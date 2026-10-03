@@ -10,7 +10,7 @@ El usuario autoriza investigación, documentación y pruebas incrementales en PC
 | Ejecutar emulador comunitario | Disco/memoria PC y estado guest | Un emulador no aísla su propio ejecutable del host | Revisar paquete completo; preferir VM si no hay confianza suficiente |
 | ADB inventario allowlist | Logs host; ADB puede crear keys/server, guest puede registrar conexión | Transporte incorrecto, datos privados, shell divergente | Serial explícito emulador, timeout, sin USB seleccionado |
 | Instalar watchface en emulador | Filesystem/imagen mutable guest | UI rota o lista de watchfaces dañada | Copia previa de estado guest, ID propio, restaurar copia |
-| Lua shell en emulador futuro | Depende del comando | No presuponer permisos ni aislamiento | Experimento separado; presencia de función antes de llamada |
+| Lua shell en emulador | uname e insmod/rmmod propios probados | Shell y módulos FLAT sin aislamiento | Allowlist de comandos/payload exactos; ningún RW4 físico |
 | C / módulo en emulador futuro | RAM; un programa puede escribir storage | Crash/corrupción de memoria/guest | ABI/privilegios conocidos, hello mínimo y snapshot |
 | C / módulo en reloj | Potencialmente RAM y flash | Soft brick o corrupción persistente; hard brick no descartado | Prohibido en esta fase; recovery/compatibilidad y aprobación explícita |
 
@@ -25,6 +25,8 @@ La [revisión local](emulator-package-review.md) verificó las 94 piezas EXE/DLL
 No ejecutar MSI de Drive, APK de Telegram, compiler EasyFace o adb incluido antes de revisión razonable. El digest de compiler v4.23 aporta comparación de integridad, no revisión de comportamiento ni confianza del MSI separado. Si un origen importante sigue sin verificarse, detener ejecución y documentar la alternativa oficial AIoT-IDE.
 
 La revisión posterior de [compiler v4.23](touch-events-emulator.md) cotejó el digest original e inspeccionó metadata/IL antes de ejecutarlo solo para empaquetar en PC. Su ADB no se extrajo y el branch automático de upload se omitió. No se ejecutó el editor. La instalación posterior en emulador sí escribió /data, eliminó una caché concreta respaldada y reseteó el guest, con ID propio/readback y backup del disco pausado. No es una operación read-only ni una instalación física. Se validaron navegación stock, cierre Lua por cambio de watchface y reentrada sin reinstalar.
+
+El [puente Lua↔C](lua-native-bridge-emulator.md) crea un nodo virtual propio en RAM y ejecuta callbacks síncronos. EXIT cierra descriptores, retira el nodo y descarga C; rmmod rechazó un descriptor abierto en una prueba. No usa periféricos ni threads. Se necesita cleanup ante cierre inesperado de watchface y no se garantiza concurrencia arbitraria. No confundir pseudo-driver o RAM-only con sandbox. La prueba no altera particiones/boot del reloj físico.
 
 ## Condiciones de parada
 

@@ -36,7 +36,7 @@ Estados: **CONFIRMADO EN RW4**, **CONFIRMADO EN EMULADOR**, **CONFIRMADO SOLO EN
 | Servicio adbd accesible | Guest emulador | R33 | CONFIRMADO EN EMULADOR | Alta local | 16 consultas de inventario | version no soportado aunque status 0; NAT 2512 offline |
 | CPU VM Cortex-A15 y 2048 MB asignados | QEMU/launcher | R33 argumentos/runtime log | CONFIRMADO EN EMULADOR | Alta local | Launch/boot | No equivale a heap NuttX ni RAM RW4 |
 | Display 390×450 | Guest emulador | R33/R34 | CONFIRMADO EN EMULADOR | Alta local | Screenshot PNG | UI stock almacenamiento; no render TouchEvents |
-| insmod/rmmod/lsmod anunciados por NSH | Emulador S3 | R33 help/lsmod | CONFIRMADO EN EMULADOR | Alta local para presencia | lsmod sin módulos | Ninguna carga propia; ABI/exports pendientes |
+| insmod/rmmod/lsmod anunciados por NSH | Emulador S3 | R33 help/lsmod | CONFIRMADO EN EMULADOR | Alta local para presencia | Inventario inicial sin módulos | Cargas propias posteriores R45/R51, sin extrapolar RW4 |
 | exec recibe dirección hexadecimal | Emulador S3 | R33 help -v exec | CONFIRMADO EN EMULADOR | Alta local | Ayuda solamente | No launcher ELF por filename; no invocado |
 | iwasm/qjs/aiotjsc/lua en builtins | Emulador S3 | R33 help/ls /bin | CONFIRMADO EN EMULADOR | Alta local para presencia | Inventario | No payload WASM/JS propio ni compatibilidad RW4 |
 | /dev/fb0, input0, utouch existen | Emulador S3 | R33 ls /dev | CONFIRMADO EN EMULADOR | Alta local | Listado | Sin apertura de drivers ni display/input propio |
@@ -135,6 +135,19 @@ Continuación 2026-10-03: lua-api confirmó disp.load_scr/get_scr_act y Timer en
 | Touch del panel también llega a página propia oculta | Guest S3, tap50,45 | R50 contador/logs | REFUTADO en esta prueba | Alta local | Sin release propio ni incremento | No prueba exhaustiva de todos los overlays |
 | Watchface usa Lua5.4 y expone loadlib como función | UIProbe guest | R50 mensaje runtime | CONFIRMADO EN EMULADOR | Alta local | Tipos/versiones, sin loadlib | No carga nativa desde Lua probada |
 | EXIT/reentrada funciona; seleccionar Storage cierra Lua | Guest S3 | R50 capturas/log | CONFIRMADO EN EMULADOR | Alta local | Sin reboot durante interacción | EXIT conserva launcher/objetos |
+
+## Puente Lua ↔ C: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| loadlib existente puede importar bibliotecas C | Guest S3 exacto | R51 ELF y respuesta CLI/watchface | REFUTADO en este guest | Alta local/estática | nil, error de librerías deshabilitadas, absent | No refuta el loader C dlopen de NuttX ni todas las builds Xiaomi |
+| os.execute accede a shell desde watchface | Guest S3 UIProbe | R51 | CONFIRMADO EN EMULADOR | Alta local | uname, insmod/rmmod propios; true/exit/0 | RW4 físico desconocido |
+| Lua io invoca callbacks de C en nodo virtual propio | Guest S3 exacto | R51 ABI DWARF, read/write y respuestas | CONFIRMADO EN EMULADOR | Alta local | Coordenadas y contador devueltos por C | No driver físico ni worker |
+| Panel pausa/reanuda estado nativo; tap50,45 no lo cambia | Guest S3, overlay ensayado | R51 snapshots | CONFIRMADO EN EMULADOR | Alta local | seq7 pausado idéntico tras tap; seq8 reanudado | No engine pausado ni overlays exhaustivos |
+| EXIT descarga C; START vuelve a cargarlo sin PC entre ciclos | Guest S3 UIProbe | R51 | CONFIRMADO EN EMULADOR | Alta local | Dos ciclos, node/module ausentes al salir, contador reiniciado | Requiere preparar ELF después de reset/cleanup |
+| Uninitializer rechaza descarga con descriptor abierto | Guest S3, cliente controlado | R51 CLI | CONFIRMADO EN EMULADOR | Alta local | rmmod busy; cierre y descarga posterior correctos | No concurrencia arbitraria ni errores prolongados probados |
+| ELF del puente permanece instalado después de reset | /tmp en emulador | R51 mount tmpfs y staging posterior al reset | REFUTADO para esta instalación | Alta local | Reset elimina /tmp; payload retirado al terminar | Watchface Lua sí permanece; persistencia ELF pendiente |
+| Cambio de watchface sin EXIT también descarga C | Guest S3 | R51 solo EXIT validado | SIN EVIDENCIA | No evaluable | No | Próximo checkpoint de cleanup; gate físico sigue cerrado |
 
 ## Correcciones de interpretación
 

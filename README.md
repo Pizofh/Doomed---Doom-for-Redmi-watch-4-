@@ -10,7 +10,9 @@ Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4
 
 **Touch C:** observador independiente leyó 36 muestras de `/dev/input0`; TouchEvents y el panel stock respondieron simultáneamente. Descriptor cerrado y módulo descargado sin reboot posterior. [Contrato, logs y reproducción](docs/native-touch-emulator.md).
 
-**UI propia Lua:** START/EXIT/reentrada y gestos centrales comprobados; abrir panel stock llama pause y cerrarlo resume. Bordes siguen reservados al sistema; C aún no está conectado a esta UI. [Prueba y límites](docs/lua-ui-emulator.md).
+**UI propia Lua:** START/EXIT/reentrada y gestos centrales comprobados; abrir panel stock llama pause y cerrarlo resume. [Prueba y límites](docs/lua-ui-emulator.md).
+
+**Puente Lua ↔ C:** START carga nuestro módulo mediante os.execute/insmod; un dispositivo virtual recibe eventos propios y devuelve estado C. Panel pausa/reanuda, EXIT descarga, dos ciclos sin reboot ni PC entre aperturas. loadlib está deshabilitado en este guest. Persistencia nativa y limpieza ante cierre inesperado pendientes. [Contrato, pruebas y reproducción](docs/lua-native-bridge-emulator.md).
 
 - Crear documentación, matriz de evidencia y herramientas de inspección para PC.
 - Identificar dependencias originales y fijar revisiones consultadas.

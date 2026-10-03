@@ -1,6 +1,12 @@
 # Retomar el proyecto
 
-Estado activo al 2026-10-03. Resultado actual: [UI Lua propia con gestos centrales, EXIT y pause/resume validados](lua-ui-emulator.md).
+Estado activo al 2026-10-03. Resultado actual: [puente Lua↔C con carga desde START, eventos propios, pausa y descarga desde EXIT](lua-native-bridge-emulator.md).
+
+Última sesión: loadlib es un stub deshabilitado (CLI y watchface nil/error/absent), os.execute desde watchface funciona para uname e insmod/rmmod propios. C registra su nodo virtual /dev/rw4bridge, sin thread/timer/periférico. io envía24bytes y lee32bytes exactos; nunca leer nodo con cat/read-all. File_operations40bytes, write12, contrastado con DWARF del guest. ABI/símbolos enlazados a su hash exacto; no usar físicamente.
+
+Dos ciclos START/EXIT desde UI sin reboot ni PC entre ciclos. C devuelve coordenadas, panel pone paused=1 y tap50,45 deja snapshot idéntico, al cerrar paused=0. EXIT unregister=0 refs=0 y lsmod/nodo ausentes; reentrada recarga y reinicia contador. CLI adicional confirmó busy si hay descriptor abierto, luego close y descarga correcta. No hay engine pausado, input mantenido, medición de latencia/FPS ni cleanup garantizado al cerrar watchface sin EXIT.
+
+Final: Storage365700764 seleccionada, Lua cerrado, C/nodo y /tmp/rw4-lua-bridge.elf ausentes. UIProbe365799903 queda almacenada con prefijo de bridge. Reproducir exige preparar ELF después de reset/cleanup. C2552bytes SHA2fbebe482949a5e04d30879369bbba92b7597be1d2efc594565479dcbd41f741. Watchface15648bytes SHAad73c67a42e8820ddcf921d3747b6b4124c97d6479b97b1077f5a355795c5527. Evidencia ui-probe-exercise-1791061092218 y lua-bridge-test-1791061474934, ignorada. Se revisaron capturas/logs/respuestas C. La navegación Settings requiere revisar cada pantalla; selector no avanza con todos los swipes sintéticos.
 
 - Nunca se conectó el reloj físico M2315W1. Gate físico cerrado; sin flash, exploits, mods APK ni DOOM/WAD. Hello C propio validado únicamente en el emulador.
 - Guest Xiaomi Watch S3 / NuttX 0.0.0, revisión 9aec7d0ff1; pantalla configurada 390×450. No emulación exacta RW4/BES.
@@ -15,9 +21,11 @@ Estado activo al 2026-10-03. Resultado actual: [UI Lua propia con gestos central
 
 ## Próxima meta
 
-Revisar loadlib/dlopen del guest exacto y validar un puente Lua→C mínimo para eventos propios y pause/resume/exit. No compilar DOOM: C aún no está integrado con UI Lua, ni timing monotónico o FS/WAD validados.
+Garantizar limpieza de C cuando se cierre la watchface sin pulsar EXIT. Después quedarán render C en la página propia, input mantenido, timers monotónicos, FS/WAD y DOOM. No compilar todavía DOOM ni tocar hardware físico.
 
-UIProbe: experiments/lua-ui/main.lua, launcher START/página/EXIT. Desactivar eventos/gestos no bastó (commit5ed95ec reproduce widgets stock); también se desactivó SCROLL_CHAIN_HOR/VER en objetos propios durante juego. Drags centrales4direcciones y hold no mueven home. Borde inferior aún abre panel; pageOnPause/pageOnResume confirmados con callbacks propios. Tap50,45 en panel no llegó a página. Dos EXIT/reentrada, luego Storage y Lua cerrado, sin reboot para salir. Lua5.4 y type(package.loadlib)=function dentro de watchface; loadlib NO invocado. No native worker/timers/canvas C.
+## Experimentos anteriores
+
+UIProbe original, solo Lua: experiments/lua-ui/main.lua, launcher START/página/EXIT. Desactivar eventos/gestos no bastó (commit5ed95ec reproduce widgets stock); también se desactivó SCROLL_CHAIN_HOR/VER en objetos propios durante juego. Drags centrales4direcciones y hold no mueven home. Borde inferior aún abre panel; pageOnPause/pageOnResume confirmados con callbacks propios. Tap50,45 en panel no llegó a página. Dos EXIT/reentrada, luego Storage y Lua cerrado, sin reboot para salir. Lua5.4 y type(package.loadlib)=function dentro de watchface; en esa prueba loadlib NO invocado. No native worker/timers/canvas C. El puente posterior está descrito arriba.
 
 Build final12168bytes SHA4a61184a1e46aeac951d5b74ad5c62f46120142cb58263acbfca79482fe43fc5; instalado3988c7741e4560bda4eadea22942596ea39999cc2fb7efa0780447860915400e. Logs ui-probe-exercise-1791058256861. tools/package-ui-probe.mjs y install-ui-probe-emulator.mjs; update verifica ID propio inactivo/recurso anterior, copia y readback antes de reset. tools/exercise-ui-probe.mjs exige página propia y marcadores PNG, pero capturas/logs requieren revisión.
 
@@ -46,11 +54,17 @@ node tools/build-display.mjs pattern
 node tools/run-display-emulator.mjs pattern
 node tools/build-touch.mjs
 node tools/run-touch-emulator.mjs
-node tools/package-ui-probe.mjs
+node tools/build-lua-bridge.mjs
+node tools/package-ui-probe.mjs bridge
 # Si ya existe UIProbe: seleccionar primero Storage antes de actualizar.
 node tools/install-ui-probe-emulator.mjs update
+# Después de boot/reset, preparar el payload temporal:
+node tools/stage-lua-bridge.mjs stage
 # Seleccionar UIProbe y START antes de ejercer gestos:
-node tools/exercise-ui-probe.mjs
+node tools/exercise-ui-probe.mjs bridge
+node tools/lua-bridge-state.mjs
+# Tras EXIT y selección de Storage:
+node tools/stage-lua-bridge.mjs cleanup
 ```
 
 Si el emulador está cerrado, el usuario normal puede arrancarlo con tools/emulator-host.mjs start desde su PowerShell y dejarla abierta. No abrir una segunda instancia sobre el mismo disco. Antes de descartar un marker antiguo, comprobar PID/QEMU y salida registrada.

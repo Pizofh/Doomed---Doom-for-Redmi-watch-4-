@@ -1,3 +1,3 @@
-# Lua shell — gate cerrado
+# Lua shell — emulador confirmado, gate físico cerrado
 
-Experimento separado de TouchEvents. No hay prueba de `os.execute()` en M2315W1 ni en un guest local. Primero identificar runtime y disponibilidad de la función sin llamarla. Si se demuestra, una futura llamada debe limitarse a inspección de solo lectura en el emulador y registrar return codes, permisos y stdout. No instalar persistencia ni usar drivers. No contiene código ejecutable en esta fase.
+Experimento separado de TouchEvents original. Desde UIProbe en el guest S3 se ejecutó primero `os.execute("uname -a")`: true/exit/0. Después se cargó/descargó exclusivamente el módulo C propio con comandos fijos, sin exploits ni persistencia nativa. El código y resultados están en [lua-native-bridge](../lua-native-bridge/control.lua) y [su documentación](../../docs/lua-native-bridge-emulator.md). No hay prueba de os.execute en M2315W1. No ampliar esta evidencia a comandos arbitrarios ni a dispositivos físicos.

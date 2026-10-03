@@ -2,19 +2,20 @@
 
 Referencia adicional del 2026-10-03: [MiWatchNativeApps](https://github.com/m0tral/MiWatchNativeApps/tree/a392529b9e369d046b9c15858d990f358fdf6c29), para S3/Band 10 Pro. Su header S3 usa direcciones absolutas del firmware; no ejecutar esos módulos en el emulador Cortex-A ni en M2315W1. «Userspace module» en documentación ajena no prueba separación de memoria. Fijar contrato/exports/init/uninit de nuestro guest antes de hello C. Ver R35 en research.md.
 
-Se ejecutó un [hello C propio](hello-native-emulator.md) mediante insmod y se descargó con rmmod en dos ciclos, únicamente en el emulador. También se ejecutaron comandos builtin y Lua por ADB. No se ejecutó WASM, iwasm, os.execute ni exploits. No hay una razón demostrada para root/jailbreak. Referencias y estados: [research.md](research.md), [matriz](evidence-matrix.md), [runtime observado](emulator-runtime.md).
+Se ejecutaron [hello C](hello-native-emulator.md) y un [puente Lua↔C propio](lua-native-bridge-emulator.md), únicamente en el emulador. os.execute desde watchface ejecutó uname e insmod/rmmod con nuestro módulo. No se ejecutó WASM, iwasm ni exploits. No hay una razón demostrada para root/jailbreak. Referencias y estados: [research.md](research.md), [matriz](evidence-matrix.md), [runtime observado](emulator-runtime.md).
 
-[UIProbe Lua](lua-ui-emulator.md) crea widgets en contexto de watchface; controla scroll central y recibe pageOnPause/Resume al abrir/cerrar panel stock. El puente loadlib/dlopen hacia C aún no está probado. El lector C de /dev/input0 no debe alimentar gameplay detrás de otras pantallas. Input/UI routing no introduce separación de memoria en esta build FLAT.
+[UIProbe Lua](lua-ui-emulator.md) crea widgets en contexto de watchface; controla scroll central y recibe pageOnPause/Resume. El puente posterior usa io y un dispositivo virtual propio: C recibe estados/eventos y EXIT lo descarga. package.loadlib tiene un stub deshabilitado, confirmado estática y dinámicamente. El lector global de /dev/input0 no alimenta este puente. Input/UI routing no introduce separación de memoria en FLAT.
 
 La [inspección estática del ELF guest](emulator-package-review.md) identifica Goldfish Cortex-A7, ELF32 ARM/EABI5/hard-float, `CONFIG_BUILD_FLAT`, loaders ELF/módulos y soporte Lua/WAMR. Son capacidades compiladas de la imagen del emulador, no prueba de ejecución de código propio ni evidencia M2315W1. Los ejecutables Windows del launcher sí se ejecutaron tras revisar su procedencia; distinguirlos de payloads guest.
 
 | Camino | Evidencia actual | Bloqueo | Experimento posterior en PC |
 |---|---|---|---|
 | QuickApp / JS / RPK | API oficial Vela; debug físico documentado S4 | Soporte RW4 y bridge C/WASM no demostrados | App JS mínima, consulta de capacidades; no la llamar C |
-| Lua / watchface | TouchEvents original empaquetado; render/touch/cierre y reentrada en emulador | API para lanzar C y compatibilidad física pendientes | Experimento separado de launcher si se demuestra spawn |
-| Lua → shell | Símbolos `os_execute`/`system` definidos en ELF del emulador | Exposición desde watchface/RW4 sin probar | Inspeccionar presencia/tipo primero, experimento separado |
+| Lua / watchface | TouchEvents y UIProbe propios; launcher C probado en emulador | Limpieza ante cierre inesperado, persistencia C y RW4 pendientes | Teardown al cerrar watchface sin EXIT |
+| Lua → shell | os.execute(uname/insmod/rmmod) desde watchface devuelve true/exit/0 | RW4 físico sin probar | No ampliar a comandos arbitrarios |
+| Lua loadlib | Stub deshabilitado, respuesta nil/absent | No permite importar biblioteca C en este guest | Puente io→dispositivo virtual ya probado |
 | ELF / exec | `CONFIG_ELF`, `CONFIG_LIBC_EXECFUNCS`, `execv`/`posix_spawn` en emulador | Exports, contrato loader/entrypoint y lifecycle pendientes | Inventario read-only, luego hello C si hay contrato válido |
-| Módulo / `insmod` | Hello C, patrón framebuffer y touch ligados al guest exacto, descargados | Sin sandbox, ownership UI estable ni compatibilidad RW4 demostrada | Pantalla propia con salida fiable |
+| Módulo / `insmod` | Hello, display, touch y puente ligado al guest; carga/descarga desde launcher | Sin sandbox; engine/UI C y RW4 sin probar | Completar limpieza de lifecycle antes de render C |
 | Touch C / driver | [Observador nativo validado](native-touch-emulator.md), colas por lector; stock concurrente | UI propia, timing, FS y compatibilidad RW4 pendientes | Pantalla interactiva con salida y contexto correctos |
 | WASM / `iwasm` | `iwasm_main` y macros WAMR en emulador | Imports, memoria/UI/lifecycle y RW4 desconocidos | Identificar comando/runtime sin ejecutar payload |
 | App nativa precompilada/builtin | Concepto upstream | Builtin no significa carga de app arbitraria stock | Identificar registro/launcher y build requerida |
@@ -25,7 +26,7 @@ Un componente de UI implementado internamente en C no da a una QuickApp permiso 
 
 El inventario confirma los comandos de módulos y `/bin/iwasm`; `lsmod` no muestra módulos cargados. `help -v insmod` indica `insmod <file-path> <module-name>`. **El comando NSH `exec` acepta una dirección hexadecimal**, no un filename ELF. No confundirlo con las funciones C exec/execv ni utilizarlo como exploración. `help -v` no describe builtins Lua/iwasm aunque sí aparecen y Lua se ejecutó.
 
-CLI Lua 5.4 expone `os.execute`/`package.loadlib` como funciones y carga LVGL; eso no prueba disponibilidad desde una watchface o el firmware RW4. La prueba CLI histórica del original TouchEvents falló al crear su fuente. Posteriormente, el original empaquetado y abierto mediante el launcher watchface sí demostró render, touch, cierre y reentrada: [resultados](touch-events-emulator.md).
+CLI Lua5.4 expone os.execute/package.loadlib como funciones; se comprobó posteriormente el shell desde watchface y el stub loadlib en ambos contextos. Ninguno establece disponibilidad física RW4. La prueba CLI histórica TouchEvents falló al crear su fuente; empaquetado y abierto mediante launcher watchface sí demostró render, touch, cierre y reentrada: [resultados](touch-events-emulator.md).
 
 ## Modelo de memoria
 
@@ -43,7 +44,7 @@ NuttX distingue [módulos kernel y shared libraries](https://nuttx.apache.org/do
 
 ## Contrato mínimo antes de hello C
 
-TouchEvents demostró una entrada Lua persistente en el emulador, con render/touch y cierre al cambiar a una watchface stock [resultado](touch-events-emulator.md). Esto facilita futuros launchers, pero no demuestra os.execute desde ese contexto ni puente QuickApp→nativo. El hello C se cargó desde NSH/ADB, sin launcher persistente.
+TouchEvents demostró una entrada Lua persistente en el emulador [resultado](touch-events-emulator.md). El hello inicial se cargó desde NSH/ADB; UIProbe posterior carga y descarga C desde Lua. Su ELF se preparó en /tmp y no persiste después de reset. QuickApp→C continúa sin probar.
 
 Registrar encabezado ELF esperado (clase/endian/machine, tipo ET_REL/ET_EXEC/ET_DYN), ISA y flags, EABI/FPU, toolchain y versión, linker/relocations, entrypoint, libc y símbolos/imports. Identificar quién ejecuta init/exit, contexto/task, stack/heap, privilegios y recuperación del emulador. El contrato mínimo del hello ET_REL quedó contrastado; stack/heap completos, tareas y ownership de UI aún no se caracterizaron para DOOM.
 

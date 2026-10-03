@@ -13,7 +13,7 @@ flowchart TD
     D -. cierre y liberación de recursos .-> W
 ```
 
-La línea discontinua marca una dependencia no validada; no se ha construido ninguno de esos puentes nativos. El emulador S3 permite investigar conceptos, Lua, UI y APIs. Ni el host Windows AMD64 ni un ELF del simulador determinan la ISA del RW4.
+La línea discontinua marca una dependencia no validada del objetivo físico: todavía no existe un adaptador DOOM para RW4. En el emulador S3 sí se construyó un [puente Lua↔C](lua-native-bridge-emulator.md) con carga bajo demanda, eventos y descarga desde EXIT. Ni el host Windows AMD64 ni un ELF del simulador determinan la ISA del RW4.
 
 ## Adaptador futuro
 

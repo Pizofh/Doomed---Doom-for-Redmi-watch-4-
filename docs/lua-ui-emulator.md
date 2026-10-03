@@ -59,4 +59,4 @@ Una secuencia de coordenadas después de reset encontró otra pantalla y activó
 
 No se garantiza exclusividad universal, llamadas/notificaciones/corona, suspensión de C, fugas, FPS o memoria. UI routing no es sandbox. Archivos persistentes solo en emulador; finalizó activo Storage365700764 con Lua cerrado. Hardware físico intacto.
 
-Próximo checkpoint: revisar contrato loadlib/dlopen y validar puente Lua→C mínimo que reciba eventos propios y respete pause/resume/exit. Timers monotónicos, FS/WAD y DOOM pendientes.
+Continuación: [puente Lua↔C probado mediante dispositivo virtual](lua-native-bridge-emulator.md). El experimento descrito arriba era solo Lua; el posterior sí carga/descarga C desde START/EXIT y verifica estado nativo. Timers monotónicos, FS/WAD y DOOM pendientes.

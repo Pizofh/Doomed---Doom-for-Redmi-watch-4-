@@ -47,4 +47,4 @@ El enlace antiguo de Arm 11.3 en developer.arm.com falló en el navegador del us
 
 El usuario descargó ZIP y checksum; coincidieron. Se inspeccionaron manifiesto, documentación GNU y las seis herramientas utilizadas; extracción local sin PATH global. [Hashes, flags y resultados](hello-native-emulator.md). GCC 14.3 produjo el módulo con atributos ARM y relocations revisados antes de ejecutarlo.
 
-Checkpoint hello C completado en el emulador. Display, timers, input C, filesystem y DOOM permanecen pendientes. `insmod` en FLAT comparte memoria con el sistema incluso si el archivo reside en `/tmp`.
+Checkpoint hello C completado en el emulador. Posteriormente se validaron probes de display/input y un [puente Lua↔C](lua-native-bridge-emulator.md); renderer integrado, timers, FS/WAD y DOOM siguen pendientes. `insmod` en FLAT comparte memoria con el sistema incluso si el archivo reside en `/tmp`.
