@@ -2,7 +2,7 @@
 
 Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4, modelo objetivo **M2315W1**, preservando el firmware Xiaomi y las funciones normales del reloj si resulta técnicamente viable.
 
-**Estado al 2026-10-02:** ZIP descargado por el usuario, extracción selectiva e inspección local completadas. Los 94 EXE/DLL del emulador coinciden con una revisión oficial OpenVela; ADB tiene firma Google válida. El usuario ya registró el INI. El launcher termina antes del boot bajo la cuenta restringida de esta sesión; se solicitó arrancar el helper desde PowerShell del usuario normal. No se obtuvo `adb shell`, no se probó TouchEvents y no se compiló DOOM. No se conectó el reloj físico.
+**Estado al 2026-10-03:** emulador arrancado, `adb shell` obtenido por `emulator-5554` e inventario capturado. `uname -a` identifica Xiaomi Watch S3. TouchEvents original falla al crear una fuente; una copia con fuente por defecto termina por CLI, pero no aparece en pantalla ni se validó touch. Hay captura real 390×450 de la UI stock. No se compiló DOOM ni C propio y no se conectó el reloj físico. Estado y comandos para continuar en [HANDOFF](docs/HANDOFF.md).
 
 ## Alcance de esta sesión
 
@@ -51,6 +51,8 @@ La [revisión local del paquete](docs/emulator-package-review.md) describe proce
 - [Entorno local](docs/host-environment.md)
 - [Emulador y TouchEvents](docs/emulator.md)
 - [Inspección del paquete y ELF del emulador](docs/emulator-package-review.md)
+- [Boot observado y conectividad](docs/emulator-runtime.md)
+- [Estado completo para retomar](docs/HANDOFF.md)
 - [Ejecución nativa y privilegios](docs/native-execution.md)
 - [Modelo de riesgo](docs/risk-model.md)
 - [Gate para dispositivo físico, cerrado](docs/physical-device-plan.md)

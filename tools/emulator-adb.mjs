@@ -3,13 +3,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { packageRoot, projectRoot } from './verify-emulator.mjs';
+import { packageRoot, projectRoot, verifyEmulator } from './verify-emulator.mjs';
 
 const action = process.argv[2];
-if (!['version', 'connect', 'devices', 'inventory'].includes(action)) {
-  throw new Error('Usage: node tools/emulator-adb.mjs version|connect|devices|inventory');
+if (!['version', 'connect', 'devices', 'inventory', 'capabilities', 'post-sample'].includes(action)) {
+  throw new Error('Usage: node tools/emulator-adb.mjs version|connect|devices|inventory|capabilities|post-sample');
 }
-const endpoint = '127.0.0.1:2512';
+const endpoint = 'emulator-5554';
 const serverPort = '5039';
 const executable = path.join(packageRoot, 'platform-tools/adb.exe');
 const expected = '0e606318957baac81b997ccd8ee4bcdff79964a9921da07c716aea3e8d856af7';
@@ -20,8 +20,37 @@ const destination = path.join(projectRoot, 'artifacts/emulator/adb');
 fs.mkdirSync(userRoot, { recursive: true });
 fs.mkdirSync(destination, { recursive: true });
 const env = { ...process.env, ANDROID_SDK_HOME: userRoot, ANDROID_USER_HOME: userRoot,
-  ADB_SERVER_SOCKET: `tcp:127.0.0.1:${serverPort}`, ANDROID_ADB_SERVER_PORT: serverPort,
+  ADB_SERVER_SOCKET: `tcp:localhost:${serverPort}`, ANDROID_ADB_SERVER_PORT: serverPort,
   ADB_MDNS_AUTO_CONNECT: '0' };
+function assertOwnedEmulator() {
+  verifyEmulator();
+  const record = JSON.parse(fs.readFileSync(path.join(projectRoot, 'artifacts/emulator/host-process.json'), 'utf8'));
+  if (record.exitedAtUtc || record.executable !== path.join(packageRoot, 'emulator/emulator.exe') ||
+      !record.args.includes(path.join(packageRoot, 'system-images/vela-release-4.0/nuttx'))) {
+    throw new Error('No matching project launcher record');
+  }
+  const systemRoot = process.env.SystemRoot;
+  const network = spawnSync(path.join(systemRoot, 'System32/netstat.exe'), ['-ano', '-p', 'tcp'],
+    { encoding: 'utf8', shell: false, windowsHide: true, timeout: 5000 });
+  if (network.status !== 0) throw new Error('Cannot inspect loopback listener ownership');
+  const listeners = network.stdout.split(/\r?\n/).map(line => line.trim().split(/\s+/))
+    .filter(fields => fields[0] === 'TCP' && fields[3] === 'LISTENING');
+  const ports = [5554, 5555, 2512, 8554];
+  const owners = ports.map(port => listeners.find(fields => fields[1] === `127.0.0.1:${port}`)?.[4]);
+  if (!owners[0] || !/^\d+$/.test(owners[0]) || owners.some(owner => owner !== owners[0])) {
+    throw new Error('Emulator bridge and forwarded port do not belong to the same loopback process');
+  }
+  const owner = spawnSync(path.join(systemRoot, 'System32/WindowsPowerShell/v1.0/powershell.exe'),
+    ['-NoProfile', '-NonInteractive', '-Command', `(Get-Process -Id ${owners[0]} -ErrorAction Stop).Path`],
+    { encoding: 'utf8', shell: false, windowsHide: true, timeout: 5000 });
+  const expectedQemu = path.join(packageRoot, 'emulator/qemu/windows-x86_64/qemu-system-armel-headless.exe');
+  if (owner.status !== 0 || owner.stdout.trim().toLowerCase() !== expectedQemu.toLowerCase()) {
+    throw new Error('Loopback listeners are not owned by the reviewed project QEMU');
+  }
+  fs.writeFileSync(path.join(destination, 'transport-ownership.json'), JSON.stringify({ endpoint,
+    qemuPid: Number(owners[0]), qemuExecutable: expectedQemu, ports,
+    physicalTransport: false, verifiedAtUtc: new Date().toISOString() }, null, 2) + '\n');
+}
 function invoke(args, name) {
   const result = spawnSync(executable, args, { cwd: packageRoot, env, shell: false, windowsHide: true,
     timeout: 15000, maxBuffer: 1024 * 1024, encoding: 'utf8' });
@@ -37,31 +66,44 @@ if (action === 'version') {
 } else {
   // The impossible project-specific USB serial filters USB connections in this dedicated server.
   // TCP traffic uses only the fixed loopback guest endpoint. mDNS autoconnection is disabled.
-  const start = invoke(['-L', `tcp:127.0.0.1:${serverPort}`, '--one-device',
+  const start = invoke(['-L', `tcp:localhost:${serverPort}`, '--one-device',
     'RW4_EMULATOR_NO_USB_TRANSPORT', 'start-server'], 'server-start');
   if (start.status !== 0) throw new Error('Dedicated ADB server failed; see server-start.json');
   const common = ['-H', '127.0.0.1', '-P', serverPort];
   if (action === 'connect') {
-    const result = invoke([...common, 'connect', endpoint], 'connect');
+    assertOwnedEmulator();
+    const result = invoke([...common, '-s', endpoint, 'get-state'], 'connect');
     console.log((result.stdout + result.stderr).trim());
-    process.exitCode = result.status ?? 1;
+    process.exitCode = result.status === 0 && result.stdout.trim() === 'device' ? 0 : 1;
   } else if (action === 'devices') {
     console.log(invoke([...common, 'devices', '-l'], 'devices').stdout.trim());
   } else {
+    assertOwnedEmulator();
     const devices = invoke([...common, 'devices', '-l'], 'devices');
-    if (!devices.stdout.split(/\r?\n/).some(line => line.startsWith(`${endpoint}\tdevice`))) {
+    if (!devices.stdout.split(/\r?\n/).some(line => {
+      const fields = line.trim().split(/\s+/);
+      return fields[0] === endpoint && fields[1] === 'device';
+    })) {
       throw new Error('Expected loopback emulator is not online; no shell commands sent');
     }
-    const commands = [ ['help'], ['uname'], ['version'], ['ps'], ['free'], ['mount'], ['df'],
+    const inventoryCommands = [ ['help'], ['uname'], ['version'], ['ps'], ['free'], ['mount'], ['df'],
       ['ls', '/'], ['ls', '/dev'], ['ls', '/data'], ['ls', '/proc'], ['ls', '/bin'],
       ['ls', '/data/app'], ['ls', '/data/app/watchface'], ['env'], ['getprop'] ];
+    const capabilityCommands = [ ['uname', '-a'], ['help', '-v', 'lua'], ['help', '-v', 'insmod'],
+      ['help', '-v', 'exec'], ['help', '-v', 'iwasm'], ['lsmod'], ['ls', '/system'],
+      ['ls', '/data/app/watchface/market'], ['ls', '/tmp'],
+      ['lua', '-e', '"print(_VERSION); print(type(os.execute)); print(type(package.loadlib)); print(type(package.preload.lvgl))"'] ];
+    const commands = action === 'capabilities' ? capabilityCommands : action === 'post-sample' ?
+      [['ps'], ['free'], ['ls', '/data/app/watchface/market']] : inventoryCommands;
     const summary = [];
     for (const [index, command] of commands.entries()) {
-      const name = `${String(index + 1).padStart(2, '0')}-${command.join('-').replaceAll('/', '_')}`;
+      const name = action === 'post-sample' ? `post-${String(index + 1).padStart(2, '0')}-${command[0]}` :
+        action === 'capabilities' ? `cap-${String(index + 1).padStart(2, '0')}-${command[0]}` :
+        `${String(index + 1).padStart(2, '0')}-${command.join('-').replaceAll('/', '_')}`;
       const result = invoke([...common, '-s', endpoint, 'shell', ...command], name);
       summary.push({ command, status: result.status, outputBytes: Buffer.byteLength(result.stdout + result.stderr) });
     }
-    fs.writeFileSync(path.join(destination, 'inventory-summary.json'), JSON.stringify(summary, null, 2) + '\n');
+    fs.writeFileSync(path.join(destination, `${action}-summary.json`), JSON.stringify(summary, null, 2) + '\n');
     console.log(JSON.stringify(summary, null, 2));
   }
 }

@@ -26,7 +26,7 @@ EasyFace documenta empaquetado y transferencia automática al emulador; su READM
 
 ## Emulador
 
-La release v1.0 contiene presets S3/RW4/RW5 [R12]; ZIP 733,139,307 bytes, asset ID 229620973, sin digest en metadata. El repositorio no contiene el código completo de esos binarios. La firma del commit documental no cubre el ZIP. EasyFace describe el origen Watch S3 [R10]. Windows 10/11, ADB, rutas de watchfaces y `/dev/fb0` están documentados por el mantenedor [R13], todavía sin prueba local.
+La release v1.0 contiene presets S3/RW4/RW5 [R12]; ZIP 733,139,307 bytes, asset ID 229620973, sin digest en metadata. El repositorio no contiene el código completo de esos binarios. La firma del commit documental no cubre el ZIP. EasyFace describe el origen Watch S3 [R10]. La continuación local confirmó boot, ADB, rutas y `/dev/fb0`; `uname -a` identifica Xiaomi Watch S3 [R33]. Lua CLI 5.4 expone tipos function para `os.execute`/`package.loadlib`, sin invocación. TouchEvents original falla al crear su fuente; una variante sin esa línea termina sin excepción, pero no aparece en pantalla. No extrapolar CLI a watchface ni S3 a RW4.
 
 ## QuickApps
 
@@ -76,3 +76,5 @@ Las páginas web son referencias móviles consultadas en esta fecha. Los links a
 - **R30:** [OpenVela prebuilts Windows, revisión equivalente a los ejecutables del bundle](https://github.com/open-vela/prebuilts_emulator_windows-x86_64/tree/3776c05d2c66f73f6bbe65528cd1a34fe34e1f18); metadata Git contrastada localmente para 94 EXE/DLL.
 - **R31:** [Revisión local del paquete e imagen guest](emulator-package-review.md); inspección estática, separada de pruebas runtime.
 - **R32:** [AOSP System.cpp emu-32-dev](https://github.com/aosp-mirror/platform_external_qemu/blob/emu-32-dev/android/android-emu-base/android/base/system/System.cpp); upstream usa SHGetFolderPathW en Windows. No es fuente exacta de la variante Vela.
+- **R33:** [Observaciones locales de boot, ADB, inventario y Lua](emulator-runtime.md); primera instancia cerrada desde padre, segunda con shell y pruebas CLI sin validación touch.
+- **R34:** [AOSP protocolo EmulatorController fijado](https://github.com/aosp-mirror/platform_external_qemu/blob/3784ee8181ab600b8a1d009a5e03cf9afe78865a/android/android-grpc/emulator_controller.proto); utilizado para captura gRPC de pantalla, sin envío de input.

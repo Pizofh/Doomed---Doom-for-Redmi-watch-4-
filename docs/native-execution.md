@@ -1,6 +1,6 @@
 # Ejecución y privilegios
 
-No hay ejecución nativa demostrada en esta sesión. No se ejecutaron `insmod`, ELF, `iwasm`, shell Lua ni exploits. No hay una razón demostrada para root/jailbreak. Referencias y estados: [research.md](research.md), [matriz](evidence-matrix.md).
+No se ejecutó ningún payload C propio, módulo ELF o WASM. Sí se ejecutaron comandos builtin y Lua por ADB en el emulador. No se invocaron `insmod`, `rmmod`, `iwasm`, `os.execute` ni exploits. No hay una razón demostrada para root/jailbreak. Referencias y estados: [research.md](research.md), [matriz](evidence-matrix.md), [runtime observado](emulator-runtime.md).
 
 La [inspección estática del ELF guest](emulator-package-review.md) identifica Goldfish Cortex-A7, ELF32 ARM/EABI5/hard-float, `CONFIG_BUILD_FLAT`, loaders ELF/módulos y soporte Lua/WAMR. Son capacidades compiladas de la imagen del emulador, no prueba de ejecución de código propio ni evidencia M2315W1. Los ejecutables Windows del launcher sí se ejecutaron tras revisar su procedencia; distinguirlos de payloads guest.
 
@@ -15,6 +15,10 @@ La [inspección estática del ELF guest](emulator-package-review.md) identifica 
 | App nativa precompilada/builtin | Concepto upstream | Builtin no significa carga de app arbitraria stock | Identificar registro/launcher y build requerida |
 
 Un componente de UI implementado internamente en C no da a una QuickApp permiso para ejecutar un binario arbitrario. La existencia de una toolchain Linux ARM no basta: NuttX necesita contrato de libc, relocations, arquitectura y símbolos compatible. No usar un ELF Linux en el emulador como ensayo de compatibilidad.
+
+El inventario confirma los comandos de módulos y `/bin/iwasm`; `lsmod` no muestra módulos cargados. `help -v insmod` indica `insmod <file-path> <module-name>`. **El comando NSH `exec` acepta una dirección hexadecimal**, no un filename ELF. No confundirlo con las funciones C exec/execv ni utilizarlo como exploración. `help -v` no describe builtins Lua/iwasm aunque sí aparecen y Lua se ejecutó.
+
+CLI Lua 5.4 expone `os.execute`/`package.loadlib` como funciones y carga LVGL; eso no prueba disponibilidad desde una watchface o el firmware RW4. El original TouchEvents falla en su fuente; la copia temporal sin esa propiedad termina sin excepción reportada, pero la captura sigue mostrando UI stock. Render/touch y lifecycle siguen pendientes.
 
 ## Modelo de memoria
 
