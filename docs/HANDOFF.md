@@ -2,7 +2,7 @@
 
 Estado activo al 2026-10-03. Resultado actual: [TouchEvents validado en emulador](touch-events-emulator.md).
 
-- Nunca se conectó el reloj físico M2315W1. Gate físico cerrado; sin flash, exploits, mods APK, DOOM/WAD ni payload C propio.
+- Nunca se conectó el reloj físico M2315W1. Gate físico cerrado; sin flash, exploits, mods APK ni DOOM/WAD. Hello C propio validado únicamente en el emulador.
 - Guest Xiaomi Watch S3 / NuttX 0.0.0, revisión 9aec7d0ff1; pantalla configurada 390×450. No emulación exacta RW4/BES.
 - ADB shell funciona por emulator-5554, servidor dedicado 5039. NAT 2512 está offline. Helpers comprueban puertos loopback/PID/ruta de QEMU y excluyen USB.
 - Launcher actual fue iniciado por el usuario (PID inicial 27964). QEMU sobrevivió a dos resets por gRPC; comprobar ownership vigente antes de actuar. La terminal del usuario se mantiene abierta.
@@ -15,9 +15,11 @@ Estado activo al 2026-10-03. Resultado actual: [TouchEvents validado en emulador
 
 ## Próxima meta
 
-Fijar el contrato ELF/exports/init/uninit/relocations/toolchain del emulador para un hello-world C mínimo. insmod es candidato, no mecanismo validado con payload propio. FLAT comparte memoria y no es sandbox. WatchS3/Band10Pro de MiWatchNativeApps contienen direcciones ajenas: nunca usarlas en este guest o RW4. No compilar DOOM todavía.
+Mostrar un patrón simple desde C y retirarlo limpiamente en el emulador, tras identificar API display y ownership. Hello C por insmod/rmmod validado en dos ciclos; FLAT comparte memoria y no es sandbox. No compilar DOOM todavía.
 
-Avance: [loader estático](native-loader-emulator.md). Guest compilado con GCC 11.3.1, Cortex-A7/Thumb/hard-float; allsyms contiene 44.839 entradas y puts, sin binding probado. OpenVela actual difiere del guest; NuttX 12.3 sirve solo de referencia histórica. El enlace Arm 11.3 falló: se pidió ZIP Arm 14.3 Windows x64 y .sha256asc desde Arm Keil en tools/local. Pendiente descarga y revisión antes de usar binutils/compilador.
+Avance: [hello C](hello-native-emulator.md). Arm 14.3 ZIP/checksum revisados, extracción local; build reproducible en este PC mediante tools/build-hello.mjs. Guest compilado con GCC 11.3.1, Cortex-A7/Thumb/hard-float. Import puts falla con error 2; enlace al símbolo del ELF exacto funciona. tools/run-hello-emulator.mjs bound carga desde /tmp, observa mensaje/lsmod, rmmod y elimina archivo. Dos ciclos, shell y captura TouchEvents posteriores correctos. Sin persistencia nativa, medición de RAM pico ni compatibilidad física demostradas.
+
+Nunca usar direcciones de otros firmwares S3/Band10Pro de MiWatchNativeApps. El hello deriva puts del ELF guest identificado por SHA256 y conserva su bit Thumb; build/carga rechazan otra imagen. OpenVela actual difiere del guest; NuttX 12.3 es referencia histórica. Display con callbacks/LVGL necesitará uninitializer real antes de descarga.
 
 ## Comandos útiles
 
@@ -26,6 +28,8 @@ Desde C:\Users\steve\Documents\Devs\Doomed\redmi-watch4-doom:
 ```powershell
 node tools/emulator-adb.mjs connect
 node tools/emulator-screenshot.mjs current
+node tools/build-hello.mjs
+node tools/run-hello-emulator.mjs bound
 ```
 
 Si el emulador está cerrado, el usuario normal puede arrancarlo con tools/emulator-host.mjs start desde su PowerShell y dejarla abierta. No abrir una segunda instancia sobre el mismo disco. Antes de descartar un marker antiguo, comprobar PID/QEMU y salida registrada.

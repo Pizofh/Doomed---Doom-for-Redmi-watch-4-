@@ -29,3 +29,5 @@ Microsoft asigna build 26200 a [Windows 11 25H2](https://learn.microsoft.com/en-
 Falta en PATH no significa ausencia de toda instalación. No instalar ARM/CMake/WSL antes de conocer la arquitectura guest y el mecanismo de build. Evitar `wsl --install`, instaladores y cambios de política solo por completar una lista de herramientas.
 
 Los cuatro clones fallaron al conectar a GitHub HTTPS. El navegador/conector sí pudieron consultar fuentes. Detalles resumidos en [acquisition.json](evidence/acquisition.json). No se solicitó ni se obtuvo excepción para la red.
+
+Actualización 2026-10-03: Arm GNU Toolchain 14.3 descargada manualmente del almacenamiento Arm Keil, checksum y piezas utilizadas revisados; extracción portátil dentro de tools/local/arm-14.3-review. No instalador, PATH global ni cambio de ExecutionPolicy. GCC 14.3.1/binutils 2.44 ejecutados para build e inspección del hello C. [Revisión y hashes](hello-native-emulator.md). La tabla anterior conserva el inventario inicial.

@@ -2,14 +2,14 @@
 
 Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4, modelo objetivo **M2315W1**, preservando el firmware Xiaomi y las funciones normales del reloj si resulta técnicamente viable.
 
-**Estado al 2026-10-03:** `adb shell` e inventario obtenidos en el emulador Xiaomi Watch S3. TouchEvents RW4 original se empaquetó e instaló; render y eventos touch validados a 390×450. Se comprobó cambiar a una watchface stock, cerrar el runtime Lua y reabrir TouchEvents tras reset sin reinstalar. [Resultados y reproducción](docs/touch-events-emulator.md). No se compiló DOOM ni C propio y no se conectó el reloj físico. Estado para continuar en [HANDOFF](docs/HANDOFF.md).
+**Estado al 2026-10-03:** TouchEvents original validado en el emulador Xiaomi Watch S3 a 390×450, con cierre y reentrada sin reinstalar. Un hello C propio imprimió su mensaje y se descargó mediante rmmod en dos ciclos; enlaza puts desde la imagen exacta del emulador. [Prueba nativa y limitaciones](docs/hello-native-emulator.md), [prueba Lua](docs/touch-events-emulator.md). No se compiló DOOM ni se conectó el reloj físico. Estado para continuar en [HANDOFF](docs/HANDOFF.md).
 
 ## Alcance de esta sesión
 
 - Crear documentación, matriz de evidencia y herramientas de inspección para PC.
 - Identificar dependencias originales y fijar revisiones consultadas.
 - Preparar revisión del paquete del emulador y captura de inventario de solo lectura.
-- Analizar `RedmiWatch4/TouchEvents` sin atribuir una prueba de ejecución al análisis del código.
+- Validar `RedmiWatch4/TouchEvents` y un hello C mínimo exclusivamente en el emulador.
 
 La release comunitaria candidata es [MiWatchEmulator v1.0](https://github.com/m0tral/MiWatchEmulator/releases/tag/v1.0). El autor describe un sistema derivado del emulador Watch S3 en [EasyFace](https://github.com/m0tral/EasyFace/blob/f76a9fe1f559bc8b1d91cf2a1f5af1a630848098/README.md). **MiWatchEmulator no demuestra compatibilidad de ISA, ABI, firmware ni privilegios con M2315W1.** Cambiar la resolución a 390×450 solamente configura la presentación.
 
@@ -32,13 +32,14 @@ Antes de ejecutar un paquete descargado, seguir [la revisión del emulador](docs
 .\scripts\emulator.ps1 -Action Inventory -AdbPath 'C:\ruta\adb.exe' -ExpectedAdbSha256 '<hash revisado>' -Serial '127.0.0.1:<puerto confirmado>'
 ```
 
-El inventario exige un transporte de emulador explícito. Nunca selecciona automáticamente un dispositivo USB. Consultar [comandos y limitaciones](docs/emulator.md) antes de usarlo. `build.ps1` está bloqueado deliberadamente hasta demostrar mecanismo de ejecución y ABI.
+El inventario exige un transporte de emulador explícito. Nunca selecciona automáticamente un dispositivo USB. Consultar [comandos y limitaciones](docs/emulator.md) antes de usarlo. `build.ps1 -Target Hello` compila el hello local; `-Target Doom` conserva el gate cerrado.
 
 En este PC los `.ps1` están bloqueados por ExecutionPolicy. Las herramientas Node propias se ejecutan sin cambiar esa política:
 
 ```powershell
 node tools/verify-emulator.mjs
 node tools/emulator-host.mjs help
+node tools/build-hello.mjs
 ```
 
 La [revisión local del paquete](docs/emulator-package-review.md) describe procedencia, hashes y la configuración pendiente. No ejecutar `start` hasta registrar el perfil según [emulator.md](docs/emulator.md).
@@ -54,6 +55,7 @@ La [revisión local del paquete](docs/emulator-package-review.md) describe proce
 - [Boot observado y conectividad](docs/emulator-runtime.md)
 - [Estado completo para retomar](docs/HANDOFF.md)
 - [Ejecución nativa y privilegios](docs/native-execution.md)
+- [Hello C: build, carga y descarga verificadas](docs/hello-native-emulator.md)
 - [Modelo de riesgo](docs/risk-model.md)
 - [Gate para dispositivo físico, cerrado](docs/physical-device-plan.md)
 - [Reporte de esta sesión](docs/session-2026-10-02.md)

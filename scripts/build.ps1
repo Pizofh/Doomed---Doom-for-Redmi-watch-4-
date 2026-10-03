@@ -1,4 +1,8 @@
 [CmdletBinding()]
-param()
+param([ValidateSet('Hello', 'Doom')][string]$Target = 'Hello')
 
-throw 'Build gate closed: demonstrate emulator execution mechanism, ISA, ABI, exports and privilege model before compiling native code. DOOM is outside session 1.'
+if ($Target -eq 'Doom') { throw 'DOOM gate closed: display, input, timers and filesystem have not been validated from C.' }
+$ErrorActionPreference = 'Stop'
+$rw4BuildTool = Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-hello.mjs'
+& node $rw4BuildTool
+if ($LASTEXITCODE -ne 0) { throw 'Emulator hello build failed.' }

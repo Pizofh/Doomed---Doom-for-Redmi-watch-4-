@@ -1,6 +1,6 @@
 # Contrato nativo del emulador: investigación estática
 
-Inspección del 2026-10-03. No se compiló ni cargó un payload C. Esta página describe exclusivamente la imagen guest de MiWatchEmulator v1.0, identificada como Xiaomi Watch S3; no establece compatibilidad con M2315W1.
+Inspección del 2026-10-03, iniciada antes de compilar/cargar C. Posteriormente se completó el [hello nativo](hello-native-emulator.md). Esta página describe exclusivamente la imagen guest de MiWatchEmulator v1.0, identificada como Xiaomi Watch S3; no establece compatibilidad con M2315W1.
 
 ## Imagen y evidencia reproducible
 
@@ -20,7 +20,7 @@ Reporte local ignorado: `artifacts/package-review/nuttx-modules-static.json`. El
 | GCC 11.3.1 20220712 | Cadenas de unidades de compilación | Compilador original del guest |
 | Cortex-A7, Thumb, hard-float, neon-vfpv4 | `-mcpu=cortex-a7 -mthumb -mfloat-abi=hard -mfpu=neon-vfpv4 -march=armv7ve+simd` | Flags encontrados; no flags del BES2700iBP |
 | FLAT y módulos | `CONFIG_BUILD_FLAT 1`, `CONFIG_MODULE 1` | Memoria compartida; no sandbox |
-| Loader ELF relocatable | `CONFIG_BINFMT_ELF_RELOCATABLE 1` y funciones `modlib_*` | Capacidad compilada; carga propia sin probar |
+| Loader ELF relocatable | `CONFIG_BINFMT_ELF_RELOCATABLE 1` y funciones `modlib_*` | Hello propio ligado al guest cargado y descargado posteriormente |
 | Tabla allsyms | 44.839 entradas de 8 bytes, nombre y valor | Lectura estática; binding del loader pendiente |
 | `puts`, `printf`, `malloc`, `free`, `memcpy`, `clock_gettime` | Nombres en allsyms | No prueba de imports resolubles |
 
@@ -39,12 +39,12 @@ Como referencia histórica se inspeccionó Apache NuttX 12.3.0, commit [`8fdb56b
 - [`mod_rmmod.c`](https://github.com/apache/nuttx/blob/8fdb56b5f2124de351a48125a252ba4264665e3d/sched/module/mod_rmmod.c): comprueba dependencias, llama al uninitializer cuando existe y libera las asignaciones del módulo.
 - [`modlib_symtab.c`](https://github.com/apache/nuttx/blob/8fdb56b5f2124de351a48125a252ba4264665e3d/libs/libc/modlib/modlib_symtab.c): selección de tabla depende de la configuración. Encontrar allsyms no basta para asegurar que sea la tabla de imports.
 
-Antes de ejecutar C: contrastar el flujo real de `insmod`, `rmmod`, `modlib_getsymtab`, verificación ELF y relocations con desensamblado o información de tipos del guest. No cargar un módulo para descubrir el contrato.
+Se contrastaron con objdump las funciones reales insmod, rmmod, modlib_getsymtab, modlib_symvalue, modlib_findglobal, symtab_findbyname, modlib_verifyheader y up_checkarch/up_relocate. Init ET_REL recibe información del módulo y devuelve int; rmmod libera memoria y permite uninitializer nulo. El payload usa únicamente R_ARM_ABS32, cuya rama suma el valor del símbolo al word de destino. El ELF entry Thumb 0x1 cumple la validación observada. No se usó la carga para descubrir la ABI.
 
-## Toolchain pendiente
+## Toolchain obtenida y revisada
 
-El enlace antiguo de Arm 11.3 en developer.arm.com falló en el navegador del usuario. Se solicitó el ZIP portátil Arm GNU Toolchain 14.3.rel1, Windows x64 / arm-none-eabi, y su checksum desde el almacenamiento Arm Keil. El enlace del ZIP consta en [`supportedToolchains.ini` de Raspberry Pi](https://github.com/raspberrypi/pico-vscode/blob/81e0cd88cf920b3a8c2a3619dd7c0572062fba09/data/0.18.0/supportedToolchains.ini). Las peticiones web al ZIP y checksum devolvieron tipos binarios que la herramienta no interpreta; no se verificó su contenido ni digest todavía.
+El enlace antiguo de Arm 11.3 en developer.arm.com falló en el navegador del usuario. Se solicitó el ZIP portátil Arm GNU Toolchain 14.3.rel1, Windows x64 / arm-none-eabi, y su checksum desde Arm Keil. El enlace del ZIP consta en [`supportedToolchains.ini` de Raspberry Pi](https://github.com/raspberrypi/pico-vscode/blob/81e0cd88cf920b3a8c2a3619dd7c0572062fba09/data/0.18.0/supportedToolchains.ini). Las peticiones web devolvieron tipos binarios que la herramienta no interpreta; la revisión se completó posteriormente con la descarga local.
 
-Guardar ambos en `tools/local/`, revisar SHA256, manifiesto, licencias y binarios antes de ejecutar. No instalar globalmente ni cambiar PATH. Usar una versión distinta de GCC no demuestra incompatibilidad, pero requiere verificar los flags, atributos ARM y relocations del payload resultante.
+El usuario descargó ZIP y checksum; coincidieron. Se inspeccionaron manifiesto, documentación GNU y las seis herramientas utilizadas; extracción local sin PATH global. [Hashes, flags y resultados](hello-native-emulator.md). GCC 14.3 produjo el módulo con atributos ARM y relocations revisados antes de ejecutarlo.
 
-Próximo checkpoint: caracterizar el loader y, si el contrato coincide, cargar un hello C mínimo en el emulador, observar su mensaje y descargarlo limpiamente. Sin threads, timers, drivers, UI, archivos persistentes ni DOOM. `insmod` en FLAT comparte memoria con el sistema incluso si el archivo reside en `/tmp`.
+Checkpoint hello C completado en el emulador. Display, timers, input C, filesystem y DOOM permanecen pendientes. `insmod` en FLAT comparte memoria con el sistema incluso si el archivo reside en `/tmp`.

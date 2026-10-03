@@ -2,7 +2,7 @@
 
 Referencia adicional del 2026-10-03: [MiWatchNativeApps](https://github.com/m0tral/MiWatchNativeApps/tree/a392529b9e369d046b9c15858d990f358fdf6c29), para S3/Band 10 Pro. Su header S3 usa direcciones absolutas del firmware; no ejecutar esos módulos en el emulador Cortex-A ni en M2315W1. «Userspace module» en documentación ajena no prueba separación de memoria. Fijar contrato/exports/init/uninit de nuestro guest antes de hello C. Ver R35 en research.md.
 
-No se ejecutó ningún payload C propio, módulo ELF o WASM. Sí se ejecutaron comandos builtin y Lua por ADB en el emulador. No se invocaron `insmod`, `rmmod`, `iwasm`, `os.execute` ni exploits. No hay una razón demostrada para root/jailbreak. Referencias y estados: [research.md](research.md), [matriz](evidence-matrix.md), [runtime observado](emulator-runtime.md).
+Se ejecutó un [hello C propio](hello-native-emulator.md) mediante insmod y se descargó con rmmod en dos ciclos, únicamente en el emulador. También se ejecutaron comandos builtin y Lua por ADB. No se ejecutó WASM, iwasm, os.execute ni exploits. No hay una razón demostrada para root/jailbreak. Referencias y estados: [research.md](research.md), [matriz](evidence-matrix.md), [runtime observado](emulator-runtime.md).
 
 La [inspección estática del ELF guest](emulator-package-review.md) identifica Goldfish Cortex-A7, ELF32 ARM/EABI5/hard-float, `CONFIG_BUILD_FLAT`, loaders ELF/módulos y soporte Lua/WAMR. Son capacidades compiladas de la imagen del emulador, no prueba de ejecución de código propio ni evidencia M2315W1. Los ejecutables Windows del launcher sí se ejecutaron tras revisar su procedencia; distinguirlos de payloads guest.
 
@@ -12,7 +12,7 @@ La [inspección estática del ELF guest](emulator-package-review.md) identifica 
 | Lua / watchface | TouchEvents original empaquetado; render/touch/cierre y reentrada en emulador | API para lanzar C y compatibilidad física pendientes | Experimento separado de launcher si se demuestra spawn |
 | Lua → shell | Símbolos `os_execute`/`system` definidos en ELF del emulador | Exposición desde watchface/RW4 sin probar | Inspeccionar presencia/tipo primero, experimento separado |
 | ELF / exec | `CONFIG_ELF`, `CONFIG_LIBC_EXECFUNCS`, `execv`/`posix_spawn` en emulador | Exports, contrato loader/entrypoint y lifecycle pendientes | Inventario read-only, luego hello C si hay contrato válido |
-| Módulo / `insmod` | `CONFIG_MODULE`, `cmd_insmod`/`cmd_rmmod`/`cmd_lsmod` en emulador FLAT | Carga y teardown no probados; sin aislamiento de memoria | Inspeccionar `help`/exports; no cargar para descubrir ABI |
+| Módulo / `insmod` | Hello C con símbolo puts ligado al guest exacto; dos ciclos de carga/descarga | Sin sandbox, API estable ni compatibilidad RW4 demostrada | Patrón display tras identificar API/ownership |
 | WASM / `iwasm` | `iwasm_main` y macros WAMR en emulador | Imports, memoria/UI/lifecycle y RW4 desconocidos | Identificar comando/runtime sin ejecutar payload |
 | App nativa precompilada/builtin | Concepto upstream | Builtin no significa carga de app arbitraria stock | Identificar registro/launcher y build requerida |
 
@@ -38,11 +38,11 @@ NuttX distingue [módulos kernel y shared libraries](https://nuttx.apache.org/do
 
 ## Contrato mínimo antes de hello C
 
-TouchEvents ya demostró una entrada Lua persistente en el emulador, con render/touch y cierre al cambiar a una watchface stock [resultado](touch-events-emulator.md). Esto facilita futuros launchers, pero no demuestra os.execute desde ese contexto, C propio, permisos de módulos ni puente QuickApp→nativo. No se cargó un ELF ni WASM propio.
+TouchEvents demostró una entrada Lua persistente en el emulador, con render/touch y cierre al cambiar a una watchface stock [resultado](touch-events-emulator.md). Esto facilita futuros launchers, pero no demuestra os.execute desde ese contexto ni puente QuickApp→nativo. El hello C se cargó desde NSH/ADB, sin launcher persistente.
 
-Registrar encabezado ELF esperado (clase/endian/machine, tipo ET_REL/ET_EXEC/ET_DYN), ISA y flags, EABI/FPU, toolchain y versión, linker/relocations, entrypoint, libc y símbolos/imports. Identificar quién ejecuta init/exit, contexto/task, stack/heap, privilegios y recuperación del emulador. Distinguir binario host del payload guest. Ya se caracterizó el encabezado del firmware guest y su modo FLAT; no se ha determinado el contrato de un payload propio.
+Registrar encabezado ELF esperado (clase/endian/machine, tipo ET_REL/ET_EXEC/ET_DYN), ISA y flags, EABI/FPU, toolchain y versión, linker/relocations, entrypoint, libc y símbolos/imports. Identificar quién ejecuta init/exit, contexto/task, stack/heap, privilegios y recuperación del emulador. El contrato mínimo del hello ET_REL quedó contrastado; stack/heap completos, tareas y ownership de UI aún no se caracterizaron para DOOM.
 
-Hello C posterior: imprimir una línea y devolver; sin drivers, hooks, writes, persistencia ni display. Solo promover ese checkpoint cuando exista un mecanismo demostrado y coherente. El esqueleto de `experiments/hello-native` no contiene código ni build anticipados. La [investigación del loader](native-loader-emulator.md) fija flags del compilador y tabla allsyms estática; imports, entrypoint y descarga todavía requieren contraste con el guest.
+Hello C completado: una línea y devolución, sin recursos propios, drivers, hooks ni display. La [investigación del loader](native-loader-emulator.md) contrastó init/unload y relocations con el guest. El import puts no funcionó; el enlace al símbolo del ELF exacto sí. No extrapolar ese mecanismo a M2315W1.
 
 ## Salida antes del hardware
 

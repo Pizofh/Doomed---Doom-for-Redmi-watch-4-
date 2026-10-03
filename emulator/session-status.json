@@ -35,7 +35,7 @@
     "userVvdRegistrationCopied":  true,
     "physicalDeviceConnected":  false,
     "blockers":  [
-                     "Native payload ABI/exports/toolchain still need characterization",
+                     "Native display ownership/API, timers, input and filesystem still need characterization",
                      "RW4 physical execution remains unverified and outside authorized scope"
                  ],
     "luaInteractiveUiVerified":  false,
@@ -52,5 +52,13 @@
     "touchEventsExitBySelectingStockVerified":  true,
     "compilerAutomaticAdbInvoked":  false,
     "touchEventsPressedCoordinatesCaptured":  false,
-    "latestResultsDocument":  "docs/touch-events-emulator.md"
+    "latestResultsDocument":  "docs/hello-native-emulator.md",
+    "nativeHelloExecuted": true,
+    "nativeHelloLoadUnloadCycles": 2,
+    "nativeHelloRequiresExactGuestSymbolBinding": true,
+    "nativeHelloNormalPutsImportFailed": true,
+    "nativeHelloPersistentInstallation": false,
+    "nativeDisplayValidated": false,
+    "armToolchainVersion": "14.3.rel1",
+    "armToolchainArchiveSha256": "864c0c8815857d68a1bbba2e5e2782255bb922845c71c97636004a3d74f60986"
 }
