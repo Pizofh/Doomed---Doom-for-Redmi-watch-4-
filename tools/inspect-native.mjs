@@ -3,8 +3,9 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 
 const input = process.argv[2];
-if (!input) throw new Error('Usage: node tools/inspect-native.mjs <ELF-or-PE> [lua]');
+if (!input) throw new Error('Usage: node tools/inspect-native.mjs <ELF-or-PE> [lua|modules]');
 const inspectLua = process.argv[3] === 'lua';
+const inspectModules = process.argv[3] === 'modules';
 const data = fs.readFileSync(input);
 const report = { bytes: data.length, sha256: crypto.createHash('sha256').update(data).digest('hex'), executed: false };
 function range(offset, size) {
@@ -37,13 +38,13 @@ if (data.subarray(0, 4).equals(Buffer.from([0x7f, 0x45, 0x4c, 0x46]))) {
   const sections = Array.from({ length: sectionCount }, (_, i) => {
     const offset = sectionOffset + i * sectionSize;
     return { nameOffset: data.readUInt32LE(offset), type: data.readUInt32LE(offset + 4),
-      offset: data.readUInt32LE(offset + 16), size: data.readUInt32LE(offset + 20),
+      address: data.readUInt32LE(offset + 12), offset: data.readUInt32LE(offset + 16), size: data.readUInt32LE(offset + 20),
       link: data.readUInt32LE(offset + 24), entrySize: data.readUInt32LE(offset + 36) };
   });
   const names = range(sections[stringIndex].offset, sections[stringIndex].size);
   sections.forEach(s => { s.name = cstring(names, s.nameOffset); });
   report.sections = sections.map(s => ({ name: s.name, bytes: s.size }));
-  const wanted = inspectLua ? /^(?:lua_main|luaopen_.*|luavgl_(?:context|set_root|disp_.*|obj_create_helper)|root_gc|root_clean|am_main|.*lua.*(?:app|page|script|launch).*|.*(?:app|page).*lua.*)$/i : /^(insmod|rmmod|lsmod|dlopen|dlclose|exec|execl|execv|posix_spawn|system|luaopen_os|luaopen_io|os_execute|iwasm_main|lua_main|lvgl_main|nsh_main|cmd_insmod|cmd_rmmod|cmd_lsmod|g_userspace|g_symtab|g_nsymbols|g_kernel_symtab|g_kernel_nsymbols|up_userspace)$/;
+const wanted = inspectModules ? /^(?:g_.*(?:allsyms|symtab|nsymbols)|allsyms.*|symtab.*|modlib.*|module_head|insmod|rmmod|modsym|elf_(?:init|load|bind|verify|reloc).*|up_checkarch|up_relocate.*|binfmt.*sym|__export.*|puts)$/i : inspectLua ? /^(?:lua_main|luaopen_.*|luavgl_(?:context|set_root|disp_.*|obj_create_helper)|root_gc|root_clean|am_main|.*lua.*(?:app|page|script|launch).*|.*(?:app|page).*lua.*)$/i : /^(insmod|rmmod|lsmod|dlopen|dlclose|exec|execl|execv|posix_spawn|system|luaopen_os|luaopen_io|os_execute|iwasm_main|lua_main|lvgl_main|nsh_main|cmd_insmod|cmd_rmmod|cmd_lsmod|g_userspace|g_symtab|g_nsymbols|g_kernel_symtab|g_kernel_nsymbols|up_userspace)$/;
   report.selectedSymbols = [];
   for (const section of sections.filter(s => s.type === 2 || s.type === 11)) {
     if (section.entrySize < 16 || section.link >= sections.length) throw new Error('Invalid symbol table');
@@ -63,6 +64,48 @@ if (data.subarray(0, 4).equals(Buffer.from([0x7f, 0x45, 0x4c, 0x46]))) {
     report.selectedConfigLiterals.push(...matches);
   }
   report.selectedConfigLiterals = [...new Set(report.selectedConfigLiterals)].sort();
+  if (inspectModules) {
+    const literals = sections.filter(s => s.name === '.debug_str').flatMap(s =>
+      range(s.offset, s.size).toString('latin1').split('\0'));
+    report.moduleConfig = literals.filter(s => /^CONFIG_(?:MODULE|MODLIB|BINFMT|LIBC_SYMTAB|ELF|ARCH_FPU|ARM_THUMB|ARMV7A|SYMTAB|ALLSYMS|DEBUG_MODULE)/.test(s));
+    report.compilerHints = literals.filter(s => /^GNU C|arm-none-eabi|.*(?:module\/.*\.c|modlib_.*\.c|arm_elf\.c)$/.test(s)).slice(0, 60);
+    // Static allsyms membership is not proof of loader imports or runtime resolution.
+    function virtualRange(address, size) {
+      const section = sections.find(s => s.type !== 8 && address >= s.address &&
+        address + size <= s.address + s.size);
+      if (!section) throw new Error('Unmapped file-backed virtual address');
+      return range(section.offset + address - section.address, size);
+    }
+    function virtualString(address) {
+      const section = sections.find(s => s.type !== 8 && address >= s.address && address < s.address + s.size);
+      if (!section) throw new Error('Unmapped string address');
+      const bytes = virtualRange(address, Math.min(1024, section.address + section.size - address));
+      // Long C++ mangled names cannot match the selected short API names.
+      if (bytes.indexOf(0) < 0) return null;
+      return cstring(bytes, 0);
+    }
+    const all = report.selectedSymbols.find(s => s.name === 'g_allsyms');
+    const countSymbol = report.selectedSymbols.find(s => s.name === 'g_nallsyms');
+    if (all && countSymbol) {
+      const count = virtualRange(Number(countSymbol.value), 4).readUInt32LE();
+      if (count > 100000 || count * 8 > all.size) throw new Error('Unsupported allsyms layout');
+      const table = virtualRange(Number(all.value), count * 8);
+      const selected = [];
+      let nullNames = 0;
+      let longNames = 0;
+      for (let i = 0; i < count; i++) {
+        const nameAddress = table.readUInt32LE(i * 8);
+        if (!nameAddress) { nullNames++; continue; }
+        const name = virtualString(nameAddress);
+        if (name === null) { longNames++; continue; }
+        if (/^(?:puts|printf|malloc|free|memcpy|clock_gettime|modlib_getsymtab|modlib_setsymtab|insmod|rmmod)$/.test(name)) {
+          selected.push({ name, value: '0x' + table.readUInt32LE(i * 8 + 4).toString(16) });
+        }
+      }
+      report.staticAllsyms = { count, entryBytes: 8, nullNames, longNames, selected,
+        interpretation: 'Membership only; loader binding and runtime execution untested.' };
+    }
+  }
   if (inspectLua) {
     report.luaSourceAndUsageHints = [];
     for (const section of sections.filter(s => ['.debug_str', '.rodata'].includes(s.name))) {

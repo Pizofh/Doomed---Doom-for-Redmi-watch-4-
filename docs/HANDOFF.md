@@ -17,6 +17,8 @@ Estado activo al 2026-10-03. Resultado actual: [TouchEvents validado en emulador
 
 Fijar el contrato ELF/exports/init/uninit/relocations/toolchain del emulador para un hello-world C mínimo. insmod es candidato, no mecanismo validado con payload propio. FLAT comparte memoria y no es sandbox. WatchS3/Band10Pro de MiWatchNativeApps contienen direcciones ajenas: nunca usarlas en este guest o RW4. No compilar DOOM todavía.
 
+Avance: [loader estático](native-loader-emulator.md). Guest compilado con GCC 11.3.1, Cortex-A7/Thumb/hard-float; allsyms contiene 44.839 entradas y puts, sin binding probado. OpenVela actual difiere del guest; NuttX 12.3 sirve solo de referencia histórica. El enlace Arm 11.3 falló: se pidió ZIP Arm 14.3 Windows x64 y .sha256asc desde Arm Keil en tools/local. Pendiente descarga y revisión antes de usar binutils/compilador.
+
 ## Comandos útiles
 
 Desde C:\Users\steve\Documents\Devs\Doomed\redmi-watch4-doom:

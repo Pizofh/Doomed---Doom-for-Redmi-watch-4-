@@ -9,7 +9,7 @@ La [inspección estática del ELF guest](emulator-package-review.md) identifica 
 | Camino | Evidencia actual | Bloqueo | Experimento posterior en PC |
 |---|---|---|---|
 | QuickApp / JS / RPK | API oficial Vela; debug físico documentado S4 | Soporte RW4 y bridge C/WASM no demostrados | App JS mínima, consulta de capacidades; no la llamar C |
-| Lua / watchface | Fuente TouchEvents específica RW4 | Versión/runtime, exit y packaging no ejecutados | Reproducir original en emulador |
+| Lua / watchface | TouchEvents original empaquetado; render/touch/cierre y reentrada en emulador | API para lanzar C y compatibilidad física pendientes | Experimento separado de launcher si se demuestra spawn |
 | Lua → shell | Símbolos `os_execute`/`system` definidos en ELF del emulador | Exposición desde watchface/RW4 sin probar | Inspeccionar presencia/tipo primero, experimento separado |
 | ELF / exec | `CONFIG_ELF`, `CONFIG_LIBC_EXECFUNCS`, `execv`/`posix_spawn` en emulador | Exports, contrato loader/entrypoint y lifecycle pendientes | Inventario read-only, luego hello C si hay contrato válido |
 | Módulo / `insmod` | `CONFIG_MODULE`, `cmd_insmod`/`cmd_rmmod`/`cmd_lsmod` en emulador FLAT | Carga y teardown no probados; sin aislamiento de memoria | Inspeccionar `help`/exports; no cargar para descubrir ABI |
@@ -20,7 +20,7 @@ Un componente de UI implementado internamente en C no da a una QuickApp permiso 
 
 El inventario confirma los comandos de módulos y `/bin/iwasm`; `lsmod` no muestra módulos cargados. `help -v insmod` indica `insmod <file-path> <module-name>`. **El comando NSH `exec` acepta una dirección hexadecimal**, no un filename ELF. No confundirlo con las funciones C exec/execv ni utilizarlo como exploración. `help -v` no describe builtins Lua/iwasm aunque sí aparecen y Lua se ejecutó.
 
-CLI Lua 5.4 expone `os.execute`/`package.loadlib` como funciones y carga LVGL; eso no prueba disponibilidad desde una watchface o el firmware RW4. El original TouchEvents falla en su fuente; la copia temporal sin esa propiedad termina sin excepción reportada, pero la captura sigue mostrando UI stock. Render/touch y lifecycle siguen pendientes.
+CLI Lua 5.4 expone `os.execute`/`package.loadlib` como funciones y carga LVGL; eso no prueba disponibilidad desde una watchface o el firmware RW4. La prueba CLI histórica del original TouchEvents falló al crear su fuente. Posteriormente, el original empaquetado y abierto mediante el launcher watchface sí demostró render, touch, cierre y reentrada: [resultados](touch-events-emulator.md).
 
 ## Modelo de memoria
 
@@ -42,7 +42,7 @@ TouchEvents ya demostró una entrada Lua persistente en el emulador, con render/
 
 Registrar encabezado ELF esperado (clase/endian/machine, tipo ET_REL/ET_EXEC/ET_DYN), ISA y flags, EABI/FPU, toolchain y versión, linker/relocations, entrypoint, libc y símbolos/imports. Identificar quién ejecuta init/exit, contexto/task, stack/heap, privilegios y recuperación del emulador. Distinguir binario host del payload guest. Ya se caracterizó el encabezado del firmware guest y su modo FLAT; no se ha determinado el contrato de un payload propio.
 
-Hello C posterior: imprimir una línea y devolver; sin drivers, hooks, writes, persistencia ni display. Solo promover ese checkpoint cuando exista un mecanismo demostrado y coherente. El esqueleto de `experiments/hello-native` no contiene código ni build anticipados.
+Hello C posterior: imprimir una línea y devolver; sin drivers, hooks, writes, persistencia ni display. Solo promover ese checkpoint cuando exista un mecanismo demostrado y coherente. El esqueleto de `experiments/hello-native` no contiene código ni build anticipados. La [investigación del loader](native-loader-emulator.md) fija flags del compilador y tabla allsyms estática; imports, entrypoint y descarga todavía requieren contraste con el guest.
 
 ## Salida antes del hardware
 
