@@ -3,13 +3,14 @@
 local module_file = "/tmp/rw4-lua-bridge.elf"
 local device = "/dev/rw4bridge"
 local sequence, running = 0, false
+local frame_paths = {}
 local function shell(command)
     local ok, why, code = os.execute(command)
     print("RW4_LUA_BRIDGE: shell", command, tostring(ok), tostring(why), tostring(code))
     assert(ok == true and why == "exit" and code == 0, "shell command failed")
 end
-local function present()
-    local f <close> = io.open(device, "rb")
+local function present(filename)
+    local f <close> = io.open(filename or device, "rb")
     if not f then return false end
     assert(f:close())
     return true
@@ -32,13 +33,19 @@ local function message(op, x, y)
     return {active=active, paused=paused, touches=touches, x=cx, y=cy}
 end
 local function cleanup(reason)
-    if not running then return end
-    -- A failed EXIT transaction must not skip removal of the owned module.
-    local notified, notify_error = pcall(function() assert(message(4).active == 0) end)
-    if not notified then print("RW4_LUA_BRIDGE: cleanup notification failed " .. tostring(notify_error)) end
-    shell("rmmod rw4bridge")
-    assert(not present(), "native node remained after unload")
-    running=false
+    if not running and #frame_paths==0 then return end
+    if running then
+        -- A failed EXIT transaction must not skip removal of the owned module.
+        local notified, notify_error = pcall(function() assert(message(4).active == 0) end)
+        if not notified then print("RW4_LUA_BRIDGE: cleanup notification failed " .. tostring(notify_error)) end
+        shell("rmmod rw4bridge")
+        assert(not present() and not present("/dev/rw4frame"), "native node remained after unload")
+        running=false
+    end
+    while #frame_paths>0 do
+        assert(os.remove(frame_paths[#frame_paths]))
+        frame_paths[#frame_paths]=nil
+    end
     print("RW4_LUA_BRIDGE: cleanup unloaded " .. reason)
 end
 -- Keep this table strongly reachable for the entire VM lifetime. lua_close
@@ -48,7 +55,7 @@ local lifetime = setmetatable({}, {__gc=function()
     print("RW4_LUA_BRIDGE: finalizer begin running=" .. tostring(running))
     local ok, err = pcall(cleanup, "lua-close")
     if not ok then print("RW4_LUA_BRIDGE: finalizer cleanup failed " .. tostring(err)) end
-    print("RW4_LUA_BRIDGE: finalizer end clean=" .. tostring(not running))
+    print("RW4_LUA_BRIDGE: finalizer end clean=" .. tostring(not running and #frame_paths==0))
 end})
 -- A missing-file request must report the stub, not attempt an external library.
 local loader, loader_error, loader_where = package.loadlib("/tmp/rw4-nonexistent-loader-probe.elf", "luaopen_rw4probe")
@@ -56,6 +63,23 @@ print("RW4_LUA_BRIDGE: loadlib", type(loader), tostring(loader_error), tostring(
 shell("uname -a") -- First shell invocation in watchface is read-only.
 RW4_NATIVE_BRIDGE = {
     _lifetime=lifetime,
+    frame=function()
+        assert(running, "frame requested while stopped")
+        local reader <close> = assert(io.open("/dev/rw4frame", "rb"))
+        reader:setvbuf("no")
+        local bytes=assert(reader:read(89612))
+        assert(#bytes==89612 and reader:read(1)==nil, "invalid native frame length")
+        assert(reader:close())
+        local magic, cf, flags, w, h, stride, reserved=string.unpack("<I1I1I2I2I2I2I2", bytes)
+        assert(magic==0x19 and cf==0x12 and flags==0 and w==320 and h==140 and stride==640 and reserved==0)
+        local filename="/tmp/rw4-native-pattern-" .. tostring(sequence) .. ".bin"
+        assert(not present(filename), "owned frame path already exists; inspect before replacing")
+        local writer <close> = assert(io.open(filename, "wb"))
+        frame_paths[#frame_paths+1]=filename
+        assert(writer:write(bytes) and writer:close())
+        print("RW4_LUA_FRAME: snapshot bytes=" .. #bytes .. " path=" .. filename)
+        return filename
+    end,
     start=function()
         assert(not running and not present(), "native device already present; inspect before starting")
         shell("insmod " .. module_file .. " rw4bridge")

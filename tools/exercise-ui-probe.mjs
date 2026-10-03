@@ -5,7 +5,7 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { guardEmulator, gesture } from './emulator-ui.mjs';
 import { projectRoot } from './verify-emulator.mjs';
-import { assertUiProbe } from './assert-ui-probe.mjs';
+import { assertUiProbe, assertNativePattern } from './assert-ui-probe.mjs';
 import { bridgeState } from './lua-bridge-state.mjs';
 
 const bridgeMode=process.argv[2]==='bridge';
@@ -36,6 +36,7 @@ function capture(label) {
 }
 capture(`${prefix}-baseline`);
 assertUiProbe(path.join(projectRoot,`artifacts/emulator/screenshots/${prefix}-baseline.png`),'page');
+if(bridgeMode)assertNativePattern(path.join(projectRoot,`artifacts/emulator/screenshots/${prefix}-baseline.png`));
 let priorNative=bridgeMode?bridgeState():null;
 if(bridgeMode&&(!priorNative.registered||priorNative.state.active!==1||priorNative.state.paused!==0))throw Error('Native baseline is not active');
 for(const [name,coordinates] of actions){
@@ -49,6 +50,7 @@ for(const [name,coordinates] of actions){
   if(!['edge-up','panel-blank','stock-panel'].includes(name)) {
     const expected=['exit','exit-again','close-stock-panel'].includes(name)?'launcher':'page';
     assertUiProbe(path.join(projectRoot,`artifacts/emulator/screenshots/${label}.png`),expected);
+    if(bridgeMode&&expected==='page')assertNativePattern(path.join(projectRoot,`artifacts/emulator/screenshots/${label}.png`));
   }
   if(bridgeMode) {
     const absent=['exit','exit-again','stock-panel','close-stock-panel'].includes(name);

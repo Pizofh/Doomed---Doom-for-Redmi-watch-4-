@@ -48,6 +48,22 @@ local counter = label(page, "Presses: 0", 155)
 local active, presses = false, 0
 local suspended = false
 local bridge = rawget(_G, "RW4_NATIVE_BRIDGE")
+local pattern_image
+local function show_pattern()
+    if not bridge or not bridge.frame then return end
+    local src=bridge.frame()
+    if pattern_image then pattern_image:set_src(src)
+    else
+        pattern_image=lvgl.Image(page, {x=35, y=205, src=src})
+        for _, flag in ipairs({flags.CLICKABLE, flags.SCROLLABLE, flags.EVENT_BUBBLE,
+            flags.GESTURE_BUBBLE, flags.SCROLL_CHAIN_HOR, flags.SCROLL_CHAIN_VER}) do
+            pattern_image:clear_flag(flag)
+        end
+    end
+    local w,h=pattern_image:get_img_size()
+    assert(w==320 and h==140, "LVGL did not recognize native frame")
+    print("RW4_UI_FRAME: image 320x140")
+end
 local function native(method, ...)
     if not bridge then return true end
     local ok, err = pcall(bridge[method], ...)
@@ -99,6 +115,11 @@ end
 
 local start_button = button(launcher, "START", 250, function()
     if not native("start") then status:set {text = "Native error: inspect log"}; return end
+    local frame_ok, frame_error=pcall(show_pattern)
+    if not frame_ok then
+        print("RW4_UI_FRAME: error " .. tostring(frame_error))
+        native("exit"); status:set {text="Frame error: inspect log"}; return
+    end
     active = true
     navigation(false)
     launcher:add_flag(flags.HIDDEN)

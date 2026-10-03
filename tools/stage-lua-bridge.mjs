@@ -23,6 +23,7 @@ function adb(args,label){
 const moduleName='rw4bridge', guestFile='/tmp/rw4-lua-bridge.elf', device='/dev/rw4bridge';
 if(adb(['shell','lsmod'],'modules-before').includes(moduleName))throw Error('Own module already loaded; exit UI and inspect before staging/cleanup');
 if(!/^nsh: ls: stat failed: 2\r?$/im.test(adb(['shell','ls',device],'node-absence')))throw Error('Virtual node unexpectedly exists');
+if(!/^nsh: ls: stat failed: 2\r?$/im.test(adb(['shell','ls','/dev/rw4frame'],'frame-absence')))throw Error('Frame node unexpectedly exists');
 const review=JSON.parse(fs.readFileSync(path.join(projectRoot,'build/lua-native-bridge/bridge-review.json'),'utf8'));
 const source=path.join(projectRoot,'build/lua-native-bridge/bridge.elf');
 const bytes=fs.readFileSync(source);
@@ -49,6 +50,7 @@ if(action==='test') {
   const removed=adb(['shell','rmmod',moduleName],'rmmod');
   const unloaded=!adb(['shell','lsmod'],'modules-after').includes(moduleName);
   const noNode=/^nsh: ls: stat failed: 2\r?$/im.test(adb(['shell','ls',device],'node-after'));
-  if((!tested.includes('BRIDGE_TEST_OK')||!tested.includes('BRIDGE_BUSY_REJECTED'))||!removed.includes('unregister=0 refs=0')||!unloaded||!noNode)throw Error('Native test/cleanup not confirmed; inspect artifacts');
+  const noFrame=/^nsh: ls: stat failed: 2\r?$/im.test(adb(['shell','ls','/dev/rw4frame'],'frame-after'));
+  if((!tested.includes('BRIDGE_TEST_OK')||!tested.includes('BRIDGE_BUSY_REJECTED'))||!removed.includes('unregister=0 refs=0')||!unloaded||!noNode||!noFrame)throw Error('Native test/cleanup not confirmed; inspect artifacts');
 }
 console.log(JSON.stringify({action,folder,backup:backup.folder,sha256:digest(bytes),physicalTransport:false}));

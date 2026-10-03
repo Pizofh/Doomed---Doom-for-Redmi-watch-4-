@@ -19,13 +19,16 @@ export function bridgeState() {
   const read=command(['lua','-e','"'+code+'"']);
   const match=read.stdout.match(/BRIDGE_STATE\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)/);
   const registered=modules.stdout.includes('rw4bridge');
+  const frame=command(['ls','/dev/rw4frame']);
+  const frameAbsent=/^nsh: ls: stat failed: 2\r?$/im.test(frame.stdout);
+  if(frameAbsent===registered || (!frameAbsent&&!frame.stdout.includes('rw4frame')))throw Error('Frame node/module state mismatch');
   let state=null;
   if(match) {
     const [magic,sequence,active,paused,touches,x,y,op]=match.slice(1).map(Number);
     if(magic!==0x34574252||!registered)throw Error('Unexpected native snapshot');
     state={sequence,active,paused,touches,x,y,op};
   } else if(!read.stdout.includes('BRIDGE_STATE absent')||registered)throw Error('Module/node state mismatch');
-  const result={registered,state,modules,read,physicalTransport:false,atUtc:new Date().toISOString()};
+  const result={registered,state,modules,read,frame,physicalTransport:false,atUtc:new Date().toISOString()};
   fs.writeFileSync(path.join(projectRoot,`artifacts/emulator/lua-bridge-state-${Date.now()}.json`),JSON.stringify(result,null,2)+'\n');
   return result;
 }

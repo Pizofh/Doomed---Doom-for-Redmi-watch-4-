@@ -2,8 +2,7 @@
 import fs from 'node:fs';
 import zlib from 'node:zlib';
 
-export function assertUiProbe(filename, expected) {
-  if (!['page','launcher'].includes(expected)) throw new Error('Unknown probe surface');
+export function readScreenshot(filename) {
   const png=fs.readFileSync(filename);
   if(png.length>1024*1024||!png.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))) throw new Error('Unexpected PNG');
   const chunks=[]; let bpp=0,ended=false;
@@ -33,10 +32,29 @@ export function assertUiProbe(filename, expected) {
       pixels[at]=(raw[y*(stride+1)+1+x]+prediction)&255;
     }
   }
+  return {pixels,bpp};
+}
+
+export function assertUiProbe(filename, expected) {
+  if (!['page','launcher'].includes(expected)) throw new Error('Unknown probe surface');
+  const {pixels,bpp}=readScreenshot(filename);
   // Captured RGB after the guest's RGB565 conversion, not the Lua RGB888 value.
   const color=expected==='page'?[16,53,74]:[16,24,33];
-  for(const [x,y] of [[20,100],[195,230],[370,250]]) {
+  for(const [x,y] of [[20,100],[20,230],[370,250]]) {
     const p=(y*390+x)*bpp;
     if(!color.every((v,i)=>pixels[p+i]===v)) throw new Error(`Expected own ${expected} surface at ${x},${y}; RGB=${[...pixels.subarray(p,p+3)]}; stop and inspect UI`);
+  }
+}
+
+export function assertNativePattern(filename) {
+  const {pixels,bpp}=readScreenshot(filename);
+  const colors=[[255,0,0],[0,255,0],[0,0,255],[255,255,255],
+    [255,255,0],[0,255,255],[255,0,255],[0,0,0]];
+  for(let y=0;y<140;y++)for(let x=0;x<320;x++){
+    const rgb=y<70?colors[Math.floor(x/40)]:(((Math.floor(x/16)^Math.floor(y/16))&1)?colors[3]:colors[7]);
+    const p=((y+205)*390+x+35)*bpp;
+    // Captured image edges differ by up to two channel levels in this controller.
+    // Native source bytes are checked exactly in test-native-frame.mjs.
+    if(!rgb.every((v,i)=>Math.abs(pixels[p+i]-v)<=2))throw Error(`Native pattern mismatch at ${x},${y}`);
   }
 }
