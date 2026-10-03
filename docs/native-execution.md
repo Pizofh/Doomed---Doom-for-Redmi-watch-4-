@@ -1,5 +1,7 @@
 # Ejecución y privilegios
 
+Referencia adicional del 2026-10-03: [MiWatchNativeApps](https://github.com/m0tral/MiWatchNativeApps/tree/a392529b9e369d046b9c15858d990f358fdf6c29), para S3/Band 10 Pro. Su header S3 usa direcciones absolutas del firmware; no ejecutar esos módulos en el emulador Cortex-A ni en M2315W1. «Userspace module» en documentación ajena no prueba separación de memoria. Fijar contrato/exports/init/uninit de nuestro guest antes de hello C. Ver R35 en research.md.
+
 No se ejecutó ningún payload C propio, módulo ELF o WASM. Sí se ejecutaron comandos builtin y Lua por ADB en el emulador. No se invocaron `insmod`, `rmmod`, `iwasm`, `os.execute` ni exploits. No hay una razón demostrada para root/jailbreak. Referencias y estados: [research.md](research.md), [matriz](evidence-matrix.md), [runtime observado](emulator-runtime.md).
 
 La [inspección estática del ELF guest](emulator-package-review.md) identifica Goldfish Cortex-A7, ELF32 ARM/EABI5/hard-float, `CONFIG_BUILD_FLAT`, loaders ELF/módulos y soporte Lua/WAMR. Son capacidades compiladas de la imagen del emulador, no prueba de ejecución de código propio ni evidencia M2315W1. Los ejecutables Windows del launcher sí se ejecutaron tras revisar su procedencia; distinguirlos de payloads guest.

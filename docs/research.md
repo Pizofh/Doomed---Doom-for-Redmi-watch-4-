@@ -36,6 +36,8 @@ La página oficial de depuración física identifica **solo Watch S4** y acceso 
 
 ## DOOM y NuttX
 
+MiWatchNativeApps [R35], fijado en a392529b9e369d046b9c15858d990f358fdf6c29, incluye hello C y launcher Lua para Watch S3 y Band 10 Pro. El launcher invoca os.execute; el header S3 2.6.0 contiene direcciones absolutas específicas del firmware. Su README afirma ausencia de hardcoded code addresses, pero el header sí las contiene. Su etiqueta «userspace module» no demuestra aislamiento; nuestro emulador es FLAT. Descargar el módulo de RAM al reboot no implica borrar el archivo ELF almacenado. Ningún código/binario del proyecto fue ejecutado ni copiado al guest. No aporta evidencia específica suficiente para M2315W1.
+
 doomgeneric conserva el motor de DOOM y expone una interfaz pequeña [R24]. El header real incluye `DG_SetWindowTitle`, `doomgeneric_Create`, `doomgeneric_Tick` y `DG_ScreenBuffer`. Sus defaults son **640×400** y `uint32_t`, con alternativa `CMAP256`; 320×200 es una futura elección de build, no el default actual [R25]. LICENSE es GPL versión 2 [R26]; derechos de WAD separados. No se descargó WAD ni se compiló motor.
 
 NuttX documenta FLAT/PROTECTED/KERNEL [R27] y distingue módulos kernel de shared libraries [R28]. NSH puede incluir `insmod`, `rmmod` y `lsmod` condicionado por configuración [R29]. Son mecanismos upstream, no evidencia de firmware M2315W1. El uso de RAM no establece aislamiento ni rollback de escrituras.
@@ -78,3 +80,4 @@ Las páginas web son referencias móviles consultadas en esta fecha. Los links a
 - **R32:** [AOSP System.cpp emu-32-dev](https://github.com/aosp-mirror/platform_external_qemu/blob/emu-32-dev/android/android-emu-base/android/base/system/System.cpp); upstream usa SHGetFolderPathW en Windows. No es fuente exacta de la variante Vela.
 - **R33:** [Observaciones locales de boot, ADB, inventario y Lua](emulator-runtime.md); primera instancia cerrada desde padre, segunda con shell y pruebas CLI sin validación touch.
 - **R34:** [AOSP protocolo EmulatorController fijado](https://github.com/aosp-mirror/platform_external_qemu/blob/3784ee8181ab600b8a1d009a5e03cf9afe78865a/android/android-grpc/emulator_controller.proto); utilizado para captura gRPC de pantalla, sin envío de input.
+- **R35:** [MiWatchNativeApps fijado](https://github.com/m0tral/MiWatchNativeApps/tree/a392529b9e369d046b9c15858d990f358fdf6c29): README, WatchS3/watchs3_hello.c, WatchS3/wf_native_hello/app/lua/main.lua y platform/watchs3/fw_2.6.0/miwear_system.h. Fuente comunitaria original inspeccionada remotamente el 2026-10-03, sin ejecución.

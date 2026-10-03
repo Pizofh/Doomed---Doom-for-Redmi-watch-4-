@@ -55,3 +55,11 @@ Logs ignorados: artifacts/emulator/adb/, artifacts/emulator/lua-touch/, artifact
 ## Reproducibilidad pendiente
 
 collect fue actualizado para esperar el puente 5555 y emulator-5554. Esa recaptura automática actualizada no se volvió a probar desde un boot nuevo; conexión, inventario y captura se validaron por separado. No reiniciar para ocultar errores ni repetir inventarios sin necesidad. Ver [HANDOFF](HANDOFF.md).
+
+## Continuación 2026-10-03: introspección de API
+
+ADB seguía online. `node tools/emulator-adb.mjs lua-api` enumera tablas/metatablas existentes con límite de 120 claves por tabla; no crea widgets ni invoca UI. Artefacto: artifacts/emulator/adb/lua-api-module-entries.json.
+
+El módulo expone Timer, disp.get_default/get_next/get_scr_act/get_scr_prev/load_scr y _root userdata. Las clases también se resuelven por metatabla; pairs no basta para descartar Object/Label. Logs anuncian apertura de activity, screen, navigator, miwear, dataman, topic y vibrator; no se invocaron sus APIs. Los nombres no demuestran firmas, threading, permisos ni lifecycle.
+
+TouchEvents crea objetos y termina con entry(); no llama explícitamente a disp.load_scr ni mantiene un event loop propio. Es una inferencia que CLI y watchface inicializan/activan/liberan la UI de forma distinta. Falta demostrar el mecanismo correcto; no llamar load_scr con argumentos supuestos ni mantener Lua mediante un bucle infinito. No se repitió el sample ni se enviaron eventos.

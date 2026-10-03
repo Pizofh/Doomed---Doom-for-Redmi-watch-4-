@@ -48,6 +48,8 @@ Estados: **CONFIRMADO EN RW4**, **CONFIRMADO EN EMULADOR**, **CONFIRMADO SOLO EN
 
 ## Las 23 hipótesis
 
+Continuación 2026-10-03: lua-api confirmó disp.load_scr/get_scr_act y Timer en emulador, sin invocarlos. MiWatchNativeApps [R35] contiene launcher Lua con os.execute y hello C para Watch S3/Band 10 Pro: evidencia documental **CONFIRMADO SOLO EN OTRO XIAOMI**, sin prueba local ni validación RW4. Direcciones absolutas dependen del firmware. Ninguna clasificación física cambia por estos hallazgos.
+
 | # | Claim | Device | Evidence | Classification | Confidence | Tested locally | Notes / siguiente evidencia necesaria |
 |---|---|---|---|---|---|---|---|
 | 1 | Lua permite `os.execute()` | RW4 | Ninguna específica; TouchEvents no la llama | SIN EVIDENCIA | No evaluable | No | Ver runtime/config/version; no inferir de Lua estándar |

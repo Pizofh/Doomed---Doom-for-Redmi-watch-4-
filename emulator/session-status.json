@@ -1,6 +1,8 @@
 {
   "date": "2026-10-02",
   "workStatus": "active",
+  "lastContinuationDate": "2026-10-03",
+  "luaApiIntrospectionCompleted": true,
   "resumeDocument": "docs/HANDOFF.md",
   "candidateRelease": "https://github.com/m0tral/MiWatchEmulator/releases/tag/v1.0",
   "archiveDownloaded": true,
