@@ -6,7 +6,7 @@ El usuario autoriza investigación, documentación y pruebas incrementales en PC
 |---|---|---|---|
 | Consultar documentación/código remoto | Archivos locales del proyecto | Información falsa o extrapolada | Fuentes originales, SHAs, clasificación por dispositivo |
 | Clonar fuentes fijadas | Disco PC | Hooks/filtros/config del host | No ejecutar build/install; revisar fuente y licencias |
-| Listar ZIP/leer PE/hash/firma | Reporte PC | Archivo enorme/malformado, traversal al extraer | No extracción automática; revisar size/rutas |
+| Listar ZIP/leer PE/hash/firma | Reporte PC | Archivo enorme/malformado, traversal al extraer | Revisar size/rutas; extracción selectiva a destinos resueltos dentro del workspace |
 | Ejecutar emulador comunitario | Disco/memoria PC y estado guest | Un emulador no aísla su propio ejecutable del host | Revisar paquete completo; preferir VM si no hay confianza suficiente |
 | ADB inventario allowlist | Logs host; ADB puede crear keys/server, guest puede registrar conexión | Transporte incorrecto, datos privados, shell divergente | Serial explícito emulador, timeout, sin USB seleccionado |
 | Instalar watchface en emulador | Filesystem/imagen mutable guest | UI rota o lista de watchfaces dañada | Copia previa de estado guest, ID propio, restaurar copia |
@@ -19,6 +19,8 @@ El usuario autoriza investigación, documentación y pruebas incrementales en PC
 ## Procedencia de binarios
 
 Release MiWatchEmulator v1.0 verificable por metadata del repositorio original; sin digest publicado. Código completo/licencia del bundle no identificados. Se requiere obtener el ZIP, generar manifest, revisar launchers, PE, firmas, dependencias e imágenes guest y determinar el origen Xiaomi alegado. SHA local identifica bytes; no sustituye autenticidad. Firma Git del README tampoco autentica assets.
+
+La [revisión local](emulator-package-review.md) ya verificó las 94 piezas EXE/DLL del emulador contra el repo oficial OpenVela fijado, y firmas Google/Microsoft de componentes revisados. Se ejecutaron help/launcher del host y `adb version`, sin boot del guest. La imagen guest permanece una build opaca de la release comunitaria, inspeccionada estáticamente; no atribuirle una build oficial reproducida ni compatibilidad física. El launcher original permite semihosting/audio; nuestro arranque deshabilita audio y usa una copia del estado guest. El semihosting requiere tratar guest y host como una frontera que debe revisarse, no un sandbox garantizado.
 
 No ejecutar MSI de Drive, APK de Telegram, compiler EasyFace o adb incluido antes de revisión razonable. El digest de compiler v4.23 aporta comparación de integridad, no revisión de comportamiento ni confianza del MSI separado. Si un origen importante sigue sin verificarse, detener ejecución y documentar la alternativa oficial AIoT-IDE.
 

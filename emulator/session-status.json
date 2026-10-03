@@ -1,12 +1,18 @@
 {
   "date": "2026-10-02",
   "candidateRelease": "https://github.com/m0tral/MiWatchEmulator/releases/tag/v1.0",
-  "archiveDownloaded": false,
-  "binariesInspected": false,
+  "archiveDownloaded": true,
+  "archiveSha256": "4c3fd80c31b0457ba6a179aa79baccd5acaec4aa9f40c170c463fbaca97f0dba",
+  "binariesInspected": true,
+  "officialHostBinaryMatches": 94,
+  "hostLauncherExecuted": true,
+  "guestStaticallyInspected": true,
   "started": false,
   "adbShellObtained": false,
   "readOnlyInventoryCompleted": false,
   "touchEventsExecuted": false,
+  "touchEventsSourceFilesVerified": 6,
+  "userVvdRegistrationCopied": true,
   "physicalDeviceConnected": false,
-  "blockers": ["Terminal network cannot reach GitHub", "No local emulator package supplied", "Archive binary provenance review remains pending"]
+  "blockers": ["Launcher resolves the restricted account's Windows profile; manual start under normal user requested", "Terminal network still cannot reach GitHub for clones/packager downloads"]
 }

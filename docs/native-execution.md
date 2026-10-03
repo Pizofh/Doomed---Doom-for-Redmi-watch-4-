@@ -2,14 +2,16 @@
 
 No hay ejecución nativa demostrada en esta sesión. No se ejecutaron `insmod`, ELF, `iwasm`, shell Lua ni exploits. No hay una razón demostrada para root/jailbreak. Referencias y estados: [research.md](research.md), [matriz](evidence-matrix.md).
 
+La [inspección estática del ELF guest](emulator-package-review.md) identifica Goldfish Cortex-A7, ELF32 ARM/EABI5/hard-float, `CONFIG_BUILD_FLAT`, loaders ELF/módulos y soporte Lua/WAMR. Son capacidades compiladas de la imagen del emulador, no prueba de ejecución de código propio ni evidencia M2315W1. Los ejecutables Windows del launcher sí se ejecutaron tras revisar su procedencia; distinguirlos de payloads guest.
+
 | Camino | Evidencia actual | Bloqueo | Experimento posterior en PC |
 |---|---|---|---|
 | QuickApp / JS / RPK | API oficial Vela; debug físico documentado S4 | Soporte RW4 y bridge C/WASM no demostrados | App JS mínima, consulta de capacidades; no la llamar C |
 | Lua / watchface | Fuente TouchEvents específica RW4 | Versión/runtime, exit y packaging no ejecutados | Reproducir original en emulador |
-| Lua → shell | Sin prueba de `os.execute` en RW4 o emulador local | Biblioteca estándar puede estar recortada | Inspeccionar presencia/tipo primero, experimento separado |
-| ELF userspace | NuttX upstream soporta loaders según build | ISA, ABI, exports, loader y modo desconocidos | Inventario read-only, luego hello C si hay contrato válido |
-| Módulo / `insmod` | NuttX upstream documenta módulos kernel | No presencia ni privilegios comprobados en build Xiaomi | Inspeccionar `help`/config; no cargar para descubrir ABI |
-| WASM / `iwasm` | No evidencia específica M2315W1 | Runtime, imports, memoria y UI desconocidos | Identificar comando/config sin ejecutar payload |
+| Lua → shell | Símbolos `os_execute`/`system` definidos en ELF del emulador | Exposición desde watchface/RW4 sin probar | Inspeccionar presencia/tipo primero, experimento separado |
+| ELF / exec | `CONFIG_ELF`, `CONFIG_LIBC_EXECFUNCS`, `execv`/`posix_spawn` en emulador | Exports, contrato loader/entrypoint y lifecycle pendientes | Inventario read-only, luego hello C si hay contrato válido |
+| Módulo / `insmod` | `CONFIG_MODULE`, `cmd_insmod`/`cmd_rmmod`/`cmd_lsmod` en emulador FLAT | Carga y teardown no probados; sin aislamiento de memoria | Inspeccionar `help`/exports; no cargar para descubrir ABI |
+| WASM / `iwasm` | `iwasm_main` y macros WAMR en emulador | Imports, memoria/UI/lifecycle y RW4 desconocidos | Identificar comando/runtime sin ejecutar payload |
 | App nativa precompilada/builtin | Concepto upstream | Builtin no significa carga de app arbitraria stock | Identificar registro/launcher y build requerida |
 
 Un componente de UI implementado internamente en C no da a una QuickApp permiso para ejecutar un binario arbitrario. La existencia de una toolchain Linux ARM no basta: NuttX necesita contrato de libc, relocations, arquitectura y símbolos compatible. No usar un ELF Linux en el emulador como ensayo de compatibilidad.
@@ -30,7 +32,7 @@ NuttX distingue [módulos kernel y shared libraries](https://nuttx.apache.org/do
 
 ## Contrato mínimo antes de hello C
 
-Registrar encabezado ELF esperado (clase/endian/machine, tipo ET_REL/ET_EXEC/ET_DYN), ISA y flags, EABI/FPU, toolchain y versión, linker/relocations, entrypoint, libc y símbolos/imports. Identificar quién ejecuta init/exit, contexto/task, stack/heap, privilegios y recuperación del emulador. Distinguir binario host del payload guest. Falta toda esa caracterización local.
+Registrar encabezado ELF esperado (clase/endian/machine, tipo ET_REL/ET_EXEC/ET_DYN), ISA y flags, EABI/FPU, toolchain y versión, linker/relocations, entrypoint, libc y símbolos/imports. Identificar quién ejecuta init/exit, contexto/task, stack/heap, privilegios y recuperación del emulador. Distinguir binario host del payload guest. Ya se caracterizó el encabezado del firmware guest y su modo FLAT; no se ha determinado el contrato de un payload propio.
 
 Hello C posterior: imprimir una línea y devolver; sin drivers, hooks, writes, persistencia ni display. Solo promover ese checkpoint cuando exista un mecanismo demostrado y coherente. El esqueleto de `experiments/hello-native` no contiene código ni build anticipados.
 
