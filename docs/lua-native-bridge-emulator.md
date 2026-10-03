@@ -74,6 +74,6 @@ No automatizar la navegación de Settings mediante coordenadas sin revisar cada 
 
 Final: Storage365700764 activa, Lua cerrado, módulo/nodo y archivo temporal ausentes. No reset para salir. La watchface queda almacenada en el emulador; el ELF en /tmp **no es persistente**, se retiró al terminar. La reapertura probada entre ciclos no requirió PC, pero requiere preparar otra vez el ELF después de reset/cleanup. No hay persistencia nativa demostrada.
 
-Cierra correctamente mediante EXIT. Cambio directo de watchface, muerte de Lua, errores de lanzamiento/transacción y cierre inesperado todavía no garantizan descarga del módulo. No se midieron fugas prolongadas, coste por llamada, FPS, memoria pico ni timing. Tampoco se verificaron archivos WAD, WASM, QuickApp→C ni ejecución RW4.
+Cierra correctamente mediante EXIT. En esta prueba inicial no se validó cambio directo de watchface ni errores de lanzamiento/transacción. La [continuación de lifecycle](lua-native-close-emulator.md) validó posteriormente dos cambios de watchface sin EXIT y un error CLI controlado. Crashes y terminación forzada siguen sin garantía. No se midieron fugas prolongadas, coste por llamada, FPS, memoria pico ni timing. Tampoco se verificaron archivos WAD, WASM, QuickApp→C ni ejecución RW4.
 
-**Siguiente checkpoint:** garantizar limpieza de C cuando se cierre la watchface sin pulsar EXIT, antes de introducir render o un engine.
+**Checkpoint posterior completado:** [limpieza de C al cerrar la watchface sin pulsar EXIT](lua-native-close-emulator.md). Siguiente: patrón C dentro de nuestra página LVGL, conservando el lifecycle probado.

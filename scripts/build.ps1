@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param([ValidateSet('Hello', 'DisplayProbe', 'DisplayPattern', 'Touch', 'UIProbe', 'NativeBridge', 'UIProbeBridge', 'Doom')][string]$Target = 'Hello')
 
-if ($Target -eq 'Doom') { throw 'DOOM gate closed: cleanup on unexpected Lua closure, native render integration, monotonic timers and WAD filesystem remain unvalidated.' }
+if ($Target -eq 'Doom') { throw 'DOOM gate closed: native render integration, held input, monotonic timers and WAD filesystem remain unvalidated.' }
 $ErrorActionPreference = 'Stop'
 $rw4BuildTool = Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-hello.mjs'
 if ($Target -eq 'Hello') {

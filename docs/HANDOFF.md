@@ -1,12 +1,14 @@
 # Retomar el proyecto
 
-Estado activo al 2026-10-03. Resultado actual: [puente Lua↔C con carga desde START, eventos propios, pausa y descarga desde EXIT](lua-native-bridge-emulator.md).
+Estado activo al 2026-10-03. Resultado actual: [descarga de C al cambiar de watchface sin EXIT](lua-native-close-emulator.md), después del [puente Lua↔C](lua-native-bridge-emulator.md).
 
-Última sesión: loadlib es un stub deshabilitado (CLI y watchface nil/error/absent), os.execute desde watchface funciona para uname e insmod/rmmod propios. C registra su nodo virtual /dev/rw4bridge, sin thread/timer/periférico. io envía24bytes y lee32bytes exactos; nunca leer nodo con cat/read-all. File_operations40bytes, write12, contrastado con DWARF del guest. ABI/símbolos enlazados a su hash exacto; no usar físicamente.
+Última sesión: control.lua mantiene un guard __gc global durante la VM y usa handles con atributo close. CLI normal/error controlado pasan: collectgarbage no descarga C activo; cierre VM notifica EXIT, unregister=0 refs=0, módulo/nodo ausentes. Error ensayado tenía descriptor abierto, cerrado antes de rmmod. Dos ciclos UI START→Storage sin EXIT descargaron C automáticamente sin reset ni PC entre aperturas. Tercer ciclo START→EXIT→Storage pasó; finalizador vio running=false sin repetir rmmod. Se inspeccionó llamada Xiaomi a lua_close antes del cleanup posterior. No se cambió C ni se compiló Doom.
 
-Dos ciclos START/EXIT desde UI sin reboot ni PC entre ciclos. C devuelve coordenadas, panel pone paused=1 y tap50,45 deja snapshot idéntico, al cerrar paused=0. EXIT unregister=0 refs=0 y lsmod/nodo ausentes; reentrada recarga y reinicia contador. CLI adicional confirmó busy si hay descriptor abierto, luego close y descarga correcta. No hay engine pausado, input mantenido, medición de latencia/FPS ni cleanup garantizado al cerrar watchface sin EXIT.
+Puente previo: loadlib es un stub deshabilitado; os.execute desde watchface funciona para uname e insmod/rmmod propios. C registra /dev/rw4bridge virtual, sin thread/timer/periférico. io envía24bytes y lee32bytes exactos; nunca cat/read-all. File_operations40bytes, write12, contrastado con DWARF del guest; símbolos ligados al ELF exacto. Panel pausa/reanuda C; tap50,45 no cambia estado. Descriptor abierto rechaza rmmod. No hay engine/render integrado, input mantenido, latencia/FPS ni cleanup garantizado ante crash/panic/kill forzado.
 
-Final: Storage365700764 seleccionada, Lua cerrado, C/nodo y /tmp/rw4-lua-bridge.elf ausentes. UIProbe365799903 queda almacenada con prefijo de bridge. Reproducir exige preparar ELF después de reset/cleanup. C2552bytes SHA2fbebe482949a5e04d30879369bbba92b7597be1d2efc594565479dcbd41f741. Watchface15648bytes SHAad73c67a42e8820ddcf921d3747b6b4124c97d6479b97b1077f5a355795c5527. Evidencia ui-probe-exercise-1791061092218 y lua-bridge-test-1791061474934, ignorada. Se revisaron capturas/logs/respuestas C. La navegación Settings requiere revisar cada pantalla; selector no avanza con todos los swipes sintéticos.
+Final: Storage365700764 seleccionada, Lua cerrado, C/nodo y /tmp/rw4-lua-bridge.elf ausentes. UIProbe365799903 queda almacenada con finalizador. Reproducir exige preparar ELF después de reset/cleanup. C2552bytes SHA2fbebe482949a5e04d30879369bbba92b7597be1d2efc594565479dcbd41f741. Watchface16852bytes SHAe5c713e69607e00aed523dfb83aaa0cfa044ddb795cea1a1ae72e3e7f71a0890. Evidencia lua-bridge-close-normal-1791062551430, lua-bridge-close-error-1791062555253 y lua-bridge-close-ui, ignorada. Se revisaron capturas/logs/respuestas C. La navegación Settings requiere revisar cada pantalla; selector no avanza con todos los swipes sintéticos.
+
+**Siguiente meta única:** patrón de píxeles generado por C dentro de nuestra página LVGL. Investigar primero el contrato de imagen/canvas Lua del guest; conservar contexto UI, pausa, EXIT y finalizador. Sin Doom, workers, framebuffer global ni hardware físico en ese checkpoint.
 
 - Nunca se conectó el reloj físico M2315W1. Gate físico cerrado; sin flash, exploits, mods APK ni DOOM/WAD. Hello C propio validado únicamente en el emulador.
 - Guest Xiaomi Watch S3 / NuttX 0.0.0, revisión 9aec7d0ff1; pantalla configurada 390×450. No emulación exacta RW4/BES.
@@ -60,6 +62,9 @@ node tools/package-ui-probe.mjs bridge
 node tools/install-ui-probe-emulator.mjs update
 # Después de boot/reset, preparar el payload temporal:
 node tools/stage-lua-bridge.mjs stage
+# Pruebas de cierre por consola, estando UIProbe inactiva:
+node tools/test-lua-bridge-close.mjs normal
+node tools/test-lua-bridge-close.mjs error
 # Seleccionar UIProbe y START antes de ejercer gestos:
 node tools/exercise-ui-probe.mjs bridge
 node tools/lua-bridge-state.mjs

@@ -147,7 +147,11 @@ Continuación 2026-10-03: lua-api confirmó disp.load_scr/get_scr_act y Timer en
 | EXIT descarga C; START vuelve a cargarlo sin PC entre ciclos | Guest S3 UIProbe | R51 | CONFIRMADO EN EMULADOR | Alta local | Dos ciclos, node/module ausentes al salir, contador reiniciado | Requiere preparar ELF después de reset/cleanup |
 | Uninitializer rechaza descarga con descriptor abierto | Guest S3, cliente controlado | R51 CLI | CONFIRMADO EN EMULADOR | Alta local | rmmod busy; cierre y descarga posterior correctos | No concurrencia arbitraria ni errores prolongados probados |
 | ELF del puente permanece instalado después de reset | /tmp en emulador | R51 mount tmpfs y staging posterior al reset | REFUTADO para esta instalación | Alta local | Reset elimina /tmp; payload retirado al terminar | Watchface Lua sí permanece; persistencia ELF pendiente |
-| Cambio de watchface sin EXIT también descarga C | Guest S3 | R51 solo EXIT validado | SIN EVIDENCIA | No evaluable | No | Próximo checkpoint de cleanup; gate físico sigue cerrado |
+| Cambio de watchface sin EXIT también descarga C | Guest S3 UIProbe | R52 finalizador, log, lsmod y nodo | CONFIRMADO EN EMULADOR | Alta local | Dos ciclos hacia Storage sin reboot; módulo/nodo ausentes | No implica cleanup ante crash ni compatibilidad RW4 |
+| Recolección normal no descarga C activo | Guest S3 CLI | R52 collectgarbage y lectura de estado | CONFIRMADO EN EMULADOR | Alta local | Retorno normal y error controlado | Guard mantenido globalmente; VM exacta |
+| Error Lua controlado cierra descriptor y descarga C | Guest S3 CLI | R52 traceback y unregister=0 refs=0 | CONFIRMADO EN EMULADOR | Alta local | Descriptor con atributo close, módulo/nodo ausentes | No prueba kill/panic/agotamiento de memoria |
+| EXIT seguido de cierre Lua no repite descarga | Guest S3 UIProbe | R52 finalizer running=false | CONFIRMADO EN EMULADOR | Alta local | Un ciclo UI adicional | C sin worker ni timer |
+| Crash o terminación forzada garantiza cleanup nativo | Guest S3 / RW4 | Ninguna prueba | SIN EVIDENCIA | No evaluable | No | Finalizador depende del cierre normal de VM; no provocar crash |
 
 ## Correcciones de interpretación
 

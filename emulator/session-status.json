@@ -35,7 +35,8 @@
     "userVvdRegistrationCopied":  true,
     "physicalDeviceConnected":  false,
     "blockers":  [
-                     "Native cleanup when Lua closes without EXIT, render integration, held input, monotonic timers and WAD filesystem remain unvalidated",
+                     "Native render integration, held input, monotonic timers and WAD filesystem remain unvalidated",
+                     "Cleanup on native crash or forced termination remains unverified",
                      "RW4 physical execution remains unverified and outside authorized scope"
                  ],
     "luaCliInteractiveUiVerified":  false,
@@ -52,7 +53,7 @@
     "touchEventsExitBySelectingStockVerified":  true,
     "compilerAutomaticAdbInvoked":  false,
     "touchEventsPressedCoordinatesCaptured":  false,
-    "latestResultsDocument":  "docs/lua-native-bridge-emulator.md",
+    "latestResultsDocument":  "docs/lua-native-close-emulator.md",
     "nativeHelloExecuted": true,
     "nativeHelloLoadUnloadCycles": 2,
     "nativeHelloRequiresExactGuestSymbolBinding": true,
@@ -93,5 +94,10 @@
     "nativeBridgeVirtualDeviceRemoved": true,
     "nativeBridgeTemporaryPayloadRemoved": true,
     "nativeBridgePersistentInstallation": false,
-    "nativeBridgeUnexpectedLuaClosureCleanupVerified": false
+    "nativeBridgeUnexpectedLuaClosureCleanupVerified": false,
+    "nativeBridgeWatchfaceSwitchCleanupVerified": true,
+    "nativeBridgeWatchfaceSwitchCleanupCycles": 2,
+    "nativeBridgeLuaGcFinalizerVerified": true,
+    "nativeBridgeLuaControlledErrorCleanupVerified": true,
+    "nativeBridgeExitThenLuaCloseIdempotenceVerified": true
 }

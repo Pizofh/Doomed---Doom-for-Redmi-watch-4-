@@ -26,7 +26,7 @@ No ejecutar MSI de Drive, APK de Telegram, compiler EasyFace o adb incluido ante
 
 La revisión posterior de [compiler v4.23](touch-events-emulator.md) cotejó el digest original e inspeccionó metadata/IL antes de ejecutarlo solo para empaquetar en PC. Su ADB no se extrajo y el branch automático de upload se omitió. No se ejecutó el editor. La instalación posterior en emulador sí escribió /data, eliminó una caché concreta respaldada y reseteó el guest, con ID propio/readback y backup del disco pausado. No es una operación read-only ni una instalación física. Se validaron navegación stock, cierre Lua por cambio de watchface y reentrada sin reinstalar.
 
-El [puente Lua↔C](lua-native-bridge-emulator.md) crea un nodo virtual propio en RAM y ejecuta callbacks síncronos. EXIT cierra descriptores, retira el nodo y descarga C; rmmod rechazó un descriptor abierto en una prueba. No usa periféricos ni threads. Se necesita cleanup ante cierre inesperado de watchface y no se garantiza concurrencia arbitraria. No confundir pseudo-driver o RAM-only con sandbox. La prueba no altera particiones/boot del reloj físico.
+El [puente Lua↔C](lua-native-bridge-emulator.md) crea un nodo virtual propio en RAM y ejecuta callbacks síncronos. EXIT cierra descriptores, retira el nodo y descarga C; rmmod rechazó un descriptor abierto en una prueba. No usa periféricos ni threads. La [limpieza al cambiar de watchface sin EXIT](lua-native-close-emulator.md) y el error Lua controlado se probaron; crashes, terminación forzada y concurrencia arbitraria siguen sin garantía. No confundir pseudo-driver o RAM-only con sandbox. La prueba no altera particiones/boot del reloj físico.
 
 ## Condiciones de parada
 

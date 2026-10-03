@@ -11,11 +11,11 @@ La [inspección estática del ELF guest](emulator-package-review.md) identifica 
 | Camino | Evidencia actual | Bloqueo | Experimento posterior en PC |
 |---|---|---|---|
 | QuickApp / JS / RPK | API oficial Vela; debug físico documentado S4 | Soporte RW4 y bridge C/WASM no demostrados | App JS mínima, consulta de capacidades; no la llamar C |
-| Lua / watchface | TouchEvents y UIProbe propios; launcher C probado en emulador | Limpieza ante cierre inesperado, persistencia C y RW4 pendientes | Teardown al cerrar watchface sin EXIT |
+| Lua / watchface | Launcher C, EXIT y cierre por cambio de watchface probados en emulador | Crash, persistencia C y RW4 pendientes | Patrón C dentro de página LVGL propia |
 | Lua → shell | os.execute(uname/insmod/rmmod) desde watchface devuelve true/exit/0 | RW4 físico sin probar | No ampliar a comandos arbitrarios |
 | Lua loadlib | Stub deshabilitado, respuesta nil/absent | No permite importar biblioteca C en este guest | Puente io→dispositivo virtual ya probado |
 | ELF / exec | `CONFIG_ELF`, `CONFIG_LIBC_EXECFUNCS`, `execv`/`posix_spawn` en emulador | Exports, contrato loader/entrypoint y lifecycle pendientes | Inventario read-only, luego hello C si hay contrato válido |
-| Módulo / `insmod` | Hello, display, touch y puente ligado al guest; carga/descarga desde launcher | Sin sandbox; engine/UI C y RW4 sin probar | Completar limpieza de lifecycle antes de render C |
+| Módulo / `insmod` | Hello, display, touch y puente ligado al guest; carga/descarga desde launcher y cierre Lua | Sin sandbox; engine/UI C y RW4 sin probar | Patrón C integrado con LVGL; mantener descarga correcta |
 | Touch C / driver | [Observador nativo validado](native-touch-emulator.md), colas por lector; stock concurrente | UI propia, timing, FS y compatibilidad RW4 pendientes | Pantalla interactiva con salida y contexto correctos |
 | WASM / `iwasm` | `iwasm_main` y macros WAMR en emulador | Imports, memoria/UI/lifecycle y RW4 desconocidos | Identificar comando/runtime sin ejecutar payload |
 | App nativa precompilada/builtin | Concepto upstream | Builtin no significa carga de app arbitraria stock | Identificar registro/launcher y build requerida |
