@@ -50,4 +50,4 @@ El runner comprueba mensajes/coordenadas/cierre/descarga; las capturas deben rev
 
 Los 500 sleeps solicitaron 10 segundos acumulados; el cliente insmod tardó aproximadamente 15,6 segundos en esta prueba. No es medición de frecuencia, deadline garantizado ni validación del reloj monotónico. No medimos pérdidas de eventos, latencia, memoria pico, fugas prolongadas o capacidad de la cola. Los macros del driver no prueban cuántas muestras efectivas caben.
 
-Quedan pendientes ownership/contexto de UI, pantalla propia interactiva y salida por el usuario; timing monotónico y filesystem para WAD. Próximo checkpoint: una pantalla interactiva propia que se cierre limpiamente en el contexto correcto de UI. DOOM y gate físico siguen pendientes.
+Checkpoint posterior: [pantalla Lua propia, EXIT y pause/resume](lua-ui-emulator.md). Falta integrar C con ese contexto y lifecycle; timing monotónico y filesystem para WAD pendientes. DOOM y gate físico siguen pendientes.

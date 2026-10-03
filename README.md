@@ -8,7 +8,9 @@ Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4
 
 ## Alcance de esta sesión
 
-**Touch C:** observador independiente leyó 36 muestras de `/dev/input0`; TouchEvents y el panel stock respondieron simultáneamente. Descriptor cerrado y módulo descargado sin reboot posterior. [Contrato, logs y reproducción](docs/native-touch-emulator.md). Aún falta una pantalla propia con ownership/contexto de UI y salida fiable.
+**Touch C:** observador independiente leyó 36 muestras de `/dev/input0`; TouchEvents y el panel stock respondieron simultáneamente. Descriptor cerrado y módulo descargado sin reboot posterior. [Contrato, logs y reproducción](docs/native-touch-emulator.md).
+
+**UI propia Lua:** START/EXIT/reentrada y gestos centrales comprobados; abrir panel stock llama pause y cerrarlo resume. Bordes siguen reservados al sistema; C aún no está conectado a esta UI. [Prueba y límites](docs/lua-ui-emulator.md).
 
 - Crear documentación, matriz de evidencia y herramientas de inspección para PC.
 - Identificar dependencias originales y fijar revisiones consultadas.
@@ -62,6 +64,7 @@ La [revisión local del paquete](docs/emulator-package-review.md) describe proce
 - [Hello C: build, carga y descarga verificadas](docs/hello-native-emulator.md)
 - [Display C: framebuffer, patrón y devolución a stock](docs/native-display-emulator.md)
 - [Touch C: lector independiente y coexistencia con stock](docs/native-touch-emulator.md)
+- [UI propia Lua: scroll, salida y pausa/reanudación](docs/lua-ui-emulator.md)
 - [Modelo de riesgo](docs/risk-model.md)
 - [Gate para dispositivo físico, cerrado](docs/physical-device-plan.md)
 - [Reporte de esta sesión](docs/session-2026-10-02.md)

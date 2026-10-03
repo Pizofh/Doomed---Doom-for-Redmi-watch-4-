@@ -35,16 +35,16 @@
     "userVvdRegistrationCopied":  true,
     "physicalDeviceConnected":  false,
     "blockers":  [
-                     "Interactive UI ownership/context, monotonic timers and WAD filesystem still need characterization",
+                     "Lua-to-C bridge/lifecycle, monotonic timers and WAD filesystem still need characterization",
                      "RW4 physical execution remains unverified and outside authorized scope"
                  ],
-    "luaInteractiveUiVerified":  false,
+    "luaCliInteractiveUiVerified":  false,
     "luaParentProbeCrashedQemu":  true,
     "guestFunctionallyRecoveredAfterUserRelaunch":  true,
     "romfsInspectedReadOnly":  true,
     "easyfaceCompilerReviewed":  true,
     "touchEventsPersistentReopenAfterGuestResetVerified":  true,
-    "currentEmulatorWatchface":  "365799901",
+    "currentEmulatorWatchface":  "365700764",
     "touchEventsOwnExitButton":  false,
     "touchEventsWatchfaceId":  "365799901",
     "touchEventsOriginalCliFailure":  "lvgl.Font cannot create font: misansw regular, 32",
@@ -52,7 +52,7 @@
     "touchEventsExitBySelectingStockVerified":  true,
     "compilerAutomaticAdbInvoked":  false,
     "touchEventsPressedCoordinatesCaptured":  false,
-    "latestResultsDocument":  "docs/native-touch-emulator.md",
+    "latestResultsDocument":  "docs/lua-ui-emulator.md",
     "nativeHelloExecuted": true,
     "nativeHelloLoadUnloadCycles": 2,
     "nativeHelloRequiresExactGuestSymbolBinding": true,
@@ -72,5 +72,13 @@
     "nativeTouchSamplesObserved": 36,
     "nativeTouchDescriptorClosed": true,
     "nativeTouchModuleUnloaded": true,
-    "nativeTouchOwnUi": false
+    "nativeTouchOwnUi": false,
+    "luaUiProbeValidated": true,
+    "luaUiCentralScrollRoutingVerified": true,
+    "luaUiUniversalGestureExclusivity": false,
+    "luaUiPauseResumeCallbacksVerified": true,
+    "luaUiExitReentryVerified": true,
+    "luaUiLoadlibTypeFunctionVerified": true,
+    "luaUiNativeBridgeExecuted": false,
+    "luaUiSilentAutomationIncidentReverted": true
 }

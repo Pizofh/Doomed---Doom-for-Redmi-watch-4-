@@ -124,6 +124,18 @@ Continuación 2026-10-03: lua-api confirmó disp.load_scr/get_scr_act y Timer en
 | Cada DOWN de la entrada sintética es un nuevo contacto | Camino gRPC/Goldfish | R48 | REFUTADO | Alta local | DOWN repetido durante drag | Adaptador necesita estado previo |
 | C creó una pantalla propia interactiva | Guest S3 | R48 únicamente logs; UI es Lua/stock | SIN EVIDENCIA | No evaluable | No | Contexto de UI/ownership pendientes |
 
+## UI propia Lua: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Página propia recibe controles centrales sin desplazar home | Guest S3 | R50 | CONFIRMADO EN EMULADOR | Alta local | Drags en4direcciones y hold | No exclusividad universal |
+| Desactivar event/gesture bubbling basta para bloquear scroll | Primera UIProbe | R50 | REFUTADO | Alta local | Arrastre abrió widgets | SCROLL_CHAIN es independiente |
+| Bordes también quedan bloqueados | UIProbe corregida | R50 | REFUTADO en esta prueba | Alta local | Swipe inferior abrió panel | Reservar bordes/suspender engine |
+| pageOnPause/Resume se invocan al abrir/cerrar panel | Guest S3 | R50 ELF/strings/logs | CONFIRMADO EN EMULADOR | Alta local | Ambos mensajes | No suspensión de C demostrada |
+| Touch del panel también llega a página propia oculta | Guest S3, tap50,45 | R50 contador/logs | REFUTADO en esta prueba | Alta local | Sin release propio ni incremento | No prueba exhaustiva de todos los overlays |
+| Watchface usa Lua5.4 y expone loadlib como función | UIProbe guest | R50 mensaje runtime | CONFIRMADO EN EMULADOR | Alta local | Tipos/versiones, sin loadlib | No carga nativa desde Lua probada |
+| EXIT/reentrada funciona; seleccionar Storage cierra Lua | Guest S3 | R50 capturas/log | CONFIRMADO EN EMULADOR | Alta local | Sin reboot durante interacción | EXIT conserva launcher/objetos |
+
 ## Correcciones de interpretación
 
 | Claim | Scope | Evidence | Classification | Tested locally | Notes |

@@ -9,6 +9,9 @@ local function surface(parent, properties)
     obj:clear_flag(flags.SCROLLABLE)
     obj:clear_flag(flags.EVENT_BUBBLE)
     obj:clear_flag(flags.GESTURE_BUBBLE)
+    -- LVGL scroll chaining is separate from event/gesture bubbling.
+    obj:clear_flag(flags.SCROLL_CHAIN_HOR)
+    obj:clear_flag(flags.SCROLL_CHAIN_VER)
     return obj
 end
 
@@ -42,6 +45,34 @@ label(page, "OWN PAGE", 30)
 local coords = label(page, "Touch the blue area", 105)
 local counter = label(page, "Presses: 0", 155)
 local active, presses = false, 0
+local suspended = false
+local previous_pause, previous_resume = pageOnPause, pageOnResume
+
+-- Names and global-call contract inspected in this exact guest's activity.c.
+-- Preserve an existing lifecycle handler if the runtime supplies one.
+function pageOnPause(...)
+    suspended = true
+    print("RW4_UI_PROBE: pause")
+    if type(previous_pause) == "function" then previous_pause(...) end
+end
+
+function pageOnResume(...)
+    suspended = false
+    print("RW4_UI_PROBE: resume")
+    if type(previous_resume) == "function" then previous_resume(...) end
+end
+
+local function navigation(enabled)
+    for _, obj in ipairs({base, launcher}) do
+        if enabled then
+            obj:add_flag(flags.SCROLL_CHAIN_HOR)
+            obj:add_flag(flags.SCROLL_CHAIN_VER)
+        else
+            obj:clear_flag(flags.SCROLL_CHAIN_HOR)
+            obj:clear_flag(flags.SCROLL_CHAIN_VER)
+        end
+    end
+end
 
 local function button(parent, text, y, callback)
     local obj = surface(parent, {
@@ -58,12 +89,14 @@ end
 
 local start_button = button(launcher, "START", 250, function()
     active = true
+    navigation(false)
     launcher:add_flag(flags.HIDDEN)
     page:clear_flag(flags.HIDDEN)
     print("RW4_UI_PROBE: enter")
 end)
 local exit_button = button(page, "EXIT", 355, function()
     active = false
+    navigation(true)
     page:add_flag(flags.HIDDEN)
     launcher:clear_flag(flags.HIDDEN)
     status:set {text = "UI probe: closed"}
@@ -73,7 +106,7 @@ end)
 page:add_flag(flags.CLICKABLE)
 page:add_flag(flags.HIDDEN)
 page:onevent(lvgl.EVENT.ALL, function(_, code)
-    if not active then return end
+    if not active or suspended then return end
     if code ~= lvgl.EVENT.PRESSED and code ~= lvgl.EVENT.PRESSING and
        code ~= lvgl.EVENT.RELEASED and code ~= lvgl.EVENT.GESTURE then return end
     local indev = lvgl.indev.get_act()
@@ -91,4 +124,5 @@ end)
 
 -- References are held by closures/objects; no native pointers or replacement
 -- of the system display screen. Switching watchfaces owns full Lua teardown.
-print("RW4_UI_PROBE: ready loadlib=" .. type(package.loadlib))
+print("RW4_UI_PROBE: ready " .. _VERSION .. " loadlib=" .. type(package.loadlib))
+navigation(true) -- Standard home navigation remains available after EXIT.

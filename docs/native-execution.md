@@ -4,6 +4,8 @@ Referencia adicional del 2026-10-03: [MiWatchNativeApps](https://github.com/m0tr
 
 Se ejecutó un [hello C propio](hello-native-emulator.md) mediante insmod y se descargó con rmmod en dos ciclos, únicamente en el emulador. También se ejecutaron comandos builtin y Lua por ADB. No se ejecutó WASM, iwasm, os.execute ni exploits. No hay una razón demostrada para root/jailbreak. Referencias y estados: [research.md](research.md), [matriz](evidence-matrix.md), [runtime observado](emulator-runtime.md).
 
+[UIProbe Lua](lua-ui-emulator.md) crea widgets en contexto de watchface; controla scroll central y recibe pageOnPause/Resume al abrir/cerrar panel stock. El puente loadlib/dlopen hacia C aún no está probado. El lector C de /dev/input0 no debe alimentar gameplay detrás de otras pantallas. Input/UI routing no introduce separación de memoria en esta build FLAT.
+
 La [inspección estática del ELF guest](emulator-package-review.md) identifica Goldfish Cortex-A7, ELF32 ARM/EABI5/hard-float, `CONFIG_BUILD_FLAT`, loaders ELF/módulos y soporte Lua/WAMR. Son capacidades compiladas de la imagen del emulador, no prueba de ejecución de código propio ni evidencia M2315W1. Los ejecutables Windows del launcher sí se ejecutaron tras revisar su procedencia; distinguirlos de payloads guest.
 
 | Camino | Evidencia actual | Bloqueo | Experimento posterior en PC |
