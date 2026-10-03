@@ -1,0 +1,75 @@
+# Investigación inicial
+
+Fecha: 2026-10-02. Fuentes técnicas primarias primero; código inspeccionado remotamente mediante GitHub. Las revisiones se fijan en [dependencies.lock.json](../third_party/dependencies.lock.json). Ninguna afirmación documental implica que se probó el reloj del usuario.
+
+## Método
+
+Separar modelo/familia, región, firmware, emulador y upstream. Cada resultado debe declarar origen, revisión, procedimiento, salida y límite. Una capacidad compilable de NuttX no demuestra que Xiaomi la haya habilitado. Una función Lua estándar no demuestra que el runtime del reloj la exponga. Una prueba con pantalla RW4 en un sistema S3 no demuestra ABI RW4.
+
+## Dispositivo y hardware
+
+El modelo M2315W1 procede de la identificación física comunicada por el usuario. No se verificaron región, firmware ni unidad. Xiaomi documenta AMOLED 1.97 pulgadas, 390×450, hasta 60 Hz, corona, GNSS, sensores, altavoz y llamadas mediante micrófono. [R01], [R02], [R03].
+
+Xiaomi declara **32 MB RAM y 256 MB ROM** [R04]. Esto confirma una especificación comercial del RW4, no 32 MB de heap libre. No especifica aquí SRAM frente a PSRAM, reservas del sistema, capacidad libre ni tipo exacto de flash.
+
+El teardown original de 52audio [R05] identifica BES2700iBP, SPI NAND Dosilicon DS35M2GB-IB, controlador táctil con marcaje 8918BC, GNSS SYN47752B1, sensor HX3690Q y amplificador FS1818. Su unidad incluye NFC: no extrapolar su población de componentes a la unidad global M2315W1 sin evidencia adicional. No publica un memory map utilizable ni SDK de la build Xiaomi.
+
+El brief datasheet del fabricante BES [R06] especifica doble STAR-MC1 para CPU, STAR-MC1 en sensor hub, 2.2 MB SRAM compartida y Flash/PSRAM en encapsulado, además de GPU 2.5D y controlador de pantalla. No determina el reparto físico de los 32 MB anunciados por Xiaomi ni nuestra ABI, linker script, relocations, flags FPU o símbolos exportados. Tampoco confirma el modelo exacto del controlador AMOLED del reloj. No seleccionar toolchain ARM a partir del nombre del SoC únicamente.
+
+## Lua y empaquetado
+
+MiWatchLuaWatchfaces incluye ejemplos específicos RW4 y atribuye NuttX/LVGL a esa familia [R07]. `TouchEvents.fprj` declara `DeviceType=365` y una superficie 390×450 con entrada Lua `app_lua%2Fmain.lua` [R08]. El código usa `require("lvgl")`, módulos locales `root`/`image`, `SCRIPT_PATH`, labels, imágenes y callbacks de eventos. Se inspeccionaron sus tres Lua completos de forma remota [R09].
+
+`PRESSED` lee `get_point()`. `PRESSING` y `RELEASED` leen `get_vect()`; no confundir desplazamiento con coordenadas absolutas. El ejemplo también lee dirección de gesto. Contiene una variable `/data/tmp.log` sin apertura/escritura: eso **no prueba permisos de filesystem**. No contiene `os.execute()` ni mecanismo de cierre del launcher. Hay un identificador `EVENT_BUBLE` en el código; no corregirlo como si conociéramos el binding sin probarlo. Versión Lua, timers, permisos, sensores y unload están pendientes.
+
+EasyFace documenta empaquetado y transferencia automática al emulador; su README remite a MSI en Drive, redistributable Microsoft, ejecución como administrador y Mi Fitness mod de Telegram [R10]. Solo se documentó ese camino: no se instaló nada. La release v4.23 tiene digest publicado para el ZIP del compiler [R11]; no autentica el MSI externo ni demuestra seguridad del editor.
+
+## Emulador
+
+La release v1.0 contiene presets S3/RW4/RW5 [R12]; ZIP 733,139,307 bytes, asset ID 229620973, sin digest en metadata. El repositorio no contiene el código completo de esos binarios. La firma del commit documental no cubre el ZIP. EasyFace describe el origen Watch S3 [R10]. Windows 10/11, ADB, rutas de watchfaces y `/dev/fb0` están documentados por el mantenedor [R13], todavía sin prueba local.
+
+## QuickApps
+
+Xiaomi documenta apps JS con `.ux`, manifest, APIs `@system.*` y empaquetado `.rpk` [R14], [R15]. El runtime no es Node.js; importar `fs` de Node no es un camino [R16]. File APIs permiten buffers y acceso por offset/longitud [R17]. Los URIs privados incluyen `internal://files`, cache, mass y tmp, con distintas garantías [R18]. Hay salida de app mediante `$app.exit()` y consulta de capacidades mediante `$canIUse` [R19]. Todo esto es API general Vela, no validación RW4.
+
+La página oficial de depuración física identifica **solo Watch S4** y acceso para partners con versión/OTA específica [R20]. No seguir ese flujo en RW4. La tabla de adaptación consultada no incluye RW4 [R21]; ausencia en esa tabla no demuestra incompatibilidad absoluta. La FAQ describe instalar RPK con una versión de Mi Fitness provista por Xiaomi [R22]. No encontramos una API pública que permita a un RPK arbitrario cargar ELF, módulos C o WASM en RW4. La mención de WebAssembly en una herramienta web para certificados [R23] no es evidencia de WASM dentro del reloj.
+
+## DOOM y NuttX
+
+doomgeneric conserva el motor de DOOM y expone una interfaz pequeña [R24]. El header real incluye `DG_SetWindowTitle`, `doomgeneric_Create`, `doomgeneric_Tick` y `DG_ScreenBuffer`. Sus defaults son **640×400** y `uint32_t`, con alternativa `CMAP256`; 320×200 es una futura elección de build, no el default actual [R25]. LICENSE es GPL versión 2 [R26]; derechos de WAD separados. No se descargó WAD ni se compiló motor.
+
+NuttX documenta FLAT/PROTECTED/KERNEL [R27] y distingue módulos kernel de shared libraries [R28]. NSH puede incluir `insmod`, `rmmod` y `lsmod` condicionado por configuración [R29]. Son mecanismos upstream, no evidencia de firmware M2315W1. El uso de RAM no establece aislamiento ni rollback de escrituras.
+
+## Fuentes consultadas
+
+Las páginas web son referencias móviles consultadas en esta fecha. Los links a código usan SHA. No se archivan firmware, imágenes del teardown ni datos del juego.
+
+- **R01:** [Xiaomi especificaciones globales](https://www.mi.com/global/product/redmi-watch-4/specs/).
+- **R02:** [Xiaomi resolución y pantalla](https://www.mi.co.id/id/support/faq/details/KA-325678/).
+- **R03:** [Xiaomi producto, corona y llamadas](https://www.mi.com/tw/product/redmi-watch-4/).
+- **R04:** [Xiaomi RAM/ROM RW4](https://www.mi.com/global/support/faq/details/KA-533710/).
+- **R05:** [52audio, teardown original RW4](https://www.52audio.com/archives/191060.html).
+- **R06:** [Bestechnic, BES2700iBP Brief Datasheet](https://www.bestechnic.com/en/Uploads/keditor/file/20241011/20241011133740_73924.pdf), páginas 2–3.
+- **R07:** [MiWatchLuaWatchfaces README](https://github.com/m0tral/MiWatchLuaWatchfaces/blob/5af6e14ea92830a394c88dc04f76ceef697a6ded/README.md).
+- **R08:** [TouchEvents proyecto](https://github.com/m0tral/MiWatchLuaWatchfaces/blob/5af6e14ea92830a394c88dc04f76ceef697a6ded/RedmiWatch4/TouchEvents/TouchEvents.fprj).
+- **R09:** [TouchEvents Lua](https://github.com/m0tral/MiWatchLuaWatchfaces/tree/5af6e14ea92830a394c88dc04f76ceef697a6ded/RedmiWatch4/TouchEvents/app/lua).
+- **R10:** [EasyFace README](https://github.com/m0tral/EasyFace/blob/f76a9fe1f559bc8b1d91cf2a1f5af1a630848098/README.md).
+- **R11:** [EasyFace v4.23](https://github.com/m0tral/EasyFace/releases/tag/v4.23).
+- **R12:** [MiWatchEmulator v1.0](https://github.com/m0tral/MiWatchEmulator/releases/tag/v1.0).
+- **R13:** [MiWatchEmulator README](https://github.com/m0tral/MiWatchEmulator/blob/f637d22a07727e59ffe96aa919b1a9193d23db95/README.md).
+- **R14:** [Xiaomi Vela JS overview](https://iot.mi.com/vela/quickapp/en/guide/).
+- **R15:** [Xiaomi RPK packaging](https://iot.mi.com/vela/quickapp/en/tools/release/start.html).
+- **R16:** [Xiaomi JS script runtime](https://iot.mi.com/vela/quickapp/en/guide/framework/script/).
+- **R17:** [Xiaomi file API](https://iot.mi.com/vela/quickapp/en/features/data/file.html).
+- **R18:** [Xiaomi project structure y URIs](https://iot.mi.com/vela/quickapp/en/guide/framework/project-structure.html).
+- **R19:** [Xiaomi global methods](https://iot.mi.com/vela/quickapp/en/guide/framework/script/global-data-method.html).
+- **R20:** [Xiaomi real-device debugging](https://iot.mi.com/vela/quickapp/en/tools/devicedebug/start.html).
+- **R21:** [Xiaomi multi-screen table](https://iot.mi.com/vela/quickapp/en/guide/multi-screens/).
+- **R22:** [Xiaomi FAQ de instalación RPK](https://iot.mi.com/vela/quickapp/en/guide/other/faq.html).
+- **R23:** [Xiaomi interconnect y herramienta web de certificados](https://iot.mi.com/vela/quickapp/en/features/network/interconnect.html).
+- **R24:** [doomgeneric README](https://github.com/ozkl/doomgeneric/blob/dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284/README.md).
+- **R25:** [doomgeneric header](https://github.com/ozkl/doomgeneric/blob/dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284/doomgeneric/doomgeneric.h).
+- **R26:** [doomgeneric LICENSE](https://github.com/ozkl/doomgeneric/blob/dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284/LICENSE).
+- **R27:** [NuttX memory configurations](https://nuttx.apache.org/docs/latest/implementation/memory_configurations.html).
+- **R28:** [NuttX kernel modules vs shared libraries](https://nuttx.apache.org/docs/latest/implementation/kernel_modules_vs_shared_libraries.html).
+- **R29:** [NuttX NSH commands](https://nuttx.apache.org/docs/latest/applications/nsh/commands.html).

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "researchDate": "2026-10-02",
+  "acquisition": "Remote GitHub connector inspection; local clones failed",
+  "repositories": [
+    {
+      "name": "MiWatchEmulator",
+      "url": "https://github.com/m0tral/MiWatchEmulator.git",
+      "revision": "f637d22a07727e59ffe96aa919b1a9193d23db95",
+      "commitDate": "2025-03-13T21:42:35Z"
+    },
+    {
+      "name": "EasyFace",
+      "url": "https://github.com/m0tral/EasyFace.git",
+      "revision": "f76a9fe1f559bc8b1d91cf2a1f5af1a630848098",
+      "commitDate": "2026-09-06T12:33:27Z"
+    },
+    {
+      "name": "MiWatchLuaWatchfaces",
+      "url": "https://github.com/m0tral/MiWatchLuaWatchfaces.git",
+      "revision": "5af6e14ea92830a394c88dc04f76ceef697a6ded",
+      "commitDate": "2026-08-21T14:06:40Z"
+    },
+    {
+      "name": "doomgeneric",
+      "url": "https://github.com/ozkl/doomgeneric.git",
+      "revision": "dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284",
+      "commitDate": "2026-04-12T11:23:43Z"
+    }
+  ],
+  "emulatorRelease": {
+    "url": "https://github.com/m0tral/MiWatchEmulator/releases/tag/v1.0",
+    "tag": "v1.0",
+    "publishedAt": "2025-02-16T16:44:04Z",
+    "assets": [
+      {
+        "name": "MiWatchEmulator.zip",
+        "sizeBytes": 733139307,
+        "publishedDigest": null,
+        "url": "https://github.com/m0tral/MiWatchEmulator/releases/download/v1.0/MiWatchEmulator.zip"
+      }
+    ]
+  },
+  "easyFaceRelease": {
+    "url": "https://github.com/m0tral/EasyFace/releases/tag/v4.23",
+    "tag": "v4.23",
+    "publishedAt": "2026-08-18T12:55:41Z",
+    "assets": [
+      {
+        "name": "EasyFace_Gen2_CompilerV423.zip",
+        "sizeBytes": 15934243,
+        "publishedDigest": "sha256:5b62773369c10c3402f369e8aa579f13393af359d0214c0d979464e5cc776cef",
+        "url": "https://github.com/m0tral/EasyFace/releases/download/v4.23/EasyFace_Gen2_CompilerV423.zip"
+      }
+    ]
+  },
+  "touchEventsFiles": [
+    {
+      "path": "RedmiWatch4/TouchEvents/app/lua/cat.png",
+      "gitBlobSha1": "4c5d19b1be6a4c693ff57f616c87376cffe0eb37",
+      "sizeBytes": 22745
+    },
+    {
+      "path": "RedmiWatch4/TouchEvents/app/lua/image.lua",
+      "gitBlobSha1": "07258c4d46147aa1db2584d1c3cf35e8a394c339",
+      "sizeBytes": 899
+    },
+    {
+      "path": "RedmiWatch4/TouchEvents/app/lua/main.lua",
+      "gitBlobSha1": "7ae831f99a67a89942360c8d89534f2e37f2b379",
+      "sizeBytes": 1936
+    },
+    {
+      "path": "RedmiWatch4/TouchEvents/app/lua/root.lua",
+      "gitBlobSha1": "9253ff2df1daaee4bd68c4ab1e230caea46efa1c",
+      "sizeBytes": 853
+    }
+  ],
+  "redistribution": {
+    "firmware": false,
+    "emulator": false,
+    "wad": false,
+    "luaAssets": false
+  }
+}
