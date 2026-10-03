@@ -4,6 +4,8 @@ Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4
 
 **Estado al 2026-10-03:** TouchEvents original validado en el emulador Xiaomi Watch S3 a 390×450, con cierre y reentrada sin reinstalar. Un hello C propio imprimió su mensaje y se descargó mediante rmmod en dos ciclos; enlaza puts desde la imagen exacta del emulador. [Prueba nativa y limitaciones](docs/hello-native-emulator.md), [prueba Lua](docs/touch-events-emulator.md). No se compiló DOOM ni se conectó el reloj físico. Estado para continuar en [HANDOFF](docs/HANDOFF.md).
 
+**Display C:** patrón RGB565 mostrado y retirado; píxeles originales, touch y panel stock comprobados después sin reboot en una prueba con pantalla activa. Framebuffer compartido, no ownership exclusivo. [Captura y reproducción](docs/native-display-emulator.md).
+
 ## Alcance de esta sesión
 
 - Crear documentación, matriz de evidencia y herramientas de inspección para PC.
@@ -56,6 +58,7 @@ La [revisión local del paquete](docs/emulator-package-review.md) describe proce
 - [Estado completo para retomar](docs/HANDOFF.md)
 - [Ejecución nativa y privilegios](docs/native-execution.md)
 - [Hello C: build, carga y descarga verificadas](docs/hello-native-emulator.md)
+- [Display C: framebuffer, patrón y devolución a stock](docs/native-display-emulator.md)
 - [Modelo de riesgo](docs/risk-model.md)
 - [Gate para dispositivo físico, cerrado](docs/physical-device-plan.md)
 - [Reporte de esta sesión](docs/session-2026-10-02.md)

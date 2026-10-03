@@ -35,7 +35,7 @@
     "userVvdRegistrationCopied":  true,
     "physicalDeviceConnected":  false,
     "blockers":  [
-                     "Native display ownership/API, timers, input and filesystem still need characterization",
+                     "Interactive UI/framebuffer ownership, native touch, timers and WAD filesystem still need characterization",
                      "RW4 physical execution remains unverified and outside authorized scope"
                  ],
     "luaInteractiveUiVerified":  false,
@@ -52,13 +52,19 @@
     "touchEventsExitBySelectingStockVerified":  true,
     "compilerAutomaticAdbInvoked":  false,
     "touchEventsPressedCoordinatesCaptured":  false,
-    "latestResultsDocument":  "docs/hello-native-emulator.md",
+    "latestResultsDocument":  "docs/native-display-emulator.md",
     "nativeHelloExecuted": true,
     "nativeHelloLoadUnloadCycles": 2,
     "nativeHelloRequiresExactGuestSymbolBinding": true,
     "nativeHelloNormalPutsImportFailed": true,
     "nativeHelloPersistentInstallation": false,
-    "nativeDisplayValidated": false,
+    "nativeDisplayValidated": true,
+    "nativeFramebufferInquiryValidated": true,
+    "nativeFramebufferPatternValidated": true,
+    "nativeFramebufferExclusiveOwnership": false,
+    "nativeFramebufferPatternActiveExitAndInputVerified": true,
+    "nativeFramebufferPatternRamBackupBytes": 702000,
     "armToolchainVersion": "14.3.rel1",
-    "armToolchainArchiveSha256": "864c0c8815857d68a1bbba2e5e2782255bb922845c71c97636004a3d74f60986"
+    "armToolchainArchiveSha256": "864c0c8815857d68a1bbba2e5e2782255bb922845c71c97636004a3d74f60986",
+    "nativeDisplayResultsDocument": "docs/native-display-emulator.md"
 }

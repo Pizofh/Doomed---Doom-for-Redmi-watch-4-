@@ -19,6 +19,8 @@ La línea discontinua marca una dependencia no validada; no se ha construido nin
 
 Checkpoint previo completado: hello C por insmod/rmmod en el emulador, enlazado a su imagen exacta [resultado](hello-native-emulator.md). No construye aún los puentes de display/input/tiempo/FS del diagrama ni determina la ABI física RW4.
 
+Display incremental completado: [patrón RGB565 y retorno a stock](native-display-emulator.md) mediante framebuffer compartido del emulador. Antes de usar ese camino para un port interactivo, resolver ownership/presentación y entrega de input; la prueba temporal no constituye el adaptador DOOM.
+
 Usar las funciones reales declaradas por [doomgeneric.h](https://github.com/ozkl/doomgeneric/blob/dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284/doomgeneric/doomgeneric.h): inicialización, frame, espera, ticks, eventos de tecla y título opcional. Conservar motor, renderer y gameplay. `doomgeneric_Create`/`doomgeneric_Tick` articulan el ciclo del port; su ejemplo infinito necesita una estrategia de cierre antes del hardware.
 
 Display: comparar LVGL frente a framebuffer después de conocer acceso, ownership del display, formato y threading. LVGL Lua no demuestra símbolos C exportados. Framebuffer directo puede competir con la UI stock. Inicialmente un patrón; luego frame DOOM a 320×200 si el motor se configura así. Sus defaults upstream actuales son 640×400. En 390×450, decidir escalado/letterboxing tras validación. Un frame de 320×200×4 ocupa 256,000 bytes; uno de 390×450×4 ocupa 702,000 bytes. Son cálculos de buffers, **no mediciones de consumo total** ni demostración de que Doom cabe.

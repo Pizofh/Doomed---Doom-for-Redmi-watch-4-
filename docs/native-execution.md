@@ -12,9 +12,11 @@ La [inspección estática del ELF guest](emulator-package-review.md) identifica 
 | Lua / watchface | TouchEvents original empaquetado; render/touch/cierre y reentrada en emulador | API para lanzar C y compatibilidad física pendientes | Experimento separado de launcher si se demuestra spawn |
 | Lua → shell | Símbolos `os_execute`/`system` definidos en ELF del emulador | Exposición desde watchface/RW4 sin probar | Inspeccionar presencia/tipo primero, experimento separado |
 | ELF / exec | `CONFIG_ELF`, `CONFIG_LIBC_EXECFUNCS`, `execv`/`posix_spawn` en emulador | Exports, contrato loader/entrypoint y lifecycle pendientes | Inventario read-only, luego hello C si hay contrato válido |
-| Módulo / `insmod` | Hello C con símbolo puts ligado al guest exacto; dos ciclos de carga/descarga | Sin sandbox, API estable ni compatibilidad RW4 demostrada | Patrón display tras identificar API/ownership |
+| Módulo / `insmod` | Hello C y patrón framebuffer ligados al guest exacto, descargados | Sin sandbox, ownership UI estable ni compatibilidad RW4 demostrada | Touch C compatible con UI stock |
 | WASM / `iwasm` | `iwasm_main` y macros WAMR en emulador | Imports, memoria/UI/lifecycle y RW4 desconocidos | Identificar comando/runtime sin ejecutar payload |
 | App nativa precompilada/builtin | Concepto upstream | Builtin no significa carga de app arbitraria stock | Identificar registro/launcher y build requerida |
+
+El [patrón framebuffer desde C](native-display-emulator.md) mostró RGB565 y devolvió píxeles, input y panel stock en el emulador activo. No usó LVGL desde NSH: la build tiene LV_USE_OS=0 y contexto UI pendiente. La superficie sigue compartida; esto no constituye un backend interactivo ni un launcher.
 
 Un componente de UI implementado internamente en C no da a una QuickApp permiso para ejecutar un binario arbitrario. La existencia de una toolchain Linux ARM no basta: NuttX necesita contrato de libc, relocations, arquitectura y símbolos compatible. No usar un ELF Linux en el emulador como ensayo de compatibilidad.
 

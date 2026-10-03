@@ -28,6 +28,8 @@ La revisión posterior de [compiler v4.23](touch-events-emulator.md) cotejó el 
 
 ## Condiciones de parada
 
+El patrón C escribió exclusivamente la memoria framebuffer y estado de presentación del driver del emulador. Respaldó/restauró ambos buffers, free/close y rmmod completados. Input y panel stock se verificaron sin reboot con pantalla activa. No hay ownership exclusivo: cambios concurrentes de stock pueden sobrescribir el patrón o quedar reemplazados por píxeles antiguos al restaurar. Primera evaluación de input fue inconclusa por screen OFF previo; se estableció nuevo baseline. [Evidencia y límites](native-display-emulator.md).
+
 El hello C posterior se ejecutó por insmod en el guest FLAT, tras contrastar init/unload/ABI y R_ARM_ABS32. Se usó puts ligado al símbolo del ELF exacto con gate SHA256, payload en /tmp y descarga explícita. Dos ciclos terminaron correctamente [resultado](hello-native-emulator.md). Eso no demuestra sandbox, recovery físico, RAM pico o seguridad de futuros callbacks/UI. Solo PC; firmware RW4 intacto y gate físico cerrado.
 
 2026-10-03: un probe Lua/LVGL de padres cerró QEMU con Bad ram pointer. Se retiró el probe y se conservaron logs; el usuario relanzó y ADB/UI stock volvieron a funcionar. Esto demuestra que ejecutar Lua sobre bindings nativos también puede provocar un fallo grave del emulador. No se atribuye la causa exacta ni se extrapola un recovery físico. Ver [lifecycle](lua-lifecycle.md).
