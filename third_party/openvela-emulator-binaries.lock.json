@@ -1,0 +1,477 @@
+{
+  "repository": "https://github.com/open-vela/prebuilts_emulator_windows-x86_64",
+  "revision": "3776c05d2c66f73f6bbe65528cd1a34fe34e1f18",
+  "method": "Compare local Git blob SHA-1 to official pinned GitHub tree metadata; does not establish reproducible source build or absence of vulnerabilities.",
+  "files": [
+    {
+      "path": "concrt140.dll",
+      "gitBlobSha1": "ba91900705daff31b56210ad28cf406148adb8ee",
+      "sizeBytes": 309128
+    },
+    {
+      "path": "crashpad_handler.exe",
+      "gitBlobSha1": "42117faa94d1cf5ce61da97954129736485c42a2",
+      "sizeBytes": 992256
+    },
+    {
+      "path": "emulator-check.exe",
+      "gitBlobSha1": "b1ddf32ceedeb97f72d4112986a5c3c385ffc15d",
+      "sizeBytes": 1742336
+    },
+    {
+      "path": "emulator.exe",
+      "gitBlobSha1": "f24e933fab86441afb57a701e88eed3dc52a9783",
+      "sizeBytes": 1118208
+    },
+    {
+      "path": "libandroid-emu-agents.dll",
+      "gitBlobSha1": "163243db6c8dbfd4cf78e5291b33c840044641b3",
+      "sizeBytes": 45056
+    },
+    {
+      "path": "mksdcard.exe",
+      "gitBlobSha1": "ed84e9270c7a24d8f7b341e91a88a34185de7697",
+      "sizeBytes": 16896
+    },
+    {
+      "path": "msvcp140.dll",
+      "gitBlobSha1": "fb54185464506410538c81806c594fe03e345e8a",
+      "sizeBytes": 564112
+    },
+    {
+      "path": "msvcp140_1.dll",
+      "gitBlobSha1": "c7cba6516fa3ede5b3bffb9a89d6cbde5936001b",
+      "sizeBytes": 23928
+    },
+    {
+      "path": "msvcp140_2.dll",
+      "gitBlobSha1": "e1ac89e0768f0ed54ab9c041abce4132bcdb86be",
+      "sizeBytes": 185720
+    },
+    {
+      "path": "msvcp140_atomic_wait.dll",
+      "gitBlobSha1": "dd6149e30680179e22d869530a36b7d9e7167987",
+      "sizeBytes": 41352
+    },
+    {
+      "path": "msvcp140_codecvt_ids.dll",
+      "gitBlobSha1": "a32005c9d2fa5866acf2e54835ceee8a6c4178d7",
+      "sizeBytes": 20368
+    },
+    {
+      "path": "nimble_bridge.exe",
+      "gitBlobSha1": "e6a868c8f2713d68182436638f817b6fa929e901",
+      "sizeBytes": 7499264
+    },
+    {
+      "path": "qemu-img.exe",
+      "gitBlobSha1": "daf8fdad442aac9837692b66156230dbf34a07a6",
+      "sizeBytes": 1488896
+    },
+    {
+      "path": "qsn.exe",
+      "gitBlobSha1": "acf67e9b56f63bf99326a7a174f8f85857d65e6a",
+      "sizeBytes": 20283904
+    },
+    {
+      "path": "vccorlib140.dll",
+      "gitBlobSha1": "6b43337de8afd70daaa48c844aee63634981015f",
+      "sizeBytes": 331128
+    },
+    {
+      "path": "vcruntime140.dll",
+      "gitBlobSha1": "a5bdfeb629d2ca05f930f63516e583da357f0c0c",
+      "sizeBytes": 96120
+    },
+    {
+      "path": "vcruntime140_1.dll",
+      "gitBlobSha1": "24f4d82f614e903a4c7de4ac894b6276da47e7ae",
+      "sizeBytes": 36728
+    },
+    {
+      "path": "qemu/windows-x86_64/qemu-system-aarch64-headless.exe",
+      "gitBlobSha1": "8a798486c08262ee8882a663d8a94e7c876fc254",
+      "sizeBytes": 48961536
+    },
+    {
+      "path": "qemu/windows-x86_64/qemu-system-aarch64.exe",
+      "gitBlobSha1": "3f5f7dd8db0fcc59a91e2192affbe3d551a72bf7",
+      "sizeBytes": 57438208
+    },
+    {
+      "path": "qemu/windows-x86_64/qemu-system-armel-headless.exe",
+      "gitBlobSha1": "8ae0e1ca1af4df415a917f44704791bcd5037640",
+      "sizeBytes": 48714752
+    },
+    {
+      "path": "qemu/windows-x86_64/qemu-system-armel.exe",
+      "gitBlobSha1": "95198b65943d2be28669fd4dbf23c99ac39fdb54",
+      "sizeBytes": 57192448
+    },
+    {
+      "path": "qemu/windows-x86_64/qemu-system-i386-headless.exe",
+      "gitBlobSha1": "8b01033644e3a3f366e373dde1b30d2fec1c2042",
+      "sizeBytes": 47683072
+    },
+    {
+      "path": "qemu/windows-x86_64/qemu-system-i386.exe",
+      "gitBlobSha1": "e2f64c15ea3762c5543249a5066a6f15b85a2059",
+      "sizeBytes": 56164864
+    },
+    {
+      "path": "qemu/windows-x86_64/qemu-system-x86_64-headless.exe",
+      "gitBlobSha1": "75207df1cd2f65baa6a85464e5f9f075509146c1",
+      "sizeBytes": 47718912
+    },
+    {
+      "path": "qemu/windows-x86_64/qemu-system-x86_64.exe",
+      "gitBlobSha1": "420b45c408f79c47788ecb0986dca8b14937e8ec",
+      "sizeBytes": 56200704
+    },
+    {
+      "path": "lib64/concrt140.dll",
+      "gitBlobSha1": "ba91900705daff31b56210ad28cf406148adb8ee",
+      "sizeBytes": 309128
+    },
+    {
+      "path": "lib64/glib-2-vs11.dll",
+      "gitBlobSha1": "76e1d17fa1f83525842b74dc027aba2f983fdb27",
+      "sizeBytes": 1204736
+    },
+    {
+      "path": "lib64/libOpenglRender.dll",
+      "gitBlobSha1": "5874d879831da5e9b3515e7a6a2252b0e780c9ac",
+      "sizeBytes": 3700736
+    },
+    {
+      "path": "lib64/libandroid-emu-agents.dll",
+      "gitBlobSha1": "163243db6c8dbfd4cf78e5291b33c840044641b3",
+      "sizeBytes": 45056
+    },
+    {
+      "path": "lib64/libandroid-emu-curl.dll",
+      "gitBlobSha1": "3509df98da3723531046c18b56534c2fdc3f0156",
+      "sizeBytes": 457728
+    },
+    {
+      "path": "lib64/libandroid-emu-metrics.dll",
+      "gitBlobSha1": "bffbd9d34d020acf364a68edef0f03839d8c7a9b",
+      "sizeBytes": 3660288
+    },
+    {
+      "path": "lib64/libandroid-emu-protos.dll",
+      "gitBlobSha1": "43371f632f758e7798fc55e83d9eb440158b77a6",
+      "sizeBytes": 1373696
+    },
+    {
+      "path": "lib64/libandroid-emu-tracing.dll",
+      "gitBlobSha1": "0bfac3e338e4dfe0a7d1378b00477d4fae37d1d6",
+      "sizeBytes": 69120
+    },
+    {
+      "path": "lib64/libemugl_common.dll",
+      "gitBlobSha1": "9049d968e88df2e898fa2eba23e52479e6d0af72",
+      "sizeBytes": 58880
+    },
+    {
+      "path": "lib64/libimage_converter.dll",
+      "gitBlobSha1": "0b8a57604cb47a9d1aff278608f300d8ebc1442b",
+      "sizeBytes": 9728
+    },
+    {
+      "path": "lib64/libprotobuf.dll",
+      "gitBlobSha1": "c5a5767f30a62141e15030fe1539c8fb3a4e8555",
+      "sizeBytes": 2844160
+    },
+    {
+      "path": "lib64/libshadertranslator.dll",
+      "gitBlobSha1": "d05efcf71fdc200fa331faf3e618ecc97642694b",
+      "sizeBytes": 1515520
+    },
+    {
+      "path": "lib64/msvcp140.dll",
+      "gitBlobSha1": "fb54185464506410538c81806c594fe03e345e8a",
+      "sizeBytes": 564112
+    },
+    {
+      "path": "lib64/msvcp140_1.dll",
+      "gitBlobSha1": "c7cba6516fa3ede5b3bffb9a89d6cbde5936001b",
+      "sizeBytes": 23928
+    },
+    {
+      "path": "lib64/msvcp140_2.dll",
+      "gitBlobSha1": "e1ac89e0768f0ed54ab9c041abce4132bcdb86be",
+      "sizeBytes": 185720
+    },
+    {
+      "path": "lib64/msvcp140_atomic_wait.dll",
+      "gitBlobSha1": "dd6149e30680179e22d869530a36b7d9e7167987",
+      "sizeBytes": 41352
+    },
+    {
+      "path": "lib64/msvcp140_codecvt_ids.dll",
+      "gitBlobSha1": "a32005c9d2fa5866acf2e54835ceee8a6c4178d7",
+      "sizeBytes": 20368
+    },
+    {
+      "path": "lib64/vccorlib140.dll",
+      "gitBlobSha1": "6b43337de8afd70daaa48c844aee63634981015f",
+      "sizeBytes": 331128
+    },
+    {
+      "path": "lib64/vcruntime140.dll",
+      "gitBlobSha1": "a5bdfeb629d2ca05f930f63516e583da357f0c0c",
+      "sizeBytes": 96120
+    },
+    {
+      "path": "lib64/vcruntime140_1.dll",
+      "gitBlobSha1": "24f4d82f614e903a4c7de4ac894b6276da47e7ae",
+      "sizeBytes": 36728
+    },
+    {
+      "path": "lib64/qt/bin/QtWebEngineProcess.exe",
+      "gitBlobSha1": "3846c458327dd8dfad95604b8767e12755de7b8c",
+      "sizeBytes": 19456
+    },
+    {
+      "path": "lib64/qt/lib/Qt5CoreAndroidEmu.dll",
+      "gitBlobSha1": "34abd185bd1f1f832e8509c9ed55d939b4e6d1db",
+      "sizeBytes": 5934080
+    },
+    {
+      "path": "lib64/qt/lib/Qt5GuiAndroidEmu.dll",
+      "gitBlobSha1": "1e689bc400951b1319433bf938524cd16c8d59cd",
+      "sizeBytes": 4959744
+    },
+    {
+      "path": "lib64/qt/lib/Qt5NetworkAndroidEmu.dll",
+      "gitBlobSha1": "6cae4642b009869732cd45b9e85ca291b454fb3b",
+      "sizeBytes": 1078272
+    },
+    {
+      "path": "lib64/qt/lib/Qt5PositioningAndroidEmu.dll",
+      "gitBlobSha1": "0aa35248aab133a7aa38cf95cc13af5aff2e3945",
+      "sizeBytes": 316928
+    },
+    {
+      "path": "lib64/qt/lib/Qt5PrintSupportAndroidEmu.dll",
+      "gitBlobSha1": "669cc429d063c24d59eacab3753f8b77050b8a73",
+      "sizeBytes": 318464
+    },
+    {
+      "path": "lib64/qt/lib/Qt5QmlAndroidEmu.dll",
+      "gitBlobSha1": "ccb0b28c0df501459da59d63247d2604f4125438",
+      "sizeBytes": 3990016
+    },
+    {
+      "path": "lib64/qt/lib/Qt5QuickAndroidEmu.dll",
+      "gitBlobSha1": "5d0676ebcc156af7a9fc9b48db1f31d411d60693",
+      "sizeBytes": 3767296
+    },
+    {
+      "path": "lib64/qt/lib/Qt5QuickWidgetsAndroidEmu.dll",
+      "gitBlobSha1": "046be22076378707182635c7348a1626fe5853f9",
+      "sizeBytes": 72704
+    },
+    {
+      "path": "lib64/qt/lib/Qt5SvgAndroidEmu.dll",
+      "gitBlobSha1": "e83abe9d6e7c66bb754f8392cbffca86dedb0c76",
+      "sizeBytes": 330240
+    },
+    {
+      "path": "lib64/qt/lib/Qt5WebChannelAndroidEmu.dll",
+      "gitBlobSha1": "c6802d7346872899c849d2769c0b47f18a153236",
+      "sizeBytes": 111616
+    },
+    {
+      "path": "lib64/qt/lib/Qt5WebEngineCoreAndroidEmu.dll",
+      "gitBlobSha1": "90a89069fb2e2c874ad6518d95b86ad7af374d1d",
+      "sizeBytes": 78736896
+    },
+    {
+      "path": "lib64/qt/lib/Qt5WebEngineWidgetsAndroidEmu.dll",
+      "gitBlobSha1": "9ebc905149eaa86f8d5bd4bb8cec48c14f3fe745",
+      "sizeBytes": 224768
+    },
+    {
+      "path": "lib64/qt/lib/Qt5WebSocketsAndroidEmu.dll",
+      "gitBlobSha1": "7eb01e9e996cbb9e62143316ea4073eb12e4a390",
+      "sizeBytes": 137216
+    },
+    {
+      "path": "lib64/qt/lib/Qt5WidgetsAndroidEmu.dll",
+      "gitBlobSha1": "97f4eb8e3e2626e3f620e6b50e81cdad14eaf39a",
+      "sizeBytes": 5554176
+    },
+    {
+      "path": "bin64/cygblkid-1.dll",
+      "gitBlobSha1": "2ceb7a2f762146a4e3d50e1703aaa5007327e1c8",
+      "sizeBytes": 203303
+    },
+    {
+      "path": "bin64/cygcom_err-2.dll",
+      "gitBlobSha1": "869f0e6760399d38af9c9986a9cdb50a7bc2abaf",
+      "sizeBytes": 12829
+    },
+    {
+      "path": "bin64/cyge2p-2.dll",
+      "gitBlobSha1": "c7905aaea12aca737b11d48028853b38ed324b47",
+      "sizeBytes": 28701
+    },
+    {
+      "path": "bin64/cygext2fs-2.dll",
+      "gitBlobSha1": "c48c34cec8d32390ec09688ddb4d8b115d87f779",
+      "sizeBytes": 257565
+    },
+    {
+      "path": "bin64/cyggcc_s-1.dll",
+      "gitBlobSha1": "6f30fa0c4ce30d27773c461c32bea597064d5f1e",
+      "sizeBytes": 110109
+    },
+    {
+      "path": "bin64/cygiconv-2.dll",
+      "gitBlobSha1": "9a00513c24b6c8de68b8602f7d64c281d5f4ffb9",
+      "sizeBytes": 1034269
+    },
+    {
+      "path": "bin64/cygintl-8.dll",
+      "gitBlobSha1": "90eafc742939a2217e3da7bf09894776f97f2e01",
+      "sizeBytes": 42013
+    },
+    {
+      "path": "bin64/cyguuid-1.dll",
+      "gitBlobSha1": "ee1b92023af7aba3b61f45e3152d4f56a1f6d29c",
+      "sizeBytes": 16413
+    },
+    {
+      "path": "bin64/cygwin1.dll",
+      "gitBlobSha1": "76679613aad14d84829dc7af42e1e1fcc1ec2b85",
+      "sizeBytes": 3370192
+    },
+    {
+      "path": "bin64/e2fsck.exe",
+      "gitBlobSha1": "71c6a5d2b868226c33b7410de326ae7c7db6b75a",
+      "sizeBytes": 249885
+    },
+    {
+      "path": "bin64/resize2fs.exe",
+      "gitBlobSha1": "e6dfbe95573077598a4599dc36a310f767edfd3d",
+      "sizeBytes": 47645
+    },
+    {
+      "path": "bin64/tune2fs.exe",
+      "gitBlobSha1": "8c282b118412e85f09ba6d55f043280f5473fd92",
+      "sizeBytes": 68125
+    },
+    {
+      "path": "lib64/gles_angle/d3dcompiler_47.dll",
+      "gitBlobSha1": "56512f565030db171e0aae7b9952a35907a187ab",
+      "sizeBytes": 4173928
+    },
+    {
+      "path": "lib64/gles_angle/libEGL.dll",
+      "gitBlobSha1": "fcff2775660afb76a618460741f47dda4b1d6149",
+      "sizeBytes": 374784
+    },
+    {
+      "path": "lib64/gles_angle/libGLESv2.dll",
+      "gitBlobSha1": "0a4653f6f3ab5e478c9114851d3f3e5cfdc1b7f5",
+      "sizeBytes": 4149760
+    },
+    {
+      "path": "lib64/gles_mesa/mesa_opengl32.dll",
+      "gitBlobSha1": "8443294698c4af9e126a52d8fe9c3c3ab491dfbd",
+      "sizeBytes": 69818196
+    },
+    {
+      "path": "lib64/gles_swiftshader/libEGL.dll",
+      "gitBlobSha1": "095001078c43b9a5bff5beba9df1462267242f91",
+      "sizeBytes": 177664
+    },
+    {
+      "path": "lib64/gles_swiftshader/libGLES_CM.dll",
+      "gitBlobSha1": "1da8d0f6e8a02f7536cc498fd0c2ed5f3f6c677c",
+      "sizeBytes": 6509056
+    },
+    {
+      "path": "lib64/gles_swiftshader/libGLESv2.dll",
+      "gitBlobSha1": "17ecb391c7d2f279db3a79d6e1030f73ad8e99ee",
+      "sizeBytes": 7244288
+    },
+    {
+      "path": "lib64/qt/plugins/bearer/qgenericbearer.dll",
+      "gitBlobSha1": "bfde7d52330129254b71338547631271f5ecf5cf",
+      "sizeBytes": 47104
+    },
+    {
+      "path": "lib64/qt/plugins/iconengines/qsvgicon.dll",
+      "gitBlobSha1": "dfeac55536b4ef10d9ecb7772a84b23903d16e0b",
+      "sizeBytes": 35840
+    },
+    {
+      "path": "lib64/qt/plugins/imageformats/qgif.dll",
+      "gitBlobSha1": "5cfcc487a99f0f39c2901cf6c12c6032aa033369",
+      "sizeBytes": 31744
+    },
+    {
+      "path": "lib64/qt/plugins/imageformats/qicns.dll",
+      "gitBlobSha1": "dada6da35bf661f30d40dcaabefcd9678ad6dd65",
+      "sizeBytes": 40960
+    },
+    {
+      "path": "lib64/qt/plugins/imageformats/qico.dll",
+      "gitBlobSha1": "4ff077b1d908cf0174e8e9b6c5448efe6005f837",
+      "sizeBytes": 31744
+    },
+    {
+      "path": "lib64/qt/plugins/imageformats/qjpeg.dll",
+      "gitBlobSha1": "fedd8f5947a394275cdcd8731b788eb13e4f7c31",
+      "sizeBytes": 413696
+    },
+    {
+      "path": "lib64/qt/plugins/imageformats/qsvg.dll",
+      "gitBlobSha1": "d1accc3e1bec9d72980fe228fd6f890a273ec7cf",
+      "sizeBytes": 25088
+    },
+    {
+      "path": "lib64/qt/plugins/imageformats/qtga.dll",
+      "gitBlobSha1": "1c14149cf32ee2311820e6e26df949419f6fccd8",
+      "sizeBytes": 25088
+    },
+    {
+      "path": "lib64/qt/plugins/imageformats/qtiff.dll",
+      "gitBlobSha1": "527419b19f9902c6cb33d5f7a79c758a67c452c9",
+      "sizeBytes": 373760
+    },
+    {
+      "path": "lib64/qt/plugins/imageformats/qwbmp.dll",
+      "gitBlobSha1": "bfdf7e593523115ffa404db8f39c971acb31b1d4",
+      "sizeBytes": 23552
+    },
+    {
+      "path": "lib64/qt/plugins/imageformats/qwebp.dll",
+      "gitBlobSha1": "1e11dfe581deb02f12f1b78e9f1ee96408284ba1",
+      "sizeBytes": 518144
+    },
+    {
+      "path": "lib64/qt/plugins/platforms/qwindows.dll",
+      "gitBlobSha1": "1512a9b0b0027315e8b26b33f069193019438e6d",
+      "sizeBytes": 1397760
+    },
+    {
+      "path": "lib64/vulkan/glslangValidator.exe",
+      "gitBlobSha1": "fe1d621a96b69e6222aa789ae49876dc49f09611",
+      "sizeBytes": 7572296
+    },
+    {
+      "path": "lib64/vulkan/vk_swiftshader.dll",
+      "gitBlobSha1": "b7b280eb94049dbe485485b99d87f15a91b39463",
+      "sizeBytes": 23795712
+    },
+    {
+      "path": "lib64/vulkan/vulkan-1.dll",
+      "gitBlobSha1": "b7b280eb94049dbe485485b99d87f15a91b39463",
+      "sizeBytes": 23795712
+    }
+  ]
+}

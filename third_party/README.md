@@ -12,3 +12,5 @@
 | ozkl/doomgeneric | dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284 | Futuro port, no build en esta fase | LICENSE inspeccionada: GPL versión 2; no cubre WADs |
 
 Una firma del commit README no autentica el archivo ZIP de una release. Un hash calculado localmente identifica un archivo pero, sin valor de referencia independiente, no demuestra su autenticidad o seguridad.
+
+`openvela-emulator-binaries.lock.json` fija metadata de 94 EXE/DLL del repositorio oficial OpenVela. Todos coincidieron con la extracción local v1.0; no se incorporan sus bytes. Ver [revisión del paquete](../docs/emulator-package-review.md).

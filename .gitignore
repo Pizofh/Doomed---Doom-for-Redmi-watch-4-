@@ -2,6 +2,7 @@
 /third_party/*
 !/third_party/README.md
 !/third_party/dependencies.lock.json
+!/third_party/openvela-emulator-binaries.lock.json
 /emulator/*
 !/emulator/README.md
 !/emulator/session-status.json

@@ -73,3 +73,6 @@ Las páginas web son referencias móviles consultadas en esta fecha. Los links a
 - **R27:** [NuttX memory configurations](https://nuttx.apache.org/docs/latest/implementation/memory_configurations.html).
 - **R28:** [NuttX kernel modules vs shared libraries](https://nuttx.apache.org/docs/latest/implementation/kernel_modules_vs_shared_libraries.html).
 - **R29:** [NuttX NSH commands](https://nuttx.apache.org/docs/latest/applications/nsh/commands.html).
+- **R30:** [OpenVela prebuilts Windows, revisión equivalente a los ejecutables del bundle](https://github.com/open-vela/prebuilts_emulator_windows-x86_64/tree/3776c05d2c66f73f6bbe65528cd1a34fe34e1f18); metadata Git contrastada localmente para 94 EXE/DLL.
+- **R31:** [Revisión local del paquete e imagen guest](emulator-package-review.md); inspección estática, separada de pruebas runtime.
+- **R32:** [AOSP System.cpp emu-32-dev](https://github.com/aosp-mirror/platform_external_qemu/blob/emu-32-dev/android/android-emu-base/android/base/system/System.cpp); upstream usa SHGetFolderPathW en Windows. No es fuente exacta de la variante Vela.
