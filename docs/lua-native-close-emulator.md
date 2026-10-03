@@ -65,4 +65,4 @@ Un crash nativo, panic del sistema, terminación forzada o pérdida de alimentac
 
 El ELF temporal no es persistente tras reset; sigue pendiente la instalación nativa duradera. Render integrado, input mantenido, temporización y acceso WAD también siguen pendientes.
 
-**Siguiente checkpoint:** mostrar un patrón de píxeles generado por C dentro de nuestra página LVGL, conservando pausa, EXIT y limpieza al cambiar de watchface.
+**Checkpoint posterior completado:** [patrón de píxeles C dentro de nuestra página LVGL](native-frame-lvgl-emulator.md), conservando pausa, EXIT y limpieza al cambiar de watchface. Siguiente: actualización repetida con recursos acotados.

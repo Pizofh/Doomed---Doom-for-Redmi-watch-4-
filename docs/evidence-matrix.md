@@ -152,6 +152,11 @@ Continuación 2026-10-03: lua-api confirmó disp.load_scr/get_scr_act y Timer en
 | Error Lua controlado cierra descriptor y descarga C | Guest S3 CLI | R52 traceback y unregister=0 refs=0 | CONFIRMADO EN EMULADOR | Alta local | Descriptor con atributo close, módulo/nodo ausentes | No prueba kill/panic/agotamiento de memoria |
 | EXIT seguido de cierre Lua no repite descarga | Guest S3 UIProbe | R52 finalizer running=false | CONFIRMADO EN EMULADOR | Alta local | Un ciclo UI adicional | C sin worker ni timer |
 | Crash o terminación forzada garantiza cleanup nativo | Guest S3 / RW4 | Ninguna prueba | SIN EVIDENCIA | No evaluable | No | Finalizador depende del cierre normal de VM; no provocar crash |
+| LVGL muestra snapshot RGB565 generado por C en nuestra página | Guest S3 UIProbe | R53 fuente, stream, tmpfs y captura | CONFIRMADO EN EMULADOR | Alta local | 320×140; get_img_size y píxeles capturados comprobados | Snapshot estático; RW4 y backend DOOM desconocidos |
+| file.f_priv está en offset20, struct file ocupa32 bytes | ELF guest exacto | R53 DWARF | CONFIRMADO EN EMULADOR | Alta estática | Inspección de definición y código compilado | No usar ABI en otro firmware |
+| Stream de frame tiene cursor por descriptor, EOF y bloqueo de descarga con lector | Guest S3, clientes controlados | R53 CLI con readback | CONFIRMADO EN EMULADOR | Alta local | Dos lectores, dos fases, 89612 bytes exactos | Concurrencia arbitraria no garantizada |
+| Patrón conserva touch y pausa/salida de nuestra página | Guest S3 UIProbe | R53 14 gestos y cambio a Storage | CONFIRMADO EN EMULADOR | Alta local | Dos EXIT/reentrada y un cierre sin EXIT | No animación ni engine; temporales retirados |
+| Usar snapshot en tmpfs constituye backend de frames viable para DOOM | Guest S3 / RW4 | Solo un snapshot por START | SIN EVIDENCIA | No evaluable | No se midió actualización repetida | Cache, buffers acotados y coste por frame pendientes |
 
 ## Correcciones de interpretación
 

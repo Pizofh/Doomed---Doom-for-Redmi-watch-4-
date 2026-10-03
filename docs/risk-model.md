@@ -28,6 +28,8 @@ La revisión posterior de [compiler v4.23](touch-events-emulator.md) cotejó el 
 
 El [puente Lua↔C](lua-native-bridge-emulator.md) crea un nodo virtual propio en RAM y ejecuta callbacks síncronos. EXIT cierra descriptores, retira el nodo y descarga C; rmmod rechazó un descriptor abierto en una prueba. No usa periféricos ni threads. La [limpieza al cambiar de watchface sin EXIT](lua-native-close-emulator.md) y el error Lua controlado se probaron; crashes, terminación forzada y concurrencia arbitraria siguen sin garantía. No confundir pseudo-driver o RAM-only con sandbox. La prueba no altera particiones/boot del reloj físico.
 
+El [snapshot C mostrado por Lua/LVGL](native-frame-lvgl-emulator.md) usa un segundo nodo virtual y tmpfs. Un primer candidato produjo un fallo y un panic observado en el emulador; se corrigieron referencias/cursor por descriptor y se repitieron las pruebas. Los pins finales excluyen esos candidatos. El widget consume una copia independiente de memoria C, pero cache y memoria pico no se midieron. No convertir archivos/nombres por frame en un bucle sin acotar sus recursos.
+
 ## Condiciones de parada
 
 El patrón C escribió exclusivamente la memoria framebuffer y estado de presentación del driver del emulador. Respaldó/restauró ambos buffers, free/close y rmmod completados. Input y panel stock se verificaron sin reboot con pantalla activa. No hay ownership exclusivo: cambios concurrentes de stock pueden sobrescribir el patrón o quedar reemplazados por píxeles antiguos al restaurar. Primera evaluación de input fue inconclusa por screen OFF previo; se estableció nuevo baseline. [Evidencia y límites](native-display-emulator.md).

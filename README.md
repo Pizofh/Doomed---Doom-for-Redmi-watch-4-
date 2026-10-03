@@ -14,6 +14,8 @@ Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4
 
 **Puente Lua ↔ C:** START carga nuestro módulo mediante os.execute/insmod; un dispositivo virtual recibe eventos propios y devuelve estado C. Panel pausa/reanuda y EXIT descarga. También se verificó descarga al cambiar de watchface sin EXIT en dos ciclos, más cierre normal y error Lua controlado por consola. loadlib está deshabilitado en este guest. Persistencia nativa y recuperación ante crash siguen pendientes. [Contrato](docs/lua-native-bridge-emulator.md), [limpieza del cierre y reproducción](docs/lua-native-close-emulator.md).
 
+**Imagen C en LVGL:** patrón RGB565 de 320×140 generado por C, copiado a tmpfs y mostrado dentro de nuestra página Lua. Touch, pausa, dos ciclos EXIT/reentrada y cierre por cambio de watchface comprobados. Es una imagen estática; actualización repetida, rendimiento y cache siguen pendientes. [Prueba, fallo corregido y reproducción](docs/native-frame-lvgl-emulator.md).
+
 - Crear documentación, matriz de evidencia y herramientas de inspección para PC.
 - Identificar dependencias originales y fijar revisiones consultadas.
 - Preparar revisión del paquete del emulador y captura de inventario de solo lectura.

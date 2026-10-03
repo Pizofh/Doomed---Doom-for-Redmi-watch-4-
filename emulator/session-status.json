@@ -35,7 +35,7 @@
     "userVvdRegistrationCopied":  true,
     "physicalDeviceConnected":  false,
     "blockers":  [
-                     "Native render integration, held input, monotonic timers and WAD filesystem remain unvalidated",
+                     "Repeated frame updates with bounded resources, held input, monotonic timers and WAD filesystem remain unvalidated",
                      "Cleanup on native crash or forced termination remains unverified",
                      "RW4 physical execution remains unverified and outside authorized scope"
                  ],
@@ -53,7 +53,7 @@
     "touchEventsExitBySelectingStockVerified":  true,
     "compilerAutomaticAdbInvoked":  false,
     "touchEventsPressedCoordinatesCaptured":  false,
-    "latestResultsDocument":  "docs/lua-native-close-emulator.md",
+    "latestResultsDocument":  "docs/native-frame-lvgl-emulator.md",
     "nativeHelloExecuted": true,
     "nativeHelloLoadUnloadCycles": 2,
     "nativeHelloRequiresExactGuestSymbolBinding": true,
@@ -99,5 +99,17 @@
     "nativeBridgeWatchfaceSwitchCleanupCycles": 2,
     "nativeBridgeLuaGcFinalizerVerified": true,
     "nativeBridgeLuaControlledErrorCleanupVerified": true,
-    "nativeBridgeExitThenLuaCloseIdempotenceVerified": true
+    "nativeBridgeExitThenLuaCloseIdempotenceVerified": true,
+    "nativeFrameLvglSnapshotValidated": true,
+    "nativeFrameDimensions": [320,140],
+    "nativeFrameEncodedBytes": 89612,
+    "nativeFrameCursorPerDescriptorValidated": true,
+    "nativeFrameBusyUnloadRejected": true,
+    "nativeFramePausedOpenRejected": true,
+    "nativeFrameUiTouchPauseExitVerified": true,
+    "nativeFrameUiStartExitCycles": 2,
+    "nativeFrameUiWatchfaceSwitchCleanupCycles": 1,
+    "nativeFrameTemporaryFilesRemoved": true,
+    "nativeFrameRepeatedUpdatesValidated": false,
+    "nativeFrameFailedCandidateGuestPanicObserved": true
 }
