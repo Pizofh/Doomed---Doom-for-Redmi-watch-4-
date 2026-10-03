@@ -24,24 +24,33 @@
                                          "version"
                                      ],
     "touchEventsExecuted":  true,
-    "touchEventsOriginalCompleted":  false,
-    "touchEventsOriginalFailure":  "lvgl.Font cannot create font: misansw regular, 32",
+    "touchEventsOriginalCompleted":  true,
     "touchEventsDefaultFontCliExitedWithoutReportedError":  true,
-    "touchEventsInstalledAsWatchface":  false,
-    "touchEventsRendered":  false,
-    "touchEventsInputVerified":  false,
+    "touchEventsInstalledAsWatchface":  true,
+    "touchEventsRendered":  true,
+    "touchEventsInputVerified":  true,
     "luaCliVersion":  "Lua 5.4",
     "screenshotCaptured":  true,
     "touchEventsSourceFilesVerified":  6,
     "userVvdRegistrationCopied":  true,
     "physicalDeviceConnected":  false,
     "blockers":  [
-                     "TouchEvents requires activation in a UI/watchface lifecycle; CLI success did not display it",
                      "Native payload ABI/exports/toolchain still need characterization",
-                     "Terminal network still cannot reach GitHub for clones/packager downloads"
+                     "RW4 physical execution remains unverified and outside authorized scope"
                  ],
     "luaInteractiveUiVerified":  false,
     "luaParentProbeCrashedQemu":  true,
     "guestFunctionallyRecoveredAfterUserRelaunch":  true,
-    "romfsInspectedReadOnly":  true
+    "romfsInspectedReadOnly":  true,
+    "easyfaceCompilerReviewed":  true,
+    "touchEventsPersistentReopenAfterGuestResetVerified":  true,
+    "currentEmulatorWatchface":  "365799901",
+    "touchEventsOwnExitButton":  false,
+    "touchEventsWatchfaceId":  "365799901",
+    "touchEventsOriginalCliFailure":  "lvgl.Font cannot create font: misansw regular, 32",
+    "easyfaceCompilerExecutedForLocalPackaging":  true,
+    "touchEventsExitBySelectingStockVerified":  true,
+    "compilerAutomaticAdbInvoked":  false,
+    "touchEventsPressedCoordinatesCaptured":  false,
+    "latestResultsDocument":  "docs/touch-events-emulator.md"
 }

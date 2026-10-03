@@ -24,6 +24,8 @@ La [revisión local](emulator-package-review.md) verificó las 94 piezas EXE/DLL
 
 No ejecutar MSI de Drive, APK de Telegram, compiler EasyFace o adb incluido antes de revisión razonable. El digest de compiler v4.23 aporta comparación de integridad, no revisión de comportamiento ni confianza del MSI separado. Si un origen importante sigue sin verificarse, detener ejecución y documentar la alternativa oficial AIoT-IDE.
 
+La revisión posterior de [compiler v4.23](touch-events-emulator.md) cotejó el digest original e inspeccionó metadata/IL antes de ejecutarlo solo para empaquetar en PC. Su ADB no se extrajo y el branch automático de upload se omitió. No se ejecutó el editor. La instalación posterior en emulador sí escribió /data, eliminó una caché concreta respaldada y reseteó el guest, con ID propio/readback y backup del disco pausado. No es una operación read-only ni una instalación física. Se validaron navegación stock, cierre Lua por cambio de watchface y reentrada sin reinstalar.
+
 ## Condiciones de parada
 
 2026-10-03: un probe Lua/LVGL de padres cerró QEMU con Bad ram pointer. Se retiró el probe y se conservaron logs; el usuario relanzó y ADB/UI stock volvieron a funcionar. Esto demuestra que ejecutar Lua sobre bindings nativos también puede provocar un fallo grave del emulador. No se atribuye la causa exacta ni se extrapola un recovery físico. Ver [lifecycle](lua-lifecycle.md).

@@ -2,7 +2,7 @@
 
 Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4, modelo objetivo **M2315W1**, preservando el firmware Xiaomi y las funciones normales del reloj si resulta técnicamente viable.
 
-**Estado al 2026-10-03:** emulador arrancado, `adb shell` obtenido por `emulator-5554` e inventario capturado. `uname -a` identifica Xiaomi Watch S3. TouchEvents original falla al crear una fuente; una copia con fuente por defecto termina por CLI, pero no aparece en pantalla ni se validó touch. Hay captura real 390×450 de la UI stock. No se compiló DOOM ni C propio y no se conectó el reloj físico. Estado y comandos para continuar en [HANDOFF](docs/HANDOFF.md).
+**Estado al 2026-10-03:** `adb shell` e inventario obtenidos en el emulador Xiaomi Watch S3. TouchEvents RW4 original se empaquetó e instaló; render y eventos touch validados a 390×450. Se comprobó cambiar a una watchface stock, cerrar el runtime Lua y reabrir TouchEvents tras reset sin reinstalar. [Resultados y reproducción](docs/touch-events-emulator.md). No se compiló DOOM ni C propio y no se conectó el reloj físico. Estado para continuar en [HANDOFF](docs/HANDOFF.md).
 
 ## Alcance de esta sesión
 

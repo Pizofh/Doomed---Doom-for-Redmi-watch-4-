@@ -65,3 +65,5 @@ El módulo expone Timer, disp.get_default/get_next/get_scr_act/get_scr_prev/load
 TouchEvents crea objetos y termina con entry(); no llama explícitamente a disp.load_scr ni mantiene un event loop propio. Es una inferencia que CLI y watchface inicializan/activan/liberan la UI de forma distinta. Falta demostrar el mecanismo correcto; no llamar load_scr con argumentos supuestos ni mantener Lua mediante un bucle infinito. No se repitió el sample ni se enviaron eventos.
 
 Posteriormente se probó mantener el CLI con -i: tampoco hubo UI visible. Una segunda prueba recorriendo padres LVGL terminó QEMU con «Bad ram pointer» y exit 0xC0000409; se retiró ese probe. El usuario relanzó y se comprobaron ADB e interfaz stock. Detalles, incertidumbre causal y lectura ROMFS en [lua-lifecycle.md](lua-lifecycle.md). Touch/render y salida de watchface siguen sin validar.
+
+La continuación posterior resolvió render/touch mediante el empaquetado y launcher stock: original visible, callbacks de RELEASED, cierre al seleccionar Storage y reentrada tras reset sin reinstalar. Ver [resultado actual](touch-events-emulator.md); no invalidar el historial de fallos CLI ni extrapolar al RW4.

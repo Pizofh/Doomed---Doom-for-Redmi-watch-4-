@@ -40,12 +40,12 @@ NuttX S3 0.0.0, revisión 9aec7d0ff1, Dec 5 2024; getprop Emulator-Vela/DEV. Ume
 
 No sumar pools, inferir RAM RW4 o ejecutar loaders para averiguar su ABI. No usar dd del README como inventario: crea un dump guest. FLAT no es sandbox.
 
-## TouchEvents: ejecución CLI, UI pendiente
+## TouchEvents: CLI previo y watchface validada
 
-Sample [5af6e14](https://github.com/m0tral/MiWatchLuaWatchfaces/tree/5af6e14ea92830a394c88dc04f76ceef697a6ded/RedmiWatch4/TouchEvents): seis archivos verificados y conservados en third_party ignorado. No se ejecutó EasyFace ni compiló resource.bin.
+Sample [5af6e14](https://github.com/m0tral/MiWatchLuaWatchfaces/tree/5af6e14ea92830a394c88dc04f76ceef697a6ded/RedmiWatch4/TouchEvents): seis archivos verificados y conservados en third_party ignorado. Primero se intentó CLI; posteriormente se revisó y ejecutó solo el compiler EasyFace para empaquetar el original.
 
 tools/try-touch-events.mjs subió tres Lua y cat.png a TMPFS. Original falla en lvgl.Font; variante sin esa línea termina sin excepción. Lua CLI es 5.4 y carga lvgl, pero screenshot real 390×450 muestra UI stock almacenamiento. **Sin watchface instalada ni render/input validado.** No equiparar CLI con lifecycle watchface o con RW4.
 
-Pendiente revisar lifecycle/activación y packer antes de instalar un paquete. El procedimiento upstream modifica /data/app/watchface/market, caché y reboot: no pertenece al inventario read-only y requiere copia del estado guest e ID propio. No copiar automáticamente su rm. Se debe comprobar render, pulsaciones/arrastre/gesto y salida/reentrada sin reboot obligatorio.
+Resultado posterior: watchface 365799901 instalada en copia mutable del guest, con backup de data/caché e ID nuevo. Render original, touch, navegación stock, cambio de watchface con cierre de Lua y reentrada tras reset sin reinstalar comprobados. [Revisión, comandos, capturas y límites](touch-events-emulator.md). La instalación escribe /data y elimina una caché concreta; no pertenece al inventario read-only. Gestos exhaustivos, coordenadas PRESSED y botón propio de salida siguen pendientes.
 
 Posible siguiente checkpoint C: fijar primero ELF/exports/init/uninit/toolchain/teardown. No compilar DOOM hasta demostrar ejecución, display, timers, input y filesystem. El hardware físico sigue fuera de alcance.

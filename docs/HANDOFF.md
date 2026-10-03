@@ -1,73 +1,35 @@
 # Retomar el proyecto
 
-Estado para continuar el trabajo. El usuario pidió retomar el 2026-10-03.
+Estado activo al 2026-10-03. Resultado actual: [TouchEvents validado en emulador](touch-events-emulator.md).
 
-## Workspace y límites
+- Nunca se conectó el reloj físico M2315W1. Gate físico cerrado; sin flash, exploits, mods APK, DOOM/WAD ni payload C propio.
+- Guest Xiaomi Watch S3 / NuttX 0.0.0, revisión 9aec7d0ff1; pantalla configurada 390×450. No emulación exacta RW4/BES.
+- ADB shell funciona por emulator-5554, servidor dedicado 5039. NAT 2512 está offline. Helpers comprueban puertos loopback/PID/ruta de QEMU y excluyen USB.
+- Launcher actual fue iniciado por el usuario (PID inicial 27964). QEMU sobrevivió a dos resets por gRPC; comprobar ownership vigente antes de actuar. La terminal del usuario se mantiene abierta.
+- TouchEvents original empaquetado sin modificar sus seis fuentes/assets; compiler EasyFace original v4.23 revisado por hash y metadata/IL. Se ejecutó sin su ADB: transferencia automática omitida.
+- Instalación propia 365799901 en /data/app/watchface/market. Backup de data image pausado y caché previo, readback SHA256 idéntico. Sin sobrescribir stock.
+- Render, touch RELEASED, navegación stock, cierre Lua al seleccionar Storage y reentrada tras reset sin reinstalar demostrados. Coordenadas absolutas PRESSED, gestos exhaustivos, botón de salida propio y fugas aún pendientes.
+- Última watchface activa: TouchEvents 365799901. Cambiar a Storage mediante Ajustes → Watch faces → selector; procedimiento documentado. GoBack por teclado no fue un exit validado.
+- Probe anterior de padres LVGL cerró QEMU con Bad ram pointer. Retirado, logs archivados; no repetir. No llama load_scr/exec-direcciones para explorar.
+- Repositorio Git guarda documentación y herramientas propias. ZIPs, firmware, compiler, assets y logs permanecen ignorados. No publicar esos archivos.
 
-Repositorio: `C:\Users\steve\Documents\Devs\Doomed\redmi-watch4-doom`.
+## Próxima meta
 
-- Nunca se conectó el Redmi Watch 4 físico M2315W1.
-- Sin flash, firmware modificado, bootloader, particiones, root, exploits ni Mi Fitness mod.
-- Sin compilación DOOM, WAD, payload C propio ni carga de módulos/WASM.
-- Gate físico cerrado en `docs/physical-device-plan.md`.
-- MiWatchEmulator es un entorno S3; `uname -a` dice **Xiaomi Watch S3**. No extrapolar a RW4.
-- La terminal restringida no accede a GitHub para clones. Navegador/conector GitHub sí permitieron investigación y descarga de seis archivos TouchEvents.
-- ExecutionPolicy bloquea `.ps1`; no se cambió. Las herramientas propias Node funcionan.
+Fijar el contrato ELF/exports/init/uninit/relocations/toolchain del emulador para un hello-world C mínimo. insmod es candidato, no mecanismo validado con payload propio. FLAT comparte memoria y no es sandbox. WatchS3/Band10Pro de MiWatchNativeApps contienen direcciones ajenas: nunca usarlas en este guest o RW4. No compilar DOOM todavía.
 
-## Resultados demostrados
+## Comandos útiles
 
-1. ZIP original v1.0 revisado y extraído selectivamente. Los 94 EXE/DLL del emulador coinciden con OpenVela SHA `3776c05d2c66f73f6bbe65528cd1a34fe34e1f18`. ADB 35.0.2 está firmado por Google. Hashes en `docs/emulator-package-review.md`.
-2. El usuario copió el registro VVD a `C:\Users\steve\.vela\RedmiWatch4.ini`. Las primeras ejecuciones restringidas corrían como `steve\codexsandboxoffline`, con otro UserProfile real; se consiguió arrancar bajo la cuenta normal del usuario. Al retomar, comprobar la cuenta efectiva antes de repetir ese diagnóstico.
-3. Arranque real: NuttX `0.0.0`, revisión `9aec7d0ff1`, `Dec 5 2024 07:11:08 arm miwear`. QEMU configura pantalla 390×450, Cortex-A15 y 2048 MB; el ELF contiene macros Goldfish Cortex-A7/FLAT. Nada de esto caracteriza el BES físico.
-4. **ADB shell funciona por `emulator-5554`, servidor dedicado 5039.** El reenvío 2512 queda offline; no usarlo como serial. El helper coteja propietarios de puertos 5554/5555/2512/8554 y ruta del QEMU revisado antes de enviar comandos.
-5. Inventario de 16 consultas completado. `version` devuelve command not found pese a exit code 0. Usar `uname -a`/getprop/banner. Hay `/dev/fb0`, `/dev/input0`, `/dev/utouch`, FAT `/data`, ROMFS y TMPFS `/tmp`.
-6. Umem: 129704956 bytes total, 111706820 libres en primera muestra (~106.5 MiB). `/data`: 126 MiB, ~112.1 MiB disponibles. No sumar pools ni tratar estos números como RAM/storage RW4.
-7. Shell anuncia `insmod`, `rmmod`, `lsmod`, `iwasm`, `lua`, `qjs`, `aiotjsc`. `lsmod` no muestra módulos. `exec` es **exec <hex-address>**, no un launcher ELF por filename; no ejecutarlo para explorar.
-8. CLI Lua 5.4; `os.execute` y `package.loadlib` tienen tipo function, sin invocarlos. Esto no prueba exposición en watchfaces ni RW4. `require('lvgl')` funciona desde el CLI.
-9. TouchEvents original, archivos intactos y verificados, invocado desde `/tmp`: falla en `lvgl.Font("misansw regular",32)`. Copia temporal con esa línea omitida termina sin excepción reportada. **No se instaló una watchface ni se validó touch.**
-10. Screenshot PNG real por gRPC 8554, 390×450. Muestra la pantalla stock de almacenamiento, no TouchEvents. Ejecutar el script por CLI no activó una UI visible. Después, no hay tarea Lua persistente y sigue existiendo solo la watchface market original.
-
-## Archivos locales que conservar
-
-Todo lo siguiente está ignorado por Git y no debe publicarse:
-
-- `emulator/MiWatchEmulator.zip` y `emulator/local/reviewed-v1.0/`.
-- `emulator/local/run-state/`: copia mutable del guest, separada del ZIP.
-- `third_party/miwatch-lua-watchfaces/RedmiWatch4/TouchEvents/`: seis archivos originales.
-- `emulator/local/touch-default-font/`: copia experimental privada; fuente original preservada.
-- `artifacts/package-review/`: manifiesto, firmas, hashes, inspección ELF/PE.
-- `artifacts/emulator/adb/`: inventario, capacidades, propietarios de transportes y comprobaciones posteriores.
-- `artifacts/emulator/lua-touch/`: upload/ejecución y traceback de ambas pruebas.
-- `artifacts/emulator/screenshots/after-lua-default-font.png` y metadata.
-- `artifacts/emulator/user-launch-stdout.txt`: primer boot/cierre, preservado antes de sobrescribir el log de la segunda instancia.
-
-Los scripts `/tmp/rw4-doom-touch-*` son volátiles y pueden desaparecer al cerrar la VM. Los archivos de PC y los commits permanecen. No se probó persistencia de una app propia en `/data`.
-
-## Comandos para continuar
-
-Si el emulador sigue activo, desde la raíz del repo:
+Desde C:\Users\steve\Documents\Devs\Doomed\redmi-watch4-doom:
 
 ```powershell
-node tools/emulator-adb.mjs devices
 node tools/emulator-adb.mjs connect
+node tools/emulator-screenshot.mjs current
 ```
 
-Si está cerrado, el usuario normal debe ejecutar y dejar abierta su PowerShell:
+Si el emulador está cerrado, el usuario normal puede arrancarlo con tools/emulator-host.mjs start desde su PowerShell y dejarla abierta. No abrir una segunda instancia sobre el mismo disco. Antes de descartar un marker antiguo, comprobar PID/QEMU y salida registrada.
 
-```powershell
-node 'C:\Users\steve\Documents\Devs\Doomed\redmi-watch4-doom\tools\emulator-host.mjs' collect
-```
+Build/install TouchEvents ya realizados: no repetir scripts que rechazan directorios existentes. Restaurar data exige cerrar y verificar que QEMU dejó de usar la imagen; no se necesitó ni se probó restauración. Backups bajo emulator/local/backups/, logs/capturas bajo artifacts/emulator/.
 
-La versión final de `collect` espera el puente 5555 y la disponibilidad de `emulator-5554`; esa recaptura automática actualizada aún no se reprobó. Conexión, inventario y capturas sí se comprobaron por separado en la instancia activa. No repetir inventarios sin necesidad.
+La terminal restringida no accede a GitHub para descargas; el usuario descargó ambos ZIP originales. Browser/conector GitHub permiten investigación. ExecutionPolicy bloquea .ps1; se usaron herramientas Node/PowerShell inline sin cambiarla.
 
-Si hay un registro `host-process.json` sin salida registrada, inspeccionar PID y el PID QEMU que aparece en logs/netstat antes de archivarlo. No abrir dos instancias sobre el mismo data image ni matar procesos por nombre global. Las pruebas iniciales terminaron por petición del padre, no por panic observado; no atribuir causalidad a Ctrl+C/EOF sin evidencia.
-
-## Siguiente checkpoint propuesto
-
-**Hello-world C dentro del emulador**, después de fijar contrato ELF, entrypoint/init/uninit, exports, relocations, toolchain y teardown. Existe una ruta razonable por `insmod`, pero ningún módulo propio se ha validado. FLAT comparte memoria: no es sandbox ni userspace aislado. No usar un ELF Linux ARM, llamar direcciones con `exec`, ni elegir toolchain del RW4 a partir de este emulador.
-
-TouchEvents sigue pendiente de activación en el lifecycle correcto de watchface/app, render y input. La inspección de fuente y ejecución CLI no sustituyen esa prueba. No compilar DOOM hasta demostrar ejecución propia, display, timers, input y filesystem.
-
-Continuación 2026-10-03: ADB online; lua-api enumera disp.load_scr/get_scr_act y Timer, sin invocación UI. Próxima acción inmediata: revisar activación/lifecycle TouchEvents; hello C queda condicionado al loader. MiWatchNativeApps a392529b9e369d046b9c15858d990f358fdf6c29 se revisó como referencia S3/Band 10 Pro; direcciones de firmware ajeno no válidas para emulador/RW4. Para futuras pausas, guardar solo una nota breve con el siguiente paso, sin ampliar documentación ni iniciar verificaciones largas.
-
-Último avance: probe de padres LVGL cerró QEMU; retirado y archivado. Usuario relanzó con launcher PID 27964; ADB/UI stock recuperados. ROMFS leído sin modificar; script stock ui.init y callbacks documentados en [lua-lifecycle](lua-lifecycle.md). Siguiente paso inmediato: inspeccionar ZIP original EasyFace compiler v4.23 y empaquetar TouchEvents para lifecycle watchface. Se pidió descargar a tools/local/EasyFace_Gen2_CompilerV423.zip; aún no ejecutado ni instalado. Digest esperado en third_party/dependencies.lock.json. No repetir probe de padres ni cargar pantallas desde CLI.
+En futuras pausas, guardar únicamente una nota breve con el siguiente paso. No iniciar verificaciones ni ampliar documentación por motivo de pausa.

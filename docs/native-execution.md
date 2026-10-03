@@ -38,6 +38,8 @@ NuttX distingue [módulos kernel y shared libraries](https://nuttx.apache.org/do
 
 ## Contrato mínimo antes de hello C
 
+TouchEvents ya demostró una entrada Lua persistente en el emulador, con render/touch y cierre al cambiar a una watchface stock [resultado](touch-events-emulator.md). Esto facilita futuros launchers, pero no demuestra os.execute desde ese contexto, C propio, permisos de módulos ni puente QuickApp→nativo. No se cargó un ELF ni WASM propio.
+
 Registrar encabezado ELF esperado (clase/endian/machine, tipo ET_REL/ET_EXEC/ET_DYN), ISA y flags, EABI/FPU, toolchain y versión, linker/relocations, entrypoint, libc y símbolos/imports. Identificar quién ejecuta init/exit, contexto/task, stack/heap, privilegios y recuperación del emulador. Distinguir binario host del payload guest. Ya se caracterizó el encabezado del firmware guest y su modo FLAT; no se ha determinado el contrato de un payload propio.
 
 Hello C posterior: imprimir una línea y devolver; sin drivers, hooks, writes, persistencia ni display. Solo promover ese checkpoint cuando exista un mecanismo demostrado y coherente. El esqueleto de `experiments/hello-native` no contiene código ni build anticipados.
