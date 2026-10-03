@@ -21,7 +21,11 @@ const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 if (bytes.length < 168 || bytes.length > 4 * 1024 * 1024 || bytes.readUInt32LE(0) !== 0x1234a55a ||
     !bytes.includes(Buffer.from('lua/main.lua'))) throw new Error('Unexpected package');
 if (build.status !== 0 || !build.stdout.includes('No Errors') || !build.stdout.includes('adb util is missing')) throw new Error('No reviewed successful build');
-if (hash(bytes) !== build.outputSha256 || hash(fs.readFileSync(path.join(projectRoot, 'experiments/lua-ui/main.lua'))) !== build.sourceSha256) throw new Error('Package/source differ from own build');
+const uiSource = fs.readFileSync(path.join(projectRoot, 'experiments/lua-ui/main.lua'));
+const ownSource = build.bridgeMode === true ? Buffer.concat([
+  fs.readFileSync(path.join(projectRoot, 'experiments/lua-native-bridge/control.lua')), Buffer.from('\n'), uiSource
+]) : uiSource;
+if (hash(bytes) !== build.outputSha256 || hash(ownSource) !== build.sourceSha256) throw new Error('Package/source differ from own build');
 const installFolder = path.join(projectRoot, `artifacts/emulator/watchface-${id}`);
 let prior = null;
 if (action === 'update') {
@@ -63,7 +67,7 @@ prepared[5] = 10;
 prepared.write(id, 40, 9, 'ascii');
 const resource = path.join(destination, 'resource.bin');
 fs.writeFileSync(resource, prepared);
-const record = { action, variant, id, guest, snapshot, originalPackageSha256: hash(bytes),
+const record = { action, variant, bridgeMode: build.bridgeMode === true, id, guest, snapshot, originalPackageSha256: hash(bytes),
   installedPackageSha256: hash(prepared), headerEdits: [{ offset: 5, value: 10 }, { offset: 40, ascii: id }],
   physicalTransport: false, createdAtUtc: new Date().toISOString(), resetRequested: false };
 fs.writeFileSync(path.join(destination, 'install.json'), JSON.stringify(record, null, 2) + '\n');

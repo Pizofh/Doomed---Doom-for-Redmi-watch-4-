@@ -1,5 +1,6 @@
 -- PC emulator experiment. Owned widgets in the watchface's Lua/UI context.
--- No shell, native payload, filesystem I/O, timers or parent traversal.
+-- Standalone mode has no native code. Optional reviewed bridge is prepended
+-- by the dedicated emulator build; no timers or parent traversal here.
 local lvgl = require("lvgl")
 local width, height = lvgl.HOR_RES(), lvgl.VER_RES()
 local flags = lvgl.FLAG
@@ -46,18 +47,27 @@ local coords = label(page, "Touch the blue area", 105)
 local counter = label(page, "Presses: 0", 155)
 local active, presses = false, 0
 local suspended = false
+local bridge = rawget(_G, "RW4_NATIVE_BRIDGE")
+local function native(method, ...)
+    if not bridge then return true end
+    local ok, err = pcall(bridge[method], ...)
+    if not ok then print("RW4_UI_PROBE: native error " .. tostring(err)) end
+    return ok
+end
 local previous_pause, previous_resume = pageOnPause, pageOnResume
 
 -- Names and global-call contract inspected in this exact guest's activity.c.
 -- Preserve an existing lifecycle handler if the runtime supplies one.
 function pageOnPause(...)
     suspended = true
+    if active then native("pause") end
     print("RW4_UI_PROBE: pause")
     if type(previous_pause) == "function" then previous_pause(...) end
 end
 
 function pageOnResume(...)
     suspended = false
+    if active then native("resume") end
     print("RW4_UI_PROBE: resume")
     if type(previous_resume) == "function" then previous_resume(...) end
 end
@@ -88,6 +98,7 @@ local function button(parent, text, y, callback)
 end
 
 local start_button = button(launcher, "START", 250, function()
+    if not native("start") then status:set {text = "Native error: inspect log"}; return end
     active = true
     navigation(false)
     launcher:add_flag(flags.HIDDEN)
@@ -95,11 +106,12 @@ local start_button = button(launcher, "START", 250, function()
     print("RW4_UI_PROBE: enter")
 end)
 local exit_button = button(page, "EXIT", 355, function()
+    local clean = native("exit")
     active = false
     navigation(true)
     page:add_flag(flags.HIDDEN)
     launcher:clear_flag(flags.HIDDEN)
-    status:set {text = "UI probe: closed"}
+    status:set {text = clean and "UI probe: closed" or "Native cleanup failed"}
     print("RW4_UI_PROBE: exit")
 end)
 
@@ -118,6 +130,7 @@ page:onevent(lvgl.EVENT.ALL, function(_, code)
     local x, y = indev:get_point()
     coords:set {text = string.format("x:%d y:%d", x, y)}
     if code == lvgl.EVENT.RELEASED then
+        native("touch", x, y)
         print(string.format("RW4_UI_PROBE: release x:%d y:%d", x, y))
     end
 end)
