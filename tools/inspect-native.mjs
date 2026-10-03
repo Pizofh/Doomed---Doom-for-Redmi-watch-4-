@@ -3,7 +3,8 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 
 const input = process.argv[2];
-if (!input) throw new Error('Usage: node tools/inspect-native.mjs <ELF-or-PE>');
+if (!input) throw new Error('Usage: node tools/inspect-native.mjs <ELF-or-PE> [lua]');
+const inspectLua = process.argv[3] === 'lua';
 const data = fs.readFileSync(input);
 const report = { bytes: data.length, sha256: crypto.createHash('sha256').update(data).digest('hex'), executed: false };
 function range(offset, size) {
@@ -42,7 +43,7 @@ if (data.subarray(0, 4).equals(Buffer.from([0x7f, 0x45, 0x4c, 0x46]))) {
   const names = range(sections[stringIndex].offset, sections[stringIndex].size);
   sections.forEach(s => { s.name = cstring(names, s.nameOffset); });
   report.sections = sections.map(s => ({ name: s.name, bytes: s.size }));
-  const wanted = /^(insmod|rmmod|lsmod|dlopen|dlclose|exec|execl|execv|posix_spawn|system|luaopen_os|luaopen_io|os_execute|iwasm_main|lua_main|lvgl_main|nsh_main|cmd_insmod|cmd_rmmod|cmd_lsmod|g_userspace|g_symtab|g_nsymbols|g_kernel_symtab|g_kernel_nsymbols|up_userspace)$/;
+  const wanted = inspectLua ? /^(?:lua_main|luaopen_.*|luavgl_(?:context|set_root|disp_.*|obj_create_helper)|root_gc|root_clean|am_main|.*lua.*(?:app|page|script|launch).*|.*(?:app|page).*lua.*)$/i : /^(insmod|rmmod|lsmod|dlopen|dlclose|exec|execl|execv|posix_spawn|system|luaopen_os|luaopen_io|os_execute|iwasm_main|lua_main|lvgl_main|nsh_main|cmd_insmod|cmd_rmmod|cmd_lsmod|g_userspace|g_symtab|g_nsymbols|g_kernel_symtab|g_kernel_nsymbols|up_userspace)$/;
   report.selectedSymbols = [];
   for (const section of sections.filter(s => s.type === 2 || s.type === 11)) {
     if (section.entrySize < 16 || section.link >= sections.length) throw new Error('Invalid symbol table');
@@ -62,6 +63,15 @@ if (data.subarray(0, 4).equals(Buffer.from([0x7f, 0x45, 0x4c, 0x46]))) {
     report.selectedConfigLiterals.push(...matches);
   }
   report.selectedConfigLiterals = [...new Set(report.selectedConfigLiterals)].sort();
+  if (inspectLua) {
+    report.luaSourceAndUsageHints = [];
+    for (const section of sections.filter(s => ['.debug_str', '.rodata'].includes(s.name))) {
+      const strings = range(section.offset, section.size).toString('latin1').split('\0');
+      report.luaSourceAndUsageHints.push(...strings.filter(s => s.length < 240 &&
+        /(?:lua.*(?:app|page|script)|(?:app|page).*lua).*(?:\.c|\.h|\.lua)|(?:usage|Usage): (?:am|vapp)|\/data\/.*lua|\/watchface\/lua|luavgl.*\.c/i.test(s)).slice(0, 100));
+    }
+    report.luaSourceAndUsageHints = [...new Set(report.luaSourceAndUsageHints)];
+  }
 } else if (data.subarray(0, 2).toString('ascii') === 'MZ') {
   report.format = 'PE';
   const pe = data.readUInt32LE(0x3c);

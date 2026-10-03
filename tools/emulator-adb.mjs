@@ -6,8 +6,8 @@ import { spawnSync } from 'node:child_process';
 import { packageRoot, projectRoot, verifyEmulator } from './verify-emulator.mjs';
 
 const action = process.argv[2];
-if (!['version', 'connect', 'devices', 'inventory', 'capabilities', 'post-sample', 'lua-api'].includes(action)) {
-  throw new Error('Usage: node tools/emulator-adb.mjs version|connect|devices|inventory|capabilities|post-sample|lua-api');
+if (!['version', 'connect', 'devices', 'inventory', 'capabilities', 'post-sample', 'lua-api', 'ui-help'].includes(action)) {
+  throw new Error('Usage: node tools/emulator-adb.mjs version|connect|devices|inventory|capabilities|post-sample|lua-api|ui-help');
 }
 const endpoint = 'emulator-5554';
 const serverPort = '5039';
@@ -93,13 +93,16 @@ if (action === 'version') {
       ['help', '-v', 'exec'], ['help', '-v', 'iwasm'], ['lsmod'], ['ls', '/system'],
       ['ls', '/data/app/watchface/market'], ['ls', '/tmp'],
       ['lua', '-e', '"print(_VERSION); print(type(os.execute)); print(type(package.loadlib)); print(type(package.preload.lvgl))"'] ];
-    // Enumerate existing module entries without creating objects or invoking UI functions.
-    const luaApiCode = "local lv=require('lvgl'); local function list(n,t) print('TABLE',n,type(t)); if type(t)~='table' then return end; local keys={}; for k in pairs(t) do if type(k)=='string' then keys[#keys+1]=k end end; table.sort(keys); for i,k in ipairs(keys) do if i>120 then break end; print(k,type(t[k])) end end; list('lvgl',lv); list('disp',lv.disp); list('module-meta',getmetatable(lv)); local mt=getmetatable(lv._root); list('root-meta',mt); if type(mt)=='table' then list('root-index',mt.__index) end";
-    const commands = action === 'lua-api' ? [['lua', '-e', `"${luaApiCode}"`]] : action === 'capabilities' ? capabilityCommands : action === 'post-sample' ?
+    // Enumerate entries without explicitly constructing widgets or invoking UI APIs.
+    // require('lvgl') can itself initialize native binding state; this is not a pure read.
+    const luaApiCode = "local lv=require('lvgl'); local function list(n,t) print('TABLE',n,type(t)); if type(t)~='table' then return end; local keys={}; for k in pairs(t) do if type(k)=='string' then keys[#keys+1]=k end end; table.sort(keys); for i,k in ipairs(keys) do if i>120 then break end; print(k,type(t[k])) end end; list('lvgl',lv); list('disp',lv.disp); list('module-meta',getmetatable(lv)); local mt=getmetatable(lv._root); list('root-meta',mt); if type(mt)=='table' then list('root-index',mt.__index) end; for _,n in ipairs({'miwear','activity','navigator','screen'}) do list(n,package.loaded[n]) end";
+    const uiHelpCommands = [['am'], ['help', '-v', 'am'], ['lua', '-h'],
+      ['ls', '/watchface/lua'], ['ls', '/data/app/watchface/builtin']];
+    const commands = action === 'ui-help' ? uiHelpCommands : action === 'lua-api' ? [['lua', '-e', `"${luaApiCode}"`]] : action === 'capabilities' ? capabilityCommands : action === 'post-sample' ?
       [['ps'], ['free'], ['ls', '/data/app/watchface/market']] : inventoryCommands;
     const summary = [];
     for (const [index, command] of commands.entries()) {
-      const name = action === 'lua-api' ? 'lua-api-module-entries' : action === 'post-sample' ? `post-${String(index + 1).padStart(2, '0')}-${command[0]}` :
+      const name = action === 'ui-help' ? `ui-help-${index + 1}-${command[0]}` : action === 'lua-api' ? 'lua-api-module-entries' : action === 'post-sample' ? `post-${String(index + 1).padStart(2, '0')}-${command[0]}` :
         action === 'capabilities' ? `cap-${String(index + 1).padStart(2, '0')}-${command[0]}` :
         `${String(index + 1).padStart(2, '0')}-${command.join('-').replaceAll('/', '_')}`;
       const result = invoke([...common, '-s', endpoint, 'shell', ...command], name);

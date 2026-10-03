@@ -58,8 +58,10 @@ collect fue actualizado para esperar el puente 5555 y emulator-5554. Esa recaptu
 
 ## Continuación 2026-10-03: introspección de API
 
-ADB seguía online. `node tools/emulator-adb.mjs lua-api` enumera tablas/metatablas existentes con límite de 120 claves por tabla; no crea widgets ni invoca UI. Artefacto: artifacts/emulator/adb/lua-api-module-entries.json.
+ADB seguía online. `node tools/emulator-adb.mjs lua-api` enumera tablas/metatablas con límite de 120 claves por tabla; no construye widgets explícitamente ni llama funciones UI. require('lvgl') puede inicializar estado nativo/raíz del binding: no es una lectura pura del sistema. Artefacto: artifacts/emulator/adb/lua-api-module-entries.json.
 
 El módulo expone Timer, disp.get_default/get_next/get_scr_act/get_scr_prev/load_scr y _root userdata. Las clases también se resuelven por metatabla; pairs no basta para descartar Object/Label. Logs anuncian apertura de activity, screen, navigator, miwear, dataman, topic y vibrator; no se invocaron sus APIs. Los nombres no demuestran firmas, threading, permisos ni lifecycle.
 
 TouchEvents crea objetos y termina con entry(); no llama explícitamente a disp.load_scr ni mantiene un event loop propio. Es una inferencia que CLI y watchface inicializan/activan/liberan la UI de forma distinta. Falta demostrar el mecanismo correcto; no llamar load_scr con argumentos supuestos ni mantener Lua mediante un bucle infinito. No se repitió el sample ni se enviaron eventos.
+
+Posteriormente se probó mantener el CLI con -i: tampoco hubo UI visible. Una segunda prueba recorriendo padres LVGL terminó QEMU con «Bad ram pointer» y exit 0xC0000409; se retiró ese probe. El usuario relanzó y se comprobaron ADB e interfaz stock. Detalles, incertidumbre causal y lectura ROMFS en [lua-lifecycle.md](lua-lifecycle.md). Touch/render y salida de watchface siguen sin validar.
