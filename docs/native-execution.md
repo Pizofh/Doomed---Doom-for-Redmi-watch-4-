@@ -12,7 +12,8 @@ La [inspección estática del ELF guest](emulator-package-review.md) identifica 
 | Lua / watchface | TouchEvents original empaquetado; render/touch/cierre y reentrada en emulador | API para lanzar C y compatibilidad física pendientes | Experimento separado de launcher si se demuestra spawn |
 | Lua → shell | Símbolos `os_execute`/`system` definidos en ELF del emulador | Exposición desde watchface/RW4 sin probar | Inspeccionar presencia/tipo primero, experimento separado |
 | ELF / exec | `CONFIG_ELF`, `CONFIG_LIBC_EXECFUNCS`, `execv`/`posix_spawn` en emulador | Exports, contrato loader/entrypoint y lifecycle pendientes | Inventario read-only, luego hello C si hay contrato válido |
-| Módulo / `insmod` | Hello C y patrón framebuffer ligados al guest exacto, descargados | Sin sandbox, ownership UI estable ni compatibilidad RW4 demostrada | Touch C compatible con UI stock |
+| Módulo / `insmod` | Hello C, patrón framebuffer y touch ligados al guest exacto, descargados | Sin sandbox, ownership UI estable ni compatibilidad RW4 demostrada | Pantalla propia con salida fiable |
+| Touch C / driver | [Observador nativo validado](native-touch-emulator.md), colas por lector; stock concurrente | UI propia, timing, FS y compatibilidad RW4 pendientes | Pantalla interactiva con salida y contexto correctos |
 | WASM / `iwasm` | `iwasm_main` y macros WAMR en emulador | Imports, memoria/UI/lifecycle y RW4 desconocidos | Identificar comando/runtime sin ejecutar payload |
 | App nativa precompilada/builtin | Concepto upstream | Builtin no significa carga de app arbitraria stock | Identificar registro/launcher y build requerida |
 

@@ -1,6 +1,6 @@
 # Retomar el proyecto
 
-Estado activo al 2026-10-03. Resultado actual: [patrón display desde C validado en emulador](native-display-emulator.md).
+Estado activo al 2026-10-03. Resultado actual: [touch desde C y UI stock concurrente validados en emulador](native-touch-emulator.md).
 
 - Nunca se conectó el reloj físico M2315W1. Gate físico cerrado; sin flash, exploits, mods APK ni DOOM/WAD. Hello C propio validado únicamente en el emulador.
 - Guest Xiaomi Watch S3 / NuttX 0.0.0, revisión 9aec7d0ff1; pantalla configurada 390×450. No emulación exacta RW4/BES.
@@ -15,7 +15,9 @@ Estado activo al 2026-10-03. Resultado actual: [patrón display desde C validado
 
 ## Próxima meta
 
-Recibir y mostrar touch desde C sin consumir o bloquear eventos de la UI stock. Hello C y patrón de framebuffer validados en el emulador; FLAT no es sandbox. Ownership/contexto de UI siguen pendientes para un backend interactivo estable. No compilar DOOM todavía.
+Crear una pantalla interactiva propia que se cierre limpiamente en el contexto correcto de UI. Hello C, patrón framebuffer y lector touch independiente validados en el emulador; FLAT no es sandbox. No compilar DOOM todavía: UI ownership, timing monotónico y FS para WAD pendientes.
+
+Touch C: experiments/native-touch/observer.c abrió /dev/input0 read-only/nonblocking sin ioctl/grab; 36 muestras absolutas, tap60,90 y drag145,225. TouchEvents y panel stock respondieron durante la lectura; close=0, rmmod y tap posterior sin reboot. Logs artifacts/emulator/native-touch-1791048828975. Reset previo únicamente para baseline (UI estaba OFF). C imprime logs, no crea widgets. Flags DOWN repetidos en drag sintético: conservar estado. Build/run en tools/build-touch.mjs y run-touch-emulator.mjs; SHA ELF57a649bfcac60d98ed1120197d69ca19a2c26a98ad2c59ffd820eb9b055b8d54.
 
 Display: consultas /dev/fb0 desde C confirman 390×450 RGB565, stride780, virtual390×900, memoria702000. Patrón temporal respalda ambos buffers en RAM, usa FBIOPAN_DISPLAY, restaura/free/close y luego rmmod. Capturas idénticas antes/después; en prueba activa touch cambia label y panel stock abre sin reboot. Última UI: TouchEvents tras cerrar el panel.
 
@@ -36,6 +38,8 @@ node tools/build-hello.mjs
 node tools/run-hello-emulator.mjs bound
 node tools/build-display.mjs pattern
 node tools/run-display-emulator.mjs pattern
+node tools/build-touch.mjs
+node tools/run-touch-emulator.mjs
 ```
 
 Si el emulador está cerrado, el usuario normal puede arrancarlo con tools/emulator-host.mjs start desde su PowerShell y dejarla abierta. No abrir una segunda instancia sobre el mismo disco. Antes de descartar un marker antiguo, comprobar PID/QEMU y salida registrada.

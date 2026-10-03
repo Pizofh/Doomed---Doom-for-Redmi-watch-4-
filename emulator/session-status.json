@@ -35,7 +35,7 @@
     "userVvdRegistrationCopied":  true,
     "physicalDeviceConnected":  false,
     "blockers":  [
-                     "Interactive UI/framebuffer ownership, native touch, timers and WAD filesystem still need characterization",
+                     "Interactive UI ownership/context, monotonic timers and WAD filesystem still need characterization",
                      "RW4 physical execution remains unverified and outside authorized scope"
                  ],
     "luaInteractiveUiVerified":  false,
@@ -52,7 +52,7 @@
     "touchEventsExitBySelectingStockVerified":  true,
     "compilerAutomaticAdbInvoked":  false,
     "touchEventsPressedCoordinatesCaptured":  false,
-    "latestResultsDocument":  "docs/native-display-emulator.md",
+    "latestResultsDocument":  "docs/native-touch-emulator.md",
     "nativeHelloExecuted": true,
     "nativeHelloLoadUnloadCycles": 2,
     "nativeHelloRequiresExactGuestSymbolBinding": true,
@@ -66,5 +66,11 @@
     "nativeFramebufferPatternRamBackupBytes": 702000,
     "armToolchainVersion": "14.3.rel1",
     "armToolchainArchiveSha256": "864c0c8815857d68a1bbba2e5e2782255bb922845c71c97636004a3d74f60986",
-    "nativeDisplayResultsDocument": "docs/native-display-emulator.md"
+    "nativeDisplayResultsDocument": "docs/native-display-emulator.md",
+    "nativeTouchObserverValidated": true,
+    "nativeTouchStockUiConcurrentVerified": true,
+    "nativeTouchSamplesObserved": 36,
+    "nativeTouchDescriptorClosed": true,
+    "nativeTouchModuleUnloaded": true,
+    "nativeTouchOwnUi": false
 }

@@ -85,4 +85,4 @@ La build verifica herramientas/guest, binds, ELF/ISA/entry/relocations y los has
 ELF inquiry: 1.496 bytes, SHA256 `d7e40268059936c285504bbbf84ffe59fdf2562358b0c762745ddad041e39674`.
 ELF patrón: 1.988 bytes, SHA256 `430c67fa9bad0c3be1c069608de88be91d8b0672db66aa5abfd9652969122bcb`.
 
-Siguiente checkpoint: recibir y mostrar eventos touch desde C sin consumir o bloquear los eventos de la UI stock. Resolver el contexto de UI/ownership sigue siendo requisito antes de un backend interactivo estable. Timers monotónicos, filesystem para WAD, launcher y DOOM pendientes. Gate físico cerrado.
+Checkpoint posterior completado: [touch C sin consumir eventos de stock](native-touch-emulator.md). Resolver el contexto de UI/ownership sigue siendo requisito antes de un backend interactivo estable. Timers monotónicos, filesystem para WAD, launcher y DOOM pendientes. Gate físico cerrado.

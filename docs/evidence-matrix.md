@@ -114,6 +114,16 @@ Continuación 2026-10-03: lua-api confirmó disp.load_scr/get_scr_act y Timer en
 | LVGL9/extensión, profundidad16, libuv y LV_USE_OS=0 | Build guest | R46 macros ELF | CONFIRMADO EN EMULADOR | Alta estática | Lectura ELF | No llamar UI desde cualquier task |
 | Captura visible prueba UI activa | Emulador | R46 screen OFF previo con frame conservado | REFUTADO | Alta local | Logs y captura | Verificar estado y gesto antes de pruebas |
 
+## Touch nativo: solo emulador
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Lector C recibe coordenadas absolutas de /dev/input0 | Guest S3 exacto | R48 | CONFIRMADO EN EMULADOR | Alta local | 36 muestras; tap y drag previstos | No prueba RW4 físico |
+| Driver usa circbuf por apertura y broadcast sin grab | Guest S3 exacto | R48 desensamblado, R49 referencia | CONFIRMADO EN EMULADOR | Alta estática/local | C y UI respondieron simultáneamente | No pérdidas/latencia medidas |
+| Descriptor se cierra y módulo se descarga; stock responde después | Guest S3 activo | R48 | CONFIRMADO EN EMULADOR | Alta local | close=0, lsmod vacío, captura posterior | Un ciclo, sin prueba prolongada de fugas |
+| Cada DOWN de la entrada sintética es un nuevo contacto | Camino gRPC/Goldfish | R48 | REFUTADO | Alta local | DOWN repetido durante drag | Adaptador necesita estado previo |
+| C creó una pantalla propia interactiva | Guest S3 | R48 únicamente logs; UI es Lua/stock | SIN EVIDENCIA | No evaluable | No | Contexto de UI/ownership pendientes |
+
 ## Correcciones de interpretación
 
 | Claim | Scope | Evidence | Classification | Tested locally | Notes |
