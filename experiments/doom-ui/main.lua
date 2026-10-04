@@ -13,9 +13,10 @@ local current_mask,contact,last_indev=0,nil,nil
 -- Elapsed wall time here, not portable Lua CPU time. Bounded traces; output only after unload.
 local perf_frames,perf_inputs,perf_timers={},{},{}
 local perf_started,perf_pending=0,nil
+local frame_period,trace_limit=50,256
 local function clock_ticks() return math.floor(os.clock()*10000+0.5) end
 local function perf_report()
-    print("RW4_DOOM_PERF: units=100us submitted="..frames.." frame_samples="..#perf_frames)
+    print("RW4_DOOM_PERF: units=100us submitted="..frames.." frame_samples="..#perf_frames.." period="..frame_period.." trace_limit="..trace_limit)
     for _,r in ipairs(perf_frames) do print("RW4_DOOM_PERF: frame "..table.concat(r,",")) end
     for _,r in ipairs(perf_inputs) do print("RW4_DOOM_PERF: input "..table.concat(r,",")) end
     for _,r in ipairs(perf_timers) do print("RW4_DOOM_PERF: timer "..table.concat(r,",")) end
@@ -122,7 +123,7 @@ local function show_frame()
     local width,height=image:get_img_size();assert(width==320 and height==200)
     local t5=clock_ticks()
     frames=frames+1;last_generation=generation
-    if #perf_frames<128 then perf_frames[#perf_frames+1]={frames,generation,tic,t0-perf_started,t1-t0,t2-t1,t3-t2,t4-t3,t5-t4,t5-t0} end
+    if #perf_frames<trace_limit then perf_frames[#perf_frames+1]={frames,generation,tic,t0-perf_started,t1-t0,t2-t1,t3-t2,t4-t3,t5-t4,t5-t0} end
 end
 local function pause_game(reason)
     clear_contact(true);user_paused=true;resume_requested=false
@@ -206,7 +207,7 @@ function pageOnResume(...)
     system_paused=false -- Keep menu paused until explicit RESUME and a fresh contact.
     if type(old_resume)=="function" then old_resume(...) end
 end
-local timer=lvgl.Timer({period=200,paused=false,cb=function()
+local timer=lvgl.Timer({period=frame_period,paused=false,cb=function()
     if closing or not loaded then return end
     local timer_start=clock_ticks()
     local ok,err=pcall(function()
@@ -230,7 +231,7 @@ local timer=lvgl.Timer({period=200,paused=false,cb=function()
         key_label:set{text=s.ready==1 and ("Ammo: "..s.ammo.."  HP: "..s.health) or "Loading E1M1..."}
         if active and not system_paused and not user_paused and not stopping and s.stop==0 and s.reason==0 then
             show_frame()
-            if #perf_timers<128 then perf_timers[#perf_timers+1]={timer_start-perf_started,state_end-timer_start,clock_ticks()-timer_start} end
+            if #perf_timers<trace_limit then perf_timers[#perf_timers+1]={timer_start-perf_started,state_end-timer_start,clock_ticks()-timer_start} end
         end
     end)
     if not ok then
@@ -250,4 +251,4 @@ if present() then
     end
 end
 navigation(true)
-print("RW4_DOOM_UI: ready period=200 input_capacity=32 profile=R70")
+print("RW4_DOOM_UI: ready period="..frame_period.." input_capacity=32 profile=R71")

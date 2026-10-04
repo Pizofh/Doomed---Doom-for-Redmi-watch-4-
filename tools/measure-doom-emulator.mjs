@@ -1,4 +1,4 @@
-// R70: bounded Lua pipeline traces + read-only screenshot sampling. Exact PC guest only.
+// R70/R71: bounded Lua pipeline traces + read-only screenshot sampling. Exact PC guest only.
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -69,17 +69,25 @@ try{
   for(let i=0;i<20;i++){await delay(100);const v=s.state();if(v?.ready&&v.produced>2){first=v;break;}}
   if(!first)throw Error('Engine not ready');sample('ready');
   await screenshots('idle',1200);await turn('right',185,4);await turn('left',70,2);
-  const last=sample('before-exit');await gesture(310,405,310,405);await gesture(195,390,195,390);
+  const last=sample('before-pause');await gesture(310,405,310,405);
+  let pauseA;
+  for(let i=0;i<15;i++){pauseA=sample('menu-pause');if(pauseA.paused&&pauseA.ack===pauseA.epoch&&!pauseA.applied&&!pauseA.delivered_keys)break;await delay(30);}
+  if(!pauseA.paused||pauseA.ack!==pauseA.epoch||pauseA.applied||pauseA.delivered_keys)throw Error('Pause not neutral');
+  await delay(400);const pauseB=sample('menu-frozen');
+  if(['tic','x','y','angle','ammo','drawn','produced'].some(k=>pauseA[k]!==pauseB[k]))throw Error('Engine advanced in menu');
+  await gesture(195,390,195,390);
   let absent=false;for(let i=0;i<20;i++){if(s.state()===null){absent=true;break;}await delay(100);}
   if(!absent||s.adb(['shell','lsmod'],'final-modules').includes('rw4doom')||new RegExp('^\\s*'+first.tid+'\\s','m').test(s.adb(['shell','ps'],'final-ps')))throw Error('UI did not retire module/worker');
   const log=logs(),rows=kind=>[...log.matchAll(new RegExp('RW4_DOOM_PERF: '+kind+' ([\\d,]+)','g'))].map(m=>m[1].split(',').map(Number));
   const frames=rows('frame'),inputs=rows('input'),timers=rows('timer');
+  const profile=log.match(/RW4_DOOM_PERF: units=100us submitted=(\d+) frame_samples=(\d+) period=(\d+) trace_limit=(\d+)/);
+  if(!profile||![50,200].includes(Number(profile[3]))||Number(profile[4])!==256||Number(profile[1])!==frames.length||Number(profile[2])!==frames.length)throw Error('Profile truncated or period unreviewed');
   if(frames.length<20||frames.some(r=>r.length!==10||r.some(v=>!Number.isSafeInteger(v)||v<0))||inputs.length<4||inputs.some(r=>r.length!==6)||timers.length<20)throw Error('Incomplete bounded profile');
   if(!log.includes('finished tid='+first.tid+' result=1 peak=6582961 alloc=13 free=13 streams=0 cleanup=0'))throw Error('Cleanup differs');
   const metric=col=>stats(frames.map(r=>r[col]/10));
   const gaps=frames.slice(1).map((r,i)=>(r[3]-frames[i][3])/10);
   const result={passed:true,folder:s.folder,worker:first.tid,physicalTransport:false,rebootForExit:false,hostUnload:false,
-    frames,inputs,timers,windows,traceLimit:128,units:'100us exact guest wall clock',
+    frames,inputs,timers,windows,traceLimit:256,timerPeriodMs:Number(profile[3]),pauseFrozen:true,units:'100us exact guest wall clock',
     pipelineMs:{read:metric(4),decode:metric(5),cacheCommand:metric(6),writeTmpfs:metric(7),setSourceAndSize:metric(8),total:metric(9)},
     submissionGapMs:stats(gaps),submissionRate:(frames.length-1)*10000/(frames.at(-1)[3]-frames[0][3]),
     timerCallbackMs:stats(timers.map(r=>r[2]/10)),inputHandlerMs:stats(inputs.map(r=>r[2]/10)),
