@@ -14,3 +14,5 @@
 Una firma del commit README no autentica el archivo ZIP de una release. Un hash calculado localmente identifica un archivo pero, sin valor de referencia independiente, no demuestra su autenticidad o seguridad.
 
 `openvela-emulator-binaries.lock.json` fija metadata de 94 EXE/DLL del repositorio oficial OpenVela. Todos coincidieron con la extracción local v1.0; no se incorporan sus bytes. Ver [revisión del paquete](../docs/emulator-package-review.md).
+
+R64: snapshot parcial doomgeneric181archivos/1.561.118bytes materializado mediante GitHub connector, cada Gitblob del commit fijado coincide y LICENSE conservada. No es checkout .git. Fuentes permanecen intactas e ignoradas; lock publicable en doom/doomgeneric-source.lock.json. Motor compilado solo para inventario de imports/memoria, sin runtime. Build acepta también un checkout normal que coincida con ese lock. Ver docs/doom-build-audit.md.

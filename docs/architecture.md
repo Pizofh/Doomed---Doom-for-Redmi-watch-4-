@@ -54,3 +54,5 @@ Almacenar un archivo no requiere mantenerlo residente. Tampoco convierte la carg
 ## Gate de integración
 
 Antes de doomgeneric: ejecución mínima comprendida, display, timers, touch, FS y cierre limpios demostrados en emulador. Antes de C: ISA/ABI/config/exports/privilegios conocidos. Antes de RW4: evidencia M2315W1 y revisión del [plan físico](physical-device-plan.md). No se justifica escalación de privilegios mientras no exista una restricción concreta.
+
+R64: [motor real compilado para inspección](doom-build-audit.md). Interponer shim libc con FILE opaco, recursos contabilizados, writes bloqueados y salida cooperativa. I_Quit de upstream no sale con ORIGCODEoff; no enlazar exit/system de escritorio. UI/worker/slotownershipR62 permanece base, ninguna ruta de motor se ejecutó todavía. Recarga de módulo limpio por sesión; persistencia de archivos separada de RAM.

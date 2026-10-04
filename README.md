@@ -2,7 +2,7 @@
 
 Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4, modelo objetivo **M2315W1**, preservando el firmware Xiaomi y las funciones normales del reloj si resulta técnicamente viable.
 
-**Estado al 2026-10-04:** TouchEvents original validado en el emulador Xiaomi Watch S3 a 390×450, con cierre y reentrada sin reinstalar. Un hello C propio imprimió su mensaje y se descargó mediante rmmod en dos ciclos; enlaza puts desde la imagen exacta del emulador. [Prueba nativa y limitaciones](docs/hello-native-emulator.md), [prueba Lua](docs/touch-events-emulator.md). No se compiló DOOM ni se conectó el reloj físico. Estado para continuar en [HANDOFF](docs/HANDOFF.md).
+**Estado al 2026-10-04:** TouchEvents original validado en el emulador Xiaomi Watch S3 a 390×450, con cierre y reentrada sin reinstalar. Un hello C propio imprimió su mensaje y se descargó mediante rmmod en dos ciclos; enlaza puts desde la imagen exacta del emulador. [Prueba nativa y limitaciones](docs/hello-native-emulator.md), [prueba Lua](docs/touch-events-emulator.md). El motor ahora compila para inspección; no se ejecutó Doom ni se conectó el reloj físico. Estado para continuar en [HANDOFF](docs/HANDOFF.md).
 
 **Display C:** patrón RGB565 mostrado y retirado; píxeles originales, touch y panel stock comprobados después sin reboot en una prueba con pantalla activa. Framebuffer compartido, no ownership exclusivo. [Captura y reproducción](docs/native-display-emulator.md).
 
@@ -92,3 +92,5 @@ DOOM original, WAD shareware verificado, temporización y touch funcionales, sal
 ## Distribución
 
 No se incluyen WADs, firmware, APKs, emuladores ni compiladores binarios. La licencia del motor y los derechos de los datos del juego son asuntos separados. La mención de shareware en doomgeneric no basta para redistribuir `doom1.wad`: hay que revisar la licencia del paquete original completo. Las fuentes comunitarias sin licencia explícita se referencian, no se incorporan como código propio. Este repositorio aún no establece una licencia para sus aportes originales; decidirla antes de publicarlo.
+
+**Motor real, R64:**80 archivos C originales de doomgeneric compilan para ARM, sin sonido/X11. Objeto parcial para inspección con50imports pendientes; no se ejecutó Doom ni reinició el emulador. [Dependencias, memoria y salida](docs/doom-build-audit.md).

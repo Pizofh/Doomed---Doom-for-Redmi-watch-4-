@@ -118,3 +118,7 @@ Las páginas web son referencias móviles consultadas en esta fecha. Los links a
 ## R63,2026-10-04: WAD shareware
 
 [Procedencia/licencia y lectura C](native-wad-emulator.md) pasan. Debian PSNC tar contiene solo doom1.wad,4196020bytes; identity hashes Debian coinciden. C verifica directory1264,16recursos/E1M1 y8196chunks; readback intacto. Runtime native-wad-1791133863026; unload/cleanup sin reboot. Host27casos negativos con datos propios pasan. Enlace Debian principal devolvió404 al usuario; reemplazo mirror funciona. Sin motor ni hardware. Siguiente auditoría libc/allocator/salida antes de engine build.
+
+## R64,2026-10-04: compileaudit del motor
+
+[Build real80C e inventario](doom-build-audit.md), fuentes originales181Gitblobs verificados/licencia preservada. Partial link425928bytes/50imports; no guest execution. No se repitieron R58/R62/R63 ni hubo resets. Newlibheaders noABIvalidada; zone6MiB, framebuffer256000 y static525351 antespadding/extras. Salida/allocations/streams/writes requieren shim. Primer inspectorENOBUFS traslink corregido; resultado final y read-onlyinspect pasan. Siguiente contrato runtime pequeño/shim, hardwarecerrado.

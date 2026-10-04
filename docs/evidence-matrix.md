@@ -275,3 +275,7 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 
 | doom1.wad shareware 1.9 distribuible bajo condiciones id | Datos PC | [Copyright Debian con aclaración Carmack](https://metadata.ftp-master.debian.org/changelogs/non-free/d/doom-wad-shareware/doom-wad-shareware_1.9.fixed-5_copyright) | Evidencia documental; no clasificación de dispositivo | Alta documental | Archivo local4196020, MD5/SHA1 contrastados | No GPL/assets comerciales; sin WAD en Git ni firma verificada |
 | C lee WAD completo/1264entries/16resources | S3 emulado exacto | [R63](native-wad-emulator.md), native-wad-1791133863026 | CONFIRMADO EN EMULADOR | Alta local | Checksums PC iguales, EOF,close,unload/cleanup | No motor, lectura worker, persistencia ni RW4 |
+
+|80C originales doomgeneric compilan para ARM | Host/toolchain14.3, target compileaudit S3 | [R64](doom-build-audit.md), build/doom-audit/result.json | Confirmado build local; sin runtime | Alta local | Objeto425928bytes/50imports sinresolver | No engine ejecutado ni compatibilidad RW4 |
+|6MiBzone y256000DGbuffer a320x200 | Fuentes doomgeneric fijadas | i_system.c, doomgeneric.c R64 | Confirmado en fuente; no RAM medida | Alta documental |525351bytes estáticos antespadding | No presupuesto de RAM libre M2315W1 |
+| I_Quit upstream retorna/exitfatal y posibleswrites requieren port | Doomgeneric original, ORIGCODEoff | R64 i_system/m_config/g_game | Confirmado por inspección fuente | Alta local | Sin ejecutar esas rutas | No detener worker medianteexit directo |
