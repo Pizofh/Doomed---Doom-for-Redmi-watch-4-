@@ -63,6 +63,7 @@ Helpers verifican QEMU/ADB/imagen/payload y usan exclusivamente loopback5039/emu
 - [Persistencia R73](docs/doom-persistence-emulator.md)
 - [Modelo de riesgo](docs/risk-model.md)
 - [Gate físico cerrado](docs/physical-device-plan.md)
+- [Plan DevOps y distribucion reproducible](docs/devops-roadmap.md)
 
 ## Objetivo eventual y distribución
 
@@ -72,4 +73,4 @@ No se incluyen WADs, firmware, APKs, emuladores ni toolchains binarias. [Licenci
 
 ## Repositorio Git local
 
-El repo de trabajo es `redmi-watch4-doom/`, con su propio `.git`, rama master e historial incremental. La carpeta padre `Doomed/` contiene otro repo con First commit y una entrada gitlink al proyecto; no es su historial de trabajo. Abrir esta carpeta directamente en VS Code o usar `git -C redmi-watch4-doom log --oneline -5` desde Doomed. Ninguno tiene remoto configurado; los commits son locales, no publicados. No se reorganizaron los dos repositorios.
+El repo de trabajo es `redmi-watch4-doom/`, con su propio `.git`, rama master e historial incremental. La carpeta padre `Doomed/` contiene otro repo con First commit y una entrada gitlink al proyecto; no es su historial de trabajo. Abrir esta carpeta directamente en VS Code o usar `git -C redmi-watch4-doom log --oneline -5` desde Doomed. Ninguno tiene remoto configurado; los commits son locales, no publicados. El usuario solicito eliminar solo el repo padre el 2026-10-04; el intento fue rechazado por la politica del entorno, que protege Doomed/.git contra escritura. Eliminacion manual pendiente; el repo hijo sigue intacto.

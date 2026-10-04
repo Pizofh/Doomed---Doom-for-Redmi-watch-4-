@@ -4,13 +4,15 @@
 
 ## Estado vigente y siguiente paso
 
+Direccion DevOps solicitada: [plan](devops-roadmap.md), doctor/build/test/package, perfiles compatibles, CI ligera y runner emulador controlado; no hay workflow implementado/publicado aun. Mantener como prioridad investigacion stock M2315W1.
+
 - Final: Storage365700764 activa; UIProbe365799903 instalada perfil R73 persistente, inactiva. Workers/modulo/nodos/copias/tmp ELF/WAD ausentes. Assets /data conservados; no reinstalar, stage ni cleanup historicos.
 - Next checkpoint unico: investigar con fuentes primarias el camino stock especifico M2315W1 para instalar launcher/ejecutar codigo suficiente. No ELF/direcciones S3 en hardware; ABI/privilegios/RAM/recovery fisicos pendientes y gate cerrado. Nada de firmware/USB/exploit/root ni nuevas acciones fisicas autorizadas.
 - No repetir suites R67-R72/80fuentesC. Persistencia no elimina limites120s/E1M1, ni prueba horas/crash/kill/corrupcion FAT/GC durante copia. Nuevos tests solo por cambios/fallos relevantes.
 
 ## Git y estado reproducible
 
-Repo real: C:/Users/steve/Documents/Devs/Doomed/redmi-watch4-doom, master, commits locales, sin remoto. Doomed padre es otro repo, First commit y gitlink e76134d al hijo; no reorganizar sin necesidad. Abrir carpeta hija en VS Code. Git safe.directory NO cambia cwd: usar workdir de la carpeta hija o git -C. No se publico nada en GitHub.
+Repo real: C:/Users/steve/Documents/Devs/Doomed/redmi-watch4-doom, master, commits locales, sin remoto. El usuario solicito quitar Doomed/.git y conservar solo este repo. El intento fue rechazado por la politica de escritura del entorno; eliminacion manual pendiente. El padre todavia tiene First commit y gitlink e76134d; el hijo es standalone, sin alternates detectados. Abrir carpeta hija en VS Code. Git safe.directory NO cambia cwd: usar workdir de la carpeta hija o git -C. No se publico nada en GitHub.
 
 Persistentes: /data/app/watchface/market/365799903/doom/doom.elf (446144bytes), doom1.wad (4196020bytes). Archivo en flash/FS no es residencia RAM. C FLAT no sandbox. Launcher prepara WAD temporal 32768bytes por Timer50ms (~8,3s), verifica size/FNV1a32 (no autenticacion), carga ELF de /data. Host SHA256 readback; EXIT espera C/unload/cache y elimina tmp, conserva /data.
 
