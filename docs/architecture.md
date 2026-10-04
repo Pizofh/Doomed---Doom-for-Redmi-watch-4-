@@ -17,7 +17,7 @@ La línea discontinua marca una dependencia no validada del objetivo físico: to
 
 ## Adaptador futuro
 
-Checkpoint actual R61: [worker C produce frames y UI los presenta](native-worker-frame-emulator.md). Dos buffers C con publicación atómica y descriptor lector exclusivo; Lua copia/cierra, alterna dos archivos tmpfs y actualiza Image desde su tarea UI. No punteros del módulo retenidos por LVGL. Worker separado de callbacks; pausa, stop, ausencia de PID y lectores antes de unload. Cierre Lua conserva código/copies hasta reentrada y limpieza de cache desde UI. Sigue pendiente conectar controles al consumidor worker y después integrar el motor real.
+Checkpoint actual R62: [UI produce máscaras y worker las consume](native-worker-input-emulator.md), mientras presenta frames por [el camino R61](native-worker-frame-emulator.md). Ring SPSC32/epochs; releases antes de presses en C, ack neutral antes de resume. No hay aún DG_GetKey ni engine: se validaron transporte y lifecycle. Dos buffers C inmutables para el lector, copias tmpfs y Image desde UI; ningún puntero de módulo retenido por LVGL. STOP con FIRE mantenido y cierre/reentrada limpian, sin join/sleep UI. Siguiente: WAD legítimo/read validation y después adaptación del motor. ABI/privilegios del objetivo físico siguen pendientes.
 
 Checkpoint previo completado: hello C por insmod/rmmod en el emulador, enlazado a su imagen exacta [resultado](hello-native-emulator.md). No construye aún los puentes de display/input/tiempo/FS del diagrama ni determina la ABI física RW4.
 

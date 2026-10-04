@@ -11,11 +11,11 @@ La [inspección estática del ELF guest](emulator-package-review.md) identifica 
 | Camino | Evidencia actual | Bloqueo | Experimento posterior en PC |
 |---|---|---|---|
 | QuickApp / JS / RPK | API oficial Vela; debug físico documentado S4 | Soporte RW4 y bridge C/WASM no demostrados | App JS mínima, consulta de capacidades; no la llamar C |
-| Lua / watchface | Launcher C y frames desde worker R61; controles R55 por separado, cleanup probado | Input consumido por worker, WAD, crash, persistencia C y RW4 pendientes | Controles mantenidos hacia worker con cancelación al pausar/cerrar |
+| Lua / watchface | Launcher, frames y controles consumidos por worker R62; cleanup probado | WAD, engine, crash, persistencia C y RW4 pendientes | Procedencia/licencia y lectura WAD desde C |
 | Lua → shell | os.execute(uname/insmod/rmmod) desde watchface devuelve true/exit/0 | RW4 físico sin probar | No ampliar a comandos arbitrarios |
 | Lua loadlib | Stub deshabilitado, respuesta nil/absent | No permite importar biblioteca C en este guest | Puente io→dispositivo virtual ya probado |
 | ELF / exec | `CONFIG_ELF`, `CONFIG_LIBC_EXECFUNCS`, `execv`/`posix_spawn` en emulador | Exports, contrato loader/entrypoint y lifecycle pendientes | Inventario read-only, luego hello C si hay contrato válido |
-| Módulo / `insmod` | Hello, display, touch, puente, tiempo, FS/stdio, launcher y frames de worker probados | Sin sandbox; input del worker, WAD, engine y RW4 sin probar | Integrar controles al consumidor worker, sin motor todavía |
+| Módulo / `insmod` | Hello, display, touch, puente, tiempo, FS/stdio, launcher y worker display/input probados | Sin sandbox; WAD, engine y RW4 sin probar | Validar WAD legítimo antes del motor |
 | Touch C / driver | [Observador nativo validado](native-touch-emulator.md), colas por lector; stock concurrente | Scheduling engine y compatibilidad RW4 pendientes | UI con controles mantenidos ya probada vía Lua→C |
 | WASM / `iwasm` | `iwasm_main` y macros WAMR en emulador | Imports, memoria/UI/lifecycle y RW4 desconocidos | Identificar comando/runtime sin ejecutar payload |
 | App nativa precompilada/builtin | Concepto upstream | Builtin no significa carga de app arbitraria stock | Identificar registro/launcher y build requerida |

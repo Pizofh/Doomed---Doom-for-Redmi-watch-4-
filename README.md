@@ -24,7 +24,7 @@ Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4
 
 **Stdio del lector WAD:** fopen/fread/fseek/ftell/fclose pasaron con el fixture propio, incluidos buffers, longitud y tres reaperturas. En este guest, seek no limpia EOF; clearerr sí. [Resultado y límite concreto](docs/native-stdio-emulator.md).
 
-**Worker C:** [tres ciclos desde NSH](docs/native-task-emulator.md) y [START/EXIT desde launcher](docs/native-launcher-emulator.md) validados. Ahora [produce frames visibles en LVGL](docs/native-worker-frame-emulator.md), con dos buffers de ownership atómico:12 capturas completas, dos lectores, pausa con panel, dos EXIT y cierre/reentrada pasan. Estado R61 al2026-10-04: Storage activa, módulo y temporales propios retirados sin reboot para salir. Todavía no se cargó WAD ni se compiló Doom; gate físico cerrado. Siguiente checkpoint: controles mantenidos hacia ese worker, liberados al pausar/cerrar.
+**Worker C:** [START/EXIT](docs/native-launcher-emulator.md), [frames en LVGL](docs/native-worker-frame-emulator.md) y ahora [controles consumidos por el worker](docs/native-worker-input-emulator.md) validados. R62:38 observaciones,22 key edges reales desde C, cuatro imágenes completas, pausa/overflow neutros, STOP con FIRE pulsado y cierre/reentrada sin reboot. Storage activa; módulo y temporales propios retirados. Todavía no se cargó WAD ni se compiló Doom; gate físico cerrado. Siguiente checkpoint: verificar procedencia/licencia de doom1.wad y comprobar su lectura desde C.
 
 - Crear documentación, matriz de evidencia y herramientas de inspección para PC.
 - Identificar dependencias originales y fijar revisiones consultadas.

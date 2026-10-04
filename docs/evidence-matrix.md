@@ -257,5 +257,18 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Metadatos sequence/cycle se leen sin carrera de datos UI/NSH | Contrato propio R61 final | atomic_uint/disassembly y regresión | CONFIRMADO EN EMULADOR | Alta estática/local | Mismos10 imports, barreras,12 capturas finales | No implica snapshot transaccional ni stress general |
 | BSS del payload ocupa179312bytes | ELF propio R61 | readelf/build fijado | CONFIRMADO EN EMULADOR | Alta estática | Dos buffers89612 más estado | No RAM total/pico ni budget RW4 |
 | Update repara derivado y refresh puede evitar reset | Installer/guest S3 | R61 backup/readback/result | CONFIRMADO EN EMULADOR | Alta local | Modo wframe propio inactivo, módulos ausentes | Rama nueva R60 ya ejercitada en R61; no actualización de stock |
-| Worker consume controles mantenidos de R55 | Guest S3 / RW4 | R61 solo frames | SIN EVIDENCIA | No evaluable | No | Siguiente checkpoint |
+| Worker consume controles mantenidos de R55 | Guest S3 exacto (R62) | R62 runtime/source | CONFIRMADO EN EMULADOR | Alta local |38 observaciones/22 edges | R61 probaba frames; RW4 físico sigue SIN EVIDENCIA |
 | Frames/worker/native launcher funcionan en RW4 | M2315W1 físico | Ninguna ABI/runtime/recovery específicos | SIN EVIDENCIA | No evaluable | No | No extrapolar del emulador |
+## Input de worker R62: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Hilo C consume controles mientras produce imágenes | Guest S3 exacto | R62 snapshots/log gettid/frame | CONFIRMADO EN EMULADOR | Alta local | Workers439/791,22 key edges,4 imágenes completas | No Doom/DG_GetKey ni RW4 |
+| Mantener no repite presses; release/slide cambian acciones | UI/contrato propio | R62 changes/consumed/key_events | CONFIRMADO EN EMULADOR | Alta local | changes1/keys1 mientras steps50→90 | Un dedo; movimiento+FIRE UI pendiente |
+| Ring32 saturado cancela y no restaura acciones antiguas | Contrato propio SPSC/guest | R62 finite UI burst/epochs | CONFIRMADO EN EMULADOR | Alta para ensayo |32 aceptadas, overflow1, requested/applied/queued0 | No stress/SMP ni productor múltiple |
+| Pausa confirma neutral antes de resume | UI/worker S3 | R62 HOLD TEST y panel | CONFIRMADO EN EMULADOR | Alta local | Ratón down, epoch/ack3; panel epoch/ack4 | Foco real stock con dedo apoyado no probado |
+| Panel puede abrir desde margen libre inferior | Prototipo S3 | R62 capture y counters | CONFIRMADO EN EMULADOR | Alta local | y440, steps373/produced115 estables | y410 cae dentro de MOVE/PRESS_LOCK y no abrió panel |
+| STOP con FIRE aún pulsado libera tecla y retira C | Módulo propio/S3 | R62 held-stop/final markers | CONFIRMADO EN EMULADOR | Alta local | Worker885 down1→down0, uninit neutral | Stop cooperativo NSH, cache/unload desde UI; no kill |
+| Cierre Lua y reentrada conservan/recogen código e imágenes | Watchface propia/S3 | R62 close/reentry/final | CONFIRMADO EN EMULADOR | Alta local | Worker968 retirado antes de unload | No crash cleanup ni código persistente |
+| BSS179620bytes/imports10/79 ABS32 | ELF propio R62 | Build/readelf exactos | CONFIRMADO EN EMULADOR | Alta estática | Entry0xf1d y payload8436bytes revisados | No RAM total/pico física |
+| Native input/display funciona en M2315W1 | RW4 físico | Ninguna ABI/runtime/recovery específica | SIN EVIDENCIA | No evaluable | No | Gate físico cerrado |
