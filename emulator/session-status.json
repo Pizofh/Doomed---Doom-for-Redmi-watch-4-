@@ -35,7 +35,7 @@
   "userVvdRegistrationCopied": true,
   "physicalDeviceConnected": false,
   "blockers": [
-    "Long-duration performance/memory and actual presentation/input latency remain unmeasured",
+    "Long-duration performance/memory, exact display completion and touch-to-photon latency remain unmeasured; R70 short pipeline/screenshot/input bounds are measured",
     "Cleanup on native crash or forced termination remains unverified",
     "RW4 physical ABI, memory, recovery and native execution remain unverified and outside authorized scope"
   ],
@@ -53,7 +53,7 @@
   "touchEventsExitBySelectingStockVerified": true,
   "compilerAutomaticAdbInvoked": false,
   "touchEventsPressedCoordinatesCaptured": false,
-  "latestResultsDocument": "docs/doom-close-emulator.md",
+  "latestResultsDocument": "docs/doom-performance-emulator.md",
   "nativeHelloExecuted": true,
   "nativeHelloLoadUnloadCycles": 2,
   "nativeHelloRequiresExactGuestSymbolBinding": true,
@@ -144,7 +144,7 @@
   "nativeInputMovementAndFireTogetherFromUiValidated": false,
   "currentWatchfaceId": "365700764",
   "ownUiPackageMode": "doom",
-  "nextCheckpoint": "Measure actual presented frames, copy cost and input latency in the emulator before optimizing fluidity",
+  "nextCheckpoint": "Change Lua Timer from 200 to 50 ms and compare the same bounded presentation/input measurement with pause and clean EXIT; emulator only",
   "nativeMonotonicClockValidated": true,
   "nativeTimeTimespecBytes": 16,
   "nativeTimeSecondsBits": 64,
@@ -423,5 +423,26 @@
   "doomCloseBaselineArtifact": "artifacts/emulator/doom-close-baseline-1791147587283",
   "doomCloseCleanupArtifact": "artifacts/emulator/doom-ui-cleanup-1791148267953",
   "doomCloseFinalArtifact": "artifacts/emulator/doom-close-final-1791148293324",
-  "doomCloseImplementationCommit": "bcc1829"
+  "doomCloseImplementationCommit": "bcc1829",
+  "doomPerformanceMeasured": true,
+  "doomPerformanceArtifact": "artifacts/emulator/doom-perf-1791152085442",
+  "doomPerformanceFrames": 33,
+  "doomPerformanceScreenshots": 75,
+  "doomPerformanceWorkerTid": 88,
+  "doomPerformancePipelineMeanMs": 1.4818181818181817,
+  "doomPerformanceSubmissionGapMeanMs": 205.30312500000002,
+  "doomPerformanceSubmissionRate": 4.870846461786687,
+  "doomPerformanceObservedTurnChangesPerSecond": [
+    5.075123243024054,
+    4.5657782541519145
+  ],
+  "doomPerformanceIsExactDisplayFps": false,
+  "doomPerformanceIsExactInputLatency": false,
+  "doomPerformanceTimerPeriodMs": 200,
+  "doomPerformanceOptimizationApplied": false,
+  "doomPerformanceBaselineArtifact": "artifacts/emulator/doom-perf-baseline-1791151868826",
+  "doomPerformanceCleanupArtifact": "artifacts/emulator/doom-ui-cleanup-1791152232386",
+  "doomPerformanceFinalArtifact": "artifacts/emulator/doom-perf-final-1791152271086",
+  "doomPerformanceLuaSha256": "34e6a38154f130e537f1b02150a5cb8078448a3ff9960d39467cdaddfa256f6c",
+  "doomPerformanceImplementationCommit": "a69b143"
 }

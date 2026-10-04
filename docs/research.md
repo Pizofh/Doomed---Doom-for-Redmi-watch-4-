@@ -1,6 +1,8 @@
 # Investigación inicial
 
-**R69, 2026-10-04:** [Cierre sin EXIT y reentrada](doom-close-emulator.md) pasan con Doom original. Seleccionar Storage detiene el worker104 y libera13 reservas/streams; conserva modulo/copias hasta reentrada UI, que recoge todo. Sin reboot para salir ni unload host. C/Lua/ELF R67 intactos; solo emulador S3, gate M2315W1 cerrado. Siguiente: medir frames presentados, costo de copia y latencia antes de optimizar.
+**R70, 2026-10-04:** [Presentacion y controles medidos](doom-performance-emulator.md). Pipeline Lua/LVGL media1,48ms, intervalos205,30ms/4,87entregas/s; giros con4,57-5,08cambios visibles/s observados. C/ELF R67 intactos, instrumentacion Lua acotada; salida limpia. Siguiente: Timer200 a50ms y comparar, sin prometer20FPS. Solo emulador S3, gate M2315W1 cerrado.
+
+**Historial R69, 2026-10-04:** [Cierre sin EXIT y reentrada](doom-close-emulator.md) pasan con Doom original. Seleccionar Storage detiene el worker104 y libera13 reservas/streams; conserva modulo/copias hasta reentrada UI, que recoge todo. Sin reboot para salir ni unload host. C/Lua/ELF R67 intactos; solo emulador S3, gate M2315W1 cerrado. Siguiente: medir frames presentados, costo de copia y latencia antes de optimizar.
 
 Resultado historico **R68:** [foco stock y STOP mantenido](doom-focus-emulator.md). Doom se congela en panel, espera RESUME y retira worker/módulo con FIRE down; mismo binario/Lua R67, sin compilación nueva. Nueve muestras/siete capturas, worker104/13alloc-free/streams0, sin reboot para salir. Un reset de baseline por screen OFF antes de C. Sin pérdida de foco con acción mantenida ni cierre sin EXIT del motor probado. Siguiente: cambio de watchface mientras corre Doom/recolección al reentrar. Gate físico cerrado.
 

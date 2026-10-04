@@ -1,12 +1,24 @@
 # Retomar el proyecto
 
-**R69, 2026-10-04:** [Cierre sin EXIT y reentrada](doom-close-emulator.md) pasan con Doom original. Seleccionar Storage detiene el worker104 y libera13 reservas/streams; conserva modulo/copias hasta reentrada UI, que recoge todo. Sin reboot para salir ni unload host. C/Lua/ELF R67 intactos; solo emulador S3, gate M2315W1 cerrado. Siguiente: medir frames presentados, costo de copia y latencia antes de optimizar.
+**R70, 2026-10-04:** [Presentacion y controles medidos](doom-performance-emulator.md). Pipeline Lua/LVGL media1,48ms, intervalos205,30ms/4,87entregas/s; giros con4,57-5,08cambios visibles/s observados. C/ELF R67 intactos, instrumentacion Lua acotada; salida limpia. Siguiente: Timer200 a50ms y comparar, sin prometer20FPS. Solo emulador S3, gate M2315W1 cerrado.
+
+Implementacion **a69b143**. Resultado `doom-perf-1791152085442`, passed=true:33frames/39callbacks perfilados,75capturas, worker88. Pipeline p951,70ms/max2,90; Timer callback media1,89ms/max3,80. Motor222tics/6343ms (~35/s),444DG callbacks distintos de FPS. Handler input0,30-0,60ms, confirmacion UI29,70-151,30ms incluye espera al Timer; host angle/key observado<=46,91/116,14ms incluye RPC/ADB/polling. No latency exacta/fotones, ni flush completion.
+
+Lua instrumentada SHA34e6a38154f130e537f1b02150a5cb8078448a3ff9960d39467cdaddfa256f6c; paquete21472bytes SHAf5b00512904ce4d4a4eba5f7d7618230b1f4d16844e4438a6e5755520c8f3e31. C/ELF R67 intactos. Clock revisado en `doom-perf-clock-review-1791151751886`: os.clock lee ticks guest/10000, no CPU time portable; no asumir RW4.
+
+Baseline screen OFF: backup/reset antes de stage/C `doom-perf-baseline-1791151868826`, nunca para salir. Refresh readback sin reset, sin nuevas herramientas/compilacion C. Cleanup `doom-ui-cleanup-1791152232386`; final read-only `doom-perf-final-1791152271086`, passed=true. Storage365700764 activa, UIProbe365799903 modo doom con perfil R70; worker88/modulo/nodos/copias/ELF/WAD tmp ausentes.
+
+**Siguiente checkpoint unico:** Timer200 a50ms, aumentar buffers de traza si hace falta y ejecutar `tools/measure-doom-emulator.mjs` para comparar tasas/costos/input, con pausa/EXIT dentro del ensayo. No repetir suite R67/R68/R69 ni fuentes80C por este cambio Lua salvo fallo. La medicion corta no sustituye estabilidad/memoria/crash/persistencia ni gate fisico.
+
+Todo lo siguiente es historial R69 y anteriores; tomar R70 como estado operativo actual.
+
+**Historial R69, 2026-10-04:** [Cierre sin EXIT y reentrada](doom-close-emulator.md) pasan con Doom original. Seleccionar Storage detiene el worker104 y libera13 reservas/streams; conserva modulo/copias hasta reentrada UI, que recoge todo. Sin reboot para salir ni unload host. C/Lua/ELF R67 intactos; solo emulador S3, gate M2315W1 cerrado. Siguiente: medir frames presentados, costo de copia y latencia antes de optimizar.
 
 Implementacion R69 guardada en **bcc1829**. Resultado completo: `artifacts/emulator/doom-close-reentry-1791147966833/result.json`; cierre `doom-close-closed-1791147862451`; cleanup `doom-ui-cleanup-1791148267953`; final read-only `doom-close-final-1791148293324`, passed=true. Storage365700764 activa, UIProbe365799903 modo doom almacenada; PID104/modulo/nodos/copias/ELF/WAD tmp ausentes. Baseline screen OFF requirio un reset limpio antes de stage/C (`doom-close-baseline-1791147587283`), nunca para salir. 13alloc/free, streams0, cleanup0, pico6582961; global Umem used+240080/maxused+8148368, GImageCache used+992, causa no aislada.
 
 Helper `tools/test-doom-close-emulator.mjs start|closed|reentry`; navegacion manual inspeccionada entre fases, exactamente un START/ningun EXIT. Pins R67 debajo intactos, sin nuevas compilaciones/instalaciones. Crash/kill y sesiones largas siguen sin garantia. No repetir R58/R62/R63/R65/R66/R67/R68/R69 salvo cambio o fallo.
 
-Todo lo siguiente es historial R68 y anteriores; tomar R69 como estado operativo actual.
+Todo lo siguiente es historial R68 y anteriores; consultar R70 al inicio para el estado operativo actual.
 
 Implementación R68 guardada en **ae255fa**. Final read-only `doom-focus-final-1791145679942` confirma Storage activa y worker/módulo/nodos/tmp ausentes.
 

@@ -1,6 +1,8 @@
 # Matriz de evidencia
 
-**R69, 2026-10-04:** [Cierre sin EXIT y reentrada](doom-close-emulator.md) pasan con Doom original. Seleccionar Storage detiene el worker104 y libera13 reservas/streams; conserva modulo/copias hasta reentrada UI, que recoge todo. Sin reboot para salir ni unload host. C/Lua/ELF R67 intactos; solo emulador S3, gate M2315W1 cerrado. Siguiente: medir frames presentados, costo de copia y latencia antes de optimizar.
+**R70, 2026-10-04:** [Presentacion y controles medidos](doom-performance-emulator.md). Pipeline Lua/LVGL media1,48ms, intervalos205,30ms/4,87entregas/s; giros con4,57-5,08cambios visibles/s observados. C/ELF R67 intactos, instrumentacion Lua acotada; salida limpia. Siguiente: Timer200 a50ms y comparar, sin prometer20FPS. Solo emulador S3, gate M2315W1 cerrado.
+
+**Historial R69, 2026-10-04:** [Cierre sin EXIT y reentrada](doom-close-emulator.md) pasan con Doom original. Seleccionar Storage detiene el worker104 y libera13 reservas/streams; conserva modulo/copias hasta reentrada UI, que recoge todo. Sin reboot para salir ni unload host. C/Lua/ELF R67 intactos; solo emulador S3, gate M2315W1 cerrado. Siguiente: medir frames presentados, costo de copia y latencia antes de optimizar.
 
 **Historial R68:** [Panel stock y STOP con FIRE mantenido](doom-focus-emulator.md) comprobados con Doom original. R67 y anteriores son historial; gate físico cerrado.
 
@@ -337,3 +339,14 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Cambiar de watchface sin EXIT detiene Doom original | Port propio S3/E1M1 | [R69](doom-close-emulator.md), close retained/finish/ps | CONFIRMADO EN EMULADOR | Alta para ciclo observado | Worker104 ausente; reason1,13alloc/free,streams0,cleanup0 | Cierre normal Lua; no crash/kill probado |
 | Cierre conserva modulo y copias hasta reentrada | Port propio S3 | R69 lsmod y dos copias128012bytes/header | CONFIRMADO EN EMULADOR | Alta local | Modulo residente, motor retirado, Storage activa | Retencion deliberada; sin sandbox |
 | Reentrar recoge modulo/caches/copias sin EXIT ni reboot | UIProbe propia/S3 | R69 uninit0/unloaded/ps/nodos/PNG | CONFIRMADO EN EMULADOR | Alta para flujo | Un START, cero EXIT; no unload host; launcher Ready | Final Storage y tmp retirados; no persistencia Doom ni compatibilidad RW4 |
+
+## Presentacion e input R70: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Pipeline UI entrega fuente a LVGL en1,48ms media | UI instrumentada S3 | [R70](doom-performance-emulator.md),33trazas os.clock | CONFIRMADO EN EMULADOR | Alta para ensayo | P951,70ms/max2,90ms | No incluye finalizacion de render/flush |
+| Timer200ms limita ritmo de entregas actual | UI propia S3 | Intervalos205,30ms media/4,87entregas/s | CONFIRMADO EN EMULADOR | Alta para build actual |32intervalos | Reducir intervalo puede mejorar; rendimiento50ms pendiente |
+| Giros muestran alrededor de5cambios visibles/s | Capturas de display S3 |75PNGs/area RGB320x200/hashes | CONFIRMADO EN EMULADOR | Alta para cambios observados | Derecha5,08/izquierda4,57 | Cota inferior, ventanas cortas; no FPS exacto ni RW4 |
+| os.clock mide tiempo transcurrido en guest inspeccionado | ELF S3 exacto | R70 disassembly os_clock/clock/up_timer_gettick y dos llamadas | CONFIRMADO EN EMULADOR | Alta local | Delta0,4495s tras espera400ms+ADB | No CPU time Lua portable; no evidencia RW4 |
+| Handler y confirmacion posterior de input son medibles | Port/UI S3 | R70 cuatroedges y dos giros procesados | CONFIRMADO EN EMULADOR | Alta para muestras | Handler0,30-0,60ms; UI observa29,70-151,30ms | Observacion incluye Timer; host incluye RPC/ADB; no touch-a-foton |
+| Timer50ms alcanza20FPS reales | S3/RW4 | Aun sin aplicar ni medir | SIN EVIDENCIA | No evaluable | No | Siguiente comparacion; no extrapolar a hardware |
