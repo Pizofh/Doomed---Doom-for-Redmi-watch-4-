@@ -2,7 +2,7 @@
 
 Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4, modelo objetivo **M2315W1**, preservando el firmware Xiaomi y las funciones normales del reloj si resulta técnicamente viable.
 
-**Estado al 2026-10-03:** TouchEvents original validado en el emulador Xiaomi Watch S3 a 390×450, con cierre y reentrada sin reinstalar. Un hello C propio imprimió su mensaje y se descargó mediante rmmod en dos ciclos; enlaza puts desde la imagen exacta del emulador. [Prueba nativa y limitaciones](docs/hello-native-emulator.md), [prueba Lua](docs/touch-events-emulator.md). No se compiló DOOM ni se conectó el reloj físico. Estado para continuar en [HANDOFF](docs/HANDOFF.md).
+**Estado al 2026-10-04:** TouchEvents original validado en el emulador Xiaomi Watch S3 a 390×450, con cierre y reentrada sin reinstalar. Un hello C propio imprimió su mensaje y se descargó mediante rmmod en dos ciclos; enlaza puts desde la imagen exacta del emulador. [Prueba nativa y limitaciones](docs/hello-native-emulator.md), [prueba Lua](docs/touch-events-emulator.md). No se compiló DOOM ni se conectó el reloj físico. Estado para continuar en [HANDOFF](docs/HANDOFF.md).
 
 **Display C:** patrón RGB565 mostrado y retirado; píxeles originales, touch y panel stock comprobados después sin reboot en una prueba con pantalla activa. Framebuffer compartido, no ownership exclusivo. [Captura y reproducción](docs/native-display-emulator.md).
 
@@ -24,7 +24,7 @@ Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4
 
 **Stdio del lector WAD:** fopen/fread/fseek/ftell/fclose pasaron con el fixture propio, incluidos buffers, longitud y tres reaperturas. En este guest, seek no limpia EOF; clearerr sí. [Resultado y límite concreto](docs/native-stdio-emulator.md).
 
-**Worker C:** [tres ciclos desde NSH](docs/native-task-emulator.md) y [START/EXIT desde launcher](docs/native-launcher-emulator.md) validados. Dos START/EXIT, pausa con panel stock, rechazo de descarga mientras C vive y cierre/reentrada sin reboot. Todavía no se cargó WAD ni se compiló Doom; gate físico cerrado. Siguiente checkpoint: mostrar un frame producido por el worker C dentro del launcher LVGL.
+**Worker C:** [tres ciclos desde NSH](docs/native-task-emulator.md) y [START/EXIT desde launcher](docs/native-launcher-emulator.md) validados. Ahora [produce frames visibles en LVGL](docs/native-worker-frame-emulator.md), con dos buffers de ownership atómico:12 capturas completas, dos lectores, pausa con panel, dos EXIT y cierre/reentrada pasan. Estado R61 al2026-10-04: Storage activa, módulo y temporales propios retirados sin reboot para salir. Todavía no se cargó WAD ni se compiló Doom; gate físico cerrado. Siguiente checkpoint: controles mantenidos hacia ese worker, liberados al pausar/cerrar.
 
 - Crear documentación, matriz de evidencia y herramientas de inspección para PC.
 - Identificar dependencias originales y fijar revisiones consultadas.

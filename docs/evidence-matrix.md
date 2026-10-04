@@ -1,6 +1,6 @@
 # Matriz de evidencia
 
-Actualizada 2026-10-03. Referencias Rxx: [research.md](research.md#fuentes-consultadas). `CONFIRMADO` puede significar evidencia documental específica del dispositivo, nunca prueba de nuestra unidad sin resultado local. Hay inspección estática, boot, ADB, inventario y validación visual/táctil de TouchEvents empaquetado en emulador S3. No hay pruebas del reloj físico. Filas CLI anteriores describen pruebas históricas; no el resultado posterior con launcher watchface.
+Actualizada 2026-10-04. Referencias Rxx: [research.md](research.md#fuentes-consultadas). `CONFIRMADO` puede significar evidencia documental específica del dispositivo, nunca prueba de nuestra unidad sin resultado local. Hay inspección estática, boot, ADB, inventario y validación visual/táctil de TouchEvents empaquetado en emulador S3. No hay pruebas del reloj físico. Filas CLI anteriores describen pruebas históricas; no el resultado posterior con launcher watchface.
 
 Estados: **CONFIRMADO EN RW4**, **CONFIRMADO EN EMULADOR**, **CONFIRMADO SOLO EN OTRO XIAOMI**, **INFERENCIA RAZONABLE**, **SIN EVIDENCIA**, **REFUTADO**. Las capacidades genéricas upstream se indican aparte y no se transforman en compatibilidad RW4.
 
@@ -243,3 +243,19 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Reentrada puede recoger módulo retenido sin comando host | Watchface propia/guest | R60 launcher-reentry | CONFIRMADO EN EMULADOR | Alta local | Timer/uninit0/Ready: exited | C en tmpfs, no persistencia nativa |
 | Un script extraído más corto puede conservar cola anterior | Guest S3/extractor | R60 derivado16765 vs fuente5064, error línea105 | CONFIRMADO EN EMULADOR | Alta local para observación | Backup/reemplazo/readback exacto corrigen | Punto interno responsable no aislado; instalador nuevo completo sin runtime |
 | Worker/launcher del emulador funcionan en M2315W1 | RW4 físico | Ninguna prueba/ABI/recovery específico | SIN EVIDENCIA | No evaluable | No | Gate físico cerrado |
+## Frames desde worker R61: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Worker detached produce frames visibles en LVGL | Guest S3 exacto | R61 result/observations | CONFIRMADO EN EMULADOR | Alta local |12 capturas completas,44800 píxeles cada una | Patrón propio, no Doom ni RW4 |
+| Dos slots conceden un buffer exclusivo por lector | Contrato propio/guest | R61 fuente/CAS y reader-result | CONFIRMADO EN EMULADOR | Alta local/estática | Dos lectores, frames54/55 exactos, tercero rechazado, split/EOF | No stress/SMP ni FD compartido |
+| Saturación omite producir sin sobrescribir lectores | Contrato propio/guest | R61 slots/blocked y readbacks | CONFIRMADO EN EMULADOR | Alta para ensayo | blocked136/92 en binario final, frames coherentes | No timing/realtime garantizado |
+| Cache-drop se limita al owner UI | Contrato propio/guest | R61 check nxsched_gettid y presentación | CONFIRMADO EN EMULADOR | Alta estática/local | Caller permitido pasa, worker no llama LVGL | Rechazo desde caller erróneo no inyectado |
+| Panel pausa producción y EXIT retira worker/imágenes | Guest S3 | R61 dos ciclos y state | CONFIRMADO EN EMULADOR | Alta local | steps149/produced46 estables, dos EXIT finales | Pausa cooperativa, no cobertura exhaustiva de gestos |
+| Cierre Lua conserva código/caches hasta reentrada UI | Watchface propia/guest | R61 close/reentry/final | CONFIRMADO EN EMULADOR | Alta local | Worker374 ausente antes de unload, GC sin LVGL | Crash/kill no probados |
+| Presupuesto finito termina y UI recoge módulo | Guest S3 | R61 own-markers worker242 reason2 | CONFIRMADO EN EMULADOR | Alta para observación | Término natural del primer candidato, no repetido en final | No hard watchdog ni60s garantizados |
+| Metadatos sequence/cycle se leen sin carrera de datos UI/NSH | Contrato propio R61 final | atomic_uint/disassembly y regresión | CONFIRMADO EN EMULADOR | Alta estática/local | Mismos10 imports, barreras,12 capturas finales | No implica snapshot transaccional ni stress general |
+| BSS del payload ocupa179312bytes | ELF propio R61 | readelf/build fijado | CONFIRMADO EN EMULADOR | Alta estática | Dos buffers89612 más estado | No RAM total/pico ni budget RW4 |
+| Update repara derivado y refresh puede evitar reset | Installer/guest S3 | R61 backup/readback/result | CONFIRMADO EN EMULADOR | Alta local | Modo wframe propio inactivo, módulos ausentes | Rama nueva R60 ya ejercitada en R61; no actualización de stock |
+| Worker consume controles mantenidos de R55 | Guest S3 / RW4 | R61 solo frames | SIN EVIDENCIA | No evaluable | No | Siguiente checkpoint |
+| Frames/worker/native launcher funcionan en RW4 | M2315W1 físico | Ninguna ABI/runtime/recovery específicos | SIN EVIDENCIA | No evaluable | No | No extrapolar del emulador |

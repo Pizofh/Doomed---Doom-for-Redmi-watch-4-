@@ -11,11 +11,11 @@ La [inspección estática del ELF guest](emulator-package-review.md) identifica 
 | Camino | Evidencia actual | Bloqueo | Experimento posterior en PC |
 |---|---|---|---|
 | QuickApp / JS / RPK | API oficial Vela; debug físico documentado S4 | Soporte RW4 y bridge C/WASM no demostrados | App JS mínima, consulta de capacidades; no la llamar C |
-| Lua / watchface | Launcher C, frames repetidos, controles mantenidos y cleanup probados | Launcher/worker, WAD, crash, persistencia C y RW4 pendientes | START/EXIT controlando worker; create/stop/join probados desde NSH |
+| Lua / watchface | Launcher C y frames desde worker R61; controles R55 por separado, cleanup probado | Input consumido por worker, WAD, crash, persistencia C y RW4 pendientes | Controles mantenidos hacia worker con cancelación al pausar/cerrar |
 | Lua → shell | os.execute(uname/insmod/rmmod) desde watchface devuelve true/exit/0 | RW4 físico sin probar | No ampliar a comandos arbitrarios |
 | Lua loadlib | Stub deshabilitado, respuesta nil/absent | No permite importar biblioteca C en este guest | Puente io→dispositivo virtual ya probado |
 | ELF / exec | `CONFIG_ELF`, `CONFIG_LIBC_EXECFUNCS`, `execv`/`posix_spawn` en emulador | Exports, contrato loader/entrypoint y lifecycle pendientes | Inventario read-only, luego hello C si hay contrato válido |
-| Módulo / `insmod` | Hello, display, touch, puente, tiempo, FS/stdio y worker finito probados | Sin sandbox; launcher/worker, WAD, engine y RW4 sin probar | Ownership al retornar init y worker controlado por launcher |
+| Módulo / `insmod` | Hello, display, touch, puente, tiempo, FS/stdio, launcher y frames de worker probados | Sin sandbox; input del worker, WAD, engine y RW4 sin probar | Integrar controles al consumidor worker, sin motor todavía |
 | Touch C / driver | [Observador nativo validado](native-touch-emulator.md), colas por lector; stock concurrente | Scheduling engine y compatibilidad RW4 pendientes | UI con controles mantenidos ya probada vía Lua→C |
 | WASM / `iwasm` | `iwasm_main` y macros WAMR en emulador | Imports, memoria/UI/lifecycle y RW4 desconocidos | Identificar comando/runtime sin ejecutar payload |
 | App nativa precompilada/builtin | Concepto upstream | Builtin no significa carga de app arbitraria stock | Identificar registro/launcher y build requerida |
@@ -61,3 +61,6 @@ R59: [pthread_create/stop cooperativo/join](native-task-emulator.md) probados de
 [Frames repetidos en nuestra página](native-frame-loop-emulator.md): dos slots y un Timer de firmware que invoca Lua. Op6/op7 llaman cache LVGL **solo desde contexto UI**, nunca NSH/CLI/worker/uninit. Timer no conserva callbacks del módulo; se detiene antes de pausa/EXIT y GC normal retira Timer. Guard bloquea llamadas tras cierre. Pausa/descarga comprobadas en ensayo300frames; sin garantía ante crash ni de memoria prolongada. Umem maxused subió sin causa aislada.
 
 Probar abrir/cerrar repetidamente y medir liberación de RAM, input y display. Tener salida UI y un mecanismo externo documentado de terminar la instancia en emulador. No ejecutar `kill` ni escribir watchdog/config para descubrir su comportamiento. Un timeout del host solo termina el cliente ADB; no asegura la terminación de un programa dentro del guest. Un reboot no sustituye el requisito de devolver el control al reloj sin reiniciarlo.
+## R61: worker y presentación separados, solo emulador
+
+[Prueba de frames](native-worker-frame-emulator.md): worker detached de la UI genera RGB565; stream con dos slots y ownership release/acquire entrega copias completas. Lua/UI presenta mediante archivos propios y LVGL, con cache-drop restringido al owner UI. Dos EXIT y cierre/reentrada limpian sin reboot; el finalizador no toca LVGL y conserva módulo hasta reentrada. Uninit requiere cero referencias y worker retirado/PID ausente. La existencia de insmod y símbolos internos en este guest FLAT no demuestra userspace aislado, soporte ELF genérico ni compatibilidad M2315W1. Concurrencia arbitraria de open/unload y crash siguen sin validar.

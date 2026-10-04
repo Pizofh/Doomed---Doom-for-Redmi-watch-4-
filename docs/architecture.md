@@ -17,6 +17,8 @@ La línea discontinua marca una dependencia no validada del objetivo físico: to
 
 ## Adaptador futuro
 
+Checkpoint actual R61: [worker C produce frames y UI los presenta](native-worker-frame-emulator.md). Dos buffers C con publicación atómica y descriptor lector exclusivo; Lua copia/cierra, alterna dos archivos tmpfs y actualiza Image desde su tarea UI. No punteros del módulo retenidos por LVGL. Worker separado de callbacks; pausa, stop, ausencia de PID y lectores antes de unload. Cierre Lua conserva código/copies hasta reentrada y limpieza de cache desde UI. Sigue pendiente conectar controles al consumidor worker y después integrar el motor real.
+
 Checkpoint previo completado: hello C por insmod/rmmod en el emulador, enlazado a su imagen exacta [resultado](hello-native-emulator.md). No construye aún los puentes de display/input/tiempo/FS del diagrama ni determina la ABI física RW4.
 
 Display incremental completado: [patrón RGB565 y retorno a stock](native-display-emulator.md) mediante framebuffer compartido del emulador. Antes de usar ese camino para un port interactivo, resolver ownership/presentación y entrega de input; la prueba temporal no constituye el adaptador DOOM.
