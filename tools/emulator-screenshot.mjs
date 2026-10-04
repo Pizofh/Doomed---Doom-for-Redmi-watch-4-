@@ -3,15 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import http2 from 'node:http2';
 import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { projectRoot } from './verify-emulator.mjs';
-
-const guard = spawnSync(process.execPath, [path.join(projectRoot, 'tools/emulator-adb.mjs'), 'connect'],
-  { encoding: 'utf8', shell: false, windowsHide: true, timeout: 20000 });
-if (guard.status !== 0) throw new Error('Project emulator ownership/state check failed');
-const label = process.argv[2] ?? 'current';
-if (!/^[a-z0-9-]{1,60}$/.test(label)) throw new Error('Invalid screenshot label');
-const destination = path.join(projectRoot, 'artifacts/emulator/screenshots');
-fs.mkdirSync(destination, { recursive: true });
 
 function fields(buffer) {
   const result = [];
@@ -43,6 +36,12 @@ function fields(buffer) {
   }
   return result;
 }
+// Importers must guard their PC emulator session once before sampling.
+// Read-only, fixed loopback RPC; no external endpoint parameter.
+export async function captureScreenshot(label) {
+if (!/^[a-z0-9-]{1,60}$/.test(label)) throw new Error('Invalid screenshot label');
+const destination = path.join(projectRoot, 'artifacts/emulator/screenshots');
+fs.mkdirSync(destination, { recursive: true });
 const response = await new Promise((resolve, reject) => {
   const client = http2.connect('http://127.0.0.1:8554');
   const chunks = [];
@@ -81,4 +80,12 @@ if (!png?.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])))
 }
 const output = path.join(destination, `${label}.png`);
 fs.writeFileSync(output, png);
-console.log(JSON.stringify({ output, bytes: png.length, width: png.readUInt32BE(16), height: png.readUInt32BE(20) }));
+return { output, bytes: png.length, width: png.readUInt32BE(16), height: png.readUInt32BE(20), timestamp:message.find(f=>f.number===6&&f.type===0)?.value??null };
+}
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  if(process.argv.length>3)throw Error('Expected optional screenshot label');
+  const guard = spawnSync(process.execPath, [path.join(projectRoot, 'tools/emulator-adb.mjs'), 'connect'],
+    { encoding: 'utf8', shell: false, windowsHide: true, timeout: 20000 });
+  if (guard.status !== 0) throw new Error('Project emulator ownership/state check failed');
+  console.log(JSON.stringify(await captureScreenshot(process.argv[2] ?? 'current')));
+}

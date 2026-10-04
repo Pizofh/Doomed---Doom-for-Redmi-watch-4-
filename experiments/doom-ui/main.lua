@@ -9,6 +9,17 @@ local image,owned=nil,{false,false}
 local active,system_paused,user_paused=false,false,false
 local resume_requested=false
 local current_mask,contact,last_indev=0,nil,nil
+-- Exact guest os.clock -> clock_systime_ticks / 10000, inspected in R70.
+-- Elapsed wall time here, not portable Lua CPU time. Bounded traces; output only after unload.
+local perf_frames,perf_inputs,perf_timers={},{},{}
+local perf_started,perf_pending=0,nil
+local function clock_ticks() return math.floor(os.clock()*10000+0.5) end
+local function perf_report()
+    print("RW4_DOOM_PERF: units=100us submitted="..frames.." frame_samples="..#perf_frames)
+    for _,r in ipairs(perf_frames) do print("RW4_DOOM_PERF: frame "..table.concat(r,",")) end
+    for _,r in ipairs(perf_inputs) do print("RW4_DOOM_PERF: input "..table.concat(r,",")) end
+    for _,r in ipairs(perf_timers) do print("RW4_DOOM_PERF: timer "..table.concat(r,",")) end
+end
 local function present()
     local f=io.open(node,"rb");if not f then return false end;assert(f:close());return true
 end
@@ -83,27 +94,35 @@ local function unload(s)
     shell("rmmod rw4doom");assert(not present());loaded=false;stopping=false
     for i,path in ipairs(paths) do if owned[i] then assert(os.remove(path));owned[i]=false end end
     print("RW4_DOOM_UI: unloaded tid="..s.tid.." key_events="..s.key_events)
+    perf_report()
 end
 local function show_frame()
+    local t0=clock_ticks()
     local f=io.open("/dev/rw4doomstream","rb");if not f then return end
     local r <close> = f;r:setvbuf("no")
     local wire=assert(r:read(128028));assert(#wire==128028 and r:read(1)==nil);assert(r:close())
+    local t1=clock_ticks()
     local magic,generation,tic,checksum=string.unpack("<I4I4I4I4",wire)
     assert(magic==0x34574c52,"frame metadata")
     local bytes=wire:sub(17)
     assert(bytes:sub(1,12)==string.char(0x19,0x12,0,0,0x40,1,0xc8,0,0x80,2,0,0),"frame header")
     if generation<=last_generation then return end
+    local t2=clock_ticks()
     local slot=frames%2+1
     if not owned[slot] then local old=io.open(paths[slot],"rb");if old then old:close();error("frame path already exists") end end
     must(4+slot)
+    local t3=clock_ticks()
     local w <close> = assert(io.open(paths[slot],"wb"));owned[slot]=true;assert(w:write(bytes));assert(w:close())
+    local t4=clock_ticks()
     if image then image:set_src(paths[slot])
     else
         image=lvgl.Image(game,{x=35,y=40,src=paths[slot]})
         for _,flag in ipairs({F.CLICKABLE,F.SCROLLABLE,F.EVENT_BUBBLE,F.GESTURE_BUBBLE,F.SCROLL_CHAIN_HOR,F.SCROLL_CHAIN_VER}) do image:clear_flag(flag) end
     end
     local width,height=image:get_img_size();assert(width==320 and height==200)
+    local t5=clock_ticks()
     frames=frames+1;last_generation=generation
+    if #perf_frames<128 then perf_frames[#perf_frames+1]={frames,generation,tic,t0-perf_started,t1-t0,t2-t1,t3-t2,t4-t3,t5-t4,t5-t0} end
 end
 local function pause_game(reason)
     clear_contact(true);user_paused=true;resume_requested=false
@@ -113,9 +132,11 @@ local function pause_game(reason)
 end
 local function send_mask(mask)
     if not active or system_paused or user_paused or stopping or closing or current_mask==mask then return end
-    if state().ready~=1 then return end
+    local t0=clock_ticks();local before=state();if before.ready~=1 then return end
     local ok,err=command(8,mask)
-    if ok then current_mask=mask;print("RW4_DOOM_UI: mask="..mask)
+    if ok then
+        local t1=clock_ticks();perf_pending={mask,t0-perf_started,t1-t0,before.changes}
+        current_mask=mask;print("RW4_DOOM_UI: mask="..mask)
     else pause_game("Input cancelled: inspect log");print("RW4_DOOM_UI: input error "..tostring(err)) end
 end
 local function button(parent,text,x,y,w,h,callback)
@@ -135,6 +156,7 @@ button(launcher,"START",45,250,300,70,function()
     if not loaded then assert(not present());shell("insmod "..elf.." rw4doom");loaded=true;state() end
     local s=state();if s.pending==1 and s.live==1 then return end
     must(1);active=true;system_paused=false;user_paused=false;resume_requested=false;frames=0;last_generation=0
+    perf_started=clock_ticks();perf_frames={};perf_inputs={};perf_timers={};perf_pending=nil
     clear_contact(false);navigation(false)
     launcher:add_flag(F.HIDDEN);game:clear_flag(F.HIDDEN);menu:add_flag(F.HIDDEN)
     print("RW4_DOOM_UI: START")
@@ -186,8 +208,14 @@ function pageOnResume(...)
 end
 local timer=lvgl.Timer({period=200,paused=false,cb=function()
     if closing or not loaded then return end
+    local timer_start=clock_ticks()
     local ok,err=pcall(function()
         local s=state();assert(s.error==0,"worker error")
+        local state_end=clock_ticks()
+        if perf_pending and s.changes>perf_pending[4] and s.requested==perf_pending[1] and s.applied==perf_pending[1] and s.delivered_keys==perf_pending[1] then
+            if #perf_inputs<64 then perf_inputs[#perf_inputs+1]={perf_pending[1],perf_pending[2],perf_pending[3],state_end-perf_started-perf_pending[2],s.tic,s.key_events} end
+            perf_pending=nil
+        end
         if s.reason~=0 and s.live==0 and s.readers==0 then
             clear_contact(true);detach_image();must(2);s=state();unload(s);active=false;resume_requested=false
             game:add_flag(F.HIDDEN);menu:add_flag(F.HIDDEN);launcher:clear_flag(F.HIDDEN);navigation(true);status:set{text="Ready: exited"};return
@@ -202,6 +230,7 @@ local timer=lvgl.Timer({period=200,paused=false,cb=function()
         key_label:set{text=s.ready==1 and ("Ammo: "..s.ammo.."  HP: "..s.health) or "Loading E1M1..."}
         if active and not system_paused and not user_paused and not stopping and s.stop==0 and s.reason==0 then
             show_frame()
+            if #perf_timers<128 then perf_timers[#perf_timers+1]={timer_start-perf_started,state_end-timer_start,clock_ticks()-timer_start} end
         end
     end)
     if not ok then
@@ -221,4 +250,4 @@ if present() then
     end
 end
 navigation(true)
-print("RW4_DOOM_UI: ready period=200 input_capacity=32")
+print("RW4_DOOM_UI: ready period=200 input_capacity=32 profile=R70")
