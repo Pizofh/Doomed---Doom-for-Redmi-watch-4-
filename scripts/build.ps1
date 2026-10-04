@@ -1,7 +1,7 @@
 [CmdletBinding()]
-param([ValidateSet('Hello', 'DisplayProbe', 'DisplayPattern', 'Touch', 'UIProbe', 'NativeBridge', 'UIProbeBridge', 'FrameLoop', 'Controls', 'TimeProbe', 'FsProbe', 'StdioProbe', 'TaskProbe', 'LauncherProbe', 'WorkerFrames', 'Doom')][string]$Target = 'Hello')
+param([ValidateSet('Hello', 'DisplayProbe', 'DisplayPattern', 'Touch', 'UIProbe', 'NativeBridge', 'UIProbeBridge', 'FrameLoop', 'Controls', 'TimeProbe', 'FsProbe', 'StdioProbe', 'TaskProbe', 'LauncherProbe', 'WorkerFrames', 'WorkerInput', 'Doom')][string]$Target = 'Hello')
 
-if ($Target -eq 'Doom') { throw 'DOOM gate closed: worker input synchronization and legal WAD integration remain unvalidated; worker frames and launcher START/EXIT passed in emulator only.' }
+if ($Target -eq 'Doom') { throw 'DOOM gate closed: legal WAD provenance/read validation and engine integration remain pending; worker display/input and lifecycle passed in emulator only.' }
 $ErrorActionPreference = 'Stop'
 $rw4BuildTool = Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-hello.mjs'
 if ($Target -eq 'Hello') {
@@ -34,6 +34,10 @@ if ($Target -eq 'Hello') {
     & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-worker-frame.mjs')
     if ($LASTEXITCODE -ne 0) { throw 'Worker frame C build failed.' }
     & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/package-ui-probe.mjs') wframe
+} elseif ($Target -eq 'WorkerInput') {
+    & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-worker-input.mjs')
+    if ($LASTEXITCODE -ne 0) { throw 'Worker input C build failed.' }
+    & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/package-ui-probe.mjs') winput
 } else {
     $rw4DisplayTool = Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-display.mjs'
     $rw4Variant = if ($Target -eq 'DisplayProbe') { 'probe' } else { 'pattern' }

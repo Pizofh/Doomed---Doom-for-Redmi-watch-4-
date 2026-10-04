@@ -50,7 +50,7 @@ if(path.resolve(process.argv[1]??'')===fileURLToPath(import.meta.url)) {
     const payload=reviewedPayload(),target='/tmp/rw4-worker-frame.elf';
     let modules=s.adb(['shell','lsmod'],'modules');
     if(action==='cleanup'&&modules.includes('rw4wframe')) throw Error('Reenter the owned UI to retire C and clear its image caches first; no host unload');
-    if(['rw4worker','rw4wframe','rw4bridge','rw4task','rw4time','rw4fs','rw4stdio'].some(n=>modules.includes(n)))throw Error('Own module loaded; inspect before mutation');
+    if(['rw4winput','rw4worker','rw4wframe','rw4bridge','rw4task','rw4time','rw4fs','rw4stdio'].some(n=>modules.includes(n)))throw Error('Own module loaded; inspect before mutation');
     if(s.state()!==null)throw Error('Worker node remains');
     if(!/^nsh: ls: stat failed: 2\r?$/im.test(s.adb(['shell','ls','/dev/rw4wstream'],'stream-absence')))throw Error('Stream remains');
     for(let i=0;i<2;i++)if(!/^nsh: ls: stat failed: 2\r?$/im.test(s.adb(['shell','ls','/tmp/rw4-worker-frame-'+i+'.bin'],'frame-copy-'+i)))throw Error('Frame copy remains; collect via UI first');
