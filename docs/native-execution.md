@@ -1,5 +1,7 @@
 # Ejecución y privilegios
 
+**Actual R67:** [DOOM original integrado en UI del emulador](doom-ui-emulator.md), controles, pausa y dos salidas limpias. Lua→os.execute→insmod carga ELF propio ligado a45imports de la imagen S3 exacta; worker detached ejecuta Doom, UI presenta por LVGL y hace unload después de retiro/PID ausente. No root/exploit ni userspace aislado: FLAT compartido. Persistencia nativa, crash recovery y compatibilidad RW4 siguen pendientes. La tabla describe caminos con resultados históricos; motor/WAD/display/input del port ya están demostrados en S3, nunca en M2315W1.
+
 Referencia adicional del 2026-10-03: [MiWatchNativeApps](https://github.com/m0tral/MiWatchNativeApps/tree/a392529b9e369d046b9c15858d990f358fdf6c29), para S3/Band 10 Pro. Su header S3 usa direcciones absolutas del firmware; no ejecutar esos módulos en el emulador Cortex-A ni en M2315W1. «Userspace module» en documentación ajena no prueba separación de memoria. Fijar contrato/exports/init/uninit de nuestro guest antes de hello C. Ver R35 en research.md.
 
 Se ejecutaron [hello C](hello-native-emulator.md) y un [puente Lua↔C propio](lua-native-bridge-emulator.md), únicamente en el emulador. os.execute desde watchface ejecutó uname e insmod/rmmod con nuestro módulo. No se ejecutó WASM, iwasm ni exploits. No hay una razón demostrada para root/jailbreak. Referencias y estados: [research.md](research.md), [matriz](evidence-matrix.md), [runtime observado](emulator-runtime.md).

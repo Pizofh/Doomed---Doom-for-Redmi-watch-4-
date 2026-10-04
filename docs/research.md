@@ -1,5 +1,7 @@
 # Investigación inicial
 
+Checkpoint actual: **R67**, [Doom en UI/control real del emulador](doom-ui-emulator.md). Resultados Rxx debajo son cronología; no extrapolar a hardware ni interpretar pendientes antiguos como estado actual.
+
 Fecha: 2026-10-02. Fuentes técnicas primarias primero; código inspeccionado remotamente mediante GitHub. Las revisiones se fijan en [dependencies.lock.json](../third_party/dependencies.lock.json). Ninguna afirmación documental implica que se probó el reloj del usuario.
 
 ## Método
@@ -130,3 +132,7 @@ Las páginas web son referencias móviles consultadas en esta fecha. Los links a
 ## R66,2026-10-04: Doom original ejecuta E1M1
 
 [Primer frame y evidencia](doom-first-frame-emulator.md): primera ejecución guest pasa, worker210 produce320x200/145colores/FNV07aece36. Imagen visualmente corresponde a E1M1 con arma/HUD.13alloc/free y2streams limpios, WAD intacto, join/unload/temporales sin reboot.1263ms incluye init/wipe;43callbacks no FPS.41bindings revisados,4THM_CALL locales admitidos por loader; fallos de guards y ENOBUFS ocurrieron solo en PC. Sin presentación UI/input conectado/juego continuo/RW4. Siguiente integración UI/controles, sin repetir pruebas aprobadas.
+
+## R67,2026-10-04: Doom en UI y controles
+
+[Resultados y reproducción](doom-ui-emulator.md): E1M1 visible en página Lua/LVGL320×200, input produce movimiento/giro/disparo originales, munición50→47.24 snapshots y ocho capturas; imagen completa comparada con copia RGB565,167 colores. Pausa congela motor/reanuda sin catch-up, dos STOP/unload/reload restauran posición/ammo50; workers104/408 retirados con13alloc/free y streams0 sin reboot. Core R66 reutilizado sin recompilar80C ni repetir pruebas anteriores. Fuente/transporte propios basados R62,45imports guest exacto,FLAT sin sandbox. Timer200ms limita presentación a≈5 imágenes/s; motor≈35tics/s, callbacks no FPS. Un reset de baseline por screen OFF antes de C, ninguno para salir. Final Storage/UIProbe doom almacenada, ELF/WAD/tmp retirados. Panel durante motor/held-input stop y estabilidad prolongada pendientes. No nuevas descargas/instalaciones host ni hardware. Siguiente checkpoint único: foco stock y salida con FIRE mantenido con el motor real.

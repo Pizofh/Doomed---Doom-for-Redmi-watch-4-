@@ -1,5 +1,7 @@
 # Modelo de riesgo
 
+**Actual R67:** [Motor original con UI/control](doom-ui-emulator.md) y dos STOP/unload limpios. Módulo FLAT, sin sandbox; el shim no protege frente a corrupción de memoria. Límite120s cooperativo, no hard watchdog. Recursos propios limpios; diferencia global Umem sin causa aislada, crash/kill/agotamiento/foco stock con contacto y estabilidad prolongada no demostrados. Un reset de guest limpio por screen OFF precedió C, ninguno para salir. Gate físico permanece cerrado; no reutilizar ELF/símbolos del emulador en M2315W1. Apartados Rxx siguientes son historia de investigación.
+
 El usuario autoriza investigación, documentación y pruebas incrementales en PC/emulador. Hardware físico, firmware, exploits y herramientas dudosas quedan fuera del alcance actual. No se instaló software durante esta sesión.
 
 | Acción | Escritura | Riesgo relevante | Reversión / gate |

@@ -1,5 +1,7 @@
 # Matriz de evidencia
 
+**Actual R67:** [DOOM original en UI con controles](doom-ui-emulator.md). Las filas históricas Rxx describen ese checkpoint; sus pendientes de motor/input/UI no sustituyen el resultado posterior R67. Ninguna prueba nueva abre el gate M2315W1.
+
 Actualizada 2026-10-04. Referencias Rxx: [research.md](research.md#fuentes-consultadas). `CONFIRMADO` puede significar evidencia documental específica del dispositivo, nunca prueba de nuestra unidad sin resultado local. Hay inspección estática, boot, ADB, inventario y validación visual/táctil de TouchEvents empaquetado en emulador S3. No hay pruebas del reloj físico. Filas CLI anteriores describen pruebas históricas; no el resultado posterior con launcher watchface.
 
 Estados: **CONFIRMADO EN RW4**, **CONFIRMADO EN EMULADOR**, **CONFIRMADO SOLO EN OTRO XIAOMI**, **INFERENCIA RAZONABLE**, **SIN EVIDENCIA**, **REFUTADO**. Las capacidades genéricas upstream se indican aparte y no se transforman en compatibilidad RW4.
@@ -299,3 +301,16 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Pico tracked del motor6582961bytes | Shim propio | R66 stats malloc | CONFIRMADO EN EMULADOR | Alta para contador |13blocks pico | No RAM total;secciones/stack/libc/tmpfs aparte |
 | Loader admite4THM_CALL locales autorrecursivos | Guest S3 exacto | up_relocate0x65c668/tipo10 y carga R66 | CONFIRMADO EN EMULADOR | Alta para esos4 |6900ABS32+4THM_CALL cargados | No branches externos ni RW4 |
 | Doom jugable/persistente en M2315W1 | RW4 físico | Ninguna ABI/runtime/recovery física demostrada | SIN EVIDENCIA | No evaluable | No | Primer frame S3 no cambia el gate físico |
+
+## Motor interactivo R67: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Motor original visible dentro de página Lua/LVGL | Guest S3 exacto | [R67](doom-ui-emulator.md), PNG/stream/copias | CONFIRMADO EN EMULADOR | Alta local |64000 píxeles comparados,167 colores |320×200 RGB565; no framebuffer global directo |
+| Avanzar/girar/disparar llegan al gameplay original | Doom/E1M1 en S3 | R67 posición/ángulo/ammo y ocho edges | CONFIRMADO EN EMULADOR | Alta local | Munición50→47; tics progresan | Un dedo; ergonomía física/simultáneo MOVE+FIRE pendientes |
+| Menú pausa motor y RESUME recupera progreso | Port propio S3 | R67 dos muestras congeladas y posterior progreso | CONFIRMADO EN EMULADOR | Alta para ensayo | Tic/posición/ángulo/ammo/drawn iguales mientras pausado | No foco stock mantenido probado con motor |
+| Dos STOP/unload/reload restauran sesión sin reboot | Port propio S3 | R67 workers104/408, stats/ps/lsmod/nodos | CONFIRMADO EN EMULADOR | Alta local |13alloc/free por ciclo, streams0, posiciones/ammo50 restaurados | No crash/kill/errores pthread probados |
+| Persistencia de Doom instalada en RW4 o emulador | Hardware/almacenamiento | ELF/WAD solo tmpfs, retirados | SIN EVIDENCIA | No evaluable | Dos sesiones sin retransmitir, sin reset | Reapertura no prueba supervivencia al reboot |
+| Port cabe en RAM disponible de M2315W1 | RW4 físico | Sin RAM libre/ABI específicas | SIN EVIDENCIA | No evaluable | Pico motor6582961 en S3, secciones793228 aparte | Excluye stack/Lua/cache/loader/tmpfs |
+| Presentación fluida/FPS físico | RW4/S3 | Timer200ms,13 produced/2534ms | SIN EVIDENCIA para fluidez/físico | Alta para contador S3 |89tics/178callbacks; sin contador de presentaciones | Transporte inicial≈5 imágenes/s; callbacks no son FPS |
+| Panel/entorno normal operativos después de Doom | Guest S3 | Capturas post-EXIT panel/Ajustes/Storage | CONFIRMADO EN EMULADOR | Alta local | Normal seleccionado sin reboot | Panel durante ejecución del motor pendiente |

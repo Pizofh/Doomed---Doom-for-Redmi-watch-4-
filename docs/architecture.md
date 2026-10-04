@@ -1,62 +1,60 @@
-# Arquitectura propuesta
+# Arquitectura
 
-Estado: diseño condicionado por capacidades aún no demostradas. El firmware stock y las funciones normales tienen prioridad. [Evidencia actual](evidence-matrix.md).
+R67: [Doom original en UI con controles](doom-ui-emulator.md) demostrado solo en guest S3. Objetivo M2315W1 condicionado por ABI, APIs, privilegios, RAM y recovery desconocidos. [Matriz](evidence-matrix.md).
+
+## Objetivo físico condicionado
 
 ```mermaid
 flowchart TD
-    S[Firmware Xiaomi stock] --> W[Funciones normales del reloj]
-    S --> L[Entrada Lua o QuickApp por demostrar]
-    L -. mecanismo de ejecución pendiente .-> D[DOOM original / doomgeneric]
+    S[Firmware Xiaomi stock] --> W[Funciones normales]
+    S --> L[Entrada Lua / app / QuickApp por demostrar]
+    L -. mecanismo fisico pendiente .-> D[DOOM original / doomgeneric]
     D --> P[Adaptador display / input / tiempo / FS]
-    P -. ABI y privilegios pendientes .-> V[Build real Xiaomi Vela / NuttX]
-    F[Almacenamiento persistente: programa y WAD] -. carga bajo demanda .-> D
-    D -. cierre y liberación de recursos .-> W
+    P -. ABI y APIs fisicas pendientes .-> V[Xiaomi Vela / NuttX pertinente]
+    F[Ejecutable y WAD persistentes] -. carga bajo demanda .-> D
+    D -. cierre y liberacion .-> W
 ```
 
-La línea discontinua marca una dependencia no validada del objetivo físico: todavía no existe un adaptador DOOM para RW4. En el emulador S3 sí se construyó un [puente Lua↔C](lua-native-bridge-emulator.md) con carga bajo demanda, eventos y descarga desde EXIT. Ni el host Windows AMD64 ni un ELF del simulador determinan la ISA del RW4.
+Dependencias discontinuas sin validar en RW4. Ni host Windows AMD64 ni emulador Cortex-A determinan ISA del BES2700iBP. No hay adaptador nativo aprobado para hardware.
 
-## Adaptador futuro
+## Implementación ejecutada en emulador
 
-Checkpoint actual R62: [UI produce máscaras y worker las consume](native-worker-input-emulator.md), mientras presenta frames por [el camino R61](native-worker-frame-emulator.md). Ring SPSC32/epochs; releases antes de presses en C, ack neutral antes de resume. No hay aún DG_GetKey ni engine: se validaron transporte y lifecycle. Dos buffers C inmutables para el lector, copias tmpfs y Image desde UI; ningún puntero de módulo retenido por LVGL. STOP con FIRE mantenido y cierre/reentrada limpian, sin join/sleep UI. Siguiente: WAD legítimo/read validation y después adaptación del motor. ABI/privilegios del objetivo físico siguen pendientes.
+`experiments/doom-ui/adapter.c` implementa DG_Init, DrawFrame, SleepMs, GetTicksMs, GetKey y título. Motor original fijado a dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284; fuentes intactas, overlay I_Quit/I_Error para salida local. Sin sonido ni reimplementación de renderer/gameplay.
 
-Checkpoint previo completado: hello C por insmod/rmmod en el emulador, enlazado a su imagen exacta [resultado](hello-native-emulator.md). No construye aún los puentes de display/input/tiempo/FS del diagrama ni determina la ABI física RW4.
+Lua/UI28 crea worker detached con stack32KiB después de retornar initializer NSH. Touch de su página escribe máscaras al driver propio. Ring SPSC32/epochs transfiere cambios; worker genera releases antes de presses en cola64 y DG_GetKey alimenta eventos originales. No lectura de /dev/input0 para controlar Doom ni intercepción del input stock.
 
-Display incremental completado: [patrón RGB565 y retorno a stock](native-display-emulator.md) mediante framebuffer compartido del emulador. Antes de usar ese camino para un port interactivo, resolver ownership/presentación y entrega de input; la prueba temporal no constituye el adaptador DOOM.
+DG_DrawFrame convierte320×200 BGRX a RGB565LE; dos slots C inmutables para lector. Stream por descriptor con EOF; Lua Timer200ms cierra descriptor, invalida cache en UI y escribe uno de dos archivos tmpfs. LVGL Image muestra x35/y40. Worker no llama LVGL; Timer no retiene callbacks nativos y LVGL no guarda punteros al módulo. Framebuffer global pertenece a UI stock.
 
-Camino actual en emulador: [frames dentro de nuestra página LVGL](native-frame-loop-emulator.md), dos slots tmpfs y un Timer Lua; invalida cache desde el caller UI y reutiliza nombres. Pausa y limpieza probadas en300 frames y reentrada, sin escribir directamente el framebuffer global. No es todavía adaptador Doom ni prueba prolongada de memoria o rendimiento físico.
+Transporte inicial: aproximadamente5frames/s; motor aproximadamente35tics/s. Callbacks de dibujo, frames producidos y presentaciones son contadores distintos. Sin corrección de aspecto; controles debajo. [Layout](controls.md).
 
-Usar las funciones reales declaradas por [doomgeneric.h](https://github.com/ozkl/doomgeneric/blob/dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284/doomgeneric/doomgeneric.h): inicialización, frame, espera, ticks, eventos de tecla y título opcional. Conservar motor, renderer y gameplay. `doomgeneric_Create`/`doomgeneric_Tick` articulan el ciclo del port; su ejemplo infinito necesita una estrategia de cierre antes del hardware.
+Runtime R65:128reservas/8streams/payload8MiB, owner worker único, FILE opacos de lectura del WAD fijo, logs acotados, writes/shell del motor denegadas. No sandbox FLAT. Peak tracked~6.28MiB excluye estáticos/stack/loader/libc/Lua/LVGL/cache/tmpfs. [Mediciones](doom-ui-emulator.md).
 
-Display: comparar LVGL frente a framebuffer después de conocer acceso, ownership del display, formato y threading. LVGL Lua no demuestra símbolos C exportados. Framebuffer directo puede competir con la UI stock. Inicialmente un patrón; luego frame DOOM a 320×200 si el motor se configura así. Sus defaults upstream actuales son 640×400. En 390×450, decidir escalado/letterboxing tras validación. Un frame de 320×200×4 ocupa 256,000 bytes; uno de 390×450×4 ocupa 702,000 bytes. Son cálculos de buffers, **no mediciones de consumo total** ni demostración de que Doom cabe.
+## Pausa y salida
 
-Input: [cola C de32 eventos y cancelación probadas en emulador](native-controls-emulator.md), sin motor. Adaptador futuro de press/release hacia teclas de Doom, coordenadas escaladas y liberación de teclas al cancelar gesto/cerrar. Giro, avanzar y fire primero. [Propuesta de controles](controls.md): zonas grandes, un dedo, avanzar y girar combinados; ergonomía aún no validada. Corona y más controles después de una API demostrada. Tiempo: reloj monotónico y sleep medidos, no reloj de pared. FS: acceso aleatorio al WAD, errores/cuotas y ownership de archivos. Audio excluido del primer milestone.
+Pausa invalida epoch, solicita releases; worker llega al límite entre Ticks, procesa KEYUP y confirma neutralidad antes de esperar sin Tick. DG descuenta pausa para evitar catch-up. RESUME explícito/contacto nuevo. Menú probado; callbacks stock heredados de R62 necesitan nueva prueba con motor real.
 
-Tiempo R56: [CLOCK_MONOTONIC y esperas C medidos](native-time-emulator.md) en tarea NSH separada, panel stock activo. No dormir dentro del callback UI ni confundir este ensayo con scheduling del motor. El futuro port debe calcular tiempo transcurrido real; las esperas1ms variaron y aún no hay backend DG_GetTicksMs/DG_SleepMs integrado.
+EXIT elimina Image/invalida caches en UI, marca STOP y espera con Timer. Owner observa STOP en polls DG/runtime y vuelve a cleanup; no join/sleep UI. Unload exige cero referencias/lectores/productor/input, completion y PID ausente. Fallos retienen módulo. Finalizador Lua solo stop/retención; reentrada UI recoge caches/unload. Cierre sin EXIT con motor pendiente.
 
-## Persistencia frente a residencia
+Cada sesión recarga ELF para restaurar globals. Liberar reservas no restablece motor. Límite120s real incluidas pausas/10000Ticks/E1M1; no hard watchdog/crash recovery. Saves/config/audio deshabilitados.
 
-FS R57: [open/read/lseek/close probados sobre fixture tmpfs](native-fs-emulator.md), con posiciones64, EOF y errores. No es persistencia: tmpfs se pierde al reset. R58 [lectura stdio y consulta de longitud](native-stdio-emulator.md) también pasan con fixture propio; EOF después de seek requiere atención/clearerr. Ejecución del motor, su tarea/scheduling y WAD real siguen pendientes.
+## Persistencia frente a RAM
 
-R59: [worker finito desde NSH](native-task-emulator.md) valida creación, parada cooperativa y join antes de unload, con UI stock respondiendo. R60: [launcher/worker](native-launcher-emulator.md) separa initializer NSH y creación desde UI28; detach y stop/poll permiten EXIT sin join/sleep en UI. Descarga exige reason + PID ausente y referencias cerradas. El motor podrá necesitar una tarea separada porque TryRunTics espera; no se ha integrado. El worker no llama LVGL; sincronización input/frame sigue pendiente.
+Watchface en /data/app/watchface/market/365799903. ELF/WAD/copias en /tmp volátil y retirados tras ensayo. Dos sesiones sin reenviar archivos; reset los pierde. **Persistencia nativa pendiente.**
 
-Ruta conceptual, **no una ruta aprobada en RW4**:
+Ruta deseada, no aprobada en RW4:
 
 ```text
-storage: /data/<app-owned-dir>/doom.elf
-         /data/<app-owned-dir>/doom1.wad
-open:    loader copia o mapea el programa; inicia el motor
-close:   exit/unload; libera RAM y recursos de UI/input
-reopen:  vuelve a cargar los archivos persistentes; no necesita PC
+storage: /data/<directorio propio>/doom.elf
+         /data/<directorio propio>/doom1.wad
+open:    cargar ejecutable y WAD; iniciar motor
+close:   exit/unload; liberar RAM y recursos UI/input
+reopen:  recargar desde almacenamiento, sin PC
 ```
 
-Almacenar un archivo no requiere mantenerlo residente. Tampoco convierte la carga en sandbox. Las APIs `internal://files` de QuickApp documentan otra abstracción de storage; no asumir que equivalen a una ruta POSIX accesible para C. La carga persistente, el launcher y los savegames requieren pruebas independientes.
+Archivos persistentes no exigen residencia continua. RAM-only no significa sandbox. internal://files de QuickApp no demuestra ruta POSIX para C ni bridge nativo. Launcher/registro/saves requieren pruebas independientes.
 
-## Gate de integración
+## Gates
 
-Antes de doomgeneric: ejecución mínima comprendida, display, timers, touch, FS y cierre limpios demostrados en emulador. Antes de C: ISA/ABI/config/exports/privilegios conocidos. Antes de RW4: evidencia M2315W1 y revisión del [plan físico](physical-device-plan.md). No se justifica escalación de privilegios mientras no exista una restricción concreta.
+Ejecución/display/input/tiempo/WAD/motor y dos salidas limpias demostrados en emulador. Siguiente: foco stock/salida con input mantenido del motor. Luego medir presentación, latencia, copia y estabilidad antes de optimizar/persistir.
 
-R64: [motor real compilado para inspección](doom-build-audit.md). Interponer shim libc con FILE opaco, recursos contabilizados, writes bloqueados y salida cooperativa. I_Quit de upstream no sale con ORIGCODEoff; no enlazar exit/system de escritorio. UI/worker/slotownershipR62 permanece base, ninguna ruta de motor se ejecutó todavía. Recarga de módulo limpio por sesión; persistencia de archivos separada de RAM.
-
-R65: [runtime propio y build con él](doom-runtime-emulator.md). El worker ejecutará el motor dentro de rw4_runtime_run: memoria registrada/presupuesto, FILE wrappers de lectura, logs acotados y salida al cleanup mediante setjmp/longjmp del guest exacto. STOP externo solo marca un atomic; el owner debe observarlo en polls/DG. I_Quit/I_Error generan salida sin callbacks de escritura upstream. Cada sesión deberá recargar el módulo, no conservar punteros/globales después de liberar recursos. Primer frame real y adaptación DG siguen pendientes; recursos/exit del fixture ya pasan.
-
-R66: [primer frame original de E1M1](doom-first-frame-emulator.md) capturado desde DG_ScreenBuffer después del wipe inicial. Adaptador finito implementa tiempo y copia, sin input ni acceso al framebuffer global. Quit vuelve al cleanup, worker termina/join y el initializer exporta solo su buffer BSS a tmpfs. Módulo se descarga al terminar. Presentar frames en Lua/LVGL y conectar controles R62 sigue pendiente; no rediseñar renderer/gameplay.
+Antes de hardware: evidencia M2315W1/firmware exacto, privilegios, recovery y [plan explícito](physical-device-plan.md) con revisión del usuario. No escalación sin restricción concreta. Excluir ELF/direcciones del emulador del reloj físico.
