@@ -21,7 +21,7 @@ const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 if (bytes.length < 168 || bytes.length > 4 * 1024 * 1024 || bytes.readUInt32LE(0) !== 0x1234a55a ||
     !bytes.includes(Buffer.from('lua/main.lua'))) throw new Error('Unexpected package');
 if (build.status !== 0 || !build.stdout.includes('No Errors') || !build.stdout.includes('adb util is missing')) throw new Error('No reviewed successful build');
-const uiSource = fs.readFileSync(path.join(projectRoot, build.workerInputMode===true?'experiments/native-worker-input/main.lua':build.workerFrameMode===true?'experiments/native-worker-frame/main.lua':build.workerMode===true?'experiments/native-launcher/main.lua':build.controlsMode===true?'experiments/lua-controls/main.lua':'experiments/lua-ui/main.lua'));
+const uiSource = fs.readFileSync(path.join(projectRoot, build.doomMode===true?'experiments/doom-ui/main.lua':build.workerInputMode===true?'experiments/native-worker-input/main.lua':build.workerFrameMode===true?'experiments/native-worker-frame/main.lua':build.workerMode===true?'experiments/native-launcher/main.lua':build.controlsMode===true?'experiments/lua-controls/main.lua':'experiments/lua-ui/main.lua'));
 const ownSource = build.bridgeMode === true ? Buffer.concat([
   fs.readFileSync(path.join(projectRoot, 'experiments/lua-native-bridge/control.lua')), Buffer.from(build.loopMode===true?'\nRW4_FRAME_LOOP=true\n':'\n'), uiSource
 ]) : uiSource;
@@ -59,7 +59,7 @@ if (!prior) {
   if (hash(fs.readFileSync(old)) !== prior.installedPackageSha256) throw new Error('Prior resource differs; not replacing');
 }
 const loadedModules = adb(['shell', 'lsmod'], '01-native-reset-gate');
-if (['rw4winput', 'rw4wframe', 'rw4worker', 'rw4bridge', 'rw4task', 'rw4time', 'rw4fs', 'rw4stdio'].some(n => loadedModules.includes(n))) {
+if (['rw4doom', 'rw4first', 'rw4winput', 'rw4wframe', 'rw4worker', 'rw4bridge', 'rw4task', 'rw4time', 'rw4fs', 'rw4stdio'].some(n => loadedModules.includes(n))) {
   throw new Error('Own native module is still loaded; complete its lifecycle before updating/resetting');
 }
 if (action === 'refresh' && /^nsh: ls: stat failed: 2\r?$/im.test(
@@ -75,7 +75,7 @@ prepared[5] = 10;
 prepared.write(id, 40, 9, 'ascii');
 const resource = path.join(destination, 'resource.bin');
 fs.writeFileSync(resource, prepared);
-const record = { action, variant, bridgeMode: build.bridgeMode === true, id, guest, snapshot, originalPackageSha256: hash(bytes),
+const record = { action, variant, bridgeMode: build.bridgeMode === true, doomMode: build.doomMode === true, id, guest, snapshot, originalPackageSha256: hash(bytes),
   installedPackageSha256: hash(prepared), headerEdits: [{ offset: 5, value: 10 }, { offset: 40, ascii: id }],
   physicalTransport: false, createdAtUtc: new Date().toISOString(), resetRequested: false };
 fs.writeFileSync(path.join(destination, 'install.json'), JSON.stringify(record, null, 2) + '\n');
