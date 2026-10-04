@@ -1,7 +1,7 @@
 [CmdletBinding()]
-param([ValidateSet('Hello', 'DisplayProbe', 'DisplayPattern', 'Touch', 'UIProbe', 'NativeBridge', 'UIProbeBridge', 'FrameLoop', 'Controls', 'TimeProbe', 'FsProbe', 'StdioProbe', 'TaskProbe', 'LauncherProbe', 'WorkerFrames', 'WorkerInput', 'DoomAudit', 'Doom')][string]$Target = 'Hello')
+param([ValidateSet('Hello', 'DisplayProbe', 'DisplayPattern', 'Touch', 'UIProbe', 'NativeBridge', 'UIProbeBridge', 'FrameLoop', 'Controls', 'TimeProbe', 'FsProbe', 'StdioProbe', 'TaskProbe', 'LauncherProbe', 'WorkerFrames', 'WorkerInput', 'RuntimeProbe', 'DoomAudit', 'DoomShimAudit', 'Doom')][string]$Target = 'Hello')
 
-if ($Target -eq 'Doom') { throw 'Executable DOOM gate closed: libc ABI, owned allocator/streams/cooperative exit and integration remain pending. DoomAudit compiles core objects for inspection only.' }
+if ($Target -eq 'Doom') { throw 'Executable DOOM gate closed: remaining library ABI, DG adapters and engine lifecycle integration pending. RuntimeProbe tests the shim; DoomShimAudit compiles an inspection object only.' }
 $ErrorActionPreference = 'Stop'
 $rw4BuildTool = Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-hello.mjs'
 if ($Target -eq 'Hello') {
@@ -36,6 +36,10 @@ if ($Target -eq 'Hello') {
     & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/package-ui-probe.mjs') wframe
 } elseif ($Target -eq 'DoomAudit') {
     & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-doom-audit.mjs')
+} elseif ($Target -eq 'DoomShimAudit') {
+    & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-doom-audit.mjs') shim
+} elseif ($Target -eq 'RuntimeProbe') {
+    & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-runtime.mjs')
 } elseif ($Target -eq 'WorkerInput') {
     & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-worker-input.mjs')
     if ($LASTEXITCODE -ne 0) { throw 'Worker input C build failed.' }

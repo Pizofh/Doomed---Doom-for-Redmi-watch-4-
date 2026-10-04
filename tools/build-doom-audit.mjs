@@ -6,7 +6,9 @@ import { spawnSync } from 'node:child_process';
 import { projectRoot, packageRoot } from './verify-emulator.mjs';
 
 const mode=process.argv[2]??'build';
-if(process.argv.length>3||!['build','inspect'].includes(mode))throw Error('Only build/inspect accepted; no runtime target');
+if(process.argv.length>3||!['build','inspect','shim','inspect-shim'].includes(mode))throw Error('Only build/inspect/shim/inspect-shim accepted; no runtime target');
+const withShim=mode==='shim'||mode==='inspect-shim';
+const inspectOnly=mode==='inspect'||mode==='inspect-shim';
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const guestHash = '849a04f6d461938022ffb820143f870be7e91933b3fb538d009b24c7fa6098fa';
 const root = path.join(projectRoot, 'tools/local/arm-14.3-review');
@@ -42,30 +44,53 @@ if(hash(fs.readFileSync(path.join(packageRoot,'system-images/vela-release-4.0/nu
 const make=fs.readFileSync(path.join(upstream,'doomgeneric/Makefile'),'utf8');
 const sources=make.match(/^SRC_DOOM = (.+)$/m)[1].trim().split(/\s+/).map(n=>n.replace(/\.o$/,'.c')).filter(n=>n!=='doomgeneric_xlib.c');
 if(sources.length!==80||sources.some(n=>!manifest.files.some(e=>e.path==='doomgeneric/'+n)))throw Error('Source recipe changed');
-const destination=path.join(projectRoot,'build/doom-audit');fs.mkdirSync(destination,{recursive:true});
+const relativeDestination=withShim?'build/doom-shim-audit':'build/doom-audit';
+const destination=path.join(projectRoot,relativeDestination);fs.mkdirSync(destination,{recursive:true});
 const flags=['-mcpu=cortex-a7','-mthumb','-mfpu=neon-vfpv4','-mfloat-abi=hard','-mlong-calls',
   '-std=gnu17','-Os','-ffreestanding','-fno-builtin','-fcommon','-fno-unwind-tables','-fno-asynchronous-unwind-tables',
   '-fno-stack-protector','-fstack-usage','-Wall','-Wextra','-DNORMALUNIX','-D_DEFAULT_SOURCE',
   '-DDOOMGENERIC_RESX=320','-DDOOMGENERIC_RESY=200','-Ithird_party/doomgeneric/doomgeneric'];
+if(withShim)flags.push('-ffunction-sections','-falign-functions=4','-DRW4_ENGINE',
+  '-Idoom/platform-rw4/compat','-Idoom/platform-rw4','-include','doom/platform-rw4/runtime.h');
 // Compiler's newlib headers are used only to find compile/import issues.
 // Their FILE, stderr, struct stat and related ABI are NOT approved guest ABI.
 const objects=[];
+const artifact=relativeDestination+'/engine-audit.o';
+const shimSources=['doom/platform-rw4/runtime.c','doom/platform-rw4/runtime.h','doom/platform-rw4/module.ld',
+  'doom/platform-rw4/compat/stdio.h','doom/platform-rw4/compat/ctype.h','doom/platform-rw4/compat/sys/stat.h'];
+const shimSourceSha256=withShim?hash(shimSources.map(p=>fs.readFileSync(path.join(projectRoot,p),'utf8').replace(/\r\n/g,'\n')).join('\n')):null;
+if(withShim){
+  let overlay=fs.readFileSync(path.join(upstream,'doomgeneric/i_system.c'),'utf8').replace(/\r\n/g,'\n');
+  const replacements=[[/void I_Quit \(void\)\n\{[\s\S]*?\n\}/,'void I_Quit (void)\n{\n    rw4_exit(0);\n}'],
+    [/void I_Error \(char \*error, \.\.\.\)\n\{[\s\S]*?\n\}/,'void I_Error (char *error, ...)\n{\n    va_list args;\n    va_start(args, error);\n    rw4_error(error, args);\n}']];
+  for(const[match,replace]of replacements){if((overlay.match(new RegExp(match.source,'g'))??[]).length!==1)throw Error('Exit overlay anchor changed');overlay=overlay.replace(match,replace);}
+  if(inspectOnly){if(fs.readFileSync(path.join(destination,'i_system.c'),'utf8')!==overlay)throw Error('Generated exit overlay changed');}
+  else fs.writeFileSync(path.join(destination,'i_system.c'),overlay);
+}
 try{
-  if(mode==='inspect'){
+  if(inspectOnly){
     const prior=JSON.parse(fs.readFileSync(path.join(destination,'result.json')));
     if(prior.sha256!==hash(fs.readFileSync(path.join(destination,'engine-audit.o')))||
-       prior.sha256!=='30ba8ead4ca94fd69d661d774edd3a9fbd449dfe68696798ad4519c7daa56366'||
+       prior.sha256!==(withShim?'0281a7dc95222408d41c3eb05cc83ae4531b899b104995bfb7537f0484bd4f3b':'30ba8ead4ca94fd69d661d774edd3a9fbd449dfe68696798ad4519c7daa56366')||
+       (withShim&&shimSourceSha256!=='8571e1c5da855a3b46721b204c1d833810bc5a1d61cfc0df5fc409510afbc8a0')||
        JSON.stringify(prior.flags)!==JSON.stringify(flags))throw Error('Inspect only the already audited artifact');
   }else{
     for(const name of sources){
-      const obj='build/doom-audit/'+name.replace(/\.c$/,'.o');
-      run(path.join(root,'bin/arm-none-eabi-gcc.exe'),[...flags,'-c','third_party/doomgeneric/doomgeneric/'+name,'-o',obj]);objects.push(obj);
+      const obj=relativeDestination+'/'+name.replace(/\.c$/,'.o');
+      const src=withShim&&name==='i_system.c'?relativeDestination+'/i_system.c':'third_party/doomgeneric/doomgeneric/'+name;
+      run(path.join(root,'bin/arm-none-eabi-gcc.exe'),[...flags,'-c',src,'-o',obj]);objects.push(obj);
     }
-    run(path.join(root,'arm-none-eabi/bin/ld.exe'),['-r',...objects,'-o','build/doom-audit/engine-audit.o']);
+    if(withShim){
+      const shimFlags=flags.slice(0,-7); // remove engine-only define/includes/forced header
+      const obj=relativeDestination+'/runtime.o';
+      run(path.join(root,'bin/arm-none-eabi-gcc.exe'),[...shimFlags,'-ffunction-sections','-falign-functions=4','-Idoom/platform-rw4','-c','doom/platform-rw4/runtime.c','-o',obj]);objects.push(obj);
+    }
+    run(path.join(root,'arm-none-eabi/bin/ld.exe'),['-r',...(withShim?['-T','doom/platform-rw4/module.ld']:[]),...objects,'-o',artifact]);
   }
-  const readelf=run(path.join(root,'bin/arm-none-eabi-readelf.exe'),['-W','-h','-S','-s','-r','build/doom-audit/engine-audit.o']);
+  const readelf=run(path.join(root,'bin/arm-none-eabi-readelf.exe'),['-W','-h','-S','-s','-r',artifact]);
   fs.writeFileSync(path.join(destination,'engine-readelf.txt'),readelf);
   const imports=[...readelf.matchAll(/\bUND[ \t]+(\S+)[ \t]*$/gm)].map(m=>m[1]).sort();
+  if(withShim&&['_impure_ptr','_ctype_','abs','exit','system','mkdir','remove','rename','fwrite','fflush','calloc','realloc','strdup','stderr'].some(n=>imports.includes(n)))throw Error('Unwrapped engine resource/private ABI import');
   // Read names from the already hash-pinned ELF; do not dump its large symtab.
   const guest=fs.readFileSync(path.join(packageRoot,'system-images/vela-release-4.0/nuttx'));
   const exportedNames=new Set(),shoff=guest.readUInt32LE(32),shsize=guest.readUInt16LE(46),shcount=guest.readUInt16LE(48);
@@ -82,7 +107,7 @@ try{
     }
   }
   const stack=[];
-  for(const name of sources){
+  for(const name of [...sources,...(withShim?['runtime.c']:[])]){
     const file=path.join(destination,name.replace(/\.c$/,'.su'));
     for(const l of fs.readFileSync(file,'utf8').trim().split(/\r?\n/)){
       const [where,n,type]=l.split('\t');if(where)stack.push({where,bytes:Number(n),type});
@@ -93,17 +118,19 @@ try{
     .map(m=>({name:m[3],size:Number(m[2]),alignment:Number.parseInt(m[1],16)}));
   const commonBytes=common.reduce((n,e)=>n+e.size,0);
   const allocatedSectionBytes=sections.reduce((n,l)=>n+Number.parseInt(l.match(/\]\s+\S+\s+\S+\s+\S+\s+\S+\s+(\S+)/)[1],16),0);
-  const compilerLogs=mode==='inspect'?JSON.parse(fs.readFileSync(path.join(destination,'build-log.json'))):logs;
+  const compilerLogs=inspectOnly?JSON.parse(fs.readFileSync(path.join(destination,'build-log.json'))):logs;
   const output=fs.readFileSync(path.join(destination,'engine-audit.o'));
-  const record={revision:manifest.revision,guestSha256:guestHash,filesCompiled:sources.length,
+  const reviewedShimImports=['__errno','clearerr','fclose','feof','ferror','fopen','fread','free','fseek','ftell','longjmp','malloc','nxsched_gettid','printf','setjmp','vsnprintf'];
+  const record={revision:manifest.revision,guestSha256:guestHash,filesCompiled:sources.length,withShim,shimSourceSha256,
+    overlaySha256:withShim?hash(fs.readFileSync(path.join(destination,'i_system.c'))):null,
     flags,sha256:hash(output),bytes:output.length,sections,
-    unresolvedImports:imports.map(name=>({name,guestSymbolPresent:exportedNames.has(name),abiReviewed:false})),
+    unresolvedImports:imports.map(name=>({name,guestSymbolPresent:exportedNames.has(name),abiReviewed:withShim&&reviewedShimImports.includes(name)})),
     commonSymbols:common.length,commonBytes,allocatedSectionBytes,
     staticBytesBeforeAlignment:allocatedSectionBytes+commonBytes,
     largestFunctionStack:stack.toSorted((a,b)=>b.bytes-a.bytes).slice(0,12),
     dynamicStackFunctions:stack.filter(s=>s.type!=='static'),warnings:compilerLogs.reduce((n,l)=>n+[...l.stderr.matchAll(/warning:/g)].length,0),
-    headers:'Arm newlib, compile-audit only; not runtime ABI',soundEnabled:false,x11Included:false,
+    headers:withShim?'Owned stdio/ASCII ctype; other newlib declarations not yet approved guest ABI':'Arm newlib, compile-audit only; not runtime ABI',soundEnabled:false,x11Included:false,
     linking:'ld -r, no libc/libm/libgcc imports bound',contractReviewed:false,loadableModule:false,guestExecuted:false,physicalTransport:false};
   fs.writeFileSync(path.join(destination,'result.json'),JSON.stringify(record,null,2)+'\n');
   console.log(JSON.stringify(record,null,2));
-}finally{fs.writeFileSync(path.join(destination,mode==='inspect'?'inspect-log.json':'build-log.json'),JSON.stringify(logs,null,2)+'\n');}
+}finally{fs.writeFileSync(path.join(destination,inspectOnly?'inspect-log.json':'build-log.json'),JSON.stringify(logs,null,2)+'\n');}
