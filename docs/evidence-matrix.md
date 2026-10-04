@@ -164,6 +164,13 @@ Continuación 2026-10-03: lua-api confirmó disp.load_scr/get_scr_act y Timer en
 | Umem maxused aumenta en ensayo de frames | Guest S3 | R54 free | CONFIRMADO EN EMULADOR | Alta para observación | +134080bytes, primera muestra→300 | Causa SIN EVIDENCIA; uso actual muestreado no creció sostenidamente |
 | EXIT y cierre de watchface limpian C/archivos con Timer presente | Guest S3 UIProbe | R54 snapshots/logs | CONFIRMADO EN EMULADOR | Alta local | Dos EXIT; tercer START→Storage sin EXIT | Timer firmware __gc inspeccionado; no prueba crash/kill |
 | Animación garantiza recursos/memoria acotados indefinidamente | Guest S3 / RW4 | Solo ensayo300frames | SIN EVIDENCIA | No evaluable | No | Dos slots y un Timer; high-water y pruebas prolongadas pendientes |
+| Controles mantenidos entregan edges C sin duplicarlos al sostener | Guest S3 UI propia | R55 cola/26 snapshots | CONFIRMADO EN EMULADOR | Alta local | Avance, diagonales, giro y FIRE | Sin motor ni ergonomía física |
+| Cola de32 cancela y pausa ante overflow | Guest S3 módulo propio | R55 CLI | CONFIRMADO EN EMULADOR | Alta local | Libera4 teclas, descarta downs antiguos | Un consumidor; no contrato concurrente general |
+| Pausa mientras ratón sigue pulsado deja held0 | Guest S3 UI propia | R55 HOLD TEST | CONFIRMADO EN EMULADOR | Alta local | Cancelación del mismo path de pausa | No pérdida real de foco stock durante contacto |
+| Panel stock mantiene controles pausados al regresar | Guest S3 overlay ensayado | R55 seq183 estable y RESUME193 | CONFIRMADO EN EMULADOR | Alta local | Tap neutro no alteró snapshot; resume exige nueva acción | Solo overlay y gesto ensayados |
+| Cierre Lua con FIRE mantenido limpia módulo | Guest S3 CLI | R55 normal/error | CONFIRMADO EN EMULADOR | Alta local | GC retiene, lua_close cancela/descarga | No panic, kill ni crash abrupto |
+| Controles cómodos en muñeca / movimiento+disparo simultáneos | RW4 / prototipo | R55 sin ensayo físico | SIN EVIDENCIA | No evaluable | Un dedo debe detener movimiento para FIRE | Corona/multitouch/auto-fire pendientes |
+| Foco stock durante contacto mantenido garantiza cancelación | RW4 / guest S3 | No ensayo directo | SIN EVIDENCIA | No evaluable | HOLD TEST y pausa stock son ensayos separados | No inferir garantía desde ambos |
 
 ## Correcciones de interpretación
 

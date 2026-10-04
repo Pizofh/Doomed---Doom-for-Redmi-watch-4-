@@ -16,6 +16,8 @@ Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4
 
 **Frames C en LVGL:** patrón RGB565 de320×140 animado durante300 actualizaciones, con dos archivos fijos en tmpfs y un Timer Lua. Pausa/reanudación, EXIT/reentrada y cierre al cambiar de watchface comprobados. Lua tras GC estable en la prueba corta; un contador de máximo uso del guest aumentó sin causa aislada. No Doom ni FPS del motor medidos. [Resultado, memoria y reproducción](docs/native-frame-loop-emulator.md), [snapshot anterior](docs/native-frame-lvgl-emulator.md).
 
+**Controles mantenidos:** avanzar, giro y disparo llegan a C con cola de32 eventos; pausa, cancelación con contacto activo y salida liberan teclas. Dos EXIT/reentrada y cambio de watchface limpian el módulo. Panel stock deja el prototipo pausado hasta RESUME explícito. No Doom ni ergonomía física demostrados. [Pruebas, fallo corregido y límites](docs/native-controls-emulator.md).
+
 - Crear documentación, matriz de evidencia y herramientas de inspección para PC.
 - Identificar dependencias originales y fijar revisiones consultadas.
 - Preparar revisión del paquete del emulador y captura de inventario de solo lectura.

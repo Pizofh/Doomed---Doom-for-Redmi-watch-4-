@@ -1,6 +1,6 @@
 # Controles táctiles propuestos
 
-Estado: diseño para un prototipo en PC/emulador. No implementado ni validado en el M2315W1. El usuario delega la elección y pide evitar controles incómodos; la comodidad es un criterio de aceptación, no un resultado demostrado.
+Estado: diseño con [prototipo mantenido validado en PC/emulador](native-controls-emulator.md). No implementado ni validado en el M2315W1. El usuario delega la elección y pide evitar controles incómodos; la comodidad es un criterio de aceptación, no un resultado demostrado.
 
 ## Primera propuesta
 
@@ -15,7 +15,7 @@ Layout inicial para 390×450, ajustable tras probarlo:
 | Disparo | x245, y255, 125×100 | Mantener para disparar; soltar para detener |
 | Menú | x245, y365, 125×60 | Pausar y mostrar USAR, REANUDAR y SALIR grandes |
 
-Estas coordenadas son una propuesta, no el layout de UIProbe actual. Conservar márgenes y evitar depender de gestos que empiezan en el borde del sistema. La salida propia del menú debe funcionar aunque la corona no sea accesible.
+La imagen320×200 sigue siendo propuesta para Doom; el prototipo de controles utiliza patrón320×140 en x35,y50 y las tres zonas inferiores de esta tabla. Conservar márgenes y evitar depender de gestos que empiezan en el borde del sistema. La salida propia del menú debe funcionar aunque la corona no sea accesible.
 
 Movimiento: indicar un centro visible dentro de la zona. Desplazar el dedo hacia arriba activa avanzar; hacia los lados, girar; una diagonal combina ambos. Una zona neutra amplia evita giro involuntario. Mantener el dedo conserva las teclas activas; soltar detiene el movimiento. Primero probar una separación sencilla entre neutral y activo, sin prometer velocidad analógica ni modificar la física de Doom.
 
@@ -37,4 +37,4 @@ Después del checkpoint de frames repetidos, usar un patrón y un indicador de a
 
 El emulador valida coordenadas, eventos y lifecycle. Un dibujo a escala de pantalla puede orientar el tamaño de las zonas; ni ese dibujo ni el ratón validan ergonomía en la muñeca. La prueba física de comodidad solo llegará tras el gate de hardware y su aprobación. No hay todavía métricas de latencia, precisión o comodidad.
 
-El checkpoint de frames repetidos se completó en un ensayo finito de300 imágenes: [resultados y límites](native-frame-loop-emulator.md). Ahora toca probar input mantenido y cancelación al pausar/salir sobre una pantalla de controles. No compilar Doom ni tocar el reloj para probar este diseño.
+El checkpoint de frames repetidos se completó en un ensayo finito de300 imágenes: [resultados y límites](native-frame-loop-emulator.md). Input mantenido pasó26 snapshots de UI y pruebas separadas de cola C, panel stock y cierre Lua. Ergonomía, movimiento+disparo simultáneos y pérdida real de foco stock durante contacto mantenido siguen pendientes. Siguiente meta: tiempo monotónico y espera acotada para C. No compilar Doom ni tocar el reloj para probar este diseño.
