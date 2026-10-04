@@ -64,3 +64,5 @@ Probar abrir/cerrar repetidamente y medir liberación de RAM, input y display. T
 ## R61: worker y presentación separados, solo emulador
 
 [Prueba de frames](native-worker-frame-emulator.md): worker detached de la UI genera RGB565; stream con dos slots y ownership release/acquire entrega copias completas. Lua/UI presenta mediante archivos propios y LVGL, con cache-drop restringido al owner UI. Dos EXIT y cierre/reentrada limpian sin reboot; el finalizador no toca LVGL y conserva módulo hasta reentrada. Uninit requiere cero referencias y worker retirado/PID ausente. La existencia de insmod y símbolos internos en este guest FLAT no demuestra userspace aislado, soporte ELF genérico ni compatibilidad M2315W1. Concurrencia arbitraria de open/unload y crash siguen sin validar.
+
+R63 posterior a la tabla: [WAD legítimo leído desde C](native-wad-emulator.md) ya validado en NSH del guest exacto. Motor, allocator, lectura en worker, persistencia y RW4 siguen pendientes. Próximo checkpoint: auditoría libc/memoria/salida y preparación del build doomgeneric sin sonido.

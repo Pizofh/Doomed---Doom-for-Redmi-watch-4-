@@ -272,3 +272,6 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Cierre Lua y reentrada conservan/recogen código e imágenes | Watchface propia/S3 | R62 close/reentry/final | CONFIRMADO EN EMULADOR | Alta local | Worker968 retirado antes de unload | No crash cleanup ni código persistente |
 | BSS179620bytes/imports10/79 ABS32 | ELF propio R62 | Build/readelf exactos | CONFIRMADO EN EMULADOR | Alta estática | Entry0xf1d y payload8436bytes revisados | No RAM total/pico física |
 | Native input/display funciona en M2315W1 | RW4 físico | Ninguna ABI/runtime/recovery específica | SIN EVIDENCIA | No evaluable | No | Gate físico cerrado |
+
+| doom1.wad shareware 1.9 distribuible bajo condiciones id | Datos PC | [Copyright Debian con aclaración Carmack](https://metadata.ftp-master.debian.org/changelogs/non-free/d/doom-wad-shareware/doom-wad-shareware_1.9.fixed-5_copyright) | Evidencia documental; no clasificación de dispositivo | Alta documental | Archivo local4196020, MD5/SHA1 contrastados | No GPL/assets comerciales; sin WAD en Git ni firma verificada |
+| C lee WAD completo/1264entries/16resources | S3 emulado exacto | [R63](native-wad-emulator.md), native-wad-1791133863026 | CONFIRMADO EN EMULADOR | Alta local | Checksums PC iguales, EOF,close,unload/cleanup | No motor, lectura worker, persistencia ni RW4 |

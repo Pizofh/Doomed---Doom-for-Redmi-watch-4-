@@ -6,6 +6,8 @@ Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4
 
 **Display C:** patrón RGB565 mostrado y retirado; píxeles originales, touch y panel stock comprobados después sin reboot en una prueba con pantalla activa. Framebuffer compartido, no ownership exclusivo. [Captura y reproducción](docs/native-display-emulator.md).
 
+**WAD shareware real:** C validó el directorio1264entradas, leyó16 recursos y recorrió los4.196.020bytes con checksums iguales al PC. Datos intactos, módulo y temporales retirados sin reboot. Todavía sin motor Doom ni hardware. [Procedencia y resultado R63](docs/native-wad-emulator.md).
+
 ## Alcance de esta sesión
 
 **Touch C:** observador independiente leyó 36 muestras de `/dev/input0`; TouchEvents y el panel stock respondieron simultáneamente. Descriptor cerrado y módulo descargado sin reboot posterior. [Contrato, logs y reproducción](docs/native-touch-emulator.md).
