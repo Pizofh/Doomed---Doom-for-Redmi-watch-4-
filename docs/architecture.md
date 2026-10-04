@@ -33,6 +33,8 @@ Tiempo R56: [CLOCK_MONOTONIC y esperas C medidos](native-time-emulator.md) en ta
 
 ## Persistencia frente a residencia
 
+FS R57: [open/read/lseek/close probados sobre fixture tmpfs](native-fs-emulator.md), con posiciones64, EOF y errores. No es persistencia: tmpfs se pierde al reset. El lector stdio upstream requiere un checkpoint separado con fopen/fread/fseek/fclose antes de integrar WAD; la ejecución del motor y su scheduling siguen pendientes.
+
 Ruta conceptual, **no una ruta aprobada en RW4**:
 
 ```text

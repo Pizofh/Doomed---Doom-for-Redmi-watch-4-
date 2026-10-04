@@ -18,7 +18,9 @@ Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4
 
 **Controles mantenidos:** avanzar, giro y disparo llegan a C con cola de32 eventos; pausa, cancelación con contacto activo y salida liberan teclas. Dos EXIT/reentrada y cambio de watchface limpian el módulo. Panel stock deja el prototipo pausado hasta RESUME explícito. No Doom ni ergonomía física demostrados. [Pruebas, fallo corregido y límites](docs/native-controls-emulator.md).
 
-**Tiempo C:** reloj monotónico con257 lecturas sin retroceso y19 esperas relativas medidas. Panel stock responde mientras espera la tarea de consola; retorno, descarga y cleanup comprobados. Esperas pequeñas tienen variación y no se permite dormir en el callback UI. [ABI, mediciones y reproducción](docs/native-time-emulator.md). Siguiente checkpoint: lectura/seek de archivos desde C; Doom sigue sin compilar.
+**Tiempo C:** reloj monotónico con257 lecturas sin retroceso y19 esperas relativas medidas. Panel stock responde mientras espera la tarea de consola; retorno, descarga y cleanup comprobados. Esperas pequeñas tienen variación y no se permite dormir en el callback UI. [ABI, mediciones y reproducción](docs/native-time-emulator.md).
+
+**Archivos C:** lectura completa de un fixture propio de1MiB+37 bytes,41 ventanas por posición, EOF, cuatro errores y reapertura comprobados en tmpfs. Archivo intacto y módulo/temporales retirados sin reboot. [Contrato y reproducción](docs/native-fs-emulator.md). Siguiente checkpoint: stdio usado por el lector WAD de doomgeneric; Doom sigue sin compilar y el gate físico cerrado.
 
 - Crear documentación, matriz de evidencia y herramientas de inspección para PC.
 - Identificar dependencias originales y fijar revisiones consultadas.

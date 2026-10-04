@@ -189,3 +189,17 @@ Continuación 2026-10-03: lua-api confirmó disp.load_scr/get_scr_act y Timer en
 | RAM-only implica sandbox | NuttX general | R27/R28 | REFUTADO | No | Carga kernel/FLAT puede afectar todo el sistema |
 
 No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha demostrado.
+
+## Archivos C R57: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| off_t signed64, size_t unsigned32, O_RDONLY1 | Guest S3 ELF exacto | R57 DWARF/macros/disassembly | CONFIRMADO EN EMULADOR | Alta estática/local | C con tipos verificados pasa | No ABI RW4 o newlib |
+| C lee archivo propio completo en tmpfs | Guest S3 | R57 bytes y checksum | CONFIRMADO EN EMULADOR | Alta local | 1048613 bytes,2049 chunks | No storage persistente ni WAD |
+| C lee por posición, con tres orígenes y EOF | Guest S3 | R57 41 ventanas/offsets | CONFIRMADO EN EMULADOR | Alta local | Nueve bordes y32 posiciones deterministas | Solo fixture propio |
+| lseek conserva palabra alta de posición | Guest S3 tmpfs | R57 SET/CUR a 2^32+7 | CONFIRMADO EN EMULADOR | Alta local | Retorno y restore0 | Sin lectura allí ni archivo4GiB |
+| Errores ENOENT/EBADF/EINVAL se reciben desde C | Guest S3 | R57 cuatro errores controlados | CONFIRMADO EN EMULADOR | Alta local | Captura inmediata errno | No fallos de disco/agotamiento |
+| Dos aperturas tienen cursores independientes y reopen inicia0 | Guest S3 | R57 read/seek/close | CONFIRMADO EN EMULADOR | Alta local | Posiciones777/333, reapertura byte165 | Sin concurrencia arbitraria |
+| Fixture queda intacto y módulo/temporales se retiran | Guest S3 | R57 SHA256,lsmod,ls | CONFIRMADO EN EMULADOR | Alta local | Cleanup sin reboot | No prueba de UI activa ni crash cleanup |
+| Stdio del lector WAD de doomgeneric funciona | Guest S3 / RW4 | R57 prueba POSIX distinta de stdio | SIN EVIDENCIA | No evaluable | No | fopen/fread/fseek/fclose siguientes |
+| Archivo C persiste tras reset | Guest S3 / RW4 | R57 solo tmpfs | SIN EVIDENCIA | No evaluable | No | Persistencia C/WAD pendiente |
