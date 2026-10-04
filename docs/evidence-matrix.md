@@ -279,3 +279,13 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 |80C originales doomgeneric compilan para ARM | Host/toolchain14.3, target compileaudit S3 | [R64](doom-build-audit.md), build/doom-audit/result.json | Confirmado build local; sin runtime | Alta local | Objeto425928bytes/50imports sinresolver | No engine ejecutado ni compatibilidad RW4 |
 |6MiBzone y256000DGbuffer a320x200 | Fuentes doomgeneric fijadas | i_system.c, doomgeneric.c R64 | Confirmado en fuente; no RAM medida | Alta documental |525351bytes estáticos antespadding | No presupuesto de RAM libre M2315W1 |
 | I_Quit upstream retorna/exitfatal y posibleswrites requieren port | Doomgeneric original, ORIGCODEoff | R64 i_system/m_config/g_game | Confirmado por inspección fuente | Alta local | Sin ejecutar esas rutas | No detener worker medianteexit directo |
+
+## Runtime R65: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| malloc/free y formato variádico utilizables desde worker propio | Guest S3 exacto | [R65](doom-runtime-emulator.md), assembly y ocho ciclos | CONFIRMADO EN EMULADOR | Alta local | Calloc/realloc/strdup/log 1.5 pasan | No ABI ni RAM física RW4 |
+| Salida local limpia reservas y FILE opacos | Shim propio, S3 | R65 return/quit/error/stop/OOM/invalidfree | CONFIRMADO EN EMULADOR | Alta local | Cero blocks/streams, join0, unload sin reboot | No sandbox, crash recovery ni engine I_Error probado |
+| Escrituras y shell del engine están interpuestos | Port propio | Runtime/header imports y denials R65 | Confirmado por fuente/build y prueba local | Alta para contrato | 7 denials/ciclo; fixture intacto | No aislamiento frente a corrupción de memoria |
+| Motor compila con headers propios y salida adaptada | Build ARM R65 | Objeto435288bytes/39imports pendientes | Confirmado build local; sin runtime | Alta local | Build e inspect-shim pasan | DG6/17biblioteca sin completar; no cargar objeto |
+| Salida limpia de Doom real o ejecución en M2315W1 | Engine/hardware | Ninguna ejecución del motor | SIN EVIDENCIA | No evaluable | No | Runtime pequeño no demuestra estabilidad del motor |

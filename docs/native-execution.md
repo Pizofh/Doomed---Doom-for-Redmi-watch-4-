@@ -68,3 +68,5 @@ Probar abrir/cerrar repetidamente y medir liberación de RAM, input y display. T
 R63 posterior a la tabla: [WAD legítimo leído desde C](native-wad-emulator.md) ya validado en NSH del guest exacto. Motor, allocator, lectura en worker, persistencia y RW4 siguen pendientes. Próximo checkpoint: auditoría libc/memoria/salida y preparación del build doomgeneric sin sonido.
 
 R64: [build compileaudit del motor](doom-build-audit.md) completado. Todavía50imports sinresolver y ninguna ABI libc completa aprobada. Siguiente shim/allocator/streams/salida; no cargar el objeto parcial.
+
+R65: [shim de recursos/salida](doom-runtime-emulator.md) pasa ocho runs dentro de worker139, con join y unload sin reboot. Setjmp/longjmp estándar del guest inspeccionados, no builtins ni jmp_buf Newlib. Stop probado desde el propio worker; externo pendiente. Malloc/free y vsnprintf probados, FILE opaco con lectura de ruta única. Motor recompila con shim/overlay de I_Quit/I_Error; objeto no cargable con39imports pendientes, incluyendo6DG. FLAT sin sandbox y M2315W1 sin ABI demostrada. Siguiente bindings/adaptadores para primer frame real, sin repetir pruebas anteriores.

@@ -122,3 +122,7 @@ Las páginas web son referencias móviles consultadas en esta fecha. Los links a
 ## R64,2026-10-04: compileaudit del motor
 
 [Build real80C e inventario](doom-build-audit.md), fuentes originales181Gitblobs verificados/licencia preservada. Partial link425928bytes/50imports; no guest execution. No se repitieron R58/R62/R63 ni hubo resets. Newlibheaders noABIvalidada; zone6MiB, framebuffer256000 y static525351 antespadding/extras. Salida/allocations/streams/writes requieren shim. Primer inspectorENOBUFS traslink corregido; resultado final y read-onlyinspect pasan. Siguiente contrato runtime pequeño/shim, hardwarecerrado.
+
+## R65,2026-10-04: runtime de recursos y salida
+
+[Contrato y resultado](doom-runtime-emulator.md): ocho ciclos C pasan en worker139, con FILE/allocations limpios y join/unload sin reset. Inspeccionados malloc/free/vsnprintf/setjmp/longjmp del guest exacto. Build80C+shim compila,39imports pendientes; overlay solo I_Quit/I_Error, upstream intacto. No engine ejecutado ni hardware. Pruebas anteriores no repetidas; siguiente bindings/DG y primer frame real acotado.

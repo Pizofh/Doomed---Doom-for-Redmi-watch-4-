@@ -1,5 +1,7 @@
 # DOOM en Redmi Watch 4
 
+**Avance R65:** la capa C de memoria, lectura y salida pasó ocho ciclos en un worker del emulador; terminó y se descargó sin reboot. Doom también compila con ella, sin estructuras privadas Newlib ni escrituras directas. Todavía falta enlazar funciones de biblioteca y adaptar DG para ejecutar el motor. [Resultados y siguiente checkpoint](docs/doom-runtime-emulator.md). No se tocó el reloj físico.
+
 Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4, modelo objetivo **M2315W1**, preservando el firmware Xiaomi y las funciones normales del reloj si resulta técnicamente viable.
 
 **Estado al 2026-10-04:** TouchEvents original validado en el emulador Xiaomi Watch S3 a 390×450, con cierre y reentrada sin reinstalar. Un hello C propio imprimió su mensaje y se descargó mediante rmmod en dos ciclos; enlaza puts desde la imagen exacta del emulador. [Prueba nativa y limitaciones](docs/hello-native-emulator.md), [prueba Lua](docs/touch-events-emulator.md). El motor ahora compila para inspección; no se ejecutó Doom ni se conectó el reloj físico. Estado para continuar en [HANDOFF](docs/HANDOFF.md).
@@ -26,7 +28,7 @@ Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4
 
 **Stdio del lector WAD:** fopen/fread/fseek/ftell/fclose pasaron con el fixture propio, incluidos buffers, longitud y tres reaperturas. En este guest, seek no limpia EOF; clearerr sí. [Resultado y límite concreto](docs/native-stdio-emulator.md).
 
-**Worker C:** [START/EXIT](docs/native-launcher-emulator.md), [frames en LVGL](docs/native-worker-frame-emulator.md) y ahora [controles consumidos por el worker](docs/native-worker-input-emulator.md) validados. R62:38 observaciones,22 key edges reales desde C, cuatro imágenes completas, pausa/overflow neutros, STOP con FIRE pulsado y cierre/reentrada sin reboot. Storage activa; módulo y temporales propios retirados. Todavía no se cargó WAD ni se compiló Doom; gate físico cerrado. Siguiente checkpoint: verificar procedencia/licencia de doom1.wad y comprobar su lectura desde C.
+**Worker C:** [START/EXIT](docs/native-launcher-emulator.md), [frames en LVGL](docs/native-worker-frame-emulator.md) y ahora [controles consumidos por el worker](docs/native-worker-input-emulator.md) validados. R62:38 observaciones,22 key edges reales desde C, cuatro imágenes completas, pausa/overflow neutros, STOP con FIRE pulsado y cierre/reentrada sin reboot. Storage activa; módulo y temporales propios retirados. R63 completó la lectura del WAD y R65 el build con runtime; el motor todavía no se ejecutó y el gate físico sigue cerrado.
 
 - Crear documentación, matriz de evidencia y herramientas de inspección para PC.
 - Identificar dependencias originales y fijar revisiones consultadas.
