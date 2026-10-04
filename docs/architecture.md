@@ -29,6 +29,8 @@ Display: comparar LVGL frente a framebuffer después de conocer acceso, ownershi
 
 Input: [cola C de32 eventos y cancelación probadas en emulador](native-controls-emulator.md), sin motor. Adaptador futuro de press/release hacia teclas de Doom, coordenadas escaladas y liberación de teclas al cancelar gesto/cerrar. Giro, avanzar y fire primero. [Propuesta de controles](controls.md): zonas grandes, un dedo, avanzar y girar combinados; ergonomía aún no validada. Corona y más controles después de una API demostrada. Tiempo: reloj monotónico y sleep medidos, no reloj de pared. FS: acceso aleatorio al WAD, errores/cuotas y ownership de archivos. Audio excluido del primer milestone.
 
+Tiempo R56: [CLOCK_MONOTONIC y esperas C medidos](native-time-emulator.md) en tarea NSH separada, panel stock activo. No dormir dentro del callback UI ni confundir este ensayo con scheduling del motor. El futuro port debe calcular tiempo transcurrido real; las esperas1ms variaron y aún no hay backend DG_GetTicksMs/DG_SleepMs integrado.
+
 ## Persistencia frente a residencia
 
 Ruta conceptual, **no una ruta aprobada en RW4**:

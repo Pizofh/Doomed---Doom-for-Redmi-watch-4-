@@ -171,6 +171,13 @@ Continuación 2026-10-03: lua-api confirmó disp.load_scr/get_scr_act y Timer en
 | Cierre Lua con FIRE mantenido limpia módulo | Guest S3 CLI | R55 normal/error | CONFIRMADO EN EMULADOR | Alta local | GC retiene, lua_close cancela/descarga | No panic, kill ni crash abrupto |
 | Controles cómodos en muñeca / movimiento+disparo simultáneos | RW4 / prototipo | R55 sin ensayo físico | SIN EVIDENCIA | No evaluable | Un dedo debe detener movimiento para FIRE | Corona/multitouch/auto-fire pendientes |
 | Foco stock durante contacto mantenido garantiza cancelación | RW4 / guest S3 | No ensayo directo | SIN EVIDENCIA | No evaluable | HOLD TEST y pausa stock son ensayos separados | No inferir garantía desde ambos |
+| Guest timespec tiene16 bytes, sec64 signed y nsec32 offset8 | Guest S3 ELF exacto | R56 DWARF/disassembly | CONFIRMADO EN EMULADOR | Alta estática | Declaración C verificada y runtime pasa | No ABI M2315W1 ni newlib |
+| CLOCK_MONOTONIC1 lee contador, sin sumar g_basetime | Guest S3 ELF exacto | R56 branch compilado y257 lecturas | CONFIRMADO EN EMULADOR | Alta local/estática | Sin retroceso en ensayo; valores iguales permitidos | No se cambió hora ni prueba prolongada |
+| clock_nanosleep relativo suspende tarea NSH y retorna | Guest S3 | R56 19 waits y ps | CONFIRMADO EN EMULADOR | Alta local | rc0,task Waiting Signal | Interrupciones/errores no provocados |
+| UI stock responde mientras otra tarea espera4s | Guest S3 Storage/panel | R56 captura y ps antes/después | CONFIRMADO EN EMULADOR | Alta local | Mismo PID aún esperando tras captura; retorno idéntico | No dormir desde callback UI ni engine integrado |
+| Espera1ms ofrece precisión1ms | Guest S3, ensayos R56 | R56 medidas5,3–15ms finales; hasta17,3 previos | REFUTADO EN EMULADOR como garantía de precisión | Alta local | Tiempo solicitado distinto del real | No extrapolar jitter a hardware |
+| Timeout del cliente detiene el módulo guest | Host/guest | Contrato ADB; timeout solo cliente | REFUTADO como mecanismo de parada | Estático | No watchdog guest | No unload antes de retorno confirmado |
+| DG_GetTicksMs/DG_SleepMs integrados con Doom | Guest S3 / RW4 | Ningún motor compilado | SIN EVIDENCIA | No | APIs candidatas probadas separadamente | Scheduling/coste/salida pendientes |
 
 ## Correcciones de interpretación
 
