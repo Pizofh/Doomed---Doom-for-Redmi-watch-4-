@@ -66,15 +66,24 @@ export async function snapshotData() {
   const hash = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
   let resumed = false;
   let checksum;
+  async function observed(expected) {
+    // Controller acknowledgement can precede the requested VM transition.
+    const deadline=Date.now()+2500;
+    do {
+      if(await state()===expected) return true;
+      await new Promise(resolve=>setTimeout(resolve,50));
+    } while(Date.now()<deadline);
+    return false;
+  }
   try {
     await rpc('setVmState', field(1, 3)); // PAUSED, not shutdown/terminate.
-    if (await state() !== 3) throw new Error('Pause was not observed');
+    if (!await observed(3)) throw new Error('Pause was not observed');
     fs.copyFileSync(source, target, fs.constants.COPYFILE_EXCL);
     checksum = hash(source);
     if (hash(target) !== checksum) throw new Error('Snapshot differs from paused image');
   } finally {
     await rpc('setVmState', field(1, 1));
-    resumed = await state() === 1;
+    resumed = await observed(1);
     if (!resumed) throw new Error('Guest resume not confirmed; inspect emulator before continuing');
   }
   const record = { folder, source, sha256: checksum, resumed, createdAtUtc: new Date().toISOString(),

@@ -53,7 +53,7 @@ if(path.resolve(process.argv[1]??'')===fileURLToPath(import.meta.url)) {
       const st=s.state();if(!st||st.stop!==1||st.reason!==1||st.detached!==1||st.live!==0||st.error!==0)throw Error('Not safely retired; retain module');
       s.adb(['shell','rmmod','rw4worker'],'unload');modules=s.adb(['shell','lsmod'],'modules-after');
     }
-    if(['rw4worker','rw4bridge','rw4task','rw4time','rw4fs','rw4stdio'].some(n=>modules.includes(n)))throw Error('Own module loaded; inspect before mutation');
+    if(['rw4wframe','rw4worker','rw4bridge','rw4task','rw4time','rw4fs','rw4stdio'].some(n=>modules.includes(n)))throw Error('Own module loaded; inspect before mutation');
     if(s.state()!==null)throw Error('Worker node remains');
     const absence=s.adb(['shell','ls',target],'payload-before');
     if(!/^nsh: ls: stat failed: 2\r?$/im.test(absence)) {
