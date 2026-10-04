@@ -24,7 +24,7 @@ const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 const review=JSON.parse(fs.readFileSync(path.join(projectRoot,'build/lua-native-bridge/bridge-review.json')));
 const native=path.join(folder,'native-readback.elf');
 adb(['pull','/tmp/rw4-lua-bridge.elf',native],'native-readback');
-if(!review.contractReviewed||hash(fs.readFileSync(native))!==review.sha256||review.sha256!=='69b1b6a607aec62e6a7def95dcf9e53933cc0f3dbd7bb7b7732863a661eea88e')throw Error('Native payload is not reviewed');
+if(!review.contractReviewed||hash(fs.readFileSync(native))!==review.sha256||review.sha256!=='f345f4c2e2ec7a6811dad0f66e077dc65b397271aa8291da4b1fdd2f1851a0b6')throw Error('Native payload is not reviewed');
 const guest='/tmp/rw4-bridge-close-test.lua';
 if(!/^nsh: ls: stat failed: 2\r?$/im.test(adb(['shell','ls',guest],'absence')))throw Error('Test filename already exists');
 const prefix=fs.readFileSync(path.join(projectRoot,'experiments/lua-native-bridge/control.lua'));

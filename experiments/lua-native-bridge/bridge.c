@@ -25,6 +25,8 @@ _Static_assert(sizeof(struct mod_info) == 16, "guest module ABI");
 extern int register_driver(const char *, const struct file_operations *, unsigned, void *);
 extern int unregister_driver(const char *);
 extern int printf(const char *, ...);
+extern void lv_image_cache_drop(const void *);
+extern void lv_image_header_cache_drop(const void *);
 #define MAGIC 0x34574252u
 static unsigned refs, sequence, active, paused, touches, last_x, last_y, last_op;
 static const char node[] = "/dev/rw4bridge";
@@ -35,6 +37,17 @@ static const char frame_node[] = "/dev/rw4frame";
 #define FRAME_HEIGHT 140u
 #define FRAME_BYTES (12u + FRAME_WIDTH * FRAME_HEIGHT * 2u)
 static unsigned frame_refs;
+static unsigned frame_updates;
+static const char loop_paths[2][32] = {
+    "/tmp/rw4-loop-frame-0.bin", "/tmp/rw4-loop-frame-1.bin"
+};
+/* Only op6/op7 invoke LVGL, synchronously from our watchface UI caller.
+ * Never dispatch these operations from NSH/CLI, a worker, or uninit.
+ * Fixed non-null paths prevent whole-system cache invalidation. */
+static void drop_loop_cache(unsigned slot) {
+    lv_image_cache_drop(loop_paths[slot]);
+    lv_image_header_cache_drop(loop_paths[slot]);
+}
 static const unsigned char frame_header[12] = {0x19,0x12,0,0,0x40,1,0x8c,0,0x80,2,0,0};
 static const uint16_t colors[8] = {0xf800,0x07e0,0x001f,0xffff,0xffe0,0x07ff,0xf81f,0};
 
@@ -45,7 +58,7 @@ static int frame_open(struct file *f) {
      * low17bits = cursor+1, bit17 = snapshot phase. Zero means no reference. */
     f->f_priv=NULL;
     if (!active || paused) return -11;
-    f->f_priv=(void *)(uintptr_t)(1u | ((touches & 1u)<<17));
+    f->f_priv=(void *)(uintptr_t)(1u | (((touches+frame_updates) & 1u)<<17));
     frame_refs++;
     return 0;
 }
@@ -74,7 +87,7 @@ static int frame_read(struct file *f, char *buffer, unsigned length) {
     }
     frame_pos+=length;
     f->f_priv=(void *)(uintptr_t)((frame_pos+1u) | (frame_phase<<17));
-    if (frame_pos==FRAME_BYTES && length)
+    if (frame_pos==FRAME_BYTES && length && (!frame_updates || frame_updates%25u==0))
         printf("RW4_C_FRAME: bytes=%u phase=%u refs=%u\n", FRAME_BYTES, frame_phase, frame_refs);
     return (int)length; /* Bounded file-like stream with EOF, unlike bridge snapshots. */
 }
@@ -97,14 +110,25 @@ static int bridge_write(struct file *f, const char *buffer, unsigned length) {
     const unsigned char *b = (const unsigned char *)buffer;
     if (length != 24 || word(b) != MAGIC || word(b+20) != 1) return -22;
     unsigned seq=word(b+4), op=word(b+8), x=word(b+12), y=word(b+16);
-    if (seq <= sequence || op < 1 || op > 5 || x >= 390 || y >= 450) return -22;
-    if (op == 1) { active=1; paused=0; touches=0; last_x=last_y=0; }
+    if (seq <= sequence || op < 1 || op > 7 || x >= 390 || y >= 450) return -22;
+    if (op == 6) {
+        if (!active || paused) return -11;
+        if (x>1 || y || frame_refs) return -22;
+        drop_loop_cache(x);
+        frame_updates++;
+    }
+    if (op == 7) {
+        if (x || y || frame_refs) return -22;
+        drop_loop_cache(0); drop_loop_cache(1);
+    }
+    if (op == 1) { active=1; paused=0; touches=0; frame_updates=0; last_x=last_y=0; }
     if (op == 2) paused=1;
     if (op == 3) paused=0;
     if (op == 4) { active=0; paused=1; }
     if (op == 5 && active && !paused) { touches++; last_x=x; last_y=y; }
     sequence=seq; last_op=op;
-    printf("RW4_C_BRIDGE: seq=%u op=%u active=%u paused=%u touches=%u x=%u y=%u\n",
+    if (op!=6 || frame_updates%25u==0)
+        printf("RW4_C_BRIDGE: seq=%u op=%u active=%u paused=%u touches=%u x=%u y=%u\n",
            sequence, op, active, paused, touches, last_x, last_y);
     return (int)length;
 }

@@ -23,7 +23,7 @@ if (bytes.length < 168 || bytes.length > 4 * 1024 * 1024 || bytes.readUInt32LE(0
 if (build.status !== 0 || !build.stdout.includes('No Errors') || !build.stdout.includes('adb util is missing')) throw new Error('No reviewed successful build');
 const uiSource = fs.readFileSync(path.join(projectRoot, 'experiments/lua-ui/main.lua'));
 const ownSource = build.bridgeMode === true ? Buffer.concat([
-  fs.readFileSync(path.join(projectRoot, 'experiments/lua-native-bridge/control.lua')), Buffer.from('\n'), uiSource
+  fs.readFileSync(path.join(projectRoot, 'experiments/lua-native-bridge/control.lua')), Buffer.from(build.loopMode===true?'\nRW4_FRAME_LOOP=true\n':'\n'), uiSource
 ]) : uiSource;
 if (hash(bytes) !== build.outputSha256 || hash(ownSource) !== build.sourceSha256) throw new Error('Package/source differ from own build');
 const installFolder = path.join(projectRoot, `artifacts/emulator/watchface-${id}`);

@@ -4,6 +4,7 @@ local module_file = "/tmp/rw4-lua-bridge.elf"
 local device = "/dev/rw4bridge"
 local sequence, running = 0, false
 local frame_paths = {}
+local closing = false
 local function shell(command)
     local ok, why, code = os.execute(command)
     print("RW4_LUA_BRIDGE: shell", command, tostring(ok), tostring(why), tostring(code))
@@ -29,7 +30,9 @@ local function message(op, x, y)
     assert(bytes and #bytes == 32 and read_closed, read_err or read_close_err or "short native response")
     local magic, seq, active, paused, touches, cx, cy, kind = string.unpack("<I4I4I4I4I4I4I4I4", bytes)
     assert(magic == 0x34574252 and seq == sequence and kind == op, "native response mismatch")
-    print(string.format("RW4_LUA_BRIDGE: ack seq=%d op=%d active=%d paused=%d touches=%d x=%d y=%d", seq,kind,active,paused,touches,cx,cy))
+    if op~=6 then
+        print(string.format("RW4_LUA_BRIDGE: ack seq=%d op=%d active=%d paused=%d touches=%d x=%d y=%d", seq,kind,active,paused,touches,cx,cy))
+    end
     return {active=active, paused=paused, touches=touches, x=cx, y=cy}
 end
 local function cleanup(reason)
@@ -52,6 +55,7 @@ end
 -- runs its finalizer even while globals still reference it. No LVGL calls,
 -- coroutine yields or collectgarbage calls from the finalizer.
 local lifetime = setmetatable({}, {__gc=function()
+    closing=true -- No future timer callback may use C, regardless of finalizer order.
     print("RW4_LUA_BRIDGE: finalizer begin running=" .. tostring(running))
     local ok, err = pcall(cleanup, "lua-close")
     if not ok then print("RW4_LUA_BRIDGE: finalizer cleanup failed " .. tostring(err)) end
@@ -63,8 +67,24 @@ print("RW4_LUA_BRIDGE: loadlib", type(loader), tostring(loader_error), tostring(
 shell("uname -a") -- First shell invocation in watchface is read-only.
 RW4_NATIVE_BRIDGE = {
     _lifetime=lifetime,
-    frame=function()
-        assert(running, "frame requested while stopped")
+    is_running=function() return running and not closing end,
+    drop_frame_cache=function() -- UI context only, after deleting our Image.
+        assert(running and not closing)
+        message(7)
+    end,
+    frame=function(slot)
+        assert(running and not closing, "frame requested while stopped")
+        local filename
+        if slot~=nil then
+            assert(slot==0 or slot==1, "invalid loop slot")
+            filename="/tmp/rw4-loop-frame-" .. tostring(slot) .. ".bin"
+        else
+            filename="/tmp/rw4-native-pattern-" .. tostring(sequence) .. ".bin"
+        end
+        local owned=false
+        for _,path in ipairs(frame_paths) do if path==filename then owned=true end end
+        assert(owned or not present(filename), "frame path already exists; inspect before replacing")
+        if slot~=nil then message(6,slot,0) end -- Same UI caller; no os.execute.
         local reader <close> = assert(io.open("/dev/rw4frame", "rb"))
         reader:setvbuf("no")
         local bytes=assert(reader:read(89612))
@@ -72,12 +92,10 @@ RW4_NATIVE_BRIDGE = {
         assert(reader:close())
         local magic, cf, flags, w, h, stride, reserved=string.unpack("<I1I1I2I2I2I2I2", bytes)
         assert(magic==0x19 and cf==0x12 and flags==0 and w==320 and h==140 and stride==640 and reserved==0)
-        local filename="/tmp/rw4-native-pattern-" .. tostring(sequence) .. ".bin"
-        assert(not present(filename), "owned frame path already exists; inspect before replacing")
         local writer <close> = assert(io.open(filename, "wb"))
-        frame_paths[#frame_paths+1]=filename
+        if not owned then frame_paths[#frame_paths+1]=filename end
         assert(writer:write(bytes) and writer:close())
-        print("RW4_LUA_FRAME: snapshot bytes=" .. #bytes .. " path=" .. filename)
+        if slot==nil then print("RW4_LUA_FRAME: snapshot bytes=" .. #bytes .. " path=" .. filename) end
         return filename
     end,
     start=function()

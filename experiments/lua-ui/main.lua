@@ -1,6 +1,6 @@
 -- PC emulator experiment. Owned widgets in the watchface's Lua/UI context.
 -- Standalone mode has no native code. Optional reviewed bridge is prepended
--- by the dedicated emulator build; no timers or parent traversal here.
+-- by the dedicated emulator build. Optional bounded UI timer, no parent traversal.
 local lvgl = require("lvgl")
 local width, height = lvgl.HOR_RES(), lvgl.VER_RES()
 local flags = lvgl.FLAG
@@ -48,10 +48,13 @@ local counter = label(page, "Presses: 0", 155)
 local active, presses = false, 0
 local suspended = false
 local bridge = rawget(_G, "RW4_NATIVE_BRIDGE")
+local loop_mode = rawget(_G, "RW4_FRAME_LOOP") == true
+local frame_timer, frame_count, frame_limit = nil, 0, 300
+local frame_failed = false
 local pattern_image
 local function show_pattern()
     if not bridge or not bridge.frame then return end
-    local src=bridge.frame()
+    local src=bridge.frame(loop_mode and (frame_count%2) or nil)
     if pattern_image then pattern_image:set_src(src)
     else
         pattern_image=lvgl.Image(page, {x=35, y=205, src=src})
@@ -62,7 +65,9 @@ local function show_pattern()
     end
     local w,h=pattern_image:get_img_size()
     assert(w==320 and h==140, "LVGL did not recognize native frame")
-    print("RW4_UI_FRAME: image 320x140")
+    frame_count=frame_count+1
+    if not loop_mode then print("RW4_UI_FRAME: image 320x140")
+    else counter:set {text=string.format("Frames: %d",frame_count)} end
 end
 local function native(method, ...)
     if not bridge then return true end
@@ -76,6 +81,7 @@ local previous_pause, previous_resume = pageOnPause, pageOnResume
 -- Preserve an existing lifecycle handler if the runtime supplies one.
 function pageOnPause(...)
     suspended = true
+    if frame_timer then frame_timer:pause() end
     if active then native("pause") end
     print("RW4_UI_PROBE: pause")
     if type(previous_pause) == "function" then previous_pause(...) end
@@ -83,7 +89,10 @@ end
 
 function pageOnResume(...)
     suspended = false
-    if active then native("resume") end
+    if active and (not loop_mode or (not frame_failed and frame_count<frame_limit)) then
+        native("resume")
+        if frame_timer then frame_timer:resume() end
+    end
     print("RW4_UI_PROBE: resume")
     if type(previous_resume) == "function" then previous_resume(...) end
 end
@@ -114,6 +123,7 @@ local function button(parent, text, y, callback)
 end
 
 local start_button = button(launcher, "START", 250, function()
+    frame_count=0; frame_failed=false
     if not native("start") then status:set {text = "Native error: inspect log"}; return end
     local frame_ok, frame_error=pcall(show_pattern)
     if not frame_ok then
@@ -124,9 +134,16 @@ local start_button = button(launcher, "START", 250, function()
     navigation(false)
     launcher:add_flag(flags.HIDDEN)
     page:clear_flag(flags.HIDDEN)
+    if frame_timer then frame_timer:resume() end
     print("RW4_UI_PROBE: enter")
 end)
 local exit_button = button(page, "EXIT", 355, function()
+    if frame_timer then frame_timer:pause() end
+    if loop_mode and pattern_image then
+        local detached, err=pcall(function() pattern_image:delete(); pattern_image=nil end)
+        if detached then native("drop_frame_cache")
+        else print("RW4_UI_LOOP: image cleanup failed " .. tostring(err)) end
+    end
     local clean = native("exit")
     active = false
     navigation(true)
@@ -146,7 +163,7 @@ page:onevent(lvgl.EVENT.ALL, function(_, code)
     if not indev then return end
     if code == lvgl.EVENT.PRESSED then
         presses = presses + 1
-        counter:set {text = string.format("Presses: %d", presses)}
+        if not loop_mode then counter:set {text = string.format("Presses: %d", presses)} end
     end
     local x, y = indev:get_point()
     coords:set {text = string.format("x:%d y:%d", x, y)}
@@ -155,6 +172,30 @@ page:onevent(lvgl.EVENT.ALL, function(_, code)
         print(string.format("RW4_UI_PROBE: release x:%d y:%d", x, y))
     end
 end)
+
+if loop_mode then
+    assert(bridge and type(bridge.is_running)=="function", "loop requires own native bridge")
+    -- One firmware-owned timer per Lua VM. Callback retains no module pointer.
+    -- Its native __gc was inspected: pause/unref, free data, lv_timer_delete.
+    frame_timer=lvgl.Timer({period=200, paused=true, cb=function()
+        if not active or suspended or frame_failed or not bridge.is_running() then return end
+        local ok, err=pcall(show_pattern)
+        if not ok then
+            frame_failed=true; frame_timer:pause(); native("pause")
+            coords:set {text="Frame failed: use EXIT"}
+            print("RW4_UI_LOOP: frame failed " .. tostring(err)); return
+        end
+        if frame_count%25==0 then
+            collectgarbage("collect")
+            print(string.format("RW4_UI_LOOP: frames=%d lua_kib=%.3f",frame_count,collectgarbage("count")))
+        end
+        if frame_count>=frame_limit then
+            frame_timer:pause(); native("pause")
+            print("RW4_UI_LOOP: budget reached " .. frame_count)
+        end
+    end})
+    print("RW4_UI_LOOP: ready period_ms=200 limit=" .. frame_limit)
+end
 
 -- References are held by closures/objects; no native pointers or replacement
 -- of the system display screen. Switching watchfaces owns full Lua teardown.

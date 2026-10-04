@@ -40,9 +40,9 @@ const flags = ['-mcpu=cortex-a7', '-mthumb', '-mfpu=neon-vfpv4', '-mfloat-abi=ha
   '-fno-unwind-tables', '-fno-asynchronous-unwind-tables', '-fno-stack-protector', '-Wall', '-Wextra', '-Werror'];
 const object = `build/lua-native-bridge/${variant}.o`;
 run(path.join(root, 'bin/arm-none-eabi-gcc.exe'), [...flags, '-c', source, '-o', object]);
-const objectSymbols = run(path.join(root, 'bin/arm-none-eabi-readelf.exe'), ['-s', object]);
+const objectSymbols = run(path.join(root, 'bin/arm-none-eabi-readelf.exe'), ['-W', '-s', object]);
 const imports = [...objectSymbols.matchAll(/\bUND[ \t]+(\S+)[ \t]*$/gm)].map(m => m[1]);
-const allowed = ['register_driver', 'unregister_driver', 'printf'];
+const allowed = ['register_driver', 'unregister_driver', 'printf', 'lv_image_cache_drop', 'lv_image_header_cache_drop'];
 const bindings = imports.map(name => {
   const symbol = guest.selectedSymbols.find(s => s.name === name && (s.info & 15) === 2);
   if (!allowed.includes(name) || !symbol) throw new Error(`Unreviewed import: ${name}`);
@@ -51,7 +51,7 @@ const bindings = imports.map(name => {
 const output = `build/lua-native-bridge/${variant}.elf`;
 run(path.join(root, 'arm-none-eabi/bin/ld.exe'), ['-r', '-e', 'rw4_bridge_init',
   ...bindings.map(s => `--defsym=${s.name}=${s.value}`), object, '-o', output]);
-const readelf = run(path.join(root, 'bin/arm-none-eabi-readelf.exe'), ['-h', '-A', '-S', '-r', '-s', output]);
+const readelf = run(path.join(root, 'bin/arm-none-eabi-readelf.exe'), ['-W', '-h', '-A', '-S', '-r', '-s', output]);
 const disassembly = run(path.join(root, 'bin/arm-none-eabi-objdump.exe'), ['-dr', output]);
 const bytes = fs.readFileSync(path.join(projectRoot, output));
 const relocations = [...readelf.matchAll(/\bR_ARM_[A-Z0-9_]+\b/g)].map(m => m[0]);
@@ -60,7 +60,7 @@ if (bytes[4] !== 1 || bytes[5] !== 1 || bytes.readUInt16LE(16) !== 1 || bytes.re
     relocations.some(r => r !== 'R_ARM_ABS32') || /\bUND[ \t]+\S+[ \t]*$/m.test(readelf)) {
   throw new Error('Unreviewed ELF layout/relocations; inspect before loading');
 }
-const known = {bridge: {source: '09f1137b8ab32e7653d32f40c955d8ba6b0a5cd8c2483734967ce778166ba3e7', binary: '69b1b6a607aec62e6a7def95dcf9e53933cc0f3dbd7bb7b7732863a661eea88e'}};
+const known = {bridge: {source: 'e04c6d1ad8fa4e680113f71e4fb0a8c4246884dc98e7a4026e09ebb313406a27', binary: 'f345f4c2e2ec7a6811dad0f66e077dc65b397271aa8291da4b1fdd2f1851a0b6'}};
 const sourceHash = hash(fs.readFileSync(path.join(projectRoot, source), 'utf8').replace(/\r\n/g, '\n'));
 const record = { variant, guestSha256: guestHash, sha256: hash(bytes), sourceSha256: sourceHash,
   bytes: bytes.length, entry: bytes.readUInt32LE(24), flags, bindings, relocations,

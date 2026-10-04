@@ -7,8 +7,9 @@ import zlib from 'node:zlib';
 import { spawnSync } from 'node:child_process';
 import { projectRoot } from './verify-emulator.mjs';
 
-const bridgeMode = process.argv[2] === 'bridge';
-if (process.argv.length !== (bridgeMode ? 3 : 2)) throw new Error('Only optional bridge mode accepted');
+const loopMode = process.argv[2] === 'loop';
+const bridgeMode = loopMode || process.argv[2] === 'bridge';
+if (process.argv.length !== (bridgeMode ? 3 : 2)) throw new Error('Only optional bridge|loop mode accepted');
 const hash = b => crypto.createHash('sha256').update(b).digest('hex');
 const compilerRoot = path.join(projectRoot, 'tools/local/easyface-v4.23-review');
 const compiler = path.join(compilerRoot, 'Compiler.exe');
@@ -20,7 +21,7 @@ const allowed = new Set(['Compiler.exe', 'DeviceInfo.db', 'EasyFace_en.exe']);
 if (fs.readdirSync(compilerRoot).some(n => !allowed.has(n))) throw new Error('Unexpected compiler dependencies/ADB');
 const uiSource = fs.readFileSync(path.join(projectRoot, 'experiments/lua-ui/main.lua'));
 const bridgeSource = bridgeMode ? fs.readFileSync(path.join(projectRoot, 'experiments/lua-native-bridge/control.lua')) : null;
-const source = bridgeMode ? Buffer.concat([bridgeSource, Buffer.from('\n'), uiSource]) : uiSource;
+const source = bridgeMode ? Buffer.concat([bridgeSource, Buffer.from(loopMode?'\nRW4_FRAME_LOOP=true\n':'\n'), uiSource]) : uiSource;
 const work = path.join(projectRoot, `emulator/local/ui-probe-${Date.now()}`);
 fs.mkdirSync(path.join(work, 'app/lua'), {recursive: true});
 fs.mkdirSync(path.join(work, 'images'));
@@ -54,7 +55,7 @@ fs.writeFileSync(path.join(work,'images/preview.png'),Buffer.concat([Buffer.from
 const args=['-b',path.join(work,'UIProbe.fprj'),path.join(work,'output'),'UIProbe.face','365799903'];
 const result=spawnSync(compiler,args,{cwd:work,shell:false,windowsHide:true,encoding:'utf8',timeout:30000,
   maxBuffer:2*1024*1024,env:{...process.env,TEMP:work,TMP:work,PATH:path.join(process.env.SystemRoot,'System32')}});
-const record={work,args,bridgeMode,status:result.status,stdout:result.stdout,stderr:result.stderr,error:result.error?.message??null,
+const record={work,args,bridgeMode,loopMode,status:result.status,stdout:result.stdout,stderr:result.stderr,error:result.error?.message??null,
   sourceSha256:hash(source),compilerSha256:hash(fs.readFileSync(compiler)),adbBesideCompiler:false,installed:false};
 const recordPath=path.join(projectRoot,'artifacts/package-review/ui-probe-package.json');
 fs.writeFileSync(recordPath,JSON.stringify(record,null,2)+'\n');
