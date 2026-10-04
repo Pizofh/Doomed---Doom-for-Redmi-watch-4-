@@ -1,5 +1,7 @@
 # Patrón C dentro de la página Lua/LVGL
 
+Checkpoint posterior: [300 frames con dos slots fijos, Timer, pausa y cierre](native-frame-loop-emulator.md). Este documento conserva la evidencia del snapshot anterior.
+
 El 2026-10-03 se mostró un patrón RGB565 generado por nuestro módulo C dentro de UIProbe, en el guest S3 exacto de MiWatchEmulator v1.0 a 390×450. Touch, panel, pausa/reanudación, dos ciclos START/EXIT y un cambio a Storage sin EXIT funcionaron. No se conectó M2315W1 ni se compiló DOOM. **Esta prueba del emulador no certifica ISA, APIs o permisos del RW4 físico.**
 
 ## Camino probado

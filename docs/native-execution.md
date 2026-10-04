@@ -52,4 +52,6 @@ Hello C completado: una línea y devolución, sin recursos propios, drivers, hoo
 
 ## Salida antes del hardware
 
+[Frames repetidos en nuestra página](native-frame-loop-emulator.md): dos slots y un Timer de firmware que invoca Lua. Op6/op7 llaman cache LVGL **solo desde contexto UI**, nunca NSH/CLI/worker/uninit. Timer no conserva callbacks del módulo; se detiene antes de pausa/EXIT y GC normal retira Timer. Guard bloquea llamadas tras cierre. Pausa/descarga comprobadas en ensayo300frames; sin garantía ante crash ni de memoria prolongada. Umem maxused subió sin causa aislada.
+
 Probar abrir/cerrar repetidamente y medir liberación de RAM, input y display. Tener salida UI y un mecanismo externo documentado de terminar la instancia en emulador. No ejecutar `kill` ni escribir watchdog/config para descubrir su comportamiento. Un timeout del host solo termina el cliente ADB; no asegura la terminación de un programa dentro del guest. Un reboot no sustituye el requisito de devolver el control al reloj sin reiniciarlo.

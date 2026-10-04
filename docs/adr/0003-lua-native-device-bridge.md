@@ -11,3 +11,5 @@ Consecuencias: ABI del driver y símbolos dependen del ELF exacto; no hay sandbo
 Evidencia y comandos: [puente probado](../lua-native-bridge-emulator.md). No se concluye que esta arquitectura sea la mejor para el firmware RW4 desconocido.
 
 Extensión R53: [stream de snapshot RGB565](../native-frame-lvgl-emulator.md) en /dev/rw4frame, con cursor por descriptor y EOF, copiado a tmpfs y renderizado por Lua/LVGL en contexto UI. Un archivo por START funciona en la prueba; no se acepta generar archivos/cache ilimitados como backend de frames para DOOM. Actualización repetida y coste siguen pendientes.
+
+Extensión R54: [frames repetidos](../native-frame-loop-emulator.md) con dos nombres tmpfs, invalidación dirigida de cache en UI y un Timer de firmware, máximo300 por START. Widgets consumen copias sin punteros de módulo. Op6/op7 no se usan en CLI o worker. Ensayo corto valida pausa, salida/reentrada y cierre Lua; memoria prolongada y rendimiento Doom siguen pendientes.

@@ -41,3 +41,5 @@ El hello C posterior se ejecutó por insmod en el guest FLAT, tras contrastar in
 Exigir revisión antes de flash/OTA modificada, bootloader/recovery, particiones crudas, desactivar firma, otro modelo, abrir reloj, SWD/JTAG, corrupción de memoria, código kernel físico no probado, hard brick plausible o recovery desconocido. No hay aprobaciones implícitas para esos pasos.
 
 Mantener dumps, claves ADB y datos del dispositivo en artifacts ignorados; publicar solo extractos revisados sin identificadores ni secretos. No introducir CI de builds sin mecanismo y licencias definidos.
+
+R54: frames repetidos limitados a300, dos rutas propias tmpfs y un Timer de firmware. Cache invalidada solo con nombres propios no nulos, desde caller UI síncrono. Op6/op7 fuera de ese contexto no están autorizados; el driver FLAT no impone sandbox. EXIT y cambio de watchface normal retiran C/archivos, sin reboot para salir ni contacto físico. Lua post-GC estable en prueba corta; contador maxused del guest aumentó sin causa aislada. Conservar límite y no dar por validada memoria prolongada. [Contrato y resultados](native-frame-loop-emulator.md).

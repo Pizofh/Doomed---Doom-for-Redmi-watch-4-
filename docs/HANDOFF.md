@@ -1,16 +1,18 @@
 # Retomar el proyecto
 
-Estado activo al 2026-10-03. Resultado actual: [patrón RGB565 generado por C dentro de nuestra página Lua/LVGL](native-frame-lvgl-emulator.md). Solo snapshot por START; no Doom ni hardware físico.
+Estado activo al 2026-10-03 (Bogotá). Resultado actual: [300 frames C en nuestra página Lua/LVGL](native-frame-loop-emulator.md), con dos slots fijos y un Timer. Pausa, dos START/EXIT y tercer START→Storage sin EXIT pasan sin reboot para salir. No Doom ni hardware físico.
 
-Última sesión: C añade /dev/rw4frame virtual, stream con EOF y cursor/fase por descriptor. Lua lee89612bytes, valida cabecera12 + 320×140 RGB565, copia a /tmp/rw4-native-pattern-<seq>.bin y crea Image en page x35y205. C no llama LVGL ni framebuffer global; no hay punteros compartidos C→widget. Dos fases CLI exactas por readback; lectores independientes, busy unload y rechazo de apertura en pausa probados. UI14gestos, dos START/EXIT y tercer START→Storage sin EXIT pasan con patrón visible. Fuente/captura revisadas: 44800píxeles, tolerancia2niveles/canal en captura; bytes fuente exactos. La UI no actualiza el snapshot al tocar. No FPS/latencia/memoria pico medidos.
+Última sesión R54: op6 invalida cache del slot0/1 y avanza fase; op7 invalida ambos después de borrar Image durante EXIT. Imports lv_image_cache_drop y lv_image_header_cache_drop ligados al guest exacto. **Op6/op7 solo desde nuestra watchface en contexto UI; nunca CLI/NSH, worker ni uninit.** file_write llama síncronamente al driver; no se midió thread ID. Un Timer Lua por VM, periodo200 ms, máximo300 frames por START, pausa/resume/EXIT; timer __gc compilado revisado. Slots /tmp/rw4-loop-frame-0.bin y -1.bin,89612bytes cada uno. Imagen x35y205 320×140; no punteros de módulo retenidos por LVGL ni framebuffer global. Guard marca closing antes de descargar; callbacks comprueban is_running. Finalizador propio no llama LVGL. Reproducción actual requiere `package-ui-probe.mjs loop`, no bridge; `test-frame-loop-emulator.mjs` comienza desde launcher SIN START previo.
 
-Incidente de esta sesión: primer stream con lector único/estado global falló al probar otro lector y os.execute con handle abierto; se observó panic y reinicio guest. Artefactos retenidos, causa exacta del panic no aislada. Primer ajuste per-descriptor aún fallaba la expectativa del shell; versión final permite aperturas múltiples y guarda cursor/fase en file.f_priv. DWARF exacto: file32bytes, f_priv20; nunca dereferenciar cookie numérico. Fuente NuttX de dup reabre drivers, referencia para interpretar herencia al crear NSH. Código final verificado, candidatos anteriores fuera de pins. ABI/símbolos solo guest exacto, FLAT no sandbox.
+Evidencia: frame-loop-1791075123314,18 observaciones y ambas fases verificadas sobre44800píxeles/captura con tolerancia2. Panel state seq45 estable, límite300 seq305 estable. ~4,92 actualizaciones de fuente/s, NO FPS del motor. Lua post-GC72,405KiB desde frame50 hasta300 y reentrada; GImageCache usado1.900.024 constante tras panel. Umem usado muestreado estable con variación; maxused23.529.596→23.663.676 aumentó134080bytes sin causa aislada. No pico acotado ni fugas prolongadas descartadas. Regresión CLI stream/busy/pausa y cierre normal/error pasan con C nuevo.
 
-Final: Storage365700764 seleccionada, Lua cerrado, módulo/ambos nodos y temporales propios ausentes. UIProbe365799903 queda almacenada con imagen y finalizador. Reproducir exige preparar ELF después de reset/cleanup. C3580bytes SHA69b1b6a607aec62e6a7def95dcf9e53933cc0f3dbd7bb7b7732863a661eea88e. Watchface19024bytes SHA8a47c395a0fafb62364d3b2a0dfce74e0b5a83b89b3043da434e1fb34446903f. Evidencia native-frame-1791066494323, native-frame-1791067206109, native-frame-ui, ui-probe-exercise-1791066790197. CLI normal/error regresión pasan con C nuevo. Capturas/logs ignorados. Esperar device después del reset de install; guard rechazó una consulta transitoria offline. Revisar cada pantalla en Settings.
+Histórico R53: primer stream con lector único/estado global falló al probar otro lector y os.execute con handle abierto; se observó panic y reinicio guest. Artefactos retenidos, causa exacta del panic no aislada. Primer ajuste per-descriptor aún fallaba la expectativa del shell; versión final permite aperturas múltiples y guarda cursor/fase en file.f_priv. DWARF exacto: file32bytes, f_priv20; nunca dereferenciar cookie numérico. Fuente NuttX de dup reabre drivers, referencia para interpretar herencia al crear NSH. Candidatos fallidos fuera de pins. ABI/símbolos solo guest exacto, FLAT no sandbox.
 
-**Siguiente meta única:** actualización repetida de frames en LVGL con recursos acotados, pausa y salida. Investigar invalidación/cache o superficie en memoria del guest antes de convertir snapshots en un bucle. Un archivo/nombre nuevo por frame no es una solución aceptada para Doom. Sin Doom ni hardware físico en ese checkpoint.
+Final R54: Storage365700764, Lua cerrado, módulo/ambos nodos y temporales propios ausentes; /tmp solo temporary.db. UIProbe365799903 permanece instalada en modo loop. Preparar ELF después de reset/cleanup. C3992bytes SHA f345f4c2e2ec7a6811dad0f66e077dc65b397271aa8291da4b1fdd2f1851a0b6; source LF e04c6d1ad8fa4e680113f71e4fb0a8c4246884dc98e7a4026e09ebb313406a27. Watchface21928bytes SHA f1b26fc16722eed1c9aa8b2c3bbab7a97559c7710a177ea5c65e5de7f9ab84d1. Cierre normal sin EXIT en frame-loop-close; regressiones native-frame-1791074808268 y lua-bridge-close-{normal-1791074813034,error-1791074817541}. Commit implementación71836d9. Capturas/logs ignorados. Revisar cada pantalla en Settings; no navegación ciega.
 
-Lifecycle conservado: guard __gc global, handles close, pausa/resume, EXIT y cierre al cambiar watchface. C/nodos retirados y snapshots propios eliminados. /dev/rw4bridge sigue siendo protocolo32bytes SIN EOF; nunca cat/read-all. Crashes/panic/kill forzado no garantizan finalizador. Persistencia C, input mantenido, timers monotónicos y WAD pendientes.
+**Siguiente meta única:** input mantenido y cancelación al pausar/salir en pantalla de controles de prueba, según controls.md. No solo coordenadas en RELEASED. Sin Doom ni hardware físico. Memoria prolongada, tiempo monotónico y WAD siguen pendientes.
+
+Lifecycle conservado: guard __gc global, handles close, pausa/resume, EXIT y cierre al cambiar watchface. C/nodos retirados y archivos propios eliminados. /dev/rw4bridge sigue siendo protocolo32bytes SIN EOF; nunca cat/read-all. Crashes/panic/kill forzado no garantizan finalizador. Timer LVGL probado no demuestra aún un reloj monotónico para doomgeneric. Persistencia C, input mantenido, tiempo y WAD pendientes.
 
 - Nunca se conectó el reloj físico M2315W1. Gate físico cerrado; sin flash, exploits, mods APK ni DOOM/WAD. Hello C propio validado únicamente en el emulador.
 - Guest Xiaomi Watch S3 / NuttX 0.0.0, revisión 9aec7d0ff1; pantalla configurada 390×450. No emulación exacta RW4/BES.
@@ -25,9 +27,9 @@ Lifecycle conservado: guard __gc global, handles close, pausa/resume, EXIT y cie
 
 ## Próxima meta
 
-Frames repetidos con recursos acotados, pausa y salida, como se indica arriba. La limpieza al cerrar Lua y el snapshot C en la página propia ya fueron validados. Después quedarán input mantenido, timers monotónicos, FS/WAD y DOOM. No compilar todavía DOOM ni tocar hardware físico.
+Input mantenido y cancelación al pausar/salir. Después tiempo monotónico, FS/WAD y DOOM, con validación prolongada de recursos todavía necesaria. No compilar todavía DOOM ni tocar hardware físico.
 
-Preferencia del usuario registrada en [controls.md](controls.md): elegir controles cómodos, táctiles inicialmente, sin asignar avanzar a pulsar la corona. Propuesta documentada, no implementada ni probada; un dedo, zonas grandes, diagonal para avanzar+girar, menú con salida visible. Combatir mientras se mueve sigue siendo una limitación por evaluar. No cambia el checkpoint inmediato de frames.
+Preferencia del usuario registrada en [controls.md](controls.md): elegir controles cómodos, táctiles inicialmente, sin asignar avanzar a pulsar la corona. Propuesta documentada, no implementada ni probada; un dedo, zonas grandes, diagonal para avanzar+girar, menú con salida visible. Combatir mientras se mueve sigue siendo una limitación por evaluar.
 
 ## Experimentos anteriores
 
@@ -61,7 +63,7 @@ node tools/run-display-emulator.mjs pattern
 node tools/build-touch.mjs
 node tools/run-touch-emulator.mjs
 node tools/build-lua-bridge.mjs
-node tools/package-ui-probe.mjs bridge
+node tools/package-ui-probe.mjs loop
 # Si ya existe UIProbe: seleccionar primero Storage antes de actualizar.
 node tools/install-ui-probe-emulator.mjs update
 # Después de boot/reset, preparar el payload temporal:
@@ -70,10 +72,10 @@ node tools/stage-lua-bridge.mjs stage
 node tools/test-lua-bridge-close.mjs normal
 node tools/test-lua-bridge-close.mjs error
 node tools/test-native-frame.mjs
-# Seleccionar UIProbe y START antes de ejercer gestos:
-node tools/exercise-ui-probe.mjs bridge
+# Seleccionar UIProbe y dejar en launcher, SIN START previo:
+node tools/test-frame-loop-emulator.mjs
 node tools/lua-bridge-state.mjs
-# Tras EXIT y selección de Storage:
+# Tras el ensayo, probar otro START→Storage sin EXIT; después:
 node tools/stage-lua-bridge.mjs cleanup
 ```
 

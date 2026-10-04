@@ -35,7 +35,7 @@
     "userVvdRegistrationCopied":  true,
     "physicalDeviceConnected":  false,
     "blockers":  [
-                     "Repeated frame updates with bounded resources, held input, monotonic timers and WAD filesystem remain unvalidated",
+                     "Held input, monotonic timers, WAD filesystem and long-duration memory remain unvalidated",
                      "Cleanup on native crash or forced termination remains unverified",
                      "RW4 physical execution remains unverified and outside authorized scope"
                  ],
@@ -53,7 +53,7 @@
     "touchEventsExitBySelectingStockVerified":  true,
     "compilerAutomaticAdbInvoked":  false,
     "touchEventsPressedCoordinatesCaptured":  false,
-    "latestResultsDocument":  "docs/native-frame-lvgl-emulator.md",
+    "latestResultsDocument":  "docs/native-frame-loop-emulator.md",
     "nativeHelloExecuted": true,
     "nativeHelloLoadUnloadCycles": 2,
     "nativeHelloRequiresExactGuestSymbolBinding": true,
@@ -110,6 +110,20 @@
     "nativeFrameUiStartExitCycles": 2,
     "nativeFrameUiWatchfaceSwitchCleanupCycles": 1,
     "nativeFrameTemporaryFilesRemoved": true,
-    "nativeFrameRepeatedUpdatesValidated": false,
-    "nativeFrameFailedCandidateGuestPanicObserved": true
+    "nativeFrameRepeatedUpdatesValidated": true,
+    "nativeFrameFailedCandidateGuestPanicObserved": true,
+    "nativeFrameRepeatedUpdateLimit": 300,
+    "nativeFrameLoopFixedSlots": 2,
+    "nativeFrameLoopPeriodMs": 200,
+    "nativeFrameLoopSourceUpdatesPerHostSecond": 4.9235097590997015,
+    "nativeFrameLoopSourceRateIsDisplayFps": false,
+    "nativeFrameLoopLongDurationMemoryValidated": false,
+    "nativeFrameLoopGuestMaxusedIncreased": true,
+    "nativeFrameLoopGuestMaxusedIncreaseCauseKnown": false,
+    "nativeFrameLoopLuaPostGcKiB": 72.405,
+    "nativeFrameLoopPanelPauseResumeVerified": true,
+    "nativeFrameLoopStartExitCycles": 2,
+    "nativeFrameLoopWatchfaceSwitchCleanupCycles": 1,
+    "nativeFrameLoopModuleUnloaded": true,
+    "nativeFrameLoopTemporaryFilesRemoved": true
 }

@@ -37,4 +37,4 @@ Después del checkpoint de frames repetidos, usar un patrón y un indicador de a
 
 El emulador valida coordenadas, eventos y lifecycle. Un dibujo a escala de pantalla puede orientar el tamaño de las zonas; ni ese dibujo ni el ratón validan ergonomía en la muñeca. La prueba física de comodidad solo llegará tras el gate de hardware y su aprobación. No hay todavía métricas de latencia, precisión o comodidad.
 
-Checkpoint inmediato sin cambios: frames repetidos con recursos acotados, pausa y salida. No compilar Doom ni tocar el reloj para probar este diseño.
+El checkpoint de frames repetidos se completó en un ensayo finito de300 imágenes: [resultados y límites](native-frame-loop-emulator.md). Ahora toca probar input mantenido y cancelación al pausar/salir sobre una pantalla de controles. No compilar Doom ni tocar el reloj para probar este diseño.

@@ -156,7 +156,14 @@ Continuación 2026-10-03: lua-api confirmó disp.load_scr/get_scr_act y Timer en
 | file.f_priv está en offset20, struct file ocupa32 bytes | ELF guest exacto | R53 DWARF | CONFIRMADO EN EMULADOR | Alta estática | Inspección de definición y código compilado | No usar ABI en otro firmware |
 | Stream de frame tiene cursor por descriptor, EOF y bloqueo de descarga con lector | Guest S3, clientes controlados | R53 CLI con readback | CONFIRMADO EN EMULADOR | Alta local | Dos lectores, dos fases, 89612 bytes exactos | Concurrencia arbitraria no garantizada |
 | Patrón conserva touch y pausa/salida de nuestra página | Guest S3 UIProbe | R53 14 gestos y cambio a Storage | CONFIRMADO EN EMULADOR | Alta local | Dos EXIT/reentrada y un cierre sin EXIT | No animación ni engine; temporales retirados |
-| Usar snapshot en tmpfs constituye backend de frames viable para DOOM | Guest S3 / RW4 | Solo un snapshot por START | SIN EVIDENCIA | No evaluable | No se midió actualización repetida | Cache, buffers acotados y coste por frame pendientes |
+| Backend tmpfs es viable para DOOM | Guest S3 / RW4 | R53/R54 patrón, sin motor | SIN EVIDENCIA | No evaluable | 300 frames de patrón, no Doom | Rendimiento del motor, coste y memoria prolongada pendientes |
+| Timer Lua/LVGL actualiza nuestra imagen y se pausa al abrir panel | Guest S3 exacto | R54 inspección y UI | CONFIRMADO EN EMULADOR | Alta local | 300 frames, pausa/reanudación | No reloj monotónico para Doom ni API física probados |
+| Frames reutilizan dos nombres fijos en tmpfs | Guest S3 UIProbe | R54 ls/código/capturas | CONFIRMADO EN EMULADOR | Alta local | Dos archivos89612bytes; ambas fases visibles | Prueba finita, no backend definitivo |
+| C invalida cache solo para nuestros slots desde el caller UI | Guest S3 exacto | R54 ELF file_write/cache y código | CONFIRMADO EN EMULADOR | Alta para contrato propio | Reutilización de slots actualiza pixels | No enforce de privilegios ni thread ID medido; op6/op7 prohibidos en CLI |
+| Lua después de GC no crece durante300 frames | Guest S3, ensayo corto | R54 muestras25..300 | CONFIRMADO EN EMULADOR | Alta local | 72,405KiB desde50 hasta300 y reentrada | No pico RAM total ni ausencia de fugas prolongadas |
+| Umem maxused aumenta en ensayo de frames | Guest S3 | R54 free | CONFIRMADO EN EMULADOR | Alta para observación | +134080bytes, primera muestra→300 | Causa SIN EVIDENCIA; uso actual muestreado no creció sostenidamente |
+| EXIT y cierre de watchface limpian C/archivos con Timer presente | Guest S3 UIProbe | R54 snapshots/logs | CONFIRMADO EN EMULADOR | Alta local | Dos EXIT; tercer START→Storage sin EXIT | Timer firmware __gc inspeccionado; no prueba crash/kill |
+| Animación garantiza recursos/memoria acotados indefinidamente | Guest S3 / RW4 | Solo ensayo300frames | SIN EVIDENCIA | No evaluable | No | Dos slots y un Timer; high-water y pruebas prolongadas pendientes |
 
 ## Correcciones de interpretación
 
