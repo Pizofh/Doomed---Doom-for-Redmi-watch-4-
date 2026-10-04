@@ -1,7 +1,7 @@
 [CmdletBinding()]
-param([ValidateSet('Hello', 'DisplayProbe', 'DisplayPattern', 'Touch', 'UIProbe', 'NativeBridge', 'UIProbeBridge', 'FrameLoop', 'Controls', 'TimeProbe', 'FsProbe', 'StdioProbe', 'TaskProbe', 'LauncherProbe', 'WorkerFrames', 'WorkerInput', 'RuntimeProbe', 'DoomAudit', 'DoomShimAudit', 'Doom')][string]$Target = 'Hello')
+param([ValidateSet('Hello', 'DisplayProbe', 'DisplayPattern', 'Touch', 'UIProbe', 'NativeBridge', 'UIProbeBridge', 'FrameLoop', 'Controls', 'TimeProbe', 'FsProbe', 'StdioProbe', 'TaskProbe', 'LauncherProbe', 'WorkerFrames', 'WorkerInput', 'RuntimeProbe', 'DoomAudit', 'DoomShimAudit', 'DoomFirstFrame', 'Doom')][string]$Target = 'Hello')
 
-if ($Target -eq 'Doom') { throw 'Executable DOOM gate closed: remaining library ABI, DG adapters and engine lifecycle integration pending. RuntimeProbe tests the shim; DoomShimAudit compiles an inspection object only.' }
+if ($Target -eq 'Doom') { throw 'Interactive DOOM gate closed: UI/input/launcher integration pending. DoomFirstFrame builds a reviewed finite engine capture module for the PC emulator only.' }
 $ErrorActionPreference = 'Stop'
 $rw4BuildTool = Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-hello.mjs'
 if ($Target -eq 'Hello') {
@@ -38,6 +38,8 @@ if ($Target -eq 'Hello') {
     & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-doom-audit.mjs')
 } elseif ($Target -eq 'DoomShimAudit') {
     & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-doom-audit.mjs') shim
+} elseif ($Target -eq 'DoomFirstFrame') {
+    & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-doom-first.mjs')
 } elseif ($Target -eq 'RuntimeProbe') {
     & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-runtime.mjs')
 } elseif ($Target -eq 'WorkerInput') {

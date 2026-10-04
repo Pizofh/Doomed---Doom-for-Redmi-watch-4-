@@ -6,9 +6,10 @@ import { spawnSync } from 'node:child_process';
 import { projectRoot, packageRoot } from './verify-emulator.mjs';
 
 const mode=process.argv[2]??'build';
-if(process.argv.length>3||!['build','inspect','shim','inspect-shim'].includes(mode))throw Error('Only build/inspect/shim/inspect-shim accepted; no runtime target');
-const withShim=mode==='shim'||mode==='inspect-shim';
-const inspectOnly=mode==='inspect'||mode==='inspect-shim';
+if(process.argv.length>3||!['build','inspect','shim','inspect-shim','first','inspect-first'].includes(mode))throw Error('Only build/inspect/shim/inspect-shim/first/inspect-first accepted; no runtime target');
+const firstBuild=mode==='first'||mode==='inspect-first';
+const withShim=mode==='shim'||mode==='inspect-shim'||firstBuild;
+const inspectOnly=mode.startsWith('inspect');
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const guestHash = '849a04f6d461938022ffb820143f870be7e91933b3fb538d009b24c7fa6098fa';
 const root = path.join(projectRoot, 'tools/local/arm-14.3-review');
@@ -44,14 +45,16 @@ if(hash(fs.readFileSync(path.join(packageRoot,'system-images/vela-release-4.0/nu
 const make=fs.readFileSync(path.join(upstream,'doomgeneric/Makefile'),'utf8');
 const sources=make.match(/^SRC_DOOM = (.+)$/m)[1].trim().split(/\s+/).map(n=>n.replace(/\.o$/,'.c')).filter(n=>n!=='doomgeneric_xlib.c');
 if(sources.length!==80||sources.some(n=>!manifest.files.some(e=>e.path==='doomgeneric/'+n)))throw Error('Source recipe changed');
-const relativeDestination=withShim?'build/doom-shim-audit':'build/doom-audit';
+const relativeDestination=firstBuild?'build/doom-first-frame':withShim?'build/doom-shim-audit':'build/doom-audit';
 const destination=path.join(projectRoot,relativeDestination);fs.mkdirSync(destination,{recursive:true});
 const flags=['-mcpu=cortex-a7','-mthumb','-mfpu=neon-vfpv4','-mfloat-abi=hard','-mlong-calls',
   '-std=gnu17','-Os','-ffreestanding','-fno-builtin','-fcommon','-fno-unwind-tables','-fno-asynchronous-unwind-tables',
   '-fno-stack-protector','-fstack-usage','-Wall','-Wextra','-DNORMALUNIX','-D_DEFAULT_SOURCE',
   '-DDOOMGENERIC_RESX=320','-DDOOMGENERIC_RESY=200','-Ithird_party/doomgeneric/doomgeneric'];
+const baseFlagCount=flags.length;
 if(withShim)flags.push('-ffunction-sections','-falign-functions=4','-DRW4_ENGINE',
   '-Idoom/platform-rw4/compat','-Idoom/platform-rw4','-include','doom/platform-rw4/runtime.h');
+if(firstBuild)flags.push('-include','doom/platform-rw4/long-calls.h');
 // Compiler's newlib headers are used only to find compile/import issues.
 // Their FILE, stderr, struct stat and related ABI are NOT approved guest ABI.
 const objects=[];
@@ -71,7 +74,7 @@ try{
   if(inspectOnly){
     const prior=JSON.parse(fs.readFileSync(path.join(destination,'result.json')));
     if(prior.sha256!==hash(fs.readFileSync(path.join(destination,'engine-audit.o')))||
-       prior.sha256!==(withShim?'0281a7dc95222408d41c3eb05cc83ae4531b899b104995bfb7537f0484bd4f3b':'30ba8ead4ca94fd69d661d774edd3a9fbd449dfe68696798ad4519c7daa56366')||
+       prior.sha256!==(firstBuild?'50d8fb8911766fb0285eedd81e3965be7b923562c7a3782abd87e068c6a21c8e':withShim?'0281a7dc95222408d41c3eb05cc83ae4531b899b104995bfb7537f0484bd4f3b':'30ba8ead4ca94fd69d661d774edd3a9fbd449dfe68696798ad4519c7daa56366')||
        (withShim&&shimSourceSha256!=='8571e1c5da855a3b46721b204c1d833810bc5a1d61cfc0df5fc409510afbc8a0')||
        JSON.stringify(prior.flags)!==JSON.stringify(flags))throw Error('Inspect only the already audited artifact');
   }else{
@@ -81,7 +84,7 @@ try{
       run(path.join(root,'bin/arm-none-eabi-gcc.exe'),[...flags,'-c',src,'-o',obj]);objects.push(obj);
     }
     if(withShim){
-      const shimFlags=flags.slice(0,-7); // remove engine-only define/includes/forced header
+      const shimFlags=flags.slice(0,baseFlagCount); // no engine remapping in raw shim
       const obj=relativeDestination+'/runtime.o';
       run(path.join(root,'bin/arm-none-eabi-gcc.exe'),[...shimFlags,'-ffunction-sections','-falign-functions=4','-Idoom/platform-rw4','-c','doom/platform-rw4/runtime.c','-o',obj]);objects.push(obj);
     }
