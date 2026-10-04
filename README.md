@@ -22,7 +22,9 @@ Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4
 
 **Archivos C:** lectura completa de un fixture propio de1MiB+37 bytes,41 ventanas por posición, EOF, cuatro errores y reapertura comprobados en tmpfs. Archivo intacto y módulo/temporales retirados sin reboot. [Contrato y reproducción](docs/native-fs-emulator.md).
 
-**Stdio del lector WAD:** fopen/fread/fseek/ftell/fclose pasaron con el fixture propio, incluidos buffers, longitud y tres reaperturas. En este guest, seek no limpia EOF; clearerr sí. [Resultado y límite concreto](docs/native-stdio-emulator.md). Siguiente checkpoint: lifecycle de una tarea C separada de UI para evitar bloquearla. Todavía no se cargó WAD ni se compiló Doom; gate físico cerrado.
+**Stdio del lector WAD:** fopen/fread/fseek/ftell/fclose pasaron con el fixture propio, incluidos buffers, longitud y tres reaperturas. En este guest, seek no limpia EOF; clearerr sí. [Resultado y límite concreto](docs/native-stdio-emulator.md).
+
+**Worker C:** tres ciclos crear/parar/recoger pasaron desde NSH; el panel stock respondió con el worker activo. Hilos recogidos y módulo retirado sin reboot para salir. [ABI, evidencia y límites](docs/native-task-emulator.md). Siguiente checkpoint: START/EXIT del launcher controlando un worker sin bloquear UI. Todavía no se cargó WAD ni se compiló Doom; gate físico cerrado.
 
 - Crear documentación, matriz de evidencia y herramientas de inspección para PC.
 - Identificar dependencias originales y fijar revisiones consultadas.

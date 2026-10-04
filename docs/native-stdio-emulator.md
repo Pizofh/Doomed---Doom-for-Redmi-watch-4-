@@ -67,3 +67,5 @@ La marca EOF persistente requiere atención en un adaptador que consulte feof: c
 Validar el lifecycle de una tarea C separada de UI: creación, parada, recogida de la tarea y descarga, primero con payload finito de prueba y ABI inspeccionada. No introducir el motor en un Timer UI que pueda esperar/bloquear.
 
 Motivo concreto: [doomgeneric_Tick en d_main.c](https://github.com/ozkl/doomgeneric/blob/dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284/doomgeneric/d_main.c) llama TryRunTics; [TryRunTics en d_loop.c](https://github.com/ozkl/doomgeneric/blob/dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284/doomgeneric/d_loop.c) puede esperar mediante I_Sleep(1). El sleep actual solo se probó desde NSH, nunca UI. El mecanismo de creación de tarea y su ABI aún no se han validado; tampoco la sincronización engine/LVGL. WAD legal y primera build del motor vienen después de ese contrato, manteniendo independiente el gate físico.
+
+Actualización R59: [worker C finito](native-task-emulator.md) completó create/stop/join desde NSH con UI activa. La siguiente meta actual es integrarlo con START/EXIT del launcher; no se ejecutó el motor ni WAD.

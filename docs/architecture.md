@@ -35,6 +35,8 @@ Tiempo R56: [CLOCK_MONOTONIC y esperas C medidos](native-time-emulator.md) en ta
 
 FS R57: [open/read/lseek/close probados sobre fixture tmpfs](native-fs-emulator.md), con posiciones64, EOF y errores. No es persistencia: tmpfs se pierde al reset. R58 [lectura stdio y consulta de longitud](native-stdio-emulator.md) también pasan con fixture propio; EOF después de seek requiere atención/clearerr. Ejecución del motor, su tarea/scheduling y WAD real siguen pendientes.
 
+R59: [worker finito desde NSH](native-task-emulator.md) valida creación, parada cooperativa y join antes de unload, con UI stock respondiendo. El motor podrá necesitar una tarea separada porque TryRunTics espera; no se ha integrado. START/EXIT del launcher y ownership cuando retorna init requieren siguiente prueba. El worker no llamará LVGL; sincronización input/frame y recogida de tareas fuera de UI todavía pendientes.
+
 Ruta conceptual, **no una ruta aprobada en RW4**:
 
 ```text

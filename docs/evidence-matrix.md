@@ -217,3 +217,16 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Streams independientes/reopen/cierre y cleanup funcionan | Guest S3 | R58 dos streams/tres reopen | CONFIRMADO EN EMULADOR | Alta local | Fixture intacto,unload/tmp ausentes,sin reboot | No crash cleanup ni ausencia de fugas prolongadas |
 | doomgeneric_Tick siempre retorna sin esperar | doomgeneric upstream fijado | R58 TryRunTics llama I_Sleep en espera | REFUTADO como garantía | Alta de fuente | Inspección remota, no compilación | No ejecutar en callback UI sin resolver scheduling |
 | Creación/parada/recogida de worker C están validadas | Guest S3 / RW4 | R58 solo initializer NSH | SIN EVIDENCIA | No evaluable | No | Siguiente checkpoint, ABI pendiente |
+
+## Worker C R59: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| pthread_t signed32 y trampoline permite retorno del worker | Guest S3 exacto | R59 DWARF/wrappers/runtime | CONFIRMADO EN EMULADOR | Alta estática/local | Tres create/join con cookies | No ABI ni mecanismo RW4 |
+| Worker C puede parar cooperativamente y recogerse | Guest S3 NSH | R59 tres ciclos finitos | CONFIRMADO EN EMULADOR | Alta local | Stop61/47ms, natural124ms observados | No latencias garantizadas ni cancelación forzada |
+| UI stock responde con worker propio vivo | Guest S3 Storage/panel | R59 captura y ps antes/después | CONFIRMADO EN EMULADOR | Alta local | Mismo pthread55 en ambas muestras | No UI caller ni carga de Doom |
+| Uninit devuelve EBUSY mientras join está pendiente | Módulo propio/NSH | R59 llamada directa a su gate | CONFIRMADO EN EMULADOR | Alta para contrato propio | Tres rc=-16 | No rmmod concurrente durante init |
+| Hilos propios desaparecen y C se descarga sin reboot | Guest S3 | R59 cookies/done/ps/lsmod | CONFIRMADO EN EMULADOR | Alta local | Tres join0, PIDs ausentes, ELF retirado | No crash cleanup/parent exit probado |
+| Atomics32 propios no necesitan helper externo | Payload Cortex-A7 guest | R59 disassembly/imports | CONFIRMADO EN EMULADOR | Alta estática/local | Loads/stores/DMB, sin atomic imports | No stress/SMP o cola input/frame concurrentes |
+| Worker puede sobrevivir al retorno de init y controlarse desde launcher | Guest S3 / RW4 | R59 recoge antes de retornar | SIN EVIDENCIA | No evaluable | No | Siguiente integración START/EXIT |
+| Fallo de join conserva módulo ocupado en runtime | Módulo propio | R59 rama revisada, no provocada | INFERENCIA RAZONABLE del contrato | Estática | No | No anunciar recovery validado |
