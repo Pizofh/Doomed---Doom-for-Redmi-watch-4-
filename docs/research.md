@@ -1,6 +1,8 @@
 # Investigación inicial
 
-Resultado posterior **R68:** [foco stock y STOP mantenido](doom-focus-emulator.md). Doom se congela en panel, espera RESUME y retira worker/módulo con FIRE down; mismo binario/Lua R67, sin compilación nueva. Nueve muestras/siete capturas, worker104/13alloc-free/streams0, sin reboot para salir. Un reset de baseline por screen OFF antes de C. Sin pérdida de foco con acción mantenida ni cierre sin EXIT del motor probado. Siguiente: cambio de watchface mientras corre Doom/recolección al reentrar. Gate físico cerrado.
+**R69, 2026-10-04:** [Cierre sin EXIT y reentrada](doom-close-emulator.md) pasan con Doom original. Seleccionar Storage detiene el worker104 y libera13 reservas/streams; conserva modulo/copias hasta reentrada UI, que recoge todo. Sin reboot para salir ni unload host. C/Lua/ELF R67 intactos; solo emulador S3, gate M2315W1 cerrado. Siguiente: medir frames presentados, costo de copia y latencia antes de optimizar.
+
+Resultado historico **R68:** [foco stock y STOP mantenido](doom-focus-emulator.md). Doom se congela en panel, espera RESUME y retira worker/módulo con FIRE down; mismo binario/Lua R67, sin compilación nueva. Nueve muestras/siete capturas, worker104/13alloc-free/streams0, sin reboot para salir. Un reset de baseline por screen OFF antes de C. Sin pérdida de foco con acción mantenida ni cierre sin EXIT del motor probado. Siguiente: cambio de watchface mientras corre Doom/recolección al reentrar. Gate físico cerrado.
 
 Checkpoint actual: **R67**, [Doom en UI/control real del emulador](doom-ui-emulator.md). Resultados Rxx debajo son cronología; no extrapolar a hardware ni interpretar pendientes antiguos como estado actual.
 

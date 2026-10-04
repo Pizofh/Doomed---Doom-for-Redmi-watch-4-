@@ -1,8 +1,16 @@
 # Retomar el proyecto
 
+**R69, 2026-10-04:** [Cierre sin EXIT y reentrada](doom-close-emulator.md) pasan con Doom original. Seleccionar Storage detiene el worker104 y libera13 reservas/streams; conserva modulo/copias hasta reentrada UI, que recoge todo. Sin reboot para salir ni unload host. C/Lua/ELF R67 intactos; solo emulador S3, gate M2315W1 cerrado. Siguiente: medir frames presentados, costo de copia y latencia antes de optimizar.
+
+Implementacion R69 guardada en **bcc1829**. Resultado completo: `artifacts/emulator/doom-close-reentry-1791147966833/result.json`; cierre `doom-close-closed-1791147862451`; cleanup `doom-ui-cleanup-1791148267953`; final read-only `doom-close-final-1791148293324`, passed=true. Storage365700764 activa, UIProbe365799903 modo doom almacenada; PID104/modulo/nodos/copias/ELF/WAD tmp ausentes. Baseline screen OFF requirio un reset limpio antes de stage/C (`doom-close-baseline-1791147587283`), nunca para salir. 13alloc/free, streams0, cleanup0, pico6582961; global Umem used+240080/maxused+8148368, GImageCache used+992, causa no aislada.
+
+Helper `tools/test-doom-close-emulator.mjs start|closed|reentry`; navegacion manual inspeccionada entre fases, exactamente un START/ningun EXIT. Pins R67 debajo intactos, sin nuevas compilaciones/instalaciones. Crash/kill y sesiones largas siguen sin garantia. No repetir R58/R62/R63/R65/R66/R67/R68/R69 salvo cambio o fallo.
+
+Todo lo siguiente es historial R68 y anteriores; tomar R69 como estado operativo actual.
+
 Implementación R68 guardada en **ae255fa**. Final read-only `doom-focus-final-1791145679942` confirma Storage activa y worker/módulo/nodos/tmp ausentes.
 
-**ACTUAL R68,2026-10-04:** [Panel stock/STOP con FIRE down](doom-focus-emulator.md), `doom-focus-test-1791145311054`, passed=true. Nueve snapshots/siete capturas: panel con worker104 vivo congela tic86/posición/ángulo/ammo/callbacks/input; tap neutro50,45 no llega al motor. Regreso PAUSED/System panel hasta RESUME, tics96→157. FIRE held mask8/ammo50→48; NSH op2 STOP sin release, UI recoge Image/cache/worker/módulo antes de soltar. reason1/uninit0/live0/refs0/input0/keys2,13alloc-free/streams0/cleanup0/pico6582961; launcher Ready: exited y sin autoSTART con pointerdown. Sin reboot para salir ni crash.
+**HISTORIAL R68,2026-10-04:** [Panel stock/STOP con FIRE down](doom-focus-emulator.md), `doom-focus-test-1791145311054`, passed=true. Nueve snapshots/siete capturas: panel con worker104 vivo congela tic86/posición/ángulo/ammo/callbacks/input; tap neutro50,45 no llega al motor. Regreso PAUSED/System panel hasta RESUME, tics96→157. FIRE held mask8/ammo50→48; NSH op2 STOP sin release, UI recoge Image/cache/worker/módulo antes de soltar. reason1/uninit0/live0/refs0/input0/keys2,13alloc-free/streams0/cleanup0/pico6582961; launcher Ready: exited y sin autoSTART con pointerdown. Sin reboot para salir ni crash.
 
 Reutilizados C/Lua/ELF/paquete R67, pins debajo intactos; no recompile80C, no nuevos downloads/installs. Solo helper `tools/test-doom-focus-emulator.mjs`; preflight real ELF/WAD/Lua/ID/píxeles. STOP admite únicamente hasta6retries EINVAL22 por secuencia, nunca kill/unload/LVGL host. Una marca del result inicial `retirementObservedAtUtc` se guarda después de checks/capturas, no latencia aislada; helper la llama ahora `retirementChecksCompletedAtUtc` sin repetir motor por el nombre.
 
@@ -12,7 +20,7 @@ Baseline estaba SCREEN_STATE_OFF, ratón no despertó. Un backup/reset limpio an
 
 R68 no demuestra foco perdido mientras una acción sigue mantenida, llamadas/notificaciones/corona, crash/kill/SMP/agotamiento/errores pthread, sesiones largas, persistencia o hardware. Gate M2315W1 cerrado. Repro: guest responsive/UIProbe doom instalada→`doom-ui-emulator.mjs stage`; abrir UIProbe/Ready sinSTART→`test-doom-focus-emulator.mjs`; volverStorage→`doom-ui-emulator.mjs cleanup`. Fuente/ELF no cambiaron. Launcher user sigue abierto, verificar ownership vigente antes de actuar; si screen OFF, reset limpio/backup antes de stage, nunca para sustituir EXIT.
 
-Todo lo siguiente es historial R67 y anteriores; tomar R68 como estado operativo actual.
+Todo lo siguiente es historial R67 y anteriores; consultar R69 al inicio para el estado operativo actual.
 
 Implementación R67 guardada en commit **a3884e8**. Estado final read-only validado en `artifacts/emulator/doom-ui-final-1791144160277`; Storage365700764/PIDs104 y408 ausentes/ningún módulo, nodo o archivo tmp propio.
 

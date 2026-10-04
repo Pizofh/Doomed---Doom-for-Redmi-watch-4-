@@ -33,7 +33,7 @@ Runtime R65:128reservas/8streams/payload8MiB, owner worker único, FILE opacos d
 
 Pausa invalida epoch, solicita releases; worker llega al límite entre Ticks, procesa KEYUP y confirma neutralidad antes de esperar sin Tick. DG descuenta pausa para evitar catch-up. RESUME explícito/contacto nuevo. Menú R67 y [panel stock R68](doom-focus-emulator.md) probados con motor real; volver exige RESUME. Pérdida de foco con acción mantenida pendiente.
 
-EXIT elimina Image/invalida caches en UI, marca STOP y espera con Timer. Owner observa STOP en polls DG/runtime y vuelve a cleanup; no join/sleep UI. Unload exige cero referencias/lectores/productor/input, completion y PID ausente. Fallos retienen módulo. Finalizador Lua solo stop/retención; reentrada UI recoge caches/unload. Cierre sin EXIT con motor pendiente.
+EXIT elimina Image/invalida caches en UI, marca STOP y espera con Timer. Owner observa STOP en polls DG/runtime y vuelve a cleanup; no join/sleep UI. Unload exige cero referencias/lectores/productor/input, completion y PID ausente. Fallos retienen módulo. Finalizador Lua solo stop/retención; reentrada UI recoge caches/unload. [R69](doom-close-emulator.md) demuestra cierre normal sin EXIT con el motor activo y recogida al reentrar; crash o terminacion forzada sin garantia.
 
 Cada sesión recarga ELF para restaurar globals. Liberar reservas no restablece motor. Límite120s real incluidas pausas/10000Ticks/E1M1; no hard watchdog/crash recovery. Saves/config/audio deshabilitados.
 
@@ -55,6 +55,6 @@ Archivos persistentes no exigen residencia continua. RAM-only no significa sandb
 
 ## Gates
 
-Ejecución/display/input/tiempo/WAD/motor y dos salidas limpias demostrados en emulador. [R68](doom-focus-emulator.md) completó foco stock y STOP con FIRE mantenido. Siguiente: cerrar watchface con motor activo sin EXIT y recoger al reentrar. Luego medir presentación, latencia, copia y estabilidad antes de optimizar/persistir.
+Ejecución/display/input/tiempo/WAD/motor y dos salidas limpias demostrados en emulador. [R68](doom-focus-emulator.md) completó foco stock y STOP con FIRE mantenido. [R69](doom-close-emulator.md) completa el cierre normal/reentrada. Siguiente: medir presentacion real, latencia y copia antes de optimizar; estabilidad prolongada y persistencia pendientes.
 
 Antes de hardware: evidencia M2315W1/firmware exacto, privilegios, recovery y [plan explícito](physical-device-plan.md) con revisión del usuario. No escalación sin restricción concreta. Excluir ELF/direcciones del emulador del reloj físico.

@@ -1,8 +1,10 @@
 # Matriz de evidencia
 
-**Actual R68:** [Panel stock y STOP con FIRE mantenido](doom-focus-emulator.md) comprobados con Doom original. R67 y anteriores son historial; gate físico cerrado.
+**R69, 2026-10-04:** [Cierre sin EXIT y reentrada](doom-close-emulator.md) pasan con Doom original. Seleccionar Storage detiene el worker104 y libera13 reservas/streams; conserva modulo/copias hasta reentrada UI, que recoge todo. Sin reboot para salir ni unload host. C/Lua/ELF R67 intactos; solo emulador S3, gate M2315W1 cerrado. Siguiente: medir frames presentados, costo de copia y latencia antes de optimizar.
 
-**Actual R67:** [DOOM original en UI con controles](doom-ui-emulator.md). Las filas históricas Rxx describen ese checkpoint; sus pendientes de motor/input/UI no sustituyen el resultado posterior R67. Ninguna prueba nueva abre el gate M2315W1.
+**Historial R68:** [Panel stock y STOP con FIRE mantenido](doom-focus-emulator.md) comprobados con Doom original. R67 y anteriores son historial; gate físico cerrado.
+
+**Historial R67:** [DOOM original en UI con controles](doom-ui-emulator.md). Las filas históricas Rxx describen ese checkpoint; sus pendientes de motor/input/UI no sustituyen el resultado posterior R67. Ninguna prueba nueva abre el gate M2315W1.
 
 Actualizada 2026-10-04. Referencias Rxx: [research.md](research.md#fuentes-consultadas). `CONFIRMADO` puede significar evidencia documental específica del dispositivo, nunca prueba de nuestra unidad sin resultado local. Hay inspección estática, boot, ADB, inventario y validación visual/táctil de TouchEvents empaquetado en emulador S3. No hay pruebas del reloj físico. Filas CLI anteriores describen pruebas históricas; no el resultado posterior con launcher watchface.
 
@@ -326,4 +328,12 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Volver del panel exige RESUME | UI Lua propia/S3 | R68 PAUSED y posterior tic96→157 | CONFIRMADO EN EMULADOR | Alta local | No auto-resume, keys0 | No implementación física RW4 |
 | STOP con FIRE down retira motor/módulo antes de release | Port propio/S3 | R68 NSH op2, pointer down, ps/lsmod/nodos/log | CONFIRMADO EN EMULADOR | Alta para ensayo |13alloc/free,streams0,reason1,uninit0,sin reboot | No kill/unload host ni emergencia física demostrados |
 | Foco stock perdido con acción aún mantenida | M2315W1/S3 | No se abrió panel manteniendo acción | SIN EVIDENCIA | No evaluable | No | No confundir con STOP mantenido |
-| Cierre sin EXIT con Doom y reentrada | Port S3 | Solo probado antes con transporte R62 | SIN EVIDENCIA con motor | Pendiente | No en R68 | Siguiente checkpoint; nunca extrapolar a RW4 |
+| Cierre sin EXIT con Doom y reentrada (estado historico R68) | Port S3 | Solo probado entonces con transporte R62 | SIN EVIDENCIA en R68 | Historica | No en R68 | Resuelto posteriormente por R69 debajo; nunca extrapolar a RW4 |
+
+## Cierre y reentrada R69: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Cambiar de watchface sin EXIT detiene Doom original | Port propio S3/E1M1 | [R69](doom-close-emulator.md), close retained/finish/ps | CONFIRMADO EN EMULADOR | Alta para ciclo observado | Worker104 ausente; reason1,13alloc/free,streams0,cleanup0 | Cierre normal Lua; no crash/kill probado |
+| Cierre conserva modulo y copias hasta reentrada | Port propio S3 | R69 lsmod y dos copias128012bytes/header | CONFIRMADO EN EMULADOR | Alta local | Modulo residente, motor retirado, Storage activa | Retencion deliberada; sin sandbox |
+| Reentrar recoge modulo/caches/copias sin EXIT ni reboot | UIProbe propia/S3 | R69 uninit0/unloaded/ps/nodos/PNG | CONFIRMADO EN EMULADOR | Alta para flujo | Un START, cero EXIT; no unload host; launcher Ready | Final Storage y tmp retirados; no persistencia Doom ni compatibilidad RW4 |

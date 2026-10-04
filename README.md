@@ -1,6 +1,8 @@
 # DOOM en Redmi Watch 4
 
-**R68:** [Panel stock y STOP con FIRE pulsado](docs/doom-focus-emulator.md) pasan con el motor real: pausa al abrir panel, RESUME explícito y retirada limpia antes de soltar FIRE, sin reboot. Siguiente: cierre al cambiar de watchface sin EXIT; hardware físico intacto.
+**R69:** [Cerrar Doom sin EXIT y volver](docs/doom-close-emulator.md) pasa: el motor se detiene al cambiar de esfera y la reentrada recoge modulo e imagenes retenidas, sin reboot. Siguiente: medir la fluidez; hardware fisico intacto.
+
+**Historial R68:** [Panel stock y STOP con FIRE pulsado](docs/doom-focus-emulator.md) pasaron con el motor real.
 
 **R67, 2026-10-04:** DOOM original ejecuta E1M1 en la UI Lua/LVGL del emulador Xiaomi Watch S3. Avanzar, girar, disparar, pausar/reanudar y dos ciclos START/EXIT/reapertura pasaron sin reboot. [Resultados, mediciones y reproducción](docs/doom-ui-emulator.md). Presentación inicial: aproximadamente cinco frames/s; fluidez, estabilidad prolongada y persistencia nativa pendientes.
 
@@ -16,7 +18,7 @@ Se conserva motor, renderer y gameplay original. Aportes propios: investigación
 - Watchface permanece instalada en emulador; ELF/WAD en /tmp volátil y retirados tras el ensayo. Persistencia de Doom pendiente.
 - NuttX FLAT compartido, **sin sandbox**. No cargar este ELF ni sus direcciones en M2315W1.
 
-Final: Storage365700764 activa, UIProbe365799903 modo doom almacenada; workers/módulo/nodos/copias/ELF/WAD tmp retirados. Siguiente checkpoint: cerrar la watchface con Doom activo sin EXIT y recoger al reentrar.
+Final: Storage365700764 activa, UIProbe365799903 modo doom almacenada; workers/módulo/nodos/copias/ELF/WAD tmp retirados. Siguiente checkpoint: medir presentacion, costo de copia y latencia de input antes de optimizar.
 
 ## Reproducción local
 
