@@ -25,7 +25,9 @@ Lifecycle conservado: guard __gc global, handles close, pausa/resume, EXIT y cie
 
 ## Próxima meta
 
-Garantizar limpieza de C cuando se cierre la watchface sin pulsar EXIT. Después quedarán render C en la página propia, input mantenido, timers monotónicos, FS/WAD y DOOM. No compilar todavía DOOM ni tocar hardware físico.
+Frames repetidos con recursos acotados, pausa y salida, como se indica arriba. La limpieza al cerrar Lua y el snapshot C en la página propia ya fueron validados. Después quedarán input mantenido, timers monotónicos, FS/WAD y DOOM. No compilar todavía DOOM ni tocar hardware físico.
+
+Preferencia del usuario registrada en [controls.md](controls.md): elegir controles cómodos, táctiles inicialmente, sin asignar avanzar a pulsar la corona. Propuesta documentada, no implementada ni probada; un dedo, zonas grandes, diagonal para avanzar+girar, menú con salida visible. Combatir mientras se mueve sigue siendo una limitación por evaluar. No cambia el checkpoint inmediato de frames.
 
 ## Experimentos anteriores
 
