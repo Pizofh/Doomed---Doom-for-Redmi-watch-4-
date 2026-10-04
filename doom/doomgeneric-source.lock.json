@@ -1,0 +1,912 @@
+{
+  "repository": "https://github.com/ozkl/doomgeneric",
+  "revision": "dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284",
+  "acquisition": "GitHub connector immutable contents, each Git blob verified locally",
+  "files": [
+    {
+      "path": "LICENSE",
+      "gitBlobSha1": "d159169d1050894d3ea3b98e1c965c4058208fe1",
+      "size": 18092
+    },
+    {
+      "path": "README.TXT",
+      "gitBlobSha1": "503537837d42ce8f4a4ce9a33772ce5a4eb5ad17",
+      "size": 3868
+    },
+    {
+      "path": "README.md",
+      "gitBlobSha1": "dabfabab0ef9e085deb7c8af40d555e4dc994fc0",
+      "size": 2028
+    },
+    {
+      "path": "doomgeneric/Makefile",
+      "gitBlobSha1": "503e0dca2b8b768a35057db2ef158a245bfdccfa",
+      "size": 1659
+    },
+    {
+      "path": "doomgeneric/am_map.c",
+      "gitBlobSha1": "d3d504e326c7ee4f4d6145365d01cd896d16b6e0",
+      "size": 27807
+    },
+    {
+      "path": "doomgeneric/am_map.h",
+      "gitBlobSha1": "572d2389bc28ed4858a8cfc770941bef508e11e6",
+      "size": 1243
+    },
+    {
+      "path": "doomgeneric/config.h",
+      "gitBlobSha1": "7e05102e09a07c15d50c836049f07ee8ee8a77b9",
+      "size": 2801
+    },
+    {
+      "path": "doomgeneric/d_englsh.h",
+      "gitBlobSha1": "cfb05722c5c9623ede6cfa75a81bfb1bc95c55e4",
+      "size": 21755
+    },
+    {
+      "path": "doomgeneric/d_event.c",
+      "gitBlobSha1": "3eef57282a8b4bb1dff084b2b3fdbe12a5dff0d8",
+      "size": 1427
+    },
+    {
+      "path": "doomgeneric/d_event.h",
+      "gitBlobSha1": "c9374b296f5e54ef1c341adbeb5a916d11ce78de",
+      "size": 3186
+    },
+    {
+      "path": "doomgeneric/d_items.c",
+      "gitBlobSha1": "33f310c63b3a83fae380ed495f5ac49456f9b23b",
+      "size": 1868
+    },
+    {
+      "path": "doomgeneric/d_items.h",
+      "gitBlobSha1": "3d22a063030db2e181e37246c1875ef17a5a3a71",
+      "size": 989
+    },
+    {
+      "path": "doomgeneric/d_iwad.c",
+      "gitBlobSha1": "508cc6188dc32b23a454791bde9c164985242969",
+      "size": 18889
+    },
+    {
+      "path": "doomgeneric/d_iwad.h",
+      "gitBlobSha1": "91a804f07c3a37e3905cfa6ebf912a8296ee9a72",
+      "size": 1636
+    },
+    {
+      "path": "doomgeneric/d_loop.c",
+      "gitBlobSha1": "1939dbdc3d0f155e674485445caf5a79e0fbc902",
+      "size": 16671
+    },
+    {
+      "path": "doomgeneric/d_loop.h",
+      "gitBlobSha1": "eb87d84888bd8cf90a374eb214462bd25a22ab80",
+      "size": 2365
+    },
+    {
+      "path": "doomgeneric/d_main.c",
+      "gitBlobSha1": "9012e5f54086cb86aa6f5ab2d0aa7c7d11165ec8",
+      "size": 44883
+    },
+    {
+      "path": "doomgeneric/d_main.h",
+      "gitBlobSha1": "0fe9547b32cd84343e442fb35b382e76a4b6182b",
+      "size": 1015
+    },
+    {
+      "path": "doomgeneric/d_mode.c",
+      "gitBlobSha1": "afd84acb327187311145e39e7498f7fbd92dab09",
+      "size": 4865
+    },
+    {
+      "path": "doomgeneric/d_mode.h",
+      "gitBlobSha1": "ebbd0e834faad21e822f1363cd47ab78e911548b",
+      "size": 2942
+    },
+    {
+      "path": "doomgeneric/d_net.c",
+      "gitBlobSha1": "b8962cc6a317dc00133b4992f3b6b69dea0d136e",
+      "size": 6704
+    },
+    {
+      "path": "doomgeneric/d_player.h",
+      "gitBlobSha1": "a72c2f5f17558dc2946a718f8499ab3a8aabb3be",
+      "size": 4457
+    },
+    {
+      "path": "doomgeneric/d_textur.h",
+      "gitBlobSha1": "1afe040eb04c180f4a995afafe94c293b1240379",
+      "size": 928
+    },
+    {
+      "path": "doomgeneric/d_think.h",
+      "gitBlobSha1": "0966ad96023f269e050d4177ad7a71468289df38",
+      "size": 1481
+    },
+    {
+      "path": "doomgeneric/d_ticcmd.h",
+      "gitBlobSha1": "daf0da318ba8fd938f7769224dafc3eb63faad17",
+      "size": 1544
+    },
+    {
+      "path": "doomgeneric/deh_main.h",
+      "gitBlobSha1": "10ac2360ef0e0e3938a73aae2ef131db9fb61cc3",
+      "size": 1493
+    },
+    {
+      "path": "doomgeneric/deh_misc.h",
+      "gitBlobSha1": "319a1451abf16de8776c6e5c23c8cd516abe0a0b",
+      "size": 3071
+    },
+    {
+      "path": "doomgeneric/deh_str.h",
+      "gitBlobSha1": "cdecaf0e50af3794a74455d9c612d2a6811aba67",
+      "size": 1195
+    },
+    {
+      "path": "doomgeneric/doom.h",
+      "gitBlobSha1": "3c0d0be74930dfea229a0b5ffd1ed4fdb5115cc2",
+      "size": 1738
+    },
+    {
+      "path": "doomgeneric/doomdata.h",
+      "gitBlobSha1": "46b3e11b629b94370436b197105fa8e0e3ac7116",
+      "size": 4679
+    },
+    {
+      "path": "doomgeneric/doomdef.c",
+      "gitBlobSha1": "d31f3efa2dd7b103fbca573f695c401170a52c00",
+      "size": 803
+    },
+    {
+      "path": "doomgeneric/doomdef.h",
+      "gitBlobSha1": "62d729ddb134664a1df0b753115b48918d5e1dcc",
+      "size": 3114
+    },
+    {
+      "path": "doomgeneric/doomfeatures.h",
+      "gitBlobSha1": "dff693611d4faf9c22ed51aedef2600e5b5e0e59",
+      "size": 1020
+    },
+    {
+      "path": "doomgeneric/doomgeneric.c",
+      "gitBlobSha1": "881d700776dfc9fdc2e69943ed45767e72c7660b",
+      "size": 390
+    },
+    {
+      "path": "doomgeneric/doomgeneric.h",
+      "gitBlobSha1": "fd8708f42010ff7226926450e3bed379429eb2a6",
+      "size": 793
+    },
+    {
+      "path": "doomgeneric/doomkeys.h",
+      "gitBlobSha1": "2dfc431b9b94407a2d703de05a4d466c25b4879f",
+      "size": 2604
+    },
+    {
+      "path": "doomgeneric/doomstat.c",
+      "gitBlobSha1": "ed4c6ccc32404b53c73853b8e6988edb1ea31c7e",
+      "size": 959
+    },
+    {
+      "path": "doomgeneric/doomstat.h",
+      "gitBlobSha1": "acd65dccaf80847ba24462c968d3d19754810501",
+      "size": 6786
+    },
+    {
+      "path": "doomgeneric/doomtype.h",
+      "gitBlobSha1": "dc14bc5dacd04a58f581db44c36cfe9534c5f1b8",
+      "size": 2542
+    },
+    {
+      "path": "doomgeneric/dstrings.c",
+      "gitBlobSha1": "b87f198b34a3d94d80ac3b704c251457a666da31",
+      "size": 2303
+    },
+    {
+      "path": "doomgeneric/dstrings.h",
+      "gitBlobSha1": "d3240b499146c4babf76d2cc0dabe381dc11c601",
+      "size": 948
+    },
+    {
+      "path": "doomgeneric/dummy.c",
+      "gitBlobSha1": "d78816b8c11c255b41af4773e666debc58ec792c",
+      "size": 1995
+    },
+    {
+      "path": "doomgeneric/f_finale.c",
+      "gitBlobSha1": "ca6775ef8883c1989794888776c6c56ede955b9d",
+      "size": 14691
+    },
+    {
+      "path": "doomgeneric/f_finale.h",
+      "gitBlobSha1": "daa71c32a3e4a8857624c889fa4b4d90427719c4",
+      "size": 918
+    },
+    {
+      "path": "doomgeneric/f_wipe.c",
+      "gitBlobSha1": "05852fd20e001f63a3b95830df1659d6a7549897",
+      "size": 5076
+    },
+    {
+      "path": "doomgeneric/f_wipe.h",
+      "gitBlobSha1": "f48a9ca6515f412bd17a5ea5bc58afc67fea6e6c",
+      "size": 1163
+    },
+    {
+      "path": "doomgeneric/g_game.c",
+      "gitBlobSha1": "9954d78902387f7745676163aa601fa17b94a765",
+      "size": 53214
+    },
+    {
+      "path": "doomgeneric/g_game.h",
+      "gitBlobSha1": "da0df39b147332d9ea0c182c6fb6bde254f00e31",
+      "size": 1916
+    },
+    {
+      "path": "doomgeneric/gusconf.h",
+      "gitBlobSha1": "e0124266e850d61cc4499fdce1d335a02073858c",
+      "size": 800
+    },
+    {
+      "path": "doomgeneric/hu_lib.c",
+      "gitBlobSha1": "47038a0439cfba8e3b02de3072476f8ff0516526",
+      "size": 6244
+    },
+    {
+      "path": "doomgeneric/hu_lib.h",
+      "gitBlobSha1": "8f0994e60e890646457a3c081418fde3a0673b79",
+      "size": 3630
+    },
+    {
+      "path": "doomgeneric/hu_stuff.c",
+      "gitBlobSha1": "b63cac7659eb92c14c90744fc810057f173225d3",
+      "size": 12234
+    },
+    {
+      "path": "doomgeneric/hu_stuff.h",
+      "gitBlobSha1": "a3affc5b969e8723e9a55b9fcfef037b9bba9dab",
+      "size": 1342
+    },
+    {
+      "path": "doomgeneric/i_cdmus.c",
+      "gitBlobSha1": "12a815cfa7f2c1de777ee8d7732709391a68172c",
+      "size": 4282
+    },
+    {
+      "path": "doomgeneric/i_cdmus.h",
+      "gitBlobSha1": "31db2a659ae76a76cf23484593391ab93adfeeb4",
+      "size": 1351
+    },
+    {
+      "path": "doomgeneric/i_endoom.c",
+      "gitBlobSha1": "6de261bb15ca1a9d3ff4a8bfa8f6b979576d3cf8",
+      "size": 2097
+    },
+    {
+      "path": "doomgeneric/i_endoom.h",
+      "gitBlobSha1": "8c8ff457fae4af8e148fa0721d42654e210b1a12",
+      "size": 811
+    },
+    {
+      "path": "doomgeneric/i_input.c",
+      "gitBlobSha1": "7ec4b63dd13eb4de50c0ec40cc82d2b2e0a89040",
+      "size": 7975
+    },
+    {
+      "path": "doomgeneric/i_joystick.c",
+      "gitBlobSha1": "755aec3d37da169f752fe2707feb503e2a50fc42",
+      "size": 8015
+    },
+    {
+      "path": "doomgeneric/i_joystick.h",
+      "gitBlobSha1": "b8815e215d19abe3392b1cac79e924b553e29a8c",
+      "size": 2511
+    },
+    {
+      "path": "doomgeneric/i_scale.c",
+      "gitBlobSha1": "f88c694497bcf0f76fd761c644da14fa79195d9a",
+      "size": 32663
+    },
+    {
+      "path": "doomgeneric/i_scale.h",
+      "gitBlobSha1": "48231f5e9258d0811569c143af41f93885868153",
+      "size": 1606
+    },
+    {
+      "path": "doomgeneric/i_sound.c",
+      "gitBlobSha1": "c80a9d114c1391a19e26144434a81fafbe918536",
+      "size": 8351
+    },
+    {
+      "path": "doomgeneric/i_sound.h",
+      "gitBlobSha1": "e31b5e58e5bf64f7728e78708dfbae7b7ec4c281",
+      "size": 5614
+    },
+    {
+      "path": "doomgeneric/i_swap.h",
+      "gitBlobSha1": "fa45d4c91102ae13c0c4c1b73aa4951f493379c6",
+      "size": 1820
+    },
+    {
+      "path": "doomgeneric/i_system.c",
+      "gitBlobSha1": "53ab2c945a8d80457c1021abe7b855c2decf0293",
+      "size": 12664
+    },
+    {
+      "path": "doomgeneric/i_system.h",
+      "gitBlobSha1": "b65daff00db292aa643b86efbc675335c6f3c67a",
+      "size": 2140
+    },
+    {
+      "path": "doomgeneric/i_timer.c",
+      "gitBlobSha1": "0a85c722b58eb1ece8dbb3d83c2590cffbe328e1",
+      "size": 1604
+    },
+    {
+      "path": "doomgeneric/i_timer.h",
+      "gitBlobSha1": "9b3dbb8d105afcf42efb6a80ffbb89935002e9e3",
+      "size": 1038
+    },
+    {
+      "path": "doomgeneric/i_video.c",
+      "gitBlobSha1": "84bebdeb61feceb09820dea1a02215ffc6fa90ff",
+      "size": 11235
+    },
+    {
+      "path": "doomgeneric/i_video.h",
+      "gitBlobSha1": "c8565f419d3066b13d53f829d0e2dfeb32cf35f6",
+      "size": 4803
+    },
+    {
+      "path": "doomgeneric/info.c",
+      "gitBlobSha1": "9389e84f08408b8b424f52f48e7866439da9ec21",
+      "size": 139548
+    },
+    {
+      "path": "doomgeneric/info.h",
+      "gitBlobSha1": "648b518889501d315d1e487e020ea62be4f98f28",
+      "size": 21728
+    },
+    {
+      "path": "doomgeneric/m_argv.c",
+      "gitBlobSha1": "1582450feb63631182998f2b823f848403594864",
+      "size": 5223
+    },
+    {
+      "path": "doomgeneric/m_argv.h",
+      "gitBlobSha1": "b576f6cedccc293d9f69c3618ee75230d742a830",
+      "size": 1222
+    },
+    {
+      "path": "doomgeneric/m_bbox.c",
+      "gitBlobSha1": "fb3f270d1b4d2cebe109e2def7815ef050ee58b2",
+      "size": 1108
+    },
+    {
+      "path": "doomgeneric/m_bbox.h",
+      "gitBlobSha1": "5a7af57c458da777d2a4105cad51c391de1f104e",
+      "size": 961
+    },
+    {
+      "path": "doomgeneric/m_cheat.c",
+      "gitBlobSha1": "1565f9ef5e3b5091842e4297bb448806634be993",
+      "size": 2171
+    },
+    {
+      "path": "doomgeneric/m_cheat.h",
+      "gitBlobSha1": "6775e709e4165581ebade229da62097eb57d97f7",
+      "size": 1277
+    },
+    {
+      "path": "doomgeneric/m_config.c",
+      "gitBlobSha1": "865e168420dd8f9858fe0af7993917ba52c4a26a",
+      "size": 46812
+    },
+    {
+      "path": "doomgeneric/m_config.h",
+      "gitBlobSha1": "a17de2b455861ff4d53c4b5f27300dd8d10b3c48",
+      "size": 1213
+    },
+    {
+      "path": "doomgeneric/m_controls.c",
+      "gitBlobSha1": "f0ffa0157638f1dae38f30e1093c33f864f44a52",
+      "size": 12542
+    },
+    {
+      "path": "doomgeneric/m_controls.h",
+      "gitBlobSha1": "aa07a7e38dc10fdb034f65b87121fa4f13a573dc",
+      "size": 3925
+    },
+    {
+      "path": "doomgeneric/m_fixed.c",
+      "gitBlobSha1": "23f6ff3091fd13250bbd9bc968cac2b07800dd44",
+      "size": 1142
+    },
+    {
+      "path": "doomgeneric/m_fixed.h",
+      "gitBlobSha1": "733b2901ce88c2f2d051ea00052483ab4818c5e6",
+      "size": 908
+    },
+    {
+      "path": "doomgeneric/m_menu.c",
+      "gitBlobSha1": "6df965591b69ace68fea0dd519edab8fb6e287eb",
+      "size": 39303
+    },
+    {
+      "path": "doomgeneric/m_menu.h",
+      "gitBlobSha1": "ce41db39adbaa89a4f11c8dd879890fbdc635a0d",
+      "size": 1473
+    },
+    {
+      "path": "doomgeneric/m_misc.c",
+      "gitBlobSha1": "54b2613446306b7bcc630331f5e736d9065de3df",
+      "size": 10678
+    },
+    {
+      "path": "doomgeneric/m_misc.h",
+      "gitBlobSha1": "844b485951528a5e495045f0c19584a85fc75d19",
+      "size": 1796
+    },
+    {
+      "path": "doomgeneric/m_random.c",
+      "gitBlobSha1": "8e3b4e189e7eee53af9c1b9b3de4193dffe3ee9c",
+      "size": 2402
+    },
+    {
+      "path": "doomgeneric/m_random.h",
+      "gitBlobSha1": "aa6291ae9e4872a5f6a365cb7f68eeab2c8fb523",
+      "size": 909
+    },
+    {
+      "path": "doomgeneric/memio.c",
+      "gitBlobSha1": "3cc769a3515818694a2df6247d408564bde70374",
+      "size": 3617
+    },
+    {
+      "path": "doomgeneric/memio.h",
+      "gitBlobSha1": "03706a3171a494082ced048434f5646291c9e454",
+      "size": 1206
+    },
+    {
+      "path": "doomgeneric/mus2mid.h",
+      "gitBlobSha1": "d21516c70314f6dc634b2f1e4b7a02eb92c2dc24",
+      "size": 167
+    },
+    {
+      "path": "doomgeneric/net_client.h",
+      "gitBlobSha1": "31dc9e4af6fa8b49afd117a5e09c1a191c12a730",
+      "size": 1619
+    },
+    {
+      "path": "doomgeneric/net_dedicated.h",
+      "gitBlobSha1": "3d7387b57826adc30025ab2a509bc9905626f964",
+      "size": 704
+    },
+    {
+      "path": "doomgeneric/net_defs.h",
+      "gitBlobSha1": "bedfb95b9a0f502a59ec5a9ce1217a26622febd7",
+      "size": 5916
+    },
+    {
+      "path": "doomgeneric/net_gui.h",
+      "gitBlobSha1": "4f4198b60878728386568a6991aafd76869d2389",
+      "size": 830
+    },
+    {
+      "path": "doomgeneric/net_io.h",
+      "gitBlobSha1": "5350222306cda7a8f0991744a6f11e3d9816ea9b",
+      "size": 1251
+    },
+    {
+      "path": "doomgeneric/net_loop.h",
+      "gitBlobSha1": "5a2e58ee1c9669ded5d97acfa720c3fe1d73242e",
+      "size": 821
+    },
+    {
+      "path": "doomgeneric/net_packet.h",
+      "gitBlobSha1": "ced4e43588537d2e2d53c655eec00d6fcfd14d04",
+      "size": 1527
+    },
+    {
+      "path": "doomgeneric/net_query.h",
+      "gitBlobSha1": "563a055b96db1895b3c2cc3cb4ae2c56a48a7da2",
+      "size": 1515
+    },
+    {
+      "path": "doomgeneric/net_sdl.h",
+      "gitBlobSha1": "c249de1c490cb99899505b19e0527ebde8c5ade4",
+      "size": 742
+    },
+    {
+      "path": "doomgeneric/net_server.h",
+      "gitBlobSha1": "b9de7456ef821d5cd9aba4d3673f62eacde5e591",
+      "size": 1108
+    },
+    {
+      "path": "doomgeneric/p_ceilng.c",
+      "gitBlobSha1": "d1e61c898b40e9a0be05dbe71d591f0297b0d1a1",
+      "size": 6053
+    },
+    {
+      "path": "doomgeneric/p_doors.c",
+      "gitBlobSha1": "cafab0f4378c6fd4d5f4e412569a6b8cf4621763",
+      "size": 16417
+    },
+    {
+      "path": "doomgeneric/p_enemy.c",
+      "gitBlobSha1": "f2b44d139ff8b0275a8874e6b996dfa28c38ae8a",
+      "size": 37354
+    },
+    {
+      "path": "doomgeneric/p_floor.c",
+      "gitBlobSha1": "1384ee6b46c485d95570bc2939752bc9a08f499a",
+      "size": 11290
+    },
+    {
+      "path": "doomgeneric/p_inter.c",
+      "gitBlobSha1": "1eb58cfcab5d7268742f032ae6fe10c304db4162",
+      "size": 18939
+    },
+    {
+      "path": "doomgeneric/p_inter.h",
+      "gitBlobSha1": "5764d5dab51991ce40c9315bbd1ba36a4ba56fa7",
+      "size": 708
+    },
+    {
+      "path": "doomgeneric/p_lights.c",
+      "gitBlobSha1": "863338dcf3c72431b7890c5d58ab0b5179d5be76",
+      "size": 6512
+    },
+    {
+      "path": "doomgeneric/p_local.h",
+      "gitBlobSha1": "95fa405340c58ec1b2bebe7e1276cc020638f933",
+      "size": 6408
+    },
+    {
+      "path": "doomgeneric/p_map.c",
+      "gitBlobSha1": "e371869a74ef162c7e5f9799ac9f0895e60b5aa3",
+      "size": 31710
+    },
+    {
+      "path": "doomgeneric/p_maputl.c",
+      "gitBlobSha1": "916f2b643771a8360a43029d405c874aa92bdce9",
+      "size": 20059
+    },
+    {
+      "path": "doomgeneric/p_mobj.c",
+      "gitBlobSha1": "a3b9c432219f13aae45ab73d9643b62ef31d99c8",
+      "size": 21322
+    },
+    {
+      "path": "doomgeneric/p_mobj.h",
+      "gitBlobSha1": "90ed764b91c7de405d2bb5a98c348ad9083645b1",
+      "size": 8672
+    },
+    {
+      "path": "doomgeneric/p_plats.c",
+      "gitBlobSha1": "9e773d55cbd16bea2c0bfe7ab7c23a56bf6db751",
+      "size": 6375
+    },
+    {
+      "path": "doomgeneric/p_pspr.c",
+      "gitBlobSha1": "e4774c702f1888358ad0fe1ba3b41a188550330a",
+      "size": 16908
+    },
+    {
+      "path": "doomgeneric/p_pspr.h",
+      "gitBlobSha1": "f98fe3533569581ab7bea652c595215e865c3471",
+      "size": 1548
+    },
+    {
+      "path": "doomgeneric/p_saveg.c",
+      "gitBlobSha1": "5cb81967a87c5eb9973ecea61b02f35477941cf9",
+      "size": 36266
+    },
+    {
+      "path": "doomgeneric/p_saveg.h",
+      "gitBlobSha1": "2d7beba3c673aa775c8402d81e17005719ce1a27",
+      "size": 1569
+    },
+    {
+      "path": "doomgeneric/p_setup.c",
+      "gitBlobSha1": "00306e84c043e00509b656e56fdca0711bbc5a71",
+      "size": 19002
+    },
+    {
+      "path": "doomgeneric/p_setup.h",
+      "gitBlobSha1": "9df741629aa5ccd1485c85493ab9bdd7e608376f",
+      "size": 865
+    },
+    {
+      "path": "doomgeneric/p_sight.c",
+      "gitBlobSha1": "48ba68384bc50867e3d4865323e6cf444f619040",
+      "size": 7178
+    },
+    {
+      "path": "doomgeneric/p_spec.c",
+      "gitBlobSha1": "17446b5dfb1f2b220ace8ace8513642cbd0a03eb",
+      "size": 29251
+    },
+    {
+      "path": "doomgeneric/p_spec.h",
+      "gitBlobSha1": "a1343bfa398f22e685ea33d1333789ca9c1ce084",
+      "size": 9364
+    },
+    {
+      "path": "doomgeneric/p_switch.c",
+      "gitBlobSha1": "ed4feeca0896f6621a6cad898e5410e481819bd2",
+      "size": 13307
+    },
+    {
+      "path": "doomgeneric/p_telept.c",
+      "gitBlobSha1": "45cdfb0164e4331781cb328296df14b282754ba2",
+      "size": 2868
+    },
+    {
+      "path": "doomgeneric/p_tick.c",
+      "gitBlobSha1": "2289350012bd78d1ed7093251f98cada7a798555",
+      "size": 2799
+    },
+    {
+      "path": "doomgeneric/p_tick.h",
+      "gitBlobSha1": "ddfcd74fc8426a4eeb122d3fbe80621719782e69",
+      "size": 797
+    },
+    {
+      "path": "doomgeneric/p_user.c",
+      "gitBlobSha1": "73c0dc9434fc424918affa3bf3ae51e8fbc8fb99",
+      "size": 8151
+    },
+    {
+      "path": "doomgeneric/r_bsp.c",
+      "gitBlobSha1": "9a788122ad6f0357b217f9912c3c4a6db40b375e",
+      "size": 11028
+    },
+    {
+      "path": "doomgeneric/r_bsp.h",
+      "gitBlobSha1": "1723e6861470325e9d745d78e0f46614c826fa1f",
+      "size": 1369
+    },
+    {
+      "path": "doomgeneric/r_data.c",
+      "gitBlobSha1": "2d4b65bb5dd5563b09241979784d2ea47c525782",
+      "size": 20090
+    },
+    {
+      "path": "doomgeneric/r_data.h",
+      "gitBlobSha1": "66425afad7cd7c0d0aeb561b981fa5d5a35ae5b4",
+      "size": 1260
+    },
+    {
+      "path": "doomgeneric/r_defs.h",
+      "gitBlobSha1": "a64ac8424acd9bb24161f3ba58e9e5fbe16e191d",
+      "size": 8139
+    },
+    {
+      "path": "doomgeneric/r_draw.c",
+      "gitBlobSha1": "9271bcd554bce0d4af63232a09074b799403b58e",
+      "size": 21724
+    },
+    {
+      "path": "doomgeneric/r_draw.h",
+      "gitBlobSha1": "5b0c818b599d2843043fef4e082514d992edaa68",
+      "size": 2178
+    },
+    {
+      "path": "doomgeneric/r_local.h",
+      "gitBlobSha1": "1b9249210cd90f30da1398179544247559fc0a5a",
+      "size": 1140
+    },
+    {
+      "path": "doomgeneric/r_main.c",
+      "gitBlobSha1": "22278fe36a9d316e3fd5430833bb3352567c73a8",
+      "size": 15531
+    },
+    {
+      "path": "doomgeneric/r_main.h",
+      "gitBlobSha1": "c05a9a01353476573a8a5fb2336b80720143120a",
+      "size": 2928
+    },
+    {
+      "path": "doomgeneric/r_plane.c",
+      "gitBlobSha1": "ea1611c2e2d2a0919963e3e62f23cf2c086d8a40",
+      "size": 8160
+    },
+    {
+      "path": "doomgeneric/r_plane.h",
+      "gitBlobSha1": "57b50e5bc5ee8c5840832a094c67418de143ac35",
+      "size": 1431
+    },
+    {
+      "path": "doomgeneric/r_segs.c",
+      "gitBlobSha1": "9b4e413c856345d46b2ccdd263a58c02c72f86e1",
+      "size": 16890
+    },
+    {
+      "path": "doomgeneric/r_segs.h",
+      "gitBlobSha1": "d4a4d89964eaca9d9db051804d9509b9f6fae0db",
+      "size": 780
+    },
+    {
+      "path": "doomgeneric/r_sky.c",
+      "gitBlobSha1": "667c88d339e7574c8f25b99d6553d521fae045da",
+      "size": 1198
+    },
+    {
+      "path": "doomgeneric/r_sky.h",
+      "gitBlobSha1": "8ad6680aa5f475d798f76bafc4198fb0a5ea377e",
+      "size": 931
+    },
+    {
+      "path": "doomgeneric/r_state.h",
+      "gitBlobSha1": "2a60e2fe8e1a2176cd0d79dfb6680bb97d6dc0ee",
+      "size": 2348
+    },
+    {
+      "path": "doomgeneric/r_things.c",
+      "gitBlobSha1": "74e7369b8638f1b24f253775f238e87ab4ff8ee5",
+      "size": 20586
+    },
+    {
+      "path": "doomgeneric/r_things.h",
+      "gitBlobSha1": "256a5ebbeeb8f31f21771171ed38f8138d5a7760",
+      "size": 1551
+    },
+    {
+      "path": "doomgeneric/s_sound.c",
+      "gitBlobSha1": "f6d8be1388944e172291a48b7ed12748c5e528bb",
+      "size": 14465
+    },
+    {
+      "path": "doomgeneric/s_sound.h",
+      "gitBlobSha1": "bbd100a0c353451d52f292fb75b6060ff10f1dbf",
+      "size": 1909
+    },
+    {
+      "path": "doomgeneric/sha1.c",
+      "gitBlobSha1": "06ab40ad84872155bbf2142f35969f3b0afc8eee",
+      "size": 8641
+    },
+    {
+      "path": "doomgeneric/sha1.h",
+      "gitBlobSha1": "249571be33514fe9185c08e105f8010d696a8b20",
+      "size": 1174
+    },
+    {
+      "path": "doomgeneric/sounds.c",
+      "gitBlobSha1": "e976bc84480e632b259cb63b52e64d89413547d2",
+      "size": 5113
+    },
+    {
+      "path": "doomgeneric/sounds.h",
+      "gitBlobSha1": "1e8afc4051c4bc6e15f572bafd91a2a521e4b424",
+      "size": 3803
+    },
+    {
+      "path": "doomgeneric/st_lib.c",
+      "gitBlobSha1": "7ce978d4456288a6964bbbeeeb69fd36e1010638",
+      "size": 4691
+    },
+    {
+      "path": "doomgeneric/st_lib.h",
+      "gitBlobSha1": "3a8f5212512e4d7b7d34eb6e73c55799d63980bb",
+      "size": 3320
+    },
+    {
+      "path": "doomgeneric/st_stuff.c",
+      "gitBlobSha1": "e25acccb187096bd233a5dd2761acb771e631a1d",
+      "size": 29750
+    },
+    {
+      "path": "doomgeneric/st_stuff.h",
+      "gitBlobSha1": "8ed53e41c616c10b69e4c6d1447e04316092b853",
+      "size": 1957
+    },
+    {
+      "path": "doomgeneric/statdump.c",
+      "gitBlobSha1": "7afe3f366c33cea0c237ef17128cf43f602644f2",
+      "size": 8416
+    },
+    {
+      "path": "doomgeneric/statdump.h",
+      "gitBlobSha1": "48db2ad2d7f13ad2cdf7e2fccba0598c6d8caf11",
+      "size": 679
+    },
+    {
+      "path": "doomgeneric/tables.c",
+      "gitBlobSha1": "c221e9a04c12bfd9d91d4d7d49f831309317e503",
+      "size": 130242
+    },
+    {
+      "path": "doomgeneric/tables.h",
+      "gitBlobSha1": "495fd53498fc0f5d063ee846b64d9104fc58bd85",
+      "size": 2423
+    },
+    {
+      "path": "doomgeneric/v_patch.h",
+      "gitBlobSha1": "687dca10ec3364ae8e4701f0512d3149a892309b",
+      "size": 1470
+    },
+    {
+      "path": "doomgeneric/v_video.c",
+      "gitBlobSha1": "6db28aa5fc51a7b0c3d368b8aa5581d6d39711e1",
+      "size": 20873
+    },
+    {
+      "path": "doomgeneric/v_video.h",
+      "gitBlobSha1": "a970c71933a2dee53de1092f3da7b809ccd09655",
+      "size": 2998
+    },
+    {
+      "path": "doomgeneric/w_checksum.c",
+      "gitBlobSha1": "5933fdf9adf401d0fe2369e235c7efe1a3fc2a4f",
+      "size": 2219
+    },
+    {
+      "path": "doomgeneric/w_checksum.h",
+      "gitBlobSha1": "e1ce5b89e8783db9b7b2e4139291175552a32a2c",
+      "size": 812
+    },
+    {
+      "path": "doomgeneric/w_file.c",
+      "gitBlobSha1": "cce3737b24179b2c48ddeb5a296f9eaac5571643",
+      "size": 1886
+    },
+    {
+      "path": "doomgeneric/w_file.h",
+      "gitBlobSha1": "f57781436f15e7b0f1915a460f93b073af538aba",
+      "size": 2031
+    },
+    {
+      "path": "doomgeneric/w_file_stdc.c",
+      "gitBlobSha1": "829e96037394462da312417fb57bddb99871a532",
+      "size": 2148
+    },
+    {
+      "path": "doomgeneric/w_main.c",
+      "gitBlobSha1": "115f08116a2685b8e5c3f96891020b57af6d7962",
+      "size": 4607
+    },
+    {
+      "path": "doomgeneric/w_main.h",
+      "gitBlobSha1": "2e39efc3605856e2412772e9b8964d97b1160ef4",
+      "size": 743
+    },
+    {
+      "path": "doomgeneric/w_merge.h",
+      "gitBlobSha1": "c8ecc69f47d5d5cfa045fb1c46c844fb3725836a",
+      "size": 1220
+    },
+    {
+      "path": "doomgeneric/w_wad.c",
+      "gitBlobSha1": "1248046397aef094eb18e1bed475e570a7f3e1ad",
+      "size": 12774
+    },
+    {
+      "path": "doomgeneric/w_wad.h",
+      "gitBlobSha1": "718957499086d5552ebab5e8f51ced9d39c5231a",
+      "size": 1606
+    },
+    {
+      "path": "doomgeneric/wi_stuff.c",
+      "gitBlobSha1": "ddb9a66c1d23ab480cec0f8f36fa512eb17d3740",
+      "size": 33830
+    },
+    {
+      "path": "doomgeneric/wi_stuff.h",
+      "gitBlobSha1": "296571f73a82995c1e40039ac2e70b11c151e8ef",
+      "size": 1164
+    },
+    {
+      "path": "doomgeneric/z_zone.c",
+      "gitBlobSha1": "16da22b90a9036efe27b785aac55dc13ad1ff30f",
+      "size": 10396
+    },
+    {
+      "path": "doomgeneric/z_zone.h",
+      "gitBlobSha1": "526f30d30a3cbae6e87e04549eebe93be8c6b5d8",
+      "size": 2096
+    }
+  ]
+}

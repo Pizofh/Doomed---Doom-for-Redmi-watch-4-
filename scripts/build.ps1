@@ -1,7 +1,7 @@
 [CmdletBinding()]
-param([ValidateSet('Hello', 'DisplayProbe', 'DisplayPattern', 'Touch', 'UIProbe', 'NativeBridge', 'UIProbeBridge', 'FrameLoop', 'Controls', 'TimeProbe', 'FsProbe', 'StdioProbe', 'TaskProbe', 'LauncherProbe', 'WorkerFrames', 'WorkerInput', 'Doom')][string]$Target = 'Hello')
+param([ValidateSet('Hello', 'DisplayProbe', 'DisplayPattern', 'Touch', 'UIProbe', 'NativeBridge', 'UIProbeBridge', 'FrameLoop', 'Controls', 'TimeProbe', 'FsProbe', 'StdioProbe', 'TaskProbe', 'LauncherProbe', 'WorkerFrames', 'WorkerInput', 'DoomAudit', 'Doom')][string]$Target = 'Hello')
 
-if ($Target -eq 'Doom') { throw 'DOOM gate closed: engine libc/allocator/exit audit and integration remain pending; WAD read and worker display/input/lifecycle passed in emulator only.' }
+if ($Target -eq 'Doom') { throw 'Executable DOOM gate closed: libc ABI, owned allocator/streams/cooperative exit and integration remain pending. DoomAudit compiles core objects for inspection only.' }
 $ErrorActionPreference = 'Stop'
 $rw4BuildTool = Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-hello.mjs'
 if ($Target -eq 'Hello') {
@@ -34,6 +34,8 @@ if ($Target -eq 'Hello') {
     & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-worker-frame.mjs')
     if ($LASTEXITCODE -ne 0) { throw 'Worker frame C build failed.' }
     & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/package-ui-probe.mjs') wframe
+} elseif ($Target -eq 'DoomAudit') {
+    & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-doom-audit.mjs')
 } elseif ($Target -eq 'WorkerInput') {
     & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-worker-input.mjs')
     if ($LASTEXITCODE -ne 0) { throw 'Worker input C build failed.' }
