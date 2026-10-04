@@ -69,3 +69,7 @@ Son controles del contrato propio en guest FLAT compartido, no sandbox. La prueb
 ## Runtime R65
 
 [El shim](doom-runtime-emulator.md) limita payload/slots, bloquea writes/shell por sus APIs y limpia en salida cooperativa. FLAT: no aislamiento de memoria, sandbox ni recovery ante crash. Solo un worker owner dentro del run; requests previos al run se borran. Jump entre tareas o llamada fuera del contrato puede provocar trap. Fallos de join/cleanup retienen el modulo; nunca descargar tras timeout sin completion. Ocho ciclos del fixture no prueban cierre del motor, stack peak ni seguridad M2315W1. Gate fisico cerrado.
+
+## Motor R66
+
+[El motor real](doom-first-frame-emulator.md) ya ejecuta E1M1 en una prueba finita del guest S3. Límite15s cooperativo en DG, no watchdog duro; falta de polls puede bloquear.13reservas/2streams limpiados y worker unido antes de exportar un frame a ruta tmpfs propia. Stack32KiB solicitado, sin pico de stack medido. No unload ante join/cleanup/close inciertos. FLAT sin sandbox, no crash/kill recovery ni compatibilidad física demostrada. Gate M2315W1 cerrado.

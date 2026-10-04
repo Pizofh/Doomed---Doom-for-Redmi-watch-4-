@@ -289,3 +289,13 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Escrituras y shell del engine están interpuestos | Port propio | Runtime/header imports y denials R65 | Confirmado por fuente/build y prueba local | Alta para contrato | 7 denials/ciclo; fixture intacto | No aislamiento frente a corrupción de memoria |
 | Motor compila con headers propios y salida adaptada | Build ARM R65 | Objeto435288bytes/39imports pendientes | Confirmado build local; sin runtime | Alta local | Build e inspect-shim pasan | DG6/17biblioteca sin completar; no cargar objeto |
 | Salida limpia de Doom real o ejecución en M2315W1 | Engine/hardware | Ninguna ejecución del motor | SIN EVIDENCIA | No evaluable | No | Runtime pequeño no demuestra estabilidad del motor |
+
+## Primer frame R66: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| DOOM original ejecuta E1M1 y renderiza320x200 | Guest S3 exacto | [R66](doom-first-frame-emulator.md), log/PNG/bufferFNV | CONFIRMADO EN EMULADOR | Alta local | Worker210,imagen original inspeccionada | No UI guest/input/FPS/RW4 |
+| Motor se retira limpiando recursos propios | Port R66/S3 | Quit local+join+stats/rmmod/ps | CONFIRMADO EN EMULADOR | Alta para ensayo |13reservas/2streams limpios,WADintacto,sin reboot | No stop externo/crash/juego continuo |
+| Pico tracked del motor6582961bytes | Shim propio | R66 stats malloc | CONFIRMADO EN EMULADOR | Alta para contador |13blocks pico | No RAM total;secciones/stack/libc/tmpfs aparte |
+| Loader admite4THM_CALL locales autorrecursivos | Guest S3 exacto | up_relocate0x65c668/tipo10 y carga R66 | CONFIRMADO EN EMULADOR | Alta para esos4 |6900ABS32+4THM_CALL cargados | No branches externos ni RW4 |
+| Doom jugable/persistente en M2315W1 | RW4 físico | Ninguna ABI/runtime/recovery física demostrada | SIN EVIDENCIA | No evaluable | No | Primer frame S3 no cambia el gate físico |

@@ -126,3 +126,7 @@ Las páginas web son referencias móviles consultadas en esta fecha. Los links a
 ## R65,2026-10-04: runtime de recursos y salida
 
 [Contrato y resultado](doom-runtime-emulator.md): ocho ciclos C pasan en worker139, con FILE/allocations limpios y join/unload sin reset. Inspeccionados malloc/free/vsnprintf/setjmp/longjmp del guest exacto. Build80C+shim compila,39imports pendientes; overlay solo I_Quit/I_Error, upstream intacto. No engine ejecutado ni hardware. Pruebas anteriores no repetidas; siguiente bindings/DG y primer frame real acotado.
+
+## R66,2026-10-04: Doom original ejecuta E1M1
+
+[Primer frame y evidencia](doom-first-frame-emulator.md): primera ejecución guest pasa, worker210 produce320x200/145colores/FNV07aece36. Imagen visualmente corresponde a E1M1 con arma/HUD.13alloc/free y2streams limpios, WAD intacto, join/unload/temporales sin reboot.1263ms incluye init/wipe;43callbacks no FPS.41bindings revisados,4THM_CALL locales admitidos por loader; fallos de guards y ENOBUFS ocurrieron solo en PC. Sin presentación UI/input conectado/juego continuo/RW4. Siguiente integración UI/controles, sin repetir pruebas aprobadas.

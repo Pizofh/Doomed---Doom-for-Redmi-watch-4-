@@ -1,10 +1,10 @@
 # DOOM en Redmi Watch 4
 
-**Avance R65:** la capa C de memoria, lectura y salida pasó ocho ciclos en un worker del emulador; terminó y se descargó sin reboot. Doom también compila con ella, sin estructuras privadas Newlib ni escrituras directas. Todavía falta enlazar funciones de biblioteca y adaptar DG para ejecutar el motor. [Resultados y siguiente checkpoint](docs/doom-runtime-emulator.md). No se tocó el reloj físico.
+**Avance R66:** DOOM real ejecutó E1M1 dentro del emulador Xiaomi Watch S3 y produjo una imagen completa de320×200. El motor liberó sus recursos y terminó sin reboot. [Captura, mediciones y reproducción](docs/doom-first-frame-emulator.md). Todavía falta mostrarlo en la UI y conectar los controles; el reloj físico sigue intacto.
 
 Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4, modelo objetivo **M2315W1**, preservando el firmware Xiaomi y las funciones normales del reloj si resulta técnicamente viable.
 
-**Estado al 2026-10-04:** TouchEvents original validado en el emulador Xiaomi Watch S3 a 390×450, con cierre y reentrada sin reinstalar. Un hello C propio imprimió su mensaje y se descargó mediante rmmod en dos ciclos; enlaza puts desde la imagen exacta del emulador. [Prueba nativa y limitaciones](docs/hello-native-emulator.md), [prueba Lua](docs/touch-events-emulator.md). El motor ahora compila para inspección; no se ejecutó Doom ni se conectó el reloj físico. Estado para continuar en [HANDOFF](docs/HANDOFF.md).
+**Estado al 2026-10-04:** TouchEvents, hello C, transporte de frames/controles y lectura del WAD validados en el emulador. Ahora también el motor original ejecuta E1M1 en una prueba acotada. No demuestra compatibilidad con M2315W1 ni juego continuo. Estado para continuar en [HANDOFF](docs/HANDOFF.md).
 
 **Display C:** patrón RGB565 mostrado y retirado; píxeles originales, touch y panel stock comprobados después sin reboot en una prueba con pantalla activa. Framebuffer compartido, no ownership exclusivo. [Captura y reproducción](docs/native-display-emulator.md).
 
@@ -28,7 +28,7 @@ Investigación para portar DOOM real mediante doomgeneric a Xiaomi Redmi Watch 4
 
 **Stdio del lector WAD:** fopen/fread/fseek/ftell/fclose pasaron con el fixture propio, incluidos buffers, longitud y tres reaperturas. En este guest, seek no limpia EOF; clearerr sí. [Resultado y límite concreto](docs/native-stdio-emulator.md).
 
-**Worker C:** [START/EXIT](docs/native-launcher-emulator.md), [frames en LVGL](docs/native-worker-frame-emulator.md) y ahora [controles consumidos por el worker](docs/native-worker-input-emulator.md) validados. R62:38 observaciones,22 key edges reales desde C, cuatro imágenes completas, pausa/overflow neutros, STOP con FIRE pulsado y cierre/reentrada sin reboot. Storage activa; módulo y temporales propios retirados. R63 completó la lectura del WAD y R65 el build con runtime; el motor todavía no se ejecutó y el gate físico sigue cerrado.
+**Worker C:** [START/EXIT](docs/native-launcher-emulator.md), [frames en LVGL](docs/native-worker-frame-emulator.md) y ahora [controles consumidos por el worker](docs/native-worker-input-emulator.md) validados. R62:38 observaciones,22 key edges reales desde C, cuatro imágenes completas, pausa/overflow neutros, STOP con FIRE pulsado y cierre/reentrada sin reboot. Storage activa; módulo y temporales propios retirados. R63 completó la lectura del WAD y R66 ejecutó el motor para capturar E1M1. Conectar estos controles y presentar frames del juego en UI sigue pendiente; gate físico cerrado.
 
 - Crear documentación, matriz de evidencia y herramientas de inspección para PC.
 - Identificar dependencias originales y fijar revisiones consultadas.
@@ -95,4 +95,4 @@ DOOM original, WAD shareware verificado, temporización y touch funcionales, sal
 
 No se incluyen WADs, firmware, APKs, emuladores ni compiladores binarios. La licencia del motor y los derechos de los datos del juego son asuntos separados. La mención de shareware en doomgeneric no basta para redistribuir `doom1.wad`: hay que revisar la licencia del paquete original completo. Las fuentes comunitarias sin licencia explícita se referencian, no se incorporan como código propio. Este repositorio aún no establece una licencia para sus aportes originales; decidirla antes de publicarlo.
 
-**Motor real, R64:**80 archivos C originales de doomgeneric compilan para ARM, sin sonido/X11. Objeto parcial para inspección con50imports pendientes; no se ejecutó Doom ni reinició el emulador. [Dependencias, memoria y salida](docs/doom-build-audit.md).
+**Motor real, R64 (histórico):**80 archivos C originales de doomgeneric compilan para ARM, sin sonido/X11. Objeto parcial para inspección con50imports pendientes; en aquel checkpoint no se ejecutó Doom ni reinició el emulador. [Dependencias, memoria y salida](docs/doom-build-audit.md).
