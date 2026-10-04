@@ -21,7 +21,7 @@ const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 if (bytes.length < 168 || bytes.length > 4 * 1024 * 1024 || bytes.readUInt32LE(0) !== 0x1234a55a ||
     !bytes.includes(Buffer.from('lua/main.lua'))) throw new Error('Unexpected package');
 if (build.status !== 0 || !build.stdout.includes('No Errors') || !build.stdout.includes('adb util is missing')) throw new Error('No reviewed successful build');
-const uiSource = fs.readFileSync(path.join(projectRoot, build.controlsMode===true?'experiments/lua-controls/main.lua':'experiments/lua-ui/main.lua'));
+const uiSource = fs.readFileSync(path.join(projectRoot, build.workerMode===true?'experiments/native-launcher/main.lua':build.controlsMode===true?'experiments/lua-controls/main.lua':'experiments/lua-ui/main.lua'));
 const ownSource = build.bridgeMode === true ? Buffer.concat([
   fs.readFileSync(path.join(projectRoot, 'experiments/lua-native-bridge/control.lua')), Buffer.from(build.loopMode===true?'\nRW4_FRAME_LOOP=true\n':'\n'), uiSource
 ]) : uiSource;
@@ -58,6 +58,10 @@ if (!prior) {
   adb(['pull', `${guest}/resource.bin`, old], '01-prior-resource');
   if (hash(fs.readFileSync(old)) !== prior.installedPackageSha256) throw new Error('Prior resource differs; not replacing');
 }
+const loadedModules = adb(['shell', 'lsmod'], '01-native-reset-gate');
+if (['rw4worker', 'rw4bridge', 'rw4task', 'rw4time', 'rw4fs', 'rw4stdio'].some(n => loadedModules.includes(n))) {
+  throw new Error('Own native module is still loaded; complete its lifecycle before updating/resetting');
+}
 const snapshot = await snapshotData();
 adb(['pull', '/data/app/watchface/watchface_list.json', path.join(destination, 'watchface-list-before.json')], '02-cache-backup');
 // Same two header edits as the inspected AdbBridge.SetWatchfaceId IL.
@@ -76,6 +80,22 @@ adb(['push', resource, `${guest}/resource.bin`], '04-push');
 const reread = path.join(destination, 'resource-readback.bin');
 adb(['pull', `${guest}/resource.bin`, reread], '05-readback');
 if (hash(fs.readFileSync(reread)) !== hash(prepared)) throw new Error('Readback mismatch; no reset requested');
+// A shorter script can retain the tail of the previously extracted main.lua
+// in this guest. Preserve and invalidate only our derived Lua file, not stock.
+const extracted = `${guest}/lua/main.lua`;
+const cached = adb(['shell', 'ls', extracted], '05-derived-lua-check');
+if (!/^nsh: ls: stat failed: 2\r?$/im.test(cached)) {
+  adb(['pull', extracted, path.join(destination, 'derived-main-before.lua')], '05-derived-lua-backup');
+  adb(['shell', 'rm', extracted], '05-derived-lua-invalidate');
+  record.derivedLuaInvalidated = true;
+  const fresh = path.join(destination, 'derived-main-current.lua');
+  fs.writeFileSync(fresh, ownSource);
+  adb(['push', fresh, extracted], '05-derived-lua-replace');
+  const derivedReadback = path.join(destination, 'derived-main-readback.lua');
+  adb(['pull', extracted, derivedReadback], '05-derived-lua-readback');
+  if (hash(fs.readFileSync(derivedReadback)) !== hash(ownSource)) throw new Error('Derived Lua mismatch; no reset requested');
+  record.derivedLuaReadbackMatched = true;
+}
 // The upstream emulator rescans its watchfaces after this cache removal + reset.
 // The previous cache and data image are preserved; no recursive rm is used.
 adb(['shell', 'rm', '/data/app/watchface/watchface_list.json'], '06-invalidate-cache');
