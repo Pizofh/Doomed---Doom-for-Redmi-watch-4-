@@ -21,7 +21,7 @@ const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 if (bytes.length < 168 || bytes.length > 4 * 1024 * 1024 || bytes.readUInt32LE(0) !== 0x1234a55a ||
     !bytes.includes(Buffer.from('lua/main.lua'))) throw new Error('Unexpected package');
 if (build.status !== 0 || !build.stdout.includes('No Errors') || !build.stdout.includes('adb util is missing')) throw new Error('No reviewed successful build');
-const uiSource = fs.readFileSync(path.join(projectRoot, 'experiments/lua-ui/main.lua'));
+const uiSource = fs.readFileSync(path.join(projectRoot, build.controlsMode===true?'experiments/lua-controls/main.lua':'experiments/lua-ui/main.lua'));
 const ownSource = build.bridgeMode === true ? Buffer.concat([
   fs.readFileSync(path.join(projectRoot, 'experiments/lua-native-bridge/control.lua')), Buffer.from(build.loopMode===true?'\nRW4_FRAME_LOOP=true\n':'\n'), uiSource
 ]) : uiSource;

@@ -46,14 +46,15 @@ export function assertUiProbe(filename, expected) {
   }
 }
 
-export function assertNativePattern(filename, phase=0) {
+export function assertNativePattern(filename, phase=0, originY=205) {
   if(phase!==0&&phase!==1)throw Error('Invalid pattern phase');
+  if(![50,205].includes(originY))throw Error('Unknown pattern origin');
   const {pixels,bpp}=readScreenshot(filename);
   const colors=[[255,0,0],[0,255,0],[0,0,255],[255,255,255],
     [255,255,0],[0,255,255],[255,0,255],[0,0,0]];
   for(let y=0;y<140;y++)for(let x=0;x<320;x++){
     const rgb=y<70?colors[(Math.floor(x/40)+phase)&7]:(((Math.floor(x/16)^Math.floor(y/16)^phase)&1)?colors[3]:colors[7]);
-    const p=((y+205)*390+x+35)*bpp;
+    const p=((y+originY)*390+x+35)*bpp;
     // Captured image edges differ by up to two channel levels in this controller.
     // Native source bytes are checked exactly in test-native-frame.mjs.
     if(!rgb.every((v,i)=>Math.abs(pixels[p+i]-v)<=2))throw Error(`Native pattern mismatch at ${x},${y}`);

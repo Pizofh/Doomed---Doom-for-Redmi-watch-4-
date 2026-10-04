@@ -16,11 +16,12 @@ function run(args){
   if(r.error||r.status!==0)throw Error('Static inspection failed: '+(r.error?.message??r.stderr));
   return r.stdout;
 }
-const wanted=/^(?:luavgl_timer_.*|lv_timer_(?:handler|pause|resume|delete|del)|luavgl_obj_delete|lv_image_(?:cache_drop|header_cache_drop|set_src)|lv_cache_(?:drop|drop_all|release)|file_write|fs_write)$/;
+const wanted=/^(?:luavgl_timer_.*|lv_timer_(?:handler|pause|resume|delete|del)|luavgl_obj_delete|luavgl_indev_wait_release|lv_indev_wait_release|lv_image_(?:cache_drop|header_cache_drop|set_src)|lv_cache_(?:drop|drop_all|release)|file_write|fs_write)$/;
 const selected=run(['-t']).split(/\r?\n/).filter(l=>wanted.test(l.trim().split(/\s+/).at(-1)));
 fs.writeFileSync(path.join(folder,'symbols.txt'),selected.join('\n')+'\n');
 for(const name of ['luavgl_timer_create','luavgl_timer_cb','luavgl_timer_delete','luavgl_timer_gc',
-  'luavgl_timer_set_paused','luavgl_obj_delete','lv_image_cache_drop','lv_image_header_cache_drop','lv_cache_drop','file_write']){
+  'luavgl_timer_set_paused','luavgl_obj_delete','luavgl_indev_wait_release','lv_indev_wait_release',
+  'lv_image_cache_drop','lv_image_header_cache_drop','lv_cache_drop','file_write']){
   fs.writeFileSync(path.join(folder,name+'.txt'),run(['-d','--disassemble='+name]));
 }
 console.log(selected.join('\n'));

@@ -38,6 +38,40 @@ static const char frame_node[] = "/dev/rw4frame";
 #define FRAME_BYTES (12u + FRAME_WIDTH * FRAME_HEIGHT * 2u)
 static unsigned frame_refs;
 static unsigned frame_updates;
+/* Own bounded key queue, not an engine. Numeric mappings from doomgeneric
+ * doomkeys.h @ dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284. */
+#define KEY_CAPACITY 32u
+static const unsigned key_codes[4] = {0xad,0xac,0xae,0xa3};
+struct key_event { uint32_t key, down; };
+static struct key_event key_queue[KEY_CAPACITY];
+static unsigned key_head, key_count, held_mask, key_changes, key_overflows;
+static unsigned key_cancels, sampled_mask, sampled_steps;
+static void push_key(unsigned key, unsigned down) {
+    unsigned tail=(key_head+key_count)%KEY_CAPACITY;
+    key_queue[tail]=(struct key_event){key,down}; key_count++;
+}
+static void cancel_keys(void) {
+    /* Drop stale downs and deliver releases for every supported key. This
+     * also resynchronizes a consumer that already dequeued earlier downs. */
+    if (held_mask) key_changes++;
+    held_mask=0; sampled_mask=0; key_head=key_count=0; key_cancels++;
+    for (unsigned i=0;i<4;i++) push_key(key_codes[i],0);
+    printf("RW4_C_KEYS: cancel held=0 queued=%u cancels=%u\n",key_count,key_cancels);
+}
+static void set_keys(unsigned mask) {
+    if (mask==held_mask) return;
+    unsigned changed=held_mask^mask, needed=0;
+    for (unsigned i=0;i<4;i++) if(changed&(1u<<i)) needed++;
+    if (needed>KEY_CAPACITY-key_count) {
+        key_overflows++; paused=1; cancel_keys();
+        printf("RW4_C_KEYS: overflow paused=1 count=%u\n",key_overflows);
+        return; /* Never partially queue a transition or leave held keys. */
+    }
+    for (unsigned i=0;i<4;i++) if(changed & held_mask & (1u<<i)) push_key(key_codes[i],0);
+    for (unsigned i=0;i<4;i++) if(changed & mask & (1u<<i)) push_key(key_codes[i],1);
+    held_mask=mask; key_changes++;
+    printf("RW4_C_KEYS: held=%u queued=%u changes=%u\n",held_mask,key_count,key_changes);
+}
 static const char loop_paths[2][32] = {
     "/tmp/rw4-loop-frame-0.bin", "/tmp/rw4-loop-frame-1.bin"
 };
@@ -110,21 +144,31 @@ static int bridge_write(struct file *f, const char *buffer, unsigned length) {
     const unsigned char *b = (const unsigned char *)buffer;
     if (length != 24 || word(b) != MAGIC || word(b+20) != 1) return -22;
     unsigned seq=word(b+4), op=word(b+8), x=word(b+12), y=word(b+16);
-    if (seq <= sequence || op < 1 || op > 7 || x >= 390 || y >= 450) return -22;
+    if (seq <= sequence || op < 1 || op > 8 || x >= 390 || y >= 450) return -22;
+    if (op == 8) {
+        if (x>15 || y || ((x & 6u)==6u)) return -22;
+        if ((!active || paused) && x) return -11;
+        set_keys(x);
+    }
     if (op == 6) {
         if (!active || paused) return -11;
         if (x>1 || y || frame_refs) return -22;
         drop_loop_cache(x);
         frame_updates++;
+        sampled_mask=held_mask;
+        if(held_mask) sampled_steps++;
     }
     if (op == 7) {
         if (x || y || frame_refs) return -22;
         drop_loop_cache(0); drop_loop_cache(1);
     }
-    if (op == 1) { active=1; paused=0; touches=0; frame_updates=0; last_x=last_y=0; }
-    if (op == 2) paused=1;
+    if (op == 1) {
+        active=1; paused=0; touches=0; frame_updates=0; last_x=last_y=0;
+        held_mask=key_head=key_count=key_changes=key_overflows=key_cancels=sampled_mask=sampled_steps=0;
+    }
+    if (op == 2) { paused=1; cancel_keys(); }
     if (op == 3) paused=0;
-    if (op == 4) { active=0; paused=1; }
+    if (op == 4) { active=0; paused=1; cancel_keys(); }
     if (op == 5 && active && !paused) { touches++; last_x=x; last_y=y; }
     sequence=seq; last_op=op;
     if (op!=6 || frame_updates%25u==0)
@@ -134,11 +178,19 @@ static int bridge_write(struct file *f, const char *buffer, unsigned length) {
 }
 static int bridge_read(struct file *f, char *buffer, unsigned length) {
     (void)f;
-    if (length < 32) return -22;
-    uint32_t words[8] = {MAGIC, sequence, active, paused, touches, last_x, last_y, last_op};
+    uint32_t words[16] = {MAGIC, sequence, active, paused, touches, last_x, last_y, last_op,
+        held_mask,key_count,key_changes,key_overflows,key_cancels,sampled_mask,sampled_steps,KEY_CAPACITY};
+    unsigned count;
+    if(length==8) {
+        if(!key_count) return 0;
+        words[0]=key_queue[key_head].key; words[1]=key_queue[key_head].down;
+        key_head=(key_head+1u)%KEY_CAPACITY; key_count--; count=2;
+    }else if(length==32) count=8;
+    else if(length==64) count=16;
+    else return -22;
     unsigned char *b=(unsigned char *)buffer;
-    for (unsigned i=0;i<8;i++) for (unsigned j=0;j<4;j++) b[i*4+j]=(unsigned char)(words[i]>>(j*8));
-    return 32; /* Snapshot protocol: caller reads EXACTLY32 then closes, not EOF stream. */
+    for (unsigned i=0;i<count;i++) for (unsigned j=0;j<4;j++) b[i*4+j]=(unsigned char)(words[i]>>(j*8));
+    return (int)(count*4); /* 32/64=snapshot, 8=pop one key (0 if empty); never read-all. */
 }
 static const struct file_operations operations = {
     bridge_open, bridge_close, bridge_read, bridge_write, {0,0,0,0,0,0}
@@ -147,7 +199,7 @@ static int bridge_uninit(void *arg) {
     (void)arg;
     /* Controlled single Lua caller closes every handle before rmmod.
      * Not a concurrency contract for arbitrary third-party opens. */
-    if (refs || frame_refs) return -16;
+    if (refs || frame_refs || held_mask) return -16;
     int frame_result=unregister_driver(frame_node);
     printf("RW4_C_FRAME: unregister=%d refs=%u\n", frame_result, frame_refs);
     if (frame_result < 0) return frame_result;

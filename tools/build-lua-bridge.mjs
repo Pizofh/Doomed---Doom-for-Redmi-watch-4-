@@ -60,7 +60,7 @@ if (bytes[4] !== 1 || bytes[5] !== 1 || bytes.readUInt16LE(16) !== 1 || bytes.re
     relocations.some(r => r !== 'R_ARM_ABS32') || /\bUND[ \t]+\S+[ \t]*$/m.test(readelf)) {
   throw new Error('Unreviewed ELF layout/relocations; inspect before loading');
 }
-const known = {bridge: {source: 'e04c6d1ad8fa4e680113f71e4fb0a8c4246884dc98e7a4026e09ebb313406a27', binary: 'f345f4c2e2ec7a6811dad0f66e077dc65b397271aa8291da4b1fdd2f1851a0b6'}};
+const known = {bridge: {source: '40a18e07975dd0c57b898e37a08c1ae9eddfc6cdbdddfbf97a6412a3de208078', binary: 'ec7b6d5d1eab951a27423607a82ef8801778c9ccc6dfd515a2c50a4891e0a844'}};
 const sourceHash = hash(fs.readFileSync(path.join(projectRoot, source), 'utf8').replace(/\r\n/g, '\n'));
 const record = { variant, guestSha256: guestHash, sha256: hash(bytes), sourceSha256: sourceHash,
   bytes: bytes.length, entry: bytes.readUInt32LE(24), flags, bindings, relocations,

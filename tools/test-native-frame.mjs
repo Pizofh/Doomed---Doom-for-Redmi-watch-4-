@@ -17,7 +17,7 @@ function adb(args,label){
   if(r.error||r.status!==0)throw Error('ADB failed: '+label);return r.stdout+r.stderr;
 }
 const native=path.join(folder,'native-readback.elf');adb(['pull','/tmp/rw4-lua-bridge.elf',native],'native-readback');
-if(hash(fs.readFileSync(native))!=='f345f4c2e2ec7a6811dad0f66e077dc65b397271aa8291da4b1fdd2f1851a0b6')throw Error('Unreviewed native payload');
+if(hash(fs.readFileSync(native))!=='ec7b6d5d1eab951a27423607a82ef8801778c9ccc6dfd515a2c50a4891e0a844')throw Error('Unreviewed native payload');
 const guest='/tmp/rw4-frame-test.lua',copies=['/tmp/rw4-frame-test-0.bin','/tmp/rw4-frame-test-1.bin'];
 for(const [i,file] of [guest,...copies].entries())if(!/^nsh: ls: stat failed: 2\r?$/im.test(adb(['shell','ls',file],'absence-'+i)))throw Error('Test path already exists');
 const suffix=`

@@ -24,11 +24,11 @@ const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 const review=JSON.parse(fs.readFileSync(path.join(projectRoot,'build/lua-native-bridge/bridge-review.json')));
 const native=path.join(folder,'native-readback.elf');
 adb(['pull','/tmp/rw4-lua-bridge.elf',native],'native-readback');
-if(!review.contractReviewed||hash(fs.readFileSync(native))!==review.sha256||review.sha256!=='f345f4c2e2ec7a6811dad0f66e077dc65b397271aa8291da4b1fdd2f1851a0b6')throw Error('Native payload is not reviewed');
+if(!review.contractReviewed||hash(fs.readFileSync(native))!==review.sha256||review.sha256!=='ec7b6d5d1eab951a27423607a82ef8801778c9ccc6dfd515a2c50a4891e0a844')throw Error('Native payload is not reviewed');
 const guest='/tmp/rw4-bridge-close-test.lua';
 if(!/^nsh: ls: stat failed: 2\r?$/im.test(adb(['shell','ls',guest],'absence')))throw Error('Test filename already exists');
 const prefix=fs.readFileSync(path.join(projectRoot,'experiments/lua-native-bridge/control.lua'));
-const test="\nRW4_NATIVE_BRIDGE.start()\ncollectgarbage('collect')\n"+
+const test="\nRW4_NATIVE_BRIDGE.start()\nRW4_NATIVE_BRIDGE.input(8)\nassert(RW4_NATIVE_BRIDGE.key_state().held==8)\ncollectgarbage('collect')\n"+
   "do local f <close> = assert(io.open('/dev/rw4bridge','rb')); f:setvbuf('no'); local b=assert(f:read(32)); local m,s,a=string.unpack('<I4I4I4',b); assert(m==0x34574252 and a==1); end\n"+
   "print('RW4_CLOSE_TEST: retained after GC')\n"+
   (mode==='error'?"local function fail() local held <close> = assert(io.open('/dev/rw4bridge','rb')); error('RW4_CONTROLLED_CLOSE_ERROR') end; fail()\n":"print('RW4_CLOSE_TEST: normal return')\n");
@@ -40,7 +40,7 @@ if(hash(fs.readFileSync(reread))!==hash(bytes))throw Error('Lua readback differs
 const output=adb(['shell','lua',guest],'lua');
 const after=bridgeState();
 const passed=output.includes('RW4_CLOSE_TEST: retained after GC')&&output.includes('cleanup unloaded lua-close')&&
-  output.includes('unregister=0 refs=0')&&output.includes('finalizer end clean=true')&&!after.registered&&
+  output.includes('unregister=0 refs=0')&&output.includes('cancel held=0')&&output.includes('finalizer end clean=true')&&!after.registered&&
   (mode==='normal'?output.includes('RW4_CLOSE_TEST: normal return'):output.includes('RW4_CONTROLLED_CLOSE_ERROR'));
 fs.writeFileSync(path.join(folder,'result.json'),JSON.stringify({mode,passed,after,sourceSha256:hash(bytes),controlSha256:hash(prefix),physicalTransport:false},null,2)+'\n');
 // A failure is preserved even if the host can remove the reviewed module.

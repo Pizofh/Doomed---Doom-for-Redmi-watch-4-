@@ -67,6 +67,31 @@ print("RW4_LUA_BRIDGE: loadlib", type(loader), tostring(loader_error), tostring(
 shell("uname -a") -- First shell invocation in watchface is read-only.
 RW4_NATIVE_BRIDGE = {
     _lifetime=lifetime,
+    key_state=function()
+        assert(running and not closing)
+        local reader <close> = assert(io.open(device,"rb")); reader:setvbuf("no")
+        local bytes=assert(reader:read(64)); assert(#bytes==64); assert(reader:close())
+        local magic,seq,active,paused,touches,x,y,op,held,queued,changes,overflows,cancels,sampled,steps,capacity=
+            string.unpack("<I4I4I4I4I4I4I4I4I4I4I4I4I4I4I4I4",bytes)
+        assert(magic==0x34574252 and capacity==32 and queued<=capacity and held<=15)
+        return {held=held,queued=queued,changes=changes,overflows=overflows,cancels=cancels,
+            sampled=sampled,steps=steps,paused=paused,active=active}
+    end,
+    input=function(mask) message(8,mask,0) end,
+    drain_keys=function()
+        assert(running and not closing)
+        local reader <close> = assert(io.open(device,"rb")); reader:setvbuf("no")
+        local events={}
+        for i=1,32 do
+            local bytes=reader:read(8)
+            if bytes==nil then break end
+            assert(#bytes==8); local key,down=string.unpack("<I4I4",bytes)
+            assert((key==0xad or key==0xac or key==0xae or key==0xa3) and down<=1)
+            events[#events+1]={key=key,down=down}
+        end
+        assert(reader:close())
+        return events
+    end,
     is_running=function() return running and not closing end,
     drop_frame_cache=function() -- UI context only, after deleting our Image.
         assert(running and not closing)

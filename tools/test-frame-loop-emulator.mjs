@@ -64,7 +64,7 @@ function sample(label,surface){
 capture('launcher','launcher');
 if(bridgeState().registered)throw Error('Exit current native activity before this test');
 const payload=path.join(folder,'native-before.elf');adb(['pull','/tmp/rw4-lua-bridge.elf',payload],'native-before');
-if(hash(fs.readFileSync(payload))!=='f345f4c2e2ec7a6811dad0f66e077dc65b397271aa8291da4b1fdd2f1851a0b6')throw Error('Unreviewed loop payload');
+if(hash(fs.readFileSync(payload))!=='ec7b6d5d1eab951a27423607a82ef8801778c9ccc6dfd515a2c50a4891e0a844')throw Error('Unreviewed loop payload');
 await gesture(195,285,195,285);
 sample('active-0','page');
 // Short waits keep the owner responsive; native test has a 300-frame ceiling.
