@@ -228,5 +228,18 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Uninit devuelve EBUSY mientras join está pendiente | Módulo propio/NSH | R59 llamada directa a su gate | CONFIRMADO EN EMULADOR | Alta para contrato propio | Tres rc=-16 | No rmmod concurrente durante init |
 | Hilos propios desaparecen y C se descarga sin reboot | Guest S3 | R59 cookies/done/ps/lsmod | CONFIRMADO EN EMULADOR | Alta local | Tres join0, PIDs ausentes, ELF retirado | No crash cleanup/parent exit probado |
 | Atomics32 propios no necesitan helper externo | Payload Cortex-A7 guest | R59 disassembly/imports | CONFIRMADO EN EMULADOR | Alta estática/local | Loads/stores/DMB, sin atomic imports | No stress/SMP o cola input/frame concurrentes |
-| Worker puede sobrevivir al retorno de init y controlarse desde launcher | Guest S3 / RW4 | R59 recoge antes de retornar | SIN EVIDENCIA | No evaluable | No | Siguiente integración START/EXIT |
+| Worker puede ejecutarse después de init y controlarse desde launcher | Guest S3 exacto | R60 START/EXIT desde UI28 tras init NSH | CONFIRMADO EN EMULADOR | Alta local | Workers149/248/312 | R59 recogía antes de init; RW4 sigue SIN EVIDENCIA |
 | Fallo de join conserva módulo ocupado en runtime | Módulo propio | R59 rama revisada, no provocada | INFERENCIA RAZONABLE del contrato | Estática | No | No anunciar recovery validado |
+
+## Launcher/worker R60: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| START crea C en grupo de la UI tras retornar init | Guest S3 exacto | R60 snapshots/ps/lsmod | CONFIRMADO EN EMULADOR | Alta local | Owner28, init148/247 ausentes, workers149/248 | No proceso aislado ni ABI RW4 |
+| Detach/stop/PID ausente permiten EXIT sin join/sleep UI | Módulo propio/guest | R60 source/disassembly/marcadores | CONFIRMADO EN EMULADOR | Alta para ensayo | Dos reason1, unload0, refs0, PIDs ausentes | APIs usan locks; no latencia máxima garantizada |
+| Panel pausa contador C y permite volver al launcher | Guest S3 | R60 captura/snapshots/ps | CONFIRMADO EN EMULADOR | Alta local | Worker149 vivo, steps52→52, resume0 | No motor ni input/frame concurrentes |
+| Loader rechaza descargar módulo con worker vivo | Módulo propio/guest | R60 os.execute rmmod y estado posterior | CONFIRMADO EN EMULADOR | Alta local | Una invocación rechazada con error | No estrés de open/unload arbitrario concurrente |
+| Cierre Lua pide stop sin descargar código activo | Watchface propia/guest | R60 cierre a Storage | CONFIRMADO EN EMULADOR | Alta local | Worker312 reason1/live0; módulo retenido | Crash/kill/fallo detach no probados |
+| Reentrada puede recoger módulo retenido sin comando host | Watchface propia/guest | R60 launcher-reentry | CONFIRMADO EN EMULADOR | Alta local | Timer/uninit0/Ready: exited | C en tmpfs, no persistencia nativa |
+| Un script extraído más corto puede conservar cola anterior | Guest S3/extractor | R60 derivado16765 vs fuente5064, error línea105 | CONFIRMADO EN EMULADOR | Alta local para observación | Backup/reemplazo/readback exacto corrigen | Punto interno responsable no aislado; instalador nuevo completo sin runtime |
+| Worker/launcher del emulador funcionan en M2315W1 | RW4 físico | Ninguna prueba/ABI/recovery específico | SIN EVIDENCIA | No evaluable | No | Gate físico cerrado |
