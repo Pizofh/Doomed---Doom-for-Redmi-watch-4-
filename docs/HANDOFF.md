@@ -1,5 +1,37 @@
 # Retomar el proyecto
 
+**R73, 2026-10-04, completado:** [Persistencia S3 emulada](doom-persistence-emulator.md). ELF/WAD instalados una vez en /data, E1M1/FIRE/EXIT antes/despues de reset sin push de assets. Lua final cancela preparacion con panel y ejecuta otro ciclo limpio. Implementacion **3ba88df**. No hardware conectado/modificado.
+
+## Estado vigente y siguiente paso
+
+- Final: Storage365700764 activa; UIProbe365799903 instalada perfil R73 persistente, inactiva. Workers/modulo/nodos/copias/tmp ELF/WAD ausentes. Assets /data conservados; no reinstalar, stage ni cleanup historicos.
+- Next checkpoint unico: investigar con fuentes primarias el camino stock especifico M2315W1 para instalar launcher/ejecutar codigo suficiente. No ELF/direcciones S3 en hardware; ABI/privilegios/RAM/recovery fisicos pendientes y gate cerrado. Nada de firmware/USB/exploit/root ni nuevas acciones fisicas autorizadas.
+- No repetir suites R67-R72/80fuentesC. Persistencia no elimina limites120s/E1M1, ni prueba horas/crash/kill/corrupcion FAT/GC durante copia. Nuevos tests solo por cambios/fallos relevantes.
+
+## Git y estado reproducible
+
+Repo real: C:/Users/steve/Documents/Devs/Doomed/redmi-watch4-doom, master, commits locales, sin remoto. Doomed padre es otro repo, First commit y gitlink e76134d al hijo; no reorganizar sin necesidad. Abrir carpeta hija en VS Code. Git safe.directory NO cambia cwd: usar workdir de la carpeta hija o git -C. No se publico nada en GitHub.
+
+Persistentes: /data/app/watchface/market/365799903/doom/doom.elf (446144bytes), doom1.wad (4196020bytes). Archivo en flash/FS no es residencia RAM. C FLAT no sandbox. Launcher prepara WAD temporal 32768bytes por Timer50ms (~8,3s), verifica size/FNV1a32 (no autenticacion), carga ELF de /data. Host SHA256 readback; EXIT espera C/unload/cache y elimina tmp, conserva /data.
+
+C fuente LF d6fd905b95929cd857df3693db6ca9c199f197c03ff7133d73d5752a3fbb3353; ELF SHAe115971e75ec32f33e2ee63a3c2af9799b8d207f73c3779db3bb31b53cef9639 unchanged. Lua final SHA3a167aaf0598281eb57bb615df4246a6ba59ec40b80e9a6b6bf98f868b692a1a; paquete24744 SHA2d0b8e2fd3d709fd4598f8a9b2e975be27599098c28858d7c81804a2a75edd99. Refresh backup/readback, sin reset.
+
+Artifacts ignorados: doom-storage-install-1791156103728 y authoritative doom-storage-install.json (installed); doom-persistence-latest.json (complete/passed), cancel-1791156417673 (parcial65536), run-1791156431823 worker1032 prep8273,5ms ammo50-48; reset-1791156501836 despuesEXIT/snapshot; post-reset-1791156531409 worker468 prep8225,6ms ammo50-47. Cada salida13alloc/free streams0 cleanup0; sin reboot para salir. Dos ciclos persistencia usaron Lua R73 anterior; finalSourceSupplement doom-prepare-focus-1791157330775 prueba cancelpanel y worker1131 prep8262,1ms E1M1/EXIT con Lua final. Verify SHA final doom-storage-verify-1791157364962. Final read-only doom-persistence-final-1791157623136 Storage/noC/tmp, assets conservados.
+
+Incidencias: baseline reset por screenOFF antes de C (doom-persistent-baseline-1791156243265), no confundir reset demostracionpersistencia ni rebootexit. Primer cancel-helper fallo regex NSH pathabsoluto (doom-persistent-cancel-1791156341879), Doomworker373 arrancado; MENU/EXIT normal, corregido regex. No crashengine. Guard ownership/dedicated loopback5039/emulator-5554, nunca USB.
+
+## Comandos vigentes
+
+Solo lectura: node tools/doom-ui-emulator.mjs state; node tools/doom-storage-emulator.mjs verify. Instalacion ya completada; doom-storage-emulator.mjs install rechaza repetir. Seleccionar UIProbe por Ajustes y START, esperar~8,3s, MENU/EXIT; regresar Storage. No host pushes entre sesiones. Node para no alterar ExecutionPolicy.
+
+Si cambia Lua: C/tmp ausentes y UIProbe inactiva, node tools/package-ui-probe.mjs doom, luego node tools/install-ui-probe-emulator.mjs refresh (snapshot/readback). Subcarpeta doom/ preservada. Si C retenido por cierre sin EXIT, reentrar UIProbe y dejar Timer retirarlo antes de cambiar launcher. No force unload/kill.
+
+Test helper persistence cancel/run/post-reset requiere secuencia/record; reset aparte con snapshot/revision. Supplement test-doom-prepare-focus.mjs requiere evidencia completa+UIProbeReady. No resetear registros para forzar pruebas. Rama remove assets tiene guard/hash/snapshot pero NO validada en runtime; no ejecutada para conservar instalacion. Binarios/WAD/snapshots ignorados, sin nuevos downloads.
+
+## Historial anterior (no son instrucciones vigentes)
+
+R72 y anteriores debajo documentan estado previo, incluidos paths tmp y proximos checkpoints ya realizados; la seccion R73 arriba los sustituye operativamente.
+
 **R72, 2026-10-04:** [Sesion90s a50ms](doom-stability-emulator.md) pasa:90164ms/3156tics,1580entregas totales, giro y FIRE a30/70s. Cache constante, Umem20-90s oscila263432bytes y termina+1760bytes; EXIT libera13reservas/streams, sin reboot. Diferencia global post-EXIT+666920bytes no atribuida; final tras Storage/tmp18,10MB. Siguiente: persistencia ELF/WAD en emulador; gate M2315W1 cerrado.
 
 Implementacion **dd803c0**. `doom-stability-1791153850848/result.json`, passed=true, diez muestras/cuatro capturas/worker116. Engine90164ms/3156tics/1571produced; Lua1580submitted con buffers256frames/256timers acotados. Giro30s angle1073741824 a46137344; FIRE70s ammo50 a47; releases neutrales, HP100. Motor tracked6582961/13alloc-free/streams0/cleanup0.

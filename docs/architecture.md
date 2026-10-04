@@ -1,6 +1,6 @@
 # Arquitectura
 
-R67: [Doom original en UI con controles](doom-ui-emulator.md) demostrado solo en guest S3. Objetivo M2315W1 condicionado por ABI, APIs, privilegios, RAM y recovery desconocidos. [Matriz](evidence-matrix.md).
+R73: [Doom persistente en S3 emulado](doom-persistence-emulator.md), carga bajo demanda/salida/reapertura tras reset. M2315W1 sigue condicionado por ABI, APIs, privilegios, RAM y recovery desconocidos. [Matriz](evidence-matrix.md).
 
 ## Objetivo físico condicionado
 
@@ -39,9 +39,9 @@ Cada sesión recarga ELF para restaurar globals. Liberar reservas no restablece 
 
 ## Persistencia frente a RAM
 
-Watchface en /data/app/watchface/market/365799903. ELF/WAD/copias en /tmp volátil y retirados tras ensayo. Dos sesiones sin reenviar archivos; reset los pierde. **Persistencia nativa pendiente.**
+Watchface/ELF/WAD en /data/app/watchface/market/365799903; assets en doom/. START verifica ELF y copia WAD por chunks32768bytes/Timer50ms a /tmp/rw4-doom1.wad, despues insmod del ELF persistente. EXIT unload/elimina tmp, conserva /data. R73 verifica reapertura despues de reset sin push. FNV no autentica codigo; instalacion/readbacks SHA256. Cancelar con EXIT o panel evita carga C.
 
-Ruta deseada, no aprobada en RW4:
+Persistencia demostrada en S3 emulado; ruta equivalente no aprobada en RW4:
 
 ```text
 storage: /data/<directorio propio>/doom.elf
@@ -55,6 +55,6 @@ Archivos persistentes no exigen residencia continua. RAM-only no significa sandb
 
 ## Gates
 
-Ejecución/display/input/tiempo/WAD/motor y dos salidas limpias demostrados en emulador. [R68](doom-focus-emulator.md) completó foco stock y STOP con FIRE mantenido. [R69](doom-close-emulator.md) completa el cierre normal/reentrada. [R70](doom-performance-emulator.md) mide pipeline1,48ms e intervalos205ms, cambios visibles durante giro y cotas de latencia. [R71](doom-50ms-emulator.md) demuestra mejora con Timer50ms y salida limpia. [R72](doom-stability-emulator.md) completa sesion90s con memoria/cache acotados observados y salida limpia. Siguiente: persistencia ELF/WAD en emulador; estabilidad de horas y hardware pendientes.
+Ejecución/display/input/tiempo/WAD/motor y dos salidas limpias demostrados en emulador. [R68](doom-focus-emulator.md) completó foco stock y STOP con FIRE mantenido. [R69](doom-close-emulator.md) completa el cierre normal/reentrada. [R70](doom-performance-emulator.md) mide pipeline1,48ms e intervalos205ms, cambios visibles durante giro y cotas de latencia. [R71](doom-50ms-emulator.md) demuestra mejora con Timer50ms y salida limpia. [R72](doom-stability-emulator.md) completa sesion90s con memoria/cache acotados observados y salida limpia. [R73](doom-persistence-emulator.md) completa persistencia en emulador. Siguiente: evidencia del camino stock M2315W1 mediante fuentes; estabilidad de horas y hardware pendientes.
 
 Antes de hardware: evidencia M2315W1/firmware exacto, privilegios, recovery y [plan explícito](physical-device-plan.md) con revisión del usuario. No escalación sin restricción concreta. Excluir ELF/direcciones del emulador del reloj físico.

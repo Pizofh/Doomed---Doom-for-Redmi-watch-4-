@@ -79,3 +79,7 @@ Son controles del contrato propio en guest FLAT compartido, no sandbox. La prueb
 ## Motor R66
 
 [El motor real](doom-first-frame-emulator.md) ya ejecuta E1M1 en una prueba finita del guest S3. Límite15s cooperativo en DG, no watchdog duro; falta de polls puede bloquear.13reservas/2streams limpiados y worker unido antes de exportar un frame a ruta tmpfs propia. Stack32KiB solicitado, sin pico de stack medido. No unload ante join/cleanup/close inciertos. FLAT sin sandbox, no crash/kill recovery ni compatibilidad física demostrada. Gate M2315W1 cerrado.
+
+## R73: persistencia en emulador
+
+Ahora se escriben assets propios en /data del guest S3, con ownership/hashes/free-space y snapshot previos. No writes a sistema/boot ni transporte fisico. Cancelacion EXIT/panel durante preparacion y salida cooperativa nativa probadas; codigo FLAT sigue sin sandbox. FNV del launcher no es autenticacion; SHA256 host y origen revisado son controles distintos. Retirar archivos instalados es una rama preparada sin validacion runtime. Corrupcion FAT, crash/kill y RW4 siguen fuera de evidencia. [Detalle](doom-persistence-emulator.md).

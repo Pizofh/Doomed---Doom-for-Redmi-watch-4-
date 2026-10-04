@@ -1,6 +1,6 @@
 # Matriz de evidencia
 
-**R72, 2026-10-04:** [Sesion90s a50ms](doom-stability-emulator.md) pasa:90164ms/3156tics,1580entregas totales, giro y FIRE a30/70s. Cache constante, Umem20-90s oscila263432bytes y termina+1760bytes; EXIT libera13reservas/streams, sin reboot. Diferencia global post-EXIT+666920bytes no atribuida; final tras Storage/tmp18,10MB. Siguiente: persistencia ELF/WAD en emulador; gate M2315W1 cerrado.
+**R73, 2026-10-04:** [Persistencia](doom-persistence-emulator.md) demostrada solo en emulador S3: ELF/WAD en /data sobreviven reset; dos ciclos sin reenviar assets, FIRE y EXIT limpios. Lua final cancela preparacion al abrir panel. M2315W1 sigue sin prueba de ejecucion nativa. R72 es evidencia historica de estabilidad90s.
 
 **Historial R71, 2026-10-04:** [Timer50ms medido](doom-50ms-emulator.md).17,45entregas/s frente a4,87; giros12,67-13,55cambios visibles/s observados frente aunos5. Motor ~35tics/s, pausa400ms y EXIT limpios. Mismo C/ELF R67, Lua R71; solo emulador S3. Siguiente: una sesion de90s para observar estabilidad/memoria, gate M2315W1 cerrado.
 
@@ -320,7 +320,7 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Avanzar/girar/disparar llegan al gameplay original | Doom/E1M1 en S3 | R67 posición/ángulo/ammo y ocho edges | CONFIRMADO EN EMULADOR | Alta local | Munición50→47; tics progresan | Un dedo; ergonomía física/simultáneo MOVE+FIRE pendientes |
 | Menú pausa motor y RESUME recupera progreso | Port propio S3 | R67 dos muestras congeladas y posterior progreso | CONFIRMADO EN EMULADOR | Alta para ensayo | Tic/posición/ángulo/ammo/drawn iguales mientras pausado | No foco stock mantenido probado con motor |
 | Dos STOP/unload/reload restauran sesión sin reboot | Port propio S3 | R67 workers104/408, stats/ps/lsmod/nodos | CONFIRMADO EN EMULADOR | Alta local |13alloc/free por ciclo, streams0, posiciones/ammo50 restaurados | No crash/kill/errores pthread probados |
-| Persistencia de Doom instalada en RW4 o emulador | Hardware/almacenamiento | ELF/WAD solo tmpfs, retirados | SIN EVIDENCIA | No evaluable | Dos sesiones sin retransmitir, sin reset | Reapertura no prueba supervivencia al reboot |
+| Persistencia Doom en la instalacion historica R67 | S3 /tmp; RW4 sin ensayo | R67 ELF/WAD solo tmpfs, retirados | SIN EVIDENCIA en R67 | No evaluable | Dos sesiones sin reset | Actualizada para emulador por R73 debajo; RW4 pendiente |
 | Port cabe en RAM disponible de M2315W1 | RW4 físico | Sin RAM libre/ABI específicas | SIN EVIDENCIA | No evaluable | Pico motor6582961 en S3, secciones793228 aparte | Excluye stack/Lua/cache/loader/tmpfs |
 | Presentación fluida/FPS físico | RW4/S3 | Timer200ms,13 produced/2534ms | SIN EVIDENCIA para fluidez/físico | Alta para contador S3 |89tics/178callbacks; sin contador de presentaciones | Transporte inicial≈5 imágenes/s; callbacks no son FPS |
 | Panel/entorno normal operativos después de Doom | Guest S3 | Capturas post-EXIT panel/Ajustes/Storage | CONFIRMADO EN EMULADOR | Alta local | Normal seleccionado sin reboot | Panel durante ejecución del motor pendiente |
@@ -372,3 +372,14 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Cache y archivos no crecen durante muestras0-90s | S3 guest | R72 free y ls -l /tmp | CONFIRMADO EN EMULADOR | Alta para muestras | Cache1363384 fijo; dos imagenes128012bytes | Muestreo discreto, no garantiza estado entre muestras |
 | Heap global no muestra crecimiento continuo en20-90s | S3 guest | Ocho free snapshots R72 | CONFIRMADO EN EMULADOR para rango observado | Alta local |30850584-31114016; neto+1760bytes | No leak freedom; post-EXIT+666920 sin causa aislada |
 | EXIT limpia recursos propios despues90s | Port/UI S3 | R72 finish/uninit/ps/nodos y final | CONFIRMADO EN EMULADOR | Alta para ciclo |13alloc/free,streams0,cleanup0, worker116 ausente | Sin host unload/reboot; crash sin garantia |
+
+## R73: persistencia limitada al guest S3
+
+| Claim | Device | Evidence | Status | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| ELF/WAD permanecen en /data despues de reset | Emulador S3 exacto | R73 install/readback/reset/verify | CONFIRMADO EN EMULADOR | Alta local | Si, SHA256 iguales | No demuestra firmware/FS M2315W1 |
+| Launcher recarga Doom despues de reset sin push de assets | UIProbe/S3 | R73 workers1032/468, E1M1/FIRE/EXIT | CONFIRMADO EN EMULADOR | Alta local | Si | No significa jugar sin PC; emulador alojado en PC |
+| EXIT elimina C/temporales conservando assets instalados | S3 | R73 logs13alloc-free/streams0/cleanup0, nodes/PID/tmp ausentes | CONFIRMADO EN EMULADOR | Alta para flujo | Si | Crash/kill/corrupcion FAT no probados |
+| EXIT o panel durante copia cancelan antes de native load | UIProbe/S3 | R73 parcial65536bytes; logs y ausencia C/tmp | CONFIRMADO EN EMULADOR | Alta local | Si | Panel observado2s sin START; GC durante copia sin ensayo especifico |
+| FNV1a autentica un ELF | Algoritmo launcher | Checksum32bits sin clave | REFUTADO | Alta por diseno | No necesario | Host revisa SHA256/origen; FNV solo identidad accidental |
+| Persistencia/loader/privilegios equivalentes en M2315W1 | RW4 fisico | Ninguna prueba especifica obtenida por R73 | SIN EVIDENCIA | No evaluable | No | No transferir ELF/direcciones S3 |

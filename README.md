@@ -1,6 +1,8 @@
 # DOOM en Redmi Watch 4
 
-**R72:** [Sesion90s](docs/doom-stability-emulator.md) completa a50ms: motor/controles operativos, cache constante, heap oscilante sin crecimiento continuo observado y salida limpia.1580entregas totales; no prueba de ausencia de fugas durante horas. Siguiente: persistencia ELF/WAD en emulador; hardware fisico intacto.
+**R73:** [Doom persistente en emulador](docs/doom-persistence-emulator.md): ELF/WAD instalados una vez en /data; E1M1 antes/despues de reset sin reenviar assets, salida limpia y cancelacion durante carga. No demuestra compatibilidad M2315W1.
+
+**Historial R72:** [Sesion90s](docs/doom-stability-emulator.md) completa a50ms: motor/controles operativos, cache constante, heap oscilante sin crecimiento continuo observado y salida limpia.1580entregas totales; no prueba de ausencia de fugas durante horas. Siguiente: persistencia ELF/WAD en emulador; hardware fisico intacto.
 
 **R71:** [Mejora de fluidez a50ms](docs/doom-50ms-emulator.md):17,45entregas/s y12,7-13,6cambios visibles/s durante giros (antesunos5), motor ~35tics/s.
 
@@ -10,7 +12,7 @@
 
 **Historial R68:** [Panel stock y STOP con FIRE pulsado](docs/doom-focus-emulator.md) pasaron con el motor real.
 
-**R67, 2026-10-04:** DOOM original ejecuta E1M1 en la UI Lua/LVGL del emulador Xiaomi Watch S3. Avanzar, girar, disparar, pausar/reanudar y dos ciclos START/EXIT/reapertura pasaron sin reboot. [Resultados, mediciones y reproducción](docs/doom-ui-emulator.md). Presentacion inicial R67: aproximadamente cinco frames/s; mejora R71 arriba, estabilidad prolongada y persistencia pendientes.
+**R67, 2026-10-04:** DOOM original ejecuta E1M1 en la UI Lua/LVGL del emulador Xiaomi Watch S3. Avanzar, girar, disparar, pausar/reanudar y dos ciclos START/EXIT/reapertura pasaron sin reboot. [Resultados, mediciones y reproducción](docs/doom-ui-emulator.md). Presentacion inicial R67: aproximadamente cinco frames/s; mejora R71, sesion90s R72 y persistencia R73 documentadas arriba.
 
 Objetivo: portar doomgeneric al Xiaomi Redmi Watch 4 **M2315W1**, conservando firmware stock y funciones normales si resulta posible. **El reloj físico no se ha conectado ni modificado.** El emulador S3 a390×450 no demuestra ISA/ABI/firmware/compatibilidad del RW4.
 
@@ -21,26 +23,25 @@ Se conserva motor, renderer y gameplay original. Aportes propios: investigación
 - Lua: START, MOVE, FIRE, MENU, RESUME y EXIT. Un dedo; avanzar+girar dentro del pad. Comodidad en muñeca sin validar.
 - Worker C: Doom/WAD shareware verificado; frames320×200 RGB565 por dos slots/copias tmpfs a LVGL. No llamadas UI desde worker ni escritura directa del framebuffer global.
 - Pausa libera teclas/congela tiempo. EXIT espera retirada del worker antes de unload; siguiente sesión recarga ELF y restaura globals.
-- Watchface permanece instalada en emulador; ELF/WAD en /tmp volátil y retirados tras el ensayo. Persistencia de Doom pendiente.
+- Watchface, ELF y WAD permanecen en /data del emulador. START carga C/copia WAD a tmp; EXIT retira C/temporales y preserva archivos instalados.
 - NuttX FLAT compartido, **sin sandbox**. No cargar este ELF ni sus direcciones en M2315W1.
 
-Final: Storage365700764 activa, UIProbe365799903 modo doom almacenada; workers/módulo/nodos/copias/ELF/WAD tmp retirados. Siguiente checkpoint: instalar ELF/WAD una vez en almacenamiento del emulador y reabrir despues de reset sin retransmitirlos.
+Final: Storage365700764 activa, UIProbe365799903 modo doom persistente almacenada. Worker/modulo/nodos/copias/tmp ausentes; assets en /data conservados. Siguiente checkpoint: investigar el camino stock M2315W1, solo fuentes/documentacion.
 
 ## Reproducción local
 
 PC con herramientas Node, sin cambiar ExecutionPolicy. Requiere inputs revisados: [emulador](docs/emulator.md), [paquete](docs/emulator-package-review.md), toolchain Arm14.3/[fuentes/build](docs/doom-build-audit.md) y [WAD](docs/native-wad-emulator.md).
 
 ```powershell
+# Inputs revisados y UIProbe previamente instalada/inactiva; build solo si necesario.
 node tools/build-doom-ui.mjs
+# Solo primera instalacion: rechaza sobrescritura. Estado actual ya instalado.
+node tools/doom-storage-emulator.mjs install
 node tools/package-ui-probe.mjs doom
-# UIProbe inactiva y sin modulos propios; requiere instalacion previa/derivado.
 node tools/install-ui-probe-emulator.mjs refresh
-# Guest responsive; stage despues de cualquier reset necesario.
-node tools/doom-ui-emulator.mjs stage
-# Seleccionar UIProbe por Ajustes; revisar Ready, sin START previo.
-node tools/test-doom-ui-emulator.mjs
-# Despues de EXIT y volver a Storage:
-node tools/doom-ui-emulator.mjs cleanup
+node tools/doom-storage-emulator.mjs verify
+# Seleccionar UIProbe por Ajustes; START (~8,3s), MENU/EXIT.
+node tools/doom-ui-emulator.mjs state
 ```
 
 Helpers verifican QEMU/ADB/imagen/payload y usan exclusivamente loopback5039/emulator-5554. No deployment a USB/hardware. Si worker/referencias siguen activos, conservar para inspección, sin unload forzado. [Contrato y límites](docs/doom-ui-emulator.md).
@@ -59,6 +60,7 @@ Helpers verifican QEMU/ADB/imagen/payload y usan exclusivamente loopback5039/emu
 - [Medicion de presentacion/input R70](docs/doom-performance-emulator.md)
 - [Mejora a50ms R71](docs/doom-50ms-emulator.md)
 - [Sesion90s R72](docs/doom-stability-emulator.md)
+- [Persistencia R73](docs/doom-persistence-emulator.md)
 - [Modelo de riesgo](docs/risk-model.md)
 - [Gate físico cerrado](docs/physical-device-plan.md)
 
@@ -67,3 +69,7 @@ Helpers verifican QEMU/ADB/imagen/payload y usan exclusivamente loopback5039/emu
 MVP físico: DOOM original, WAD shareware, display/touch/tiempo funcionales, salida al reloj y archivos persistentes para reabrir sin PC. Sonido, corona, saves e integración bonita después. Firmware custom solo si una restricción concreta lo exige y el usuario aprueba el riesgo.
 
 No se incluyen WADs, firmware, APKs, emuladores ni toolchains binarias. [Licencia shareware](docs/native-wad-emulator.md) y GPL del motor son asuntos separados. No publicar assets comerciales ni firmware Xiaomi. Elegir licencia de aportes originales antes de publicar; componentes derivados/enlazados con Doom deben respetar GPL.
+
+## Repositorio Git local
+
+El repo de trabajo es `redmi-watch4-doom/`, con su propio `.git`, rama master e historial incremental. La carpeta padre `Doomed/` contiene otro repo con First commit y una entrada gitlink al proyecto; no es su historial de trabajo. Abrir esta carpeta directamente en VS Code o usar `git -C redmi-watch4-doom log --oneline -5` desde Doomed. Ninguno tiene remoto configurado; los commits son locales, no publicados. No se reorganizaron los dos repositorios.
