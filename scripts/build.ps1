@@ -1,7 +1,7 @@
 [CmdletBinding()]
-param([ValidateSet('Hello', 'DisplayProbe', 'DisplayPattern', 'Touch', 'UIProbe', 'NativeBridge', 'UIProbeBridge', 'FrameLoop', 'Controls', 'TimeProbe', 'FsProbe', 'StdioProbe', 'Doom')][string]$Target = 'Hello')
+param([ValidateSet('Hello', 'DisplayProbe', 'DisplayPattern', 'Touch', 'UIProbe', 'NativeBridge', 'UIProbeBridge', 'FrameLoop', 'Controls', 'TimeProbe', 'FsProbe', 'StdioProbe', 'TaskProbe', 'Doom')][string]$Target = 'Hello')
 
-if ($Target -eq 'Doom') { throw 'DOOM gate closed: engine task lifecycle/scheduling and WAD integration remain unvalidated; POSIX and stdio reads passed with an owned fixture only.' }
+if ($Target -eq 'Doom') { throw 'DOOM gate closed: launcher/worker integration and WAD integration remain unvalidated; finite worker create/stop/join passed from NSH only.' }
 $ErrorActionPreference = 'Stop'
 $rw4BuildTool = Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-hello.mjs'
 if ($Target -eq 'Hello') {
@@ -24,6 +24,8 @@ if ($Target -eq 'Hello') {
     & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-fs.mjs')
 } elseif ($Target -eq 'StdioProbe') {
     & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-stdio.mjs')
+} elseif ($Target -eq 'TaskProbe') {
+    & node (Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-task.mjs')
 } else {
     $rw4DisplayTool = Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-display.mjs'
     $rw4Variant = if ($Target -eq 'DisplayProbe') { 'probe' } else { 'pattern' }

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import crypto from 'node:crypto';
 
 const input = process.argv[2];
-if (!input) throw new Error('Usage: node tools/inspect-native.mjs <ELF-or-PE> [lua|modules|display|input|ui|bridge|time|fs|stdio]');
+if (!input) throw new Error('Usage: node tools/inspect-native.mjs <ELF-or-PE> [lua|modules|display|input|ui|bridge|time|fs|stdio|task]');
 const inspectLua = process.argv[3] === 'lua';
 const inspectModules = process.argv[3] === 'modules';
 const inspectDisplay = process.argv[3] === 'display';
@@ -13,6 +13,7 @@ const inspectBridge = process.argv[3] === 'bridge';
 const inspectTime = process.argv[3] === 'time';
 const inspectFs = process.argv[3] === 'fs';
 const inspectStdio = process.argv[3] === 'stdio';
+const inspectTask = process.argv[3] === 'task';
 const data = fs.readFileSync(input);
 const report = { bytes: data.length, sha256: crypto.createHash('sha256').update(data).digest('hex'), executed: false };
 function range(offset, size) {
@@ -59,7 +60,7 @@ const wanted = inspectModules ? /^(?:g_.*(?:allsyms|symtab|nsymbols)|allsyms.*|s
     const strings = range(sections[section.link].offset, sections[section.link].size);
     for (let offset = 0; offset + section.entrySize <= symbols.length; offset += section.entrySize) {
       const name = cstring(strings, symbols.readUInt32LE(offset));
-      if ((inspectStdio ? /^(?:fopen|fclose|fread|fseek|ftell|feof|ferror|clearerr|__errno|printf)$/ : inspectFs ? /^(?:open|close|read|lseek|__errno|printf)$/ : inspectTime ? /^(?:clock_gettime|clock_nanosleep|nxsched_gettid|printf)$/ : inspectBridge ? /^(?:register_driver|unregister_driver|lv_image_(?:cache_drop|header_cache_drop)|lua(?:L|C|F)?_.*|luaopen_.*|ll_.*|lsys_.*|lookforfunc|dlopen|dlclose|dlsym|dlerror|modsym|insmod|rmmod|puts|printf|modlib_.*)$/ : inspectUi ? /^(?:.*navigator.*|.*activity.*|.*lua.*(?:gesture|finish|pause|resume).*|luavgl_obj_(?:create_helper|on_event|on_clicked|clear_flag|add_flag)|.*gesture.*(?:event|cb|handle).*|lua_module_miwear_.*)$/ : inspectInput ? /^(?:open|close|read|poll|ioctl|usleep|printf|fflush|memset|__errno|.*goldfish.*(?:event|touch|input).*|.*touchscreen.*|touch_.*|.*utouch.*|.*input_(?:read|open|close|register|event|poll).*|lv_nuttx_.*)$/ : inspectDisplay ? /^(?:open|close|ioctl|mmap|munmap|usleep|printf|puts|fflush|malloc|free|memcpy|memset|goldfish_gpu_fb_.*|fb_ioctl|fb_get_planeinfo|lv_display_get_.*|lv_obj_create(?:_ex)?|lv_obj_delete|lv_obj_set_.*|lv_async_call.*|lv_global|lv_mutex_.*|lv_nuttx_.*|lv_timer_handler)$/ : wanted).test(name)) report.selectedSymbols.push({ name, value: '0x' + symbols.readUInt32LE(offset + 4).toString(16),
+      if ((inspectTask ? /^(?:pthread_create|pthread_join|clock_gettime|clock_nanosleep|nxsched_gettid|printf)$/ : inspectStdio ? /^(?:fopen|fclose|fread|fseek|ftell|feof|ferror|clearerr|__errno|printf)$/ : inspectFs ? /^(?:open|close|read|lseek|__errno|printf)$/ : inspectTime ? /^(?:clock_gettime|clock_nanosleep|nxsched_gettid|printf)$/ : inspectBridge ? /^(?:register_driver|unregister_driver|lv_image_(?:cache_drop|header_cache_drop)|lua(?:L|C|F)?_.*|luaopen_.*|ll_.*|lsys_.*|lookforfunc|dlopen|dlclose|dlsym|dlerror|modsym|insmod|rmmod|puts|printf|modlib_.*)$/ : inspectUi ? /^(?:.*navigator.*|.*activity.*|.*lua.*(?:gesture|finish|pause|resume).*|luavgl_obj_(?:create_helper|on_event|on_clicked|clear_flag|add_flag)|.*gesture.*(?:event|cb|handle).*|lua_module_miwear_.*)$/ : inspectInput ? /^(?:open|close|read|poll|ioctl|usleep|printf|fflush|memset|__errno|.*goldfish.*(?:event|touch|input).*|.*touchscreen.*|touch_.*|.*utouch.*|.*input_(?:read|open|close|register|event|poll).*|lv_nuttx_.*)$/ : inspectDisplay ? /^(?:open|close|ioctl|mmap|munmap|usleep|printf|puts|fflush|malloc|free|memcpy|memset|goldfish_gpu_fb_.*|fb_ioctl|fb_get_planeinfo|lv_display_get_.*|lv_obj_create(?:_ex)?|lv_obj_delete|lv_obj_set_.*|lv_async_call.*|lv_global|lv_mutex_.*|lv_nuttx_.*|lv_timer_handler)$/ : wanted).test(name)) report.selectedSymbols.push({ name, value: '0x' + symbols.readUInt32LE(offset + 4).toString(16),
         size: symbols.readUInt32LE(offset + 8), sectionIndex: symbols.readUInt16LE(offset + 14), info: symbols[offset + 12] });
     }
   }
