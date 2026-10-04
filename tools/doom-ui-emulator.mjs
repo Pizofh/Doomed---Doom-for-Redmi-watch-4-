@@ -10,6 +10,7 @@ import {verifyShareware,shareware} from './wad-data.mjs';
 import {readScreenshot} from './assert-ui-probe.mjs';
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 const guestHash='849a04f6d461938022ffb820143f870be7e91933b3fb538d009b24c7fa6098fa';
+export const persistentDoomDir='/data/app/watchface/market/365799903/doom';
 export function session(label) {
   if(!/^[a-z-]+$/.test(label))throw Error('Invalid label');
   guardEmulator();
@@ -46,16 +47,17 @@ export function reviewedPayload() {
 }
 export function requireOwnedLauncher(s,payload=reviewedPayload()) {
   if(s.state()!==null)throw Error('Begin at inactive owned launcher');
-  const elf=path.join(s.folder,'preflight-payload.elf');s.adb(['pull','/tmp/rw4-doom-ui.elf',elf],'preflight-payload');
+  const pkg=JSON.parse(fs.readFileSync(path.join(projectRoot,'artifacts/package-review/ui-probe-package.json')));
+  const persistent=pkg.doomPersistentMode===true;
+  const elf=path.join(s.folder,'preflight-payload.elf');s.adb(['pull',persistent?persistentDoomDir+'/doom.elf':'/tmp/rw4-doom-ui.elf',elf],'preflight-payload');
   if(hash(fs.readFileSync(elf))!==payload.sha256)throw Error('Staged payload differs');
-  const wad=path.join(s.folder,'preflight-doom1.wad');s.adb(['pull','/tmp/rw4-doom1.wad',wad],'preflight-wad');
+  const wad=path.join(s.folder,'preflight-doom1.wad');s.adb(['pull',persistent?persistentDoomDir+'/doom1.wad':'/tmp/rw4-doom1.wad',wad],'preflight-wad');
   verifyShareware(fs.readFileSync(wad));
   const faceFile=path.join(s.folder,'preflight-faces.json');s.adb(['pull','/data/app/watchface/watchface_list.json',faceFile],'preflight-faces');
   const active=JSON.parse(fs.readFileSync(faceFile)).watchface_list.filter(f=>String(f.type)==='1'&&String(f.in_use)==='1');
   if(active.length!==1||active[0].id!=='365799903')throw Error('UIProbe not active');
   const sourceFile=path.join(s.folder,'preflight-main.lua');s.adb(['pull','/data/app/watchface/market/365799903/lua/main.lua',sourceFile],'preflight-source');
   if(!fs.readFileSync(sourceFile).equals(fs.readFileSync(path.join(projectRoot,'experiments/doom-ui/main.lua'))))throw Error('Extracted Lua differs');
-  const pkg=JSON.parse(fs.readFileSync(path.join(projectRoot,'artifacts/package-review/ui-probe-package.json')));
   if(pkg.doomMode!==true)throw Error('Expected doom package');
   const label=path.basename(s.folder)+'-preflight';
   const r=spawnSync(process.execPath,[path.join(projectRoot,'tools/emulator-screenshot.mjs'),label],{shell:false,windowsHide:true,encoding:'utf8',timeout:15000});
@@ -71,6 +73,8 @@ if(path.resolve(process.argv[1]??'')===fileURLToPath(import.meta.url)) {
   const s=session('doom-ui-'+action);
   if(action==='state')console.log(JSON.stringify({folder:s.folder,state:s.state()}));
   else {
+    const pkg=JSON.parse(fs.readFileSync(path.join(projectRoot,'artifacts/package-review/ui-probe-package.json')));
+    if(pkg.doomPersistentMode===true)throw Error('Persistent launcher owns transient WAD cleanup; use doom-storage-emulator.mjs install|verify, not legacy stage|cleanup');
     const payload=reviewedPayload(),target='/tmp/rw4-doom-ui.elf';
     const wadSource=path.join(projectRoot,'tools/local/doom-shareware/doom1.wad');verifyShareware(fs.readFileSync(wadSource));
     const wadTarget='/tmp/rw4-doom1.wad';

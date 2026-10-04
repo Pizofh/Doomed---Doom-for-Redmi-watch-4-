@@ -66,7 +66,7 @@ function logs(){
 }
 try{
   await gesture(195,285,195,285);let first;
-  for(let i=0;i<20;i++){await delay(100);const v=s.state();if(v?.ready&&v.produced>2){first=v;break;}}
+  for(let i=0;i<300;i++){await delay(100);const v=s.state();if(v?.ready&&v.produced>2){first=v;break;}}
   if(!first)throw Error('Engine not ready');sample('ready');
   await screenshots('idle',1200);await turn('right',185,4);await turn('left',70,2);
   const last=sample('before-pause');await gesture(310,405,310,405);

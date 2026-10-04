@@ -60,7 +60,8 @@ fs.writeFileSync(path.join(work,'images/preview.png'),Buffer.concat([Buffer.from
 const args=['-b',path.join(work,'UIProbe.fprj'),path.join(work,'output'),'UIProbe.face','365799903'];
 const result=spawnSync(compiler,args,{cwd:work,shell:false,windowsHide:true,encoding:'utf8',timeout:30000,
   maxBuffer:2*1024*1024,env:{...process.env,TEMP:work,TMP:work,PATH:path.join(process.env.SystemRoot,'System32')}});
-const record={work,args,bridgeMode,loopMode,controlsMode,workerMode,workerFrameMode,workerInputMode,doomMode,status:result.status,stdout:result.stdout,stderr:result.stderr,error:result.error?.message??null,
+const doomPersistentMode=doomMode&&source.includes(Buffer.from('local persistent_dir="/data/app/watchface/market/365799903/doom"'));
+const record={work,args,bridgeMode,loopMode,controlsMode,workerMode,workerFrameMode,workerInputMode,doomMode,doomPersistentMode,status:result.status,stdout:result.stdout,stderr:result.stderr,error:result.error?.message??null,
   sourceSha256:hash(source),compilerSha256:hash(fs.readFileSync(compiler)),adbBesideCompiler:false,installed:false};
 const recordPath=path.join(projectRoot,'artifacts/package-review/ui-probe-package.json');
 fs.writeFileSync(recordPath,JSON.stringify(record,null,2)+'\n');

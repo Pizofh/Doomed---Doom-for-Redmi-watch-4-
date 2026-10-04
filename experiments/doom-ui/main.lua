@@ -1,7 +1,10 @@
 -- PC-only worker/input adapter experiment. Original Doom, no shared-driver input or hardware.
 local lvgl=require("lvgl")
 local node="/dev/rw4doom"
-local elf="/tmp/rw4-doom-ui.elf"
+local persistent_dir="/data/app/watchface/market/365799903/doom"
+local elf=persistent_dir.."/doom.elf"
+local temporary_wad="/tmp/rw4-doom1.wad"
+local preparing,owned_wad=nil,false
 local paths={"/tmp/rw4-doom-frame-0.bin","/tmp/rw4-doom-frame-1.bin"}
 local loaded,closing,stopping=false,false,false
 local seq,frames,last_generation=0,0,0
@@ -28,6 +31,17 @@ local function shell(command)
     local ok,why,status=os.execute(command)
     assert(ok==true and why=="exit" and status==0,"shell failed: "..command)
 end
+local function close_preparation()
+    if preparing then
+        -- File userdata may already have finalized when Lua closes the page.
+        if preparing.reader then pcall(function() preparing.reader:close() end) end
+        if preparing.writer then pcall(function() preparing.writer:close() end) end
+        preparing=nil
+    end
+end
+local function remove_wad()
+    if owned_wad then assert(os.remove(temporary_wad));owned_wad=false end
+end
 local function state()
     local f <close> = assert(io.open(node,"rb"));f:setvbuf("no")
     local b=assert(f:read(192));assert(#b==192);assert(f:close())
@@ -49,9 +63,13 @@ end
 local function must(op,mask) local ok,err=command(op,mask);assert(ok,err) end
 RW4_DOOM_LIFETIME=setmetatable({}, {__gc=function()
     closing=true
+    close_preparation()
     if loaded then
         local ok,err=pcall(function() must(2);print("RW4_DOOM_UI: close retained") end)
         if not ok then print("RW4_DOOM_UI: close error retained "..tostring(err)) end
+    elseif owned_wad then
+        local ok,err=pcall(remove_wad)
+        if not ok then print("RW4_DOOM_STORAGE: close copy retained "..tostring(err)) end
     end
 end})
 local F,E=lvgl.FLAG,lvgl.EVENT
@@ -94,6 +112,7 @@ local function unload(s)
         (s.pending==0 or (s.detached==1 and s.reason~=0 and s.live==0)),"worker/input not retired")
     shell("rmmod rw4doom");assert(not present());loaded=false;stopping=false
     for i,path in ipairs(paths) do if owned[i] then assert(os.remove(path));owned[i]=false end end
+    remove_wad()
     print("RW4_DOOM_UI: unloaded tid="..s.tid.." key_events="..s.key_events)
     perf_report()
 end
@@ -152,8 +171,7 @@ local function request_resume()
     clear_contact(false);resume_requested=true
     pause_label:set{text="Releasing controls"}
 end
-button(launcher,"START",45,250,300,70,function()
-    if closing or stopping then return end
+local function launch_prepared()
     if not loaded then assert(not present());shell("insmod "..elf.." rw4doom");loaded=true;state() end
     local s=state();if s.pending==1 and s.live==1 then return end
     must(1);active=true;system_paused=false;user_paused=false;resume_requested=false;frames=0;last_generation=0
@@ -161,8 +179,42 @@ button(launcher,"START",45,250,300,70,function()
     clear_contact(false);navigation(false)
     launcher:add_flag(F.HIDDEN);game:clear_flag(F.HIDDEN);menu:add_flag(F.HIDDEN)
     print("RW4_DOOM_UI: START")
+end
+local function open_prepare_file(phase,started)
+    local path=phase=="elf" and elf or persistent_dir.."/doom1.wad"
+    preparing={phase=phase,started=started,total=0,hash=0x811c9dc5,reader=assert(io.open(path,"rb"))}
+    if phase=="wad" then preparing.writer=assert(io.open(temporary_wad,"wb"));owned_wad=true end
+end
+local function prepare_tick()
+    local p=preparing;local b=p.reader:read(32768)
+    local size=p.phase=="elf" and 446144 or 4196020
+    if b then
+        assert(p.total+#b<=size,"asset oversized")
+        for i=1,#b do p.hash=((p.hash~b:byte(i))*0x01000193)&0xffffffff end
+        p.total=p.total+#b
+        if p.writer then assert(p.writer:write(b)) end
+        return
+    end
+    assert(p.total==size and p.hash==(p.phase=="elf" and 1092583361 or 62952258),"asset identity differs")
+    assert(p.reader:close());p.reader=nil
+    if p.writer then assert(p.writer:close());p.writer=nil end
+    if p.phase=="elf" then open_prepare_file("wad",p.started)
+    else
+        local elapsed=(clock_ticks()-p.started)/10;preparing=nil
+        print("RW4_DOOM_STORAGE: prepared elf=446144 wad=4196020 ms="..elapsed)
+        launch_prepared()
+    end
+end
+button(launcher,"START",45,250,300,70,function()
+    if closing or stopping or preparing or loaded then return end
+    assert(not present())
+    local old=io.open(temporary_wad,"rb")
+    if old then old:close();error("temporary WAD already exists: inspect") end
+    open_prepare_file("elf",clock_ticks());status:set{text="Preparing Doom..."}
+    print("RW4_DOOM_STORAGE: prepare started")
 end)
 local function exit_game()
+    if preparing and not closing then close_preparation();remove_wad();status:set{text="Ready"};print("RW4_DOOM_STORAGE: preparation cancelled");return end
     if not loaded or closing then return end
     clear_contact(true);resume_requested=false;active=false;detach_image();must(2);stopping=true
     game:add_flag(F.HIDDEN);menu:add_flag(F.HIDDEN);launcher:clear_flag(F.HIDDEN);status:set{text="Stopping..."}
@@ -200,7 +252,9 @@ button(menu,"RESUME",45,160,300,70,function() request_resume() end)
 button(menu,"EXIT",45,355,300,70,exit_game)
 local old_pause,old_resume=pageOnPause,pageOnResume
 function pageOnPause(...)
-    system_paused=true;if active then pause_game("System panel") end
+    system_paused=true
+    if preparing then close_preparation();remove_wad();status:set{text="Ready"};print("RW4_DOOM_STORAGE: preparation cancelled on pause") end
+    if active then pause_game("System panel") end
     if type(old_pause)=="function" then old_pause(...) end
 end
 function pageOnResume(...)
@@ -208,7 +262,18 @@ function pageOnResume(...)
     if type(old_resume)=="function" then old_resume(...) end
 end
 local timer=lvgl.Timer({period=frame_period,paused=false,cb=function()
-    if closing or not loaded then return end
+    if closing then return end
+    if preparing then
+        local ok,err=pcall(prepare_tick)
+        if not ok then
+            close_preparation()
+            if present() then loaded=true;stopping=true;pcall(function() state();must(2) end)
+            else remove_wad() end
+            status:set{text="Error: inspect logs"};print("RW4_DOOM_STORAGE: prepare error "..tostring(err))
+        end
+        return
+    end
+    if not loaded then return end
     local timer_start=clock_ticks()
     local ok,err=pcall(function()
         local s=state();assert(s.error==0,"worker error")
@@ -242,6 +307,8 @@ end})
 RW4_DOOM_LIFETIME.timer=timer;RW4_DOOM_LIFETIME.base=base
 if present() then
     loaded=true;state();must(2);stopping=true;status:set{text="Collecting previous C"}
+    local w <close> = assert(io.open(temporary_wad,"rb"))
+    assert(w:seek("end")==4196020);assert(w:close());owned_wad=true
     for i,path in ipairs(paths) do
         local f=io.open(path,"rb")
         if f then
@@ -251,4 +318,4 @@ if present() then
     end
 end
 navigation(true)
-print("RW4_DOOM_UI: ready period="..frame_period.." input_capacity=32 profile=R71")
+print("RW4_DOOM_UI: ready period="..frame_period.." input_capacity=32 profile=R73 persistent=1")
