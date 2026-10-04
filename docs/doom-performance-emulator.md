@@ -1,5 +1,7 @@
 # R70: medir presentación y controles antes de optimizar
 
+Referencia historica R70 a200ms. [R71](doom-50ms-emulator.md) aplica y mide posteriormente Timer50ms; los resultados y pendientes siguientes pertenecen a R70.
+
 El 2026-10-04 se midió el port original E1M1 en el emulador S3 con el mismo C/ELF R67 y Timer Lua de200ms. La UI instrumentada presentó33 imágenes;75 capturas rápidas comprobaron cambios visibles durante reposo y giros. EXIT retiró worker88 y recursos propios sin reboot ni unload host. No se tocó M2315W1.
 
 Resultado `artifacts/emulator/doom-perf-1791152085442/result.json`, passed=true. La medición identifica un límite concreto: el intervalo de presentación domina el costo de copiar y asignar una imagen a LVGL. Probar50ms es la siguiente optimización razonable; **no se ha aplicado ni demostrado20FPS**.

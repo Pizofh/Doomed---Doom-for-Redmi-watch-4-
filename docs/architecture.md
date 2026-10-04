@@ -23,9 +23,9 @@ Dependencias discontinuas sin validar en RW4. Ni host Windows AMD64 ni emulador 
 
 Lua/UI28 crea worker detached con stack32KiB después de retornar initializer NSH. Touch de su página escribe máscaras al driver propio. Ring SPSC32/epochs transfiere cambios; worker genera releases antes de presses en cola64 y DG_GetKey alimenta eventos originales. No lectura de /dev/input0 para controlar Doom ni intercepción del input stock.
 
-DG_DrawFrame convierte320×200 BGRX a RGB565LE; dos slots C inmutables para lector. Stream por descriptor con EOF; Lua Timer200ms cierra descriptor, invalida cache en UI y escribe uno de dos archivos tmpfs. LVGL Image muestra x35/y40. Worker no llama LVGL; Timer no retiene callbacks nativos y LVGL no guarda punteros al módulo. Framebuffer global pertenece a UI stock.
+DG_DrawFrame convierte320×200 BGRX a RGB565LE; dos slots C inmutables para lector. Stream por descriptor con EOF; Lua Timer50ms (R71) cierra descriptor, invalida cache en UI y escribe uno de dos archivos tmpfs. LVGL Image muestra x35/y40. Worker no llama LVGL; Timer no retiene callbacks nativos y LVGL no guarda punteros al módulo. Framebuffer global pertenece a UI stock.
 
-Transporte inicial: aproximadamente5frames/s; motor aproximadamente35tics/s. Callbacks de dibujo, frames producidos y presentaciones son contadores distintos. Sin corrección de aspecto; controles debajo. [Layout](controls.md).
+Transporte inicial R67: aproximadamente5frames/s. [R71](doom-50ms-emulator.md):17,45entregas/s y12,67-13,55cambios visibles/s observados durante giros; motor aproximadamente35tics/s. Callbacks de dibujo, frames producidos y presentaciones son contadores distintos. Sin corrección de aspecto; controles debajo. [Layout](controls.md).
 
 Runtime R65:128reservas/8streams/payload8MiB, owner worker único, FILE opacos de lectura del WAD fijo, logs acotados, writes/shell del motor denegadas. No sandbox FLAT. Peak tracked~6.28MiB excluye estáticos/stack/loader/libc/Lua/LVGL/cache/tmpfs. [Mediciones](doom-ui-emulator.md).
 
@@ -55,6 +55,6 @@ Archivos persistentes no exigen residencia continua. RAM-only no significa sandb
 
 ## Gates
 
-Ejecución/display/input/tiempo/WAD/motor y dos salidas limpias demostrados en emulador. [R68](doom-focus-emulator.md) completó foco stock y STOP con FIRE mantenido. [R69](doom-close-emulator.md) completa el cierre normal/reentrada. [R70](doom-performance-emulator.md) mide pipeline1,48ms e intervalos205ms, cambios visibles durante giro y cotas de latencia. Siguiente: comparar Timer50ms; estabilidad prolongada y persistencia pendientes.
+Ejecución/display/input/tiempo/WAD/motor y dos salidas limpias demostrados en emulador. [R68](doom-focus-emulator.md) completó foco stock y STOP con FIRE mantenido. [R69](doom-close-emulator.md) completa el cierre normal/reentrada. [R70](doom-performance-emulator.md) mide pipeline1,48ms e intervalos205ms, cambios visibles durante giro y cotas de latencia. [R71](doom-50ms-emulator.md) demuestra mejora con Timer50ms y salida limpia. Siguiente: sesion90s para observar estabilidad/memoria; persistencia pendiente.
 
 Antes de hardware: evidencia M2315W1/firmware exacto, privilegios, recovery y [plan explícito](physical-device-plan.md) con revisión del usuario. No escalación sin restricción concreta. Excluir ELF/direcciones del emulador del reloj físico.

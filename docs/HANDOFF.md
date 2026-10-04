@@ -1,6 +1,18 @@
 # Retomar el proyecto
 
-**R70, 2026-10-04:** [Presentacion y controles medidos](doom-performance-emulator.md). Pipeline Lua/LVGL media1,48ms, intervalos205,30ms/4,87entregas/s; giros con4,57-5,08cambios visibles/s observados. C/ELF R67 intactos, instrumentacion Lua acotada; salida limpia. Siguiente: Timer200 a50ms y comparar, sin prometer20FPS. Solo emulador S3, gate M2315W1 cerrado.
+**R71, 2026-10-04:** [Timer50ms medido](doom-50ms-emulator.md).17,45entregas/s frente a4,87; giros12,67-13,55cambios visibles/s observados frente aunos5. Motor ~35tics/s, pausa400ms y EXIT limpios. Mismo C/ELF R67, Lua R71; solo emulador S3. Siguiente: una sesion de90s para observar estabilidad/memoria, gate M2315W1 cerrado.
+
+Implementacion **ba2bc70**. Resultado `doom-perf-1791153000333`, passed=true; comparison.json conserva referencia R70 `doom-perf-1791152085442`.119frames/141callbacks/75capturas. Intervalo57,31ms media; pipeline1,57ms/P952,00/max2,40; motor221tics/6327ms. Input UI observado27,90-54,20ms (4edges), host51,37/48,80ms incluye RPC/ADB. Entrega de fuente no es flush; muestreo max80ms puede saltar frames; no claim20FPS.
+
+Lua SHA8e347b1b0a0ea4706e50761ca3a58739fe985660585afbd6b1b8f008f54990aa, paquete21608bytes SHAced173992bf6b787abde199c8af2399f8e19b6d05d89b34e0298fad42be2f963. Timer50ms/trace_limit256; C/ELF R67 intactos. Helper measure-doom-emulator.mjs exige perfil50/200 y trazas completas, compara captura identica y agrega pausa400ms/EXIT despues de medir.
+
+Final Storage365700764, UIProbe365799903 modo doom/perfil R71 almacenada. Cleanup `doom-ui-cleanup-1791153170789` WAD intacto; final read-only `doom-fast-final-1791153209832`, passed=true: worker88/modulo/nodos/copias/ELF/WAD tmp ausentes.13alloc/free/streams0/cleanup0/pico6582961. Baseline screen OFF respaldo/reset antes de C `doom-fast-baseline-1791152867635`; primer guard postboot encontro ADB aun no listo, connect posterior resuelve sin segundo reset. Nunca reboot para salir.
+
+**Siguiente checkpoint unico:** sesion90s con el Timer50ms actual, snapshots espaciados de memoria/cache/tmp y salida limpia, sin ampliar limite nativo120s. Los buffers de perfil estan acotados256, asi que NO usar el helper corto que exige trazas completas para un run90s: preparar helper de estabilidad sin recompilar C ni pedir traza infinita. No repetir R67/R68/R69/R70/R71. Sesion90s no implica estabilidad de horas ni seguridad fisica; persistencia posterior, gate RW4 cerrado.
+
+Todo lo siguiente es historial R70 y anteriores; tomar R71 como estado operativo actual.
+
+**Historial R70, 2026-10-04:** [Presentacion y controles medidos](doom-performance-emulator.md). Pipeline Lua/LVGL media1,48ms, intervalos205,30ms/4,87entregas/s; giros con4,57-5,08cambios visibles/s observados. C/ELF R67 intactos, instrumentacion Lua acotada; salida limpia. Siguiente: Timer200 a50ms y comparar, sin prometer20FPS. Solo emulador S3, gate M2315W1 cerrado.
 
 Implementacion **a69b143**. Resultado `doom-perf-1791152085442`, passed=true:33frames/39callbacks perfilados,75capturas, worker88. Pipeline p951,70ms/max2,90; Timer callback media1,89ms/max3,80. Motor222tics/6343ms (~35/s),444DG callbacks distintos de FPS. Handler input0,30-0,60ms, confirmacion UI29,70-151,30ms incluye espera al Timer; host angle/key observado<=46,91/116,14ms incluye RPC/ADB/polling. No latency exacta/fotones, ni flush completion.
 
@@ -10,7 +22,7 @@ Baseline screen OFF: backup/reset antes de stage/C `doom-perf-baseline-179115186
 
 **Siguiente checkpoint unico:** Timer200 a50ms, aumentar buffers de traza si hace falta y ejecutar `tools/measure-doom-emulator.mjs` para comparar tasas/costos/input, con pausa/EXIT dentro del ensayo. No repetir suite R67/R68/R69 ni fuentes80C por este cambio Lua salvo fallo. La medicion corta no sustituye estabilidad/memoria/crash/persistencia ni gate fisico.
 
-Todo lo siguiente es historial R69 y anteriores; tomar R70 como estado operativo actual.
+Todo lo siguiente es historial R69 y anteriores; consultar R71 al inicio para el estado operativo actual.
 
 **Historial R69, 2026-10-04:** [Cierre sin EXIT y reentrada](doom-close-emulator.md) pasan con Doom original. Seleccionar Storage detiene el worker104 y libera13 reservas/streams; conserva modulo/copias hasta reentrada UI, que recoge todo. Sin reboot para salir ni unload host. C/Lua/ELF R67 intactos; solo emulador S3, gate M2315W1 cerrado. Siguiente: medir frames presentados, costo de copia y latencia antes de optimizar.
 

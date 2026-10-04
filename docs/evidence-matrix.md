@@ -1,6 +1,8 @@
 # Matriz de evidencia
 
-**R70, 2026-10-04:** [Presentacion y controles medidos](doom-performance-emulator.md). Pipeline Lua/LVGL media1,48ms, intervalos205,30ms/4,87entregas/s; giros con4,57-5,08cambios visibles/s observados. C/ELF R67 intactos, instrumentacion Lua acotada; salida limpia. Siguiente: Timer200 a50ms y comparar, sin prometer20FPS. Solo emulador S3, gate M2315W1 cerrado.
+**R71, 2026-10-04:** [Timer50ms medido](doom-50ms-emulator.md).17,45entregas/s frente a4,87; giros12,67-13,55cambios visibles/s observados frente aunos5. Motor ~35tics/s, pausa400ms y EXIT limpios. Mismo C/ELF R67, Lua R71; solo emulador S3. Siguiente: una sesion de90s para observar estabilidad/memoria, gate M2315W1 cerrado.
+
+**Historial R70, 2026-10-04:** [Presentacion y controles medidos](doom-performance-emulator.md). Pipeline Lua/LVGL media1,48ms, intervalos205,30ms/4,87entregas/s; giros con4,57-5,08cambios visibles/s observados. C/ELF R67 intactos, instrumentacion Lua acotada; salida limpia. Siguiente: Timer200 a50ms y comparar, sin prometer20FPS. Solo emulador S3, gate M2315W1 cerrado.
 
 **Historial R69, 2026-10-04:** [Cierre sin EXIT y reentrada](doom-close-emulator.md) pasan con Doom original. Seleccionar Storage detiene el worker104 y libera13 reservas/streams; conserva modulo/copias hasta reentrada UI, que recoge todo. Sin reboot para salir ni unload host. C/Lua/ELF R67 intactos; solo emulador S3, gate M2315W1 cerrado. Siguiente: medir frames presentados, costo de copia y latencia antes de optimizar.
 
@@ -349,4 +351,12 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Giros muestran alrededor de5cambios visibles/s | Capturas de display S3 |75PNGs/area RGB320x200/hashes | CONFIRMADO EN EMULADOR | Alta para cambios observados | Derecha5,08/izquierda4,57 | Cota inferior, ventanas cortas; no FPS exacto ni RW4 |
 | os.clock mide tiempo transcurrido en guest inspeccionado | ELF S3 exacto | R70 disassembly os_clock/clock/up_timer_gettick y dos llamadas | CONFIRMADO EN EMULADOR | Alta local | Delta0,4495s tras espera400ms+ADB | No CPU time Lua portable; no evidencia RW4 |
 | Handler y confirmacion posterior de input son medibles | Port/UI S3 | R70 cuatroedges y dos giros procesados | CONFIRMADO EN EMULADOR | Alta para muestras | Handler0,30-0,60ms; UI observa29,70-151,30ms | Observacion incluye Timer; host incluye RPC/ADB; no touch-a-foton |
-| Timer50ms alcanza20FPS reales | S3/RW4 | Aun sin aplicar ni medir | SIN EVIDENCIA | No evaluable | No | Siguiente comparacion; no extrapolar a hardware |
+| Timer50ms alcanza20FPS reales | S3/RW4 | R70 sin aplicar; R71 entrega17,45fuentes/s y observa cambios inferiores | SIN EVIDENCIA para20FPS | No evaluable para FPS exacto |50ms probado en R71 | No extrapolar entrega de fuente/capturas a scanout o hardware |
+
+## Mejora a50ms R71: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Reducir Timer200 a50ms aumenta entregas3,58x | UI propia S3 instrumentada | [R71](doom-50ms-emulator.md),119trazas y comparison.json | CONFIRMADO EN EMULADOR | Alta para ensayo |17,45entregas/s, intervalo57,31ms media | No flush completion ni20FPS demostrados |
+| Mismo muestreo observa mas cambios visibles durante giros | Captura area320x200 S3 |75PNGs/RGB-hashes, mismo sampler que R70 | CONFIRMADO EN EMULADOR | Alta para ventanas observadas | Derecha13,55/izquierda12,67cambios/s | Cotas inferiores; muestreo max80ms puede perder imagenes |
+| Motor mantiene ritmo, pausa y EXIT limpio a50ms | Port original E1M1/S3 | R71 snapshots y finish/uninit/ps | CONFIRMADO EN EMULADOR | Alta para ciclo corto |221tics/6327ms, pausa400ms,13alloc/free,streams0,cleanup0 | C/ELF intactos, sin reboot; no sesiones largas ni RW4 |

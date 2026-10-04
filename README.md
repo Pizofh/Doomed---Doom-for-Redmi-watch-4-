@@ -1,12 +1,14 @@
 # DOOM en Redmi Watch 4
 
-**R70:** [Medicion de fluidez](docs/doom-performance-emulator.md): entregar una imagen a LVGL tarda1,48ms de media, pero el Timer espera unos205ms. Giros:4,6-5,1cambios visibles/s observados. Siguiente: comparar Timer50ms; aun no aplicado. Hardware fisico intacto.
+**R71:** [Mejora de fluidez a50ms](docs/doom-50ms-emulator.md):17,45entregas/s y12,7-13,6cambios visibles/s durante giros (antesunos5). Motor ~35tics/s, pausa y EXIT limpios. Siguiente: sesion90s para observar estabilidad/memoria; hardware fisico intacto.
+
+**Historial R70:** [Medicion inicial](docs/doom-performance-emulator.md) identifico Timer200ms como limite.
 
 **Historial R69:** [Cierre sin EXIT y reentrada](docs/doom-close-emulator.md) pasaron sin reboot.
 
 **Historial R68:** [Panel stock y STOP con FIRE pulsado](docs/doom-focus-emulator.md) pasaron con el motor real.
 
-**R67, 2026-10-04:** DOOM original ejecuta E1M1 en la UI Lua/LVGL del emulador Xiaomi Watch S3. Avanzar, girar, disparar, pausar/reanudar y dos ciclos START/EXIT/reapertura pasaron sin reboot. [Resultados, mediciones y reproducción](docs/doom-ui-emulator.md). Presentación inicial: aproximadamente cinco frames/s; fluidez, estabilidad prolongada y persistencia nativa pendientes.
+**R67, 2026-10-04:** DOOM original ejecuta E1M1 en la UI Lua/LVGL del emulador Xiaomi Watch S3. Avanzar, girar, disparar, pausar/reanudar y dos ciclos START/EXIT/reapertura pasaron sin reboot. [Resultados, mediciones y reproducción](docs/doom-ui-emulator.md). Presentacion inicial R67: aproximadamente cinco frames/s; mejora R71 arriba, estabilidad prolongada y persistencia pendientes.
 
 Objetivo: portar doomgeneric al Xiaomi Redmi Watch 4 **M2315W1**, conservando firmware stock y funciones normales si resulta posible. **El reloj físico no se ha conectado ni modificado.** El emulador S3 a390×450 no demuestra ISA/ABI/firmware/compatibilidad del RW4.
 
@@ -20,7 +22,7 @@ Se conserva motor, renderer y gameplay original. Aportes propios: investigación
 - Watchface permanece instalada en emulador; ELF/WAD en /tmp volátil y retirados tras el ensayo. Persistencia de Doom pendiente.
 - NuttX FLAT compartido, **sin sandbox**. No cargar este ELF ni sus direcciones en M2315W1.
 
-Final: Storage365700764 activa, UIProbe365799903 modo doom almacenada; workers/módulo/nodos/copias/ELF/WAD tmp retirados. Siguiente checkpoint: reducir Timer200 a50ms y repetir la medicion comparable.
+Final: Storage365700764 activa, UIProbe365799903 modo doom almacenada; workers/módulo/nodos/copias/ELF/WAD tmp retirados. Siguiente checkpoint: una sesion acotada90s a50ms para observar estabilidad/memoria.
 
 ## Reproducción local
 
@@ -53,6 +55,7 @@ Helpers verifican QEMU/ADB/imagen/payload y usan exclusivamente loopback5039/emu
 - [Primer frame original R66](docs/doom-first-frame-emulator.md)
 - [Doom en UI/controles R67](docs/doom-ui-emulator.md)
 - [Medicion de presentacion/input R70](docs/doom-performance-emulator.md)
+- [Mejora a50ms R71](docs/doom-50ms-emulator.md)
 - [Modelo de riesgo](docs/risk-model.md)
 - [Gate físico cerrado](docs/physical-device-plan.md)
 
