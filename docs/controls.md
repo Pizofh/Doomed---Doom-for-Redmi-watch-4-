@@ -1,5 +1,7 @@
 # Controles táctiles propuestos
 
+**R68:** [Panel stock y STOP manteniendo FIRE](doom-focus-emulator.md) probados con Doom. Panel desde y440 pausa motor, regreso exige RESUME; STOP retira todo antes de soltar FIRE. Abrir panel con acción aún mantenida y ergonomía física no probados. No confundir la salida cooperativa desde consola del emulador con un control disponible en el reloj físico.
+
 **Actual R67:** [Controles de Doom original probados](doom-ui-emulator.md): MOVE permite avanzar/girar, FIRE consume munición real, MENU/RESUME/EXIT funcionan. Layout actual: imagen x35/y40/320×200, pad x20/y285/210×140, FIRE x245/y285/125×85, MENU x245/y385/125×40; margen y440 libre para navegación stock. Un dedo, sin corona/multitouch/MOVE+FIRE simultáneos. La tabla inferior y ensayos del patrón son históricos; comodidad física, USAR y foco con contacto mantenido siguen pendientes. El motor conserva su inercia/fricción original: KEYUP no equivale a anular su momentum inmediatamente.
 
 Estado: diseño con [prototipo mantenido validado en PC/emulador](native-controls-emulator.md). No implementado ni validado en el M2315W1. El usuario delega la elección y pide evitar controles incómodos; la comodidad es un criterio de aceptación, no un resultado demostrado.

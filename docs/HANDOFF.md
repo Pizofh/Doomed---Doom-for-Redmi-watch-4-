@@ -1,5 +1,19 @@
 # Retomar el proyecto
 
+Implementación R68 guardada en **ae255fa**. Final read-only `doom-focus-final-1791145679942` confirma Storage activa y worker/módulo/nodos/tmp ausentes.
+
+**ACTUAL R68,2026-10-04:** [Panel stock/STOP con FIRE down](doom-focus-emulator.md), `doom-focus-test-1791145311054`, passed=true. Nueve snapshots/siete capturas: panel con worker104 vivo congela tic86/posición/ángulo/ammo/callbacks/input; tap neutro50,45 no llega al motor. Regreso PAUSED/System panel hasta RESUME, tics96→157. FIRE held mask8/ammo50→48; NSH op2 STOP sin release, UI recoge Image/cache/worker/módulo antes de soltar. reason1/uninit0/live0/refs0/input0/keys2,13alloc-free/streams0/cleanup0/pico6582961; launcher Ready: exited y sin autoSTART con pointerdown. Sin reboot para salir ni crash.
+
+Reutilizados C/Lua/ELF/paquete R67, pins debajo intactos; no recompile80C, no nuevos downloads/installs. Solo helper `tools/test-doom-focus-emulator.mjs`; preflight real ELF/WAD/Lua/ID/píxeles. STOP admite únicamente hasta6retries EINVAL22 por secuencia, nunca kill/unload/LVGL host. Una marca del result inicial `retirementObservedAtUtc` se guarda después de checks/capturas, no latencia aislada; helper la llama ahora `retirementChecksCompletedAtUtc` sin repetir motor por el nombre.
+
+Baseline estaba SCREEN_STATE_OFF, ratón no despertó. Un backup/reset limpio antes de stage/C en `doom-focus-baseline-1791145112979`, ninguna salida requiere reboot. Final **Storage365700764**, UIProbe365799903 modo doom almacenada. Cleanup `doom-ui-cleanup-1791145462593`: WAD intacto, ELF/WAD tmp retirados, worker/módulo/nodos/copias ausentes. Umem used+233512/maxused+8125240/GImageCache+603664, causa no aislada; no leak/RW4RAM claim.
+
+**Siguiente checkpoint único:** cambiar de watchface con Doom activo **sin EXIT**, verificar stop/recursos propios limpios con código/copias retenidos, volver a UIProbe para recoger caches/módulo sin reboot. R62 ya probó transporte; el motor original no ha hecho aún ese flujo. Después medir presentación/copia/latencia antes de optimizar. No repetir R58/R62/R63/R65/R66/R67/R68 salvo cambio/fallo.
+
+R68 no demuestra foco perdido mientras una acción sigue mantenida, llamadas/notificaciones/corona, crash/kill/SMP/agotamiento/errores pthread, sesiones largas, persistencia o hardware. Gate M2315W1 cerrado. Repro: guest responsive/UIProbe doom instalada→`doom-ui-emulator.mjs stage`; abrir UIProbe/Ready sinSTART→`test-doom-focus-emulator.mjs`; volverStorage→`doom-ui-emulator.mjs cleanup`. Fuente/ELF no cambiaron. Launcher user sigue abierto, verificar ownership vigente antes de actuar; si screen OFF, reset limpio/backup antes de stage, nunca para sustituir EXIT.
+
+Todo lo siguiente es historial R67 y anteriores; tomar R68 como estado operativo actual.
+
 Implementación R67 guardada en commit **a3884e8**. Estado final read-only validado en `artifacts/emulator/doom-ui-final-1791144160277`; Storage365700764/PIDs104 y408 ausentes/ningún módulo, nodo o archivo tmp propio.
 
 **ACTUAL R67,2026-10-04:** [DOOM original en UI con controles](doom-ui-emulator.md), passed=true en `artifacts/emulator/doom-ui-test-1791143272849`. E1M1 visible320×200 en página Lua/LVGL390×450, MOVE/FIRE/MENU. Posición/ángulo cambian, munición50→47; pausa congela tic/posición/ammo/drawn y RESUME avanza.24 snapshots/ocho capturas,64000 píxeles comparados con copia RGB565,167 colores. Workers104/408 ownerUI28, init NSH88/407, stack32KiB solicitado; dos STOP reason1,13alloc/free por ciclo, streams0/cleanup0, PID ausente antes de unload. Reentrada recarga ELF/globals/posición inicial/ammo50, sin PC ni reboot entre ciclos.

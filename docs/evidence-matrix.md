@@ -1,5 +1,7 @@
 # Matriz de evidencia
 
+**Actual R68:** [Panel stock y STOP con FIRE mantenido](doom-focus-emulator.md) comprobados con Doom original. R67 y anteriores son historial; gate físico cerrado.
+
 **Actual R67:** [DOOM original en UI con controles](doom-ui-emulator.md). Las filas históricas Rxx describen ese checkpoint; sus pendientes de motor/input/UI no sustituyen el resultado posterior R67. Ninguna prueba nueva abre el gate M2315W1.
 
 Actualizada 2026-10-04. Referencias Rxx: [research.md](research.md#fuentes-consultadas). `CONFIRMADO` puede significar evidencia documental específica del dispositivo, nunca prueba de nuestra unidad sin resultado local. Hay inspección estática, boot, ADB, inventario y validación visual/táctil de TouchEvents empaquetado en emulador S3. No hay pruebas del reloj físico. Filas CLI anteriores describen pruebas históricas; no el resultado posterior con launcher watchface.
@@ -314,3 +316,14 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Port cabe en RAM disponible de M2315W1 | RW4 físico | Sin RAM libre/ABI específicas | SIN EVIDENCIA | No evaluable | Pico motor6582961 en S3, secciones793228 aparte | Excluye stack/Lua/cache/loader/tmpfs |
 | Presentación fluida/FPS físico | RW4/S3 | Timer200ms,13 produced/2534ms | SIN EVIDENCIA para fluidez/físico | Alta para contador S3 |89tics/178callbacks; sin contador de presentaciones | Transporte inicial≈5 imágenes/s; callbacks no son FPS |
 | Panel/entorno normal operativos después de Doom | Guest S3 | Capturas post-EXIT panel/Ajustes/Storage | CONFIRMADO EN EMULADOR | Alta local | Normal seleccionado sin reboot | Panel durante ejecución del motor pendiente |
+
+## Foco y STOP R68: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Abrir panel pausa el motor original | S3/Doom E1M1 | [R68](doom-focus-emulator.md), snapshots/PNG/log | CONFIRMADO EN EMULADOR | Alta para flujo | Tic86 y resto de estado congelados; worker vivo | Acción neutral antes de abrir |
+| Tocar zona neutra stock no llega al motor | S3, panel x50/y45 | R68 counters/keys/posición | CONFIRMADO EN EMULADOR | Alta para ese punto | Sin edges ni progresión | No garantía para todos los widgets/notificaciones |
+| Volver del panel exige RESUME | UI Lua propia/S3 | R68 PAUSED y posterior tic96→157 | CONFIRMADO EN EMULADOR | Alta local | No auto-resume, keys0 | No implementación física RW4 |
+| STOP con FIRE down retira motor/módulo antes de release | Port propio/S3 | R68 NSH op2, pointer down, ps/lsmod/nodos/log | CONFIRMADO EN EMULADOR | Alta para ensayo |13alloc/free,streams0,reason1,uninit0,sin reboot | No kill/unload host ni emergencia física demostrados |
+| Foco stock perdido con acción aún mantenida | M2315W1/S3 | No se abrió panel manteniendo acción | SIN EVIDENCIA | No evaluable | No | No confundir con STOP mantenido |
+| Cierre sin EXIT con Doom y reentrada | Port S3 | Solo probado antes con transporte R62 | SIN EVIDENCIA con motor | Pendiente | No en R68 | Siguiente checkpoint; nunca extrapolar a RW4 |

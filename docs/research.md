@@ -1,5 +1,7 @@
 # Investigación inicial
 
+Resultado posterior **R68:** [foco stock y STOP mantenido](doom-focus-emulator.md). Doom se congela en panel, espera RESUME y retira worker/módulo con FIRE down; mismo binario/Lua R67, sin compilación nueva. Nueve muestras/siete capturas, worker104/13alloc-free/streams0, sin reboot para salir. Un reset de baseline por screen OFF antes de C. Sin pérdida de foco con acción mantenida ni cierre sin EXIT del motor probado. Siguiente: cambio de watchface mientras corre Doom/recolección al reentrar. Gate físico cerrado.
+
 Checkpoint actual: **R67**, [Doom en UI/control real del emulador](doom-ui-emulator.md). Resultados Rxx debajo son cronología; no extrapolar a hardware ni interpretar pendientes antiguos como estado actual.
 
 Fecha: 2026-10-02. Fuentes técnicas primarias primero; código inspeccionado remotamente mediante GitHub. Las revisiones se fijan en [dependencies.lock.json](../third_party/dependencies.lock.json). Ninguna afirmación documental implica que se probó el reloj del usuario.
