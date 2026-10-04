@@ -11,11 +11,11 @@ La [inspección estática del ELF guest](emulator-package-review.md) identifica 
 | Camino | Evidencia actual | Bloqueo | Experimento posterior en PC |
 |---|---|---|---|
 | QuickApp / JS / RPK | API oficial Vela; debug físico documentado S4 | Soporte RW4 y bridge C/WASM no demostrados | App JS mínima, consulta de capacidades; no la llamar C |
-| Lua / watchface | Launcher C, frames repetidos, controles mantenidos y cleanup probados | WAD, scheduling del motor, crash, persistencia C y RW4 pendientes | POSIX FS y tiempo C probados por consola; stdio siguiente |
+| Lua / watchface | Launcher C, frames repetidos, controles mantenidos y cleanup probados | WAD, scheduling del motor, crash, persistencia C y RW4 pendientes | Lifecycle de tarea C separada; POSIX/stdio probados por consola |
 | Lua → shell | os.execute(uname/insmod/rmmod) desde watchface devuelve true/exit/0 | RW4 físico sin probar | No ampliar a comandos arbitrarios |
 | Lua loadlib | Stub deshabilitado, respuesta nil/absent | No permite importar biblioteca C en este guest | Puente io→dispositivo virtual ya probado |
 | ELF / exec | `CONFIG_ELF`, `CONFIG_LIBC_EXECFUNCS`, `execv`/`posix_spawn` en emulador | Exports, contrato loader/entrypoint y lifecycle pendientes | Inventario read-only, luego hello C si hay contrato válido |
-| Módulo / `insmod` | Hello, display, touch, puente, tiempo y POSIX read/seek C probados | Sin sandbox; stdio/WAD, engine/scheduling y RW4 sin probar | Stdio con fixture propio antes de WAD |
+| Módulo / `insmod` | Hello, display, touch, puente, tiempo, POSIX y lectura stdio C probados | Sin sandbox; WAD, engine/scheduling y RW4 sin probar | Creación/parada/recogida de tarea C antes del motor |
 | Touch C / driver | [Observador nativo validado](native-touch-emulator.md), colas por lector; stock concurrente | Scheduling engine y compatibilidad RW4 pendientes | UI con controles mantenidos ya probada vía Lua→C |
 | WASM / `iwasm` | `iwasm_main` y macros WAMR en emulador | Imports, memoria/UI/lifecycle y RW4 desconocidos | Identificar comando/runtime sin ejecutar payload |
 | App nativa precompilada/builtin | Concepto upstream | Builtin no significa carga de app arbitraria stock | Identificar registro/launcher y build requerida |
@@ -52,7 +52,9 @@ Hello C completado: una línea y devolución, sin recursos propios, drivers, hoo
 
 ## Salida antes del hardware
 
-R57: [POSIX read/seek con fixture propio](native-fs-emulator.md) pasó en tmpfs:1MiB+37 bytes,41 posiciones, EOF, cuatro errores y reapertura. ABI off_t64/O_RDONLY1 contrastada; C solo lee, cierra y retorna antes de unload. No valida todavía stdio del lector WAD de doomgeneric ni storage persistente. Gate Doom mantiene stdio/WAD y scheduling pendientes.
+R57: [POSIX read/seek con fixture propio](native-fs-emulator.md) pasó en tmpfs:1MiB+37 bytes,41 posiciones, EOF, cuatro errores y reapertura. ABI off_t64/O_RDONLY1 contrastada; C solo lee, cierra y retorna antes de unload. Prueba POSIX separada del checkpoint stdio posterior; storage persistente sigue sin probar.
+
+R58: [lectura stdio, longitud y buffers](native-stdio-emulator.md) pasan en fixture propio, sin WAD. FILE opaco; fseek/ftell usan long32. EOF queda marcado tras seek, relectura funciona y clearerr limpia. No dormir/llamar TryRunTics desde Timer UI: el upstream puede esperar. Validar lifecycle de tarea separada antes de engine; ABI de creación/parada y sincronización aún no demostradas. Gate físico independiente cerrado.
 
 [Frames repetidos en nuestra página](native-frame-loop-emulator.md): dos slots y un Timer de firmware que invoca Lua. Op6/op7 llaman cache LVGL **solo desde contexto UI**, nunca NSH/CLI/worker/uninit. Timer no conserva callbacks del módulo; se detiene antes de pausa/EXIT y GC normal retira Timer. Guard bloquea llamadas tras cierre. Pausa/descarga comprobadas en ensayo300frames; sin garantía ante crash ni de memoria prolongada. Umem maxused subió sin causa aislada.
 

@@ -203,3 +203,17 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Fixture queda intacto y módulo/temporales se retiran | Guest S3 | R57 SHA256,lsmod,ls | CONFIRMADO EN EMULADOR | Alta local | Cleanup sin reboot | No prueba de UI activa ni crash cleanup |
 | Stdio del lector WAD de doomgeneric funciona | Guest S3 / RW4 | R57 prueba POSIX distinta de stdio | SIN EVIDENCIA | No evaluable | No | fopen/fread/fseek/fclose siguientes |
 | Archivo C persiste tras reset | Guest S3 / RW4 | R57 solo tmpfs | SIN EVIDENCIA | No evaluable | No | Persistencia C/WAD pendiente |
+
+## Stdio R58: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| fseek/ftell usan long32; FILE puede tratarse opaco | Guest S3 exacto | R58 DWARF/wrappers/probe | CONFIRMADO EN EMULADOR | Alta estática/local | Sin dereferenciar FILE | No layout/ABI RW4 |
+| Stdio lee por byte y posición con buffers | Guest S3 tmpfs | R58 datos/FNV/ftell | CONFIRMADO EN EMULADOR | Alta local | Archivo1048613 bytes,41 ventanas | No WAD ni engine enlazado |
+| Secuencia de M_FileLength preserva posición buffered | Guest S3 | R58 longitud/restore/reread | CONFIRMADO EN EMULADOR | Alta local | saved13,length1048613,restore13,next19 | Secuencia propia, no función del engine compilada |
+| fread devuelve elementos completos cuando size mayor que1 | Guest S3 | R58 size4/3 y EOF | CONFIRMADO EN EMULADOR | Alta local | Retorna9 de10 con37 bytes,13 de13 con39 | No cobertura general de libc |
+| fseek exitoso limpia la marca EOF | Guest S3 exacto | R58 feof después de seek | REFUTADO EN EMULADOR | Alta local/estática | Retorna0,feof1; relectura13 pasa | No inferir comportamiento RW4 |
+| clearerr limpia EOF sin mover la posición | Guest S3 | R58 consulta flags/ftell | CONFIRMADO EN EMULADOR | Alta local | EOF0/error0/position13 | ferror de lectura no provocado |
+| Streams independientes/reopen/cierre y cleanup funcionan | Guest S3 | R58 dos streams/tres reopen | CONFIRMADO EN EMULADOR | Alta local | Fixture intacto,unload/tmp ausentes,sin reboot | No crash cleanup ni ausencia de fugas prolongadas |
+| doomgeneric_Tick siempre retorna sin esperar | doomgeneric upstream fijado | R58 TryRunTics llama I_Sleep en espera | REFUTADO como garantía | Alta de fuente | Inspección remota, no compilación | No ejecutar en callback UI sin resolver scheduling |
+| Creación/parada/recogida de worker C están validadas | Guest S3 / RW4 | R58 solo initializer NSH | SIN EVIDENCIA | No evaluable | No | Siguiente checkpoint, ABI pendiente |

@@ -64,3 +64,5 @@ No acepta destinos, comandos, fixtures ni binarios externos por argumentos. Herr
 Este resultado demuestra POSIX read/lseek sobre tmpfs en el guest exacto. No prueba acceso C a FAT persistente, cuota, WAD, stdio, allocator del motor, scheduling, rendimiento, savegames, launcher persistente o compatibilidad física.
 
 El backend [w_file_stdc.c de doomgeneric fijado](https://github.com/ozkl/doomgeneric/blob/dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284/doomgeneric/w_file_stdc.c) usa fopen("rb"), fread, fseek y fclose. Su compatibilidad aún no se deduce de POSIX. **Siguiente meta única:** comprobar esas operaciones y consulta de longitud mediante stdio con el mismo fixture propio, tras inspeccionar su ABI. No compilar Doom todavía. Scheduling y recursos del motor serán gates posteriores, además del gate físico independiente.
+
+Actualización R58: el [checkpoint stdio posterior](native-stdio-emulator.md) pasó con fixture propio; EOF después de seek no se limpia automáticamente. La siguiente meta actual está en ese documento; R57 conserva el alcance histórico de POSIX, sin WAD.
