@@ -1,6 +1,8 @@
 # DOOM en Redmi Watch 4
 
-**R71:** [Mejora de fluidez a50ms](docs/doom-50ms-emulator.md):17,45entregas/s y12,7-13,6cambios visibles/s durante giros (antesunos5). Motor ~35tics/s, pausa y EXIT limpios. Siguiente: sesion90s para observar estabilidad/memoria; hardware fisico intacto.
+**R72:** [Sesion90s](docs/doom-stability-emulator.md) completa a50ms: motor/controles operativos, cache constante, heap oscilante sin crecimiento continuo observado y salida limpia.1580entregas totales; no prueba de ausencia de fugas durante horas. Siguiente: persistencia ELF/WAD en emulador; hardware fisico intacto.
+
+**R71:** [Mejora de fluidez a50ms](docs/doom-50ms-emulator.md):17,45entregas/s y12,7-13,6cambios visibles/s durante giros (antesunos5), motor ~35tics/s.
 
 **Historial R70:** [Medicion inicial](docs/doom-performance-emulator.md) identifico Timer200ms como limite.
 
@@ -22,7 +24,7 @@ Se conserva motor, renderer y gameplay original. Aportes propios: investigación
 - Watchface permanece instalada en emulador; ELF/WAD en /tmp volátil y retirados tras el ensayo. Persistencia de Doom pendiente.
 - NuttX FLAT compartido, **sin sandbox**. No cargar este ELF ni sus direcciones en M2315W1.
 
-Final: Storage365700764 activa, UIProbe365799903 modo doom almacenada; workers/módulo/nodos/copias/ELF/WAD tmp retirados. Siguiente checkpoint: una sesion acotada90s a50ms para observar estabilidad/memoria.
+Final: Storage365700764 activa, UIProbe365799903 modo doom almacenada; workers/módulo/nodos/copias/ELF/WAD tmp retirados. Siguiente checkpoint: instalar ELF/WAD una vez en almacenamiento del emulador y reabrir despues de reset sin retransmitirlos.
 
 ## Reproducción local
 
@@ -56,6 +58,7 @@ Helpers verifican QEMU/ADB/imagen/payload y usan exclusivamente loopback5039/emu
 - [Doom en UI/controles R67](docs/doom-ui-emulator.md)
 - [Medicion de presentacion/input R70](docs/doom-performance-emulator.md)
 - [Mejora a50ms R71](docs/doom-50ms-emulator.md)
+- [Sesion90s R72](docs/doom-stability-emulator.md)
 - [Modelo de riesgo](docs/risk-model.md)
 - [Gate físico cerrado](docs/physical-device-plan.md)
 

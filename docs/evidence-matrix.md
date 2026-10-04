@@ -1,6 +1,8 @@
 # Matriz de evidencia
 
-**R71, 2026-10-04:** [Timer50ms medido](doom-50ms-emulator.md).17,45entregas/s frente a4,87; giros12,67-13,55cambios visibles/s observados frente aunos5. Motor ~35tics/s, pausa400ms y EXIT limpios. Mismo C/ELF R67, Lua R71; solo emulador S3. Siguiente: una sesion de90s para observar estabilidad/memoria, gate M2315W1 cerrado.
+**R72, 2026-10-04:** [Sesion90s a50ms](doom-stability-emulator.md) pasa:90164ms/3156tics,1580entregas totales, giro y FIRE a30/70s. Cache constante, Umem20-90s oscila263432bytes y termina+1760bytes; EXIT libera13reservas/streams, sin reboot. Diferencia global post-EXIT+666920bytes no atribuida; final tras Storage/tmp18,10MB. Siguiente: persistencia ELF/WAD en emulador; gate M2315W1 cerrado.
+
+**Historial R71, 2026-10-04:** [Timer50ms medido](doom-50ms-emulator.md).17,45entregas/s frente a4,87; giros12,67-13,55cambios visibles/s observados frente aunos5. Motor ~35tics/s, pausa400ms y EXIT limpios. Mismo C/ELF R67, Lua R71; solo emulador S3. Siguiente: una sesion de90s para observar estabilidad/memoria, gate M2315W1 cerrado.
 
 **Historial R70, 2026-10-04:** [Presentacion y controles medidos](doom-performance-emulator.md). Pipeline Lua/LVGL media1,48ms, intervalos205,30ms/4,87entregas/s; giros con4,57-5,08cambios visibles/s observados. C/ELF R67 intactos, instrumentacion Lua acotada; salida limpia. Siguiente: Timer200 a50ms y comparar, sin prometer20FPS. Solo emulador S3, gate M2315W1 cerrado.
 
@@ -360,3 +362,13 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Reducir Timer200 a50ms aumenta entregas3,58x | UI propia S3 instrumentada | [R71](doom-50ms-emulator.md),119trazas y comparison.json | CONFIRMADO EN EMULADOR | Alta para ensayo |17,45entregas/s, intervalo57,31ms media | No flush completion ni20FPS demostrados |
 | Mismo muestreo observa mas cambios visibles durante giros | Captura area320x200 S3 |75PNGs/RGB-hashes, mismo sampler que R70 | CONFIRMADO EN EMULADOR | Alta para ventanas observadas | Derecha13,55/izquierda12,67cambios/s | Cotas inferiores; muestreo max80ms puede perder imagenes |
 | Motor mantiene ritmo, pausa y EXIT limpio a50ms | Port original E1M1/S3 | R71 snapshots y finish/uninit/ps | CONFIRMADO EN EMULADOR | Alta para ciclo corto |221tics/6327ms, pausa400ms,13alloc/free,streams0,cleanup0 | C/ELF intactos, sin reboot; no sesiones largas ni RW4 |
+
+## Sesion90s R72: solo emulador
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Doom sigue operativo90s a50ms | E1M1/port S3 | [R72](doom-stability-emulator.md), diez snapshots y capturas | CONFIRMADO EN EMULADOR | Alta para sesion |90164ms/3156tics/1571produced,1580submitted totales | No horas ni FPS exacto del display |
+| Giro/FIRE siguen respondiendo durante sesion | UI propia/S3 | R72 control30/70s, angle/ammo y releases | CONFIRMADO EN EMULADOR | Alta para acciones observadas | Ammo50 a47, inputs neutrales, HP100 | No ergonomia/corona/RW4 |
+| Cache y archivos no crecen durante muestras0-90s | S3 guest | R72 free y ls -l /tmp | CONFIRMADO EN EMULADOR | Alta para muestras | Cache1363384 fijo; dos imagenes128012bytes | Muestreo discreto, no garantiza estado entre muestras |
+| Heap global no muestra crecimiento continuo en20-90s | S3 guest | Ocho free snapshots R72 | CONFIRMADO EN EMULADOR para rango observado | Alta local |30850584-31114016; neto+1760bytes | No leak freedom; post-EXIT+666920 sin causa aislada |
+| EXIT limpia recursos propios despues90s | Port/UI S3 | R72 finish/uninit/ps/nodos y final | CONFIRMADO EN EMULADOR | Alta para ciclo |13alloc/free,streams0,cleanup0, worker116 ausente | Sin host unload/reboot; crash sin garantia |

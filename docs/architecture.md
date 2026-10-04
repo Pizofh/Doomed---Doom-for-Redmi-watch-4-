@@ -55,6 +55,6 @@ Archivos persistentes no exigen residencia continua. RAM-only no significa sandb
 
 ## Gates
 
-Ejecución/display/input/tiempo/WAD/motor y dos salidas limpias demostrados en emulador. [R68](doom-focus-emulator.md) completó foco stock y STOP con FIRE mantenido. [R69](doom-close-emulator.md) completa el cierre normal/reentrada. [R70](doom-performance-emulator.md) mide pipeline1,48ms e intervalos205ms, cambios visibles durante giro y cotas de latencia. [R71](doom-50ms-emulator.md) demuestra mejora con Timer50ms y salida limpia. Siguiente: sesion90s para observar estabilidad/memoria; persistencia pendiente.
+Ejecución/display/input/tiempo/WAD/motor y dos salidas limpias demostrados en emulador. [R68](doom-focus-emulator.md) completó foco stock y STOP con FIRE mantenido. [R69](doom-close-emulator.md) completa el cierre normal/reentrada. [R70](doom-performance-emulator.md) mide pipeline1,48ms e intervalos205ms, cambios visibles durante giro y cotas de latencia. [R71](doom-50ms-emulator.md) demuestra mejora con Timer50ms y salida limpia. [R72](doom-stability-emulator.md) completa sesion90s con memoria/cache acotados observados y salida limpia. Siguiente: persistencia ELF/WAD en emulador; estabilidad de horas y hardware pendientes.
 
 Antes de hardware: evidencia M2315W1/firmware exacto, privilegios, recovery y [plan explícito](physical-device-plan.md) con revisión del usuario. No escalación sin restricción concreta. Excluir ELF/direcciones del emulador del reloj físico.

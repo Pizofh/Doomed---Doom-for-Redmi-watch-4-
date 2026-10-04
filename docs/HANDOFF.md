@@ -1,6 +1,18 @@
 # Retomar el proyecto
 
-**R71, 2026-10-04:** [Timer50ms medido](doom-50ms-emulator.md).17,45entregas/s frente a4,87; giros12,67-13,55cambios visibles/s observados frente aunos5. Motor ~35tics/s, pausa400ms y EXIT limpios. Mismo C/ELF R67, Lua R71; solo emulador S3. Siguiente: una sesion de90s para observar estabilidad/memoria, gate M2315W1 cerrado.
+**R72, 2026-10-04:** [Sesion90s a50ms](doom-stability-emulator.md) pasa:90164ms/3156tics,1580entregas totales, giro y FIRE a30/70s. Cache constante, Umem20-90s oscila263432bytes y termina+1760bytes; EXIT libera13reservas/streams, sin reboot. Diferencia global post-EXIT+666920bytes no atribuida; final tras Storage/tmp18,10MB. Siguiente: persistencia ELF/WAD en emulador; gate M2315W1 cerrado.
+
+Implementacion **dd803c0**. `doom-stability-1791153850848/result.json`, passed=true, diez muestras/cuatro capturas/worker116. Engine90164ms/3156tics/1571produced; Lua1580submitted con buffers256frames/256timers acotados. Giro30s angle1073741824 a46137344; FIRE70s ammo50 a47; releases neutrales, HP100. Motor tracked6582961/13alloc-free/streams0/cleanup0.
+
+C/ELF R67 y Lua/paquete R71 intactos (pins debajo), sin builds/installs ni cambio limite120s. Nuevo helper test-doom-stability-emulator.mjs valida esos inputs y guarda memoria/tmp cada10s. Umem20-90s min30850584/max31114016/ultimo30852344; cache1363384 fija. Umem antesSTART22806584/despuesEXIT23473504; no atribuir residuo666920 solo a Doom. FinalStorage+tmp retirado18098856; mezcla cierreLua y retirada4,64MB de assets tmp. No prueba horas/leak freedom.
+
+Baseline `doom-stability-baseline-1791153720582` guard rechazo reset sin evidencia screen OFF; panel responsive, cero resets. Stage `doom-ui-stage-1791153836674`, cleanup `doom-ui-cleanup-1791154112205` WAD intacto. Final read-only `doom-stability-final-1791154142254`: Storage365700764 activa, UIProbe365799903 perfil R71 instalada; worker116/modulo/nodos/copias/ELF/WAD tmp ausentes.
+
+**Siguiente checkpoint unico:** persistencia emulador: assets en directorio propio de /data, launcher abre/reabre tras reset limpio sin push entre sesiones. Ruta candidata /data/app/watchface/market/365799903/doom; inspeccionar espacio/mount y backup antes de escritura. Puede mantenerse ELF/C exacto: cargar ELF persistente, copiar WAD a tmp con buffer acotado para el runtime que permite ruta fija /tmp/rw4-doom1.wad, retirar copia solo al salir/streams0. Aun sin implementar/probar, no afirmar persistencia. No escribir /resource/sistema ni tocar reloj. No repetir suites R67-R72 o80fuentesC salvo fallo/cambio.
+
+Todo lo siguiente es historial R71 y anteriores; tomar R72 como estado operativo actual.
+
+**Historial R71, 2026-10-04:** [Timer50ms medido](doom-50ms-emulator.md).17,45entregas/s frente a4,87; giros12,67-13,55cambios visibles/s observados frente aunos5. Motor ~35tics/s, pausa400ms y EXIT limpios. Mismo C/ELF R67, Lua R71; solo emulador S3. Siguiente: una sesion de90s para observar estabilidad/memoria, gate M2315W1 cerrado.
 
 Implementacion **ba2bc70**. Resultado `doom-perf-1791153000333`, passed=true; comparison.json conserva referencia R70 `doom-perf-1791152085442`.119frames/141callbacks/75capturas. Intervalo57,31ms media; pipeline1,57ms/P952,00/max2,40; motor221tics/6327ms. Input UI observado27,90-54,20ms (4edges), host51,37/48,80ms incluye RPC/ADB. Entrega de fuente no es flush; muestreo max80ms puede saltar frames; no claim20FPS.
 
@@ -10,7 +22,7 @@ Final Storage365700764, UIProbe365799903 modo doom/perfil R71 almacenada. Cleanu
 
 **Siguiente checkpoint unico:** sesion90s con el Timer50ms actual, snapshots espaciados de memoria/cache/tmp y salida limpia, sin ampliar limite nativo120s. Los buffers de perfil estan acotados256, asi que NO usar el helper corto que exige trazas completas para un run90s: preparar helper de estabilidad sin recompilar C ni pedir traza infinita. No repetir R67/R68/R69/R70/R71. Sesion90s no implica estabilidad de horas ni seguridad fisica; persistencia posterior, gate RW4 cerrado.
 
-Todo lo siguiente es historial R70 y anteriores; tomar R71 como estado operativo actual.
+Todo lo siguiente es historial R70 y anteriores; consultar R72 al inicio para el estado operativo actual.
 
 **Historial R70, 2026-10-04:** [Presentacion y controles medidos](doom-performance-emulator.md). Pipeline Lua/LVGL media1,48ms, intervalos205,30ms/4,87entregas/s; giros con4,57-5,08cambios visibles/s observados. C/ELF R67 intactos, instrumentacion Lua acotada; salida limpia. Siguiente: Timer200 a50ms y comparar, sin prometer20FPS. Solo emulador S3, gate M2315W1 cerrado.
 
