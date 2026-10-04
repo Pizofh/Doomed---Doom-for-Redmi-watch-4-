@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param([ValidateSet('Hello', 'DisplayProbe', 'DisplayPattern', 'Touch', 'UIProbe', 'NativeBridge', 'UIProbeBridge', 'FrameLoop', 'Controls', 'TimeProbe', 'FsProbe', 'StdioProbe', 'TaskProbe', 'LauncherProbe', 'WorkerFrames', 'WorkerInput', 'Doom')][string]$Target = 'Hello')
 
-if ($Target -eq 'Doom') { throw 'DOOM gate closed: legal WAD provenance/read validation and engine integration remain pending; worker display/input and lifecycle passed in emulator only.' }
+if ($Target -eq 'Doom') { throw 'DOOM gate closed: engine libc/allocator/exit audit and integration remain pending; WAD read and worker display/input/lifecycle passed in emulator only.' }
 $ErrorActionPreference = 'Stop'
 $rw4BuildTool = Join-Path (Split-Path -Parent $PSScriptRoot) 'tools/build-hello.mjs'
 if ($Target -eq 'Hello') {
