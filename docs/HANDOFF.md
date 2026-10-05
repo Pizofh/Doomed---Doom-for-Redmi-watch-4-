@@ -10,7 +10,9 @@
 
 **R77: carpeta accesible:** usuario confirma `.device.log` y backups `.bak`; contenido no leido. Comprobador propio `tools/check-mi-fitness-auth.mjs` y prueba sintetica pasan, sin red/Bluetooth/escritura de resultados ni valores de claves en salida. Carpeta privada `tools/local/mi-fitness-logs/` creada e ignorada; `.log.*`/`.bak` tambien ignorados.
 
-**Siguiente concreto:** usuario copia solo `.device.log` actual al destino privado del PC (no chat/cloud), sin mover original, ADB ni cambios de vinculacion. Cuando confirme, ejecutar `node tools/check-mi-fitness-auth.mjs`; comunicar recuentos solamente. No usar herramientas que impriman logs crudos. Copia/patrones no demuestran clave correcta/compatibilidad; plan de retorno a Mi Fitness e instalador/retirada/recovery pendientes. Gate fisico cerrado. No instalar, transferir ELF S3 ni repetir emulador.
+**R78: comprobacion real completada:** tras confirmacion del usuario, `node tools/check-mi-fitness-auth.mjs` devuelve `candidate-found`:4 archivos,0 backups reconocidos,1 archivo con candidatos,1 valor distinto, campos `encryptKey` y `token`. No valores/hashes/nombres de archivos/lineas en salida. Ninguna autenticacion o asociacion al dispositivo demostrada, sin red/Bluetooth/ADB ni cambios en reloj. No copiar contenido crudo a artifacts, terminal/chat o Git.
+
+**Siguiente concreto:** confirmar asociacion local del candidato a M2315W1 sin divulgar credenciales y completar el plan de conexion temporal/retorno a Mi Fitness antes de proponer Gadgetbridge. No hace falta pedir mas backups por ahora. Instalador/retirada/recovery pendientes; gate fisico cerrado. No instalar, transferir ELF S3 ni repetir emulador.
 
 **Ultimo resultado runtime, R73, 2026-10-04:** [Persistencia S3 emulada](doom-persistence-emulator.md). ELF/WAD instalados una vez en /data, E1M1/FIRE/EXIT antes/despues de reset sin push de assets. Lua final cancela preparacion con panel y ejecuta otro ciclo limpio. Implementacion **3ba88df**. No hardware conectado/modificado.
 

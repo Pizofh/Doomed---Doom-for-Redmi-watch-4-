@@ -144,7 +144,7 @@
   "nativeInputMovementAndFireTogetherFromUiValidated": false,
   "currentWatchfaceId": "365700764",
   "ownUiPackageMode": "doom",
-  "nextCheckpoint": "User copies current device log to ignored tools/local/mi-fitness-logs; run local redacted candidate checker after confirmation, no raw log output or Bluetooth/pairing actions",
+  "nextCheckpoint": "Confirm local candidate/device association without exposing credentials and complete temporary Gadgetbridge connection/return-to-Mi-Fitness plan; physical gate remains closed",
   "nativeMonotonicClockValidated": true,
   "nativeTimeTimespecBytes": 16,
   "nativeTimeSecondsBits": 64,
@@ -527,10 +527,22 @@
     "localImportOrDebugVisible": false,
     "scope": "Observed installation only; not a claim about every firmware/app version"
   },
-  "miFitnessLogDirectoryAccessibility": "User reports accessible .device.log and .bak backups, 2026-10-04; contents not read",
+  "miFitnessLogDirectoryAccessibility": "User reports accessible .device.log and .bak backups, 2026-10-04; private PC copies scanned by redacted checker after confirmation",
   "gadgetbridgeInstalled": false,
   "miFitnessAuthCandidateChecker": "tools/check-mi-fitness-auth.mjs",
   "miFitnessAuthCheckerSyntheticTestsPassed": true,
-  "miFitnessRealLogsScanned": false,
+  "miFitnessRealLogsScanned": true,
+  "miFitnessAuthCandidateCheckResult": {
+    "date": "2026-10-04",
+    "status": "candidate-found",
+    "filesScanned": 4,
+    "backupFilesScanned": 0,
+    "filesWithCandidates": 1,
+    "distinctCandidateCount": 1,
+    "matchedFields": ["encryptKey", "token"],
+    "deviceAssociationVerified": false,
+    "authenticationVerified": false,
+    "credentialValuesOrRawLinesPrinted": false
+  },
   "miFitnessAuthenticationVerified": false
 }
