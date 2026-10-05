@@ -7,7 +7,7 @@ R75, 2026-10-04. Datos comunicados por usuario: M2315W1, versión mostrada2.2.86
 | Operación | Evidencia | Estado para nuestra unidad |
 |---|---|---|
 | Personalizar foto/estilo | [FAQ oficial RW4](https://www.mi.com/my/support/faq/details/KA-228707/) | No equivale a importar Lua/C; no se solicita actualizar |
-| Instalar archivo Lua propio con Mi Fitness3.59.1i | Sin documentación específica encontrada | Pendiente de inspección visual del menú; no afirmar soporte |
+| Instalar archivo Lua propio con Mi Fitness3.59.1i | Usuario revisó el menú: solo online y guardadas en reloj | No hay entrada de importación visible en esta instalación; ruta directa descartada por ahora |
 | Debug RPK | [FAQ Vela](https://iot.mi.com/vela/quickapp/en/guide/other/faq.html) describe app proporcionada mediante contacto comercial | No prueba que el Debug exista en esta app/build ni que ejecute C |
 | Transferir watchface con Gadgetbridge | [Ficha RW4](https://gadgetbridge.org/gadgets/wearables/xiaomi/#redmi-watch-4), fuentes R74 | Candidato experimental, sin validación física |
 | Ejecutar módulo C | Relato Lua/shell, targets relacionados y emulador | Bloqueado por contrato del firmware2.2.86 |
@@ -48,4 +48,12 @@ Candidata: TouchEvents RW4 conocido, preparado y probado en PC, sin ELF/WAD/shel
 | Recuperación | Reboot/gestión de esferas documentados para RW4 en general; restauración de sistema2.2.86 no validada |
 | Compatibilidad | Fuentes RW4 disponibles; aceptación de paquete y runtime2.2.86 sin demostrar |
 
-No hay todavía acción física lista para aprobación ni ejecución. El siguiente paso es **solo mirar** Mi Fitness → Dispositivo → Gestionar esferas y comprobar si ofrece importación local o Debug; pregunta enviada, sin Apply/descarga. Si no ofrece importación, concretar el estudio de Gadgetbridge sin instalarlo, o buscar acceso oficial de desarrollo. La falta de recovery para un paso de riesgo obliga a revisión antes de ejecutarlo.
+No hay todavía acción física lista para aprobación ni ejecución. La falta de recovery para un paso de riesgo obliga a revisión antes de ejecutarlo.
+
+## R76: no hay importación visible; siguiente comprobación local
+
+El usuario revisó Mi Fitness3.59.1i y solo encontró esferas online y guardadas en el reloj, sin importación local/Debug visible. Es una observación de esta instalación, no prueba de que todas las versiones/modelos carezcan del mecanismo. No insistir en buscar ese menú ni sustituir la app por un mod.
+
+Siguiente comprobación: usando únicamente el gestor de archivos ya disponible en el teléfono, mirar si se puede acceder a `Almacenamiento interno/Android/data/com.xiaomi.wearable/files/log`. Informar solo si hay archivos, carpeta vacía/inexistente o acceso denegado. No abrir, copiar ni enviar logs/claves; no conectar al reloj, instalar herramientas, activar ADB, cambiar permisos o desvincular. Si el gestor no permite acceder, registrar esa limitación sin intentar sortearla.
+
+La ruta procede de [Gadgetbridge](https://gadgetbridge.org/basics/pairing/huami-xiaomi-server/#mi-fitness-mi-health-xiaomi-wear): hay informes de claves en logs de Mi Fitness sin root, con disponibilidad dependiente de versión/Android. La mera existencia de archivos no demuestra que contengan la clave correcta ni compatibilidad del instalador. Cualquier extracción posterior debe ser local y evitar divulgar credenciales; antes de una conexión alternativa sigue pendiente el plan de retorno a Mi Fitness. No se ha instalado Gadgetbridge ni accedido a esos archivos.

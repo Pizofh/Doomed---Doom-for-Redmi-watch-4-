@@ -144,7 +144,7 @@
   "nativeInputMovementAndFireTogetherFromUiValidated": false,
   "currentWatchfaceId": "365700764",
   "ownUiPackageMode": "doom",
-  "nextCheckpoint": "Read-only manual inspection of Mi Fitness watchface menu for local import or Debug; then complete installation/rollback/compatibility review for first known Lua watchface, no installation approved",
+  "nextCheckpoint": "Check accessibility of Mi Fitness log directory using existing phone file manager; report availability only, no log/key collection or pairing changes; Gadgetbridge installation/rollback compatibility remains unverified",
   "nativeMonotonicClockValidated": true,
   "nativeTimeTimespecBytes": 16,
   "nativeTimeSecondsBits": 64,
@@ -520,5 +520,13 @@
     "miFitnessOriginVerified": false
   },
   "rw4RecoveryScope": "Official documentation describes forced reboot and responsive UI watchface removal; not firmware corruption recovery, not locally tested on 2.2.86",
-  "miFitnessImportMenuQuestionSent": true
+  "miFitnessImportMenuQuestionSent": true,
+  "miFitnessImportMenuObservation": {
+    "source": "User menu inspection, 2026-10-04",
+    "visibleCategories": ["Online watchfaces", "Watchfaces stored on watch"],
+    "localImportOrDebugVisible": false,
+    "scope": "Observed installation only; not a claim about every firmware/app version"
+  },
+  "miFitnessLogDirectoryAccessibility": "Not yet checked; no logs or keys collected",
+  "gadgetbridgeInstalled": false
 }

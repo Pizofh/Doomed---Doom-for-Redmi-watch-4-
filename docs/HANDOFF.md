@@ -6,7 +6,9 @@
 
 **Telefono/app recibidos:** Android y Mi Fitness3.59.1i, literalmente. [R75 ruta y retirada](rw4-installation-route.md): reboot12s/deletionUI Xiaomi documentados, sin recovery corruption/native2.2.86.
 
-**Siguiente concreto:** respuesta sobre menu Importar/Archivo local/Debug de MiFitness, solo lectura sin Apply/descargar. Expediente primera watchface conocida sigue incompleto: instalador/compatibilidad/retirada/recovery. No instalar aun, no recopilar claves/MAC, no transferir ELF S3. No repetir emulador.
+**R76: respuesta recibida:** Mi Fitness3.59.1i solo muestra esferas online y guardadas en reloj, sin importacion local/Debug visible. Ruta directa descartada por ahora; no seguir buscando ese menu.
+
+**Siguiente concreto:** comprobar si el gestor de archivos ya disponible permite ver `Android/data/com.xiaomi.wearable/files/log` en el telefono, informar solo disponibilidad de carpeta/archivos. Sin abrir/copiar logs ni claves, instalar herramientas, ADB o cambios de vinculacion. Gadgetbridge sigue candidato experimental; plan de retorno a Mi Fitness e instalador/compatibilidad/retirada/recovery pendientes. No instalar aun, no transferir ELF S3, no repetir emulador.
 
 **Ultimo resultado runtime, R73, 2026-10-04:** [Persistencia S3 emulada](doom-persistence-emulator.md). ELF/WAD instalados una vez en /data, E1M1/FIRE/EXIT antes/despues de reset sin push de assets. Lua final cancela preparacion con panel y ejecuta otro ciclo limpio. Implementacion **3ba88df**. No hardware conectado/modificado.
 

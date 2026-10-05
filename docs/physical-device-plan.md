@@ -53,4 +53,8 @@ Usuario confirma M2315W1 y version mostrada2.2.86. No se recopilan serial ni MAC
 
 ## R75: datos de telefono/app y rollback limitado
 
-Android y Mi Fitness3.59.1i informados por usuario. [Ruta/expediente](rw4-installation-route.md): Xiaomi documenta gestion/eliminacion de esferas y reboot forzado de RW4; no recovery de corrupcion firmware ni ensayo2.2.86. Importacion Lua propia en app3.59.1i sin demostrar, Custom oficial solo foto/estilo. Gadgetbridge/auth logs sin root es candidato reportado, no validado en esa app; no obtener claves/logs ni desvincular. Inspeccion visual del menu pendiente, ninguna instalacion/vinculacion aprobada.
+Android y Mi Fitness3.59.1i informados por usuario. [Ruta/expediente](rw4-installation-route.md): Xiaomi documenta gestion/eliminacion de esferas y reboot forzado de RW4; no recovery de corrupcion firmware ni ensayo2.2.86. Custom oficial solo foto/estilo. Gadgetbridge/auth logs sin root es candidato reportado, no validado en esa app; no obtener claves/logs ni desvincular. Ninguna instalacion/vinculacion aprobada.
+
+## R76: inspeccion del menu completada
+
+Usuario solo encuentra esferas online y guardadas en reloj; sin importacion local/Debug visible en3.59.1i. Siguiente diagnostico limitado al telefono: comprobar disponibilidad de carpeta de logs con gestor existente, sin abrir/copiar archivos ni claves, instalar software, ADB o cambios de vinculacion. No toca el reloj ni abre el gate fisico. Retorno a Mi Fitness y compatibilidad experimental de Gadgetbridge siguen pendientes.
