@@ -1,5 +1,31 @@
 # Diagnóstico Android limitado: prototipo en PC
 
+**R83,2026-10-05:** fuente seleccionada ampliada a46textos y vista previa
+actual en `build/android-diagnostic-preview-r83/` (once fuentes/nueve diffs).
+Sesión propia sincronizada con reloj monotónico: vence sin depender del timer,
+cierra al desconectar y rechaza intentos/auth duplicados. WriteAction comprueba
+la sesión al ejecutar y antes de escribir, clona el payload y deniega por defecto;
+la variante BTBR solo abre ese gate desde RW4 SPP. Activity ya no se despacha
+a salud; entrada después de cerrar se ignora. Se eliminaron también logs crudos
+y direcciones identificados en BtBRQueue. Negociación/ACK siguen siendo tráfico
+activo; un write ya iniciado puede terminar después del límite. Cierre del socket
+y reconexión global aún no probados. No es una auditoría global de privacidad.
+
+Pruebas nuevas: expiración exacta a30s, regresión del reloj, cierre explícito,
+un intento/auth por sesión; componente WriteAction real parcheado con socket
+falso rechaza cola vencida y cierre durante lookup, conserva copia del payload.
+No Android runtime/Bluetooth. [Herramientas/build](../../docs/android-build.md)
+preparados con ZIP oficiales verificados; SDK remoto bloqueado en esta terminal.
+No APK producido ni gate físico abierto. Esta actualización sustituye rutas,
+requisitos y pendientes operativos R82 descritos debajo.
+
+```powershell
+node tools/test-android-diagnostic-policy.mjs
+node tools/prepare-android-diagnostic.mjs
+node tools/test-android-diagnostic-queue.mjs
+node tools/android-build.mjs doctor
+```
+
 R82, 2026-10-05. El usuario eligió desarrollar una variante limitada de
 Gadgetbridge antes de plantear una conexión física. Esta elección autoriza el
 trabajo en PC; **no la instalación ni conexión al reloj**.
