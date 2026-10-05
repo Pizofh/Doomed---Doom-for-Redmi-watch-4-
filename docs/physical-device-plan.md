@@ -10,7 +10,8 @@ Este documento registra requisitos y bloqueos. **No es un procedimiento ejecutab
 | Región / variante de placa | Desconocida |
 | Version del dispositivo / firmware mostrado | 2.2.86, leida en Ajustes y comunicada por usuario el 2026-10-04; build/hash interno pendiente |
 | HyperOS / Vela / NuttX versión | Desconocida en esta unidad |
-| Mi Fitness versión / origen | Desconocidos |
+| Telefono | Android, informado por usuario2026-10-04 |
+| Mi Fitness version / origen | 3.59.1i, informado por usuario; origen/firma pendientes |
 | Runtime Lua / paquetes aceptados | Fuente RW4 disponible; firmware concreto sin verificar |
 | Build FLAT/PROTECTED/KERNEL | Desconocida |
 | ABI / exports / loader | Desconocidos |
@@ -27,7 +28,7 @@ Sincronización Mi Fitness puede conservar datos de uso compatibles con esa app;
 
 | Paso | Comando/método exacto | Afecta | Reversible por reboot | Flash | Particiones crudas | Bootloader | Firmware mod | Riesgo / recovery |
 |---|---|---|---|---|---|---|---|---|
-| Identificación manual | Pendiente de autorización física | Solo lectura de ajustes | No aplica | No | No | No | No | Bajo; ninguna modificación prevista |
+| Identificacion manual | Usuario informo modelo/firmware/telefono/app; sin comando del agente | Solo lectura de ajustes | No aplica | No | No | No | No | Bajo; ninguna modificación prevista |
 | Watchface conocida | **Pendiente; no instalador compatible aprobado** | Storage de watchface / UI | No, archivo persiste | Sí si se instala | No escritura cruda prevista | No previsto | No permitido | Error de UI/crash plausible; rollback concreto pendiente |
 | Hello/logging | **Bloqueado: runtime/privilegios desconocidos** | Depende de mecanismo | No garantizado | Instalación posiblemente sí | No permitido | No permitido | No permitido | Crash; soft/hard brick no descartados; recovery pendiente |
 | Patrón display | **Bloqueado** | UI/driver según mecanismo | No garantizado | Depende del programa | No permitido | No permitido | No permitido | Contención UI/memoria; recovery pendiente |
@@ -49,3 +50,7 @@ Si la ruta exige firmware de otro modelo, exploit, firma desactivada, SWD/JTAG o
 ## Identificacion recibida, 2026-10-04
 
 Usuario confirma M2315W1 y version mostrada2.2.86. No se recopilan serial ni MAC. Este numero no establece version NuttX/Vela, region, ABI ni disponibilidad shell/loader. Android-iPhone y Mi Fitness siguen pendientes. Sin permiso de instalacion o actualizacion; gate cerrado. Busqueda web exacta produjo menciones de version, sin prueba tecnica primaria de carga nativa2.2.86; no usar foros comerciales como contrato.
+
+## R75: datos de telefono/app y rollback limitado
+
+Android y Mi Fitness3.59.1i informados por usuario. [Ruta/expediente](rw4-installation-route.md): Xiaomi documenta gestion/eliminacion de esferas y reboot forzado de RW4; no recovery de corrupcion firmware ni ensayo2.2.86. Importacion Lua propia en app3.59.1i sin demostrar, Custom oficial solo foto/estilo. Gadgetbridge/auth logs sin root es candidato reportado, no validado en esa app; no obtener claves/logs ni desvincular. Inspeccion visual del menu pendiente, ninguna instalacion/vinculacion aprobada.

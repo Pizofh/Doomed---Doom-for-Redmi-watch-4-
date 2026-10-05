@@ -4,7 +4,9 @@
 
 **Identificacion recibida:** M2315W1, version mostrada2.2.86, usuario2026-10-04; no serial/MAC. Region/ABI/NuttX desconocidos, sin nuevas acciones fisicas.
 
-**Siguiente concreto:** respuesta Android-iPhone/MiFitness por lectura manual (pregunta async actualizada), luego expediente primera watchfaceconocida con instalador revisado/compatibilidad/retirada/recovery. No instalar aun, no recopilar claves/MAC, no transferir ELF S3. No repetir emulador.
+**Telefono/app recibidos:** Android y Mi Fitness3.59.1i, literalmente. [R75 ruta y retirada](rw4-installation-route.md): reboot12s/deletionUI Xiaomi documentados, sin recovery corruption/native2.2.86.
+
+**Siguiente concreto:** respuesta sobre menu Importar/Archivo local/Debug de MiFitness, solo lectura sin Apply/descargar. Expediente primera watchface conocida sigue incompleto: instalador/compatibilidad/retirada/recovery. No instalar aun, no recopilar claves/MAC, no transferir ELF S3. No repetir emulador.
 
 **Ultimo resultado runtime, R73, 2026-10-04:** [Persistencia S3 emulada](doom-persistence-emulator.md). ELF/WAD instalados una vez en /data, E1M1/FIRE/EXIT antes/despues de reset sin push de assets. Lua final cancela preparacion con panel y ejecuta otro ciclo limpio. Implementacion **3ba88df**. No hardware conectado/modificado.
 

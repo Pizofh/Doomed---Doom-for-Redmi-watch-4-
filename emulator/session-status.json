@@ -144,7 +144,7 @@
   "nativeInputMovementAndFireTogetherFromUiValidated": false,
   "currentWatchfaceId": "365700764",
   "ownUiPackageMode": "doom",
-  "nextCheckpoint": "Obtain phone OS and Mi Fitness version; review first watchface installation method for user-reported M2315W1 version 2.2.86, with compatibility/rollback/recovery plan; no installation yet",
+  "nextCheckpoint": "Read-only manual inspection of Mi Fitness watchface menu for local import or Debug; then complete installation/rollback/compatibility review for first known Lua watchface, no installation approved",
   "nativeMonotonicClockValidated": true,
   "nativeTimeTimespecBytes": 16,
   "nativeTimeSecondsBits": 64,
@@ -497,7 +497,7 @@
   "devopsPipelineImplemented": false,
   "parentGitRemovalAuthorized": true,
   "parentGitRemovalCompleted": true,
-  "latestResearchDocument": "docs/rw4-stock-feasibility.md",
+  "latestResearchDocument": "docs/rw4-installation-route.md",
   "rw4StockSourceAuditImplementationCommit": "00198f1",
   "rw4StockSourceAuditReport": "artifacts/research/rw4-stock-source-audit.json",
   "rw4StockGitBlobsVerified": 17,
@@ -514,8 +514,11 @@
     "independentlyVerified": false,
     "region": null,
     "internalBuildHash": null,
-    "phoneOS": null,
-    "miFitnessVersion": null,
-    "serialOrMacCollected": false
-  }
+    "phoneOS": "Android",
+    "miFitnessVersion": "3.59.1i",
+    "serialOrMacCollected": false,
+    "miFitnessOriginVerified": false
+  },
+  "rw4RecoveryScope": "Official documentation describes forced reboot and responsive UI watchface removal; not firmware corruption recovery, not locally tested on 2.2.86",
+  "miFitnessImportMenuQuestionSent": true
 }

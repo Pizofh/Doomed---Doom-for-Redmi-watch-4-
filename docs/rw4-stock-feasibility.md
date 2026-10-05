@@ -61,3 +61,7 @@ Obtener versión de firmware de la unidad, Android/iPhone y versión de Mi Fitne
 ## Datos de unidad recibidos despues de R74
 
 El 2026-10-04, el usuario leyo M2315W1 y version del dispositivo2.2.86. Serial/MAC no necesarios ni recopilados. No deducir region o ABI del numero. Sigue pendiente telefono Android-iPhone y version Mi Fitness. La busqueda publica exacta2.2.86 no aporto una fuente tecnica primaria de ejecucion Lua/shell/ELF para ese firmware. Menciones en foros no verifican compatibilidad. No nuevos downloads, conexion ni instalacion fisica.
+
+## R75: perfil informado completo para investigar
+
+Usuario informa Android y Mi Fitness3.59.1i, junto a M2315W1/2.2.86. [Ruta de instalacion y retirada](rw4-installation-route.md). Reboot/retirada watchfaces documentados por Xiaomi para RW4, sin garantia de recovery ante corrupcion ni runtime native compatible. Se solicita solo inspeccion del menu de la app; no nuevos binaries/ADB/instalaciones.

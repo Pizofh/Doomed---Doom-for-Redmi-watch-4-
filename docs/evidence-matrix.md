@@ -394,3 +394,12 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | Paquete propio es candidato para parser watchface Gadgetbridge | .face local24744bytes | R74 magic/ID numerico coinciden con subset Java source | INFERENCIA RAZONABLE | Alta para subset, compatibilidad completa desconocida | Header PC, sin ADB | No Java runtime, firma, preview ni acceptance real; IDraw167210065 |
 | QuickApp oficial disponible libremente para RW4 global | RPK/firmware fisico | FAQ ofrece debug mediante contacto comercial | SIN EVIDENCIA | No evaluable | No | Feature table o docs generales no prueban C/WASM/instalacion en unidad |
 | Usuario informa lectura de version2.2.86 en su unidad | M2315W1 comunicado | Lectura manual Ajustes informada2026-10-04 | CONFIRMADO EN RW4 | Alta para dato informado | No por agente | No identifica NuttX/region/ABI ni loader |
+
+## R75: telefono/app y fuentes de retirada
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Usuario utiliza Android/Mi Fitness3.59.1i | Telefono del usuario | Informado2026-10-04 | INFERENCIA RAZONABLE para perfil operativo | Alta como dato comunicado | No por agente | Firma/origen/importacion local sin verificar |
+| RW4 tiene reboot forzado y gestion/eliminacion watchfaces documentados | RW4 general | R75 FAQ Xiaomi KA-228897/KA-228715 | CONFIRMADO EN RW4 | Alta documental | No | No recovery de firmware corrupto ni ensayo en2.2.86 |
+| Custom de Mi Fitness permite importar cualquier Lua/ELF | RW4/3.59.1i | FAQ custom describe foto/estilo, no importacion | SIN EVIDENCIA | No evaluable | No | No llamar oficial a instalacion propia |
+| Logs de3.59.1i contienen auth key utilizable sin root | Telefono/Android concreto | Gadgetbridge reporta metodo generico dependiente de version | SIN EVIDENCIA | No evaluable | No | Sin logs obtenidos; no publicar claves |
