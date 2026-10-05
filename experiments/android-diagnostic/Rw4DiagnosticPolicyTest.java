@@ -56,6 +56,27 @@ public final class Rw4DiagnosticPolicyTest {
             require(!Rw4DiagnosticPolicy.allowsSerialized(Rw4DiagnosticPolicy.Phase.CLOSED, valid));
         }
         require(!Rw4DiagnosticPolicy.allowsSerialized(Rw4DiagnosticPolicy.Phase.HANDSHAKE, null));
-        System.out.println("PASS: phase allowlist and strict wire payloads; writes, injected fields, invalid nonce, truncation and closed-session commands denied.");
+        final long[] now = {1000};
+        Rw4DiagnosticSession session = new Rw4DiagnosticSession(() -> now[0]);
+        require(!session.isOpen());
+        require(session.begin());
+        require(!session.begin());
+        require(session.phase() == Rw4DiagnosticPolicy.Phase.HANDSHAKE);
+        require(session.authenticated());
+        require(!session.authenticated()); // Do not repeat queries on duplicate auth.
+        now[0] += Rw4DiagnosticPolicy.MAX_SESSION_MS - 1;
+        require(session.isOpen());
+        now[0]++;
+        require(!session.isOpen()); // Expiry works without an Android timer firing.
+        require(!session.authenticated() && !session.begin());
+        session = new Rw4DiagnosticSession(() -> now[0]);
+        require(session.begin());
+        now[0]--;
+        require(!session.isOpen()); // Clock regression fails closed.
+        session = new Rw4DiagnosticSession(() -> now[0]);
+        require(session.begin());
+        session.close();
+        require(!session.isOpen() && !session.begin());
+        System.out.println("PASS: command/payload policy; monotonic expiry, one attempt, duplicate auth and explicit close.");
     }
 }

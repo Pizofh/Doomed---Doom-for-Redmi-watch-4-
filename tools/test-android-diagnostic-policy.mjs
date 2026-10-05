@@ -7,8 +7,9 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const out = path.join(root, 'build/android-diagnostic-policy');
 fs.mkdirSync(out, {recursive: true});
 for (const [cmd, args] of [
-  ['javac', ['--release', '8', '-d', out,
+  ['javac', ['--release', '17', '-d', out,
     path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticPolicy.java'),
+    path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticSession.java'),
     path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticPolicyTest.java')]],
   ['java', ['-cp', out, 'nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticPolicyTest']]
 ]) {
