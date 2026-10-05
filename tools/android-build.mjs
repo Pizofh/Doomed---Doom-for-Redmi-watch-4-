@@ -137,7 +137,7 @@ function refresh() {
   console.log(JSON.stringify({status: 'refreshed', patchedFiles: old.files.length, hardwareGateOpen: false}));
 }
 const action = process.argv[2];
-const toolActions = ['versions', 'sdk-list', 'sdk-licenses', 'sdk-install', 'build'];
+const toolActions = ['versions', 'sdk-list', 'sdk-licenses', 'sdk-install', 'build', 'build-diagnose', 'path-probe'];
 if (process.argv.length !== 3 || !['prepare', 'refresh', 'doctor', ...toolActions].includes(action)) throw Error('Unknown action; no device operations');
 if (action === 'prepare') prepare();
 else if (action === 'refresh') refresh();
@@ -146,7 +146,7 @@ else {
   // Run the reviewed script as command text; do not change machine/user ExecutionPolicy.
   const quote = value => "'" + value.replace(/'/g, "''") + "'";
   const script = path.join(root, 'scripts/android-build.ps1');
-  const command = '& ([scriptblock]::Create([IO.File]::ReadAllText(' + quote(script) + '))) -Action ' + quote(action) + ' -ProjectRoot ' + quote(root);
+  const command = '& ([scriptblock]::Create([IO.File]::ReadAllText(' + quote(script) + '))) -Action ' + quote(action === 'build-diagnose' ? 'build' : action) + ' -ProjectRoot ' + quote(root) + (action === 'build-diagnose' ? ' -Stacktrace' : '');
   const run = spawnSync('powershell.exe', ['-NoProfile', '-Command', command], {stdio: 'inherit', windowsHide: true});
   if (run.error) throw Error('Could not launch Android development tool');
   if (run.status !== 0) process.exitCode = run.status || 1;

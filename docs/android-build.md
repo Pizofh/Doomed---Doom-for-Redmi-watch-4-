@@ -14,6 +14,38 @@ compileSdk ni cambiar fuentes/firmware. Se comprueba la existencia de ambos
 componentes tras instalar, incluso si sdkmanager devuelve0 con avisos.
 Licencias ya presentes en el SDK local; no se pide aceptarlas otra vez.
 
+**R85,2026-10-05: SDK instalado, build bloqueado en esta sesión.** Tras el
+usuario ejecutar el comando corregido, doctor confirma `platform37=true` y
+`buildTools36=true`, con las once fuentes preparadas intactas. source.properties
+declara API37.0/revisión2/PreviewSdkInt0 y Build Tools36.0.0. Ya no faltan paquetes.
+Primer build falla en29s, antes de la compilación Android, con
+`GeneratedClassCompilationException`; un segundo intento con `--stacktrace`
+falla en21s y señala `AccessDeniedException` al cerrar ZipFS del JAR
+`gradle-classloaders-9.7.1.jar`, dentro de `ZipFileSystemProvider.removeFileSystem`.
+El src.zip del JDK21 existente confirma que ese método llama a `toRealPath`.
+
+Un programa propio aislado reprodujo `readable=true`, canonical/nofollow con
+AccessDeniedException, zip-open=ok y fallo al cerrar ZIP, sin Gradle ni Android.
+El archivo no tiene atributo ReadOnly y su ACL muestra permisos heredados
+Allow/Modify/FullControl; no se modificaron ACL, JDK o binarios de Gradle. Esto
+apunta a una limitación de acceso de esta sesión; no demuestra todavía que el
+build funcione desde el usuario normal ni que la integración Android compile.
+JDK observado21.0.7. Resultados en artifacts/research/android-build-first.txt,
+android-build-diagnose.txt y android-build-path-probe.txt, todos ignorados.
+
+Se solicitó al usuario ejecutar desde su PowerShell habitual:
+
+```powershell
+node tools/android-build.mjs build-diagnose 2>&1 | Tee-Object -FilePath artifacts/research/android-build-user.txt
+```
+
+Genera/loguea un build de PC con stacktrace, sin instalar APK ni conectarse.
+`build-diagnose` añade solo `--stacktrace`; no DEBUG ni upload de Build Scan.
+El reproducer se conserva como BuildPathProbe.java; se puede ejecutar con
+`node tools/android-build.mjs path-probe` para comparar contextos de acceso.
+No repetir builds idénticos aquí hasta que cambie el bloqueo. No hay APK
+producido ni gate físico abierto.
+
 ## Herramientas verificadas
 
 Los ZIP encontrados en `tools/local/android-build/` coinciden con los hashes

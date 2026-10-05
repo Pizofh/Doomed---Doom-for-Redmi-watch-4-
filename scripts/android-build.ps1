@@ -1,6 +1,7 @@
 param(
-    [Parameter(Mandatory=$true)][ValidateSet('versions','sdk-list','sdk-licenses','sdk-install','build')][string]$Action,
-    [string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot)
+    [Parameter(Mandatory=$true)][ValidateSet('versions','sdk-list','sdk-licenses','sdk-install','build','path-probe')][string]$Action,
+    [string]$ProjectRoot = (Split-Path -Parent $PSScriptRoot),
+    [switch]$Stacktrace
 )
 $ErrorActionPreference = 'Stop'
 $taskRoot = $ProjectRoot
@@ -26,6 +27,13 @@ $taskGradle = Join-Path $taskLocal 'runtime/gradle-9.7.1/bin/gradle.bat'
 Push-Location -LiteralPath $taskSource
 try {
     switch ($Action) {
+        'path-probe' {
+            $taskProbeClasses = Join-Path $taskRoot 'build/android-diagnostic-path-probe/classes'
+            New-Item -ItemType Directory -Path $taskProbeClasses -Force | Out-Null
+            & (Join-Path $env:JAVA_HOME 'bin/javac.exe') --release 17 -d $taskProbeClasses (Join-Path $taskRoot 'experiments/android-diagnostic/BuildPathProbe.java')
+            if ($LASTEXITCODE -ne 0) { throw 'Path probe compilation failed' }
+            & (Join-Path $env:JAVA_HOME 'bin/java.exe') -cp $taskProbeClasses BuildPathProbe (Join-Path $taskLocal 'runtime/gradle-9.7.1/lib/gradle-classloaders-9.7.1.jar')
+        }
         'versions' {
             & $taskGradle --no-daemon --version
             if ($LASTEXITCODE -ne 0) { throw 'Gradle version check failed' }
@@ -46,7 +54,9 @@ try {
                 !(Test-Path -LiteralPath (Join-Path $taskSdk 'build-tools/36.0.0/aapt2.exe'))) {
                 throw 'Missing SDK packages. Run sdk-install first.'
             }
-            & $taskGradle --no-daemon --console=plain :app:assembleMainlineRw4diagnostic
+            $taskBuildArgs = @('--no-daemon', '--console=plain', ':app:assembleMainlineRw4diagnostic')
+            if ($Stacktrace) { $taskBuildArgs += '--stacktrace' }
+            & $taskGradle @taskBuildArgs
         }
     }
     if ($LASTEXITCODE -ne 0) { throw "Android development command failed: $Action" }
