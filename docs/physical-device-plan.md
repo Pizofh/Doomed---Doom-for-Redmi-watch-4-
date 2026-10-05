@@ -58,3 +58,7 @@ Android y Mi Fitness3.59.1i informados por usuario. [Ruta/expediente](rw4-instal
 ## R76: inspeccion del menu completada
 
 Usuario solo encuentra esferas online y guardadas en reloj; sin importacion local/Debug visible en3.59.1i. Siguiente diagnostico limitado al telefono: comprobar disponibilidad de carpeta de logs con gestor existente, sin abrir/copiar archivos ni claves, instalar software, ADB o cambios de vinculacion. No toca el reloj ni abre el gate fisico. Retorno a Mi Fitness y compatibilidad experimental de Gadgetbridge siguen pendientes.
+
+## R80: diagnosticos PC completados, gate sin abrir
+
+Logs copiados por usuario: un candidato privado, etiqueta RW4 en mismas5lineas; autenticacion e identidad fisica no demostradas. [APK0.94.0 revisado](gadgetbridge-apk-review.md) sin ejecutar/instalar: manifiesto correcto y firma/digest v2 comprobados por inspector limitado. No conexion ni escritura en reloj. Pendiente auditar operaciones automaticas de inicializacion de esta version, permisos minimos, writes y retorno a Mi Fitness. No tratar conexion como solo lectura ni autorizar por el hecho de tener un APK firmado. Plan ejecutable/aprobacion fisica siguen pendientes.
