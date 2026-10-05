@@ -62,3 +62,7 @@ Usuario solo encuentra esferas online y guardadas en reloj; sin importacion loca
 ## R80: diagnosticos PC completados, gate sin abrir
 
 Logs copiados por usuario: un candidato privado, etiqueta RW4 en mismas5lineas; autenticacion e identidad fisica no demostradas. [APK0.94.0 revisado](gadgetbridge-apk-review.md) sin ejecutar/instalar: manifiesto correcto y firma/digest v2 comprobados por inspector limitado. No conexion ni escritura en reloj. Pendiente auditar operaciones automaticas de inicializacion de esta version, permisos minimos, writes y retorno a Mi Fitness. No tratar conexion como solo lectura ni autorizar por el hecho de tener un APK firmado. Plan ejecutable/aprobacion fisica siguen pendientes.
+
+## R81: conexion estandar envia configuracion
+
+[Expediente/alternativas](gadgetbridge-connection-review.md): fuente0.94.0 seleccionada tras revision de archivo confirma envios automaticos de perfil salud, unidad de temperatura y calendario (disabled=true tambien envia), hora condicional. No afirmar una conexion read-only ni que cerrar app revierta esos ajustes. Se solicita decidir entre diagnostico limitado a desarrollar en PC y aceptar envios de app oficial con plan de restauracion. No modifica firmware ni autoriza hardware ninguna de las elecciones. Secuencia ejecutable, writes/auth persistentes y retorno siguen pendientes; gate cerrado.
