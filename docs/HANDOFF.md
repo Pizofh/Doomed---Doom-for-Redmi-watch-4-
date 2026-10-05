@@ -12,7 +12,9 @@
 
 **R78: comprobacion real completada:** tras confirmacion del usuario, `node tools/check-mi-fitness-auth.mjs` devuelve `candidate-found`:4 archivos,0 backups reconocidos,1 archivo con candidatos,1 valor distinto, campos `encryptKey` y `token`. No valores/hashes/nombres de archivos/lineas en salida. Ninguna autenticacion o asociacion al dispositivo demostrada, sin red/Bluetooth/ADB ni cambios en reloj. No copiar contenido crudo a artifacts, terminal/chat o Git.
 
-**Siguiente concreto:** confirmar asociacion local del candidato a M2315W1 sin divulgar credenciales y completar el plan de conexion temporal/retorno a Mi Fitness antes de proponer Gadgetbridge. No hace falta pedir mas backups por ahora. Instalador/retirada/recovery pendientes; gate fisico cerrado. No instalar, transferir ELF S3 ni repetir emulador.
+**R79: asociacion por contexto:** comprobador propio `tools/check-mi-fitness-association.mjs` probado con fixtures y ejecutado localmente. Resultado `same-line-rw4-label-only`:4archivos,5lineas con candidato,5con etiqueta RW4,0asociaciones JSON mismo objeto. Refuerza inferencia, no identifica unidad/valida autenticacion. Sin valores/MAC/serial/lineas en salida. No forzar parser ni tratar cercania como prueba.
+
+**Siguiente concreto:** descargar para inspeccion estatica el APK0.94.0/code253 desde F-Droid a `tools/local/gadgetbridge/nodomain.freeyourgadget.gadgetbridge_253_01cce93.apk`; descarga por terminal fallo, se requiere navegador del usuario. No instalar/abrir APK, conectar reloj ni cambiar vinculacion. Revisar paquete/firma/procedencia y protocolo de inicializacion antes de completar plan de conexion temporal/retorno a Mi Fitness. Gate fisico cerrado; sin nuevas pruebas emulador.
 
 **Ultimo resultado runtime, R73, 2026-10-04:** [Persistencia S3 emulada](doom-persistence-emulator.md). ELF/WAD instalados una vez en /data, E1M1/FIRE/EXIT antes/despues de reset sin push de assets. Lua final cancela preparacion con panel y ejecuta otro ciclo limpio. Implementacion **3ba88df**. No hardware conectado/modificado.
 

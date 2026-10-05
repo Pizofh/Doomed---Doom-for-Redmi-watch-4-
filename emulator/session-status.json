@@ -144,7 +144,7 @@
   "nativeInputMovementAndFireTogetherFromUiValidated": false,
   "currentWatchfaceId": "365700764",
   "ownUiPackageMode": "doom",
-  "nextCheckpoint": "Confirm local candidate/device association without exposing credentials and complete temporary Gadgetbridge connection/return-to-Mi-Fitness plan; physical gate remains closed",
+  "nextCheckpoint": "User downloads selected F-Droid Gadgetbridge 0.94.0 APK to ignored PC folder for static inspection; do not install, launch or pair; complete physical connection/return plan only after inspection",
   "nativeMonotonicClockValidated": true,
   "nativeTimeTimespecBytes": 16,
   "nativeTimeSecondsBits": 64,
@@ -544,5 +544,17 @@
     "authenticationVerified": false,
     "credentialValuesOrRawLinesPrinted": false
   },
-  "miFitnessAuthenticationVerified": false
+  "miFitnessAuthenticationVerified": false,
+  "miFitnessAssociationCheckResult": {
+    "status": "same-line-rw4-label-only",
+    "filesScanned": 4,
+    "candidateLines": 5,
+    "sameLineRw4Labels": 5,
+    "sameObjectRw4Labels": 0,
+    "authenticationVerified": false,
+    "physicalUnitIdentityVerified": false
+  },
+  "gadgetbridgeCandidateApkUrl": "https://f-droid.org/repo/nodomain.freeyourgadget.gadgetbridge_253_01cce93.apk",
+  "gadgetbridgeCandidateVersion": "0.94.0 (253), suggested developer-signed build listed by F-Droid",
+  "gadgetbridgeApkDownloadFromTerminalSucceeded": false
 }
