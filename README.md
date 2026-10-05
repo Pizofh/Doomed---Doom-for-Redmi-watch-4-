@@ -1,5 +1,7 @@
 # DOOM en Redmi Watch 4
 
+**R74:** [Investigacion stock RW4](docs/rw4-stock-feasibility.md): indicio Lua/shell y Gadgetbridge como candidato de instalacion; ABI/loader/firmware fisico siguen pendientes.17sources auditados, sin tocar hardware.
+
 **R73:** [Doom persistente en emulador](docs/doom-persistence-emulator.md): ELF/WAD instalados una vez en /data; E1M1 antes/despues de reset sin reenviar assets, salida limpia y cancelacion durante carga. No demuestra compatibilidad M2315W1.
 
 **Historial R72:** [Sesion90s](docs/doom-stability-emulator.md) completa a50ms: motor/controles operativos, cache constante, heap oscilante sin crecimiento continuo observado y salida limpia.1580entregas totales; no prueba de ausencia de fugas durante horas. Siguiente: persistencia ELF/WAD en emulador; hardware fisico intacto.
@@ -73,4 +75,4 @@ No se incluyen WADs, firmware, APKs, emuladores ni toolchains binarias. [Licenci
 
 ## Repositorio Git local
 
-El repo de trabajo es `redmi-watch4-doom/`, con su propio `.git`, rama master e historial incremental. La carpeta padre `Doomed/` contiene otro repo con First commit y una entrada gitlink al proyecto; no es su historial de trabajo. Abrir esta carpeta directamente en VS Code o usar `git -C redmi-watch4-doom log --oneline -5` desde Doomed. Ninguno tiene remoto configurado; los commits son locales, no publicados. El usuario solicito eliminar solo el repo padre el 2026-10-04; el intento fue rechazado por la politica del entorno, que protege Doomed/.git contra escritura. Eliminacion manual pendiente; el repo hijo sigue intacto.
+El repo de trabajo es `redmi-watch4-doom/`, con su propio `.git`, rama master e historial incremental. La carpeta padre `Doomed/` contiene otro repo con First commit y una entrada gitlink al proyecto; no es su historial de trabajo. Abrir esta carpeta directamente en VS Code o usar `git -C redmi-watch4-doom log --oneline -5` desde Doomed. Ninguno tiene remoto configurado; los commits son locales, no publicados. El intento de retirar el repo padre fue rechazado por el entorno; en la inspeccion posterior del 2026-10-04, Doomed/.git ya no existe. Se conserva este repo con su historial completo; no se atribuye esa retirada al agente.

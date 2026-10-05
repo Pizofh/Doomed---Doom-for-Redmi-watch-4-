@@ -1,6 +1,6 @@
 # Matriz de evidencia
 
-**R73, 2026-10-04:** [Persistencia](doom-persistence-emulator.md) demostrada solo en emulador S3: ELF/WAD en /data sobreviven reset; dos ciclos sin reenviar assets, FIRE y EXIT limpios. Lua final cancela preparacion al abrir panel. M2315W1 sigue sin prueba de ejecucion nativa. R72 es evidencia historica de estabilidad90s.
+**R74, 2026-10-04:** [Auditoria stock RW4](rw4-stock-feasibility.md):10sources Lua especificos sin llamadas shell/loader; relato original de m0tral refuerza indicio Lua/shell pero sin firmware RW4 reproducible. Gadgetbridge candidato de instalacion experimental, no usado. R73 persiste como prueba exclusiva S3; gate fisico cerrado.
 
 **Historial R71, 2026-10-04:** [Timer50ms medido](doom-50ms-emulator.md).17,45entregas/s frente a4,87; giros12,67-13,55cambios visibles/s observados frente aunos5. Motor ~35tics/s, pausa400ms y EXIT limpios. Mismo C/ELF R67, Lua R71; solo emulador S3. Siguiente: una sesion de90s para observar estabilidad/memoria, gate M2315W1 cerrado.
 
@@ -78,8 +78,8 @@ Continuación 2026-10-03: lua-api confirmó disp.load_scr/get_scr_act y Timer en
 
 | # | Claim | Device | Evidence | Classification | Confidence | Tested locally | Notes / siguiente evidencia necesaria |
 |---|---|---|---|---|---|---|---|
-| 1 | Lua permite `os.execute()` | RW4 | Ninguna específica; TouchEvents no la llama | SIN EVIDENCIA | No evaluable | No | Ver runtime/config/version; no inferir de Lua estándar |
-| 2 | Shell NuttX accesible indirectamente | RW4 | R13 solo emulador | SIN EVIDENCIA | No evaluable | No | Demostrar puente autorizado RW4 |
+| 1 | Lua permite `os.execute()` | RW4, firmware desconocido | R74 articulo original m0tral, preparacion | INFERENCIA RAZONABLE | Media como relato, sin contrato | No | No version/region/transcript RW4;10sources no la llaman |
+| 2 | Shell NuttX accesible indirectamente | RW4, firmware desconocido | R74 relato autor sobre Lua/shell | INFERENCIA RAZONABLE | Media como relato | No | Requiere prueba especifica antes de uso |
 | 3 | Shell incluye `insmod` | RW4 | R29 upstream | SIN EVIDENCIA | No evaluable | No | `help` de build real, después gate físico |
 | 4 | Carga módulos ELF nativos | RW4 | R28 upstream | SIN EVIDENCIA | No evaluable | No | Loader/config/exports/ABI concretos |
 | 5 | Módulos persistentes cargables bajo demanda | RW4 | Diseño deseado | SIN EVIDENCIA | No evaluable | No | FS escribible persistente y loader |
@@ -383,3 +383,13 @@ No se ha refutado la posibilidad final de DOOM con firmware stock. Tampoco se ha
 | EXIT o panel durante copia cancelan antes de native load | UIProbe/S3 | R73 parcial65536bytes; logs y ausencia C/tmp | CONFIRMADO EN EMULADOR | Alta local | Si | Panel observado2s sin START; GC durante copia sin ensayo especifico |
 | FNV1a autentica un ELF | Algoritmo launcher | Checksum32bits sin clave | REFUTADO | Alta por diseno | No necesario | Host revisa SHA256/origen; FNV solo identidad accidental |
 | Persistencia/loader/privilegios equivalentes en M2315W1 | RW4 fisico | Ninguna prueba especifica obtenida por R73 | SIN EVIDENCIA | No evaluable | No | No transferir ELF/direcciones S3 |
+
+## R74: instalacion y evidencia stock
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Diez sources Lua RW4 contienen prueba de shell/loader | RW4 ejemplos fijados | R74 busqueda de patrones y17Git blobs | REFUTADO para estas muestras | Alta estatica | Auditoria PC | Ausencia de llamadas no refuta disponibilidad API fisica |
+| MiWatchNativeApps contiene target nativo RW4 | Repo a392529 | R74 tree no truncado: S3/MB10 Pro | REFUTADO para esa revision | Alta estatica | No ejecucion | Firmware/header S3 no portable sin contrato RW4 |
+| Gadgetbridge reconoce RW4 y ofrece ruta Xiaomi watchface | Coordinator RW4/mirror2024 | R74 source y ficha actual experimental | INFERENCIA RAZONABLE como instalador candidato | Alta para existencia; baja para unidad | Solo sources | Auth key local requerida; firmware/retirada no validados |
+| Paquete propio es candidato para parser watchface Gadgetbridge | .face local24744bytes | R74 magic/ID numerico coinciden con subset Java source | INFERENCIA RAZONABLE | Alta para subset, compatibilidad completa desconocida | Header PC, sin ADB | No Java runtime, firma, preview ni acceptance real; IDraw167210065 |
+| QuickApp oficial disponible libremente para RW4 global | RPK/firmware fisico | FAQ ofrece debug mediante contacto comercial | SIN EVIDENCIA | No evaluable | No | Feature table o docs generales no prueban C/WASM/instalacion en unidad |

@@ -1,6 +1,10 @@
 # Retomar el proyecto
 
-**R73, 2026-10-04, completado:** [Persistencia S3 emulada](doom-persistence-emulator.md). ELF/WAD instalados una vez en /data, E1M1/FIRE/EXIT antes/despues de reset sin push de assets. Lua final cancela preparacion con panel y ejecuta otro ciclo limpio. Implementacion **3ba88df**. No hardware conectado/modificado.
+**R74, 2026-10-04:** [Auditoria stock](rw4-stock-feasibility.md), implementacion00198f1.17Git blobs verificados (10RW4Lua,3NativeApps S3,4Gadgetbridge), sin ADB/nuevosbinarios/hardware. NativeApps no tieneRW4target; relato original Habr de m0tral eleva Lua/shell a inferencia, no confirmacionfirmware. Gadgetbridge candidato con fuente, fichaexperimental/authkeylocal; mirrorGithub2024 no actualCodeberg.
+
+**Siguiente concreto:** respuesta firmwareunidad/Android-iPhone/MiFitness por lectura manual (pregunta async enviada), luego expediente primera watchfaceconocida con instalador revisado/compatibilidad/retirada/recovery. No instalar aun, no recopilar claves/MAC, no transferir ELF S3. No repetir emulador.
+
+**Ultimo resultado runtime, R73, 2026-10-04:** [Persistencia S3 emulada](doom-persistence-emulator.md). ELF/WAD instalados una vez en /data, E1M1/FIRE/EXIT antes/despues de reset sin push de assets. Lua final cancela preparacion con panel y ejecuta otro ciclo limpio. Implementacion **3ba88df**. No hardware conectado/modificado.
 
 ## Estado vigente y siguiente paso
 
@@ -12,7 +16,7 @@ Direccion DevOps solicitada: [plan](devops-roadmap.md), doctor/build/test/packag
 
 ## Git y estado reproducible
 
-Repo real: C:/Users/steve/Documents/Devs/Doomed/redmi-watch4-doom, master, commits locales, sin remoto. El usuario solicito quitar Doomed/.git y conservar solo este repo. El intento fue rechazado por la politica de escritura del entorno; eliminacion manual pendiente. El padre todavia tiene First commit y gitlink e76134d; el hijo es standalone, sin alternates detectados. Abrir carpeta hija en VS Code. Git safe.directory NO cambia cwd: usar workdir de la carpeta hija o git -C. No se publico nada en GitHub.
+Repo real: C:/Users/steve/Documents/Devs/Doomed/redmi-watch4-doom, master, commits locales, sin remoto. El usuario solicito quitar Doomed/.git; intento del agente rechazado por politica, pero inspeccionR74 posterior observa padre.git ausente. Solo repo hijo conserva historial; es standalone y no se atribuye retirada manual al agente. Abrir carpeta hija en VS Code. Git safe.directory NO cambia cwd: usar workdir de la carpeta hija o git -C. No se publico nada en GitHub.
 
 Persistentes: /data/app/watchface/market/365799903/doom/doom.elf (446144bytes), doom1.wad (4196020bytes). Archivo en flash/FS no es residencia RAM. C FLAT no sandbox. Launcher prepara WAD temporal 32768bytes por Timer50ms (~8,3s), verifica size/FNV1a32 (no autenticacion), carga ELF de /data. Host SHA256 readback; EXIT espera C/unload/cache y elimina tmp, conserva /data.
 

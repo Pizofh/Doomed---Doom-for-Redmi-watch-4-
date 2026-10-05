@@ -41,3 +41,7 @@ Flash en esta tabla significa almacenamiento persistente; instalar un archivo de
 Antes de pedir aprobación, sustituir los pendientes por comando o secuencia UI exactos y explicar: componente, writes persistentes, backup previo, pasos de rollback, peor fallo razonable, soft brick, hard brick, recovery demostrado y evidencia modelo/región/firmware M2315W1. Tener resultado revisable en emulador, ciclo de salida/reentrada y límites de privilegios. Una prueba en S3/Mi Band no satisface ese requisito.
 
 Si la ruta exige firmware de otro modelo, exploit, firma desactivada, SWD/JTAG o bootloader, detener y comparar alternativas. Firmware custom requiere una decisión explícita independiente; no es meta por sí mismo.
+
+## Actualizacion R74: ruta candidata, sin abrir gate
+
+[Auditoria stock](rw4-stock-feasibility.md): Gadgetbridge publica reconocimiento RW4 y handler watchface; soporte experimental, auth key local y firmware de unidad pendientes. No instalacion/vinculacion/download de APK efectuados. Fuentes del mirror2024 no prueban que version actual ni paquete propio funcionen. Mi Fitness mod del README EasyFace no autorizado. Relato Lua/shell RW4 no satisface loader/privilegios/ABI. Se pidieron firmware/Android-iPhone/MiFitness por lectura manual, sin claves/serial/MAC ni actualizaciones; pendiente respuesta. Primera instalacion requiere completar retirada/recovery y revision de riesgo, con comando/secuencia concreta, no es el proximo comando automatico.

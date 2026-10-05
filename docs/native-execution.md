@@ -1,6 +1,6 @@
 # Ejecución y privilegios
 
-**R69, 2026-10-04:** [Cierre sin EXIT y reentrada](doom-close-emulator.md) pasan con Doom original. Seleccionar Storage detiene el worker104 y libera13 reservas/streams; conserva modulo/copias hasta reentrada UI, que recoge todo. Sin reboot para salir ni unload host. C/Lua/ELF R67 intactos; solo emulador S3, gate M2315W1 cerrado. Siguiente: medir frames presentados, costo de copia y latencia antes de optimizar.
+**R74, 2026-10-04:** [Viabilidad stock RW4](rw4-stock-feasibility.md) aporta indicio de primera mano Lua/shell, sin version/ABI/loader probado. NativeApps solo targets S3/MB10Pro. Gadgetbridge es candidato para transferir watchfaces, no demostracion de ejecucion C. R73 Doom persistente confirmado exclusivamente en S3 emulado.
 
 **Historial R68:** [Panel stock y STOP con FIRE down](doom-focus-emulator.md) pasan con el ELF R67 sin recompilar. NSH solo solicita STOP al driver propio; Lua/UI descarga tras worker retirado, sin kill ni unload host. No implica privilegios aislados, recovery física ni compatibilidad RW4. Cierre sin EXIT/reentrada con motor original queda como siguiente gate.
 
