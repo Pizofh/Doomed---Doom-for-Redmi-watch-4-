@@ -2,13 +2,13 @@
 
 Este documento registra requisitos y bloqueos. **No es un procedimiento ejecutable ni autorización para conectar el reloj.** No hay comando físico aprobado. Compatibilidad nativa y recovery no demostrados impiden abrir el gate.
 
-## Identificación pendiente
+## Identificacion de la unidad: datos y pendientes
 
 | Campo | Estado |
 |---|---|
 | Modelo | M2315W1, comunicado por usuario |
 | Región / variante de placa | Desconocida |
-| Firmware / build | Desconocida |
+| Version del dispositivo / firmware mostrado | 2.2.86, leida en Ajustes y comunicada por usuario el 2026-10-04; build/hash interno pendiente |
 | HyperOS / Vela / NuttX versión | Desconocida en esta unidad |
 | Mi Fitness versión / origen | Desconocidos |
 | Runtime Lua / paquetes aceptados | Fuente RW4 disponible; firmware concreto sin verificar |
@@ -45,3 +45,7 @@ Si la ruta exige firmware de otro modelo, exploit, firma desactivada, SWD/JTAG o
 ## Actualizacion R74: ruta candidata, sin abrir gate
 
 [Auditoria stock](rw4-stock-feasibility.md): Gadgetbridge publica reconocimiento RW4 y handler watchface; soporte experimental, auth key local y firmware de unidad pendientes. No instalacion/vinculacion/download de APK efectuados. Fuentes del mirror2024 no prueban que version actual ni paquete propio funcionen. Mi Fitness mod del README EasyFace no autorizado. Relato Lua/shell RW4 no satisface loader/privilegios/ABI. Se pidieron firmware/Android-iPhone/MiFitness por lectura manual, sin claves/serial/MAC ni actualizaciones; pendiente respuesta. Primera instalacion requiere completar retirada/recovery y revision de riesgo, con comando/secuencia concreta, no es el proximo comando automatico.
+
+## Identificacion recibida, 2026-10-04
+
+Usuario confirma M2315W1 y version mostrada2.2.86. No se recopilan serial ni MAC. Este numero no establece version NuttX/Vela, region, ABI ni disponibilidad shell/loader. Android-iPhone y Mi Fitness siguen pendientes. Sin permiso de instalacion o actualizacion; gate cerrado. Busqueda web exacta produjo menciones de version, sin prueba tecnica primaria de carga nativa2.2.86; no usar foros comerciales como contrato.

@@ -57,3 +57,7 @@ Los head de los dos repos m0tral se consultaron y seguían en las revisiones fij
 ## Siguiente checkpoint
 
 Obtener versión de firmware de la unidad, Android/iPhone y versión de Mi Fitness mediante lectura manual de Ajustes. La pregunta ya está enviada, sin pedir claves/MAC/serial ni conectar apps nuevas. Con esos datos, concretar el expediente de la **primera watchface conocida**: instalador de procedencia revisable, compatibilidad, writes, retirada, peor fallo y recuperación. Aún no aprobar ni ejecutar instalación. Si el camino exige un mod dudoso, firma desactivada o recovery inexistente para el riesgo propuesto, documentar alternativa y pedir revisión.
+
+## Datos de unidad recibidos despues de R74
+
+El 2026-10-04, el usuario leyo M2315W1 y version del dispositivo2.2.86. Serial/MAC no necesarios ni recopilados. No deducir region o ABI del numero. Sigue pendiente telefono Android-iPhone y version Mi Fitness. La busqueda publica exacta2.2.86 no aporto una fuente tecnica primaria de ejecucion Lua/shell/ELF para ese firmware. Menciones en foros no verifican compatibilidad. No nuevos downloads, conexion ni instalacion fisica.

@@ -2,7 +2,9 @@
 
 **R74, 2026-10-04:** [Auditoria stock](rw4-stock-feasibility.md), implementacion00198f1.17Git blobs verificados (10RW4Lua,3NativeApps S3,4Gadgetbridge), sin ADB/nuevosbinarios/hardware. NativeApps no tieneRW4target; relato original Habr de m0tral eleva Lua/shell a inferencia, no confirmacionfirmware. Gadgetbridge candidato con fuente, fichaexperimental/authkeylocal; mirrorGithub2024 no actualCodeberg.
 
-**Siguiente concreto:** respuesta firmwareunidad/Android-iPhone/MiFitness por lectura manual (pregunta async enviada), luego expediente primera watchfaceconocida con instalador revisado/compatibilidad/retirada/recovery. No instalar aun, no recopilar claves/MAC, no transferir ELF S3. No repetir emulador.
+**Identificacion recibida:** M2315W1, version mostrada2.2.86, usuario2026-10-04; no serial/MAC. Region/ABI/NuttX desconocidos, sin nuevas acciones fisicas.
+
+**Siguiente concreto:** respuesta Android-iPhone/MiFitness por lectura manual (pregunta async actualizada), luego expediente primera watchfaceconocida con instalador revisado/compatibilidad/retirada/recovery. No instalar aun, no recopilar claves/MAC, no transferir ELF S3. No repetir emulador.
 
 **Ultimo resultado runtime, R73, 2026-10-04:** [Persistencia S3 emulada](doom-persistence-emulator.md). ELF/WAD instalados una vez en /data, E1M1/FIRE/EXIT antes/despues de reset sin push de assets. Lua final cancela preparacion con panel y ejecuta otro ciclo limpio. Implementacion **3ba88df**. No hardware conectado/modificado.
 

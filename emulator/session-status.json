@@ -144,7 +144,7 @@
   "nativeInputMovementAndFireTogetherFromUiValidated": false,
   "currentWatchfaceId": "365700764",
   "ownUiPackageMode": "doom",
-  "nextCheckpoint": "Obtain manual firmware/phone OS/Mi Fitness versions; prepare reviewed first known watchface installation and rollback/recovery plan; no installation yet",
+  "nextCheckpoint": "Obtain phone OS and Mi Fitness version; review first watchface installation method for user-reported M2315W1 version 2.2.86, with compatibility/rollback/recovery plan; no installation yet",
   "nativeMonotonicClockValidated": true,
   "nativeTimeTimespecBytes": 16,
   "nativeTimeSecondsBits": 64,
@@ -506,5 +506,16 @@
   "rw4NativeCompatibilityVerified": false,
   "rw4WatchfaceInstallerCandidate": "Gadgetbridge: source available, RW4 experimental, local auth key required, unit compatibility untested",
   "unitIdentificationQuestionSent": true,
-  "parentGitRemovalCompletionScope": "Parent .git observed absent in R74; earlier agent deletion rejected, user/manual removal not independently attributed"
+  "parentGitRemovalCompletionScope": "Parent .git observed absent in R74; earlier agent deletion rejected, user/manual removal not independently attributed",
+  "physicalUnitIdentification": {
+    "model": "M2315W1",
+    "displayedDeviceVersion": "2.2.86",
+    "source": "User reading of watch Settings, 2026-10-04",
+    "independentlyVerified": false,
+    "region": null,
+    "internalBuildHash": null,
+    "phoneOS": null,
+    "miFitnessVersion": null,
+    "serialOrMacCollected": false
+  }
 }
