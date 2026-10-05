@@ -144,7 +144,7 @@
   "nativeInputMovementAndFireTogetherFromUiValidated": false,
   "currentWatchfaceId": "365700764",
   "ownUiPackageMode": "doom",
-  "nextCheckpoint": "Check accessibility of Mi Fitness log directory using existing phone file manager; report availability only, no log/key collection or pairing changes; Gadgetbridge installation/rollback compatibility remains unverified",
+  "nextCheckpoint": "User copies current device log to ignored tools/local/mi-fitness-logs; run local redacted candidate checker after confirmation, no raw log output or Bluetooth/pairing actions",
   "nativeMonotonicClockValidated": true,
   "nativeTimeTimespecBytes": 16,
   "nativeTimeSecondsBits": 64,
@@ -527,6 +527,10 @@
     "localImportOrDebugVisible": false,
     "scope": "Observed installation only; not a claim about every firmware/app version"
   },
-  "miFitnessLogDirectoryAccessibility": "Not yet checked; no logs or keys collected",
-  "gadgetbridgeInstalled": false
+  "miFitnessLogDirectoryAccessibility": "User reports accessible .device.log and .bak backups, 2026-10-04; contents not read",
+  "gadgetbridgeInstalled": false,
+  "miFitnessAuthCandidateChecker": "tools/check-mi-fitness-auth.mjs",
+  "miFitnessAuthCheckerSyntheticTestsPassed": true,
+  "miFitnessRealLogsScanned": false,
+  "miFitnessAuthenticationVerified": false
 }

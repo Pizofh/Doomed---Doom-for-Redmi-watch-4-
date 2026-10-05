@@ -21,6 +21,8 @@
 *.zip
 *.7z
 *.log
+*.log.*
+*.bak
 *.pem
 *.key
 *.keystore

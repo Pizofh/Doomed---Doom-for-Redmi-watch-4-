@@ -57,3 +57,21 @@ El usuario revisó Mi Fitness3.59.1i y solo encontró esferas online y guardadas
 Siguiente comprobación: usando únicamente el gestor de archivos ya disponible en el teléfono, mirar si se puede acceder a `Almacenamiento interno/Android/data/com.xiaomi.wearable/files/log`. Informar solo si hay archivos, carpeta vacía/inexistente o acceso denegado. No abrir, copiar ni enviar logs/claves; no conectar al reloj, instalar herramientas, activar ADB, cambiar permisos o desvincular. Si el gestor no permite acceder, registrar esa limitación sin intentar sortearla.
 
 La ruta procede de [Gadgetbridge](https://gadgetbridge.org/basics/pairing/huami-xiaomi-server/#mi-fitness-mi-health-xiaomi-wear): hay informes de claves en logs de Mi Fitness sin root, con disponibilidad dependiente de versión/Android. La mera existencia de archivos no demuestra que contengan la clave correcta ni compatibilidad del instalador. Cualquier extracción posterior debe ser local y evitar divulgar credenciales; antes de una conexión alternativa sigue pendiente el plan de retorno a Mi Fitness. No se ha instalado Gadgetbridge ni accedido a esos archivos.
+
+## R77: carpeta accesible; comprobador local preparado
+
+El usuario confirma archivos `.device.log` y sus backups `.bak` en la carpeta. No se han leído sus contenidos ni encontrado/validado una clave. La comprobación de disponibilidad R76 está completada; su restricción de no copiar se refería a ese paso. El siguiente diagnóstico propone copiar únicamente el `.device.log` actual al PC, manteniendo el original en el teléfono, sin cambiar conexión/vinculación del reloj.
+
+Destino privado: `tools/local/mi-fitness-logs/` (creado, ignorado por Git). Usar la transferencia de archivos habitual del teléfono si hace falta; no requiere depuración USB ni ADB. No subir al chat, GitHub, servicios cloud o artifacts. Los backups solo serían necesarios si el registro actual no contiene candidatos; su información puede estar desactualizada.
+
+Comando reproducible desde la raíz del repo:
+
+```powershell
+node tools/check-mi-fitness-auth.mjs
+```
+
+El comprobador es código propio sin dependencias externas, red, Bluetooth, subprocesses o escritura de resultados. Lee `.log`/`.log.bak` en esa carpeta; emite solo recuentos, nombres de campos conocidos y estado `candidate-found`/`no-candidate-found`. No imprime valores, hashes de claves, nombres de archivos, rutas ni líneas. Los errores tampoco muestran datos de entrada. Límites:100 archivos,32MiB cada uno,128MiB total; rechaza archivos binarios/UTF-16 y symlinks finales. No ofrece opción para exportar claves. Las copias privadas permanecen en el PC hasta que el usuario las retire; Git ignore no cifra archivos ni evita backups/cloud del PC.
+
+Los patrones se basan en los campos publicados por Gadgetbridge y variantes snake_case, incluyendo JSON con comillas escapadas. Un `token` genérico puede pertenecer a otro uso. Encontrar32 caracteres hexadecimales no identifica M2315W1 ni demuestra autenticación. Un resultado negativo solo cubre esos patrones/formato y las copias presentes; no demuestra ausencia de la clave en toda la app.
+
+Validación: `node tools/test-mi-fitness-auth.mjs` pasa con datos ficticios: candidatos repetidos/múltiples, JSON escapado, longitudes incorrectas, nombres de campos parciales, UTF-16 y ausencia de secretos en salida/errores. No se ejecutó contra logs reales. Después de este diagnóstico siguen pendientes asociación local de clave/dispositivo, retorno a Mi Fitness y revisión de una eventual primera conexión/instalación; gate físico cerrado.
