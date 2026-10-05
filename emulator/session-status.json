@@ -601,5 +601,9 @@
   "gadgetbridgeDiagnosticSdkBuildTools36Present": false,
   "gadgetbridgeDiagnosticSdkManifestFetchSucceeded": false,
   "gadgetbridgeDiagnosticSdkManualPreparationRequested": true,
-  "gadgetbridgeDiagnosticBuildReport": "docs/android-build.md"
+  "gadgetbridgeDiagnosticBuildReport": "docs/android-build.md",
+  "gadgetbridgeDiagnosticSdkPlatformPackage": "platforms;android-37.0",
+  "gadgetbridgeDiagnosticSdkPlatformNameVerifiedInCachedGoogleCatalog": true,
+  "gadgetbridgeDiagnosticSdkLicenseFilesPresent": true,
+  "gadgetbridgeDiagnosticSdkInstallInitialFailure": "Our script requested android-37; cached Google catalog publishes android-37.0; script and doctor corrected"
 }

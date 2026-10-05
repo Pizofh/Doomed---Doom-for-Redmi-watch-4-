@@ -4,6 +4,16 @@ R83, 2026-10-05. Herramientas preparadas y pruebas de componentes en PC.
 **Todavía no hay un APK propio compilado. Ningún comando de este documento
 instala apps, conecta el reloj o abre el gate físico.**
 
+**R84,2026-10-05: corrección del paquete SDK.** La primera instalación del
+usuario falló porque nuestro script pedía `platforms;android-37`. El catálogo
+Google descargado por su sdkmanager (`repository2-4.xml` en caché local)
+publica `platforms;android-37.0`, API37.0, revisión2 y canal estable0; no publica
+el nombre solicitado. Coincide con `release(37) / minorApiLevel=0` de upstream.
+Instalación, doctor y preflight del build ahora usan `android-37.0`, sin bajar
+compileSdk ni cambiar fuentes/firmware. Se comprueba la existencia de ambos
+componentes tras instalar, incluso si sdkmanager devuelve0 con avisos.
+Licencias ya presentes en el SDK local; no se pide aceptarlas otra vez.
+
 ## Herramientas verificadas
 
 Los ZIP encontrados en `tools/local/android-build/` coinciden con los hashes
@@ -46,7 +56,7 @@ node tools/android-build.mjs build
 
 `sdk-licenses` es interactivo: el usuario revisa las licencias y decide si
 aceptarlas. No se automatiza la respuesta. `sdk-install` solicita solamente
-`platforms;android-37` y `build-tools;36.0.0`; no platform-tools/ADB ni imágenes
+`platforms;android-37.0` y `build-tools;36.0.0`; no platform-tools/ADB ni imágenes
 de emulador Android. `build` ejecuta únicamente
 `:app:assembleMainlineRw4diagnostic` y todavía no se ha ensayado.
 

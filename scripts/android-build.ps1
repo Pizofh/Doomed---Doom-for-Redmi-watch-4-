@@ -33,8 +33,21 @@ try {
         }
         'sdk-list' { & $taskSdkManager "--sdk_root=$taskSdk" --list }
         'sdk-licenses' { & $taskSdkManager "--sdk_root=$taskSdk" --licenses }
-        'sdk-install' { & $taskSdkManager "--sdk_root=$taskSdk" 'platforms;android-37' 'build-tools;36.0.0' }
-        'build' { & $taskGradle --no-daemon --console=plain :app:assembleMainlineRw4diagnostic }
+        'sdk-install' {
+            & $taskSdkManager "--sdk_root=$taskSdk" 'platforms;android-37.0' 'build-tools;36.0.0'
+            if ($LASTEXITCODE -eq 0 -and
+                (!(Test-Path -LiteralPath (Join-Path $taskSdk 'platforms/android-37.0/android.jar')) -or
+                 !(Test-Path -LiteralPath (Join-Path $taskSdk 'build-tools/36.0.0/aapt2.exe')))) {
+                throw 'SDK packages are still missing; inspect sdkmanager warnings.'
+            }
+        }
+        'build' {
+            if (!(Test-Path -LiteralPath (Join-Path $taskSdk 'platforms/android-37.0/android.jar')) -or
+                !(Test-Path -LiteralPath (Join-Path $taskSdk 'build-tools/36.0.0/aapt2.exe'))) {
+                throw 'Missing SDK packages. Run sdk-install first.'
+            }
+            & $taskGradle --no-daemon --console=plain :app:assembleMainlineRw4diagnostic
+        }
     }
     if ($LASTEXITCODE -ne 0) { throw "Android development command failed: $Action" }
 } finally { Pop-Location }

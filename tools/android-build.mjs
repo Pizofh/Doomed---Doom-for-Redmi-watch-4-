@@ -107,7 +107,8 @@ function doctor() {
     java21: fs.existsSync(path.join(jdk, 'bin/java.exe')),
     sdkmanager: fs.existsSync(path.join(sdk, 'cmdline-tools/latest/bin/sdkmanager.bat')),
     gradle: fs.existsSync(path.join(local, 'runtime/gradle-9.7.1/bin/gradle.bat')),
-    platform37: fs.existsSync(path.join(sdk, 'platforms/android-37/android.jar')),
+    platform37: fs.existsSync(path.join(sdk, 'platforms/android-37.0/android.jar')),
+    platformPackage: 'platforms;android-37.0',
     buildTools36: fs.existsSync(path.join(sdk, 'build-tools/36.0.0/aapt2.exe')),
     hardwareGateOpen: false}));
 }
@@ -147,5 +148,6 @@ else {
   const script = path.join(root, 'scripts/android-build.ps1');
   const command = '& ([scriptblock]::Create([IO.File]::ReadAllText(' + quote(script) + '))) -Action ' + quote(action) + ' -ProjectRoot ' + quote(root);
   const run = spawnSync('powershell.exe', ['-NoProfile', '-Command', command], {stdio: 'inherit', windowsHide: true});
-  if (run.error || run.status !== 0) throw Error('Android development tool failed; inspect output');
+  if (run.error) throw Error('Could not launch Android development tool');
+  if (run.status !== 0) process.exitCode = run.status || 1;
 }
