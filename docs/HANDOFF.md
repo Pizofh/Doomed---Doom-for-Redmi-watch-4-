@@ -1,5 +1,7 @@
 # Retomar el proyecto
 
+**R82, 2026-10-05: variante limitada elegida.** Usuario acepta desarrollo en PC para autenticar/consultar bateria, modelo y version; no autoriza instalar/conectar. [Prototipo y pendientes](../experiments/android-diagnostic/README.md). Politica Java propia y pruebas pasan; generador produce cinco fuentes/cuatro diffs en build/android-diagnostic-preview con hashes. Omite servicios/syncTime, filtra protobuf en soporte/salida SPP, bloquea sendDataChunk, omite serial y logs sensibles identificados, propone timeout30s/sin autoreconnect. No Android compilado ni APK generado: revisar transporte crudo/Activity/colas/concurrencia/cierre global y APIs reales antes. Fuente seleccionada ampliada28 a38textos; sin ejecutar upstream. PC tiene JDK21/26; Android SDK no hallado en ruta habitual, Gradle no cacheado. Versiones declaradas por fuente no verificadas contra distribuidores. Gate fisico cerrado.
+
 **R74, 2026-10-04:** [Auditoria stock](rw4-stock-feasibility.md), implementacion00198f1.17Git blobs verificados (10RW4Lua,3NativeApps S3,4Gadgetbridge), sin ADB/nuevosbinarios/hardware. NativeApps no tieneRW4target; relato original Habr de m0tral eleva Lua/shell a inferencia, no confirmacionfirmware. Gadgetbridge candidato con fuente, fichaexperimental/authkeylocal; mirrorGithub2024 no actualCodeberg.
 
 **Identificacion recibida:** M2315W1, version mostrada2.2.86, usuario2026-10-04; no serial/MAC. Region/ABI/NuttX desconocidos, sin nuevas acciones fisicas.
@@ -18,7 +20,7 @@
 
 **R81 source recibido/auditado:** [conexion y alternativas](gadgetbridge-connection-review.md). TAR80957440bytes sin compresion aunque sufijo.gz; SHA700b2364858e6d26c4446c277d5c89ec7cba795d857d90a7a8d68533c1a69cb1. Native Windows tar inspecciona10219entradas/copia28textos regulares, sin ejecutar upstream. build.gradle0.94.0/253. RW4 usaBT_CLASSIC; onAuthSuccess envia perfil8/0, temperatura10/10, calendario12/1 incluso sync disabled y hora2/3 condicional. No conexion read-only; efectos RW4/2.2.86 no ensayados. DEBUG de auth contiene claves de sesion, no exportar logs.
 
-**Siguiente concreto:** respuesta sobre camino de desarrollo: diagnostico limitado propio (recomendado, requiere build/politica de salida) o APK oficial aceptando envios normales de ajustes con plan de respaldo/restauracion. Pregunta enviada; ninguna seleccion autoriza conexion fisica. No construir dependencias Android ni instalar APK antes de elegir; mantener gate cerrado y vinculo actual. No transferir ELF S3 ni repetir emulador.
+**Siguiente concreto:** compilar la variante Android limitada tras revisar integracion y dependencias oficiales; eleccion ya recibida, no volver a preguntarla. No hay APK propio listo ni autorizacion fisica. Mantener gate cerrado y vinculo actual. No transferir ELF S3 ni repetir emulador.
 
 **Ultimo resultado runtime, R73, 2026-10-04:** [Persistencia S3 emulada](doom-persistence-emulator.md). ELF/WAD instalados una vez en /data, E1M1/FIRE/EXIT antes/despues de reset sin push de assets. Lua final cancela preparacion con panel y ejecuta otro ciclo limpio. Implementacion **3ba88df**. No hardware conectado/modificado.
 

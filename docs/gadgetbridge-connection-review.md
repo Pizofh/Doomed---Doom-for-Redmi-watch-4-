@@ -47,7 +47,7 @@ Privacidad: XiaomiAuthService.java210-213 registra claves de sesión a nivel DEB
 
 Para variante limitada, diseño mínimo a implementar/revisar: saltar initialize de servicios y syncTime; filtro de salida con denegación por defecto, permitir solo handshake1/26,1/27 y GET batería2/1/GET info2/2; bloquear upload/OTA/watchfaces/configuración y callbacks de envío no solicitadas; omitir password/health/calendar; ocultar claves/serial en logs; desconexión explícita con tiempo acotado y reconexión automática deshabilitada. Revisar los bypass de transporte y respuestas requeridas antes de afirmar que la política está completa. Autenticación y enlace siguen siendo comunicaciones activas; no garantizar cero writes internos del firmware.
 
-No compilar/instalar esa variante antes de decidir el camino y revisar sus dependencias. No perseguir root, exploit o firmware modificado. La elección solicitada al usuario decide desarrollo en PC, **no autoriza conexión física**.
+**R82,2026-10-05: elección recibida.** El usuario acepta desarrollar el diagnóstico limitado. [Política y vista previa](../experiments/android-diagnostic/README.md) preparadas; prueba Java propia pasa y selección de fuentes ampliada de28 a38textos. La integración Android no está compilada y su cobertura completa de transporte/cierre sigue pendiente. Revisar dependencias antes del build; no APK propio listo. No perseguir root, exploit o firmware modificado. La elección autoriza desarrollo en PC, **no conexión física**.
 
 ## Expediente físico pendiente para ambas alternativas
 

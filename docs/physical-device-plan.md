@@ -65,4 +65,6 @@ Logs copiados por usuario: un candidato privado, etiqueta RW4 en mismas5lineas; 
 
 ## R81: conexion estandar envia configuracion
 
+**Actualizacion R82,2026-10-05:** usuario eligio desarrollar diagnostico limitado en PC. [Politica/vista previa](../experiments/android-diagnostic/README.md) preparadas, prueba Java propia pasa. No APK propio compilado ni revision completa de transporte/cierre; no conexion o instalacion autorizadas. La primera consulta propuesta es bateria/modelo/version tras autenticar; sigue pendiente el plan ejecutable y su revision explicita. Gate cerrado.
+
 [Expediente/alternativas](gadgetbridge-connection-review.md): fuente0.94.0 seleccionada tras revision de archivo confirma envios automaticos de perfil salud, unidad de temperatura y calendario (disabled=true tambien envia), hora condicional. No afirmar una conexion read-only ni que cerrar app revierta esos ajustes. Se solicita decidir entre diagnostico limitado a desarrollar en PC y aceptar envios de app oficial con plan de restauracion. No modifica firmware ni autoriza hardware ninguna de las elecciones. Secuencia ejecutable, writes/auth persistentes y retorno siguen pendientes; gate cerrado.
