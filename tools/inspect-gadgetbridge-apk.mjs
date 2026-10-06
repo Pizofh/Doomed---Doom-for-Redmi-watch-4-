@@ -109,7 +109,7 @@ function unzip(b, entry) {
 }
 function manifestMetadata(b) {
   check(b.readUInt16LE(0) === 3 && b.readUInt32LE(4) === b.length, 'Not binary XML');
-  let strings = [], result = {permissions: []};
+  let strings = [], result = {permissions: [], permissionDetails: [], components: []};
   for (let p = b.readUInt16LE(2); p < b.length;) {
     const type = b.readUInt16LE(p), header = b.readUInt16LE(p + 2), size = b.readUInt32LE(p + 4);
     check(size >= header && header >= 8 && p + size <= b.length, 'Invalid XML chunk');
@@ -135,7 +135,11 @@ function manifestMetadata(b) {
       if (tag === 'manifest') for (const name of ['package', 'versionName', 'versionCode']) result[name] = attrs[name];
       if (tag === 'uses-sdk') for (const name of ['minSdkVersion', 'targetSdkVersion']) result[name] = attrs[name];
       if (tag === 'application') result.debuggable = attrs.debuggable ?? false;
-      if (tag === 'uses-permission') result.permissions.push(attrs.name);
+      if (tag === 'uses-permission' || tag === 'uses-permission-sdk-23') {
+        result.permissions.push(attrs.name);
+        result.permissionDetails.push(attrs);
+      }
+      if (['activity', 'activity-alias', 'service', 'receiver', 'provider'].includes(tag)) result.components.push({kind: tag, ...attrs});
     }
     p += size;
   }

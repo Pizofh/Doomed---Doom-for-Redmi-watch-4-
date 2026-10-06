@@ -5,6 +5,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {diagnosticPermissions} from './android-diagnostic-permissions.mjs';
 if (process.argv.length !== 2) throw Error('No arguments supported');
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const source = path.join(root, 'artifacts/research/gadgetbridge-source');
@@ -159,6 +160,205 @@ queue = replaceOnce(queue, 'LOG.info("Attempting to connect to {} ({})", mGbDevi
 write('BtBRQueue.java', queue, true);
 write('Rw4DiagnosticPolicy.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticPolicy.java'), 'utf8'), false);
 write('Rw4DiagnosticSession.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticSession.java'), 'utf8'), false);
+write('Rw4DiagnosticAttempt.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticAttempt.java'), 'utf8'), false);
+
+let service = load('DeviceCommunicationService.java');
+service = body(service, 'private final BroadcastReceiver mReceiver = new BroadcastReceiver()', `        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (!GBDevice.ACTION_DEVICE_CHANGED.equals(intent.getAction())) return;
+            final GBDevice device = intent.getParcelableExtra(GBDevice.EXTRA_DEVICE);
+            if (device == null) return;
+            final DeviceStruct cached = getDeviceStructOrNull(device);
+            if (cached != null) {
+                cached.setDevice(device);
+                cached.setCoordinator(device.getDeviceCoordinator());
+            }
+        }`);
+service = body(service, 'private void updateReceiversState()', '        deviceReceiversManager.setReceiversEnableState(false, false, null, null);');
+service = replaceOnce(service, '        localFilter.addAction(BLEScanService.EVENT_DEVICE_FOUND);', '        // No background scanning or automatic reconnect receiver.');
+service = body(service, 'private void registerExternalReceivers()', '        // Diagnostic variant deliberately registers no external receivers.');
+service = body(service, 'public void onCreate()', `        super.onCreate();
+        mFactory = new DeviceSupportFactory(this);
+        deviceReceiversManager = new DeviceReceiversManager(this);
+        registerInternalReceivers();
+        allowBluetoothIntentApi = false;
+        reconnectViaScan = false;
+        startForeground();`);
+service = body(service, 'private void scanAllDevices()', '        // Automatic scanning disabled.');
+service = body(service, 'public synchronized int onStartCommand(Intent intent, int flags, int startId)', `        if (intent == null || intent.getAction() == null) return START_NOT_STICKY;
+        final String action = intent.getAction();
+        final GBDevice target = intent.getParcelableExtra(GBDevice.EXTRA_DEVICE);
+        if (ACTION_CONNECT.equals(action)) {
+            if (target == null || !(target.getDeviceCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator)) return START_NOT_STICKY;
+            if (intent.getBooleanExtra(EXTRA_CONNECT_FIRST_TIME, false)) return START_NOT_STICKY;
+            if (!nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttempt.PROCESS.consume(
+                    target.getAddress(), intent.getStringExtra(nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttempt.EXTRA_TICKET),
+                    android.os.SystemClock.elapsedRealtime())) return START_NOT_STICKY;
+            connectToDevice(target, false);
+        } else if (ACTION_DISCONNECT.equals(action)) {
+            for (GBDevice candidate : getGBDevices()) {
+                if (target != null && !candidate.getAddress().equals(target.getAddress())) continue;
+                try { handleAction(intent, action, candidate); }
+                catch (Exception ignored) { LOG.warn("RW4 diagnostic disconnect failed"); }
+            }
+            stopSelf();
+        }
+        // Every other request, including uploads/time/profile/notifications, is ignored.
+        return START_NOT_STICKY;`);
+service = body(service, 'public void onDestroy()', `        super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mReceiver);
+        deviceReceiversManager.onDestroy();
+        for (GBDevice device : getGBDevices()) {
+            try { removeDeviceSupport(device); }
+            catch (DeviceNotFoundException ignored) { LOG.warn("RW4 diagnostic cleanup failed"); }
+        }
+        GB.removeNotification(GB.NOTIFICATION_ID, this);`);
+service = body(service, 'public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key)', '        // Preferences cannot re-enable reconnects, phone integrations or receivers.');
+write('DeviceCommunicationService.java', service, true);
+
+let factory = load('DeviceSupportFactory.java');
+factory = replaceOnce(factory, '    public synchronized DeviceSupport createDeviceSupport(final @NonNull GBDevice device) throws GBException {', `    public synchronized DeviceSupport createDeviceSupport(final @NonNull GBDevice device) throws GBException {
+        if (!(device.getDeviceCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator)
+                || !android.bluetooth.BluetoothAdapter.checkBluetoothAddress(device.getAddress())) return null;
+        if (mBtAdapter == null || mBtAdapter.getRemoteDevice(device.getAddress()).getBondState() != android.bluetooth.BluetoothDevice.BOND_BONDED) return null;`);
+write('DeviceSupportFactory.java', factory, true);
+
+let deviceService = load('GBDeviceService.java');
+deviceService = replaceOnce(deviceService, '    protected void invokeService(@NonNull Intent intent) {', `    protected void invokeService(@NonNull Intent intent) {
+        // The foreground adapter issues the only authorized CONNECT intent directly.
+        // Drop every generic request before it can start a background/foreground service.
+        if (!ACTION_DISCONNECT.equals(intent.getAction())) return;`);
+write('GBDeviceService.java', deviceService, true);
+
+let prefs = load('GBPrefs.java');
+for (const signature of ['public boolean getAutoReconnect(GBDevice device)', 'public boolean getAutoReconnectByScan()', 'public boolean getAutoStart()']) {
+  prefs = body(prefs, signature, '        return false;');
+}
+write('GBPrefs.java', prefs, true);
+
+let adapter = load('GBDeviceAdapterv2.java');
+adapter = body(adapter, 'void handleDeviceConnect(GBDevice device)', `        if (!(device.getDeviceCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator)) return;
+        final String ticket = nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttempt.PROCESS.issue(
+                device.getAddress(), android.os.SystemClock.elapsedRealtime());
+        if (ticket == null) {
+            android.widget.Toast.makeText(context, "El intento ya se utilizó. Para repetir, fuerza la detención de esta app desde Ajustes.", android.widget.Toast.LENGTH_LONG).show();
+            return;
+        }
+        final Intent intent = new Intent(context, nodomain.freeyourgadget.gadgetbridge.service.DeviceCommunicationService.class)
+                .setAction(ACTION_CONNECT)
+                .putExtra(GBDevice.EXTRA_DEVICE, device)
+                .putExtra(nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttempt.EXTRA_TICKET, ticket);
+        androidx.core.content.ContextCompat.startForegroundService(context, intent);`);
+write('GBDeviceAdapterv2.java', adapter, true);
+
+let permissionUtils = load('PermissionsUtils.java');
+permissionUtils = body(permissionUtils, 'public static ArrayList<PermissionDetails> getRequiredPermissionsList(Activity activity)', `        final ArrayList<PermissionDetails> permissionsList = new ArrayList<>();
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
+            permissionsList.add(new PermissionDetails(Manifest.permission.ACCESS_FINE_LOCATION,
+                    activity.getString(R.string.permission_fine_location_title), activity.getString(R.string.permission_fine_location_summary)));
+        } else {
+            permissionsList.add(new PermissionDetails(Manifest.permission.BLUETOOTH_SCAN,
+                    activity.getString(R.string.permission_bluetooth_scan_title), activity.getString(R.string.permission_bluetooth_scan_summary)));
+            permissionsList.add(new PermissionDetails(Manifest.permission.BLUETOOTH_CONNECT,
+                    activity.getString(R.string.permission_bluetooth_connect_title), activity.getString(R.string.permission_bluetooth_connect_summary)));
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissionsList.add(new PermissionDetails(Manifest.permission.POST_NOTIFICATIONS,
+                    activity.getString(R.string.permission_post_notification_title), activity.getString(R.string.permission_post_notification_summary)));
+        }
+        return permissionsList;`);
+permissionUtils = body(permissionUtils, 'public static void requestPermission(Activity activity, String permission)', `        for (PermissionDetails detail : getRequiredPermissionsList(activity)) {
+            if (detail.permission().equals(permission)) {
+                ActivityCompat.requestPermissions(activity, new String[]{permission}, 0);
+                return;
+            }
+        }`);
+write('PermissionsUtils.java', permissionUtils, true);
+
+let discovery = load('DiscoveryActivityV2.java');
+discovery = body(discovery, 'private void checkAndRequestLocationPermission()', `        final List<String> wanted = new ArrayList<>();
+        for (nodomain.freeyourgadget.gadgetbridge.util.PermissionsUtils.PermissionDetails permission : nodomain.freeyourgadget.gadgetbridge.util.PermissionsUtils.getRequiredPermissionsList(this)) {
+            if (ActivityCompat.checkSelfPermission(this, permission.permission()) != PackageManager.PERMISSION_GRANTED) wanted.add(permission.permission());
+        }
+        if (!wanted.isEmpty()) ActivityCompat.requestPermissions(this, wanted.toArray(new String[0]), 0);`);
+discovery = body(discovery, 'private void checkAuthKeyAndPair(final GBDeviceCandidate deviceCandidate, final DeviceCoordinator coordinator)', `        if (!(coordinator instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator) || !deviceCandidate.isBonded()) {
+            toast(this, "Solo se admite Redmi Watch 4 con vínculo Bluetooth existente. Esta variante no crea vínculos.", Toast.LENGTH_LONG, GB.INFO);
+            return;
+        }
+        final Intent authIntent = AuthKeyActivity.Companion.newIntent(this, deviceCandidate);
+        authKeyLauncher.launch(authIntent);`);
+discovery = body(discovery, 'private void startPair(final GBDeviceCandidate deviceCandidate, final DeviceCoordinator coordinator)', `        if (!(coordinator instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator) || !deviceCandidate.isBonded()) return;
+        final GBDevice device = DeviceHelper.getInstance().toSupportedDevice(deviceCandidate);
+        if (!(device.getDeviceCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator)) return;
+        // Registration is local to this phone app. No Bluetooth bonding or automatic connection.
+        try (nodomain.freeyourgadget.gadgetbridge.database.DBHandler db = GBApplication.acquireDB()) {
+            nodomain.freeyourgadget.gadgetbridge.database.DBHelper.getDevice(device, db.getDaoSession());
+        } catch (Exception ignored) {
+            toast(this, "No se pudo guardar el dispositivo localmente.", Toast.LENGTH_LONG, GB.ERROR);
+            return;
+        }
+        device.sendDeviceUpdateIntent(this);
+        finish();`);
+discovery = replaceOnce(discovery, '        bluetoothIntents.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);', '        // No bond-state receiver: this variant never initiates pairing.');
+write('DiscoveryActivityV2.java', discovery, true);
+
+let application = load('GBApplication.java');
+const startupBegin = application.indexOf('        if (!GBEnvironment.env().isTest()) {\n            PeriodicDbExporter.INSTANCE.scheduleNextExecution(context);');
+const startupEnd = application.indexOf('\n    private void startNotificationCollectorMonitorService()', startupBegin);
+if (startupBegin < 0 || startupEnd < 0) throw Error('Application startup anchors differ');
+application = application.slice(0, startupBegin) + `        notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        // No exporters, Bluetooth state reconnects, notification collector, health or InternetHelper.
+    }
+` + application.slice(startupEnd);
+application = body(application, 'private void startNotificationCollectorMonitorService()', '        // Notification collection disabled.');
+application = body(application, 'public static boolean hasDirectInternetAccess()', '        return false;');
+application = body(application, 'public static boolean hasInternetAccess()', '        return false;');
+write('GBApplication.java', application, true);
+let internet = load('InternetHelperSingleton.kt');
+internet = body(internet, 'fun ensureInternetHelperBound(): Boolean', '        return false');
+internet = body(internet, 'fun ensureInternetHelperBoundBlocking(timeoutMs: Long = 3000): Boolean', '        return false');
+write('InternetHelperSingleton.kt', internet, true);
+
+let manifest = load('AndroidManifest.xml');
+const upstreamPermissions = [...manifest.matchAll(/<uses-permission\b[^>]*android:name="([^"]+)"[^>]*\/>/g)].map(match => match[1]);
+manifest = manifest.replace(/<uses-permission\b[^>]*\/>/g, '');
+const denied = new Set([...upstreamPermissions, 'android.permission.ACCESS_NETWORK_STATE', 'android.permission.WRITE_EXTERNAL_STORAGE', 'android.permission.READ_PHONE_NUMBERS', 'android.permission.READ_SMS']);
+const permissionBlock = [...diagnosticPermissions].map(([name, attrs]) => `    <uses-permission android:name="${name}" ${attrs} />`)
+  .concat([...denied].filter(name => !diagnosticPermissions.has(name)).sort().map(name => `    <uses-permission android:name="${name}" tools:node="remove" />`)).join('\n');
+const manifestOpen = manifest.indexOf('>', manifest.indexOf('<manifest')) + 1;
+manifest = manifest.slice(0, manifestOpen) + '\n' + permissionBlock + manifest.slice(manifestOpen);
+manifest = manifest.replace(/<queries\b[^>]*>[\s\S]*?<\/queries>/g, '');
+function componentAttribute(tag, name, value) {
+  const attr = new RegExp(`\\s+android:${name}="[^"]*"`, 'g');
+  return tag.replace(attr, '').replace(/(\/?>)$/, ` android:${name}="${value}"$1`);
+}
+manifest = manifest.replace(/<(service|receiver)\b[^>]*>/g, (tag) => {
+  const core = tag.includes('android:name=".service.DeviceCommunicationService"');
+  tag = componentAttribute(componentAttribute(tag, 'exported', 'false'), 'enabled', String(core));
+  if (tag.includes('android:name="androidx.work.impl.foreground.SystemForegroundService"')) tag = tag.replace(/>$/, ' tools:replace="android:enabled,android:exported">');
+  return tag;
+});
+manifest = manifest.replace(/<activity\b[^>]*>/g, tag => {
+  return componentAttribute(tag, 'exported', String(tag.includes('android:name=".activities.ControlCenterv2"')));
+});
+manifest = manifest.replace(/<activity-alias\b[^>]*>/g, tag => componentAttribute(componentAttribute(tag, 'exported', 'false'), 'enabled', 'false'));
+const dependencyComponents = [
+  ['service', 'androidx.health.platform.client.impl.sdkservice.HealthDataSdkService'],
+  ['service', 'androidx.work.impl.background.systemjob.SystemJobService'],
+  ['service', 'androidx.room.MultiInstanceInvalidationService'],
+  ['receiver', 'androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver'],
+  ['receiver', 'androidx.work.impl.background.systemalarm.RescheduleReceiver'],
+  ['receiver', 'androidx.work.impl.diagnostics.DiagnosticsReceiver'],
+  ['receiver', 'androidx.profileinstaller.ProfileInstallReceiver']
+].map(([kind, name]) => `        <${kind} android:name="${name}" tools:node="remove" />`).join('\n');
+manifest = replaceOnce(manifest, '    </application>', dependencyComponents + `
+        <provider android:name="androidx.startup.InitializationProvider"
+            android:authorities="\${applicationId}.androidx-startup" android:exported="false" tools:node="merge">
+            <meta-data android:name="androidx.work.WorkManagerInitializer" tools:node="remove" />
+            <meta-data android:name="androidx.profileinstaller.ProfileInstallerInitializer" tools:node="remove" />
+        </provider>
+    </application>`);
+write('AndroidManifest.xml', manifest, true);
 let gradle = load('build.gradle');
 gradle = body(gradle, 'tasks.register("buildGitChangelog")', `    final def changelogFile = new File("\${project.rootDir}/app/build/generated/res/changelog/xml/changelog_git.xml")
     outputs.file(changelogFile)
@@ -173,7 +373,7 @@ gradle = replaceOnce(gradle, '    buildTypes {', `    buildTypes {
         rw4diagnostic {
             initWith debug
             applicationIdSuffix ".rw4diagnostic"
-            versionNameSuffix "-rw4-diagnostic"
+            versionNameSuffix "-rw4-diagnostic-r87"
             debuggable false
             minifyEnabled false
             signingConfig signingConfigs.debug

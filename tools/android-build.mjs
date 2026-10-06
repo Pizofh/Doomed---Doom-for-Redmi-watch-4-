@@ -119,20 +119,36 @@ function refresh() {
   const old = JSON.parse(fs.readFileSync(filename));
   const previewDir = path.join(root, 'build/android-diagnostic-preview-r83');
   const preview = JSON.parse(fs.readFileSync(path.join(previewDir, 'manifest.json')));
-  if (preview.sourceArchiveSha256 !== old.sourceArchiveSha256 || preview.hardwareGateOpen !== false) throw Error('Preview provenance changed');
+  const reviewed = JSON.parse(fs.readFileSync(path.join(root, 'artifacts/research/gadgetbridge-source-review.json')));
+  if (preview.sourceArchiveSha256 !== old.sourceArchiveSha256 || reviewed.archiveSha256 !== old.sourceArchiveSha256 || preview.hardwareGateOpen !== false) throw Error('Preview provenance changed');
   // Validate all old files first; never overwrite manual changes to the worktree.
   for (const file of old.files) {
     const dest = path.join(sourceRoot, file.relative);
     contained(dest);
     if (hash(fs.readFileSync(dest)) !== file.sha256) throw Error('Worktree changed outside preparation');
   }
-  const nextFiles = old.files.map(file => {
-    const record = preview.files.find(row => row.name === path.basename(file.relative));
+  if (new Set(preview.files.map(row => row.name)).size !== preview.files.length) throw Error('Duplicate preview names');
+  if (old.files.some(file => !preview.files.some(row => row.name === path.basename(file.relative)))) throw Error('Removal of staged files requires separate review');
+  const nextFiles = preview.files.map(record => {
+    if (path.basename(record.name) !== record.name) throw Error('Unsafe preview filename');
     const bytes = fs.readFileSync(path.join(previewDir, record.name));
     if (hash(bytes) !== record.previewSha256) throw Error('Preview changed');
-    return {relative: file.relative, sha256: record.previewSha256, bytes};
+    const prior = old.files.find(file => path.basename(file.relative) === record.name);
+    const original = reviewed.files.find(file => file.filename === record.name);
+    const sourcePrefix = 'nodomain.freeyourgadget.gadgetbridge_253_src.tar.gz/';
+    if (original && (!original.archivePath.startsWith(sourcePrefix) || original.sha256 !== record.sourceSha256)) throw Error('Source provenance changed');
+    if (!original && !['Rw4DiagnosticPolicy.java', 'Rw4DiagnosticSession.java', 'Rw4DiagnosticAttempt.java'].includes(record.name)) throw Error('Unreviewed new source');
+    const relative = original ? original.archivePath.slice(sourcePrefix.length) :
+      'app/src/main/java/nodomain/freeyourgadget/gadgetbridge/service/devices/xiaomi/' + record.name;
+    if (prior && prior.relative !== relative) throw Error('Staged path changed');
+    const dest = path.join(sourceRoot, relative);
+    contained(dest);
+    if (!prior) {
+      if (original && hash(fs.readFileSync(dest)) !== original.sha256) throw Error('New patch target differs from reviewed original');
+      if (!original && fs.existsSync(dest)) throw Error('New source target already exists');
+    }
+    return {relative, sha256: record.previewSha256, bytes};
   });
-  if (preview.files.length !== nextFiles.length) throw Error('File set changed; review new files before refresh');
   for (const file of nextFiles) fs.writeFileSync(path.join(sourceRoot, file.relative), file.bytes);
   old.files = nextFiles.map(({relative, sha256}) => ({relative, sha256}));
   old.apkMatchesPreparedSources = false; // Existing APK must be rebuilt/reviewed after refresh.

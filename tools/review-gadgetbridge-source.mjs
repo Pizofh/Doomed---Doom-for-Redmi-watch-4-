@@ -32,12 +32,16 @@ const selected = names.filter(name => {
     relative === 'build.gradle.kts' || relative === 'gradle/wrapper/gradle-wrapper.properties' ||
     relative === 'settings.gradle.kts' || relative === 'gradle/libs.versions.toml' ||
     relative === 'GBProtobufGenerator/src/main/proto/xiaomi.proto' ||
+    relative === 'app/src/main/AndroidManifest.xml' ||
+    /^app\/src\/main\/java\/nodomain\/freeyourgadget\/gadgetbridge\/(?:GBApplication|service\/(?:DeviceCommunicationService|DeviceSupportFactory|DeviceReceiversManager)|util\/(?:GBPrefs|PermissionsUtils|DeviceHelper)|database\/DBHelper|devices\/DeviceManager|adapter\/GBDeviceAdapterv2)\.java$/.test(relative) ||
+    relative === 'app/src/main/java/nodomain/freeyourgadget/gadgetbridge/util/InternetHelperSingleton.kt' ||
+    relative === 'app/src/main/java/nodomain/freeyourgadget/gadgetbridge/impl/GBDeviceService.java' ||
     /^app\/src\/main\/java\/nodomain\/freeyourgadget\/gadgetbridge\/(?:devices\/xiaomi\/(?:XiaomiCoordinator|XiaomiFWHelper|XiaomiInstallHandler)|devices\/xiaomi\/watches\/RedmiWatch4Coordinator|service\/devices\/xiaomi\/(?:XiaomiSupport|XiaomiAuthService|XiaomiPreferences|XiaomiBleSupport|XiaomiSppSupport|XiaomiConnectionSupport)|service\/devices\/xiaomi\/services\/\w+)\.java$/.test(relative) ||
     /^app\/src\/main\/java\/nodomain\/freeyourgadget\/gadgetbridge\/service\/devices\/xiaomi\/(?:AbstractXiaomiSppProtocol|XiaomiSppProtocolV[12]|XiaomiSppPacketV[12]|XiaomiUuids|XiaomiChannelHandler)\.java$/.test(relative) ||
     /^app\/src\/main\/java\/nodomain\/freeyourgadget\/gadgetbridge\/service\/btbr\/(?:AbstractBTBRDeviceSupport|BtBRQueue|BtBRAction|Transaction|TransactionBuilder|actions\/WriteAction)\.java$/.test(relative) ||
     /^app\/src\/main\/java\/nodomain\/freeyourgadget\/gadgetbridge\/activities\/(?:AuthKeyActivity\.kt|discovery\/(?:DiscoveryActivityV2|DiscoveryPairingPreferenceActivity)\.java)$/.test(relative);
 });
-if (selected.length < 20 || selected.length > 55 || new Set(selected.map(p => path.basename(p))).size !== selected.length) throw Error('Unexpected selection');
+if (selected.length < 20 || selected.length > 60 || new Set(selected.map(p => path.basename(p))).size !== selected.length) throw Error('Unexpected selection');
 // No archive-controlled destination paths, symlinks, special files or overwrites.
 const sources = selected.map(name => {
   if (names.filter(n => n === name).length !== 1) throw Error('Duplicate selected entry');

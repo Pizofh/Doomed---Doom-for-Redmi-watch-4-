@@ -4,6 +4,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {inspectApk} from './inspect-gadgetbridge-apk.mjs';
+import {diagnosticPermissions, permissionAllowed} from './android-diagnostic-permissions.mjs';
 
 if (process.argv.length !== 2) throw Error('No arguments supported');
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -16,13 +17,30 @@ const bytes = fs.readFileSync(path.join(source, apkRelative));
 const inspection = inspectApk(bytes);
 const manifest = inspection.manifest;
 if (manifest.package !== 'nodomain.freeyourgadget.gadgetbridge.rw4diagnostic' ||
-    manifest.versionName !== '0.94.0-rw4-diagnostic' || manifest.versionCode !== 253 ||
+    manifest.versionName !== '0.94.0-rw4-diagnostic-r87' || manifest.versionCode !== 253 ||
     manifest.minSdkVersion !== 23 || manifest.targetSdkVersion !== 35 || manifest.debuggable !== false) throw Error('Unexpected diagnostic APK identity/configuration');
+if (!manifest.permissions.every(permissionAllowed) ||
+    [...diagnosticPermissions.keys()].some(name => !manifest.permissions.includes(name))) throw Error('Unexpected diagnostic permissions after manifest merge');
+for (const name of ['android.permission.BLUETOOTH', 'android.permission.BLUETOOTH_ADMIN', 'android.permission.ACCESS_FINE_LOCATION']) {
+  if (Number(manifest.permissionDetails.find(row => row.name === name)?.maxSdkVersion) !== 30) throw Error('Legacy permission lacks API 30 limit');
+}
+const scanFlags = manifest.permissionDetails.find(row => row.name === 'android.permission.BLUETOOTH_SCAN')?.usesPermissionFlags;
+if (![65536, 'neverForLocation'].includes(scanFlags)) throw Error('Scan location flag differs');
+const coreService = 'nodomain.freeyourgadget.gadgetbridge.service.DeviceCommunicationService';
+for (const component of manifest.components) {
+  if (component.kind === 'service' || component.kind === 'receiver') {
+    if (component.exported !== false || component.enabled !== (component.name === coreService)) throw Error('Unrestricted service or receiver after manifest merge');
+  }
+  if (component.kind === 'activity-alias' && (component.exported !== false || component.enabled !== false)) throw Error('Unexpected exported activity alias');
+  if (component.kind === 'activity' && component.exported !== (component.name === 'nodomain.freeyourgadget.gadgetbridge.activities.ControlCenterv2')) throw Error('Unexpected activity export');
+}
+if (!manifest.components.some(c => c.kind === 'service' && c.name === coreService && c.enabled === true)) throw Error('Diagnostic service missing');
 const out = path.join(root, 'artifacts/research/android-diagnostic-apk-inspection.json');
 const report = {...inspection, apkPath: path.relative(root, path.join(source, apkRelative)).replace(/\\/g, '/'),
   preparedSourcesSha256: state.files, sourceArchiveSha256: state.sourceArchiveSha256,
   hardwareGateOpen: false, runtimeTested: false,
   privacyAndGlobalLifecycleAuditComplete: false,
+  declaredPermissionsAndComponentsRestricted: true,
   officialApksignerReport: 'artifacts/research/android-diagnostic-apksigner.txt'};
 fs.mkdirSync(path.dirname(out), {recursive: true});
 fs.writeFileSync(out, JSON.stringify(report, null, 2) + '\n');
