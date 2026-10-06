@@ -2,6 +2,12 @@
 
 Este documento registra requisitos y bloqueos. **No es un procedimiento ejecutable ni autorización para conectar el reloj.** No hay comando físico aprobado. Compatibilidad nativa y recovery no demostrados impiden abrir el gate.
 
+**R88:** segundo APK-r87 compilado y revisado estáticamente: diez permisos
+previstos y firma v1/v2 válida. Restricciones de servicios/receivers y entradas
+exportadas verificadas en el manifiesto final. Sin instalar ni ejecutar en
+Android; comportamiento, logs y cierre real del socket pendientes. No hay
+autorización nueva de instalación, escaneo, vinculación o conexión al reloj.
+
 **R87:** fuentes del diagnóstico Android restringidas en permisos, entradas de
 servicio y reconexión; segundo build/merge y runtime pendientes. Registro local
 no conecta, y la futura conexión exige vínculo Android existente. Si no existe,

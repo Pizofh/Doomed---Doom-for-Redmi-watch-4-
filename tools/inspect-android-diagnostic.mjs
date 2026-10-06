@@ -41,7 +41,7 @@ const report = {...inspection, apkPath: path.relative(root, path.join(source, ap
   hardwareGateOpen: false, runtimeTested: false,
   privacyAndGlobalLifecycleAuditComplete: false,
   declaredPermissionsAndComponentsRestricted: true,
-  officialApksignerReport: 'artifacts/research/android-diagnostic-apksigner.txt'};
+  officialApksignerReport: 'artifacts/research/android-diagnostic-apksigner-r87.txt'};
 fs.mkdirSync(path.dirname(out), {recursive: true});
 fs.writeFileSync(out, JSON.stringify(report, null, 2) + '\n');
 state.apkProduced = true;

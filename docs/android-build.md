@@ -1,6 +1,54 @@
 # Build de la variante de diagnóstico
 
-## R87: segundo build pendiente
+## R88: segundo APK compilado y revisado
+
+2026-10-05. El build del usuario terminó **BUILD SUCCESSFUL en 2m41s**:
+73 tareas, 20 ejecutadas y 53 up-to-date. Compilaron los cambios de Java/Kotlin
+contra Android real. Los mensajes `deprecated API` y `unchecked or unsafe
+operations` son advertencias de APIs y tipos genéricos, no fallos de compilación.
+PowerShell los presenta como NativeCommandError al recibirlos por stderr;
+el resultado final de Gradle es el que confirma el éxito. Persisten avisos
+de Gradle/API y del baseline lint: lint vital no encontró problemas nuevos,
+pero no equivale a lint completo ni auditoría de seguridad.
+
+| Campo | Resultado |
+|---|---|
+| APK | app-mainline-rw4diagnostic.apk, 31394778 bytes |
+| SHA256 | bf95f228b51e4ff1920f918b9c8502f0d85b9a7d8975b40e5c82fedcee975fd2 |
+| Versión / package | 0.94.0-rw4-diagnostic-r87/253, nodomain.freeyourgadget.gadgetbridge.rw4diagnostic |
+| Configuración | min23, target35, compile37, debuggable=false |
+| Firma | apksigner oficial exit0, v1/v2 válidas; certificado debug local igual a R86 |
+| Permisos efectivos declarados | Diez: nueve previstos y DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION de AndroidX |
+| Servicios / receivers | Solo DeviceCommunicationService habilitado, no exportado; otros declarados deshabilitados, jobs/receivers retirados |
+| Activities | Solo launcher exportado; alias deshabilitado y no exportado |
+| Runtime / hardware | No instalado ni ejecutado; ninguna conexión al reloj |
+
+El permiso interno añadido por AndroidX tiene nivel `signature` en el
+manifiesto fusionado y no da acceso a datos del teléfono. `aapt2` confirma
+límites API30 de permisos antiguos y `neverForLocation`; el inspector propio
+rechaza cualquier permiso/componente fuera de la lista prevista. El APK no
+declara INTERNET, InternetHelper, llamadas/SMS, contactos/calendario, salud
+ni ubicación de segundo plano. No confundir declaración con concesión ni
+restricciones del manifiesto con comportamiento probado en Android.
+
+Apksigner conserva los 103 avisos META-INF/v1 ya observados en R86; firma
+v2 verificada, sin modificar el APK. Certificado SHA256:
+47eeb041e241c7ab785ed8bdcf06c6fcce90020e52d4794aa3c6c66590577709.
+El inspector registra los 22 hashes de fuentes preparadas y actualiza
+`apkMatchesPreparedSources=true`; no prueba reproducibilidad byte a byte.
+
+Artefactos ignorados en artifacts/research/: android-build-restricted.txt,
+android-diagnostic-apksigner-r87.txt, android-diagnostic-badging-r87.txt,
+android-diagnostic-apk-inspection-r87.json y reporte actual sin sufijo.
+La evidencia del primer APK se conserva en el reporte con sufijo-r86.
+
+**Siguiente checkpoint:** preparar una prueba de arranque/cierre de la app
+Android sin Bluetooth ni comunicación con el reloj. Aún falta revisar logs,
+comportamiento/lifecycle y el procedimiento de instalación antes de pedir
+esa acción manual. No instalar ni conectar ahora; gate físico cerrado.
+No repetir este build exitoso sin cambios nuevos.
+
+## R87: preparación del segundo build (histórico)
 
 2026-10-05. Se prepararon **22 archivos modificados** a partir del mismo TAR
 fijado; 59 textos originales seleccionados para revisión. `refresh` admite
@@ -255,6 +303,6 @@ en el archivo recibido. No se han resuelto/auditado íntegramente las dependenci
 ni demostrado reproducibilidad del APK. Revisar resolución local, logs globales,
 reconexiones y alcance de otros dispositivos antes de permitir instalación.
 
-La preparación SDK y el primer build se completaron en R86. El siguiente
-checkpoint actual es el segundo build R87 y su revisión estática, descritos
-al inicio; el [plan físico](physical-device-plan.md) sigue cerrado.
+La preparación SDK y el primer build se completaron en R86; el segundo build
+y su revisión estática, en R88. El checkpoint actual figura al inicio;
+el [plan físico](physical-device-plan.md) sigue cerrado.

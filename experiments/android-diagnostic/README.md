@@ -1,5 +1,11 @@
 # Diagnóstico Android limitado: prototipo en PC
 
+**R88:** segundo APK (versión-r87) compilado y revisado estáticamente.
+Diez permisos efectivos previstos (nueve más uno interno de AndroidX), firma
+v1/v2 válida, solo servicio de diagnóstico habilitado y sin exportar.
+No runtime Android, instalación ni conexión. [Resultado](../../docs/android-build.md).
+Las notas R87/R83/R82 siguientes son históricas; no repetir el build sin cambios.
+
 **R87:** permisos/componentes y reconexión global limitados en las fuentes.
 Ticket manual con caducidad, un intento por proceso y vínculo existente;
 registro local sin conectar automáticamente. Pruebas Java propias pasan.
