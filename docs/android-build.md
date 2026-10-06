@@ -1,5 +1,68 @@
 # Build de la variante de diagnóstico
 
+## R86: primer APK generado y revisado
+
+2026-10-05. El usuario ejecutó el build desde su PowerShell habitual:
+**BUILD SUCCESSFUL en6m28s,73tareas ejecutadas**. Java/Kotlin de la variante
+compilaron contra Android/protobuf reales; se generaron DEX y APK. Lint vital
+no reportó errores/avisos nuevos con su baseline; no equivale a lint completo
+sin baseline ni a una auditoría de seguridad. Avisos de API deprecada/unchecked,
+una safe-call Kotlin innecesaria y deprecaciones de Gradle siguen presentes.
+PowerShell presenta algunos mensajes stderr como NativeCommandError incluso
+en este build exitoso; distinguir esos avisos del resultado final de Gradle.
+
+Archivo para **teléfono Android, no ejecutable del reloj**:
+`build/android-diagnostic-worktree/gadgetbridge/app/build/outputs/apk/mainline/rw4diagnostic/app-mainline-rw4diagnostic.apk`.
+No instalado/ejecutado. No se recompiló Doom ni se conectó ningún dispositivo.
+
+| Campo | Resultado local |
+|---|---|
+| Tamaño |31397290bytes|
+| SHA256 |1acf1e8581bc03b21984209da54eaebe213ed049b343d66cd3eb8bf6132c8661|
+| Package |nodomain.freeyourgadget.gadgetbridge.rw4diagnostic|
+| Nombre |RW4 Diagnostics|
+| Versión |0.94.0-rw4-diagnostic/code253|
+| SDK |min23/target35,compile37/minor0|
+| Debuggable |false|
+| Firma |Debug local RSA2048, un signer; no identidad del publisher|
+| Cert SHA256 |47eeb041e241c7ab785ed8bdcf06c6fcce90020e52d4794aa3c6c66590577709|
+| Permisos declarados |72, heredados de app completa; no son72permisos concedidos|
+
+`apksigner` oficial Build Tools36.0.0 verifica correctamente v1 y v2 (exit0).
+No hay v3/v3.1/v4/SourceStamp en este artefacto. Sus avisos sobre103entradas
+META-INF sin protección en v1 se conservan; v2 verificado cubre el contenido
+protegido de APK, no interpretar esos avisos como fallo de firma v2 ni eliminar
+archivos después de firmar. `aapt2 dump badging` confirma nombre/package/SDK.
+El inspector Node existente también valida v2/manifiesto del caso soportado.
+Fuentes preparadas11 siguen coincidiendo con hashes; las clases de política,
+sesión y WriteAction están en los outputs de javac. No es una comparación
+semántica completa entre fuente y DEX, ni prueba de runtime.
+
+Artefactos ignorados: android-build-user.txt, android-diagnostic-apksigner.txt,
+android-diagnostic-badging.txt y android-diagnostic-apk-inspection.json, bajo
+artifacts/research/. `node tools/inspect-android-diagnostic.mjs` regenera el
+reporte estático y actualiza el registro local de APK producido. `refresh`
+invalida su asociación a las fuentes actuales; tras cambios habrá que compilar
+y revisar de nuevo. No hay prueba de reproducibilidad byte a byte.
+
+**Efecto adicional observado:** AGP instaló automáticamente Platform-Tools37.0.1
+durante el build, pese a que sdk-install solo solicitaba plataforma/build-tools.
+Doctor registra ahora su presencia; ninguno de nuestros scripts proporciona
+acciones ADB, instalación o conexión. No confundir herramientas presentes con
+una prueba de hardware ni borrar componentes del SDK para ocultar el resultado.
+
+**Siguiente checkpoint:** cerrar el modo de diagnóstico en permisos, alcance
+de dispositivos y reconexión global. El APK actual conserva llamadas/SMS,
+contactos/calendario, Health Connect, otras integraciones y servicios/UI de
+Gadgetbridge. No declara android.permission.INTERNET, pero sí la integración
+InternetHelper; no afirmar aislamiento de red absoluto. Falta limitar esto y
+revisar logs/lifecycle y retorno a Mi Fitness antes de plantear instalación.
+Los filtros probados y la compilación no garantizan cero escrituras internas
+del firmware por autenticación ni compatibilidad con2.2.86.
+Gate físico cerrado; build completo no es autorización para teléfono/reloj.
+
+## Historial del setup y diagnóstico
+
 R83, 2026-10-05. Herramientas preparadas y pruebas de componentes en PC.
 **Todavía no hay un APK propio compilado. Ningún comando de este documento
 instala apps, conecta el reloj o abre el gate físico.**

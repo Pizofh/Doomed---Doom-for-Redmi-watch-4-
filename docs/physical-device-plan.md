@@ -2,6 +2,12 @@
 
 Este documento registra requisitos y bloqueos. **No es un procedimiento ejecutable ni autorización para conectar el reloj.** No hay comando físico aprobado. Compatibilidad nativa y recovery no demostrados impiden abrir el gate.
 
+**R86,2026-10-05:** APK de diagnostico Android compilado y revisado estaticamente
+([resultado](android-build.md)), sin instalar/ejecutar. Conserva72permisos y
+servicios/UI de Gadgetbridge; alcance de dispositivos, reconexion global y
+privacidad completos pendientes. Firma valida no prueba comportamiento seguro
+ni compatibilidad2.2.86. Ninguna nueva autorizacion fisica; gate cerrado.
+
 ## Identificacion de la unidad: datos y pendientes
 
 | Campo | Estado |

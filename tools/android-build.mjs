@@ -110,6 +110,8 @@ function doctor() {
     platform37: fs.existsSync(path.join(sdk, 'platforms/android-37.0/android.jar')),
     platformPackage: 'platforms;android-37.0',
     buildTools36: fs.existsSync(path.join(sdk, 'build-tools/36.0.0/aapt2.exe')),
+    platformToolsPresent: fs.existsSync(path.join(sdk, 'platform-tools/adb.exe')),
+    ownApkExists: fs.existsSync(path.join(sourceRoot, 'app/build/outputs/apk/mainline/rw4diagnostic/app-mainline-rw4diagnostic.apk')),
     hardwareGateOpen: false}));
 }
 function refresh() {
@@ -133,6 +135,7 @@ function refresh() {
   if (preview.files.length !== nextFiles.length) throw Error('File set changed; review new files before refresh');
   for (const file of nextFiles) fs.writeFileSync(path.join(sourceRoot, file.relative), file.bytes);
   old.files = nextFiles.map(({relative, sha256}) => ({relative, sha256}));
+  old.apkMatchesPreparedSources = false; // Existing APK must be rebuilt/reviewed after refresh.
   fs.writeFileSync(filename, JSON.stringify(old, null, 2) + '\n');
   console.log(JSON.stringify({status: 'refreshed', patchedFiles: old.files.length, hardwareGateOpen: false}));
 }
