@@ -1,5 +1,11 @@
 # Prueba Android sin Bluetooth — pendiente de aprobación
 
+**R90: aprobación recibida.** El usuario autoriza esta instalación/prueba manual
+en teléfono, manteniendo Bluetooth apagado y sin dispositivos ni claves.
+La copia de guía/review.json del bundle R89 conserva su estado de preparación
+anterior a esta autorización; el APK es el mismo. No pedir aprobación otra vez.
+La conexión al reloj continúa sin autorizar. Resultados runtime pendientes.
+
 Objetivo: instalar la app de diagnóstico **en el teléfono**, abrirla, salir y
 reabrirla sin registrar ni comunicar un reloj. Esto no ejecuta Doom ni valida
 compatibilidad del firmware M2315W1. Preparación autorizada en PC; instalación
