@@ -1,5 +1,12 @@
 # Diagnóstico Android limitado: prototipo en PC
 
+**R87:** permisos/componentes y reconexión global limitados en las fuentes.
+Ticket manual con caducidad, un intento por proceso y vínculo existente;
+registro local sin conectar automáticamente. Pruebas Java propias pasan.
+Primer APK R86 compilado, pero **el segundo build con estos cambios está
+pendiente**. [Estado actual](../../docs/android-build.md). Las notas R83/R82
+de abajo son históricas. No instalar ni conectar; gate físico cerrado.
+
 **R83,2026-10-05:** fuente seleccionada ampliada a46textos y vista previa
 actual en `build/android-diagnostic-preview-r83/` (once fuentes/nueve diffs).
 Sesión propia sincronizada con reloj monotónico: vence sin depender del timer,

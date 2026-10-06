@@ -2,6 +2,13 @@
 
 Este documento registra requisitos y bloqueos. **No es un procedimiento ejecutable ni autorización para conectar el reloj.** No hay comando físico aprobado. Compatibilidad nativa y recovery no demostrados impiden abrir el gate.
 
+**R87:** fuentes del diagnóstico Android restringidas en permisos, entradas de
+servicio y reconexión; segundo build/merge y runtime pendientes. Registro local
+no conecta, y la futura conexión exige vínculo Android existente. Si no existe,
+detener este camino: no crear vínculos ni desvincular Mi Fitness automáticamente.
+Autenticar sigue siendo tráfico activo con efectos de firmware desconocidos.
+No hay autorización nueva para instalar la app o conectar la unidad.
+
 **R86,2026-10-05:** APK de diagnostico Android compilado y revisado estaticamente
 ([resultado](android-build.md)), sin instalar/ejecutar. Conserva72permisos y
 servicios/UI de Gadgetbridge; alcance de dispositivos, reconexion global y

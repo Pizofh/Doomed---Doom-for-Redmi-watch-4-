@@ -1,5 +1,61 @@
 # Build de la variante de diagnóstico
 
+## R87: segundo build pendiente
+
+2026-10-05. Se prepararon **22 archivos modificados** a partir del mismo TAR
+fijado; 59 textos originales seleccionados para revisión. `refresh` admite
+nuevos archivos solo con procedencia verificada y valida todos los archivos
+anteriores antes de escribir. Doctor confirma sus hashes y el SDK existente.
+La versión será **0.94.0-rw4-diagnostic-r87**. El APK R86 aún presente pertenece
+a las fuentes anteriores: `apkMatchesPreparedSources=false`. No instalarlo.
+
+- Manifiesto fuente: nueve permisos, un servicio habilitado; sin llamadas,
+  SMS, contactos, calendario, salud, Internet/InternetHelper ni ubicación en
+  segundo plano. Receivers deshabilitados y actividades internas sin exportar,
+  excepto el launcher. Se retiran jobs/receivers añadidos por dependencias y
+  sus inicializadores automáticos. El merge real debe comprobarse en el APK.
+- Bluetooth clásico/administración y ubicación fina limitados a API 30;
+  API 31+ utiliza SCAN/CONNECT, SCAN con `neverForLocation`. La ubicación fina
+  antigua corresponde a descubrimiento en primer plano, no a leer GPS del
+  reloj. [Permisos oficiales](https://developer.android.com/develop/connectivity/bluetooth/bt-permissions).
+  Se mantienen notificación, wake lock y servicio de dispositivo conectado;
+  [requisitos del servicio](https://developer.android.com/develop/background-work/services/fgs/service-types#connected-device).
+- Solo los dos callbacks de toque de «Conectar» emiten un ticket en memoria
+  ligado al dispositivo. Caduca en cinco segundos y se consume una vez por
+  proceso. Eventos Bluetooth, shortcuts, service restart, preferencias y nuevas
+  instancias del soporte no proporcionan ese ticket. El servicio es
+  START_NOT_STICKY y acepta exclusivamente conectar/desconectar; desconectar
+  también lo detiene. Sigue vigente el límite de sesión de 30 segundos.
+- La fábrica admite únicamente coordinator RW4 y dirección Bluetooth válida
+  con vínculo Android ya existente. Descubrimiento registra el dispositivo
+  y la clave en almacenamiento privado **del teléfono**, sin iniciar conexión
+  ni crear un vínculo. Si no hay vínculo previo, este camino se detiene;
+  no desvincular Mi Fitness ni crear otro para sortearlo sin revisión.
+- Se omiten tareas de exportación/salud/notificaciones y conexiones de
+  InternetHelper. No se ha auditado completamente cada pantalla/log ni
+  demostrado comportamiento Android, cierre de socket o ausencia de cambios
+  internos causados por autenticar en firmware 2.2.86.
+
+Validación PC: prueba de política/sesión y nueva prueba de tickets pasan
+(caducidad, destino incorrecto, reutilización y doce consumidores concurrentes
+con un solo éxito). WriteAction generado sigue pasando con socket falso.
+XML fuente parseado: nueve permisos activos y un servicio habilitado. El
+inspector de APK ahora rechaza permisos/componentes inesperados tras merge,
+límites de API incorrectos y el APK antiguo R86. Su parser ampliado conserva
+la verificación/tamper tests del APK upstream. Ninguna prueba usa Bluetooth.
+
+El siguiente paso necesita el PowerShell habitual del usuario: el contexto
+restringido del agente falló en ZipFS/Gradle (R85), mientras ese PowerShell
+compiló correctamente (R86). Desde la raíz del repo:
+
+```powershell
+node tools/android-build.mjs build-diagnose 2>&1 | Tee-Object -FilePath artifacts/research/android-build-restricted.txt
+```
+
+Después del build: revisar resultado, manifiesto/firma del nuevo APK y logs
+antes de preparar instalación. **No instalar, escanear ni conectar aún.**
+No se necesitan descargas SDK, licencias ni reconstruir Doom nuevamente.
+
 ## R86: primer APK generado y revisado
 
 2026-10-05. El usuario ejecutó el build desde su PowerShell habitual:
@@ -199,6 +255,6 @@ en el archivo recibido. No se han resuelto/auditado íntegramente las dependenci
 ni demostrado reproducibilidad del APK. Revisar resolución local, logs globales,
 reconexiones y alcance de otros dispositivos antes de permitir instalación.
 
-Siguiente checkpoint: completar paquetes SDK y conseguir el primer build
-Android; después revisar el APK y cerrar los pendientes de transporte/UI,
-antes del [plan físico](physical-device-plan.md).
+La preparación SDK y el primer build se completaron en R86. El siguiente
+checkpoint actual es el segundo build R87 y su revisión estática, descritos
+al inicio; el [plan físico](physical-device-plan.md) sigue cerrado.

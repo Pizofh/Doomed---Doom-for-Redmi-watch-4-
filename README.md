@@ -1,5 +1,11 @@
 # DOOM en Redmi Watch 4
 
+**R87, 2026-10-05:** variante Android de diagnóstico restringida preparada para
+un segundo build. Nueve permisos en el manifiesto fuente, sin reconexión
+automática; intento manual único por proceso y vínculo Bluetooth existente.
+El primer APK R86 compiló; estos cambios todavía no están compilados ni
+probados en Android. [Estado y comando](docs/android-build.md). Reloj intacto.
+
 **R74:** [Investigacion stock RW4](docs/rw4-stock-feasibility.md): indicio Lua/shell y Gadgetbridge como candidato de instalacion; ABI/loader/firmware fisico siguen pendientes.17sources auditados, sin tocar hardware.
 
 **R73:** [Doom persistente en emulador](docs/doom-persistence-emulator.md): ELF/WAD instalados una vez en /data; E1M1 antes/despues de reset sin reenviar assets, salida limpia y cancelacion durante carga. No demuestra compatibilidad M2315W1.
