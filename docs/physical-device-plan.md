@@ -2,6 +2,11 @@
 
 Este documento registra requisitos y bloqueos. **No es un procedimiento ejecutable ni autorización para conectar el reloj.** No hay comando físico aprobado. Compatibilidad nativa y recovery no demostrados impiden abrir el gate.
 
+**R89:** preparada [prueba de app Android con Bluetooth apagado](android-offline-test.md),
+sin reloj, claves ni registro de dispositivos. Solo copia de APK y revisión en PC
+realizadas; aprobación para instalar en teléfono pendiente. Esta prueba no abre
+el gate de comunicación ni carga código en M2315W1.
+
 **R88:** segundo APK-r87 compilado y revisado estáticamente: diez permisos
 previstos y firma v1/v2 válida. Restricciones de servicios/receivers y entradas
 exportadas verificadas en el manifiesto final. Sin instalar ni ejecutar en

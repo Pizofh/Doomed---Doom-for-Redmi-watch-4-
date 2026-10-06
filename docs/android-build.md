@@ -1,5 +1,10 @@
 # Build de la variante de diagnóstico
 
+**R89:** el [plan de arranque Android offline](android-offline-test.md) ya está
+preparado y el APK-r87 copiado/verificado en artifacts/android-offline-test-r87.
+No se modificó la app ni se recompiló. Instalación manual pendiente de aprobación;
+ninguna conexión al reloj incluida. La fase runtime todavía no se ha ejecutado.
+
 ## R88: segundo APK compilado y revisado
 
 2026-10-05. El build del usuario terminó **BUILD SUCCESSFUL en 2m41s**:

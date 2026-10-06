@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**R89:** [prueba Android sin Bluetooth](docs/android-offline-test.md) preparada:
+APK-r87 verificado en `artifacts/android-offline-test-r87/`, guía de
+arranque/salida/reapertura y reversión. No instalado; aprobación para la
+prueba en teléfono pendiente. No se necesita otro build. Reloj intacto.
+
 **R88, 2026-10-05:** segundo APK Android de diagnóstico compilado y revisado:
 firma v1/v2 válida, diez permisos declarados (nueve previstos y uno interno de
 AndroidX), un servicio habilitado y entradas automáticas restringidas en el

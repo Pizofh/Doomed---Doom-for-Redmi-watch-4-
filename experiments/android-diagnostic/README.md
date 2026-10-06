@@ -1,5 +1,10 @@
 # Diagnóstico Android limitado: prototipo en PC
 
+**R89:** [guía de prueba offline](../../docs/android-offline-test.md) y bundle
+listos en PC. `node tools/prepare-android-offline-test.mjs` valida/copia el APK
+revisado; no instala. Aprobación manual de teléfono pendiente, sin pruebas
+Android ni comunicación con el reloj. Sin nuevo build.
+
 **R88:** segundo APK (versión-r87) compilado y revisado estáticamente.
 Diez permisos efectivos previstos (nueve más uno interno de AndroidX), firma
 v1/v2 válida, solo servicio de diagnóstico habilitado y sin exportar.
