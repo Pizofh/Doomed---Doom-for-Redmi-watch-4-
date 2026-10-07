@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R98:** [Fidelidad de emulación](emulation-fidelity.md), sin prueba física nueva.
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Compilar OpenVela Goldfish permite controlar configuración/versión | OpenVela general en PC | Quick start oficial/menuconfig | INFERENCIA RAZONABLE como alternativa de pruebas | Alta documental | No build nuevo | Sin configRW4 exacta, no necesariamente más fiel que S3 |
+| vendor_bes publicado demuestra soporte stock RW4/BES2700iBP | BES2600 evaluación / RW4 desconocido | README oficial dev documenta BES2600WM-AX4F/BEST2003 | SIN EVIDENCIA de esa equivalencia | Alta sobre límite README | Lectura | No generalizar otra placa/chip a M2315W1 |
+| Hay emulador público exacto M2315W1/2.2.86 localizado | Hardware/firmware exactos | Búsqueda R98 y docs QEMU/OpenVela | SIN EVIDENCIA encontrado | No evaluable | No | No refuta emulación futura ni forks privados |
+| OTA oficial exacta está disponible y demuestra ABI/recovery | M2315W1/2.2.86 | Propuesta de análisis R98; paquete no adquirido | SIN EVIDENCIA | No evaluable | No | Podría ser delta/cifrado/sin símbolos; no iniciar OTA en reloj |
+
 **R97,2026-10-06:** usuario difiere conexión para investigar evidencia/recovery.
 [Informe de auth y retorno](rw4-auth-return-research.md); sin prueba física nueva.
 
