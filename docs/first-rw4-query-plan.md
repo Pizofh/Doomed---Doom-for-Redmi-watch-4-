@@ -18,6 +18,11 @@ RW4 Diagnostics r92/code253, package
 `nodomain.freeyourgadget.gadgetbridge.rw4diagnostic`.
 SHA256 `1ed56b90fc7e56daf0ceff4f8eec8c799db8eff95e899ada41981c39ee783c97`.
 Firma oficial apksigner v1/v2 válida, mismo certificado local anterior.
+Identificación visual: aapt2 del APK-r92 confirma application-label
+«RW4 Diagnostics», pero launchable-activity ControlCenterv2 conserva label
+«Gadgetbridge». El icono del launcher puede aparecer como Gadgetbridge.
+Si hay dudas u otras instalaciones, verificar versión
+0.94.0-rw4-diagnostic-r92 en información de la app antes de conceder permisos.
 Usuario ya instaló y probó abrir/Salir/reabrir sin permisos y con lista vacía.
 El manifiesto carece de acceso SMS, lector de notificaciones, accesibilidad
 y administrador. No nueva compilación necesaria.
