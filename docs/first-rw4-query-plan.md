@@ -1,6 +1,6 @@
-# Primera consulta RW4 — borrador para revisión, no autorizado
+# Primera consulta RW4 — plan para aprobación, no autorizado
 
-R94, 2026-10-06. Objetivo: un intento de autenticación seguido de consultas
+Actualizado R95, 2026-10-06. Objetivo: un intento de autenticación seguido de consultas
 de batería e información; después retorno a Mi Fitness. No instalar código,
 watchfaces, WAD ni firmware. Este documento no abre el gate físico.
 
@@ -15,27 +15,39 @@ El manifiesto carece de acceso SMS, lector de notificaciones, accesibilidad
 y administrador. No nueva compilación necesaria.
 
 Unidad declarada: M2315W1, firmware mostrado 2.2.86, Mi Fitness 3.59.1i.
-Región, versión Android y build Vela/ABI desconocidos. El coordinator RW4 de
+Teléfono Xiaomi HyperOS 3.0.302.0, Android 16 BP2A.250605.031.A3, comunicado
+por usuario R95. El usuario observa RW4 ya emparejado en Ajustes Bluetooth y
+Mi Fitness conecta bien. Esto satisface la comprobación manual del vínculo,
+no una consulta instrumental BOND_BONDED ni prueba de SPP/auth propia.
+Región y build Vela/ABI del reloj desconocidos. El coordinator RW4 de
 Gadgetbridge 0.94.0 reconoce este modelo por nombre y usa BT_CLASSIC/SPP.
 [Soporte upstream](https://gadgetbridge.org/gadgets/wearables/xiaomi/#redmi-watch-4)
 es experimental: no garantiza compatibilidad 2.2.86.
 
-## Prerrequisitos antes de solicitar aprobación
+## Prerrequisitos y permisos concretos
 
-- Comprobar solo en Ajustes Bluetooth del teléfono si el reloj figura entre
-  dispositivos **ya vinculados/guardados**. No pulsar su nombre, conectar,
-  emparejar, olvidar ni desvincular. Estar visible entre dispositivos nuevos
-  no prueba un vínculo Android. Nuestra variante exige BOND_BONDED.
-- Confirmar que Mi Fitness sigue usando su registro original y funciona.
+- **Completado por usuario:** reloj ya emparejado en Ajustes Bluetooth.
+  No crear otro vínculo, olvidar ni desvincular. Nuestra variante vuelve a
+  exigir BOND_BONDED antes de registrar y al construir el soporte.
+- **Completado por usuario:** Mi Fitness conecta normalmente antes de probar
+  nuestra app. El retorno después de la futura autenticación sigue sin probar.
   Conservar sus datos y anotar ajustes importantes localmente; una sync no
   es backup completo de firmware. No borrar sus datos ni hacer factory reset.
-- Confirmar versión Android para concretar los permisos: Nearby en Android
-  12+, ubicación mientras se usa para descubrimiento en Android 11 o anterior.
-  Publicar notificaciones propias es distinto de leer notificaciones de otras
-  apps. Acceso sensible adicional, si se solicita, exige detenerse.
-- Preparar entrada privada de la clave en la app, sin pegarla en chat/Git ni
-  activar TRACE. Hay candidato local, pero vigencia/unidad no demostradas.
-  El procedimiento de entrega privada aún debe concretarse; no enviar logs.
+- **Android 16 confirmado:** conceder Dispositivos cercanos a RW4 Diagnostics
+  para SCAN/CONNECT. La variante declara SCAN neverForLocation y ubicación con
+  maxSdk30, por lo que no debe pedir ubicación en este teléfono. Se puede
+  permitir publicar la notificación propia del servicio; no acceso a leer
+  notificaciones de otras apps, accesibilidad, SMS, contactos o almacenamiento.
+  [Permisos Bluetooth Android](https://developer.android.com/develop/connectivity/bluetooth/bt-permissions).
+  Si pide acceso adicional, cancelar y comunicar solo el nombre del permiso.
+- Entrada privada de la clave, **solo durante el procedimiento autorizado**:
+  abrir con Bloc de notas un log propio de `tools/local/mi-fitness-logs` en el
+  PC, buscar `encryptKey`, comprobar contexto Redmi Watch 4 y tomar únicamente
+  sus 32 caracteres hexadecimales. Transcribirlos en el teléfono; no enviar
+  captura/chat/log, guardar otro archivo ni usar portapapeles sincronizado.
+  Si el campo/contexto no es inequívoco o hay varios valores, detenerse. No
+  elegir un token genérico por su longitud. El candidato previo no demuestra
+  vigencia ni autenticación: se verificará únicamente con el intento aprobado.
 
 Si falta vínculo existente, no crear otro como atajo: revisar alternativa.
 No conectar para averiguar si el vínculo existe.
@@ -48,7 +60,9 @@ No comandos de terminal/ADB sobre teléfono o reloj; operación manual en UI.
    Fitness desde Ajustes del teléfono, conservando app/datos/vinculación.
    Puede interrumpir notificaciones/sync durante la prueba. No desinstalarla.
 2. Abrir RW4 Diagnostics y conceder únicamente los permisos concretados arriba.
-   Entrar en Añadir dispositivo, seleccionar solo el RW4 ya vinculado. Si
+   Entrar en Añadir dispositivo, seleccionar solo el RW4 ya vinculado. Esta
+   pantalla puede iniciar descubrimiento Bluetooth activo; forma parte de
+   esta autorización propuesta, no de la prueba offline anterior. Si
    propone desvincular, resetear, emparejar de nuevo o actualizar, cancelar.
 3. Introducir privadamente la clave en la pantalla AuthKey. Guardar registra
    dispositivo/clave en almacenamiento privado del teléfono; la variante no
@@ -65,8 +79,11 @@ No comandos de terminal/ADB sobre teléfono o reloj; operación manual en UI.
    funciones normales. Si no retorna, detener pruebas y revisar el estado;
    no borrar bonds, resetear, cambiar firmware o reintentar automáticamente.
 
-Rótulos de UI restantes y retorno en este Android deben confirmarse durante
-el procedimiento autorizado; no utilizar instrucciones genéricas de pairing.
+Pantalla de clave: «Clave de autenticación para …», según recursos españoles
+del APK; botón submit_auth_key_button guarda SharedPreferences y devuelve
+RESULT_OK. DiscoveryActivityV2 registra DB y vuelve a la lista sin conectar.
+El menú «Conectar» emite el ticket; «Desconectar» cierra la sesión. Si los
+rótulos/flujo reales difieren, detenerse antes de una acción no reconocida.
 
 ## Comandos y efectos previstos
 
@@ -81,6 +98,7 @@ contratos, no el comportamiento firmware ni cierre de la radio en esta unidad.
 |---|---|---|---|
 | Permisos, registro y clave | App privada del teléfono | Sí; reboot no borra, desinstalar esta app sí | Exposición si se comparten logs/backups; no compartir |
 | Detener Mi Fitness | Proceso teléfono | Datos conservados; abrir app para retorno | Interrupción temporal de funciones conectadas |
+| Descubrimiento Bluetooth | Radio teléfono y dispositivos próximos | Sin escritura persistente al reloj solicitada; no garantía sobre firmware | No seleccionar otros dispositivos ni aceptar nuevo pairing |
 | Auth y consultas | Bluetooth/SPP y handlers stock del reloj | Escrituras internas de auth desconocidas; no garantizar reversión por reboot | Conflicto de conexión/auth, bloqueo o reboot posibles |
 | Instalar archivos / escribir particiones / bootloader | Fuera del plan | No mecanismos de upload/flash/boot invocados | Prohibido; gate separado |
 

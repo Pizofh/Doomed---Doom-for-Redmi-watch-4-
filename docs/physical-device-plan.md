@@ -1,5 +1,12 @@
 # Gate para M2315W1 — CERRADO
 
+**R95,2026-10-06:** usuario confirma RW4 ya emparejado en Ajustes Bluetooth,
+teléfono Xiaomi HyperOS3.0.302.0/Android16 BP2A.250605.031.A3 y conexión
+normal Mi Fitness. No confundir HyperOS del teléfono con versión del reloj.
+[Plan de primera consulta](first-rw4-query-plan.md) concretado con permisos
+Nearby, entrada privada de clave y rollback; requiere revisión explícita por
+falta de recovery completo. No conexión propia ejecutada ni autorizada.
+
 **Estado actual R94,2026-10-06:** APK-r92 instalado por usuario y ciclo
 offline abrir/salir/reabrir completado sin permisos y con lista vacía.
 Forzar detención desactivado al finalizar; Bluetooth restaurado. No prueba
@@ -41,7 +48,8 @@ ni compatibilidad2.2.86. Ninguna nueva autorizacion fisica; gate cerrado.
 | Región / variante de placa | Desconocida |
 | Version del dispositivo / firmware mostrado | 2.2.86, leida en Ajustes y comunicada por usuario el 2026-10-04; build/hash interno pendiente |
 | HyperOS / Vela / NuttX versión | Desconocida en esta unidad |
-| Telefono | Android, informado por usuario2026-10-04 |
+| Telefono | Xiaomi HyperOS3.0.302.0, Android16 BP2A.250605.031.A3, informado por usuario R95 |
+| Vínculo Bluetooth / estado previo | RW4 ya emparejado en Ajustes; Mi Fitness conecta normalmente, comunicado R95. No autenticación propia demostrada |
 | Mi Fitness version / origen | 3.59.1i, informado por usuario; origen/firma pendientes |
 | Runtime Lua / paquetes aceptados | Fuente RW4 disponible; firmware concreto sin verificar |
 | Build FLAT/PROTECTED/KERNEL | Desconocida |

@@ -1,5 +1,10 @@
 # Matriz de evidencia
 
+**R95,2026-10-06:** usuario confirma RW4 emparejado en Ajustes Bluetooth,
+Mi Fitness conecta bien y teléfono Android16/HyperOS3.0.302.0. No prueba de
+SPP/autenticación propia ni de versión HyperOS del reloj. Plan físico listo
+para revisión; no autorización recibida.
+
 **R94,2026-10-06:** instalación y ciclo visible Android r92 reportados por
 usuario. [Resultado offline](android-offline-test.md). Sin prueba de transporte
 ni autenticación del reloj; no repetir build ni emulador.
