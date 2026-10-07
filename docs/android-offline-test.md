@@ -1,4 +1,20 @@
-# Prueba Android sin Bluetooth — pendiente de aprobación
+# Prueba Android sin Bluetooth — completada por el usuario
+
+**R94, 2026-10-06: resultado recibido.** El usuario instaló r92, entró sin
+conceder permisos, esperó en la lista vacía, pulsó Salir, reabrió, denegó
+permisos y volvió a salir. Forzar detención estaba desactivado; después
+restauró Bluetooth. Es compatible con una app ya detenida, sin demostrar
+terminación de procesos/servicios. No se informó crash ni se registró reloj.
+Instalación y ciclo visible pasan en el teléfono del usuario; no se capturó
+tráfico ni se probó autenticación. No repetir esta prueba ni el build.
+
+APK r92 inspeccionado y firma oficial v1/v2 válida; bundle actual:
+`artifacts/android-offline-test-r92/RW4Diagnostics-r92.apk`.
+SHA256 `1ed56b90fc7e56daf0ceff4f8eec8c799db8eff95e899ada41981c39ee783c97`.
+La aceptación del instalador no demuestra por qué bloqueó r87 ni sustituye
+la revisión de riesgo. Comunicación con reloj sin autorizar.
+
+Las notas y la guía r87 siguientes son **historial**, no pasos que repetir.
 
 **R92: no reutilizar el APK-r87 bloqueado.** Su manifiesto conservaba un lector
 de notificaciones deshabilitado con binding sensible que no necesitamos. Se

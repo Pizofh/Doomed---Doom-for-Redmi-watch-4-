@@ -1,5 +1,12 @@
 # Gate para M2315W1 — CERRADO
 
+**Estado actual R94,2026-10-06:** APK-r92 instalado por usuario y ciclo
+offline abrir/salir/reabrir completado sin permisos y con lista vacía.
+Forzar detención desactivado al finalizar; Bluetooth restaurado. No prueba
+de transporte ni reloj registrado. [Borrador de primera consulta](first-rw4-query-plan.md)
+listo para revisión; vínculo Android existente y aprobación física pendientes.
+Las notas R89 y anteriores siguientes son históricas.
+
 Este documento registra requisitos y bloqueos. **No es un procedimiento ejecutable ni autorización para conectar el reloj.** No hay comando físico aprobado. Compatibilidad nativa y recovery no demostrados impiden abrir el gate.
 
 **R89:** preparada [prueba de app Android con Bluetooth apagado](android-offline-test.md),

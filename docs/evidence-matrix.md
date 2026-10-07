@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R94,2026-10-06:** instalación y ciclo visible Android r92 reportados por
+usuario. [Resultado offline](android-offline-test.md). Sin prueba de transporte
+ni autenticación del reloj; no repetir build ni emulador.
+
+| Claim | Scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| APK r92 instala y permite abrir/salir/reabrir sin permisos, lista vacía | Teléfono Android del usuario, no RW4 | Reporte usuario R94 | Confirmado por prueba manual reportada, fuera de categorías del reloj | Alta para UI reportada | Sí, por usuario | No confirma cierre de servicios/socket ni ausencia de todo tráfico; no prueba hardware |
+| Forzar detención desactivado demuestra que no queda proceso | Android del usuario | Botón desactivado reportado R94 | SIN EVIDENCIA concluyente | Baja | Observación manual | Compatible con app detenida; no inspección de procesos |
+
 **R74, 2026-10-04:** [Auditoria stock RW4](rw4-stock-feasibility.md):10sources Lua especificos sin llamadas shell/loader; relato original de m0tral refuerza indicio Lua/shell pero sin firmware RW4 reproducible. Gadgetbridge candidato de instalacion experimental, no usado. R73 persiste como prueba exclusiva S3; gate fisico cerrado.
 
 **Historial R71, 2026-10-04:** [Timer50ms medido](doom-50ms-emulator.md).17,45entregas/s frente a4,87; giros12,67-13,55cambios visibles/s observados frente aunos5. Motor ~35tics/s, pausa400ms y EXIT limpios. Mismo C/ELF R67, Lua R71; solo emulador S3. Siguiente: una sesion de90s para observar estabilidad/memoria, gate M2315W1 cerrado.

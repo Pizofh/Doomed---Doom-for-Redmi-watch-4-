@@ -5,16 +5,16 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {inspectApk} from './inspect-gadgetbridge-apk.mjs';
-import {permissionAllowed} from './android-diagnostic-permissions.mjs';
+import {permissionAllowed, assertNoSensitiveAccess} from './android-diagnostic-permissions.mjs';
 
 if (process.argv.length !== 2) throw Error('No arguments supported');
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const apkHash = 'bf95f228b51e4ff1920f918b9c8502f0d85b9a7d8975b40e5c82fedcee975fd2';
+const apkHash = '1ed56b90fc7e56daf0ceff4f8eec8c799db8eff95e899ada41981c39ee783c97';
 const certHash = '47eeb041e241c7ab785ed8bdcf06c6fcce90020e52d4794aa3c6c66590577709';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const source = path.join(root, 'build/android-diagnostic-worktree/gadgetbridge');
 const apk = path.join(source, 'app/build/outputs/apk/mainline/rw4diagnostic/app-mainline-rw4diagnostic.apk');
-const out = path.join(root, 'artifacts/android-offline-test-r87');
+const out = path.join(root, 'artifacts/android-offline-test-r92');
 
 function checkedPath(filename) {
   const absolute = path.resolve(filename);
@@ -34,8 +34,9 @@ const bytes = fs.readFileSync(checkedPath(apk));
 if (hash(bytes) !== apkHash) throw Error('APK differs from the reviewed build; inspect it first');
 const report = inspectApk(bytes);
 if (report.signature.certificateSha256 !== certHash || report.manifest.package !== 'nodomain.freeyourgadget.gadgetbridge.rw4diagnostic'
-    || report.manifest.versionName !== '0.94.0-rw4-diagnostic-r87' || report.manifest.debuggable !== false
+    || report.manifest.versionName !== '0.94.0-rw4-diagnostic-r92' || report.manifest.debuggable !== false
     || report.manifest.permissions.length !== 10 || !report.manifest.permissions.every(permissionAllowed)) throw Error('APK identity or capabilities changed');
+assertNoSensitiveAccess(report.manifest);
 
 // Refuse to overwrite a changed bundle. Re-running with identical inputs is harmless.
 function write(filename, content) {
@@ -46,16 +47,17 @@ function write(filename, content) {
 }
 checkedPath(out);
 fs.mkdirSync(out, {recursive: true});
-write('RW4Diagnostics-r87.apk', bytes);
-write('SHA256SUMS.txt', apkHash + '  RW4Diagnostics-r87.apk\n');
+write('RW4Diagnostics-r92.apk', bytes);
+write('SHA256SUMS.txt', apkHash + '  RW4Diagnostics-r92.apk\n');
 write('TEST.md', fs.readFileSync(checkedPath(path.join(root, 'docs/android-offline-test.md'))));
 write('review.json', JSON.stringify({
-  status: 'prepared-for-manual-review', apk: 'RW4Diagnostics-r87.apk', apkSha256: apkHash,
+  status: 'reviewed-offline-test-reported', apk: 'RW4Diagnostics-r92.apk', apkSha256: apkHash,
   certificateSha256: certHash, versionName: report.manifest.versionName,
   package: report.manifest.package, minSdk: report.manifest.minSdkVersion,
   permissionCount: report.manifest.permissions.length,
-  testedOnAndroid: false, phoneInstallationAuthorized: false, hardwareGateOpen: false,
+  androidUiTestReportedByUser: true, bluetoothTransportTested: false,
+  phoneInstallationAuthorized: true, hardwareGateOpen: false,
   scope: 'Phone app launch/exit only, Bluetooth disabled, runtime permissions denied, no device registration/key input.'
 }, null, 2) + '\n');
 console.log(JSON.stringify({status: 'offline-test-bundle-prepared', folder: path.relative(root, out),
-  apk: 'RW4Diagnostics-r87.apk', apkSha256: apkHash, installed: false, hardwareGateOpen: false}));
+  apk: 'RW4Diagnostics-r92.apk', apkSha256: apkHash, phoneInstallationPerformedByTool: false, hardwareGateOpen: false}));
