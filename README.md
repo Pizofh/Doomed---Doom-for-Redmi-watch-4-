@@ -1,5 +1,11 @@
 # DOOM en Redmi Watch 4
 
+**R92:** investigado el bloqueo Play Protect: el APK-r87 conservaba un lector
+de notificaciones deshabilitado y su binding sensible. Se preparó eliminarlo
+por completo; test de regresión pasa. [Nuevo build pendiente](docs/android-build.md).
+No desactivar protección ni reutilizar ese APK. Emulador Android aplazado;
+prioridad del usuario: avanzar hacia RW4 real, con gate físico aún cerrado.
+
 **R89:** [prueba Android sin Bluetooth](docs/android-offline-test.md) preparada:
 APK-r87 verificado en `artifacts/android-offline-test-r87/`, guía de
 arranque/salida/reapertura y reversión. No instalado; aprobación para la

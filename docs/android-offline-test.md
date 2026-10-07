@@ -1,5 +1,13 @@
 # Prueba Android sin Bluetooth — pendiente de aprobación
 
+**R92: no reutilizar el APK-r87 bloqueado.** Su manifiesto conservaba un lector
+de notificaciones deshabilitado con binding sensible que no necesitamos. Se
+ha preparado su eliminación completa y una comprobación de regresión; build
+de APK-r92 y revisión pendientes. [Estado/comando](android-build.md).
+La autorización offline R90 sigue vigente para la variante corregida una vez
+revisada; no incluye bypass de Play Protect ni comunicación con reloj. Los pasos
+y la ruta r87 siguientes quedan como historial hasta generar el nuevo bundle.
+
 **R91, 2026-10-06: instalación bloqueada por Play Protect, informado por usuario.**
 Mensaje exacto pendiente. Detener la instalación como prevé el paso 3; no
 desactivar protección ni alterar firma/package para intentar eludirla. APK

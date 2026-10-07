@@ -1,5 +1,45 @@
 # Build de la variante de diagnóstico
 
+## R92: retirar declaración sensible innecesaria — build pendiente
+
+2026-10-06. El usuario describe el aviso de datos sensibles/robo de identidad/
+fraude financiero. Coincide con el aviso documentado por Google para ciertos
+permisos sensibles en instalaciones externas; el texto también tiene otros
+contextos, así que no prueba por sí solo la causa concreta del dispositivo.
+[Guía oficial](https://developers.google.com/android/play-protect/warning-dev-guidance).
+
+Reinspección del APK-r87: sus diez uses-permission estaban restringidos, pero
+**NotificationListener seguía declarado**, enabled=false y protegido por
+BIND_NOTIFICATION_LISTENER_SERVICE. La revisión anterior comprobaba estado
+habilitado/exportado y omitió considerar ese binding sensible en componentes
+deshabilitados. Google incluye lectores de notificaciones entre los accesos
+que pueden provocar este aviso. Relación razonable, no confirmación de la
+decisión de Play Protect sobre este APK.
+
+Se elimina la declaración completa del listener con tools:node=remove, no
+solo se deshabilita. La función no sirve para batería/modelo/versión. No se
+altera package, certificado, targetSdk ni protecciones Android. Nueva versión:
+0.94.0-rw4-diagnostic-r92. Inspector exige ausencia de bindings de notificaciones,
+accesibilidad, administración de dispositivos y permisos SMS, incluso si el
+componente está deshabilitado. El test de regresión rechaza el APK-r87 real
+por ese motivo; XML fuente parseado confirma cero bindings y una regla de
+eliminación. Sources22/hashes doctor OK; APK previo ya no corresponde a ellas.
+
+Compilar desde PowerShell habitual:
+
+```powershell
+node tools/android-build.mjs build-diagnose 2>&1 | Tee-Object -FilePath artifacts/research/android-build-r92.txt
+```
+
+Después: inspeccionar merge/firma del APK nuevo y preparar su copia verificada
+para repetir **solo la prueba offline ya autorizada**, con Play Protect activo.
+La compilación/revisión no aseguran que desaparezca el aviso. Si persiste,
+detenerse y revisar opciones normales/posible apelación, sin envíos automáticos.
+No reutilizar APK-r87, cambiar identidad para eludir detección ni instalar vía
+ADB sobre teléfono. Emulador Android aplazado: no aporta evidencia del RW4 y
+el usuario prioriza llegar al reloj. El emulador Vela/S3 donde Doom funciona
+es distinto de Android. Ninguna conexión física autorizada o realizada.
+
 **R89:** el [plan de arranque Android offline](android-offline-test.md) ya está
 preparado y el APK-r87 copiado/verificado en artifacts/android-offline-test-r87.
 No se modificó la app ni se recompiló. Instalación manual pendiente de aprobación;

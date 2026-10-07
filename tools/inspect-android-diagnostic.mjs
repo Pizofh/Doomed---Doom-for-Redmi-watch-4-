@@ -4,7 +4,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {inspectApk} from './inspect-gadgetbridge-apk.mjs';
-import {diagnosticPermissions, permissionAllowed} from './android-diagnostic-permissions.mjs';
+import {diagnosticPermissions, permissionAllowed, assertNoSensitiveAccess} from './android-diagnostic-permissions.mjs';
 
 if (process.argv.length !== 2) throw Error('No arguments supported');
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -17,10 +17,11 @@ const bytes = fs.readFileSync(path.join(source, apkRelative));
 const inspection = inspectApk(bytes);
 const manifest = inspection.manifest;
 if (manifest.package !== 'nodomain.freeyourgadget.gadgetbridge.rw4diagnostic' ||
-    manifest.versionName !== '0.94.0-rw4-diagnostic-r87' || manifest.versionCode !== 253 ||
+    manifest.versionName !== '0.94.0-rw4-diagnostic-r92' || manifest.versionCode !== 253 ||
     manifest.minSdkVersion !== 23 || manifest.targetSdkVersion !== 35 || manifest.debuggable !== false) throw Error('Unexpected diagnostic APK identity/configuration');
 if (!manifest.permissions.every(permissionAllowed) ||
     [...diagnosticPermissions.keys()].some(name => !manifest.permissions.includes(name))) throw Error('Unexpected diagnostic permissions after manifest merge');
+assertNoSensitiveAccess(manifest);
 for (const name of ['android.permission.BLUETOOTH', 'android.permission.BLUETOOTH_ADMIN', 'android.permission.ACCESS_FINE_LOCATION']) {
   if (Number(manifest.permissionDetails.find(row => row.name === name)?.maxSdkVersion) !== 30) throw Error('Legacy permission lacks API 30 limit');
 }
@@ -41,7 +42,8 @@ const report = {...inspection, apkPath: path.relative(root, path.join(source, ap
   hardwareGateOpen: false, runtimeTested: false,
   privacyAndGlobalLifecycleAuditComplete: false,
   declaredPermissionsAndComponentsRestricted: true,
-  officialApksignerReport: 'artifacts/research/android-diagnostic-apksigner-r87.txt'};
+  noSensitiveAccessDeclarations: true,
+  officialApksignerReport: 'artifacts/research/android-diagnostic-apksigner-r92.txt'};
 fs.mkdirSync(path.dirname(out), {recursive: true});
 fs.writeFileSync(out, JSON.stringify(report, null, 2) + '\n');
 state.apkProduced = true;

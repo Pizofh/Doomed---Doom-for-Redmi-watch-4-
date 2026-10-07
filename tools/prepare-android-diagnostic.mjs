@@ -332,7 +332,13 @@ function componentAttribute(tag, name, value) {
   const attr = new RegExp(`\\s+android:${name}="[^"]*"`, 'g');
   return tag.replace(attr, '').replace(/(\/?>)$/, ` android:${name}="${value}"$1`);
 }
+// This is a service binding permission, not a <uses-permission> entry.
+// Disabling the service leaves its sensitive declaration in the merged APK.
+const listener = /<service\b[^>]*android:name="\.externalevents\.NotificationListener"[^>]*>[\s\S]*?<\/service>/g;
+if ([...manifest.matchAll(listener)].length !== 1) throw Error('Notification listener source anchor differs');
+manifest = manifest.replace(listener, '<service android:name=".externalevents.NotificationListener" tools:node="remove" />');
 manifest = manifest.replace(/<(service|receiver)\b[^>]*>/g, (tag) => {
+  if (tag.includes('tools:node="remove"')) return tag;
   const core = tag.includes('android:name=".service.DeviceCommunicationService"');
   tag = componentAttribute(componentAttribute(tag, 'exported', 'false'), 'enabled', String(core));
   if (tag.includes('android:name="androidx.work.impl.foreground.SystemForegroundService"')) tag = tag.replace(/>$/, ' tools:replace="android:enabled,android:exported">');
@@ -373,7 +379,7 @@ gradle = replaceOnce(gradle, '    buildTypes {', `    buildTypes {
         rw4diagnostic {
             initWith debug
             applicationIdSuffix ".rw4diagnostic"
-            versionNameSuffix "-rw4-diagnostic-r87"
+            versionNameSuffix "-rw4-diagnostic-r92"
             debuggable false
             minifyEnabled false
             signingConfig signingConfigs.debug
