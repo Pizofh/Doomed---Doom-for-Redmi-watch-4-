@@ -98,6 +98,14 @@ RESULT_OK. DiscoveryActivityV2 registra DB y vuelve a la lista sin conectar.
 El menú «Conectar» emite el ticket; «Desconectar» cierra la sesión. Si los
 rótulos/flujo reales difieren, detenerse antes de una acción no reconocida.
 
+**Aviso «Ya vinculado» observado por usuario:** DiscoveryActivityV2.preparePair
+conserva el texto genérico que sugiere borrar el vínculo si falla. Revisada la
+callback exacta del APK r92: Aceptar/OK solo llama checkAuthKeyAndPair, que
+exige RW4 con bond existente y abre AuthKeyActivity. No borra bond ni conecta.
+Se puede aceptar este aviso para llegar a la clave; **no seguir su sugerencia
+de eliminar el vínculo**, tampoco si falla. No requiere nuevo build/intento.
+Una solicitud real de nuevo pairing/reset/desvinculación sigue siendo stop.
+
 ## Comandos y efectos previstos
 
 Handshake protobuf 1/26 y 1/27, negociación y ACK del transporte SPP; después
