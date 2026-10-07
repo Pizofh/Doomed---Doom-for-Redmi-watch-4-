@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**R97,2026-10-06:** usuario difiere conexión para investigar evidencia/recovery.
+[Informe de auth y retorno](rw4-auth-return-research.md); sin prueba física nueva.
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| RW4 fue incorporado a Gadgetbridge0.81.0 como experimental | RW4, cliente upstream | Release oficial2024-07-05 / ficha actual | CONFIRMADO EN RW4 como soporte de código/documentación | Alta documental | Lectura | No confirma firmware2.2.86 ni éxito auth |
+| Un relato de usar perfil RW4 en Watch5 demuestra nuestra compatibilidad RW4 | Watch5 en hilo original | Reporte original Reddit2025-04 y comentarios | REFUTADO como inferencia de compatibilidad | Alta sobre dispositivo reportado | Lectura | No ensayo de nuestro modelo ni retorno MiFitness |
+| Auth y retorno sin reset/unpair están demostrados para M2315W1/2.2.86 | Unidad/firmware exactos | Revisión R97, fuentes/queries listadas | SIN EVIDENCIA suficiente encontrada | No evaluable | No | PR original3693 no accesible; no afirmar imposibilidad |
+| dispose/cleanup puede cerrar transporte SPP | Cliente Gadgetbridge0.94.0 | XiaomiSppSupport.dispose/BtBRQueue cleanup/close | INFERENCIA RAZONABLE para retorno propuesto | Alta para código, baja para resultado físico | Lectura PC | No demuestra reconexión MiFitness ni latencia de cierre Android16 |
+
 **R95,2026-10-06:** usuario confirma RW4 emparejado en Ajustes Bluetooth,
 Mi Fitness conecta bien y teléfono Android16/HyperOS3.0.302.0. No prueba de
 SPP/autenticación propia ni de versión HyperOS del reloj. Plan físico listo

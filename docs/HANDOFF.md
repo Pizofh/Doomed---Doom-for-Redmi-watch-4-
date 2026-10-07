@@ -1,5 +1,7 @@
 # Retomar el proyecto
 
+**R97,2026-10-06:** usuario expresa preocupación sobre seguridad/recovery y elige investigar evidencia RW4 antes de hacerlo. Diferir acción física; no guiar Conectar ni clave mientras revisamos. [Informe](rw4-auth-return-research.md) recoge docs/0.81.0/familia/authcliente/closure y relato Watch5 descartado como prueba RW4. No hallado ciclo reproducible M2315W1/2.2.86→Gadgetbridge→MiFitness. PR3693/Codeberg bloqueado y mirrors/history ilegibles; pregunta async enviada para que usuario lea PR y pegue solo descripción/comentarios sin datos sensibles. Última UI: pantalla clave, no registro/auth confirmados; archivo con campo identificado privadamente sin imprimir valor. No nuevo build/test/emulador. No inferir riesgo alto/brick observado de falta de recovery; tampoco riesgo cero. Siguiente: revisar contenido PR si usuario lo aporta, actualizar evidencia y exponer conclusión antes de continuar consulta.
+
 **UI actual:** usuario encuentra aviso «Ya vinculado» con consejo genérico de borrar vínculo. Revisión callback preparePair de r92: OK solo comprueba RW4/bond y abre AuthKeyActivity; no unlink ni conexión. Guiar Aceptar/OK para llegar a clave, conservar bond y no seguir consejo de eliminarlo. Sin auth ejecutada/reportada todavía; no recompilar para este texto heredado.
 
 **R96:** usuario autoriza «hagámoslo, qué hago, paso a paso» tras plan/riesgos R95. Aprobación incluye descubrimiento, registro local con bond existente y entrada privada clave, un intento auth/GET batería/info30s y retorno Mi Fitness. No volver a pedirla, no reintentos ni nuevos bonds/instalaciones/nativo. Guiar manualmente por etapas, comprobar pantalla de clave y después Conectar una vez; no solicitar secretos/capturas/logs. Consulta autorizada sin resultado todavía; instalación/nativo siguen cerrados.
@@ -50,7 +52,7 @@
 
 **R81 source recibido/auditado:** [conexion y alternativas](gadgetbridge-connection-review.md). TAR80957440bytes sin compresion aunque sufijo.gz; SHA700b2364858e6d26c4446c277d5c89ec7cba795d857d90a7a8d68533c1a69cb1. Native Windows tar inspecciona10219entradas/copia28textos regulares, sin ejecutar upstream. build.gradle0.94.0/253. RW4 usaBT_CLASSIC; onAuthSuccess envia perfil8/0, temperatura10/10, calendario12/1 incluso sync disabled y hora2/3 condicional. No conexion read-only; efectos RW4/2.2.86 no ensayados. DEBUG de auth contiene claves de sesion, no exportar logs.
 
-**Siguiente concreto:** guiar preparación y registro hasta pantalla de clave/lista desconectada, después el único intento Conectar ya autorizado y retorno Mi Fitness. Solicitar únicamente estado de UI sin credenciales, no aprobación repetida. No recompilar, reinstalar, desvincular ni ampliar el alcance.
+**Siguiente concreto:** leer descripción/comentarios de PR3693 aportados por usuario y clasificar firmware, autenticación y retorno Mi Fitness. Investigación antes de consulta por petición R97; no seguir instrucciones físicas R96 automáticamente. No recompilar, reinstalar, desvincular ni repetir emulador.
 
 **Ultimo resultado runtime, R73, 2026-10-04:** [Persistencia S3 emulada](doom-persistence-emulator.md). ELF/WAD instalados una vez en /data, E1M1/FIRE/EXIT antes/despues de reset sin push de assets. Lua final cancela preparacion con panel y ejecuta otro ciclo limpio. Implementacion **3ba88df**. No hardware conectado/modificado.
 

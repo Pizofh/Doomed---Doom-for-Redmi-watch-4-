@@ -1,4 +1,9 @@
-# Primera consulta RW4 — autorizada, resultado pendiente
+# Primera consulta RW4 — conexión diferida para investigación
+
+**R97:** tras consultar seguridad/recovery, el usuario pide investigar pruebas
+específicas antes de hacerlo. La autorización R96 queda como antecedente;
+no continuar descubrimiento/clave/Conectar durante esta revisión. [Hallazgos](rw4-auth-return-research.md).
+Última UI reportada: clave requerida; no guardado ni auth confirmados.
 
 **R96:** usuario dice «hagámoslo, qué hago, paso a paso» tras revisar alcance
 y recovery limitado. Autoriza descubrimiento/registro local/entrada privada

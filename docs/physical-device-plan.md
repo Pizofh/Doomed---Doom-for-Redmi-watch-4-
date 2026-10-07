@@ -1,4 +1,11 @@
-# M2315W1 — primera consulta autorizada; instalación/nativo CERRADOS
+# M2315W1 — conexión diferida; instalación/nativo CERRADOS
+
+**Estado vigente R97:** el usuario solicita evidencia específica RW4 y retorno
+Mi Fitness antes de continuar. [Revisión](rw4-auth-return-research.md): auth
+cliente implementada, ciclo 2.2.86 sin prueba reproducible encontrada; lectura
+del PR original pendiente por acceso bloqueado. No guiar Conectar ni ampliar
+alcance mientras se revisa. R96 es historial de autorización, no instrucción
+de avanzar frente a esta decisión posterior.
 
 **R96:** el usuario autoriza explícitamente un intento según
 [plan de consulta](first-rw4-query-plan.md), aceptando recovery limitado.
