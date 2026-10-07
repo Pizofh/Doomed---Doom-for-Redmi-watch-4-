@@ -1,4 +1,12 @@
-# Gate para M2315W1 — CERRADO
+# M2315W1 — primera consulta autorizada; instalación/nativo CERRADOS
+
+**R96:** el usuario autoriza explícitamente un intento según
+[plan de consulta](first-rw4-query-plan.md), aceptando recovery limitado.
+Permite descubrimiento Bluetooth, registro de reloj ya vinculado/clave en
+teléfono y auth/GET batería/info durante30s, después retorno Mi Fitness.
+Sin permiso para reintentos automáticos, nuevo pairing, paquetes, firmware
+o nativo. Resultado pendiente. Las referencias generales «gate cerrado»
+anteriores se mantienen como historial o se refieren a instalación/nativo.
 
 **R95,2026-10-06:** usuario confirma RW4 ya emparejado en Ajustes Bluetooth,
 teléfono Xiaomi HyperOS3.0.302.0/Android16 BP2A.250605.031.A3 y conexión
@@ -14,7 +22,10 @@ de transporte ni reloj registrado. [Borrador de primera consulta](first-rw4-quer
 listo para revisión; vínculo Android existente y aprobación física pendientes.
 Las notas R89 y anteriores siguientes son históricas.
 
-Este documento registra requisitos y bloqueos. **No es un procedimiento ejecutable ni autorización para conectar el reloj.** No hay comando físico aprobado. Compatibilidad nativa y recovery no demostrados impiden abrir el gate.
+Este documento registra requisitos y bloqueos. El único procedimiento físico
+aprobado es la consulta limitada enlazada arriba. Compatibilidad nativa y
+recovery completo no demostrados mantienen bloqueadas instalación y ejecución
+nativa; no ampliar la autorización de consulta a esas fases.
 
 **R89:** preparada [prueba de app Android con Bluetooth apagado](android-offline-test.md),
 sin reloj, claves ni registro de dispositivos. Solo copia de APK y revisión en PC

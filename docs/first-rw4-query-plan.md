@@ -1,8 +1,16 @@
-# Primera consulta RW4 — plan para aprobación, no autorizado
+# Primera consulta RW4 — autorizada, resultado pendiente
+
+**R96:** usuario dice «hagámoslo, qué hago, paso a paso» tras revisar alcance
+y recovery limitado. Autoriza descubrimiento/registro local/entrada privada
+de clave y **un intento** de autenticación/consultas, con retorno a Mi Fitness
+según este plan. No pedir aprobación otra vez. No autoriza instalación en
+reloj, firmware, nuevas vinculaciones, reintentos ni código nativo. El agente
+solo guía; no ADB/radio/acciones automatizadas sobre hardware.
 
 Actualizado R95, 2026-10-06. Objetivo: un intento de autenticación seguido de consultas
 de batería e información; después retorno a Mi Fitness. No instalar código,
-watchfaces, WAD ni firmware. Este documento no abre el gate físico.
+watchfaces, WAD ni firmware. Solo se abre el gate de esta consulta limitada;
+el gate de instalación y ejecución nativa permanece cerrado.
 
 ## Artefacto y evidencia
 
