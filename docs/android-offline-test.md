@@ -1,5 +1,16 @@
 # Prueba Android sin Bluetooth — pendiente de aprobación
 
+**R91, 2026-10-06: instalación bloqueada por Play Protect, informado por usuario.**
+Mensaje exacto pendiente. Detener la instalación como prevé el paso 3; no
+desactivar protección ni alterar firma/package para intentar eludirla. APK
+original en PC conserva el hash revisado; copia del teléfono sin verificar.
+No se ha confirmado instalación ni ejecución. No atribuir el bloqueo a una
+causa concreta todavía. Google distingue detección potencialmente dañina y
+bloqueos de apps no verificadas/permisos sensibles, y ofrece apelación:
+[documentación oficial](https://support.google.com/googleplay/answer/2812853?hl=es).
+No se envió APK ni apelación a terceros. Alternativa disponible para investigar:
+emulador Android oficial en PC, separado de MiWatchEmulator/Vela; no preparado.
+
 **R90: aprobación recibida.** El usuario autoriza esta instalación/prueba manual
 en teléfono, manteniendo Bluetooth apagado y sin dispositivos ni claves.
 La copia de guía/review.json del bundle R89 conserva su estado de preparación
