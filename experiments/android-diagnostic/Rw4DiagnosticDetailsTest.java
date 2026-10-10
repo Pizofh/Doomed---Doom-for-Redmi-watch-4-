@@ -3,7 +3,42 @@ package nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi;
 
 public final class Rw4DiagnosticDetailsTest {
     private static void require(boolean condition) { if (!condition) throw new AssertionError("Details contract"); }
+    private static StackTraceElement frame(String method) {
+        return new StackTraceElement("android.bluetooth.BluetoothSocket", method, "private-data", 999);
+    }
+    private static java.io.IOException socketError(String middle) {
+        java.io.IOException error = new java.io.IOException("private-data");
+        error.setStackTrace(new StackTraceElement[]{frame("readAll"), frame(middle), frame("connect")});
+        return error;
+    }
     public static void main(String[] args) {
+        require(Rw4DiagnosticDetails.socketOpeningStage(socketError("readInt")) == Rw4DiagnosticDetails.SocketOpeningStage.R01);
+        require(Rw4DiagnosticDetails.socketOpeningStage(socketError("waitSocketSignal")) == Rw4DiagnosticDetails.SocketOpeningStage.R02);
+        require(Rw4DiagnosticDetails.socketOpeningStage(socketError("changedVendorMethod")) == Rw4DiagnosticDetails.SocketOpeningStage.U00);
+        require(Rw4DiagnosticDetails.socketOpeningStage(null) == Rw4DiagnosticDetails.SocketOpeningStage.U00);
+        java.io.IOException error = socketError("readInt");
+        error.setStackTrace(new StackTraceElement[]{frame("readAll"), frame("readInt"), frame("accept")});
+        require(Rw4DiagnosticDetails.socketOpeningStage(error) == Rw4DiagnosticDetails.SocketOpeningStage.U00);
+        error.setStackTrace(new StackTraceElement[]{frame("readAll"),
+                new StackTraceElement("lookalike.BluetoothSocket", "readInt", "private-data", 1), frame("connect")});
+        require(Rw4DiagnosticDetails.socketOpeningStage(error) == Rw4DiagnosticDetails.SocketOpeningStage.U00);
+        error.setStackTrace(new StackTraceElement[]{frame("readAll"), frame("readInt"), frame("connect"),
+                frame("readAll"), frame("waitSocketSignal"), frame("connect")});
+        require(Rw4DiagnosticDetails.socketOpeningStage(error) == Rw4DiagnosticDetails.SocketOpeningStage.U00);
+        StackTraceElement[] oversized = new StackTraceElement[65];
+        java.util.Arrays.fill(oversized, frame("connect"));
+        oversized[0] = frame("readAll"); oversized[1] = frame("readInt");
+        error.setStackTrace(oversized);
+        require(Rw4DiagnosticDetails.socketOpeningStage(error) == Rw4DiagnosticDetails.SocketOpeningStage.U00);
+        java.io.IOException wrapper = new java.io.IOException("private-data", socketError("readInt"));
+        wrapper.setStackTrace(new StackTraceElement[0]);
+        require(Rw4DiagnosticDetails.socketOpeningStage(wrapper) == Rw4DiagnosticDetails.SocketOpeningStage.U00);
+        for (String stored : new String[]{null, "private-data", "R01", "R02", "U00"}) {
+            require(!Rw4DiagnosticDetails.renderSocketOpeningStage(stored).contains("private-data"));
+        }
+        require(Rw4DiagnosticDetails.socketOpeningStage(new java.io.IOException("private-data") {
+            @Override public StackTraceElement[] getStackTrace() { throw new IllegalStateException("private-data"); }
+        }) == Rw4DiagnosticDetails.SocketOpeningStage.U00);
         require(Rw4DiagnosticDetails.keyHasExpectedFormat("00000000000000000000000000000000"));
         require(Rw4DiagnosticDetails.keyHasExpectedFormat("0x00000000000000000000000000000000"));
         require(!Rw4DiagnosticDetails.keyHasExpectedFormat(null));
@@ -28,6 +63,6 @@ public final class Rw4DiagnosticDetailsTest {
         for (int i = 0; i < 100; i++) timed = Rw4DiagnosticDetails.appendTimed(timed, i % 2 == 0 ? Rw4DiagnosticTrace.Event.SOCKET_REQUESTED : Rw4DiagnosticTrace.Event.SOCKET_IO_FAILED, i);
         require(timed.split(",").length == 24);
         require(Rw4DiagnosticDetails.cacheCodes("B01: fixed T01: fixed S01: fixed private-data").equals("B01/T01/S01"));
-        System.out.println("PASS: fixed exception categories, no raw values, bounded/filtered monotonic timeline.");
+        System.out.println("PASS: fixed exception categories, exact opening-stage chains/unknown fallback, no raw values, bounded/filtered monotonic timeline.");
     }
 }

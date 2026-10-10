@@ -1,5 +1,16 @@
 # Retomar el proyecto
 
+**R130, 2026-10-10:** usuario confirma lista negra vacía. Sin bloqueo visible
+en esa lista, NO descarte de otras políticas/causa E03. Helper puro Java añadido
+en Rw4DiagnosticDetails: SocketOpeningStage R01/R02/U00; reconoce solo cadena
+exacta readAll→readInt/waitSocketSignal→connect de android.bluetooth.BluetoothSocket.
+Máx64frames, ambiguous/unknown/runtimefailure→U00, no causes/raw/privates/reflection.
+Tests ampliados Details y runner test-android-diagnostic-policy PASAN PC.
+NO integrado Status, NO preview/APK/build Android/ADB/radio, instalada sigue r114.
+[Detalle](bluetooth-open-failure.md). Próximo: revisión completa captura apertura,
+integración y plan con criterios para corregir transporte antes de otro intento.
+No nueva instalación/manualtest solicitado; no inventar conexión arreglada.
+
 **R129, 2026-10-10:** [captura y límite G08](bluetooth-open-failure.md).
 Captura HyperOS tiene Lista negra Bluetooth; solo revisión visual sugerida,
 contenido/efecto SPP PENDIENTES, sin cambios de ajustes. Fuente AOSP Android16

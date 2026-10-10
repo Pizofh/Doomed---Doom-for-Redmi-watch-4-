@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**R130, 2026-10-10:** [lista vacía y clasificación en PC](bluetooth-open-failure.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| El reloj figura en la lista negra visible | Ajustes HyperOS del usuario | Usuario informa lista vacía | REFUTADO POR REPORTE DEL USUARIO | Alta sobre reporte | Manual usuario | No descarta otras políticas internas; no causa E03 identificada |
+| Podemos clasificar dos cadenas conocidas sin exportar la traza | Helper propio Java en PC | Tests positivos, estructuras desconocidas/ambiguas, canarios y límites | CONFIRMADO EN TESTS PC | Alta para casos probados | Sí, sintético | No probado en HyperOS; no identifica ocupación/rechazo/SDP |
+| La app instalada ya recoge esa etapa | Teléfono, r114 | Helper no integrado en Status ni nuevo APK generado | REFUTADO | Alta | Lectura PC | Informes anteriores mantienen G08 ambiguo |
+
 **R129, 2026-10-10:** [captura y apertura Bluetooth](bluetooth-open-failure.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

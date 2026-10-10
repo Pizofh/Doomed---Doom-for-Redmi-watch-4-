@@ -1,5 +1,39 @@
 # Apertura Bluetooth: evidencia y límite del diagnóstico
 
+## R130 — lista vacía y clasificador probado en PC
+
+2026-10-10. El usuario confirma que la lista negra está vacía. No existe un
+bloqueo visible del reloj en esa lista; esto no descarta otras políticas
+internas de Android/HyperOS ni identifica la causa de E03. No se pidió cambiar
+ajustes o repetir la conexión.
+
+Se añadió a `Rw4DiagnosticDetails` un clasificador puro Java de la etapa interna
+de apertura. Reconoce solamente cadenas consecutivas de frames de la clase
+exacta `android.bluetooth.BluetoothSocket`:
+
+- `readAll → readInt → connect`: R01, lectura inicial del canal.
+- `readAll → waitSocketSignal → connect`: R02, espera de señal de conexión.
+- Otra estructura, más de 64 frames, múltiples cadenas o error de inspección:
+  U00, desconocido.
+
+No examina texto de la excepción, archivos, líneas, claves ni direcciones;
+no invoca métodos privados o reflexión. No recorre excepciones encapsuladas
+para evitar atribuirles una etapa que podría corresponder a otra operación.
+La salida solo contiene códigos y etiquetas constantes. R01/R02 localizan
+una lectura, **no diagnostican por sí solos la causa Bluetooth**.
+
+`node tools/test-android-diagnostic-policy.mjs` pasó en PC: cadenas conocidas,
+trazas de accept/clases parecidas/ambiguas/demasiado largas, fallback ante fallo
+de inspección, excepciones encapsuladas y filtrado de valores privados. Los
+tests existentes de política, intento y trace también pasaron en ese runner.
+
+El helper está preparado para una futura integración; `Rw4DiagnosticStatus`
+todavía no lo llama y los informes antiguos no adquieren información nueva.
+No se generó APK, ni se cambió la app instalada, ni se ejecutó ADB/Bluetooth.
+Próximo checkpoint: integrar en una revisión completa del diagnóstico de
+apertura y establecer qué resultados justificarían cambios en el transporte,
+antes de solicitar otro intento manual. Sin modificación de firmware o reloj.
+
 ## R129 — revisión en PC, 2026-10-10
 
 La captura de Configuración adicional de HyperOS muestra «Lista negra de

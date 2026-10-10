@@ -30,6 +30,47 @@ public final class Rw4DiagnosticDetails {
     }
     private Rw4DiagnosticDetails() { }
 
+    /** Location only, never a diagnosis of the remote Bluetooth failure. */
+    public enum SocketOpeningStage {
+        U00("Etapa interna no identificada"),
+        R01("Lectura inicial del canal del servicio Bluetooth local"),
+        R02("Espera de señal de conexión, después de recibir el canal");
+        public final String text;
+        SocketOpeningStage(String text) { this.text = text; }
+    }
+
+    /** Recognizes only the exact call chains reviewed in AOSP Android16. */
+    public static SocketOpeningStage socketOpeningStage(Throwable error) {
+        if (!(error instanceof java.io.IOException)) return SocketOpeningStage.U00;
+        try {
+            StackTraceElement[] frames = error.getStackTrace();
+            if (frames == null || frames.length > 64) return SocketOpeningStage.U00;
+            SocketOpeningStage stage = SocketOpeningStage.U00;
+            int matches = 0;
+            for (int i = 0; i + 2 < frames.length; i++) {
+                if (!socketFrame(frames[i], "readAll") || !socketFrame(frames[i + 2], "connect")) continue;
+                SocketOpeningStage candidate = socketFrame(frames[i + 1], "readInt") ? SocketOpeningStage.R01
+                        : socketFrame(frames[i + 1], "waitSocketSignal") ? SocketOpeningStage.R02 : SocketOpeningStage.U00;
+                if (candidate != SocketOpeningStage.U00) { stage = candidate; matches++; }
+            }
+            return matches == 1 ? stage : SocketOpeningStage.U00;
+        } catch (RuntimeException ignored) {
+            return SocketOpeningStage.U00;
+        }
+    }
+
+    private static boolean socketFrame(StackTraceElement frame, String method) {
+        return frame != null && "android.bluetooth.BluetoothSocket".equals(frame.getClassName())
+                && method.equals(frame.getMethodName());
+    }
+
+    public static String renderSocketOpeningStage(String stored) {
+        SocketOpeningStage stage;
+        try { stage = SocketOpeningStage.valueOf(stored); }
+        catch (RuntimeException ignored) { stage = SocketOpeningStage.U00; }
+        return stage.name() + ": " + stage.text;
+    }
+
     public static boolean keyHasExpectedFormat(String key) {
         return key != null && key.trim().matches("(?:0x)?[0-9a-fA-F]{32}");
     }
