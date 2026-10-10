@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R129, 2026-10-10:** [captura y apertura Bluetooth](bluetooth-open-failure.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Existe una opción «Lista negra de Bluetooth» | Ajustes del teléfono HyperOS | Captura aportada por usuario | CONFIRMADO EN CAPTURA | Alta | Visual | Contenido y efecto sobre SPP no comprobados; solo revisión visual propuesta |
+| El reloj está en esa lista y explica E03 | Teléfono/RW4 | No hay contenido de lista ni correlación del intento | SIN EVIDENCIA | Desconocida | No | Mi Fitness sincroniza; no cambiar ajustes por esta hipótesis |
+| El mismo IOException de G08 puede surgir en dos lecturas internas | AOSP android16-release, blob824dda69 | readInt y waitSocketSignal llaman readAll | CONFIRMADO EN FUENTE AOSP | Alta sobre fuente | Lectura primaria PC | No equivalencia HyperOS demostrada; no determina causa remota |
+| El informe actual conserva qué lectura interna falló | App diagnóstica propia | Status guarda categoría; patch sustituye log de excepción | REFUTADO EN IMPLEMENTACIÓN | Alta | Lectura PC | No pedir logs crudos ni atribuir una fase concreta a informes previos |
+
 **R128, 2026-10-10:** [servicio retirado; retorno normal](phone-core-state-plan.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -1,5 +1,18 @@
 # Retomar el proyecto
 
+**R129, 2026-10-10:** [captura y límite G08](bluetooth-open-failure.md).
+Captura HyperOS tiene Lista negra Bluetooth; solo revisión visual sugerida,
+contenido/efecto SPP PENDIENTES, sin cambios de ajustes. Fuente AOSP Android16
+accesible vía directorio/click: BluetoothSocket blob824dda69d4b5bddc10ae22e58e676e27841a88a3.
+connect: readInt4bytes → canal positivo → waitSocketSignal44bytes; ambos readAll
+pueden producir mismo IOException G08. NO código HyperOS confirmado ni causa E03.
+App propia descarta stack de apertura al reemplazar upstream log por fijo;
+Status solo categoría/tiempos, no recuperar fase de informes anteriores.
+Próximo PC: si se instrumenta, categoría fija por frames readInt/waitSocketSignal/
+unknown, sin logs crudos/reflection/transporte distinto; agrupar con cambios
+justificados antes de nuevo APK. Ningún build/ADB/PROBE/hardware ejecutado.
+R128 retorno normal ya confirmado; no volver a preguntar. Gates intactos.
+
 **R128, 2026-10-10:** [comparación de servicio completada](phone-core-state-plan.md).
 Stopped lectorR126: remote header/bodytrue/sections1/parsed4/unparsed0/core0/
 otherusercore0/processnot-established; local header/bodytrue/explicitNothingtrue/
