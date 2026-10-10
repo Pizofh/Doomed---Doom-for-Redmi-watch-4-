@@ -1,5 +1,36 @@
 # R114 — inventario de servicios desde Android
 
+## Resultado R117 — segundo inventario completado
+
+2026-10-10. El usuario mantuvo abierta la pantalla sin copiar ni cambiar de
+pestaña y reportó r114/API36, `I1: completado`, tiempo16132ms. ACTION_UUID
+recibido para el objetivo aceptado; cinco UUIDs listados, SPP1101/HFP/HID
+observados, FE95 no observado. BLE: ventana completada, 40 callbacks,
+cero coincidencias de dirección registrada y cero candidatos por nombre
+anunciado; FE95 no observado. Error0. Stop BLE y retiro del receptor retornaron.
+
+Esto confirma por reporte la ejecución completa del controlador y del escaneo
+en el teléfono, con cierre sin excepciones capturadas. Los 40 callbacks no
+equivalen a 40 dispositivos distintos. Ningún anuncio se pudo atribuir al RW4
+por los criterios implementados; no descarta anuncios anónimos, dirección BLE
+distinta/aleatoria ni que el reloj use BLE bajo otras condiciones.
+La lista de Android concuerda con la caché SPP previa, pero puede proceder de
+caché incluso tras SDP: no valida servicio/canal RFCOMM remoto actual ni explica
+los errores de conexión anteriores. No hay autenticación o transporte Xiaomi
+funcional demostrado, ni acceso a código/apps/filesystem del reloj.
+
+No se pidió un tercer inventario, PROBE, QUERY, cambio de clave, canal o
+transporte. No nuevo APK/código/build/tests ni hardware desde herramientas.
+**Retorno a Mi Fitness y normalidad del reloj tras este segundo intento pendientes
+de confirmación**; el reporte positivo R115 corresponde al primero.
+El checkpoint de inventario está completado por reporte del usuario; siguiente
+paso inmediato: cerrar nuestra app, abrir Mi Fitness y verificar retorno normal.
+Después, investigar el endpoint SPP a partir de fuentes verificables en PC,
+sin repetir el mismo socket o cambiar a BLE automáticamente. Instalación y
+ejecución nativa en M2315W1 siguen cerradas.
+
+---
+
 ## Resultado R116 — cancelación al perder primer plano
 
 2026-10-10. El usuario recuperó el registro guardado: r114/API36, `I3: salida

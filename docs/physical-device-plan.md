@@ -1,5 +1,11 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R117:** [segundo inventario completo por reporte](rw4-service-inventory.md),
+I1/16132ms, lista AndroidSPP/HFP/HID,40callbacksBLE sin coincidencias RW4,
+error0/cierre retornó. Falta retornoMiFit/normalidad después de este intento;
+no extrapolar R115. Sin nuevo intento radio propuesto, cambios de permisos,
+transporte, firmware o APK. Instalación/nativo reloj siguen CERRADOS.
+
 **Actual R116:** [registro terminal recuperado y segundo inventario propuesto](rw4-service-inventory.md).
 I3/5922ms: cancelación foreground antes de BLE, retiro receptor retornó. No
 compatibilidad descartada. Misma APK/APIs/alcance/riesgo R114, una segunda

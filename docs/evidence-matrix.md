@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**R117, 2026-10-10:** [segundo inventario completado](rw4-service-inventory.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Segundo inventario r114 completó ambas fases y las llamadas de cierre retornaron | Cliente Android API36 del usuario | I1/16132ms/error0/stop BLE y receptor retornaron | CONFIRMADO POR REPORTE EN TELÉFONO | Alta sobre reporte | Manual usuario | No garantiza estado de todo el stack OS/firmware |
+| Android entregó una lista del objetivo con SPP/HFP/HID | Solicitud para unidad M2315W1/2.2.86 | ACTION_UUID/5UUIDs/SPP1101 sí/HFP sí/HID sí | CONFIRMADO POR REPORTE EN TELÉFONO | Alta sobre reporte | Manual usuario | Respuesta puede contener caché; endpoint remoto actual sin validar |
+| El scanner BLE recibió callbacks | Cliente API36 | Ventana completada/40callbacks/error0 | CONFIRMADO POR REPORTE EN TELÉFONO | Alta sobre reporte | Manual usuario | No son necesariamente40dispositivos; no implica datos de Xiaomi |
+| Se identificaron anuncios BLE del RW4 | Unidad del usuario | 0coincidencias dirección/0candidatos nombre | SIN EVIDENCIA | Desconocida | No identificado | No descarta BLE ni anuncios con otros identificadores |
+| Mi Fitness/reloj retornaron normalmente tras segundo inventario | Unidad del usuario | Aún no reportado | SIN EVIDENCIA | Pendiente | No confirmado | Confirmación R115 corresponde al primer inventario |
+
 **R116, 2026-10-10:** [desenlace del primer inventario r114](rw4-service-inventory.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

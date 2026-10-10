@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R117:** [segundo inventario completado en16,1s](docs/rw4-service-inventory.md).
+Android entregó SPP/HFP/HID; BLE recibió40callbacks sin anuncios atribuibles al
+reloj. Cierre retornó sin error registrado. Falta confirmar retorno a Mi Fitness;
+servicio/canal SPP remoto aún sin validar. No nuevo intento o APK propuesto.
+
 **Actual R116:** [el primer inventario terminó a5,9s por pérdida de primer plano](docs/rw4-service-inventory.md),
 antes de BLE. Retiro del receptor reportado; causa de onPause desconocida.
 Se propone una segunda ejecución con el mismo APK y pantalla abierta30s.

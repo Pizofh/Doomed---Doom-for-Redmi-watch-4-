@@ -1,5 +1,18 @@
 # Retomar el proyecto
 
+**R117, 2026-10-10:** usuario mantuvo pantalla abierta y reporta segundo inventario
+r114/API36 completado I1/16132ms. [Resultado](rw4-service-inventory.md): ACTION_UUID
+con5UUIDs, SPP1101/HFP/HID sí, FE95 no observado; BLE ventana completada,
+40callbacks,0addressHits/0nameHits, FE95 no observado; error0, stopScan/detach
+llamadas retornaron. Inventario completo confirmado por reporte en teléfono.
+No asumir UUIDs frescos remotos, canal válido,40dispositivos o ausenciaBLEdelRW4.
+No auth/transporteXiaomi exitoso/native/filesystem demostrado. RetornoMiFit
+y normalidad reloj de ESTE segundo intento pendientes; R115 fue el primero.
+Único siguiente paso inmediato: cerrar propiaapp/abrirMiFit y confirmar normalidad;
+después investigar endpoint SPP por fuentesPC, sin tercerinventario/PROBE/QUERY
+ni fallbackBLE/canales/clave/reset. Documentación solo; no código/build/tests
+nuevos, APK o hardware desde herramientas. Nativo/firmware en reloj CERRADOS.
+
 **R116, 2026-10-10:** registro guardado recuperado: I3/salida primer plano,
 5922ms, SDP esperando UUIDs-1, BLE no iniciado/contadores0/error0, cierreBLE
 no requerido y receptor llamada retornó. [Resultado y segundo intento propuesto](rw4-service-inventory.md).
