@@ -1,5 +1,18 @@
 # Retomar el proyecto
 
+**R133, 2026-10-10:** usuario completó lector pasivo R132: cabeceras nativas
+false, cierres propios0, candidatos4 y PORT25 todos0. Completó sin error; sin
+atribución r131 ni socket actual. Inconcluso, no repetir lector ni pedir rawlogs.
+[Registro](rw4-opening-result-r132.md) y [único ensayo siguiente preparado](phone-adapter-restart-plan.md):
+misma app r131, denegar temporalmente Nearby SOLOMiFit/stop ambas→Bluetooth
+teléfono OFF real10s→ON→un PROBE→cerrar/restaurar Nearby/abrirMiFit/verificar.
+Nuevo factor respectoR113: ciclo completo adaptador; no exclusiva garantizada,
+core puede reconectar. Estado PREPARADO/no realizado; no ADB físico por agente.
+No APK nuevo/QUERY/insecure/canalmanual/corestop/unpair/reset/firmware/nativo.
+Si mismo fallo, no repetir variantes: evidencia profunda con privacidad o
+alternativa respaldada por código. Fuentes AndroidAdapter y fichaGB revisadas;
+PR3693 inaccesible, no corrección actual atribuida. Sin tests nuevos para docs.
+
 **R132, 2026-10-10:** [PROBE r131 recibido y próximo lector pasivo](rw4-opening-result-r132.md).
 Usuario r131/API36/TRANSPORT_ONLY/P00/B01T01S01: traceD01D02D03D18D04E03D17D13,
 times0/128/132/142/142/540/546/553ms; connect398ms; G08R02L01;

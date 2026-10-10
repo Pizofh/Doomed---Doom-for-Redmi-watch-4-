@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R133, 2026-10-10:** [lectura pasiva completada](rw4-opening-result-r132.md) y
+[plan de un ciclo del adaptador](phone-adapter-restart-plan.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| La lectura pasiva aportó el motivo nativo del fallo | HyperOS del usuario/lector R132 | nativeHeadersObserved=false; todos los conteos cero | REFUTADO PARA ESTA LECTURA | Alta sobre resultado | Manual usuario | Lectura completó; no demuestra ausencia de logs en otras ventanas/tags |
+| Apagar el adaptador cierra conexiones Bluetooth | Contrato Android | BluetoothAdapter.disable documenta cierre y apagado | CONFIRMADO EN DOCUMENTACIÓN ANDROID | Alta sobre contrato | No prueba nueva | Operación propuesta por UI, no API restringida; efecto exacto HyperOS aún pendiente |
+| OFF→ON y un PROBE resuelven la apertura en este RW4 | M2315W1/2.2.86 y teléfono actual | Solo plan preparado | SIN EVIDENCIA | Desconocida | No | Core puede reconectar; reutiliza r131, no corrige código por conjetura |
+
 **R132, 2026-10-10:** [canal recibido, EOF y lectura pasiva](rw4-opening-result-r132.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -1,5 +1,13 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R133:** lector pasivo ejecutado manualmente: sin cabeceras nativas
+reconocidas, ceros inconclusos. [Plan concreto siguiente](phone-adapter-restart-plan.md):
+teléfono, Nearby SOLOMiFit denegado temporalmente/stop ambas→adaptadorOFF10s→ON
+→un PROBE r131 existente→restaurar permiso/abrirMiFit/verificar. Sin nueva APK,
+ADB, QUERY o cambios del core/vínculo. Efectos/persistencia/reversión/riesgo y
+límites de recovery en ese plan. PREPARADO, no resultado físico nuevo; no es
+garantía de exclusividad ni solución demostrada. Gates nativo/firmware cerrados.
+
 **Actual R132:** [PROBE r131 localizado y retorno normal](rw4-opening-result-r132.md).
 R02/L01/G08 con398ms deconnect; usuario confirma app/relojOK. Noauth/GET.
 Nueva acción propuesta solo lectura USB de registros existentes del TELÉFONO,

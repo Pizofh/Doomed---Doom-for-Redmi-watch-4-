@@ -1,5 +1,25 @@
 # R132 — fallo después de recibir canal y lectura pasiva preparada
 
+## Resultado posterior R133 — lectura pasiva completada
+
+2026-10-10. El usuario ejecutó `node tools/phone-rfcomm-logs.mjs collect` y
+aportó el JSON R132: nativeHeadersObserved=false; ownCloseMarkers=0; las cuatro
+categorías de fallos candidatos y las 25 categorías PORT_* tienen conteo cero.
+No atribución al intento r131 ni socket activo verificados; rawOutputSaved,
+bluetoothOperationRequested, watchCommandRequested y logConfigurationChanged
+son false. La lectura terminó sin el aviso fijo de error.
+
+**Resultado inconcluso:** no hay líneas con las cabeceras nativas reconocidas
+por el lector. Puede ser ausencia de esos tags/niveles, ventana sobrescrita o
+formato distinto. No se demuestra que HyperOS nunca registre la causa, que
+no hubiera error nativo, que el canal esté libre ni quién cerró. No se solicita
+repetir collect, ampliar a logs crudos o habilitar logging.
+
+Se conserva el fallo R02/L01 de apertura como último dato atribuible. No hay
+base para cambiar UUID, seguridad del socket o clave. [Siguiente ensayo manual
+con la app existente](phone-adapter-restart-plan.md): una desconexión completa
+del adaptador del teléfono y un PROBE; preparado, todavía no realizado.
+
 2026-10-10. Usuario aporta un intento r131 y confirma «todo ok en watch y app».
 Instalación y ejecución de la revisión r131 confirmadas por el informe/usuario;
 no solicitar otra confirmación de retorno normal para este mismo intento.
