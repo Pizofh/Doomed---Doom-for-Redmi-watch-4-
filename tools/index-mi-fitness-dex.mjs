@@ -81,6 +81,7 @@ for (const entry of entries) {
     m.owner === 'Landroid/bluetooth/BluetoothSocket;' && m.name === 'connect' ||
     ['Lcom/xiaomi/wearable/spp/SystemClient;', 'Lcom/xiaomi/wearable/spp/b;'].includes(m.owner) && m.name === '<init>' ||
     ['Lcom/xiaomi/wearable/core/client/MiWearCoreClient;', 'Lcom/xiaomi/wearable/core/client/IMiWearCoreClient;'].includes(m.owner) && m.name === 'disconnect' ||
+    m.owner === 'Lcom/xiaomi/wearable/core/CoreExtKt;' && m.name === 'setLyraEnabled' ||
     /^Lcom\/xiaomi\/(fit\/device\/model|fitness\/device\/manager)\//.test(m.owner) &&
       ['disconnectDevice', 'setCurrentStatus'].includes(m.name) ? [i] : []));
   const modelIds = new Set(strings.flatMap((s, i) => /^(?:Redmi Watch 4(?: .*)?|M2315W1)$/.test(s) ? [i] : []));

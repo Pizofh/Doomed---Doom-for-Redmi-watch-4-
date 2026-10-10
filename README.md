@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R124:** [lectura USB preparada para comparar el estado de Lyra](docs/phone-core-state-plan.md).
+Herramienta probada con respuestas simuladas; comparación del teléfono pendiente.
+La papelera conduce a desvinculación y el setter Lyra revisado pertenece a manejo
+de fallos. No hay pausa temporal soportada demostrada ni otro PROBE propuesto.
+
 **Actual R121:** [servicio Xiaomi analizado: permisos y ciclo de conexión](docs/mi-connect-service-static-review.md).
 La API de Lyra exige paquete/certificado permitidos; nuestra app no está admitida.
 El cierre de Mi Fitness no obliga a cerrar todos los dispositivos en el recorrido

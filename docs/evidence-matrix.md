@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**R124, 2026-10-10:** [estado Lyra y lectura preparada](phone-core-state-plan.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Existe un setter interno para habilitar Lyra | APK base Mi Fitness verificado | CoreExtKt.setLyraEnabled guarda pref version_v3_; dos llamadas en manejo de muerte Binder | CONFIRMADO EN CÓDIGO PC | Alta sobre métodos | SDK estático | No botón normal demostrado; no provocar fallos o editar prefs |
+| Lyra sigue activo durante nuestros PROBE fallidos | Teléfono del usuario | Aún no hay lectura actual del servicio durante esos intentos | SIN EVIDENCIA DIRECTA | Desconocida | No | Comparación USB preparada no prueba socket ocupado ni causa E03 |
+| Lector USB emite solo esquema fijo sin dumps | Script PC propio | FakeADB, secciones/estados/canarios/errores y plan sinADB | CONFIRMADO EN PC | Alta para casos probados | Sí, sintético | Salida HyperOS real pendiente; ProcessRecord asignado no prueba hilo vivo |
+
 **R123, 2026-10-10:** [papelera identificada](mi-connect-service-static-review.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

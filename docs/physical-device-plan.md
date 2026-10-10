@@ -1,5 +1,11 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R124:** [comparación de estado del teléfono por USB](phone-core-state-plan.md).
+Plan concreto de lecturas fijas y detención manual únicamente Mi Fitness, con
+reversión al abrirla. Sin nuevas pruebas radio/comandos Xiaomi o cambios del
+servicio system. Script y privacidad probados con respuestas sintéticas; resultado
+físico pendiente. No instala otra APK ni modifica reloj/firmware/particiones.
+
 **Actual R121:** [servicio copiado por usuario y revisado solo en PC](mi-connect-service-static-review.md).
 Firma/manifest verificados; API restringe caller/package/cert y no admite nuestra
 app. No bind, desconexión, force-stop/disable/clear del servicio system o cambios

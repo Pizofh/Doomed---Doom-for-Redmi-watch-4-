@@ -191,7 +191,7 @@ Se solicitó únicamente lectura de la pestaña Dispositivo de Mi Fitness para
 saber si muestra Desconectar/Conexión automática/Interconectividad: nombres de
 opciones, sin cambiar ajustes, desvincular o cambiar teléfono. Esta lectura
 de la UI no requiere instalar otra APK ni ejecutar comandos. Respuesta recibida
-y corregida en R122 arriba; falta identificar la papelera distinta de Desvincular.
+y corregida en R122 arriba; papelera identificada posteriormente en R123.
 
 No se prepara una orden force-stop/disable/clear/uninstall del servicio de sistema:
 es compartido por otras funciones del teléfono y falta determinar el efecto.

@@ -1,5 +1,19 @@
 # Retomar el proyecto
 
+**R124, 2026-10-10:** [plan lectura USB del estado Lyra](phone-core-state-plan.md).
+CoreExt setLyraEnabled escribe pref version_v3_; índice68→70, dos llamadas
+confirmadas en RemoteServiceConnector muerte Binder/crash/rebind fallido,
+NO UI normal encontrada por esta búsqueda; no inducir fallos ni editar prefs.
+Tool phone-core-state.mjs plan NOADB; collect baseline|stopped solo MANUAL,
+cuatro lecturas fijas USB: get-state, am get-current-user, dumpsys activity
+services componente core, dumpsys package com.xiaomi.wearable. No raw saved/
+stdout, serial/PID/UID/keys/radio/socket/watchcommands. Parser reporta registros
+activos para usuarioactual, ProcessRecord assigned/null/unknown, MiFit stopped;
+no socket o proceso vivo probado, snapshots no atómicos. Tests sintéticos y plan
+pasan; datos reales PENDIENTES. Usuario: MiFitnormal→baseline→forzar detención
+SOLOMiFit enUI→stopped→abrirMiFit/restaurar/verificarsync, USBdebugoff/revocar.
+No cambios Nearby/autostart/profiles/core, no nueva APK ni PROBE. Gates intactos.
+
 **R123, 2026-10-10:** capturas identifican papelera en Dispositivos, RW4 conectado/
 sincronizado según UI; Desvincular en Más, versión2.2.86. SDK smali del APK
 verificado: ManagerActivity common_delete→ivg→B→onCreate$lambda$0→
