@@ -1,5 +1,16 @@
 # Retomar el proyecto
 
+**R123, 2026-10-10:** capturas identifican papelera en Dispositivos, RW4 conectado/
+sincronizado según UI; Desvincular en Más, versión2.2.86. SDK smali del APK
+verificado: ManagerActivity common_delete→ivg→B→onCreate$lambda$0→
+onTitleBarEndViewClicked→changeDisplayMode/editMode (aviso power-save opcional).
+Eliminar fila→confirmUnbound→callback positivo/red→unbind→ManagerViewModel→
+DeviceManager.unbindDevice. Papelera NO pausa de Bluetooth; no pulsarla para
+liberar SPP. [Evidencia](mi-connect-service-static-review.md). Lectura PC solo,
+sin nuevo APK/build/radio/hardware. Capturas no copiadas al repo. R122 pendiente
+de identificar papelera RESUELTO; pausa temporal soportada aún desconocida.
+No otro PROBE/autostart/disable-core/unbind. Causa E03 y gates nativos pendientes.
+
 **R122, 2026-10-10:** usuario no ve pausa de conexión en la pantalla MiFit
 inspeccionada. Corrige que **Desvincular y papelera son controles distintos**;
 no atribuir a papelera una función sin identificar su contexto. Autostart MiFit

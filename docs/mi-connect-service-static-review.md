@@ -1,5 +1,39 @@
 # R121 — servicio Xiaomi: acceso restringido y ciclo de conexión
 
+## Actualización R123 — papelera identificada por capturas y código
+
+2026-10-10. Dos capturas aportadas muestran la papelera en «Dispositivos», con
+RW4 «Conectado» y mensaje de sincronización exitosa; «Desvincular» aparece en
+«Más», junto a versión del dispositivo2.2.86. Son controles y pantallas distintos.
+Las imágenes muestran el estado de la UI en ese momento; no prueban por sí
+solas un transporte, servicio ocupado o la causa de E03.
+
+Se revisaron con el SDK oficial las clases ManagerActivity, ManagerViewModel,
+ivg y ManagerActivity$confirmUnbound$1 del mismo APK Mi Fitness verificado en
+R120. El botón final de la barra tiene descripción common_delete; ivg.onClick
+llama B→onCreate$lambda$0→onTitleBarEndViewClicked. Fuera de edición, este
+handler activa changeDisplayMode(true) cuando hay elementos, salvo una rama
+condicionada de aviso de ahorro de energía. changeMode cambia el modo de UI y
+notifica al adaptador; no es una llamada a disconnect.
+
+La acción de eliminación de una fila llega a confirmUnbound. Su callback de
+confirmación positiva, con red disponible, llama unbind→
+ManagerViewModel.unbindDevice→DeviceManager.unbindDevice. **La papelera inicia
+gestión para eliminar/desvincular; no proporciona la pausa temporal buscada.**
+No se pulsó ni confirmó nada en el teléfono; no se ejecutó bytecode del APK,
+ADB, Bluetooth o comandos del reloj. La revisión adicional de DeviceInfoFragment
+no se usa como prueba de equivalencia exacta entre las dos rutas completas.
+
+Salidas smali privadas: manager-activity.txt, manager-view-model.txt,
+manager-title-click.txt y manager-unbind-confirm.txt bajo artifacts/research/
+mi-fitness-apk (ignorados por Git). Un primer intento de clase «livg» falló por
+interpretar la L de un descriptor como parte del nombre; corregido a «ivg».
+No se publican esas salidas ni se copian las capturas al repositorio.
+
+Checkpoint de identificación de controles cerrado. No se propone otro PROBE
+ni cambios de autostart como prueba de aislamiento; aún falta una ruta temporal
+soportada que libere la conexión y permita restaurarla sin desvinculación.
+
 ## Actualización R122 — controles de UI e inicio automático
 
 2026-10-10. El usuario no encuentra Desconectar, Conexión automática o

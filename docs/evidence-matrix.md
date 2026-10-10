@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**R123, 2026-10-10:** [papelera identificada](mi-connect-service-static-review.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Papelera y Desvincular aparecen en pantallas distintas | Mi Fitness del usuario | Dos capturas: Dispositivos y Más | CONFIRMADO POR CAPTURAS | Alta | Inspección visual | No implican funciones independientes al completar el flujo |
+| Papelera proporciona una pausa temporal Bluetooth | Código de lista de dispositivos Mi Fitness3.59.1i | Handler activa edición; acción eliminar termina en unbindDevice | REFUTADO EN RUTA REVISADA | Alta | SDK estático | No pulsado en teléfono; no se comparan todos los efectos de ambas rutas |
+| UI muestra RW4 conectado/sincronizado y versión2.2.86 | Capturas aportadas | Estado conectado, aviso sincronización y versión en Más | CONFIRMADO POR CAPTURAS | Alta sobre UI | Inspección visual | No verifica canal SPP, socket Lyra ni causa E03 |
+
 **R122, 2026-10-10:** [lectura de UI e inicio automático](mi-connect-service-static-review.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
