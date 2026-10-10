@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R105,2026-10-09:** [Lectura real de caché](android-bluetooth-cache.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Android confirma vínculo, informa tipo clásico y guarda SPP | Registro RW4 del teléfono del usuario | Reporte de diálogo r104 B01/T01/S01 | CONFIRMADO por reporte de caché Android | Alta sobre reporte | Manual usuario; UI y componente propios | No enumera todas las capacidades físicas del reloj |
+| Classic/SPP seleccionado coincide con caché | Cliente r101 / registro local Android | Fuente selecciona BT_CLASSIC/UUID1101 y reporte r104 | INFERENCIA RAZONABLE sobre elección de transporte | Alta | Inspección fuente y reporte | No demuestra apertura posible ni servicio actualmente disponible |
+| La presencia de SPP en caché demuestra endpoint remoto funcional ahora | RW4/2.2.86 | Caché sin nueva conexión/discovery | SIN EVIDENCIA | No evaluable | No | E03 anterior sigue sin causa precisa |
+| Es posible recuperar del r104 la causa detallada del E03 anterior | Cliente Android | r101 guardó solo enum de etapas; r104 lee caché | REFUTADO para los datos conservados por nuestro diagnóstico | Alta sobre diseño | Fuente | No habilitar export de logs privados; haría falta instrumentar una prueba futura |
+
 **R104,2026-10-09:** [Consulta local preparada](android-bluetooth-cache.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

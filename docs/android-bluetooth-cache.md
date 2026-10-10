@@ -1,5 +1,57 @@
 # R104 — consulta de caché Bluetooth del teléfono
 
+## Resultado R105 — lectura real reportada
+
+2026-10-09. El usuario abrió el diálogo r104 y reportó:
+
+```text
+B01: vínculo guardado confirmado
+T01: tipo clásico
+S01: SPP presente en caché
+```
+
+Esto confirma instalación/apertura del flujo y lectura local según reporte
+del usuario. Android reconoce el vínculo y guarda el UUID de SPP para ese
+registro. La selección Classic/SPP de r101 coincide con estos datos. No se
+midió tráfico radio; la ausencia de intento de conexión corresponde al código
+del flujo r104 y su mensaje, no a una captura independiente.
+
+No demuestra que el servicio remoto esté disponible ahora ni que Android
+pueda abrirlo. T01 no identifica todas las capacidades físicas del chip:
+es el tipo que Android informa para el registro. El fallo anterior sigue
+localizado antes de auth Xiaomi; ninguna clave rechazada demostrada.
+
+### Diseño del siguiente diagnóstico
+
+Objetivo único: obtener la categoría del fallo de apertura del mismo socket
+seguro Classic/SPP, sin cambiar transporte, canal, vínculo o clave.
+La caché sola no permite recuperar la IOException del intento anterior.
+
+Android dispone de `BluetoothSocketException.getErrorCode()` desde API34;
+el teléfono reportado es Android16, mientras que nuestra app conserva min23.
+Una implementación deberá aislar y proteger el acceso API34. Hay errores
+genéricos y operaciones que lanzan IOException ordinaria: puede que el código
+no baste para identificar la causa.
+[Referencia oficial](https://developer.android.com/reference/android/bluetooth/BluetoothSocketException#getErrorCode()).
+
+Propuesta para una futura prueba: abrir y cerrar únicamente el socket,
+sin inicializar protocolo Xiaomi, autenticar o enviar GET. Un intento manual,
+sin fallback/reconexión; mismo UUID/método seguro y límite de30s como máximo,
+con cierre al terminar/cancelar. Guardar solo categoría fija de excepción,
+código reconocido, duración acotada y si el cierre local por timeout ya había
+empezado. No guardar mensajes crudos, claves, MAC, direcciones ni paquetes.
+Separar «error devuelto por Android» de «cierre provocado por nuestro límite».
+
+La apertura implica enlace/SDP Bluetooth reales; no describirla como lectura
+local ni garantizar cero efectos internos del reloj. Antes de guiarla deben
+estar implementados/revisados/probados el cierre y la clasificación, preparado
+el APK y actualizado el plan físico para revisión explícita de esa prueba.
+**Diseño preparado, no código/build nuevo ni tercer intento solicitado.**
+La versión r104 instalada continúa bloqueando Conectar. No repetir la lectura
+de caché ni pruebas de emulador para obtener el dato que falta.
+
+## Preparación y verificación R104 (historial)
+
 **Listo en PC:** build Android SUCCESSFUL2m57s (73 tareas,20 ejecutadas),
 prueba de componente/entrada local pasa, inspector y apksigner oficial pasan.
 APK `artifacts/android-diagnostic-r104/RW4Diagnostics-r104.apk`,31394652 bytes,
@@ -8,7 +60,8 @@ versión `0.94.0-rw4-diagnostic-r104`; SHA256
 Mismo certificado SHA256
 `47eeb041e241c7ab785ed8bdcf06c6fcce90020e52d4794aa3c6c66590577709`.
 Firma v1/v2 válida; no prueba inocuidad. DEX contiene clase/etiquetas r104.
-Instalación/UI/caché real de esta versión **aún no probadas**.
+En la preparación R104 aún no se habían probado instalación/UI/caché reales;
+el reporte R105 superior actualiza ese estado.
 
 2026-10-09. El segundo intento r101 falló en el socket antes de autenticación
 Xiaomi; el usuario confirma Mi Fitness/reloj normales después. El próximo
@@ -90,4 +143,4 @@ o cierre de nuestra app. No operación sobre particiones/bootloader/firmware
 del reloj ni prueba de código nativo. No ampliar este resultado a garantía de
 seguridad de todos los menús heredados de Gadgetbridge.
 
-El ensayo de UI/caché real en teléfono queda pendiente del reporte del usuario.
+En R104 quedaba pendiente el ensayo UI/caché; resultado recibido en R105 arriba.

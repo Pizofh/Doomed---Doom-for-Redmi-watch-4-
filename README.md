@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**R105:** lectura de caché r104 realizada por el usuario: vínculo confirmado,
+tipo clásico y SPP presente. Coincide con el transporte elegido por nuestra
+app; no prueba que el servicio remoto responda. [Resultado y siguiente diagnóstico](docs/android-bluetooth-cache.md).
+No nuevo intento Bluetooth ni APK preparado en esta revisión.
+
 **Estado actual R104:** DOOM real funciona en el emulador S3; compatibilidad
 nativa RW4 pendiente. Dos consultas manuales Bluetooth al reloj no conectaron;
 Mi Fitness y reloj normales después, confirmado por usuario. [Resultado](docs/first-rw4-query-result.md).
