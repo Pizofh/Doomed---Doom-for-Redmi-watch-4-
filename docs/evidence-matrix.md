@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**R114, 2026-10-10:** [inventario de servicios](rw4-service-inventory.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| El inventario tiene fases acotadas y libera escaneo/receptor independientemente | Controlador Java propio en PC | `test-android-service-inventory.mjs`, radio simulada | CONFIRMADO SOLO EN PC | Alta para controlador | Sí | No confirma stopScan/temporización del OS real |
+| Tickets de inventario no habilitan consumidores de conexión ni payloads | Código propio y parche GB en PC | Tests Attempt + guards de fuente/QUERY | CONFIRMADO SOLO EN PC | Alta para lo probado | Sí | QUERY aceptado requerido para comandos; UI/radio físicos pendientes |
+| El informe del inventario persiste solo conteos/flags y no exporta identificadores | Código propio en PC | Tests del controlador y preferencias Android simuladas | CONFIRMADO SOLO EN PC | Alta para componente propio | Sí | No auditoría global de Gadgetbridge/OS |
+| Solicitar UUIDs garantiza respuesta recién obtenida del RW4 | Android SDK, no unidad real | Contrato oficial `fetchUuidsWithSdp` permite caché | REFUTADO | Alta | No radio | ACTION_UUID no demuestra endpoint remoto ni canal |
+| El RW4/2.2.86 anuncia BLE o responde a esta solicitud SDP | M2315W1 del usuario | Sin resultado R114 aún | SIN EVIDENCIA | Desconocida | No | Nombre BLE coincidente será candidato, no prueba de identidad |
+
 **R113,2026-10-10:** [PROBE con permiso Mi Fitness denegado](rw4-permission-isolated-probe-result.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

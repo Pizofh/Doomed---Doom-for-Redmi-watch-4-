@@ -1,5 +1,10 @@
 # Diagnóstico Android limitado: prototipo en PC
 
+**Actual R114:** [inventario UUID/SDP y BLE](../../docs/rw4-service-inventory.md).
+Fuentes propias Activity/Status/controller y tests con radio simulada. Sin
+conexión GATT/RFCOMM propia ni protocolo Xiaomi en este modo; no módulos
+ni archivos al reloj. El usuario realizará la prueba manual; runtime pendiente.
+
 **Actual R106:** [toolkit consolidado y APK listo](../../docs/android-consolidated-diagnostic.md).
 Informe local copiable, dos modos de conexión explícitos y cancelación pendiente,
 sin uploads/auto-retries ni payloads en PROBE. Pruebas PC y build/firma pasan.

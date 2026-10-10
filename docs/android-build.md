@@ -1,5 +1,11 @@
 # Build de la variante de diagnóstico
 
+**Actual R114:** [inventario de servicios y reproducción](rw4-service-inventory.md).
+El generador/refresh admiten tres clases propias adicionales; manifest incluye
+una Activity no exportada, sin servicios o permisos adicionales. Inspector y
+empaquetador requieren r114 y el mismo certificado. Binarios locales ignorados
+por Git; ninguna instalación de teléfono/reloj desde estos scripts.
+
 **Actual R106:** [toolkit consolidado](android-consolidated-diagnostic.md),
 build final SUCCESSFUL1m58s, inspector/apksigner pasan, misma firma y permisos.
 APK listo en artifacts/android-diagnostic-r106. No compilación pendiente que

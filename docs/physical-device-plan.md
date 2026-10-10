@@ -1,5 +1,14 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R114:** [plan concreto para inventario de servicios](rw4-service-inventory.md).
+Activity propia no exportada, ticket exclusivo, solicitud Android de UUIDs y
+escaneo BLE temporal. Sin socket/GATT propio, auth, comandos Xiaomi, nuevo
+vínculo o archivos al reloj. Android puede mantener SDP pendiente y actualizar
+caché; resumen numérico persistente solo en teléfono. Pruebas PC pasan;
+UI/radio/retorno físico no probados. Un solo inventario manual propuesto.
+Instalación/nativo/firmware del reloj siguen CERRADOS; no recuperación integral
+validada. No reintentar PROBE/QUERY ni cambiar transporte automáticamente.
+
 **Actual R113:** [aislamiento NearbyMiFit ensayado](rw4-permission-isolated-probe-result.md).
 Mismo fallo preauth386ms; usuario restauró permisos y todo funciona normalmente.
 No otro PROBE igual ni QUERY. Próximo checkpoint: identificar servicio/endpoint

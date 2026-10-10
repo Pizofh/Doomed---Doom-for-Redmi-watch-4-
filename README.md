@@ -1,5 +1,11 @@
 # DOOM en Redmi Watch 4
 
+**Actual R114:** [inventario de servicios Android](docs/rw4-service-inventory.md)
+implementado en un único APK: solicitud UUID/SDP y observación BLE, sin
+autenticación ni comandos Xiaomi. Pruebas PC pasan; resultado físico pendiente.
+El próximo checkpoint es un inventario manual y retorno normal a Mi Fitness.
+Instalar/ejecutar código en el reloj sigue pendiente de su gate específico.
+
 **Actual R113:** [PROBE con Mi Fitness sin permiso Nearby](docs/rw4-permission-isolated-probe-result.md)
 también falla antes de autenticación. Permisos restaurados y funcionamiento
 normal confirmados. Filtro privado PC probado: logs existentes no identifican

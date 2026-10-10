@@ -1,5 +1,29 @@
 # Retomar el proyecto
 
+**R114, 2026-10-10:** usuario dice «adelante» después de R113. [Inventario
+de servicios completo](rw4-service-inventory.md) implementado y empaquetado,
+sin nuevo intento físico. Activity no exportada/foreground-only y ticket exclusivo
+SERVICE_INVENTORY; solicitud UUID Android + escaneo BLE LOW_POWER, ventanas
+10s/10s y límite lógico20s. Cancelación en onPause/onDestroy, sin autoretry;
+stopScan y retiro receptor independientes. SDP del OS no tiene cancelación propia
+y puede devolver caché. Dirección registrada y nombre exacto solo en memoria;
+coincidencia por nombre es débil. Informe separado solo14ints+boolean en teléfono.
+Inventario no habilita socket/GATT propio/protocolo/auth/GET; gates QUERY positivos.
+Todas cinco suites PC pasan, build final SUCCESSFUL2m19s/73tareas10ejecutadas,
+inspector/apksigner/Dex verifican3clases. APK31411083B,
+SHA0f44f91ead190e1e70b460e32fcf21bd2eebf903b382c1a164bfbebd540f3dc8,
+misma firma47eeb041...577709/paquete/10permisos, versiónr114, min23/target35.
+Bundle `artifacts/android-diagnostic-r114/RW4Diagnostics-r114.apk`; r106 conservado.
+No APK instalado/UI/radio r114 probado. Siguiente único checkpoint manual:
+actualizar propia app sobre existente sin borrar datos; force-stop MiFitness y
+propiaapp; mantener permisos restaurados/perfiles actuales/BT ON; tarjetaRW4
+→Inventario de servicios→Iniciar inventario; pantallaabierta20s; copiar informe,
+cerrar/retornoMiFit y comunicar normalidad. No PROBE/QUERY, nuevo bond, negar
+permisos otra vez ni cambiar transporte/canales. Si popup de enlace/error:
+cancelar/salir y reportar, no repetir. Firmware/nativo/instalación en reloj CERRADOS.
+Solo PC modificado; no dependencias nuevas. Build red requirió ejecución autorizada.
+Historial inferior conserva estados anteriores.
+
 **R113,2026-10-10:** usuario confirma NearbyMiFitOFF/ambasforce-stop/PROBEr106 y permisosrestaurados/todonormal. [Resultado](rw4-permission-isolated-probe-result.md): P00B01T01S01, cadenaD01D02D03D18D04E03D17D13, tiempos0/117/128/149/150/536/543/549, G08/cierreprevio:no. Connect386ms/close7ms; sinauth/GET/deadline; hipótesispermMiFit como solución nocumplida, no exclusión totalpila/privilegios. Nuevo filtroPC `check-mi-fitness-transport.mjs`+test pasa yse ejecutó sobre4logsprivados:12líneasBLE,0same-lineRW4,otrosmarcadores0; no transporteRW4 identificado, sin raw/secret/path/export. Fuente0.94 RW4Classic/SPP/SDP y override soloBOTH; BLEUUIDsotrosmodelos no compatRW4. No más PROBEsiguales/QUERY/otroAPKporlogging/unpair/reset/desinstalar/BLE/canales. Próximoúnicocheckpoint: evidencia servicio/endpoint actual deunidad, inventario futurorevisablecompleto antes deotraAPK/radio; aún noimplementado/automático. Sin nueva appbuild/testAndroid/hardware desdeherramientas.
 
 **R112,2026-10-10:** usuario caminó y reporta sincronización de pasos nuevos enMiFit con llamadas/entradaOFF. Evidencia práctica de comunicación reciente por reporte, no solo datosguardados; no prueba transporte/causaE03. Mantener perfilesOFFpara compararR109 y cambiar solo permisoNearbyMiFit; no insistir activarONantes delensayo. Guía vigente: denegar/verificarNearbySoloMiFit, force-stopambas, unPROBEr10630s, copiar/cerrar, devolverNearby/MiFit y reactivar perfilesoriginalesONalterminar para recuperarfunciones. [Registro](rw4-bluetooth-profiles-result.md). Permiso/ensayoaislado no ejecutados/reportados aún; no nuevoAPK/autoHW/QUERY. R111 eshistorial supersedido por sincronizaciónreciente.

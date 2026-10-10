@@ -1,5 +1,12 @@
 # R106 — diagnóstico consolidado, una actualización
 
+**Actual R114:** [inventario de servicios implementado](rw4-service-inventory.md)
+como opción adicional del mismo toolkit. Requiere un ticket propio y se ejecuta
+en Activity de primer plano; no abre nuestro socket/protocolo. Informes de
+conexión anterior e inventario separados. Pruebas PC pasan, ejecución Android
+real pendiente. No volver a repetir PROBE por más etiquetas. El texto inferior
+conserva el historial de r106 y sus intentos.
+
 **Actual R113:** [PROBE con permiso Mi Fitness denegado falla igual](rw4-permission-isolated-probe-result.md).
 Connect386ms/G08, sin auth/GET, retorno normal por reporte tras restaurar permisos.
 No más intentos iguales: servicio/endpoint actual aún por identificar.
