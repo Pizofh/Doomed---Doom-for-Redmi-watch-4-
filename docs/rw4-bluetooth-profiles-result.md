@@ -1,5 +1,16 @@
 # R109 — segundo PROBE y posible actividad de Mi Fitness
 
+**Actualización R110,2026-10-10:** usuario confirma que reactivó ambos
+interruptores y Mi Fitness/reloj funcionan normalmente después de R109.
+No resultado nuevo de conexión. Se guía un único PROBE r106 condicionado a
+comprobar manualmente que Dispositivos cercanos está denegado solo a Mi Fitness.
+Mantener perfiles originales, Bluetooth ON y Quick Share sin cambios.
+Detener Diagnostics/Mi Fitness sin borrar datos antes del ensayo; si el permiso
+no puede denegarse/verificarse o aparece nuevo pairing, no iniciar/continuar.
+Cerrar Diagnostics, restaurar permiso y comprobar Mi Fitness al terminar,
+incluido si hay fallo. No query, cambio de clave ni reintentos encadenados.
+Los estados pendientes y plan preparado inferiores describen R109 histórico.
+
 2026-10-10. Usuario aporta otro informe r106 después de la guía R108.
 No se dispone de confirmación separada del estado efectivo de los toggles
 durante este ensayo. Es el cuarto intento de enlace registrado y segundo PROBE.

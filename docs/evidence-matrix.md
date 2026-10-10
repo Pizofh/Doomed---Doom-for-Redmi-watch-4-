@@ -1,5 +1,10 @@
 # Matriz de evidencia
 
+**R110,2026-10-10:** usuario confirma restauración de toggles y funcionamiento
+normal de Mi Fitness/reloj tras R109. Retorno **CONFIRMADO EN RW4 por reporte**;
+no demuestra igualdad de todos los datos ni causalidad de los pasos/notificación.
+Ensayo futuro con permiso de Mi Fitness denegado todavía sin resultado.
+
 **R109,2026-10-10:** [Segundo PROBE y actividad aparente](rw4-bluetooth-profiles-result.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

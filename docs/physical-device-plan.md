@@ -1,5 +1,11 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R110:** retorno R109 confirmado: ambos perfiles restaurados y
+Mi Fitness/reloj normales por reporte. [Plan con permiso de Mi Fitness](rw4-bluetooth-profiles-result.md)
+revisado: un PROBE manual condicionado a permisoNearby denegado/verificado,
+seguido de restauración explícita. Ejecución/resultado aún pendientes; mismo
+APK, perfiles originales y QuickShare sin cambios, no hardware automático.
+
 **Actual R109:** [nuevo PROBE fallido y permiso Mi Fitness](rw4-bluetooth-profiles-result.md).
 151ms hasta fallo de connect, sin auth; posible notificación de MiFitness no
 demuestra reinicio/reconexión/causa. Retorno/restauración de R109 pendiente.
