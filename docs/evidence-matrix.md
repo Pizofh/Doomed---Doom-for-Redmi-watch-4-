@@ -1,5 +1,16 @@
 # Matriz de evidencia
 
+**R99,2026-10-09:** [Watchfaces y juegos Lua RW4](rw4-lua-games-evidence.md).
+Fuentes originales revisadas; sin ensayo físico nuevo.
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Existen scripts de watchface RW4 con touch/LVGL | RW4, código de ejemplo | Upstream TouchEvents | CONFIRMADO EN RW4 documental | Alta | Lectura; runtime previo solo S3 | No prueba firmware2.2.86 |
+| Autor publicó Duck Hunt Lua y versión RW4 Battle City | RW4, reportes del desarrollador | Publicaciones originales enlazadas R99 | CONFIRMADO EN RW4 como reporte del autor | Alta sobre reporte | No juegos ejecutados | Sin firmware exacto/fuente de juegos revisada |
+| Todo juego Lua requiere firmware modificado | RW4 / watchfaces frente a apps independientes | Habr897742 distingue las rutas | REFUTADO como conclusión de esas fuentes | Alta documental | Lectura | Firmware especial referido a apps independientes; instalación stock propia aún pendiente |
+| Una watchface defectuosa puede causar crash/reinicio recuperable por retirada | RW4, esfera Light and Night | FAQ oficial Xiaomi KA-228715 | CONFIRMADO EN RW4 documental | Alta | No | No prueba hard brick ni recovery de firmware |
+| Juegos Lua demuestran nuestro ELF Doom compatible con RW4/2.2.86 | Nuestra unidad / port C | No evidencia ABI/loader específica en esos ejemplos | SIN EVIDENCIA | No evaluable | No | No extrapolar scripting a módulo nativo |
+
 **R98:** [Fidelidad de emulación](emulation-fidelity.md), sin prueba física nueva.
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
