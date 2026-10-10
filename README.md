@@ -1,5 +1,12 @@
 # DOOM en Redmi Watch 4
 
+**Actual R120:** [APK instalado verificado y delegación Lyra identificada](docs/mi-fitness-apk-static-review.md).
+Mi Fitness3.59.1i tiene firma criptográfica válida; su cliente SPP revisado usa
+nuestro mismo UUID/factory. Los logs existentes registran delegación exitosa a
+un servicio externo Xiaomi: detener Mi Fitness no demostró aislamiento completo.
+Falta atribuir transporte/canal al RW4. Próximo paso preparado: copiar el APK
+de ese servicio por USB y analizarlo en PC; sin otra prueba Bluetooth o APK nuevo.
+
 **Actual R119:** [revisión de ruta SPP y copia de Mi Fitness preparada](docs/rw4-spp-endpoint-research.md).
 UUID/factory coinciden con cliente upstream; causa del fallo aún desconocida.
 Script probado con ADB simulado para copiar el APK instalado del teléfono por

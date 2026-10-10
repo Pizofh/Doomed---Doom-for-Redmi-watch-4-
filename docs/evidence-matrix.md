@@ -1,5 +1,16 @@
 # Matriz de evidencia
 
+**R120, 2026-10-10:** [identidad, transporte SPP y Lyra](mi-fitness-apk-static-review.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| APK copiado declara Mi Fitness3.59.1i y firma válida | Base instalado del teléfono, 4partes reportadas | Hash revalidado; AAPT2 y apksigner36.0.0 | CONFIRMADO EN PC | Alta sobre archivo | Sí, lectores oficiales | No autenticidad Xiaomi independiente ni splits verificados |
+| Cliente SystemClient de Mi Fitness usa UUID1101 y factory segura ServiceRecord | Código APK base | SDKsmali SystemClient + spp.a + zlq | CONFIRMADO EN CÓDIGO PC | Alta para método | Sí | Misma apertura que variante propia; selección RW4 sin demostrar |
+| Mi Fitness puede delegar a MiWearCoreService externo | Código APK y logs existentes | RemoteServiceConnector/CoreExtKt; 178registros bindtrue/client | CONFIRMADO EN CÓDIGO E HISTORIAL APORTADO | Alta sobre observación | Sí, filtro privado | Pueden ser duplicados; no estado actual, canal o unidad RW4 |
+| Detener Mi Fitness aisló toda su ruta de comunicación | Tres PROBE anteriores | No inspección del servicio externo en esas pruebas | SIN EVIDENCIA | Desconocida | No | Permisos/proceso MiFit no demuestran ausencia de Lyra |
+| Servicio externo causa E03 o excluye nuestra app | RW4/HyperOS del usuario | Nueva hipótesis; no canal o política del servicio comprobados | INFERENCIA RAZONABLE A INVESTIGAR | Baja | No | No desactivar servicio/evadir permisos/cambiar canales |
+| Export-core copia solo APK del paquete fijo por USB | Código propio PC | FakeADB incluido SystemExt/oneAPK; plan-core sinADB | CONFIRMADO SOLO EN PC | Alta para casos probados | Sí, sintético | Lectura física del nuevo paquete aún pendiente; no radio/firmware |
+
 **R119, 2026-10-10:** [revisión SPP y copia de APK preparada](rw4-spp-endpoint-research.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

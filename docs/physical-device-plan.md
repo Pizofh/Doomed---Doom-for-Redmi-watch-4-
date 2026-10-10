@@ -1,5 +1,15 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R120:** [Mi Fitness analizado en PC; plan de copia del servicio Xiaomi](mi-fitness-apk-static-review.md).
+Usuario completó lectura del APK MiFit por USB; identidad/firma verificadas
+offline. Se encontró delegación externa en código e historial de logs; no se
+probó su vínculo actual/RW4 ni causa de E03. Próximo paso manual preparado:
+`export-core` lee pm/APKcom.xiaomi.mi_connect_service con USBnormal y guarda
+copiaPC. Mismo gate de lectura del teléfono: no ADB físico por agente, radio,
+bind a servicio, permisos adicionales, desactivar servicio o instalar APK.
+Revertir depuración/autorizaciónUSB al terminar. CoreAPK aún no copiado.
+Ninguna escritura al reloj; no backup/recovery nuevo. Instalación/nativo CERRADOS.
+
 **Actual R119:** [plan concreto para lectura APK del teléfono por USB](rw4-spp-endpoint-research.md).
 Scripts/fakeADB probados, no ADB físico ejecutado. Acción manual propuesta:
 depuraciónUSBnormal/PCautorizado→querypm/pullbaseMiFit→desactivar/revocar.

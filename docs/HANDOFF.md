@@ -1,5 +1,36 @@
 # Retomar el proyecto
 
+**R120, 2026-10-10:** [revisión estática de Mi Fitness y plan del servicio](mi-fitness-apk-static-review.md).
+Usuario exportó manualmente base141427237B/SHA56e7bdbe139b369a72839b48d2f29e67e3df25984dd33a9b80abbbc44b511fdd,
+4partes instaladas/baseonly. Export-review histórico siguefalse; review posterior
+en artifacts/research/mi-fitness-apk/review.json verifica packagecom.xiaomi.wearable,
+3.59.1i/code359001/min26/target35; apksigner36 v2/v3/v3.1 ySourceStamp verifican;
+certAPI33+3fb18466b99ce7dcf5b85d4c326d88b04e076671a01259a143969905d54e0f1a,
+API24–32b031fe98a4dbb0d4d82661787f25de643182b378e9ef632d8adea75aab58f2d8;
+titularXiaomi no contrastado independiente. SDKlectorAccessDenied sandbox→autorizado
+fuera; apkanalyzerXML falla entidad&, AAPT2binarymanifest funciona; dexpackages
+global supera48MiB y quedaINCOMPLETO, no prueba ausencia. Nuevo índice completo
+12DEX/22candidatos (escaneo sin límitesinstruction: falsos positivos posibles)
+confirmados relevantes con SDKsmali. SystemClient→SPP1101/factoryseguraigualpropia;
+a.connect vínculo/permisos/discovery; zlq creaSystemClient; ApiCallFactory ramas
+dual/dualcoreWearOS/earphone→zlq, otraBLE/localbind→v23; DeviceInfo.isDual6/7;
+mapping/type específicoRW4 aún desconocido. spp.b resultóparser NOotrocliente.
+MiWearCoreClient permiteCLIENT/AUTO_SWITCH etc; RemoteServiceConnector hacebind
+al targetPackageName defaultcom.xiaomi.mi_connect_service, actionpackage.MiWearCoreService;
+CoreExtKt.useRemoteService guards soporte/habilitado/permiso; manifestsolicita
+MI_WEAR_CORE, protección efectiva/accesoapp propia sin determinar. Filtro
+check-mi-fitness-core-service.mjs sobre4logs existentes:178alltrue/178runningclient/
+178bindtrue/0bindfalse/356package/178CoreService/0socketmarkers; agregados pueden
+duplicarse, NO178BTconexiones ni identidadRW4/currentstate/causeE03. Testsprivacy
+canary/decision/longline pasan. No deshabilitar servicio ni repetir PROBE/query.
+Exporter extendido SOLOtargets fijosfitness/core; plan-core sinADB pasó y
+fakeADBtests pasan ambos. Próximo ÚNICO checkpoint MANUAL: teléfonoUSBnormal
+autorizado, `node tools/export-mi-fitness-apk.mjs export-core`, después desconectar/
+depurUSBoff/revocar. Destinotools/local/mi-connect-service/MiConnectService-base.apk,
+no overwrite/launch/data/BT/watch/root/fallback; planriesgos documentado.
+CoreAPK NOcopiadoaún. Herramientas soloPC/lectoresSDK, ningúnADB real ejecutado
+poragente. No nuevas instalaciones/buildsAPK/publicación/nativo/firmwareRW4.
+
 **R119, 2026-10-10:** usuario «ok»; investigación PC del endpoint SPP.
 [Informe + plan de copia APK](rw4-spp-endpoint-research.md). Seis archivos fuente
 upstream rehash contra review F-Droid0.94/code253 pasan. Ruta revisada:

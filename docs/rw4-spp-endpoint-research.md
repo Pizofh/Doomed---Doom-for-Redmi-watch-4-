@@ -1,4 +1,14 @@
-# R119 — revisión del endpoint SPP y copia de Mi Fitness
+# Investigación del endpoint SPP y copia de Mi Fitness
+
+**Actual R120:** la copia manual se completó y se analizó en PC.
+[Resultados y siguiente plan](mi-fitness-apk-static-review.md): firma válida,
+identidad3.59.1i, cliente SPP con mismo UUID/factory; delegación a servicio Lyra
+identificada en código y logs existentes. Falta atribuir ruta a RW4. Se preparó
+export-core para una segunda copia de APK del teléfono, no otro testBluetooth.
+Lo siguiente conserva el estado histórico de R119; sus pendientes de MiFit
+ya fueron abordados por R120, sin reescribir export-review histórico.
+
+## R119 — revisión del endpoint SPP y copia preparada
 
 2026-10-10. Inventario completo y retorno normal confirmados en R117/R118.
 La lista Android incluye SPP, HFP e HID; no valida el canal remoto. Tres PROBE
