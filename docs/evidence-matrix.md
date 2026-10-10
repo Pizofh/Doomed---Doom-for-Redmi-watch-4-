@@ -1,5 +1,17 @@
 # Matriz de evidencia
 
+**R107,2026-10-09:** [Resultado real PROBE r106](rw4-bluetooth-probe-result.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| r106 llegó a crear socket y falló durante connect antes de protocolo/auth | M2315W1/2.2.86 y Android API36 | Informe manual D18/D04/E03 sin D05, G08; fuente de etapas | CONFIRMADO EN RW4 por reporte del cliente | Alta sobre etapa | Manual usuario | 297ms entre solicitud socket y fallo; no captura radio |
+| El error fue causado por nuestro límite30s o cierre previo solicitado | Este intento PROBE | E03+414ms, cierre solicitado:no, sin E08 | REFUTADO para el límite y cierre registrados por nuestra app | Alta | Manual usuario | No excluye causas de la pila Bluetooth o peer |
+| La clave Xiaomi fue rechazada o validada | Este intento PROBE | Modo sin clave/protocolo; fallo pre-D05 | SIN EVIDENCIA | No evaluable | No auth ejecutada | QUERY usa el mismo socket; cambiar clave no resuelve la etapa observada |
+| La llamada close retornó y app registró desconexión | Cliente r106 en teléfono | D17+420ms/D13+440ms | CONFIRMADO por reporte Android | Alta sobre llamada | Manual usuario | No prueba cierre de todos los perfiles/link |
+| Mi Fitness y reloj vuelven a funcionar | Unidad del usuario | Respuesta posterior del usuario | CONFIRMADO EN RW4 por reporte | Alta sobre observación | Manual usuario | App muestra ~18 pasos más; no afirmar igualdad ni causa |
+| La prueba modificó el contador de pasos | Unidad del usuario | Diferencia posterior sin baseline; PROBE sin comandos Xiaomi | SIN EVIDENCIA | No evaluable | No ensayo causal | No borrar datos/reset por esta observación |
+| G08 identifica una causa concreta o rechazo explícito remoto | Pila teléfono/reloj | Patrón genérico y sin error Axx | SIN EVIDENCIA | No evaluable | Fuente/informe | AOSP histórico contiene patrón; no es build HyperOS16 exacta |
+
 **R106:** [Diagnóstico consolidado preparado](android-consolidated-diagnostic.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

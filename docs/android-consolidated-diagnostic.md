@@ -1,5 +1,11 @@
 # R106 — diagnóstico consolidado, una actualización
 
+**Actual R107:** [ensayo manual PROBE realizado](rw4-bluetooth-probe-result.md).
+Falló en `connect()` antes de protocolo/auth, con G08, y registró cierre local.
+El usuario informa funcionamiento de ambos y ~18 pasos de diferencia. No guiar
+QUERY/reintento: comparte el mismo socket que falló. Los estados pendientes y
+la guía de primer ensayo inferiores describen la preparación histórica R106.
+
 **APK listo:** `artifacts/android-diagnostic-r106/RW4Diagnostics-r106.apk`,
 versión `0.94.0-rw4-diagnostic-r106`,31411032 bytes. SHA256:
 `2223db7255f8e864400a58111eb1666839c5c57754952db8ce1b64149e70539c`.

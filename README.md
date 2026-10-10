@@ -1,5 +1,12 @@
 # DOOM en Redmi Watch 4
 
+**Actual R107:** [prueba solo Bluetooth r106 realizada](docs/rw4-bluetooth-probe-result.md).
+La apertura falló en297ms, antes de autenticación/comandos Xiaomi; el cierre
+local terminó. Mi Fitness y reloj funcionan según el usuario, con una diferencia
+de ~18 pasos entre app/reloj aún sin causa determinada. No nuevo APK ni consulta
+de batería; siguiente meta: verificar el transporte/servicio de esta unidad.
+Los apartados anteriores se conservan como historial; nativo RW4 sigue pendiente.
+
 **Actual R106:** [app de diagnóstico consolidada](docs/android-consolidated-diagnostic.md)
 lista en PC: caché/informe copiable, errores/tiempos, prueba solo Bluetooth,
 consulta limitada de batería/datos y cancelación. Un APK para estas herramientas;

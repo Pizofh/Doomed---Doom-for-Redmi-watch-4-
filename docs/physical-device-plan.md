@@ -1,5 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R107:** [PROBE manual r106 ejecutado y registrado](rw4-bluetooth-probe-result.md).
+Connect falló antes de auth/comandos; close retornó. Usuario confirma ambos
+funcionando, con ~18 pasos más en Mi Fitness que en reloj, causa desconocida.
+No QUERY ni otro intento propuesto ahora; no repetir la guía R106 inferior.
+Siguiente checkpoint de investigación: transporte/servicio usado por Mi Fitness
+en esta unidad. No nuevos permisos a nativo, instalación, firmware ni fallback.
+
 **Actual R106:** [plan concreto del diagnóstico consolidado](android-consolidated-diagnostic.md)
 con APK revisado, modo solo enlace y QUERY separados, límites, persistencia,
 rollback/riesgos/recovery/evidencia. No acción física automática ejecutada.
