@@ -1,5 +1,10 @@
 # Matriz de evidencia
 
+**R101,2026-10-09:** [Diagnóstico por etapas](android-diagnostic-stages.md).
+Usuario confirma detención previa Mi Fitness/permisos cercanos; no causa del
+fallo identificada. Build r101/Java/cola/inspección/firma confirmados solo en
+PC; UI/transporte r101 **SIN EVIDENCIA** hasta prueba manual.
+
 **R100,2026-10-09:** [Primer intento físico](first-rw4-query-result.md).
 Usuario reporta clave introducida/Conectar sin conexión, solo «No conectado».
 Mi Fitness conecta después, **CONFIRMADO EN RW4 por reporte del usuario**

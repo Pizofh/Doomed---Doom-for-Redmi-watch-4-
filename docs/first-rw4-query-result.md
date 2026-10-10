@@ -21,6 +21,12 @@ No hay instalación/transferencia/firmware reportados.
 
 ## Revisión PC y próximo paso
 
+**Actualización R101:** detención previa Mi Fitness y Dispositivos cercanos
+confirmados por el usuario. La hipótesis de permiso faltante no queda
+respaldada por ese reporte. [Instrumentación de etapas](android-diagnostic-stages.md)
+preparada/compilada en PC; aún sin instalación/UI/radio r101. Notas inferiores
+describen la investigación inicial R100.
+
 Lectura de fuentes generadas r92: UI emite ticket manual, servicio lo consume,
 soporte abre sesión y SPP intenta negociación antes de autenticación. Ticket
 caduca a los 5 s; sesión a los 30 s. Existen ramas de rechazo sin detalle

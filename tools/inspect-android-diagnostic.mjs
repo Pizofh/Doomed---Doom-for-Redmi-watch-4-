@@ -17,7 +17,7 @@ const bytes = fs.readFileSync(path.join(source, apkRelative));
 const inspection = inspectApk(bytes);
 const manifest = inspection.manifest;
 if (manifest.package !== 'nodomain.freeyourgadget.gadgetbridge.rw4diagnostic' ||
-    manifest.versionName !== '0.94.0-rw4-diagnostic-r92' || manifest.versionCode !== 253 ||
+    manifest.versionName !== '0.94.0-rw4-diagnostic-r101' || manifest.versionCode !== 253 ||
     manifest.minSdkVersion !== 23 || manifest.targetSdkVersion !== 35 || manifest.debuggable !== false) throw Error('Unexpected diagnostic APK identity/configuration');
 if (!manifest.permissions.every(permissionAllowed) ||
     [...diagnosticPermissions.keys()].some(name => !manifest.permissions.includes(name))) throw Error('Unexpected diagnostic permissions after manifest merge');
@@ -43,7 +43,7 @@ const report = {...inspection, apkPath: path.relative(root, path.join(source, ap
   privacyAndGlobalLifecycleAuditComplete: false,
   declaredPermissionsAndComponentsRestricted: true,
   noSensitiveAccessDeclarations: true,
-  officialApksignerReport: 'artifacts/research/android-diagnostic-apksigner-r92.txt'};
+  officialApksignerReport: 'artifacts/research/android-diagnostic-apksigner-r101.txt'};
 fs.mkdirSync(path.dirname(out), {recursive: true});
 fs.writeFileSync(out, JSON.stringify(report, null, 2) + '\n');
 state.apkProduced = true;

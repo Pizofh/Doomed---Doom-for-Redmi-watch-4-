@@ -1,5 +1,9 @@
 # Build de la variante de diagnóstico
 
+**Actual R101,2026-10-09:** [diagnóstico por etapas](android-diagnostic-stages.md)
+compilado/verificado en PC. APK r101 listo, aún sin instalación/UI/radio.
+R92 y apartados inferiores son historial.
+
 ## R92: retirar declaración sensible innecesaria — build pendiente
 
 2026-10-06. El usuario describe el aviso de datos sensibles/robo de identidad/

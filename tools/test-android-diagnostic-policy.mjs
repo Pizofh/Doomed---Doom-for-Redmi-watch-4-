@@ -11,10 +11,13 @@ for (const [cmd, args] of [
     path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticPolicy.java'),
     path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticSession.java'),
     path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticAttempt.java'),
+    path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticTrace.java'),
+    path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticTraceTest.java'),
     path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticAttemptTest.java'),
     path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticPolicyTest.java')]],
   ['java', ['-cp', out, 'nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticPolicyTest']],
-  ['java', ['-cp', out, 'nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttemptTest']]
+  ['java', ['-cp', out, 'nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttemptTest']],
+  ['java', ['-cp', out, 'nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticTraceTest']]
 ]) {
   const run = spawnSync(cmd, args, {windowsHide: true, encoding: 'utf8'});
   if (run.stdout) process.stdout.write(run.stdout);

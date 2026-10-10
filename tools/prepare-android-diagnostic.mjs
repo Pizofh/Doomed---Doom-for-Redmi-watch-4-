@@ -6,6 +6,7 @@ import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {diagnosticPermissions} from './android-diagnostic-permissions.mjs';
+import {addDiagnosticStatus} from './android-diagnostic-status-patches.mjs';
 if (process.argv.length !== 2) throw Error('No arguments supported');
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const source = path.join(root, 'artifacts/research/gadgetbridge-source');
@@ -35,6 +36,7 @@ function body(text, signature, replacement) {
   return text.slice(0, open + 1) + '\n' + replacement + '\n    }' + text.slice(end);
 }
 function write(name, text, original) {
+  if (original) text = addDiagnosticStatus(name, text);
   fs.mkdirSync(out, {recursive: true});
   const dest = path.join(out, name);
   if (fs.existsSync(dest)) {
@@ -161,6 +163,8 @@ write('BtBRQueue.java', queue, true);
 write('Rw4DiagnosticPolicy.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticPolicy.java'), 'utf8'), false);
 write('Rw4DiagnosticSession.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticSession.java'), 'utf8'), false);
 write('Rw4DiagnosticAttempt.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticAttempt.java'), 'utf8'), false);
+write('Rw4DiagnosticTrace.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticTrace.java'), 'utf8'), false);
+write('Rw4DiagnosticStatus.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticStatus.java'), 'utf8'), false);
 
 let service = load('DeviceCommunicationService.java');
 service = body(service, 'private final BroadcastReceiver mReceiver = new BroadcastReceiver()', `        @Override
@@ -379,7 +383,7 @@ gradle = replaceOnce(gradle, '    buildTypes {', `    buildTypes {
         rw4diagnostic {
             initWith debug
             applicationIdSuffix ".rw4diagnostic"
-            versionNameSuffix "-rw4-diagnostic-r92"
+            versionNameSuffix "-rw4-diagnostic-r101"
             debuggable false
             minifyEnabled false
             signingConfig signingConfigs.debug

@@ -137,7 +137,7 @@ function refresh() {
     const original = reviewed.files.find(file => file.filename === record.name);
     const sourcePrefix = 'nodomain.freeyourgadget.gadgetbridge_253_src.tar.gz/';
     if (original && (!original.archivePath.startsWith(sourcePrefix) || original.sha256 !== record.sourceSha256)) throw Error('Source provenance changed');
-    if (!original && !['Rw4DiagnosticPolicy.java', 'Rw4DiagnosticSession.java', 'Rw4DiagnosticAttempt.java'].includes(record.name)) throw Error('Unreviewed new source');
+    if (!original && !['Rw4DiagnosticPolicy.java', 'Rw4DiagnosticSession.java', 'Rw4DiagnosticAttempt.java', 'Rw4DiagnosticTrace.java', 'Rw4DiagnosticStatus.java'].includes(record.name)) throw Error('Unreviewed new source');
     const relative = original ? original.archivePath.slice(sourcePrefix.length) :
       'app/src/main/java/nodomain/freeyourgadget/gadgetbridge/service/devices/xiaomi/' + record.name;
     if (prior && prior.relative !== relative) throw Error('Staged path changed');
