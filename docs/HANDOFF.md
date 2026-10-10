@@ -1,5 +1,19 @@
 # Retomar el proyecto
 
+**R115, 2026-10-10:** usuario reporta r114/API36, I0/en curso, SDP esperando,
+UUIDs-1, BLE no iniciado, contadores0, error0, tiempo13ms, cierres no requeridos;
+confirma procedimiento seguido, reloj normal y MiFitness sincroniza bien.
+[Interpretación](rw4-service-inventory.md): snapshot inicial, no desenlace;
+13ms es tiempo de última publicación, no tiempo de espera/copia del usuario.
+No concluir ausencia SDP/BLE, prueba completada ni fallo de timer. Fuente revisada:
+onPause/Cerrar guarda snapshot terminal; menú Informe y caché local lee último
+inventario sin ticket/radio activa. Único siguiente paso manual: abrir toolkit,
+Informe y caché local, copiar sección Último inventario; sin force-stopMiFit,
+nuevo inventario/PROBE/QUERY, APK nuevo o cambios de permisos. Si persisteI0,
+recoger aviso de registro incompleto, no reintentar. UI apertura confirmada por
+reporte; radio/terminación no confirmadas. Documentación únicamente, sin build
+ni acciones físicas desde herramientas. Firmware/nativo reloj CERRADOS.
+
 **R114, 2026-10-10:** usuario dice «adelante» después de R113. [Inventario
 de servicios completo](rw4-service-inventory.md) implementado y empaquetado,
 sin nuevo intento físico. Activity no exportada/foreground-only y ticket exclusivo

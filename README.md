@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R115:** [r114 abrió y el retorno a Mi Fitness es normal](docs/rw4-service-inventory.md).
+El informe recibido sigue en I0; falta recuperar el desenlace guardado desde
+**Informe y caché local**. No iniciar otra prueba ni instalar un APK nuevo.
+
 **Actual R114:** [inventario de servicios Android](docs/rw4-service-inventory.md)
 implementado en un único APK: solicitud UUID/SDP y observación BLE, sin
 autenticación ni comandos Xiaomi. Pruebas PC pasan; resultado físico pendiente.

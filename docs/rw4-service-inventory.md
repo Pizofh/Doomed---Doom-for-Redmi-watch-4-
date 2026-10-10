@@ -1,5 +1,32 @@
 # R114 — inventario de servicios desde Android
 
+## Resultado reportado R115 — informe inicial, desenlace pendiente
+
+2026-10-10. Usuario confirma haber seguido el procedimiento; reloj normal y
+Mi Fitness sincroniza correctamente. El informe pegado muestra r114/API36,
+`I0: en curso`, SDP esperando ACTION_UUID, UUIDs -1, BLE no iniciado,
+todos los contadores 0, error0, tiempo13ms y cierres no requeridos.
+Esto confirma apertura de la pantalla y un snapshot inicial del controlador.
+No confirma que la API haya contactado al reloj, respuesta SDP, escaneo BLE,
+terminación por límite ni resultado negativo de los servicios.
+
+Los 13ms son el tiempo del snapshot publicado, no una medida de cuánto
+esperó el usuario ni cuándo copió el texto. El controlador no publica en cada
+tick mientras espera SDP. Una copia previa al desenlace, un informe desactualizado
+o un problema de ejecución/UI no se distinguen con esta evidencia.
+No atribuir al usuario una copia prematura ni afirmar fallo del watchdog.
+
+Revisión de fuente: `onPause` finaliza y guarda un nuevo snapshot; `Cerrar`
+también finaliza antes de salir. El toolkit **Informe y caché local** permite
+leer `Rw4InventoryStatus.report` sin emitir ticket, SDP, escaneo o conexión.
+Siguiente acción: recuperar exclusivamente **Último inventario** desde ese menú.
+No detener Mi Fitness, iniciar otro inventario, usar PROBE/QUERY ni actualizar
+APK para obtener ese registro. Si permanece I0, el lector añade aviso de registro
+incompleto; reportar ese texto sin repetir. No se hicieron operaciones físicas
+desde herramientas ni cambios de código/build en R115.
+
+---
+
 2026-10-10. Investigación del M2315W1/2.2.86, teléfono API36 y Mi Fitness
 3.59.1i. Después de tres PROBE fallidos, incluido el aislamiento de permisos
 R113, repetir el mismo socket no aporta información. Este cambio incorpora

@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**R115, 2026-10-10:** [informe r114 inicial y retorno normal](rw4-service-inventory.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| La pantalla r114 abrió y publicó un snapshot inicial | Teléfono API36 del usuario | Informe I0/SDP esperando/BLE no iniciado/13ms | CONFIRMADO POR REPORTE EN TELÉFONO | Alta sobre reporte | Manual usuario | No prueba contacto remoto ni duración total |
+| El inventario físico completó SDP y BLE | M2315W1/2.2.86 y cliente API36 | No hay informe terminal | SIN EVIDENCIA | Desconocida | No confirmado | Recuperar último registro guardado sin nuevo intento |
+| Reloj normal y Mi Fitness sincroniza tras esta operación | Unidad del usuario | Confirmación explícita | CONFIRMADO EN RW4 POR REPORTE | Alta sobre reporte | Manual usuario | No demuestra reversibilidad universal ni recovery de firmware |
+
 **R114, 2026-10-10:** [inventario de servicios](rw4-service-inventory.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -1,5 +1,11 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R115:** r114 abierto, informe inicial I0/13ms; usuario confirma reloj
+normal y Mi Fitness sincroniza. [Resultado](rw4-service-inventory.md).
+Terminación/radio sin confirmar. Siguiente paso solo leer último inventario
+guardado desde Informe y caché local, sin nueva solicitud SDP/escaneo/conexión.
+No nuevos intentos ni build; instalación y ejecución nativa en reloj CERRADAS.
+
 **Actual R114:** [plan concreto para inventario de servicios](rw4-service-inventory.md).
 Activity propia no exportada, ticket exclusivo, solicitud Android de UUIDs y
 escaneo BLE temporal. Sin socket/GATT propio, auth, comandos Xiaomi, nuevo
