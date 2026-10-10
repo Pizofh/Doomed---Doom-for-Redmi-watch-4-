@@ -1,4 +1,10 @@
-# Primera consulta RW4 — conexión diferida para investigación
+# Primera consulta RW4 — intento sin conexión, retorno confirmado
+
+**R100,2026-10-09:** después de retomar guía, usuario reporta clave introducida
+y un toque Conectar, sin conexión. Después confirma Mi Fitness conecta bien
+y diagnóstico solo mostró «No conectado». [Resultado y pendientes](first-rw4-query-result.md).
+No repetir el intento; falta confirmar prerrequisitos y localizar etapa del fallo.
+Los apartados de autorización/diferimiento inferiores conservan el historial.
 
 **R97:** tras consultar seguridad/recovery, el usuario pide investigar pruebas
 específicas antes de hacerlo. La autorización R96 queda como antecedente;

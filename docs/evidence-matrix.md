@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**R100,2026-10-09:** [Primer intento físico](first-rw4-query-result.md).
+Usuario reporta clave introducida/Conectar sin conexión, solo «No conectado».
+Mi Fitness conecta después, **CONFIRMADO EN RW4 por reporte del usuario**
+para uso normal tras este intento; no demuestra retorno tras auth exitosa.
+Auth/GET exitosos siguen **SIN EVIDENCIA**; causa desconocida, no prueba de
+clave inválida ni incompatibilidad Lua/nativa. No ensayo de instalación.
+
 **R99,2026-10-09:** [Watchfaces y juegos Lua RW4](rw4-lua-games-evidence.md).
 Fuentes originales revisadas; sin ensayo físico nuevo.
 
