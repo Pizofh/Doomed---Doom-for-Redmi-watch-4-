@@ -1,5 +1,25 @@
 # R121 — servicio Xiaomi: acceso restringido y ciclo de conexión
 
+## Actualización R122 — controles de UI e inicio automático
+
+2026-10-10. El usuario no encuentra Desconectar, Conexión automática o
+Interconectividad en la pantalla inspeccionada. Describe **dos controles
+distintos**: «Desvincular» y un icono de papelera. Se corrige la suposición
+inicial del asistente de que eran el mismo control. La función de la papelera
+no se ha identificado; no se recomienda pulsarla ni abrir una confirmación.
+Esto no demuestra que toda la app carezca de una pausa de conexión.
+
+El usuario cree que Mi Fitness tiene inicio automático habilitado en Android;
+su estado no está confirmado. [Xiaomi documenta el permiso de autoinicio](https://dev.mi.com/xiaomihyperos/documentation/detail?pId=1624)
+y [recomienda mantener Mi Fitness en segundo plano para RW4](https://www.mi.com/global/support/faq/details/KA-91967/).
+Ninguna de esas fuentes demuestra que desactivar el inicio automático cierre
+un socket existente del servicio Lyra. No se solicita cambiar ese ajuste,
+deshabilitar un servicio, desvincular o repetir PROBE.
+
+Siguiente lectura: identificar la ubicación y etiqueta de ambos controles con
+una captura recortada de la pantalla, ocultando identificadores. No requiere
+otra APK ni una operación Bluetooth. El análisis R121 que sigue es histórico.
+
 2026-10-10. El usuario completó `export-core` manualmente por USB. Todo el
 análisis posterior ocurrió en PC, sin ADB real por el agente, ejecución de APK,
 bind al servicio, Bluetooth o cambios en el reloj. El usuario dispone únicamente
@@ -136,7 +156,8 @@ con investigación PC de UI/ciclo de conexión. Usuario no tiene otro Android.
 Se solicitó únicamente lectura de la pestaña Dispositivo de Mi Fitness para
 saber si muestra Desconectar/Conexión automática/Interconectividad: nombres de
 opciones, sin cambiar ajustes, desvincular o cambiar teléfono. Esta lectura
-de la UI no requiere instalar otra APK ni ejecutar comandos. Respuesta pendiente.
+de la UI no requiere instalar otra APK ni ejecutar comandos. Respuesta recibida
+y corregida en R122 arriba; falta identificar la papelera distinta de Desvincular.
 
 No se prepara una orden force-stop/disable/clear/uninstall del servicio de sistema:
 es compartido por otras funciones del teléfono y falta determinar el efecto.

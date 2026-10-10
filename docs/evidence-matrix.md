@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R122, 2026-10-10:** [lectura de UI e inicio automático](mi-connect-service-static-review.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Desvincular y la papelera son el mismo control | Pantalla Mi Fitness del usuario | Corrección explícita: son distintos | REFUTADO POR REPORTE DEL USUARIO | Alta sobre descripción | No | Función de la papelera pendiente; no pulsar |
+| Existe una pausa de conexión visible en la pantalla inspeccionada | Mi Fitness del usuario | No ve Desconectar/Conexión automática/Interconectividad | SIN EVIDENCIA | Desconocida | Lectura manual reportada | No extrapolar a todos los menús |
+| Mi Fitness tiene autostart habilitado | Ajustes Android del usuario | Usuario dice «creo» | SIN CONFIRMACIÓN | Baja | No | No cambiar ajustes para validar la hipótesis |
+| Desactivar autostart libera el socket Lyra | Teléfono HyperOS del usuario | Documentación de autoinicio no demuestra cierre del servicio/socket | SIN EVIDENCIA | Desconocida | No | No repetir PROBE basándose solo en ese cambio |
+
 **R121, 2026-10-10:** [servicio Xiaomi instalado](mi-connect-service-static-review.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

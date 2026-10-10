@@ -1,5 +1,15 @@
 # Retomar el proyecto
 
+**R122, 2026-10-10:** usuario no ve pausa de conexión en la pantalla MiFit
+inspeccionada. Corrige que **Desvincular y papelera son controles distintos**;
+no atribuir a papelera una función sin identificar su contexto. Autostart MiFit
+posiblemente habilitado («creo»), no confirmado. Fuentes oficiales Xiaomi
+documentan autoinicio y recomiendan segundo plano para RW4; no prueban que
+desactivarlo libere el SPP de Lyra. No cambiar ajustes ni repetir PROBE.
+Siguiente lectura: captura recortada de los dos controles, sin identificadores,
+sin pulsarlos. [Actualización y fuentes](mi-connect-service-static-review.md).
+No nuevos builds, operaciones de teléfono/reloj o mediciones en esta revisión.
+
 **R121, 2026-10-10:** [servicio Xiaomi y opciones de desconexión](mi-connect-service-static-review.md).
 Usuario ejecutó export-core: una parte30540367B/SHAba8ab69da2808d8273e2dc68ac4944fc3587650f6e597542f94fffd5d2cbbaff.
 Verificación PC oficial: packagecom.xiaomi.mi_connect_service,5.1.251.10/code50012513,
