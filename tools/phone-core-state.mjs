@@ -6,11 +6,13 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath, pathToFileURL} from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const component = 'com.xiaomi.mi_connect_service/com.xiaomi.wearable.core.MiWearCoreService';
+const remotePackage = 'com.xiaomi.mi_connect_service';
+const localPackage = 'com.xiaomi.wearable';
 const commands = Object.freeze([
   ['-d', 'get-state'],
   ['-d', 'shell', 'am', 'get-current-user'],
-  ['-d', 'shell', 'dumpsys', 'activity', 'services', component],
+  ['-d', 'shell', 'dumpsys', 'activity', 'services', remotePackage],
+  ['-d', 'shell', 'dumpsys', 'activity', 'services', localPackage],
   ['-d', 'shell', 'dumpsys', 'package', 'com.xiaomi.wearable']
 ]);
 const maxBytes = 2 * 1024 * 1024;
@@ -21,37 +23,55 @@ function bounded(text) {
   }
   return text;
 }
-export function summarizePhoneCoreState(serviceText, packageText, user) {
+export function summarizeServiceState(serviceText, user, packageName) {
   if (!Number.isInteger(user) || user < 0 || user > 99999) throw Error('Invalid user response');
+  if (![remotePackage, localPackage].includes(packageName)) throw Error('Unknown fixed package');
   const lines = bounded(serviceText).split(/\r?\n/);
-  const formatRecognized = lines.some(line => /^ACTIVITY MANAGER SERVICES\b/.test(line.trim()));
+  const headerRecognized = lines.some(line => /^ACTIVITY MANAGER SERVICES\b/.test(line.trim()));
+  const explicitNothing = lines.some(line => /^\s*\(nothing\)\s*$/.test(line));
   let activeUser = null, selected = false, count = 0, assigned = 0, nullApp = 0;
+  let activeSections = 0, parsedActiveRecords = 0, unparsedRecordLines = 0, otherUserCoreRecords = 0;
   for (const line of lines) {
     if (line.length > 32768) throw Error('Unexpected state line');
     const header = line.match(/^\s*User (\d+) active services:\s*$/);
-    if (header) { activeUser = Number(header[1]); selected = false; continue; }
+    if (header) { activeUser = Number(header[1]); activeSections++; selected = false; continue; }
     // Never count restarting, pending, destroying or connection-table records.
     if (/^\s*(?:Restarting|Pending|Destroying|Connection bindings to|Delayed start of|Starting background).*services?:?/i.test(line)) {
       activeUser = null; selected = false;
     }
     if (/^\s*\* ServiceRecord\{/.test(line)) {
-      selected = formatRecognized && activeUser === user &&
-        new RegExp('\\s' + component.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\}\\s*$').test(line);
+      selected = false;
+      const record = line.match(/^\s*\* ServiceRecord\{[0-9a-f]+ u(\d+) ([A-Za-z0-9_.$]+)\/([A-Za-z0-9_.$]+)(?:\s[^}]*)?\}\s*$/i);
+      if (!record) { unparsedRecordLines++; continue; }
+      if (activeUser === null || Number(record[1]) !== activeUser) continue;
+      parsedActiveRecords++;
+      const cls = record[3].startsWith('.') ? record[2] + record[3] : record[3];
+      const isCore = record[2] === packageName && cls === 'com.xiaomi.wearable.core.MiWearCoreService';
+      if (isCore && activeUser !== user) otherUserCoreRecords++;
+      selected = headerRecognized && activeUser === user && isCore;
       if (selected) count++;
       continue;
     }
     if (selected && /^\s*app=ProcessRecord\{[^\r\n]*\}\s*$/.test(line)) assigned++;
     if (selected && /^\s*app=null\s*$/.test(line)) nullApp++;
   }
+  const formatRecognized = headerRecognized && unparsedRecordLines === 0 &&
+    (explicitNothing || activeSections > 0 && parsedActiveRecords > 0);
+  return {headerRecognized, serviceFormatRecognized: formatRecognized, explicitNothing,
+    activeSections, parsedActiveRecords, unparsedRecordLines, otherUserCoreRecords,
+    activeCoreRecords: formatRecognized ? count : null,
+    coreProcessRecord: formatRecognized && count === 1 && assigned === 1 && nullApp === 0 ? 'assigned' :
+      formatRecognized && count === 1 && nullApp === 1 && assigned === 0 ? 'null' : 'not-established'};
+}
+export function summarizePhoneCoreState(serviceText, packageText, user, localText = null) {
+  const remote = summarizeServiceState(serviceText, user, remotePackage);
+  const local = localText === null ? null : summarizeServiceState(localText, user, localPackage);
   const pkgLines = bounded(packageText).split(/\r?\n/);
   const pkgRecognized = pkgLines.some(line => /^\s*Package \[com\.xiaomi\.wearable\] \(/.test(line));
   const statuses = pkgLines.filter(line => new RegExp('^\\s*User ' + user + ':').test(line))
     .map(line => line.match(/\bstopped=(true|false)\b/)?.[1]).filter(Boolean);
   const stopped = pkgRecognized && statuses.length === 1 ? statuses[0] === 'true' : null;
-  return {serviceFormatRecognized: formatRecognized, activeCoreRecords: formatRecognized ? count : null,
-    coreProcessRecord: count === 1 && assigned === 1 && nullApp === 0 ? 'assigned' :
-      count === 1 && nullApp === 1 && assigned === 0 ? 'null' : 'not-established',
-    miFitnessStopped: stopped, currentWatchSocketVerified: false};
+  return {remote, local, miFitnessStopped: stopped, currentWatchSocketVerified: false};
 }
 export function inspectPhoneCoreState(run) {
   function read(args) {
@@ -62,7 +82,8 @@ export function inspectPhoneCoreState(run) {
   if (read(commands[0]).trim() !== 'device') throw Error('One authorized USB phone required');
   const userText = read(commands[1]).trim();
   if (!/^\d{1,5}$/.test(userText)) throw Error('Unsupported current-user response');
-  return summarizePhoneCoreState(read(commands[2]), read(commands[3]), Number(userText));
+  const remote = read(commands[2]), local = read(commands[3]), pkg = read(commands[4]);
+  return summarizePhoneCoreState(remote, pkg, Number(userText), local);
 }
 function trustedRun(args) {
   const sdk = path.join(root, 'tools/local/android-build/sdk/platform-tools');
@@ -88,7 +109,7 @@ if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === imp
       rawOutputSaved: false, automaticAppStop: false, bluetoothOperationRequested: false}));
   } else if (action === 'collect' && ['baseline', 'stopped'].includes(label) && process.argv.length === 4) {
     try {
-      const report = {checkpoint: 'R124', label, ...inspectPhoneCoreState(trustedRun),
+      const report = {checkpoint: 'R126', label, ...inspectPhoneCoreState(trustedRun),
         rawOutputSaved: false, bluetoothOperationRequested: false, watchCommandRequested: false};
       // Emit only the fixed-schema summary; the caller may save it locally if desired.
       console.log(JSON.stringify(report));

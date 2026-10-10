@@ -1,5 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R126:** [lectura ampliada de servicios, plan y resultado previo](phone-core-state-plan.md).
+Usuario confirma Mi Fitness conectada/sincronizando; baseline/stopped anteriores
+core0 en ambas, no evidencia aislamiento. Lector R124 validaba solo cabecera.
+Nueva consulta manual propuesta SOLO baseline normal, servicios de dos paquetes
+fijos y metadatos MiFit. No detener apps/cambiar ajustes/otra APK/PROBE o radio.
+Esquema/privacy/fakeADB probados, resultado real pendiente; gates reloj intactos.
+
 **Actual R124:** [comparación de estado del teléfono por USB](phone-core-state-plan.md).
 Plan concreto de lecturas fijas y detención manual únicamente Mi Fitness, con
 reversión al abrirla. Sin nuevas pruebas radio/comandos Xiaomi o cambios del

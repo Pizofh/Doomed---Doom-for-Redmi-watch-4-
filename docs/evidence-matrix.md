@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R126, 2026-10-10:** [comparación parcial y formato del lector](phone-core-state-plan.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Mi Fitness volvió a conectar/sincronizar | Teléfono y RW4 del usuario | Confirmación expresa; baseline miFitnessStopped=false | CONFIRMADO POR USUARIO | Alta sobre reporte | Manual | No socket Lyra identificado |
+| serviceFormatRecognized de R124 valida todo el cuerpo | Lector PC propio R124 | Solo comprobaba cabecera; caso sintético cabecera sola emitía0 | REFUTADO EN IMPLEMENTACIÓN | Alta | Sí | R126 corrige unknown; no se demuestra causa de ceros físicos |
+| No se observaron registros remotos en ambas salidas | JSON R124 baseline y stopped | coreRecords0 en ambas | CONFIRMADO SOBRE SALIDAS | Alta sobre JSON | Manual reportado | Formato/cuerpo real sin validar; no ausencia de servicio/socket probada |
+| Ambos APKs declaran el componente core | Manifests AAPT2 ya revisados | Misma clase, paquetes wearable y mi_connect_service | CONFIRMADO EN COPIAS PC | Alta | Estático | No uso actual para RW4 demostrado; lectura de ambos preparada |
+
 **R125, 2026-10-10:** [salida stopped aportada](phone-core-state-plan.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

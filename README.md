@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R126:** [lector USB ampliado; Mi Fitness vuelve a sincronizar](docs/phone-core-state-plan.md).
+Las dos salidas anteriores no prueban servicio/socket ausente. Se corrige la
+validación del cuerpo y se prepara una consulta normal de ambos paquetes;
+resultado real pendiente, sin otra APK o prueba Bluetooth.
+
 **Actual R124:** [lectura USB preparada para comparar el estado de Lyra](docs/phone-core-state-plan.md).
 Herramienta probada con respuestas simuladas; comparación del teléfono pendiente.
 La papelera conduce a desvinculación y el setter Lyra revisado pertenece a manejo

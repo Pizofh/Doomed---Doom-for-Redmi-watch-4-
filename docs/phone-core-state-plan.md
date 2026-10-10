@@ -1,5 +1,64 @@
 # R124 — observar Lyra sin intentar otra conexión
 
+## R126 — baseline recibida y lector ampliado en PC
+
+2026-10-10. Después de stopped, el usuario aporta baseline con
+miFitnessStopped=false, serviceFormatRecognized=true, activeCoreRecords=0 y
+coreProcessRecord=not-established; confirma Mi Fitness conectada y sincronizando
+normalmente. No se guarda como una secuencia temporal baseline→stopped: las
+lecturas recibidas fueron stopped→reapertura→baseline. Ambas usan el lector R124.
+
+```json
+{"checkpoint":"R124","label":"baseline","serviceFormatRecognized":true,"activeCoreRecords":0,"coreProcessRecord":"not-established","miFitnessStopped":false,"currentWatchSocketVerified":false,"rawOutputSaved":false,"bluetoothOperationRequested":false,"watchCommandRequested":false}
+```
+
+No hay evidencia nueva de Lyra reteniendo el socket. Se detecta una limitación
+reproducible del lector: R124 reconocía solo la cabecera, y emitía cero incluso
+con cuerpo ausente/no compatible. **No se demuestra que esa limitación haya
+causado los ceros del teléfono**: el cuerpo no se guardó, deliberadamente.
+
+Manifest de ambos APKs ya revisados declara MiWearCoreService, con paquetes
+distintos. Se amplía la lectura a servicios de ambos paquetes fijos para evitar
+presuponer que el componente remoto es el que se usa en esta sesión. Presencia
+de un servicio local tampoco demuestra que ese servicio atienda al RW4.
+
+### Plan actual, reemplaza la consulta manual R124
+
+Con Mi Fitness conectada normalmente y USB autorizado, ejecutar **una** lectura:
+`node tools/phone-core-state.mjs collect baseline`. No detener Mi Fitness, cambiar
+permisos/autostart o ejecutar PROBE. El script actual emite checkpoint R126:
+
+```text
+adb -d get-state
+adb -d shell am get-current-user
+adb -d shell dumpsys activity services com.xiaomi.mi_connect_service
+adb -d shell dumpsys activity services com.xiaomi.wearable
+adb -d shell dumpsys package com.xiaomi.wearable
+```
+
+Mismo ADB fijado, usuario-manual, consultas sin --client, sin radio o ejecución
+de componentes app solicitada. Scope nuevo: metadatos de servicios de dos
+paquetes concretos, procesados en RAM; dumps no almacenados ni publicados.
+El JSON incluye remote/local con cabecera reconocida, marcador explícito
+`(nothing)`, secciones activas, registros parseados/no reconocidos, contador
+del core para el usuario actual y agregado para otros usuarios (sin IDs).
+Nombres cortos del componente se normalizan; estados desconocidos devuelven
+null, no cero. ProcessRecord asignado sigue sin probar socket o hilo vivo.
+
+Esta lectura no modifica almacenamiento del reloj/teléfono, particiones,
+bootloader o firmware. Depuración/autorización USB mantiene el riesgo/reversión
+del plan R124: al terminar desconectar, desactivar/revocar. Peor fallo razonable
+de la consulta: denegación, timeout o formato no reconocido; no soft/hard brick
+RW4 esperado ni recovery integral proporcionado. No requiere nuevo APK.
+
+Tests PC pasan: cabecera sola→null, vacío explícito→0, registros no reconocidos,
+componente corto/local, usuarios distintos, reinicio, canarios privados y cinco
+comandos fijos mediante fakeADB. Plan/sintaxis pasan; no ADB físico por agente.
+Resultado R126 del teléfono pendiente. Si no se reconoce cuerpo, no usar sus
+contadores para concluir aislamiento o elegir transporte.
+
+El historial R125/R124 que sigue conserva sus salidas originales.
+
 ## Resultado parcial R125 — stopped recibido
 
 2026-10-10. El usuario aporta la salida de `collect stopped`:

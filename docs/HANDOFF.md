@@ -1,5 +1,19 @@
 # Retomar el proyecto
 
+**R126, 2026-10-10:** [baseline recibida y lector mejorado](phone-core-state-plan.md).
+Usuario baseline R124: coreRecords0/processnot-established, headertrue,
+MiFitstoppedfalse; confirma conectado/sync normal. Ordenreal stopped→baseline,
+NO before/after inverso. No Lyra socket probada. Lector anterior reconocía solo
+cabecera y cero ante cuerpo desconocido; limitación reproducida, NO causa real
+de ambos ceros demostrada (raw nunca guardado). Ambos manifests tienen core
+con paquetes distintos; nueva consulta una sola baseline normal, SIN stop/PROBE.
+phone-core-state.mjs ahora checkpointR126: getstate/currentuser + dumpsys
+activity services de DOS paquetes fijos mi_connect_service/wearable +pkgMiFit.
+JSON remote/local estructura/emptyexplicit/activeparsed/unparsed/otherusercounts/
+coreassigned; unknownnull, normalización componentes cortos. NO IDs/raw/radio.
+Tests ampliados/fake5commands/plan/syntax pasan. ResultadoR126 PENDIENTE;
+no ADB físico por agente ni APK nuevo. USBdebugoff/revocar al terminar.
+
 **R125, 2026-10-10:** usuario aporta SOLO collect stopped R124:
 serviceFormatRecognized=true, activeCoreRecords=0, coreProcessRecord=not-established,
 miFitnessStopped=true, currentWatchSocketVerified=false; raw/radio/watchfalse.
