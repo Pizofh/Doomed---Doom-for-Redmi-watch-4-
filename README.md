@@ -1,5 +1,11 @@
 # DOOM en Redmi Watch 4
 
+**Actual R121:** [servicio Xiaomi analizado: permisos y ciclo de conexión](docs/mi-connect-service-static-review.md).
+La API de Lyra exige paquete/certificado permitidos; nuestra app no está admitida.
+El cierre de Mi Fitness no obliga a cerrar todos los dispositivos en el recorrido
+revisado. Causa de E03 aún sin demostrar. Seguimos con el mismo teléfono:
+buscar una desconexión temporal normal y su restauración antes de otra prueba.
+
 **Actual R120:** [APK instalado verificado y delegación Lyra identificada](docs/mi-fitness-apk-static-review.md).
 Mi Fitness3.59.1i tiene firma criptográfica válida; su cliente SPP revisado usa
 nuestro mismo UUID/factory. Los logs existentes registran delegación exitosa a

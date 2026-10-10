@@ -1,5 +1,15 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R121:** [servicio copiado por usuario y revisado solo en PC](mi-connect-service-static-review.md).
+Firma/manifest verificados; API restringe caller/package/cert y no admite nuestra
+app. No bind, desconexión, force-stop/disable/clear del servicio system o cambios
+en reloj ejecutados. onClientDied/reconexión revisados refuerzan hipótesis de
+aislamiento incompleto; no causa E03 probada. Usuario solo tiene este teléfono.
+Única consulta manual actual: mirar nombres de opciones en MiFitDispositivo,
+sin cambiar ajustes/vínculo. No nuevas escrituras persistentes o radio solicitadas
+por esa lectura. Falta plan concreto de pausa/restauración antes de otro PROBE.
+Recovery/ABI/carga nativa del reloj siguen pendientes; instalación/nativo CERRADOS.
+
 **Actual R120:** [Mi Fitness analizado en PC; plan de copia del servicio Xiaomi](mi-fitness-apk-static-review.md).
 Usuario completó lectura del APK MiFit por USB; identidad/firma verificadas
 offline. Se encontró delegación externa en código e historial de logs; no se

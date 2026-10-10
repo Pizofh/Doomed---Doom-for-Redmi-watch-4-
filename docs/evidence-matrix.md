@@ -1,5 +1,18 @@
 # Matriz de evidencia
 
+**R121, 2026-10-10:** [servicio Xiaomi instalado](mi-connect-service-static-review.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| APK del servicio declara5.1.251.10 y firma válida | Copia del teléfono, no firmware RW4 | Hash, AAPT2, apksigner36.0.0 | CONFIRMADO EN PC | Alta sobre archivo | Sí | Titular Xiaomi independiente y UID real sin consultar |
+| Compartición de usuario system | Manifest del APK del teléfono | sharedUserId android.uid.system | CONFIRMADO COMO DECLARACIÓN | Alta | Inspección | No inferir UID/proceso efectivo, permisos de reloj o necesidad root |
+| Nuestra app puede obtener la API operativa de Lyra solo añadiendo permiso | API copiada, paquete propio nodomain | Identidad UID→package; whitelist2apps +cert check; rechazo a otros | REFUTADO EN RUTA DE CÓDIGO REVISADA | Alta sobre guard | Estático | No bind físico realizado; exposición onBind no equivale acceso operativo |
+| Cerrar Mi Fitness cierra todos los dispositivos vinculados | onClientDied del servicio | Cancela task; cleanup unauth condicionado, no cierre general bound | SIN EVIDENCIA EN RUTA REVISADA | Alta sobre recorrido | Estático | No garantiza supervivencia del servicio bajo cualquier acción OS |
+| El servicio puede recuperar un dispositivo y programar reconexión | Código servicio | initCurrentDevice + connectDeviceIfNeed/retraso3s | CONFIRMADO EN CÓDIGO PC | Alta | Estático | Config real no leída; servicio activo/competencia durante PROBE no comprobados |
+| API disconnect es puramente RAM | Código servicio del teléfono | Guarda flag SharedPreferences si inLyra | REFUTADO EN CÓDIGO PC | Alta | Estático | Persistencia en teléfono; no operación ejecutada ni escritura RW4 demostrada |
+| El SPP revisado usa UUID1101/factory segura | Código servicio, no mapping RW4 | ib.e/ib.o/wear.api.l SDKsmali | CONFIRMADO EN CÓDIGO PC | Alta sobre ruta | Sí | Hay rama opcional MiuiNearby para bond; flag específico RW4 desconocido |
+| Existe una pausa temporal simple disponible en la UI actual | MiFit3.59.1i/HyperOS usuario | Implementación disconnect interna sí; UIcandidatos cambian otras cosas | SIN EVIDENCIA SUFICIENTE | Desconocida | Pendiente lectura UI | No sugerir cambio teléfono/app, desvincular o deshabilitar sistema |
+
 **R120, 2026-10-10:** [identidad, transporte SPP y Lyra](mi-fitness-apk-static-review.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -1,5 +1,12 @@
 # R120 — Mi Fitness instalado: identidad, SPP y servicio Lyra
 
+**Actual R121:** el checkpoint de copia/revisión del servicio se completó.
+[Resultado](mi-connect-service-static-review.md): API operativa limitada por
+paquete/certificado, limpieza de cliente sin cierre general de bound y
+reconexión desde config propia. Causa E03 sin probar. Solo teléfono actual
+disponible; siguiente checkpoint es pausa normal y restauración conocida.
+La sección R120 siguiente se conserva como historial.
+
 2026-10-10. El usuario exportó manualmente el APK del teléfono mediante USB.
 Esta investigación posterior ocurrió en PC, sin ejecutar el APK, usar ADB real,
 abrir Bluetooth o modificar RW4 Diagnostics. El reloj conserva el gate cerrado

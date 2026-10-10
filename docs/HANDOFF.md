@@ -1,5 +1,40 @@
 # Retomar el proyecto
 
+**R121, 2026-10-10:** [servicio Xiaomi y opciones de desconexión](mi-connect-service-static-review.md).
+Usuario ejecutó export-core: una parte30540367B/SHAba8ab69da2808d8273e2dc68ac4944fc3587650f6e597542f94fffd5d2cbbaff.
+Verificación PC oficial: packagecom.xiaomi.mi_connect_service,5.1.251.10/code50012513,
+min28/target35, apksigner36v3sí/otrosfalse/verifica, certSHAc9009d01ebf9f5d0302bc71b2fe9aa9a47a432bba17308a3111b75d7b2149025.
+Manifestdeclara sharedUIDandroid.uid.system, UID/proceso actuales NOconsultados;
+servicioexportedcom.xiaomi.wearable.core.MiWearCoreService/actionpackage.MiWearCoreService.
+onBind retornaICoreInstance; getMiWearCoreBinder obtiene caller medianteeb.d.a
+Binder.getCallingUid→PackageManager.getNameForUid→PermissionChecker.checkCert.
+WhitelistSOLOcom.mi.health/com.xiaomi.wearable con firmas permitidas; packageausente
+rechazo/SecurityException. Nuestraappnodomain no admitida; añadirpermiso no resuelve.
+MI_WEAR_CORE solo solicitado, no definido enmanifest; nivel efectivo desconocido.
+FingerprintMD5legacyMiFitness coincide conwhitelist; getSigningCertificateHistory
+usado, no prueba de APIruntime ni fabricanteindependiente. NOspoof/bypass/bindreal.
+RutaSppcore ApiCallFactory→wear.api.l→ib.o, UUID1101ib.e/factorysegura/Socketconnect;
+flagDeviceInfo.createBondWithoutDialog opcional invocaMiuiNearbyApiServicepackage
+com.xiaomi.bluetooth antesconnect, estadoRW4flagUNKNOWN/noimplementarAPIsprivadas.
+initCurrentDevice restaura suconfig y programa connectDeviceIfNeed3s; onClientDied
+gb.a canceltarea +cierraunauth no vinculadas enbindingmode, no cierre global bound.
+No prueba de servicioactivo durantePROBE ni causaE03. disconnect(did) escribe
+SharedPrefsdisconnect_device_ enTELÉFONO; no ejecutado, retorno necesitaestudio.
+APKcore3DEX/18730clases/71candidatos completo; nombresclases guardadosprivados;
+MiFitíndiceampliado68candidatos12DEX. No interpretaroperand candidatescomo instrucciones.
+SDKsmali confirmado. Tools ahora perfilesfijoscompartidos installed-apk-targets.mjs,
+inspect/index admiten--core, code exige reviewprevio. SDKjavaAccessDenied→autorización
+fuerasandbox sinAPKexec/ADB/hardware; APKs hashes inalterados. No nuevos builds
+Android/tests radio o instalaciones/proprietarycodepublicado. UIcandidatos revisados
+BaseDeviceModel.disconnect/BluetoothDeviceModel.setCurrentStatus, DeviceTabVM,
+MainActivitycheckCommonApp yConnectNewPhoneActivity: varios cambianbinding/app/
+usersettings, NOrecomendar comopausa. Usuario NOtieneotroAndroid; no migración.
+Pregunta pendiente soloLECTURA: enMiFitDispositivo ¿veDesconectar/Conexiónautomática/
+Interconectividad? Comunicar únicamente nombres, no activar/desvincular/cambiar.
+Próximo checkpoint: ruta normal temporal +restauración antes de otroPROBE.
+No force-stop/disable/clear/uninstall sistemacore/sharedUID ni root. Gateswatch
+instalación/nativo/firmwareCERRADOS, recuperaciónABIloaderRW4pendientes.
+
 **R120, 2026-10-10:** [revisión estática de Mi Fitness y plan del servicio](mi-fitness-apk-static-review.md).
 Usuario exportó manualmente base141427237B/SHA56e7bdbe139b369a72839b48d2f29e67e3df25984dd33a9b80abbbc44b511fdd,
 4partes instaladas/baseonly. Export-review histórico siguefalse; review posterior
