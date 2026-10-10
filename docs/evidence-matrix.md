@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**R125, 2026-10-10:** [salida stopped aportada](phone-core-state-plan.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Mi Fitness quedó detenida en la consulta stopped | Teléfono HyperOS del usuario | JSON miFitnessStopped=true | CONFIRMADO POR REPORTE ANDROID | Alta sobre campo | Ejecución manual reportada | Falta confirmar reapertura/sincronización |
+| Lectura stopped observó registros Lyra activos | Componente y usuario filtrados | JSON activeCoreRecords=0, process not-established | NO OBSERVADO EN CONSULTA | Alta sobre salida del lector | Ejecución manual reportada | Baseline pendiente; no prueba socket libre ni valida todo el formato HyperOS |
+
 **R124, 2026-10-10:** [estado Lyra y lectura preparada](phone-core-state-plan.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

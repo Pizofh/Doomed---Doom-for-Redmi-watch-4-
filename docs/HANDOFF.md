@@ -1,5 +1,15 @@
 # Retomar el proyecto
 
+**R125, 2026-10-10:** usuario aporta SOLO collect stopped R124:
+serviceFormatRecognized=true, activeCoreRecords=0, coreProcessRecord=not-established,
+miFitnessStopped=true, currentWatchSocketVerified=false; raw/radio/watchfalse.
+[Resultado parcial](phone-core-state-plan.md). Confirma stopped MiFit, no registro
+activo del componente filtrado observado; NO prueba socket libre/proceso ausente/
+causaE03 ni formato completo HyperOS compatible. Falta baseline positiva para
+contraste (pedir JSON previo si ya corrió) y retorno/sync MiFit al abrirla.
+No otra consulta stopped, PROBE, APK o cambios de ajustes. Lyra persistente no
+respaldada por esta lectura, tampoco refutada. Agente no ejecutó ADB/hardware.
+
 **R124, 2026-10-10:** [plan lectura USB del estado Lyra](phone-core-state-plan.md).
 CoreExt setLyraEnabled escribe pref version_v3_; índice68→70, dos llamadas
 confirmadas en RemoteServiceConnector muerte Binder/crash/rebind fallido,

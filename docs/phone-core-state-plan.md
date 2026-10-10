@@ -1,5 +1,25 @@
 # R124 — observar Lyra sin intentar otra conexión
 
+## Resultado parcial R125 — stopped recibido
+
+2026-10-10. El usuario aporta la salida de `collect stopped`:
+
+```json
+{"checkpoint":"R124","label":"stopped","serviceFormatRecognized":true,"activeCoreRecords":0,"coreProcessRecord":"not-established","miFitnessStopped":true,"currentWatchSocketVerified":false,"rawOutputSaved":false,"bluetoothOperationRequested":false,"watchCommandRequested":false}
+```
+
+Android reporta Mi Fitness stopped=true. El lector reconoce la cabecera de
+servicios y no encuentra registros activos del componente Lyra filtrado para
+el usuario consultado. **No demuestra socket libre, proceso del paquete ausente
+o causa de E03.** Tampoco confirma que el formato completo HyperOS se corresponda
+con el parser: falta una baseline positiva de comparación. La hipótesis de Lyra
+persistente no queda respaldada por esta lectura parcial; no se declara refutada.
+
+Falta recibir baseline (si ya fue ejecutada, recuperar su JSON de la terminal)
+y confirmar que Mi Fitness vuelve a sincronizar tras abrirla. No repetir
+stopped/PROBE ni cambiar ajustes. Solo salida aportada, sin ADB real por el agente.
+El plan y sus resultados sintéticos que siguen corresponden a R124.
+
 2026-10-10. Objetivo: comparar el registro del servicio MiWearCoreService y el
 flag Android stopped de Mi Fitness antes/después de detener únicamente Mi Fitness.
 No identifica sockets ni demuestra la causa de E03. Resultado físico pendiente.
