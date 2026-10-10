@@ -1,5 +1,11 @@
 # Matriz de evidencia
 
+**R112,2026-10-10:** usuario dio pasos nuevos y reporta sincronización de esos
+pasos en Mi Fitness con llamadas/entrada OFF: **CONFIRMADO EN RW4 por reporte
+de prueba manual**. No implica transporte exacto identificado ni causa de G08.
+La comunicación de datos no queda deshabilitada por ambos toggles en esta
+observación. Permiso Nearby de Mi Fitness aún sin aislamiento probado.
+
 **R111,corrección de R110:** usuario precisa que ambos perfiles siguen OFF.
 Restauración de toggles **no confirmada**. Mi Fitness presenta datos, pero conexión
 actual/sincronización reciente **SIN EVIDENCIA independiente**; verificar estado

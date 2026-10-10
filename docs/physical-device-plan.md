@@ -1,5 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R112:** sincronía de pasos nuevos con perfilesOFF reportada por usuario.
+Mantenerlos OFFdurante el aislamiento NearbySoloMiFit, sin exigir restauración
+previa ON; control de comunicación reciente cubierto por reporte. Un PROBE
+r106manual con permiso denegado/verificado, luego cerrar/restaurarNearby/MiFit
+y ambos perfiles originales. Alcance/riesgos del permiso permanecen en
+[plan](rw4-bluetooth-profiles-result.md). Ensayo aislado todavía pendiente.
+
 **Actual R111,corrección:** llamadas/entrada siguen desactivadas según usuario;
 datos visibles en Mi Fitness no confirman conexión actual ni sincronización nueva.
 Restaurar ambos ajustes y verificar estado conectado dentro de Mi Fitness antes

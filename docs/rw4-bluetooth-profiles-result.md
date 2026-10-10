@@ -1,5 +1,17 @@
 # R109 — segundo PROBE y posible actividad de Mi Fitness
 
+**Actual R112,2026-10-10:** usuario confirma que dio pasos nuevos y se
+sincronizaron en Mi Fitness mientras llamadas/entrada siguen OFF. Evidencia
+práctica por reporte de sincronización de datos con esos perfiles desactivados;
+no limitarse ya a la hipótesis de datos guardados. No identifica transporte
+exacto ni prueba que Mi Fitness causara G08. Se conserva esa condición OFF
+durante el próximo ensayo de permisoNearby para evitar otra variable.
+No es necesario activar ambos antes del aislamiento: el control de sincronía
+reciente ya está reportado. Denegar soloNearby deMiFit/verificar/force-stop
+ambas/unPROBEr106/cerrar/restaurarNearby/MiFit. Al terminar reactivar también
+ambos perfiles si se desea recuperar la configuración original ON, recordando
+que llamadas/entrada se suspenden mientras OFF. Nuevo PROBE aún pendiente.
+
 **Corrección R111,2026-10-10:** usuario aclara que llamadas/entrada siguen
 desactivadas. Cree que Mi Fitness conectó porque muestra datos sincronizados,
 aunque ajustes Bluetooth no indica conectado. La respuesta general R110 no
