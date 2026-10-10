@@ -1,5 +1,39 @@
 # Primera consulta RW4 — intento sin conexión, retorno confirmado
 
+## R102: segundo intento manual con etapas, aún sin resultado
+
+2026-10-09. Usuario pidió continuar diagnóstico y confirma actualización r101
+instalada. Primer intento r92 no conectó; retorno Mi Fitness normal confirmado.
+Detención previa de Mi Fitness y permiso cercano confirmados posteriormente.
+
+Artefacto actual: `0.94.0-rw4-diagnostic-r101`, mismo package/certificado,
+SHA256 `61888725cda97a93f52e43cabf745c314c5d56c168c3a97fae5cca78ffb8c3a3`.
+[Verificación y etapas](android-diagnostic-stages.md). Cambia visualización y
+preferencias privadas del teléfono; mantiene exclusivamente handshake/GET,
+ticket único, sesión30s y uploads/reconexión automática bloqueados.
+
+Secuencia guiada: forzar detención Mi Fitness sin borrar datos; Bluetooth ON;
+abrir r101, verificar pantalla y dispositivo existente; un toque Conectar,
+esperar30s, anotar solo cadena/código/mensaje fijo; Desconectar si disponible,
+Salir; abrir Mi Fitness y confirmar retorno. Si pide clave de nuevo o el flujo
+no corresponde, detener antes de conectar; no reinstalar/desvincular/resetear.
+
+Componente afectado: transporte/auth stock y consultas de batería/información;
+ninguna instalación/escritura de particiones/bootloader prevista. Persistencia
+explícita nueva: códigos en teléfono; efectos internos de auth del reloj siguen
+desconocidos. Reversión propuesta: cerrar diagnóstico y volver a Mi Fitness;
+no garantizar que reboot revierta escrituras internas. Peor fallo razonable,
+riesgo de bloqueo/reinicio y recovery limitado al reboot/gestión de UI
+permanecen como en el expediente inferior. No recovery de firmware corrupto
+validado ni cuantificación de brick. Evidencia de compatibilidad: coordinator
+RW4 y nombre/registro de esta unidad, sin éxito auth/GET específico2.2.86.
+
+Un solo intento adicional solicitado/guiado, nunca automático. Instalación
+de watchface/nativo/firmware siguen fuera del alcance. Segundo resultado
+pendiente; no declarar éxito por instalación de la app en el teléfono.
+
+## Historial del primer intento
+
 **R100,2026-10-09:** después de retomar guía, usuario reporta clave introducida
 y un toque Conectar, sin conexión. Después confirma Mi Fitness conecta bien
 y diagnóstico solo mostró «No conectado». [Resultado y pendientes](first-rw4-query-result.md).

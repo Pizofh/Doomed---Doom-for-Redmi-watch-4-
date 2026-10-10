@@ -1,5 +1,9 @@
 # Diagnóstico visible de conexión — R101
 
+**R102:** usuario confirma actualización r101 instalada en el teléfono.
+Apertura/UI estable y segundo intento aún sin resultados reportados. Las
+notas de preparación inferiores corresponden a R101.
+
 2026-10-09. El primer intento r92 solo mostró «No conectado». Mi Fitness
 conecta después; el usuario confirma que había forzado su detención antes y
 que Dispositivos cercanos estaba permitido. No hay causa demostrada ni
