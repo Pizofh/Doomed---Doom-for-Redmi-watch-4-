@@ -1,5 +1,60 @@
 # R124 — observar Lyra sin intentar otra conexión
 
+## R128 — comparación completada y retorno normal
+
+2026-10-10. El usuario aporta stopped con el mismo lector R126, después de la
+baseline positiva R127, y confirma Mi Fitness sincronizando/reloj normal tras
+reabrirla:
+
+```json
+{"checkpoint":"R126","label":"stopped","remote":{"headerRecognized":true,"serviceFormatRecognized":true,"explicitNothing":false,"activeSections":1,"parsedActiveRecords":4,"unparsedRecordLines":0,"otherUserCoreRecords":0,"activeCoreRecords":0,"coreProcessRecord":"not-established"},"local":{"headerRecognized":true,"serviceFormatRecognized":true,"explicitNothing":true,"activeSections":0,"parsedActiveRecords":0,"unparsedRecordLines":0,"otherUserCoreRecords":0,"activeCoreRecords":0,"coreProcessRecord":"not-established"},"miFitnessStopped":true,"currentWatchSocketVerified":false,"rawOutputSaved":false,"bluetoothOperationRequested":false,"watchCommandRequested":false}
+```
+
+| Campo | Baseline R127 | Stopped R128 |
+|---|---|---|
+| Core remoto observado | 1, ProcessRecord asignado | 0 |
+| Registros de servicios remotos parseados | 5 | 4 |
+| Registros locales parseados | 7 | 0; marcador explícito vacío |
+| Mi Fitness stopped | false | true |
+
+La afirmación de que MiWearCoreService siguió registrado como activo después
+de esta detención queda refutada para estas dos observaciones. No equivale a
+proceso del paquete terminado, Bluetooth libre o socket RW4 cerrado. Hay cuatro
+registros de otros servicios remotos, sin nombres/procesos publicados; no se
+puede deducir de este resumen que compartan el proceso del core o qué hacen.
+No se confirma causa de E03 ni se extrapola a los intentos anteriores.
+
+### Cierre del componente vs conexiones: revisión PC
+
+El APK copiado declara MiWearCoreService con superclase android.app.Service;
+su clase revisada no implementa onDestroy ni onUnbind. El Binder, tras comprobar
+identidad, devuelve IMiWearCoreImpl.Companion.getInstance. SDK smali confirma
+que ese getter devuelve una instancia estática final, creada en clinit; esta
+no pertenece únicamente a la instancia Service. onClientDied revisado en R121
+no cierra de forma general los dispositivos vinculados. Esto explica por qué
+la desaparición del ServiceRecord **no demuestra** la liberación del socket:
+el ciclo del componente y del objeto de conexión pueden diferir si su proceso
+sigue vivo. No se comprueba aquí si siguió vivo, si existe un cierre desde otra
+ruta o si conserva una conexión real. No se invocó clear/removeDeviceInfo/API.
+Lectura SDK nueva: IMiWearCoreImpl$Companion→core-impl-companion.txt, privado;
+resto de las comprobaciones usa salidas ya inspeccionadas. No código del APK ejecutado.
+
+### Siguiente checkpoint
+
+Encontrar en documentación/código primario un diagnóstico Android que permita
+observar el transporte/cierre de conexión con filtrado privado, antes de solicitar
+otro PROBE. [AOSP btif_sock.cc, revisión ee02f4df3b](https://android.googlesource.com/platform/packages/modules/Bluetooth/+/ee02f4df3b/system/btif/src/btif_sock.cc)
+expone Socket Events como historial circular de16eventos; STATE_CONNECTED en
+ese historial no es por sí solo una conexión actualmente abierta. No desarrollar
+un contador de sockets activos a partir de esos eventos ni pedir dumps crudos.
+Ramas android16-release consultadas no fueron accesibles mediante el lector web;
+la revisión accesible citada no se presenta como código HyperOS del usuario.
+
+No nueva acción manual preparada: Mi Fitness restaurada, no más detenciones,
+permisos/autostart/profiles, APKs, PROBE o comandos reloj en este checkpoint.
+Agente no ejecutó ADB/radio/hardware. Sin nuevos tests: código no modificado.
+Backup/recovery, ABI/loader/privilegios nativos RW4 siguen pendientes.
+
 ## R127 — baseline positiva del lector R126
 
 2026-10-10. El usuario aporta la consulta normal del lector ampliado:

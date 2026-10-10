@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R128, 2026-10-10:** [servicio retirado; retorno normal](phone-core-state-plan.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Core externo sigue registrado activo tras esta detención MiFit | Dos consultas actuales del teléfono | Baseline core1→stopped core0; cuerpo reconocido | REFUTADO EN ESTA COMPARACIÓN | Alta sobre registros | Manual usuario | No extrapolar a sockets, proceso o intentos previos |
+| Mi Fitness y reloj vuelven a funcionar tras R128 | Teléfono y RW4 | Confirmación expresa del usuario | CONFIRMADO POR USUARIO | Alta sobre reporte | Manual | No recovery integral ni cambios firmware |
+| La implementación core depende solo de la instancia Service | APK del core en PC | Binder devuelve singleton static final; Service sin onDestroy/onUnbind propio | REFUTADO EN CÓDIGO REVISADO | Alta | SDK smali | No prueba que el singleton/socket siga vivo en teléfono |
+| Socket Events demuestra conexiones activas actuales | Android AOSP revisión ee02f4df3b | Buffer circular16eventos, no tabla de sockets vivos | REFUTADO PARA ESA FUENTE | Alta | Lectura primaria | No formato HyperOS comprobado; no dump solicitado |
+
 **R127, 2026-10-10:** [baseline positiva del servicio remoto](phone-core-state-plan.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R128:** [comparación de servicios terminada; reloj y Mi Fitness normales](docs/phone-core-state-plan.md).
+Al detener Mi Fitness desaparece el registro core externo. Su objeto de conexión
+tiene un ciclo distinto; socket libre y causa de E03 siguen sin probar.
+Siguiente trabajo: investigar diagnóstico Android de conexiones en PC.
+
 **Actual R126:** [lector USB ampliado; Mi Fitness vuelve a sincronizar](docs/phone-core-state-plan.md).
 Las dos salidas anteriores no prueban servicio/socket ausente. Se corrige la
 validación del cuerpo y se prepara una consulta normal de ambos paquetes;

@@ -1,5 +1,11 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R128:** [comparación completada y retorno normal confirmado](phone-core-state-plan.md).
+Core remoto ServiceRecord1→0 al detener MiFit; no socket libre/proceso terminado
+demostrados. Usuario confirma MiFit sincronizando y reloj normal al reabrir.
+No más acción manual/PROBE propuesta: investigar diagnóstico Android de conexiones
+en PC. Sin cambios de firmware/particiones/bootloader/nativo ni recovery integral.
+
 **Actual R127:** [baseline positiva y comparación stopped preparada](phone-core-state-plan.md).
 Registro core remoto observado con ProcessRecord asignado, socket RW4 sin probar.
 Mismo lector R126; detener manualmente SOLO Mi Fitness, collect stopped, volver

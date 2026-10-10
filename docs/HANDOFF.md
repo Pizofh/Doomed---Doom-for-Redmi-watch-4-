@@ -1,5 +1,20 @@
 # Retomar el proyecto
 
+**R128, 2026-10-10:** [comparación de servicio completada](phone-core-state-plan.md).
+Stopped lectorR126: remote header/bodytrue/sections1/parsed4/unparsed0/core0/
+otherusercore0/processnot-established; local header/bodytrue/explicitNothingtrue/
+sections0/parsed0/core0. MiFitstoppedtrue. Tras abrirla usuario confirma sync/reloj
+normal. Contra baselineR127 remotecore1/localparsed7: ServiceRecord core ya no
+observado tras stop; REFUTA persistencia de registro activo en esta medición,
+NO socket libre/proceso terminado/causaE03. PC: coreService sin onDestroy/onUnbind;
+Binder→Companion.getInstance→static final IMiWearCoreImpl instancia, smali confirmado
+nuevo core-impl-companion.txt; onClientDied R121 no cierre bound general. Posible
+vida distinta de Service/objeto/socket si proceso persiste, runtime NO comprobado.
+Next único: diagnóstico Android transporte/cierre, investigación primaria PC
+antes de otro PROBE. AOSP btif_sock.cc ee02f4df3b Socket Events es historial16,
+NO activos; Android16refs inaccesibles, no código HyperOS probado. No pedir dumps
+crudos/otra APK/stop/disable servicios/PROBE. Sin nuevos tests o ADB físico agente.
+
 **R127, 2026-10-10:** [baseline positiva R126 aportada](phone-core-state-plan.md).
 Remote header/bodytrue/activeSections1/parsed5/unparsed0/otherusercore0/
 coreRecords1/processassigned. Local header/bodytrue/activeSections1/parsed7/
