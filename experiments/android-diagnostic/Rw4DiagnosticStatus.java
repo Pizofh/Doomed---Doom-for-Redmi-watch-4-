@@ -86,7 +86,8 @@ public final class Rw4DiagnosticStatus {
 
     public static synchronized boolean isActive(Context context) {
         String trace = "," + context.getSharedPreferences(FILE, Context.MODE_PRIVATE).getString(KEY, "") + ",";
-        if (!Rw4DiagnosticAttempt.PROCESS.hasIssued() || !trace.contains(",D01,")) return false;
+        if (!Rw4DiagnosticAttempt.PROCESS.hasIssued() || Rw4DiagnosticAttempt.PROCESS.isInventory()
+                || Rw4DiagnosticAttempt.PROCESS.isCancelled() || !trace.contains(",D01,")) return false;
         for (String ended : new String[]{"D13", "D14", "D15", "D16", "D17", "E01", "E03", "E04", "E09", "E13"}) {
             if (trace.contains("," + ended + ",")) return false;
         }
@@ -108,10 +109,10 @@ public final class Rw4DiagnosticStatus {
         SharedPreferences prefs = context.getSharedPreferences(FILE, Context.MODE_PRIVATE);
         String mode = prefs.getString("mode", "");
         String modeLabel = "TRANSPORT_ONLY".equals(mode) ? "solo Bluetooth"
-                : "QUERY".equals(mode) ? "batería e información" : "sin intento r106";
+                : "QUERY".equals(mode) ? "batería e información" : "sin intento de conexión registrado";
         String cache = prefs.getString("cache", "");
         String safeCache = Rw4DiagnosticDetails.cacheCodes(cache.replace("/", ":/" ) + ":");
-        return "RW4 Diagnostics r106; Android API " + Build.VERSION.SDK_INT
+        return "RW4 Diagnostics r114; Android API " + Build.VERSION.SDK_INT
                 + "\nModo: " + modeLabel + "\nCaché del intento: " + safeCache
                 + "\nFormato de clave: " + (!prefs.getBoolean("keyFormatChecked", false) ? "no evaluado"
                     : prefs.getBoolean("keyFormatValid", false) ? "K01: formato esperado; validez no comprobada" : "K02: formato no disponible")

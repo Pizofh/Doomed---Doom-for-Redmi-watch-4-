@@ -30,12 +30,13 @@ public final class Rw4DiagnosticUi {
 
     public static void show(Context context, GBDevice device) {
         if (!(device.getDeviceCoordinator() instanceof RedmiWatch4Coordinator)) return;
-        new MaterialAlertDialogBuilder(context).setTitle("RW4 Diagnostics — r106")
-                .setItems(new String[]{"Informe y caché local", "Probar solo Bluetooth", "Consultar batería e información", "Cancelar sesión"},
+        new MaterialAlertDialogBuilder(context).setTitle("RW4 Diagnostics — r114")
+                .setItems(new String[]{"Informe y caché local", "Probar solo Bluetooth", "Consultar batería e información", "Cancelar sesión", "Inventario de servicios"},
                         (dialog, which) -> {
                             if (which == 0) showReport(context, device);
                             else if (which == 3) { cancel(context, device); showReport(context, device); }
-                            else confirm(context, device, which == 1 ? Rw4DiagnosticAttempt.Mode.TRANSPORT_ONLY : Rw4DiagnosticAttempt.Mode.QUERY);
+                            else confirm(context, device, which == 4 ? Rw4DiagnosticAttempt.Mode.SERVICE_INVENTORY
+                                    : which == 1 ? Rw4DiagnosticAttempt.Mode.TRANSPORT_ONLY : Rw4DiagnosticAttempt.Mode.QUERY);
                         }).setNegativeButton("Cerrar", null).show();
     }
 
@@ -56,6 +57,13 @@ public final class Rw4DiagnosticUi {
     }
 
     private static void confirm(Context context, GBDevice device, Rw4DiagnosticAttempt.Mode mode) {
+        if (mode == Rw4DiagnosticAttempt.Mode.SERVICE_INVENTORY) {
+            new MaterialAlertDialogBuilder(context).setTitle("Inventario manual — ventana máxima 20 s")
+                    .setMessage("Solicitar UUIDs a Android y buscar anuncios BLE. No se abre socket ni conexión GATT propia; no se autentica ni se envían comandos Xiaomi. Android puede devolver caché y su solicitud SDP puede continuar al cerrar esta pantalla.\n\nDetén Mi Fitness antes. Mantén esta pantalla abierta y el teléfono encendido. Al salir se detiene nuestro escaneo. No aceptes solicitudes de nuevo enlace. Al acabar vuelve a Mi Fitness.")
+                    .setPositiveButton("Iniciar inventario", (dialog, which) -> start(context, device, mode))
+                    .setNegativeButton("Cancelar", null).show();
+            return;
+        }
         String what = mode == Rw4DiagnosticAttempt.Mode.TRANSPORT_ONLY
                 ? "Abrir y cerrar el socket Bluetooth seguro, sin autenticar ni enviar comandos Xiaomi."
                 : "Autenticar y consultar exclusivamente batería, modelo y firmware; después cerrar.";
@@ -85,6 +93,16 @@ public final class Rw4DiagnosticUi {
             Toast.makeText(context, "Este proceso ya utilizó su intento. El informe permanece disponible; no se inicia otro.", Toast.LENGTH_LONG).show();
             showReport(context, device); return;
         }
+        if (mode == Rw4DiagnosticAttempt.Mode.SERVICE_INVENTORY) {
+            try {
+                context.startActivity(new Intent(context, Rw4InventoryActivity.class)
+                        .putExtra(GBDevice.EXTRA_DEVICE, device).putExtra(Rw4DiagnosticAttempt.EXTRA_TICKET, ticket));
+            } catch (RuntimeException ignored) {
+                Rw4DiagnosticAttempt.PROCESS.cancel();
+                Toast.makeText(context, "No se pudo abrir el inventario; no se inicia otra prueba.", Toast.LENGTH_LONG).show();
+            }
+            return;
+        }
         Rw4DiagnosticStatus.record(context, device, Rw4DiagnosticTrace.Event.REQUESTED);
         Rw4DiagnosticStatus.snapshot(context, device, mode);
         if (mode == Rw4DiagnosticAttempt.Mode.QUERY) Rw4DiagnosticStatus.keyFormat(context, true);
@@ -110,13 +128,13 @@ public final class Rw4DiagnosticUi {
         String local = "Estado local al abrir informe:\n" + localState(context)
                 + "\nCaché local (esta lectura no conecta): "
                 + Rw4DiagnosticDetails.cacheCodes(Rw4BluetoothCache.read(context, device)) + "\n\n";
-        AlertDialog dialog = new MaterialAlertDialogBuilder(context).setTitle("Informe de diagnóstico r106")
-                .setMessage(local + Rw4DiagnosticStatus.report(context))
+        AlertDialog dialog = new MaterialAlertDialogBuilder(context).setTitle("Informe de diagnóstico r114")
+                .setMessage(local + reports(context))
                 .setPositiveButton("Copiar informe", null).setNeutralButton("Cancelar sesión", null)
                 .setNegativeButton("Cerrar y cancelar", (d, which) -> cancel(context, device)).show();
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(view -> {
             ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            if (clipboard != null) clipboard.setPrimaryClip(ClipData.newPlainText("RW4 diagnóstico", local + Rw4DiagnosticStatus.report(context)));
+            if (clipboard != null) clipboard.setPrimaryClip(ClipData.newPlainText("RW4 diagnóstico", local + reports(context)));
             Toast.makeText(context, "Informe sin claves ni direcciones copiado", Toast.LENGTH_SHORT).show();
         });
         dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener(view -> cancel(context, device));
@@ -125,11 +143,16 @@ public final class Rw4DiagnosticUi {
         Runnable update = new Runnable() {
             @Override public void run() {
                 if (!dialog.isShowing()) return;
-                dialog.setMessage(local + Rw4DiagnosticStatus.report(context));
+                dialog.setMessage(local + reports(context));
                 handler.postDelayed(this, 500);
             }
         };
         handler.post(update);
         dialog.setOnDismissListener(d -> handler.removeCallbacksAndMessages(null));
+    }
+
+    private static String reports(Context context) {
+        return "Último informe de conexión (puede ser anterior):\n" + Rw4DiagnosticStatus.report(context)
+                + "\n\nÚltimo inventario:\n" + Rw4InventoryStatus.report(context);
     }
 }

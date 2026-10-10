@@ -17,7 +17,7 @@ const bytes = fs.readFileSync(path.join(source, apkRelative));
 const inspection = inspectApk(bytes);
 const manifest = inspection.manifest;
 if (manifest.package !== 'nodomain.freeyourgadget.gadgetbridge.rw4diagnostic' ||
-    manifest.versionName !== '0.94.0-rw4-diagnostic-r106' || manifest.versionCode !== 253 ||
+    manifest.versionName !== '0.94.0-rw4-diagnostic-r114' || manifest.versionCode !== 253 ||
     manifest.minSdkVersion !== 23 || manifest.targetSdkVersion !== 35 || manifest.debuggable !== false) throw Error('Unexpected diagnostic APK identity/configuration');
 if (!manifest.permissions.every(permissionAllowed) ||
     [...diagnosticPermissions.keys()].some(name => !manifest.permissions.includes(name))) throw Error('Unexpected diagnostic permissions after manifest merge');
@@ -36,6 +36,8 @@ for (const component of manifest.components) {
   if (component.kind === 'activity' && component.exported !== (component.name === 'nodomain.freeyourgadget.gadgetbridge.activities.ControlCenterv2')) throw Error('Unexpected activity export');
 }
 if (!manifest.components.some(c => c.kind === 'service' && c.name === coreService && c.enabled === true)) throw Error('Diagnostic service missing');
+if (!manifest.components.some(c => c.kind === 'activity' && c.name === 'nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4InventoryActivity'
+    && c.enabled === true && c.exported === false)) throw Error('Private inventory activity missing');
 const out = path.join(root, 'artifacts/research/android-diagnostic-apk-inspection.json');
 const report = {...inspection, apkPath: path.relative(root, path.join(source, apkRelative)).replace(/\\/g, '/'),
   preparedSourcesSha256: state.files, sourceArchiveSha256: state.sourceArchiveSha256,
@@ -43,7 +45,7 @@ const report = {...inspection, apkPath: path.relative(root, path.join(source, ap
   privacyAndGlobalLifecycleAuditComplete: false,
   declaredPermissionsAndComponentsRestricted: true,
   noSensitiveAccessDeclarations: true,
-  officialApksignerReport: 'artifacts/research/android-diagnostic-apksigner-r106.txt'};
+  officialApksignerReport: 'artifacts/research/android-diagnostic-apksigner-r114.txt'};
 fs.mkdirSync(path.dirname(out), {recursive: true});
 fs.writeFileSync(out, JSON.stringify(report, null, 2) + '\n');
 state.apkProduced = true;

@@ -69,6 +69,20 @@ public final class Rw4DiagnosticAttemptTest {
         require(cancelled.isCancelled() && !cancelled.consume("synthetic-rw4", pending, 101));
         require(cancelled.issue("synthetic-rw4", 102) == null);
         query.cancel(); require(query.isCancelled());
+        var inventory = new Rw4DiagnosticAttempt();
+        String inventoryTicket = inventory.issue("synthetic-rw4", 100, Rw4DiagnosticAttempt.Mode.SERVICE_INVENTORY);
+        require(!inventory.consume("synthetic-rw4", inventoryTicket, 101));
+        require(!inventory.consumeInventory("other", inventoryTicket, 101));
+        require(inventory.consumeInventory("synthetic-rw4", inventoryTicket, 102));
+        require(inventory.isInventory() && !inventory.isQuery() && !inventory.isTransportOnly());
+        require(!inventory.consumeInventory("synthetic-rw4", inventoryTicket, 103));
+        var isolatedQuery = new Rw4DiagnosticAttempt();
+        String queryTicket = isolatedQuery.issue("synthetic-rw4", 100, Rw4DiagnosticAttempt.Mode.QUERY);
+        require(!isolatedQuery.consumeInventory("synthetic-rw4", queryTicket, 101));
+        require(isolatedQuery.consume("synthetic-rw4", queryTicket, 102) && isolatedQuery.isQuery());
+        var inventoryExpired = new Rw4DiagnosticAttempt();
+        require(!inventoryExpired.consumeInventory("synthetic-rw4", inventoryExpired.issue("synthetic-rw4", 100,
+                Rw4DiagnosticAttempt.Mode.SERVICE_INVENTORY), 5100));
         System.out.println("Manual attempt tests passed (expiry, target, replay, concurrency)");
     }
 }

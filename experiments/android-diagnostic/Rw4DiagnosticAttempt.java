@@ -5,7 +5,7 @@ import java.util.UUID;
 
 /** Process-local ticket issued by a foreground click, not a persistent reconnect preference. */
 public final class Rw4DiagnosticAttempt {
-    public enum Mode { TRANSPORT_ONLY, QUERY }
+    public enum Mode { TRANSPORT_ONLY, QUERY, SERVICE_INVENTORY }
     public static final String EXTRA_TICKET = "rw4.diagnostic.manualTicket";
     public static final Rw4DiagnosticAttempt PROCESS = new Rw4DiagnosticAttempt();
     private static final long TICKET_MS = 5000;
@@ -32,6 +32,16 @@ public final class Rw4DiagnosticAttempt {
     }
 
     public synchronized boolean consume(String address, String presented, long now) {
+        if (pendingMode == Mode.SERVICE_INVENTORY) return false;
+        return accept(address, presented, now);
+    }
+
+    public synchronized boolean consumeInventory(String address, String presented, long now) {
+        if (pendingMode != Mode.SERVICE_INVENTORY) return false;
+        return accept(address, presented, now);
+    }
+
+    private boolean accept(String address, String presented, long now) {
         if (consumed || ticket == null || presented == null || !ticket.equals(presented)
                 || !target.equals(address)) return false;
         if (now < issued || now - issued >= TICKET_MS) {
@@ -48,6 +58,8 @@ public final class Rw4DiagnosticAttempt {
     }
 
     public synchronized boolean isTransportOnly() { return consumed && acceptedMode == Mode.TRANSPORT_ONLY; }
+    public synchronized boolean isInventory() { return consumed && acceptedMode == Mode.SERVICE_INVENTORY; }
+    public synchronized boolean isQuery() { return consumed && acceptedMode == Mode.QUERY; }
     public synchronized boolean hasConsumed() { return consumed; }
     public synchronized boolean hasIssued() { return consumed || ticket != null; }
     public synchronized boolean isCancelled() { return cancelled; }

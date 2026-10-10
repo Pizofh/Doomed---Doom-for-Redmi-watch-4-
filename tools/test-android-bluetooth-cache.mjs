@@ -98,5 +98,6 @@ const reader = queue.indexOf('readThread = createReadThread();', probe);
 if (probe < 0 || reader < probe || !queue.slice(probe, reader).includes('TRANSPORT_TEST_PASSED') ||
     !queue.slice(probe, reader).includes('return;')) throw Error('Probe must close/return before reader/initialization');
 const support = fs.readFileSync(path.join(preview, 'XiaomiSupport.java'), 'utf8');
-if (support.split('&& !Rw4DiagnosticAttempt.PROCESS.isTransportOnly()').length !== 3) throw Error('Probe output/read gates missing');
+if (support.split('&& Rw4DiagnosticAttempt.PROCESS.isQuery()').length !== 3 ||
+    !support.includes('|| Rw4DiagnosticAttempt.PROCESS.isInventory()')) throw Error('Only accepted query may send/read payloads; inventory cannot connect');
 console.log('PASS: local menu does not connect; service needs manual ticket; probe returns before protocol and output gates deny its payloads.');

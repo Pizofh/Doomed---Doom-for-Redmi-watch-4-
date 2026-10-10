@@ -60,14 +60,14 @@ support = replaceOnce(support, '    private final XiaomiAuthService authService'
 
     public boolean isRw4DiagnosticTransportOpen() {
         return getCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator
-                && !Rw4DiagnosticAttempt.PROCESS.isTransportOnly()
+                && Rw4DiagnosticAttempt.PROCESS.isQuery()
                 && !Rw4DiagnosticAttempt.PROCESS.isCancelled()
                 && diagnosticSession.isOpen();
     }
 
     public boolean isRw4DiagnosticCommandAllowed(final XiaomiProto.Command command) {
         return getCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator
-                && !Rw4DiagnosticAttempt.PROCESS.isTransportOnly()
+                && Rw4DiagnosticAttempt.PROCESS.isQuery()
                 && !Rw4DiagnosticAttempt.PROCESS.isCancelled()
                 && Rw4DiagnosticPolicy.allowsSerialized(diagnosticSession.phase(), command.toByteArray());
     }
@@ -76,7 +76,7 @@ support = replaceOnce(support, '    private final XiaomiAuthService authService'
 support = body(support, 'public boolean useAutoConnect()', '        return false;');
 support = body(support, 'public void setAutoReconnect(boolean enabled)', '        super.setAutoReconnect(false);\n        if (connectionSupport != null) connectionSupport.setAutoReconnect(false);');
 support = body(support, 'public boolean connect()', `        if (!(getCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator)
-                || !Rw4DiagnosticAttempt.PROCESS.hasConsumed() || Rw4DiagnosticAttempt.PROCESS.isCancelled()
+                || !Rw4DiagnosticAttempt.PROCESS.hasConsumed() || Rw4DiagnosticAttempt.PROCESS.isInventory() || Rw4DiagnosticAttempt.PROCESS.isCancelled()
                 || !diagnosticSession.begin()) return false;
         diagnosticTimer.postDelayed(() -> {
             diagnosticSession.close();
@@ -187,6 +187,9 @@ write('Rw4DiagnosticStatus.java', fs.readFileSync(path.join(root, 'experiments/a
 write('Rw4BluetoothCache.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4BluetoothCache.java'), 'utf8'), false);
 write('Rw4DiagnosticDetails.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticDetails.java'), 'utf8'), false);
 write('Rw4DiagnosticUi.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticUi.java'), 'utf8'), false);
+for (const name of ['Rw4ServiceInventory.java', 'Rw4InventoryStatus.java', 'Rw4InventoryActivity.java']) {
+  write(name, fs.readFileSync(path.join(root, 'experiments/android-diagnostic', name), 'utf8'), false);
+}
 
 let service = load('DeviceCommunicationService.java');
 service = body(service, 'private final BroadcastReceiver mReceiver = new BroadcastReceiver()', `        @Override
@@ -387,6 +390,8 @@ const dependencyComponents = [
   ['receiver', 'androidx.profileinstaller.ProfileInstallReceiver']
 ].map(([kind, name]) => `        <${kind} android:name="${name}" tools:node="remove" />`).join('\n');
 manifest = replaceOnce(manifest, '    </application>', dependencyComponents + `
+        <activity android:name="nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4InventoryActivity"
+            android:exported="false" android:enabled="true" />
         <provider android:name="androidx.startup.InitializationProvider"
             android:authorities="\${applicationId}.androidx-startup" android:exported="false" tools:node="merge">
             <meta-data android:name="androidx.work.WorkManagerInitializer" tools:node="remove" />
@@ -408,7 +413,7 @@ gradle = replaceOnce(gradle, '    buildTypes {', `    buildTypes {
         rw4diagnostic {
             initWith debug
             applicationIdSuffix ".rw4diagnostic"
-            versionNameSuffix "-rw4-diagnostic-r106"
+            versionNameSuffix "-rw4-diagnostic-r114"
             debuggable false
             minifyEnabled false
             signingConfig signingConfigs.debug

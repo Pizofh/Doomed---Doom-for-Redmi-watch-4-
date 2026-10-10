@@ -73,7 +73,25 @@ public final class StatusContractTest {
   c.prefs.edit().putString("failure","private-error-value").putString("timed","private-error-value")
      .putString("model","private-error-value").putString("cache","private-error-value").putString("trace","private-error-value").apply();
   require(!Rw4DiagnosticStatus.report(c).contains("private-error-value"));
-  System.out.println("PASS: actual Status API guards/error capture, timeout provenance, request reset, result retention and privacy under corrupt preferences.");
+  Context inventoryContext = new Context();
+  require(Rw4InventoryStatus.report(inventoryContext).contains("Sin inventario"));
+  int[] inventoryData = new int[Rw4ServiceInventory.KEYS.length]; inventoryData[2]=1;
+  Rw4InventoryStatus.save(inventoryContext,new Rw4ServiceInventory.Snapshot(inventoryData));
+  require(Rw4InventoryStatus.report(inventoryContext).contains("r114"));
+  require(inventoryContext.prefs.values.size() == Rw4ServiceInventory.KEYS.length+1);
+  for(Object value: inventoryContext.prefs.values.values()) require(value instanceof Integer || value instanceof Boolean);
+  inventoryContext.prefs.values.put("error","private-error-value");
+  require(Rw4InventoryStatus.report(inventoryContext).equals("Informe de inventario no disponible."));
+  inventoryContext.prefs.values.put("error",999); require(!Rw4InventoryStatus.report(inventoryContext).contains("999"));
+  inventoryContext.prefs.values.remove("error"); require(Rw4InventoryStatus.report(inventoryContext).contains("incompleto"));
+  inventoryData[2]=0; Rw4InventoryStatus.save(inventoryContext,new Rw4ServiceInventory.Snapshot(inventoryData));
+  require(Rw4InventoryStatus.report(inventoryContext).contains("Registro incompleto"));
+  c.prefs.values.put("trace","D01");
+  String inventoryTicket=Rw4DiagnosticAttempt.PROCESS.issue("synthetic",100,Rw4DiagnosticAttempt.Mode.SERVICE_INVENTORY);
+  require(Rw4DiagnosticAttempt.PROCESS.consumeInventory("synthetic",inventoryTicket,101));
+  require(!Rw4DiagnosticStatus.isActive(c));
+  Rw4DiagnosticAttempt.PROCESS.cancel(); require(!Rw4DiagnosticStatus.isActive(c));
+  System.out.println("PASS: actual Status API guards/error capture, timeout provenance, request reset, result retention and privacy under corrupt preferences; inventory integer-only storage, absent/incomplete/corrupt report guards and connection-report isolation.");
  }
 }`
 };
@@ -83,7 +101,7 @@ for (const [name, bytes] of Object.entries(stubs)) {
   fs.writeFileSync(dest, bytes); sources.push(dest);
 }
 fs.mkdirSync(classes, {recursive: true});
-for (const name of ['Rw4DiagnosticStatus', 'Rw4DiagnosticDetails', 'Rw4DiagnosticTrace', 'Rw4DiagnosticAttempt']) {
+for (const name of ['Rw4DiagnosticStatus', 'Rw4DiagnosticDetails', 'Rw4DiagnosticTrace', 'Rw4DiagnosticAttempt', 'Rw4ServiceInventory', 'Rw4InventoryStatus']) {
   sources.push(path.join(root, 'experiments/android-diagnostic/' + name + '.java'));
 }
 for (const [command, args] of [
