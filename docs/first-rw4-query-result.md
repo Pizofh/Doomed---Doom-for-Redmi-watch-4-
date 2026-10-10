@@ -1,4 +1,72 @@
-# Primer intento de consulta física
+# Resultados de consulta física RW4
+
+## R103 — segundo intento r101: fallo del socket y retorno normal
+
+2026-10-09. Reporte del usuario, sin captura de tráfico ni acceso al teléfono:
+
+```text
+D01>D02>D03>D04>E03>E08>D13
+E03: falló la conexión Bluetooth
+```
+
+Después de salir de nuestra app, el usuario confirma que **Mi Fitness volvió
+a conectar y el reloj sigue funcionando normalmente**. No se reporta bloqueo,
+instalación de archivos, batería/modelo recibidos ni autenticación exitosa.
+
+| Observación | Interpretación sustentada en fuente r101 |
+|---|---|
+| D01–D03 | Solicitud manual aceptada y soporte creado |
+| D04, E03, sin D05 | `BluetoothSocket.connect()` lanzó IOException antes de marcar conexión establecida |
+| Sin D06 ni D08 | No se alcanzó consulta del protocolo ni inicio de autenticación Xiaomi |
+| E08 | Expiró el límite local de sesión de30s; no es un watchdog del reloj |
+| D13 | Callback local de desconexión; por sí solo no certifica el instante de cierre radio |
+| Mi Fitness/reloj normales después | Retorno de uso normal confirmado por usuario para este intento fallido |
+
+No inferir clave inválida, fallo de permisos, incompatibilidad Lua/nativa,
+brick ni inviabilidad de Doom. El retorno tras **autenticación exitosa** sigue
+sin probarse. La traza no registra texto de excepción ni su causa detallada.
+
+### Transporte revisado en PC
+
+En el worktree de fuentes inspeccionadas usado para r101:
+
+- `RedmiWatch4Coordinator.getConnectionType()` devuelve `BT_CLASSIC`.
+- `XiaomiSppSupport.getSupportedService()` selecciona SPP:
+  `00001101-0000-1000-8000-00805f9b34fb`.
+- Canal predeterminado sin especificar (`-1`); `BtBRQueue` crea socket con
+  `createRfcommSocketToServiceRecord`, con resolución SDP del servicio.
+- D04 está inmediatamente antes de `connect()`, D05 inmediatamente después;
+  E03 está en su rama IOException. Esto localiza el fallo del intento.
+
+Android documenta que la conexión RFCOMM usa SDP para encontrar el canal;
+ese enlace Bluetooth precede a la autenticación Xiaomi con nuestra clave.
+No se alcanzó el envío del protocolo de inicialización según la traza, pero
+sí hubo un intento de enlace/SDP. No afirmar cero efectos internos del reloj.
+[Referencia BluetoothDevice](https://developer.android.com/reference/android/bluetooth/BluetoothDevice#createRfcommSocketToServiceRecord(java.util.UUID)),
+[BluetoothSocket.connect](https://developer.android.com/reference/android/bluetooth/BluetoothSocket#connect()).
+
+No se ha distinguido entre servicio no disponible, fallo de SDP, conflicto
+de sesión o fallo de la pila Android. Forzar Classic repetiría la selección
+actual. El comentario upstream sobre posible BLE/iOS no prueba compatibilidad
+de ese transporte en M2315W1/2.2.86. No cambiar clave ni vínculo para probar.
+
+### Siguiente checkpoint sin otra conexión
+
+Preparar una lectura manual de caché del teléfono: tipo Bluetooth, estado
+del vínculo y presencia de SPP en `BluetoothDevice.getUuids()`. Este método
+devuelve la copia local y no inicia descubrimiento de servicios, según
+[Android](https://developer.android.com/reference/android/bluetooth/BluetoothDevice#getUuids()).
+No llamar `fetchUuidsWithSdp`, discovery, connect, ni probar canales.
+Resultado futuro: categorías fijas sin MAC, nombre, UUIDs crudos o claves;
+no registrar otros dispositivos. Caché nula o sin SPP no prueba que el reloj
+carezca de ese servicio. **Solo propuesta: no implementada, compilada o
+ejecutada.** No se solicita un tercer intento físico en esta revisión.
+
+El menú Debug upstream permite compartir logs, no se encontró visor local
+del error en `MainDebugFragment`; no pedir logs completos ni activar su
+exportación como diagnóstico. No cambios de código ni nuevo APK en R103.
+
+## Historial R100 — primer intento r92
 
 R100, 2026-10-09. Tras recibir nuevamente los pasos de la consulta limitada,
 el usuario informa: introdujo la clave y pulsó Conectar; no conectó.

@@ -1,5 +1,16 @@
 # Matriz de evidencia
 
+**R103,2026-10-09:** [Segundo intento y retorno](first-rw4-query-result.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Segundo intento falla antes de auth Xiaomi | M2315W1/2.2.86, APK r101 | Cadena usuario D01>D02>D03>D04>E03>E08>D13 y ubicación de marcas en fuente | CONFIRMADO EN RW4 por reporte y correspondencia de código | Alta sobre etapa | Fuente PC; intento manual usuario | IOException del socket; causa concreta desconocida |
+| Mi Fitness y reloj funcionan normalmente después | Misma unidad, segundo intento | Confirmación explícita usuario | CONFIRMADO EN RW4 por reporte | Alta sobre reporte | Manual usuario | No demuestra retorno después de auth exitosa |
+| r101 selecciona Classic/SPP para RW4 | Cliente Android, fuente usada en build | Coordinator RW4 y XiaomiSppSupport/cola | CONFIRMADO en código cliente | Alta | Inspección PC | No prueba endpoint soportado/disponible en firmware real |
+| E08 indica reboot/watchdog del reloj | Esta traza | Enum y temporizador local de sesión | REFUTADO como interpretación del código | Alta | Inspección PC | Es límite local30s; no telemetría del reloj |
+| Clave fue rechazada en este intento | Misma unidad | Sin D05/D08; fallo previo | SIN EVIDENCIA | Alta sobre límite | No auth alcanzada según traza | No cambiar clave por este resultado |
+| Caché Android contiene SPP para esta unidad | Teléfono existente | getUuids disponible en API oficial, sin lectura realizada | SIN EVIDENCIA | No evaluable | No | Próximo diagnóstico propuesto; caché puede ser incompleta |
+
 **R101,2026-10-09:** [Diagnóstico por etapas](android-diagnostic-stages.md).
 Usuario confirma detención previa Mi Fitness/permisos cercanos; no causa del
 fallo identificada. Build r101/Java/cola/inspección/firma confirmados solo en

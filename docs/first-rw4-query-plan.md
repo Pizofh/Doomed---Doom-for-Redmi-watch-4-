@@ -1,5 +1,12 @@
 # Primera consulta RW4 — intento sin conexión, retorno confirmado
 
+**Estado vigente R103:** segundo intento r101 finalizado con
+`D01>D02>D03>D04>E03>E08>D13`; fallo del socket antes de auth. Usuario
+confirma Mi Fitness y reloj normales después. [Resultado](first-rw4-query-result.md).
+No repetir el procedimiento inferior; es historial del intento R102.
+Próximo checkpoint: diagnóstico de caché local Android, todavía sin implementar.
+No nueva consulta física, cambio de vínculo, transporte o firmware autorizado aquí.
+
 ## R102: segundo intento manual con etapas, aún sin resultado
 
 2026-10-09. Usuario pidió continuar diagnóstico y confirma actualización r101

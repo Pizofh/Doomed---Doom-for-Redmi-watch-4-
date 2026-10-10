@@ -1,6 +1,13 @@
-# M2315W1 — conexión diferida; instalación/nativo CERRADOS
+# M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
-**Estado vigente R97:** el usuario solicita evidencia específica RW4 y retorno
+**Estado vigente R103:** se realizaron dos intentos manuales de consulta
+limitada. Segundo r101 falla al abrir socket, antes de auth Xiaomi. Usuario
+confirma retorno normal de Mi Fitness y reloj. [Resultados](first-rw4-query-result.md).
+No autoriza reintentos automáticos, nuevo vínculo, firmware o código nativo.
+Siguiente diagnóstico propuesto: caché del teléfono sin conectar; aún no implementado.
+R97 y autorizaciones/resultados pendientes inferiores se conservan como historial.
+
+**Historial R97:** el usuario solicita evidencia específica RW4 y retorno
 Mi Fitness antes de continuar. [Revisión](rw4-auth-return-research.md): auth
 cliente implementada, ciclo 2.2.86 sin prueba reproducible encontrada; lectura
 del PR original pendiente por acceso bloqueado. No guiar Conectar ni ampliar

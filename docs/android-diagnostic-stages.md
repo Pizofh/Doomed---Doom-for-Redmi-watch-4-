@@ -1,5 +1,10 @@
 # Diagnóstico visible de conexión — R101
 
+**R103:** UI de etapas probada por reporte del usuario:
+`D01>D02>D03>D04>E03>E08>D13`. Fallo del socket antes de protocolo/auth;
+Mi Fitness reconecta y reloj normal después, confirmado. [Resultado](first-rw4-query-result.md).
+No tercer intento ni nuevo APK preparado. Notas R101/R102 inferiores son historial.
+
 **R102:** usuario confirma actualización r101 instalada en el teléfono.
 Apertura/UI estable y segundo intento aún sin resultados reportados. Las
 notas de preparación inferiores corresponden a R101.
