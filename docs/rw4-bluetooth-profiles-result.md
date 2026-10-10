@@ -1,5 +1,17 @@
 # R109 — segundo PROBE y posible actividad de Mi Fitness
 
+**Corrección R111,2026-10-10:** usuario aclara que llamadas/entrada siguen
+desactivadas. Cree que Mi Fitness conectó porque muestra datos sincronizados,
+aunque ajustes Bluetooth no indica conectado. La respuesta general R110 no
+demuestra restauración de toggles; tampoco hay confirmación independiente de
+sincronización reciente o estado conectado en Mi Fitness. No afirmar fallo de
+Mi Fitness ni conexión actual a partir de datos que pueden estar guardados.
+Restaurar primero ambos toggles originales y comprobar que Mi Fitness muestra
+conexión actual. Si no conecta, detener el plan PROBE/permiso y reportar;
+no reset/unpair. Solo tras ese control se mantiene el plan de aislamiento
+Nearby de Mi Fitness; Bluetooth general/perfiles originales/Quick Share intactos.
+No nuevo ensayo ni cambio APK reportados.
+
 **Actualización R110,2026-10-10:** usuario confirma que reactivó ambos
 interruptores y Mi Fitness/reloj funcionan normalmente después de R109.
 No resultado nuevo de conexión. Se guía un único PROBE r106 condicionado a

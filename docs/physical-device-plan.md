@@ -1,5 +1,11 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R111,corrección:** llamadas/entrada siguen desactivadas según usuario;
+datos visibles en Mi Fitness no confirman conexión actual ni sincronización nueva.
+Restaurar ambos ajustes y verificar estado conectado dentro de Mi Fitness antes
+de cualquier aislamiento/PROBE. Si no conecta, parar y reportar; no reset/unpair.
+La confirmación general R110 no demuestra toggles restaurados. [Registro](rw4-bluetooth-profiles-result.md).
+
 **Actual R110:** retorno R109 confirmado: ambos perfiles restaurados y
 Mi Fitness/reloj normales por reporte. [Plan con permiso de Mi Fitness](rw4-bluetooth-profiles-result.md)
 revisado: un PROBE manual condicionado a permisoNearby denegado/verificado,

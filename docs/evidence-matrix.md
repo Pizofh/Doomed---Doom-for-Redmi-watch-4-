@@ -1,5 +1,10 @@
 # Matriz de evidencia
 
+**R111,corrección de R110:** usuario precisa que ambos perfiles siguen OFF.
+Restauración de toggles **no confirmada**. Mi Fitness presenta datos, pero conexión
+actual/sincronización reciente **SIN EVIDENCIA independiente**; verificar estado
+en la app después de restaurar. No asumir que datos visibles prueban enlace activo.
+
 **R110,2026-10-10:** usuario confirma restauración de toggles y funcionamiento
 normal de Mi Fitness/reloj tras R109. Retorno **CONFIRMADO EN RW4 por reporte**;
 no demuestra igualdad de todos los datos ni causalidad de los pasos/notificación.
