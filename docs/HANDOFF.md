@@ -1,5 +1,21 @@
 # Retomar el proyecto
 
+**R116, 2026-10-10:** registro guardado recuperado: I3/salida primer plano,
+5922ms, SDP esperando UUIDs-1, BLE no iniciado/contadores0/error0, cierreBLE
+no requerido y receptor llamada retornó. [Resultado y segundo intento propuesto](rw4-service-inventory.md).
+Primera ejecución cancelada antes10s/antesBLE; sin respuesta aceptada hasta
+cancelación. No causa foreground registrada ni compatibilidad descartada.
+Normalidad reloj/MiFit ya reportada R115, sin otro intento entre reportes.
+Revisado código: onPause termina/guarda; UI no publica tiempo en cada tick SDP.
+Sin cambio código, nuevo APK, tests repetidos o hardware desde herramientas.
+Siguiente único checkpoint: segundo inventario explícito mismo APKr114,
+force-stop ambas apps para nuevo proceso/ticket, permisos/perfiles/BT actuales,
+mantener pantalla abierta encendida30s sin copiar/cambiarapps; copiar al estado
+terminal/botónCerrar, retornoMiFit. Si sigueI0 a30s, copiar/salir/recuperar guardado;
+si I3 sin cambiar pantalla o error, reportar/no tercerintento. Popupbond cancelar.
+No PROBE/QUERY/transporte automático/native/firmware. Plan de alcance/riesgo R114
+aplica igual; resultado del segundo inventario pendiente.
+
 **R115, 2026-10-10:** usuario reporta r114/API36, I0/en curso, SDP esperando,
 UUIDs-1, BLE no iniciado, contadores0, error0, tiempo13ms, cierres no requeridos;
 confirma procedimiento seguido, reloj normal y MiFitness sincroniza bien.

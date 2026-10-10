@@ -1,5 +1,54 @@
 # R114 — inventario de servicios desde Android
 
+## Resultado R116 — cancelación al perder primer plano
+
+2026-10-10. El usuario recuperó el registro guardado: r114/API36, `I3: salida
+de primer plano`, tiempo5922ms, SDP esperando ACTION_UUID/UUIDs-1, BLE no iniciado,
+contadores0, error0, cierre BLE no requerido y receptor llamada retornó.
+Reloj normal y sincronización normal confirmados en el reporte anterior R115;
+no se pidió otra operación radio entre ambos reportes.
+
+El registro terminal confirma la ejecución del cierre por `onPause` antes de
+la ventana SDP de 10s: no se registró respuesta aceptada ni comenzó el escaneo
+BLE. El retiro del receptor retornó sin excepción capturada; no demuestra
+cancelación del SDP encargado al OS ni ausencia de operaciones Bluetooth del
+sistema. La causa concreta de pérdida de primer plano no está registrada:
+no atribuirla al usuario, al bloqueo de pantalla, al clipboard o a HyperOS.
+No es prueba negativa de compatibilidad SDP/BLE ni fallo del límite de 20s.
+
+La espera es poco clara: el informe no actualiza el tiempo en cada tick mientras
+espera SDP. Esta limitación se puede resolver en el procedimiento actual sin
+otra instalación. No se modificó código ni se generó un APK nuevo.
+
+### Segundo inventario manual propuesto, mismo APK
+
+Se propone **una segunda ejecución**, porque la primera terminó antes de la fase
+BLE; no repetir PROBE ni QUERY. Alcance, comandos/API, persistencia, reversión,
+riesgos y límites de recuperación son los mismos de la tabla del plan R114 abajo.
+El registro de la primera ejecución queda aquí antes de reemplazar el resumen
+privado del teléfono. Ningún paso es ejecutado por herramientas PC.
+
+1. Forzar detención de Mi Fitness y nuestra app para cerrar el proceso anterior
+   y obtener un ticket manual nuevo. Mantener permisos/perfiles/vínculo actuales
+   y Bluetooth ON; no borrar datos ni cambiar la clave.
+2. Abrir nuestra app → tarjeta RW4 → Inventario de servicios → Iniciar inventario.
+3. Mantener la pantalla abierta y encendida durante **30 segundos**, sin cambiar
+   de app ni copiar el texto durante la espera. Que al principio siga mostrando
+   13ms u otro tiempo pequeño no demuestra que se haya detenido.
+4. Al terminar debe mostrar un estado terminal, por ejemplo `I1: completado`, y
+   el botón **Cerrar**. Copiar después, cerrar y comprobar sincronización Mi Fitness.
+   Un error terminal también sirve: reportar sin volver a intentarlo.
+5. Si tras 30s sigue I0, copiar, salir y recuperar Último inventario desde Informe
+   y caché local. Si aparece I3 sin haber cambiado de pantalla, indicarlo; no
+   repetir por tercera vez. Si surge pairing nuevo, cancelarlo y salir.
+
+La guía anterior de R115 de no repetir correspondía a recuperar el registro
+pendiente. Este resultado permite proponer una segunda ejecución explícita
+con espera clara. Su resultado y retorno siguen pendientes. Instalación/nativo
+en reloj siguen cerrados.
+
+---
+
 ## Resultado reportado R115 — informe inicial, desenlace pendiente
 
 2026-10-10. Usuario confirma haber seguido el procedimiento; reloj normal y

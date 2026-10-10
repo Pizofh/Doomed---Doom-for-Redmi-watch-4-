@@ -1,5 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R116:** [registro terminal recuperado y segundo inventario propuesto](rw4-service-inventory.md).
+I3/5922ms: cancelación foreground antes de BLE, retiro receptor retornó. No
+compatibilidad descartada. Misma APK/APIs/alcance/riesgo R114, una segunda
+ejecución manual con pantalla abierta30s; sin PROBE/QUERY ni nuevo emparejamiento.
+No segundo intento ejecutado aún ni hardware desde herramientas. Instalación/
+ejecución nativa/firmware en reloj CERRADOS; sin recovery integral validado.
+
 **Actual R115:** r114 abierto, informe inicial I0/13ms; usuario confirma reloj
 normal y Mi Fitness sincroniza. [Resultado](rw4-service-inventory.md).
 Terminación/radio sin confirmar. Siguiente paso solo leer último inventario

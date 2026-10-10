@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**R116, 2026-10-10:** [desenlace del primer inventario r114](rw4-service-inventory.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| El primer inventario terminó al perder primer plano antes de iniciar BLE | Cliente API36 del usuario | Registro I3/5922ms/BLE no iniciado | CONFIRMADO POR REPORTE EN TELÉFONO | Alta sobre registro | Manual usuario | No indica por qué ocurrió onPause |
+| El retiro del receptor retornó sin excepción capturada | Cliente API36 | Receptor: llamada retornó | CONFIRMADO POR REPORTE EN TELÉFONO | Alta sobre registro | Manual usuario | No cancela SDP OS pendiente ni prueba toda limpieza del sistema |
+| El reloj no ofrece SDP/BLE | M2315W1/2.2.86 | Inventario interrumpido a5,9s, antesBLE | SIN EVIDENCIA | Desconocida | No confirmado | Falta ejecución completa; segunda manual propuesta, mismo APK |
+
 **R115, 2026-10-10:** [informe r114 inicial y retorno normal](rw4-service-inventory.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

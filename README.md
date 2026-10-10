@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R116:** [el primer inventario terminó a5,9s por pérdida de primer plano](docs/rw4-service-inventory.md),
+antes de BLE. Retiro del receptor reportado; causa de onPause desconocida.
+Se propone una segunda ejecución con el mismo APK y pantalla abierta30s.
+Resultado pendiente; no nuevo build ni cambios de transporte/firmware.
+
 **Actual R115:** [r114 abrió y el retorno a Mi Fitness es normal](docs/rw4-service-inventory.md).
 El informe recibido sigue en I0; falta recuperar el desenlace guardado desde
 **Informe y caché local**. No iniciar otra prueba ni instalar un APK nuevo.
