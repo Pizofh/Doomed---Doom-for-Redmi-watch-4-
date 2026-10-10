@@ -1,5 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R132:** [PROBE r131 localizado y retorno normal](rw4-opening-result-r132.md).
+R02/L01/G08 con398ms deconnect; usuario confirma app/relojOK. Noauth/GET.
+Nueva acción propuesta solo lectura USB de registros existentes del TELÉFONO,
+sin otro intento radio/APK/stop de apps. Comandos, privacidad, persistencia/
+reversión y límites en el plan. Agente noADB/hardware; causa real sigue pendiente,
+no autorizar carga nativa/firmware ni repetir PROBE sin nueva justificación.
+
 **Actual R131:** [diagnóstico de apertura y plan manual específico](android-opening-diagnostic-r131.md).
 R01/R02 y resultado local L01/L02/U00/L00 integrados y probados en PC; mismo
 socket seguro y gates, sin cambio de transporte/firmware. Actualización Android

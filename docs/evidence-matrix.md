@@ -1,5 +1,16 @@
 # Matriz de evidencia
 
+**R132, 2026-10-10:** [canal recibido, EOF y lectura pasiva](rw4-opening-result-r132.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| El intento r131 alcanza waitSocketSignal y luego EOF | Teléfono HyperOS/RW4 | Informe fresco R02/L01/G08; noD05; connect398ms | CONFIRMADO POR INFORME INSTRUMENTADO | Alta sobre cadena/mensaje | Manual usuario | Canal positivo según flujo Java revisado; no causa/cierre remoto identificado |
+| Fallo se produce en auth/clave Xiaomi | Este intento soloBluetooth | SinD05/protocolo/auth, key no evaluada | REFUTADO PARA ESTE INTENTO | Alta | Manual y código | No determina validez futura de clave |
+| App/reloj siguen normales tras R132 | Dispositivos del usuario | «todo ok en watch y app» | CONFIRMADO POR USUARIO | Alta sobre reporte | Manual | No demuestra recuperación de firmware |
+| Callback de cierre entrega a Java el motivo PORT_* | AOSP Android16 revisado | BTA guarda port_status; on_rfc_close lo ignora/cierra slot | REFUTADO PARA ESA RUTA AOSP | Alta sobre código | Lectura primaria PC | Ruta real HyperOS aún no comprobada |
+| Dump Socket Events incluye UID/motivo preciso | Logger AOSP Android16 | Estructura/dump omiten campos aunque métricas los reciben | REFUTADO PARA ESA FUENTE | Alta | Lectura PC | Buffer16 histórico, no sockets vivos; no dump solicitado |
+| Lector pasivo preserva privacidad sin iniciar radio | Herramienta PC propia | FakeADB4lecturas, canarios, errores y límites; plan sinADB | CONFIRMADO EN TESTS PC | Alta para casos probados | Sí, sintético | Lectura HyperOS real pendiente; candidatos sin atribución r131 verificada |
+
 **R131, 2026-10-10:** [APK de apertura instrumentada](android-opening-diagnostic-r131.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

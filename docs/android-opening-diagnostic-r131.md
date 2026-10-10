@@ -1,5 +1,10 @@
 # R131 — localizar la apertura antes de cambiar el transporte
 
+**Resultado R132:** [PROBE recibido y retorno normal confirmado](rw4-opening-result-r132.md).
+R02/L01/G08, connect398ms, D17/D13, sin auth/GET. Instalación/revisión r131
+probada por usuario. No repetir este PROBE; siguiente evidencia es lectura
+pasiva de registros existentes mediante USB, sin otra APK/conexión Bluetooth.
+
 2026-10-10. Objetivo: obtener una ubicación interna del fallo que antes quedaba
 reducido a G08. No es una corrección de la conexión ni demuestra compatibilidad
 nativa del firmware RW4. [Investigación y fuente Android16](bluetooth-open-failure.md).
@@ -105,6 +110,7 @@ SDK apkanalyzer confirma llamadas a ambos clasificadores, renderizadores y
 registro de revisión r131 en DEX del APK empaquetado. Firma válida no garantiza
 inocuidad. APK/SHA256SUMS/review locales ignorados por Git.
 
-No instalado ni ejecutado en Android; ensayo/retorno r131 pendientes del usuario.
+Estado al empaquetar: no instalado/ejecutado entonces; ensayo/retorno estaban
+pendientes. R132 arriba registra la posterior prueba manual y normalidad.
 Agente no ejecutó ADB sobre hardware ni operaciones Bluetooth. No utilizar
 el APK anterior para esta captura: no incluye los nuevos clasificadores.

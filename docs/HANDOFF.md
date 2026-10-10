@@ -1,5 +1,26 @@
 # Retomar el proyecto
 
+**R132, 2026-10-10:** [PROBE r131 recibido y próximo lector pasivo](rw4-opening-result-r132.md).
+Usuario r131/API36/TRANSPORT_ONLY/P00/B01T01S01: traceD01D02D03D18D04E03D17D13,
+times0/128/132/142/142/540/546/553ms; connect398ms; G08R02L01;
+failureAfterCloseRequestno; sin auth/key/GET. Confirma todoOKwatch/app: retorno
+CERRADO para este intento, no volver a preguntar/repetir PROBE. Inventoryr114
+copiado es anterior R117/R118, NO nuevo. EOF puede ocurrir tras señal parcial.
+PC fuentes Android16RFC/BTA/port/logger descargadas oficiales con permiso red,
+sin ejecutar código; SHA/textos en doc/privateartifacts. BTA callback pasa
+port_status pero receptoron_rfc_close ignora y cleanupNONE cierra fd→EOF posible.
+NO ruta HyperOS/causa real probada. SDPsuccess→RfcommConnect→sendSCN en fuente,
+inferencia condicionada. SocketEvents16 dump omiteUID/error, métricas sí: no pedir
+dumpsys creyendo que los dará. Nuevo tools/phone-rfcomm-logs.mjs defaultplan
+NOADB; collectSOLOMANUAL4USBreads getstate/currentuser/cmdpkgownUID/logcat
+main+system -d-t2000-vbrief 3tags:V/*:S. NOenable/clear/rawsaved/stdout/radio,
+2MiB/30s/2000rows; summaries fixedcounts/enums bool. Candidateownslot exige
+ownUIDclosure+samePID/slot≤64rows, NO atribuciónr131/socketactivo; portcodes
+unattributed aparte. TestsFakeADB/privacy/bounds/correlation/syntax/plan PASAN.
+Siguiente manual: teléfonoUSBnormal→collect una vez conMiFitnormal→copiarJSON
+→debugoff/revocar si activado. NO otraAPK/PROBE/settingschange/corestop/hardware
+por agente. Lectura y resultado pendientes; native/firmwaregates CERRADOS.
+
 **R131, 2026-10-10:** [integración/APK y plan de ensayo](android-opening-diagnostic-r131.md).
 Status.error guarda openingStage/localReadResult enums; report render fijo, D01
 graba recordedRevisionr131 y limpia datos; reports antiguos no reinterpretados.
