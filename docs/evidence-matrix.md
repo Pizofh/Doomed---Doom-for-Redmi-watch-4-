@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**R127, 2026-10-10:** [baseline positiva del servicio remoto](phone-core-state-plan.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Existe registro activo del core externo en esta baseline | Teléfono HyperOS, componente/usuario filtrados | Lector R126 remote coreRecords1, ProcessRecord assigned, cuerpo reconocido | CONFIRMADO POR CONSULTA ANDROID REPORTADA | Alta sobre registro | Manual usuario | No socket RW4, hilo vivo o competencia demostrados |
+| Componente core local activo en esta baseline | Paquete Mi Fitness del teléfono | Cuerpo reconocido, 7registros activos, coreRecords0 | NO OBSERVADO EN CONSULTA | Alta sobre salida | Manual usuario | No ausencia de código core en proceso o conexión independiente demostrada |
+| Core externo permanece después de detener Mi Fitness | Teléfono actual, lector R126 | Solo baseline recibida | SIN EVIDENCIA ACTUAL | Desconocida | Pendiente | Comparación stopped propuesta; no usar ceros R124 como resultado equivalente |
+
 **R126, 2026-10-10:** [comparación parcial y formato del lector](phone-core-state-plan.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

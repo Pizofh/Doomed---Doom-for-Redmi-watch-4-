@@ -1,5 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R127:** [baseline positiva y comparación stopped preparada](phone-core-state-plan.md).
+Registro core remoto observado con ProcessRecord asignado, socket RW4 sin probar.
+Mismo lector R126; detener manualmente SOLO Mi Fitness, collect stopped, volver
+a abrir/verificar sincronización. Riesgo/reversión Android/USB documentados;
+sin cambios del core/permisos/autostart/Bluetooth, nuevo APK o PROBE. Resultado
+y retorno pendientes; agente no ejecuta acciones físicas. Gates reloj intactos.
+
 **Actual R126:** [lectura ampliada de servicios, plan y resultado previo](phone-core-state-plan.md).
 Usuario confirma Mi Fitness conectada/sincronizando; baseline/stopped anteriores
 core0 en ambas, no evidencia aislamiento. Lector R124 validaba solo cabecera.

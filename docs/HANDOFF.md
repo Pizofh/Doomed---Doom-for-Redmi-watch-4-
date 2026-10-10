@@ -1,5 +1,15 @@
 # Retomar el proyecto
 
+**R127, 2026-10-10:** [baseline positiva R126 aportada](phone-core-state-plan.md).
+Remote header/bodytrue/activeSections1/parsed5/unparsed0/otherusercore0/
+coreRecords1/processassigned. Local header/bodytrue/activeSections1/parsed7/
+unparsed0/otherusercore0/coreRecords0/processnot-established. MiFitstoppedfalse.
+No socket verificado ni causaE03/competencia demostrada. No reinterpretar ceros
+R124. Próximo MANUAL: Forzar detención SOLOMiFit→mismo lector collect stopped
+→abrirMiFit/verificarsync→USBdebugoff/revocar. Sin permisos/autostart/profiles/core
+changes/PROBE/QUERY/APK nuevo. Cinco lecturas fijas R126, salida y retorno PENDIENTES.
+No ADB físico por agente, firmware/instalación/nativo reloj CERRADOS.
+
 **R126, 2026-10-10:** [baseline recibida y lector mejorado](phone-core-state-plan.md).
 Usuario baseline R124: coreRecords0/processnot-established, headertrue,
 MiFitstoppedfalse; confirma conectado/sync normal. Ordenreal stopped→baseline,

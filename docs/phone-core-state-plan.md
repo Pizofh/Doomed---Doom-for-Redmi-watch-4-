@@ -1,5 +1,38 @@
 # R124 — observar Lyra sin intentar otra conexión
 
+## R127 — baseline positiva del lector R126
+
+2026-10-10. El usuario aporta la consulta normal del lector ampliado:
+
+```json
+{"checkpoint":"R126","label":"baseline","remote":{"headerRecognized":true,"serviceFormatRecognized":true,"explicitNothing":false,"activeSections":1,"parsedActiveRecords":5,"unparsedRecordLines":0,"otherUserCoreRecords":0,"activeCoreRecords":1,"coreProcessRecord":"assigned"},"local":{"headerRecognized":true,"serviceFormatRecognized":true,"explicitNothing":false,"activeSections":1,"parsedActiveRecords":7,"unparsedRecordLines":0,"otherUserCoreRecords":0,"activeCoreRecords":0,"coreProcessRecord":"not-established"},"miFitnessStopped":false,"currentWatchSocketVerified":false,"rawOutputSaved":false,"bluetoothOperationRequested":false,"watchCommandRequested":false}
+```
+
+La consulta por paquete remoto reconoce5registros activos y1MiWearCoreService
+para el usuario actual, con ProcessRecord asignado. Consulta local reconoce7
+registros activos y0MiWearCoreService. Ambos cuerpos se parsearon sin líneas
+ServiceRecord desconocidas. Mi Fitness no está detenida. Registros de servicio
+no equivalen a dispositivos ni conexiones; no atribuyen el socket al RW4, prueban
+competencia o establecen causa de E03. La diferencia con los ceros del lector
+anterior no permite reconstruir sus cuerpos ni atribuirla a una causa única.
+
+### Siguiente comparación manual con el mismo lector
+
+Detener **solo Mi Fitness** desde Información de la aplicación→Forzar detención.
+Sin reabrirla ni cambiar permisos/autostart/Bluetooth, ejecutar:
+`node tools/phone-core-state.mjs collect stopped`. Después abrir Mi Fitness y
+comprobar sincronización normal; terminar USB/desactivar/revocar depuración.
+Compartir el JSON stopped y el resultado de la vuelta a Mi Fitness. No nuevo
+APK, PROBE, QUERY, vínculo, socket/GATT ni comandos Xiaomi.
+
+Mismos cinco comandos de lectura y riesgos USB del plan R126. El único cambio
+manual es stopped del paquete Mi Fitness en Android, persistente hasta abrirlo;
+puede interrumpir sincronización/notificaciones. No detener/deshabilitar el core
+de sistema. No escritura de firmware/particiones/bootloader o instalación RW4.
+No brick RW4 esperado de esta operación del teléfono; recovery integral del
+reloj sigue desconocido. Ningún ADB físico por agente ni nuevo test PC necesario.
+Comparación stopped con lector R126 todavía pendiente; gate nativo cerrado.
+
 ## R126 — baseline recibida y lector ampliado en PC
 
 2026-10-10. Después de stopped, el usuario aporta baseline con
