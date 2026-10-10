@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R119, 2026-10-10:** [revisión SPP y copia de APK preparada](rw4-spp-endpoint-research.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| La ruta cliente RW4 usa Classic/SPP por servicio y canal default-1 | Fuentes Gadgetbridge0.94 + preview propio | Seis hashes verificados, coordinator/soporte/queue revisados | CONFIRMADO SOLO EN CÓDIGO PC | Alta para ruta revisada | Inspección estática | No endpoint remoto validado ni bug global descartado |
+| El cierre exitoso PROBE ocurre antes de socket.connect | Variante diagnóstica revisada | Está después de connect/D05 en handler | REFUTADO EN CÓDIGO PC | Alta para ubicación | Inspección estática | No descarta otras carreras/llamadas externas |
+| El exporter selecciona USB y solo query/pull del APK base | Código propio PC | FakeADB/ZIP: comandos/rutas/privacidad/nooverwrite | CONFIRMADO SOLO EN PC | Alta para casos probados | Sí | No ADB real ni export en teléfono probado |
+| Mi Fitness usa un endpoint distinto para este RW4 | MiFit3.59.1i/unidadM2315W1 | APK aún no disponible/análisis pendiente | SIN EVIDENCIA | Desconocida | No | No deducir transporte de soporte de otro Xiaomi o strings aisladas |
+
 **R118, 2026-10-10:** el usuario confirma retorno normal después del inventario
 completo: Mi Fitness sincroniza y reloj normal. [Resultado](rw4-service-inventory.md).
 Confirmado en esta unidad por reporte; no valida recovery integral ni SPP funcional.

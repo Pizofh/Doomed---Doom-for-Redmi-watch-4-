@@ -1,5 +1,33 @@
 # Retomar el proyecto
 
+**R119, 2026-10-10:** usuario «ok»; investigación PC del endpoint SPP.
+[Informe + plan de copia APK](rw4-spp-endpoint-research.md). Seis archivos fuente
+upstream rehash contra review F-Droid0.94/code253 pasan. Ruta revisada:
+RW4BT_CLASSIC→XiaomiSppSupport→UUID1101→defaultchannel-1→factoryseguraServiceRecord;
+cancelDiscovery preservado. D04 precede socket.connect/D05; PROBEclose está después
+de connect, no explica el fallo previo por sísolo. No bug concreto identificado,
+no auditoría global/carreras descartadas. Override soloBOTH; sugerenciaClassic
+genérica no cambia RW4; comentarioiOS finalauth no desbloquea preconnect.
+Web oficialRW4 aún experimental/unknown; Codebergraw no accesible, GitHubarchivado
+no latestfix. No PR3693 leído ni firmware2.2.86 validado por fuente upstream.
+Nuevo `export-mi-fitness-apk.mjs` plan/export (plan sinADB); usa SDKplatform-tools
+37.0.1 ya presente con pinexe+2DLL. Export solo manualUSBphone (`-d get-state`,
+`-d shell pm path com.xiaomi.wearable`, `-d pull`base), sin install/run/data/logs/
+BT/watchcommands. Pathsstrict/nooverwrite/partialprivado/max256MiB, no rawserial/
+remotePath en resumen. `test-mi-fitness-apk-export.mjs` fakeADB/ZIP pasa; plan
+ejecutado sinADB. PaqueteMiFit verificado en fichaGooglePlay, APKinstalado aún
+sin firma/manifest verificados; exportsoloheaderhash, baseonly/splitslimit claros.
+Siguienteúnicocheckpoint manual: activarDepurUSBnormal en teléfono, conectarUSBPC
+propio/unPhone/autorizar, ejecutar `node tools/export-mi-fitness-apk.mjs export`,
+desconectar/desactivarDepurUSB/revocarconfianza; resultado en tools/local/mi-fitness/
+MiFitness-base.apk +export-review.json ignoradosGit. NO tools ejecutaronADB real,
+APKcopiado/hardware/BT nuevo, ni root/OEM/securityUSBextras/HCIcapture/apkbuild.
+Después verificar identidad/firma/transportestático sin ejecutarAPK ni atribuir
+merascadenas aRW4. No solicitar claves/logs crudos ni publicarAPKpropietario.
+Fuente SDK actual64MiB APKinspector general es estrecho; APKMiFit podría requerir
+inspector oficialmáscapacidad/signer distinto; no relajarvalidaciones a ciegas.
+Gatesinstalación/nativo/firmwareRW4CERRADOS; R118 retorno normal confirmado.
+
 **R118, 2026-10-10:** usuario confirma «sí, todo nice» al preguntar por
 sincronización MiFitness y funcionamiento del reloj tras segundo inventario r114.
 [Inventario + retorno normal completados](rw4-service-inventory.md). No extrapolar

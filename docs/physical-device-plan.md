@@ -1,5 +1,13 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R119:** [plan concreto para lectura APK del teléfono por USB](rw4-spp-endpoint-research.md).
+Scripts/fakeADB probados, no ADB físico ejecutado. Acción manual propuesta:
+depuraciónUSBnormal/PCautorizado→querypm/pullbaseMiFit→desactivar/revocar.
+Escrituras: ajustes de depuración/autorización en teléfono, copia/hostADB en PC;
+ninguna operación del reloj. No APK instalado/ejecutado, root, OEM, cambios de
+radio o lectura de cuenta/salud/logs. No nuevo PROBE/QUERY/capturaHCI.
+No backup/recovery del reloj proporcionado por este paso. Nativo/firmware CERRADOS.
+
 **Actual R118:** usuario confirma reloj normal y Mi Fitness sincroniza después
 del segundo inventario completo. [Checkpoint cerrado](rw4-service-inventory.md).
 No recuperación integral ni conexión SPP funcional demostradas. Próximo trabajo

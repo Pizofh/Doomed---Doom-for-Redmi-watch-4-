@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R119:** [revisión de ruta SPP y copia de Mi Fitness preparada](docs/rw4-spp-endpoint-research.md).
+UUID/factory coinciden con cliente upstream; causa del fallo aún desconocida.
+Script probado con ADB simulado para copiar el APK instalado del teléfono por
+USB, sin ejecutarlo ni nuevas pruebas Bluetooth. Copia/análisis real pendientes.
+
 **Actual R118:** [inventario completo y retorno normal confirmados](docs/rw4-service-inventory.md).
 Reloj funcionando y Mi Fitness sincronizando tras la prueba. Siguiente paso:
 investigar el fallo de conexión SPP en PC; no otra prueba física o APK solicitado.
