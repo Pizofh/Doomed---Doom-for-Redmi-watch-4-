@@ -1,4 +1,4 @@
-// Copy the installed phone APK only on an explicit user-run `export` action.
+// Copy one of two fixed installed phone APKs only on explicit user-run export.
 // No install, app launch, user-data read, Bluetooth operation or watch command.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -41,13 +41,19 @@ function result(run, args) {
   if (!response || response.error || response.status !== 0 || typeof response.stdout !== 'string') throw Error('ADB read failed');
   return response.stdout;
 }
-export function copyInstalledMiFitness(run, destination) {
+const targets = Object.freeze({
+  fitness: {package: 'com.xiaomi.wearable', file: 'MiFitness-base.apk', directory: 'mi-fitness'},
+  core: {package: 'com.xiaomi.mi_connect_service', file: 'MiConnectService-base.apk', directory: 'mi-connect-service'}
+});
+export function copyInstalledMiFitness(run, destination, target = 'fitness') {
+  if (!Object.hasOwn(targets, target)) throw Error('Unknown fixed package');
+  const selectedTarget = targets[target];
   contained(destination);
-  const apk = contained(path.join(destination, 'MiFitness-base.apk'));
+  const apk = contained(path.join(destination, selectedTarget.file));
   const partial = contained(apk + '.partial'), review = contained(path.join(destination, 'export-review.json'));
   if ([apk, partial, review].some(p => fs.existsSync(p))) throw Error('Existing export refused');
   if (result(run, ['-d', 'get-state']).trim() !== 'device') throw Error('One authorized USB phone required');
-  const selected = installedBase(result(run, ['-d', 'shell', 'pm', 'path', 'com.xiaomi.wearable']));
+  const selected = installedBase(result(run, ['-d', 'shell', 'pm', 'path', selectedTarget.package]));
   fs.mkdirSync(destination, {recursive: true});
   fs.closeSync(fs.openSync(partial, 'wx')); // Reserve own local file, never overwrite an earlier export.
   result(run, ['-d', 'pull', selected.remote, partial]);
@@ -58,7 +64,7 @@ export function copyInstalledMiFitness(run, destination) {
   // copyFile EXCL refuses any intervening target creation; partial stays on failure.
   fs.copyFileSync(partial, apk, fs.constants.COPYFILE_EXCL);
   fs.unlinkSync(partial);
-  const report = {packageRequested: 'com.xiaomi.wearable', source: 'installed-on-user-phone',
+  const report = {packageRequested: selectedTarget.package, source: 'installed-on-user-phone',
     baseOnly: true, packagePartsReported: selected.parts, sizeBytes: stat.size, apkSha256: hash(bytes),
     signatureVerified: false, manifestVerified: false, apkExecuted: false,
     phoneAppLaunched: false, bluetoothOperationRequested: false, watchCommandRequested: false};
@@ -76,15 +82,16 @@ function trustedRun(args) {
 }
 if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {
   const action = process.argv[2] ?? 'plan';
-  if (process.argv.length > 3 || !['plan', 'export'].includes(action)) throw Error('Only plan/export supported');
-  if (action === 'plan') {
+  if (process.argv.length > 3 || !['plan', 'export', 'plan-core', 'export-core'].includes(action)) throw Error('Only fixed plan/export modes supported');
+  const target = action.endsWith('-core') ? 'core' : 'fitness', selectedTarget = targets[target];
+  if (action.startsWith('plan')) {
     console.log(JSON.stringify({action: 'plan', executionPerformed: false,
-      commands: ['adb -d get-state', 'adb -d shell pm path com.xiaomi.wearable', 'adb -d pull <base APK path returned by pm> <local partial file>'],
+      commands: ['adb -d get-state', 'adb -d shell pm path ' + selectedTarget.package, 'adb -d pull <base APK path returned by pm> <local partial file>'],
       sdkPlatformTools: '37.0.1, pinned local Windows binaries',
-      destination: 'tools/local/mi-fitness/MiFitness-base.apk',
+      destination: 'tools/local/' + selectedTarget.directory + '/' + selectedTarget.file,
       prerequisites: 'one USB phone, user-approved USB debugging; no watch connection'}));
   } else {
-    try { console.log(JSON.stringify(copyInstalledMiFitness(trustedRun, path.join(root, 'tools/local/mi-fitness')))); }
+    try { console.log(JSON.stringify(copyInstalledMiFitness(trustedRun, path.join(root, 'tools/local', selectedTarget.directory), target))); }
     catch { console.error('Export refused or failed. Check USB authorization, installed package and existing local export; no fallback, install or raw logs.'); process.exitCode = 1; }
   }
 }

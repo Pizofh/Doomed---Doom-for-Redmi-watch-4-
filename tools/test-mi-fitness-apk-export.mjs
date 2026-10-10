@@ -41,4 +41,20 @@ assert.equal(pulls, 0);
 assert.throws(() => copyInstalledMiFitness(() => ({status: 0, stdout: 'unauthorized'}), path.join(output, 'unauthorized')));
 assert.throws(() => copyInstalledMiFitness(() => ({status: 1, stdout: 'private-error'}), path.join(output, 'failed')));
 assert.throws(() => copyInstalledMiFitness(fake, path.resolve(root, '..', 'outside-export')));
+const coreCalls = [];
+const coreReport = copyInstalledMiFitness(args => {
+  coreCalls.push(args);
+  if (args.join(' ') === '-d get-state') return {status: 0, stdout: 'device'};
+  if (args.join(' ') === '-d shell pm path com.xiaomi.mi_connect_service') return {status: 0,
+    stdout: 'package:/system_ext/priv-app/MiConnectService/MiConnectService.apk'};
+  if (args[1] === 'pull') { fs.writeFileSync(args[3], fakeZip); return {status: 0, stdout: 'private-core-path'}; }
+  throw Error('Unapproved operation');
+}, path.join(output, 'core'), 'core');
+assert.equal(coreReport.packageRequested, 'com.xiaomi.mi_connect_service');
+assert.equal(coreReport.packagePartsReported, 1);
+assert.deepEqual(coreCalls.slice(0, 2), [['-d', 'get-state'], ['-d', 'shell', 'pm', 'path', 'com.xiaomi.mi_connect_service']]);
+assert.equal(coreCalls[2][1], 'pull');
+assert.equal(fs.existsSync(path.join(output, 'core/MiConnectService-base.apk')), true);
+assert(!JSON.stringify(coreReport).includes('private-core-path'));
+assert.throws(() => copyInstalledMiFitness(fake, path.join(output, 'unknown'), 'arbitrary.package'));
 console.log('PASS: fake USB-only APK export, exact read commands, no raw paths/data in report, malformed-path rejection, no overwrite, no fallback; no real ADB/phone executed.');
