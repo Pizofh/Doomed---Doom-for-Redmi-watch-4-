@@ -12,6 +12,16 @@ public final class Rw4DiagnosticDetailsTest {
         return error;
     }
     public static void main(String[] args) {
+        require(Rw4DiagnosticDetails.localReadResult(new java.io.IOException("read failed, socket might closed or timeout, read ret: -1")) == Rw4DiagnosticDetails.LocalReadResult.L01);
+        require(Rw4DiagnosticDetails.localReadResult(new java.io.IOException("read failed, socket might closed or timeout, read ret: 0")) == Rw4DiagnosticDetails.LocalReadResult.L02);
+        for (String message : new String[]{null, "private-data", "read failed, socket might closed or timeout, read ret: -10",
+                "read failed, socket might closed or timeout, read ret: -1 private-data"}) {
+            require(Rw4DiagnosticDetails.localReadResult(new java.io.IOException(message)) == Rw4DiagnosticDetails.LocalReadResult.L00);
+        }
+        require(Rw4DiagnosticDetails.localReadResult(null) == Rw4DiagnosticDetails.LocalReadResult.L00);
+        for (String stored : new String[]{null, "private-data", "L01", "L02", "L00"}) {
+            require(!Rw4DiagnosticDetails.renderLocalReadResult(stored).contains("private-data"));
+        }
         require(Rw4DiagnosticDetails.socketOpeningStage(socketError("readInt")) == Rw4DiagnosticDetails.SocketOpeningStage.R01);
         require(Rw4DiagnosticDetails.socketOpeningStage(socketError("waitSocketSignal")) == Rw4DiagnosticDetails.SocketOpeningStage.R02);
         require(Rw4DiagnosticDetails.socketOpeningStage(socketError("changedVendorMethod")) == Rw4DiagnosticDetails.SocketOpeningStage.U00);

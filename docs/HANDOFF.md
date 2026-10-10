@@ -1,5 +1,25 @@
 # Retomar el proyecto
 
+**R131, 2026-10-10:** [integración/APK y plan de ensayo](android-opening-diagnostic-r131.md).
+Status.error guarda openingStage/localReadResult enums; report render fijo, D01
+graba recordedRevisionr131 y limpia datos; reports antiguos no reinterpretados.
+L01 reconoce EXACTO mensaje AOSP ret:-1 (EOF local, NO prueba timeout/autor),
+L02ret0/L00unknown. Helpers/Status/privacy/reset tests PC PASAN; preview30/refresh/
+doctorOK. Socket seguro UUID1101/API/PROBE-noauth/gates/plazos/reintentos sin cambios.
+APK listo artifacts/android-diagnostic-r131/RW4Diagnostics-r131.apk,31411089B,
+SHA9b5b59e31e6dbd477235e122e3dfb9b19d8bd65d2b3300ebdbdf12193a0285ac.
+BuildSUCCESS2m29s/73tasks20exec; sandbox red falló→build escalado permitido exitoso.
+Inspector min23/target35/debugfalse/perms10/noINTERNET/bindings sensibles ausentes;
+apksigner36v1/v2verify certificado47eeb041e241c7ab785ed8bdcf06c6fcce90020e52d4794aa3c6c66590577709.
+SDKDEX confirma llamadas clasificadores/render/revision en APK empaquetado.
+Inventory código/storage/report módulo r114 conservados; conexión/UI app r131.
+Manual propuesto: update propia app→MiFitnormal→stop SOLOMiFit/propia→unPROBE
+→mantener informe abierto/copiar→cerrar/volverMiFit/verificar normalidad.
+NO QUERY/newbond/cambiarprefsprofilespermissions/systemcore/canales/fallback.
+Resultado/instalación/retorno r131 PENDIENTES; agent noADB/radio/hardware.
+Plan incluye riesgo/persistencia/recovery limitado/criterios por resultado;
+NO prometer conexión arreglada ni socket core libre. Native/firmwaregates CERRADOS.
+
 **R130, 2026-10-10:** usuario confirma lista negra vacía. Sin bloqueo visible
 en esa lista, NO descarte de otras políticas/causa E03. Helper puro Java añadido
 en Rw4DiagnosticDetails: SocketOpeningStage R01/R02/U00; reconoce solo cadena

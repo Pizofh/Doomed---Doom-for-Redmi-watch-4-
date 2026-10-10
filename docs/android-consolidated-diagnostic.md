@@ -1,5 +1,11 @@
 # R106 — diagnóstico consolidado, una actualización
 
+**Actual R131:** [diagnóstico interno de apertura compilado y plan](android-opening-diagnostic-r131.md).
+Un APK reúne clasificación R01/R02/U00, resultado de lectura L01/L02/L00 y
+revisión del intento, además del toolkit existente. Fuentes/PC tests/build/
+manifest/firma/DEX revisados. No corregida aún la conexión ni probado en teléfono;
+un PROBE manual propuesto, sin consulta batería/autenticación o cambios de ajuste.
+
 **Actual R114:** [inventario de servicios implementado](rw4-service-inventory.md)
 como opción adicional del mismo toolkit. Requiere un ticket propio y se ejecuta
 en Activity de primer plano; no abre nuestro socket/protocolo. Informes de

@@ -30,7 +30,7 @@ public final class Rw4DiagnosticUi {
 
     public static void show(Context context, GBDevice device) {
         if (!(device.getDeviceCoordinator() instanceof RedmiWatch4Coordinator)) return;
-        new MaterialAlertDialogBuilder(context).setTitle("RW4 Diagnostics — r114")
+        new MaterialAlertDialogBuilder(context).setTitle("RW4 Diagnostics — r131")
                 .setItems(new String[]{"Informe y caché local", "Probar solo Bluetooth", "Consultar batería e información", "Cancelar sesión", "Inventario de servicios"},
                         (dialog, which) -> {
                             if (which == 0) showReport(context, device);
@@ -128,7 +128,7 @@ public final class Rw4DiagnosticUi {
         String local = "Estado local al abrir informe:\n" + localState(context)
                 + "\nCaché local (esta lectura no conecta): "
                 + Rw4DiagnosticDetails.cacheCodes(Rw4BluetoothCache.read(context, device)) + "\n\n";
-        AlertDialog dialog = new MaterialAlertDialogBuilder(context).setTitle("Informe de diagnóstico r114")
+        AlertDialog dialog = new MaterialAlertDialogBuilder(context).setTitle("Informe de diagnóstico r131")
                 .setMessage(local + reports(context))
                 .setPositiveButton("Copiar informe", null).setNeutralButton("Cancelar sesión", null)
                 .setNegativeButton("Cerrar y cancelar", (d, which) -> cancel(context, device)).show();

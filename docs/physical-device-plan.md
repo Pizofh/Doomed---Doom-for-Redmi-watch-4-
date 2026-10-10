@@ -1,5 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R131:** [diagnóstico de apertura y plan manual específico](android-opening-diagnostic-r131.md).
+R01/R02 y resultado local L01/L02/U00/L00 integrados y probados en PC; mismo
+socket seguro y gates, sin cambio de transporte/firmware. Actualización Android
+y un PROBE mejor instrumentado propuestos: APK/firma ya revisados; no QUERY
+ni automatización física. Build completado; ensayo/retorno pendientes; riesgo,
+persistencia, retorno, límites de recuperación y criterios de decisión en el plan.
+
 **Actual R128:** [comparación completada y retorno normal confirmado](phone-core-state-plan.md).
 Core remoto ServiceRecord1→0 al detener MiFit; no socket libre/proceso terminado
 demostrados. Usuario confirma MiFit sincronizando y reloj normal al reabrir.

@@ -27,7 +27,7 @@ for (const file of state.files) {
 const bytes = fs.readFileSync(checked(reviewed.apkPath));
 if (hash(bytes) !== reviewed.apkSha256) throw Error('APK changed after inspection');
 const inspection = inspectApk(bytes);
-const revision = /^0\.94\.0-rw4-diagnostic-(r114)$/.exec(inspection.manifest.versionName)?.[1];
+const revision = /^0\.94\.0-rw4-diagnostic-(r131)$/.exec(inspection.manifest.versionName)?.[1];
 const certificate = '47eeb041e241c7ab785ed8bdcf06c6fcce90020e52d4794aa3c6c66590577709';
 if (!revision || inspection.signature.certificateSha256 !== certificate ||
     inspection.manifest.package !== 'nodomain.freeyourgadget.gadgetbridge.rw4diagnostic' ||

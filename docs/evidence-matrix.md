@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R131, 2026-10-10:** [APK de apertura instrumentada](android-opening-diagnostic-r131.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Clasificadores están integrados en el APK r131 | App propia compilada en PC | Tests Status, build y lectura DEX SDK | CONFIRMADO EN PC | Alta | Sí | No ejecutado en Android; informe previo no contiene datos nuevos |
+| ret:-1 demuestra un timeout | Helper readAll de AOSP | Retorno negativo reconocido es EOF del stream local | REFUTADO COMO IMPLICACIÓN | Alta sobre lectura | Fuente y tests PC | No identifica quién/cómo cerró ni excluye timeout como causa subyacente |
+| APK conserva firma y restricciones declaradas | APK propio r131 | Inspector/apksigner oficial, mismo cert,10permisos/noINTERNET | CONFIRMADO EN PC | Alta sobre comprobaciones | Sí | No garantía integral de seguridad/compatibilidad |
+| Conexión física ya corregida con r131 | RW4/HyperOS reales | Solo instrumentación; ningún ensayo nuevo | SIN EVIDENCIA | Desconocida | Pendiente usuario | Plan de un PROBE, sin auth; no modificar transporte por adivinanza |
+
 **R130, 2026-10-10:** [lista vacía y clasificación en PC](bluetooth-open-failure.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -413,7 +413,7 @@ gradle = replaceOnce(gradle, '    buildTypes {', `    buildTypes {
         rw4diagnostic {
             initWith debug
             applicationIdSuffix ".rw4diagnostic"
-            versionNameSuffix "-rw4-diagnostic-r114"
+            versionNameSuffix "-rw4-diagnostic-r131"
             debuggable false
             minifyEnabled false
             signingConfig signingConfigs.debug

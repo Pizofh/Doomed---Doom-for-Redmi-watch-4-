@@ -42,6 +42,9 @@ public final class StatusContractTest {
  static void require(boolean ok) { if(!ok) throw new AssertionError("Status contract"); }
  public static void main(String[] args) {
   Context c=new Context(); GBDevice d=new GBDevice();
+  c.prefs.values.put("failure", "G08");
+  require(Rw4DiagnosticStatus.report(c).contains("anterior o sin intento nuevo"));
+  require(Rw4DiagnosticStatus.report(c).contains("U00:") && Rw4DiagnosticStatus.report(c).contains("L00:"));
   Rw4DiagnosticStatus.record(c,d,Rw4DiagnosticTrace.Event.REQUESTED);
   Rw4DiagnosticStatus.snapshot(c,d,Rw4DiagnosticAttempt.Mode.TRANSPORT_ONLY);
   SystemClock.now=1250; Rw4DiagnosticStatus.record(c,d,Rw4DiagnosticTrace.Event.SOCKET_REQUESTED);
@@ -50,12 +53,28 @@ public final class StatusContractTest {
   require(first.contains("A18:") && first.contains("D04 +250ms") && first.contains("B01/T01/S01"));
   require(!first.contains("private-error-value"));
   require(!c.prefs.getBoolean("failureAfterCloseRequest",false));
+  java.io.IOException internal=new java.io.IOException("read failed, socket might closed or timeout, read ret: -1");
+  internal.setStackTrace(new StackTraceElement[]{
+    new StackTraceElement("android.bluetooth.BluetoothSocket","readAll","private-error-value",1),
+    new StackTraceElement("android.bluetooth.BluetoothSocket","readInt","private-error-value",2),
+    new StackTraceElement("android.bluetooth.BluetoothSocket","connect","private-error-value",3)});
+  Rw4DiagnosticStatus.error(c,d,internal);
+  require(Rw4DiagnosticStatus.report(c).contains("Revisión del intento: r131"));
+  require(Rw4DiagnosticStatus.report(c).contains("R01:") && Rw4DiagnosticStatus.report(c).contains("L01:"));
+  require(!c.prefs.values.toString().contains("private-error-value"));
+  internal.setStackTrace(new StackTraceElement[]{
+    new StackTraceElement("android.bluetooth.BluetoothSocket","readAll","private-error-value",1),
+    new StackTraceElement("android.bluetooth.BluetoothSocket","waitSocketSignal","private-error-value",2),
+    new StackTraceElement("android.bluetooth.BluetoothSocket","connect","private-error-value",3)});
+  Rw4DiagnosticStatus.error(c,d,internal);
+  require(Rw4DiagnosticStatus.report(c).contains("R02:"));
   SystemClock.now=31000; Rw4DiagnosticStatus.record(c,d,Rw4DiagnosticTrace.Event.LIMIT_REACHED);
   Rw4DiagnosticStatus.error(c,d,new BluetoothSocketException(17));
   require(c.prefs.getBoolean("failureAfterCloseRequest",false));
   require(Rw4DiagnosticStatus.report(c).contains("A17:"));
   Rw4DiagnosticStatus.record(c,d,Rw4DiagnosticTrace.Event.REQUESTED);
   require(!Rw4DiagnosticStatus.report(c).contains("A17:"));
+  require(Rw4DiagnosticStatus.report(c).contains("U00:") && Rw4DiagnosticStatus.report(c).contains("L00:"));
   Rw4DiagnosticStatus.error(c,d,new java.io.IOException("read failed, private-error-value"));
   require(Rw4DiagnosticStatus.report(c).contains("G01:"));
   require(!c.prefs.values.toString().contains("private-error-value"));
@@ -71,6 +90,8 @@ public final class StatusContractTest {
   require(Rw4DiagnosticStatus.report(c).contains("83%") && Rw4DiagnosticStatus.report(c).contains("M2315W1"));
   Rw4DiagnosticStatus.identity(c,"private-error-value","private-error-value");
   c.prefs.edit().putString("failure","private-error-value").putString("timed","private-error-value")
+     .putString("openingStage","private-error-value").putString("localReadResult","private-error-value")
+     .putString("recordedRevision","private-error-value")
      .putString("model","private-error-value").putString("cache","private-error-value").putString("trace","private-error-value").apply();
   require(!Rw4DiagnosticStatus.report(c).contains("private-error-value"));
   Context inventoryContext = new Context();

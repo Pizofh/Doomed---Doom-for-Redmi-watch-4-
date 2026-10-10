@@ -22,7 +22,8 @@ public final class Rw4DiagnosticStatus {
             boolean reset = event == Rw4DiagnosticTrace.Event.REQUESTED;
             long start = reset ? now : prefs.getLong("started", now);
             if (reset) {
-                edit.clear().putLong("started", start).putBoolean("closing", false);
+                edit.clear().putLong("started", start).putBoolean("closing", false)
+                        .putString("recordedRevision", "r131");
             }
             boolean closing = event == Rw4DiagnosticTrace.Event.LIMIT_REACHED
                     || event == Rw4DiagnosticTrace.Event.CANCEL_REQUESTED
@@ -66,6 +67,8 @@ public final class Rw4DiagnosticStatus {
         else detail = Rw4DiagnosticDetails.Failure.G07;
         SharedPreferences prefs = context.getSharedPreferences(FILE, Context.MODE_PRIVATE);
         prefs.edit().putString("failure", detail.name())
+                .putString("openingStage", Rw4DiagnosticDetails.socketOpeningStage(error).name())
+                .putString("localReadResult", Rw4DiagnosticDetails.localReadResult(error).name())
                 .putBoolean("failureAfterCloseRequest", prefs.getBoolean("closing", false)).apply();
         if (device != null) device.sendDeviceUpdateIntent(context);
         } catch (RuntimeException ignored) { /* Never obstruct cleanup. */ }
@@ -112,13 +115,17 @@ public final class Rw4DiagnosticStatus {
                 : "QUERY".equals(mode) ? "batería e información" : "sin intento de conexión registrado";
         String cache = prefs.getString("cache", "");
         String safeCache = Rw4DiagnosticDetails.cacheCodes(cache.replace("/", ":/" ) + ":");
-        return "RW4 Diagnostics r114; Android API " + Build.VERSION.SDK_INT
+        return "RW4 Diagnostics r131; Android API " + Build.VERSION.SDK_INT
+                + "\nRevisión del intento: " + ("r131".equals(prefs.getString("recordedRevision", ""))
+                    ? "r131" : "anterior o sin intento nuevo; detalles internos pueden faltar")
                 + "\nModo: " + modeLabel + "\nCaché del intento: " + safeCache
                 + "\nFormato de clave: " + (!prefs.getBoolean("keyFormatChecked", false) ? "no evaluado"
                     : prefs.getBoolean("keyFormatValid", false) ? "K01: formato esperado; validez no comprobada" : "K02: formato no disponible")
                 + "\n" + render(context)
                 + "\nTiempos desde solicitud: " + Rw4DiagnosticDetails.renderTimed(prefs.getString("timed", ""))
                 + "\n" + Rw4DiagnosticDetails.renderFailure(prefs.getString("failure", ""))
+                + "\n" + Rw4DiagnosticDetails.renderSocketOpeningStage(prefs.getString("openingStage", ""))
+                + "\n" + Rw4DiagnosticDetails.renderLocalReadResult(prefs.getString("localReadResult", ""))
                 + "\nCierre local solicitado al registrar el error: "
                 + (prefs.getBoolean("failureAfterCloseRequest", false) ? "sí" : "no")
                 + "\nBatería: " + (prefs.contains("battery") ? Math.max(0, Math.min(100, prefs.getInt("battery", 0))) + "%" : "sin respuesta")

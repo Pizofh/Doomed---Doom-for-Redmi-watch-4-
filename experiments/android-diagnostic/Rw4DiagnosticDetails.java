@@ -71,6 +71,32 @@ public final class Rw4DiagnosticDetails {
         return stage.name() + ": " + stage.text;
     }
 
+    public enum LocalReadResult {
+        L00("Resultado de lectura local no identificado"),
+        L01("La lectura local devolvió fin de flujo (-1); no demuestra timeout ni identifica quién cerró"),
+        L02("La lectura local devolvió cero bytes; causa no identificada");
+        public final String text;
+        LocalReadResult(String text) { this.text = text; }
+    }
+
+    /** Exact AOSP helper messages only; no substring numeric parsing or raw output. */
+    public static LocalReadResult localReadResult(Throwable error) {
+        if (!(error instanceof java.io.IOException)) return LocalReadResult.L00;
+        try {
+            String message = error.getMessage();
+            if ("read failed, socket might closed or timeout, read ret: -1".equals(message)) return LocalReadResult.L01;
+            if ("read failed, socket might closed or timeout, read ret: 0".equals(message)) return LocalReadResult.L02;
+        } catch (RuntimeException ignored) { /* Unrecognized vendor errors stay unknown. */ }
+        return LocalReadResult.L00;
+    }
+
+    public static String renderLocalReadResult(String stored) {
+        LocalReadResult result;
+        try { result = LocalReadResult.valueOf(stored); }
+        catch (RuntimeException ignored) { result = LocalReadResult.L00; }
+        return result.name() + ": " + result.text;
+    }
+
     public static boolean keyHasExpectedFormat(String key) {
         return key != null && key.trim().matches("(?:0x)?[0-9a-fA-F]{32}");
     }

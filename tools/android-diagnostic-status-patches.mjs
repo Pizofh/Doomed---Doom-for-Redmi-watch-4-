@@ -9,7 +9,7 @@ function once(text, anchor, replacement) {
 export function addDiagnosticStatus(name, text) {
   if (name === 'GBDeviceAdapterv2.java') {
     text = once(text, 'holder.deviceStatusLabel.setText(device.getStateString(context));',
-      `holder.deviceStatusLabel.setText("r106: toca el reloj para abrir diagnóstico\\n" + ${pkg}.Rw4DiagnosticStatus.render(context));`);
+      `holder.deviceStatusLabel.setText("r131: toca el reloj para abrir diagnóstico\\n" + ${pkg}.Rw4DiagnosticStatus.render(context));`);
   }
   if (name === 'DeviceCommunicationService.java') {
     text = once(text, '                    registeredStruct.setDeviceSupport(deviceSupport);',

@@ -1,5 +1,11 @@
 # Build de la variante de diagnóstico
 
+**Actual R131:** [APK compilado, inspeccionado y firmado](android-opening-diagnostic-r131.md).
+Bundle artifacts/android-diagnostic-r131; buildSUCCESS2m29s, mismos permisos y
+certificado. Captura de etapa/lectura interna integrada sin cambio de transporte.
+Instalación/prueba física/retorno pendientes del usuario; el agente solo trabajó
+en PC. Generador/inspector/empaquetador requieren r131; lo inferior es historial.
+
 **Actual R114:** [inventario de servicios y reproducción](rw4-service-inventory.md).
 El generador/refresh admiten tres clases propias adicionales; manifest incluye
 una Activity no exportada, sin servicios o permisos adicionales. Inspector y
