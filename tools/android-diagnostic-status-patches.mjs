@@ -1,4 +1,4 @@
-// Stage display only. Never changes permitted commands, bonding or retry policy.
+// Stage display for historical transport code. r104's entrypoint reads local cache only.
 const pkg = 'nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi';
 const mark = (context, device, event) => `${pkg}.Rw4DiagnosticStatus.record(${context}, ${device}, ${pkg}.Rw4DiagnosticTrace.Event.${event});`;
 function once(text, anchor, replacement) {
@@ -8,26 +8,10 @@ function once(text, anchor, replacement) {
 
 export function addDiagnosticStatus(name, text) {
   if (name === 'GBDeviceAdapterv2.java') {
-    text = once(text, 'final String ticket = nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttempt.PROCESS.issue(',
-      `${mark('context', 'device', 'REQUESTED')}\n        final String ticket = nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttempt.PROCESS.issue(`);
-    text = once(text, '        if (ticket == null) {', `        if (ticket == null) {\n            ${mark('context', 'device', 'REQUEST_REJECTED')}`);
-    text = once(text, '        androidx.core.content.ContextCompat.startForegroundService(context, intent);',
-      `        try { androidx.core.content.ContextCompat.startForegroundService(context, intent); }
-        catch (RuntimeException ignored) {
-            ${mark('context', 'device', 'CONNECTION_EXCEPTION')}
-            android.widget.Toast.makeText(context, "No se pudo iniciar el diagnóstico. Consulta el código de etapa.", android.widget.Toast.LENGTH_LONG).show();
-        }`);
     text = once(text, 'holder.deviceStatusLabel.setText(device.getStateString(context));',
-      `holder.deviceStatusLabel.setText(device.getStateString(context) + "\\n" + ${pkg}.Rw4DiagnosticStatus.render(context));`);
+      `holder.deviceStatusLabel.setText("r104: toca el reloj para consultar la caché local\\n" + ${pkg}.Rw4DiagnosticStatus.render(context));`);
   }
   if (name === 'DeviceCommunicationService.java') {
-    for (const anchor of [
-      'if (target == null || !(target.getDeviceCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator)) return START_NOT_STICKY;',
-      'if (intent.getBooleanExtra(EXTRA_CONNECT_FIRST_TIME, false)) return START_NOT_STICKY;'
-    ]) text = once(text, anchor, anchor.replace('return START_NOT_STICKY;', `{ ${mark('this', 'target', 'REQUEST_REJECTED')} return START_NOT_STICKY; }`));
-    text = once(text, 'android.os.SystemClock.elapsedRealtime())) return START_NOT_STICKY;',
-      `android.os.SystemClock.elapsedRealtime())) { ${mark('this', 'target', 'REQUEST_REJECTED')} return START_NOT_STICKY; }`);
-    text = once(text, '            connectToDevice(target, false);', `            ${mark('this', 'target', 'SERVICE_ACCEPTED')}\n            connectToDevice(target, false);`);
     text = once(text, '                    registeredStruct.setDeviceSupport(deviceSupport);',
       `                    registeredStruct.setDeviceSupport(deviceSupport);\n                    ${pkg}.Rw4DiagnosticStatus.record(this, gbDevice, deviceSupport == null ? ${pkg}.Rw4DiagnosticTrace.Event.SUPPORT_UNAVAILABLE : ${pkg}.Rw4DiagnosticTrace.Event.SUPPORT_CREATED);`);
     text = once(text, 'LOG.warn("exception in connectToDevice for {}", deviceAddress, e);',

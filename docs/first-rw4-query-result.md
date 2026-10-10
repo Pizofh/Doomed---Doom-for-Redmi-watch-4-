@@ -1,5 +1,9 @@
 # Resultados de consulta física RW4
 
+**R104:** la alternativa propuesta en R103 se implementó/compiló en PC:
+[consulta de caché local](android-bluetooth-cache.md). APK listo; lectura del
+teléfono pendiente. No nuevo resultado físico ni tercer intento de conexión.
+
 ## R103 — segundo intento r101: fallo del socket y retorno normal
 
 2026-10-09. Reporte del usuario, sin captura de tráfico ni acceso al teléfono:

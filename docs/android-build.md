@@ -1,6 +1,11 @@
 # Build de la variante de diagnóstico
 
-**Actual R101,2026-10-09:** [diagnóstico por etapas](android-diagnostic-stages.md)
+**Actual R104,2026-10-09:** [consulta local de caché](android-bluetooth-cache.md)
+compilada/verificada/empaquetada. APK listo en artifacts/android-diagnostic-r104,
+sin instalación/UI real todavía. No nueva conexión al reloj. R101 y estados
+anteriores inferiores son historial.
+
+**Historial R101,2026-10-09:** [diagnóstico por etapas](android-diagnostic-stages.md)
 compilado/verificado en PC. APK r101 listo, aún sin instalación/UI/radio.
 R92 y apartados inferiores son historial.
 

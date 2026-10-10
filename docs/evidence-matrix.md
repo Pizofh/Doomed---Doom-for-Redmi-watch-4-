@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**R104,2026-10-09:** [Consulta local preparada](android-bluetooth-cache.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Componente nuevo consulta caché sin discovery/socket | Cliente propio r104 en PC | Código, contrato Java con stubs sin APIs radio, guard del adapter/servicio | CONFIRMADO en código/prueba de componente | Alta sobre componente | PC | No ensayo Android real de esta versión; otros menús heredados no forman parte del flujo |
+| APK r104 contiene consulta y misma firma | Artefacto Android local | Build, inspector, apksigner v1/v2, lectura DEX | CONFIRMADO en artefacto PC | Alta | Sí | Firma no demuestra inocuidad ni comportamiento runtime |
+| Servicio SPP presente/ausente en caché de esta unidad | Teléfono del usuario / RW4 | Lectura manual r104 aún pendiente | SIN EVIDENCIA | No evaluable | No | No extrapolar datos sintéticos |
+
 **R103,2026-10-09:** [Segundo intento y retorno](first-rw4-query-result.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

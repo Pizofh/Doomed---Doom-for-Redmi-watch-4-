@@ -1,5 +1,10 @@
 # Diagnóstico visible de conexión — R101
 
+**Actual R104:** el flujo se sustituyó por [consulta local de caché](android-bluetooth-cache.md).
+No emite tickets/Conectar y el servicio rechaza ACTION_CONNECT. La traza r101
+permanece como historial; los códigos B/T/S o C se leen en el nuevo diálogo.
+No repetir la secuencia física inferior.
+
 **R103:** UI de etapas probada por reporte del usuario:
 `D01>D02>D03>D04>E03>E08>D13`. Fallo del socket antes de protocolo/auth;
 Mi Fitness reconecta y reloj normal después, confirmado. [Resultado](first-rw4-query-result.md).

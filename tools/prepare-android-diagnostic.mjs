@@ -165,6 +165,7 @@ write('Rw4DiagnosticSession.java', fs.readFileSync(path.join(root, 'experiments/
 write('Rw4DiagnosticAttempt.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticAttempt.java'), 'utf8'), false);
 write('Rw4DiagnosticTrace.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticTrace.java'), 'utf8'), false);
 write('Rw4DiagnosticStatus.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticStatus.java'), 'utf8'), false);
+write('Rw4BluetoothCache.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4BluetoothCache.java'), 'utf8'), false);
 
 let service = load('DeviceCommunicationService.java');
 service = body(service, 'private final BroadcastReceiver mReceiver = new BroadcastReceiver()', `        @Override
@@ -193,12 +194,9 @@ service = body(service, 'public synchronized int onStartCommand(Intent intent, i
         final String action = intent.getAction();
         final GBDevice target = intent.getParcelableExtra(GBDevice.EXTRA_DEVICE);
         if (ACTION_CONNECT.equals(action)) {
-            if (target == null || !(target.getDeviceCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator)) return START_NOT_STICKY;
-            if (intent.getBooleanExtra(EXTRA_CONNECT_FIRST_TIME, false)) return START_NOT_STICKY;
-            if (!nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttempt.PROCESS.consume(
-                    target.getAddress(), intent.getStringExtra(nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttempt.EXTRA_TICKET),
-                    android.os.SystemClock.elapsedRealtime())) return START_NOT_STICKY;
-            connectToDevice(target, false);
+            // r104 is cache-only: even a direct internal CONNECT intent is denied.
+            stopSelf();
+            return START_NOT_STICKY;
         } else if (ACTION_DISCONNECT.equals(action)) {
             for (GBDevice candidate : getGBDevices()) {
                 if (target != null && !candidate.getAddress().equals(target.getAddress())) continue;
@@ -242,17 +240,19 @@ write('GBPrefs.java', prefs, true);
 
 let adapter = load('GBDeviceAdapterv2.java');
 adapter = body(adapter, 'void handleDeviceConnect(GBDevice device)', `        if (!(device.getDeviceCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator)) return;
-        final String ticket = nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttempt.PROCESS.issue(
-                device.getAddress(), android.os.SystemClock.elapsedRealtime());
-        if (ticket == null) {
-            android.widget.Toast.makeText(context, "El intento ya se utilizó. Para repetir, fuerza la detención de esta app desde Ajustes.", android.widget.Toast.LENGTH_LONG).show();
-            return;
-        }
-        final Intent intent = new Intent(context, nodomain.freeyourgadget.gadgetbridge.service.DeviceCommunicationService.class)
-                .setAction(ACTION_CONNECT)
-                .putExtra(GBDevice.EXTRA_DEVICE, device)
-                .putExtra(nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttempt.EXTRA_TICKET, ticket);
-        androidx.core.content.ContextCompat.startForegroundService(context, intent);`);
+        new MaterialAlertDialogBuilder(context)
+                .setTitle("Caché Bluetooth local — r104")
+                .setMessage(nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4BluetoothCache.read(context, device))
+                .setPositiveButton("Cerrar", null).show();`);
+adapter = replaceOnce(adapter, 'menu.getMenu().findItem(R.id.controlcenter_device_submenu_connect).setVisible(!deviceConnected);',
+        'menu.getMenu().findItem(R.id.controlcenter_device_submenu_connect).setTitle("Consultar caché local").setVisible(!deviceConnected);');
+adapter = replaceOnce(adapter, '                        showTransientSnackbar(R.string.controlcenter_snackbar_connecting);',
+        '                        // Local cache dialog; do not show a connecting message.');
+adapter = replaceOnce(adapter, '                    showTransientSnackbar(R.string.controlcenter_snackbar_connecting);',
+        '                    // Local cache dialog; do not show a connecting message.');
+adapter = replaceOnce(adapter, `                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        createDynamicShortcut(device);
+                    }`, '                    // Cache consultation does not create launcher shortcuts.');
 write('GBDeviceAdapterv2.java', adapter, true);
 
 let permissionUtils = load('PermissionsUtils.java');
@@ -383,7 +383,7 @@ gradle = replaceOnce(gradle, '    buildTypes {', `    buildTypes {
         rw4diagnostic {
             initWith debug
             applicationIdSuffix ".rw4diagnostic"
-            versionNameSuffix "-rw4-diagnostic-r101"
+            versionNameSuffix "-rw4-diagnostic-r104"
             debuggable false
             minifyEnabled false
             signingConfig signingConfigs.debug

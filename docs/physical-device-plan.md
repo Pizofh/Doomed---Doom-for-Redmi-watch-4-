@@ -1,5 +1,11 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R104:** [consulta de caché del teléfono](android-bluetooth-cache.md)
+preparada como siguiente diagnóstico sin otra conexión. Actualiza solo APK
+propio del teléfono, conserva vínculo/clave y no requiere detener Mi Fitness.
+No autorización de un tercer intento, instalación de watchface, firmware o nativo.
+Retorno normal confirmado después del segundo intento sigue vigente.
+
 **Estado vigente R103:** se realizaron dos intentos manuales de consulta
 limitada. Segundo r101 falla al abrir socket, antes de auth Xiaomi. Usuario
 confirma retorno normal de Mi Fitness y reloj. [Resultados](first-rw4-query-result.md).

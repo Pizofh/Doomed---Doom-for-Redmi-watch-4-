@@ -1,5 +1,11 @@
 # DOOM en Redmi Watch 4
 
+**Estado actual R104:** DOOM real funciona en el emulador S3; compatibilidad
+nativa RW4 pendiente. Dos consultas manuales Bluetooth al reloj no conectaron;
+Mi Fitness y reloj normales después, confirmado por usuario. [Resultado](docs/first-rw4-query-result.md).
+Está listo el APK r104 de [diagnóstico de caché local del teléfono](docs/android-bluetooth-cache.md)
+sin otra conexión. Los apartados R92 y anteriores son historial.
+
 **R92:** investigado el bloqueo Play Protect: el APK-r87 conservaba un lector
 de notificaciones deshabilitado y su binding sensible. Se preparó eliminarlo
 por completo; test de regresión pasa. [Nuevo build pendiente](docs/android-build.md).
@@ -34,7 +40,7 @@ Reloj intacto.
 
 **R67, 2026-10-04:** DOOM original ejecuta E1M1 en la UI Lua/LVGL del emulador Xiaomi Watch S3. Avanzar, girar, disparar, pausar/reanudar y dos ciclos START/EXIT/reapertura pasaron sin reboot. [Resultados, mediciones y reproducción](docs/doom-ui-emulator.md). Presentacion inicial R67: aproximadamente cinco frames/s; mejora R71, sesion90s R72 y persistencia R73 documentadas arriba.
 
-Objetivo: portar doomgeneric al Xiaomi Redmi Watch 4 **M2315W1**, conservando firmware stock y funciones normales si resulta posible. **El reloj físico no se ha conectado ni modificado.** El emulador S3 a390×450 no demuestra ISA/ABI/firmware/compatibilidad del RW4.
+Objetivo: portar doomgeneric al Xiaomi Redmi Watch 4 **M2315W1**, conservando firmware stock y funciones normales si resulta posible. Se han realizado intentos manuales de conexión Bluetooth, sin autenticación exitosa ni instalación/firmware modificados reportados. El emulador S3 a390×450 no demuestra ISA/ABI/firmware/compatibilidad del RW4.
 
 Se conserva motor, renderer y gameplay original. Aportes propios: investigación de contratos/ABI del guest, tooling, adaptadores display/input/tiempo/archivos y lifecycle. No se ha reverse-engineered el firmware físico RW4. Estado para continuar: [HANDOFF](docs/HANDOFF.md).
 

@@ -1,5 +1,11 @@
 # Diagnóstico Android limitado: prototipo en PC
 
+**R104:** [consulta de caché local](../../docs/android-bluetooth-cache.md).
+El toque anterior de conexión muestra tipo/vínculo/SPP guardados en Android;
+no emite tickets y el servicio rechaza CONNECT. Prueba del componente pasa.
+R101 se instaló/probó: fallo de socket antes de auth y retorno normal de Mi Fitness.
+Apartados inferiores son historial; no repetir builds o intentos antiguos.
+
 **R89:** [guía de prueba offline](../../docs/android-offline-test.md) y bundle
 listos en PC. `node tools/prepare-android-offline-test.mjs` valida/copia el APK
 revisado; no instala. Aprobación manual de teléfono pendiente, sin pruebas
