@@ -5,11 +5,15 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {inflateRawSync} from 'node:zlib';
+import {installedApkTargets} from './installed-apk-targets.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const out = path.join(root, 'artifacts/research/mi-fitness-apk');
+if (process.argv.length > 3 || process.argv[2] && process.argv[2] !== '--core') throw Error('Use no arguments or --core');
+const target = installedApkTargets[process.argv[2] === '--core' ? 'core' : 'fitness'];
+const out = path.join(root, 'artifacts/research', target.output);
 const review = JSON.parse(fs.readFileSync(path.join(out, 'review.json')));
-const apk = fs.readFileSync(path.join(root, 'tools/local/mi-fitness/MiFitness-base.apk'));
-if (!review.signatureVerified || createHash('sha256').update(apk).digest('hex') !== review.apkSha256) throw Error('Unverified/changed input');
+const apk = fs.readFileSync(path.join(root, 'tools/local', target.directory, target.file));
+if (!review.signatureVerified || !review.manifestVerified || review.apkSha256 !== target.sha256 ||
+  createHash('sha256').update(apk).digest('hex') !== target.sha256) throw Error('Unverified/changed input');
 const check = (ok, msg) => { if (!ok) throw Error(msg); };
 let eocd = -1;
 for (let p = apk.length - 22; p >= Math.max(0, apk.length - 65557); p--) {
@@ -75,7 +79,10 @@ for (const entry of entries) {
   const targets = new Set(methods.flatMap((m, i) =>
     m.owner === 'Landroid/bluetooth/BluetoothDevice;' && /^(create.*Rfcomm.*|connectGatt)$/.test(m.name) ||
     m.owner === 'Landroid/bluetooth/BluetoothSocket;' && m.name === 'connect' ||
-    ['Lcom/xiaomi/wearable/spp/SystemClient;', 'Lcom/xiaomi/wearable/spp/b;'].includes(m.owner) && m.name === '<init>' ? [i] : []));
+    ['Lcom/xiaomi/wearable/spp/SystemClient;', 'Lcom/xiaomi/wearable/spp/b;'].includes(m.owner) && m.name === '<init>' ||
+    ['Lcom/xiaomi/wearable/core/client/MiWearCoreClient;', 'Lcom/xiaomi/wearable/core/client/IMiWearCoreClient;'].includes(m.owner) && m.name === 'disconnect' ||
+    /^Lcom\/xiaomi\/(fit\/device\/model|fitness\/device\/manager)\//.test(m.owner) &&
+      ['disconnectDevice', 'setCurrentStatus'].includes(m.name) ? [i] : []));
   const modelIds = new Set(strings.flatMap((s, i) => /^(?:Redmi Watch 4(?: .*)?|M2315W1)$/.test(s) ? [i] : []));
   const candidates = [];
   for (let c = 0; c < ct.count; c++) {
@@ -106,8 +113,11 @@ for (const entry of entries) {
     }
   }
   check(candidates.length <= 10000, 'Too many candidates');
+  const classNames = Array.from({length: ct.count}, (_, c) => types[b.readUInt32LE(ct.offset + c * 32)]);
   results.push({dex: entry.name, bytes: b.length, sha256: createHash('sha256').update(b).digest('hex'),
     classCount: ct.count, modelLiteralsPresent: modelIds.size, candidates});
+  // Names only in a separate ignored index, never all string constants.
+  fs.writeFileSync(path.join(out, entry.name + '-classes.txt'), classNames.join('\n') + '\n');
 }
 const report = {apkSha256: review.apkSha256, apkExecuted: false,
   limitation: 'Candidate scan includes operands/payloads, not instruction boundaries. Confirm in SDK smali; no RW4 routing claim.', dex: results};
