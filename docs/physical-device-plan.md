@@ -1,5 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R109:** [nuevo PROBE fallido y permiso Mi Fitness](rw4-bluetooth-profiles-result.md).
+151ms hasta fallo de connect, sin auth; posible notificación de MiFitness no
+demuestra reinicio/reconexión/causa. Retorno/restauración de R109 pendiente.
+Plan de aislamiento por permisoNearby preparado con persistencia/rollback;
+no guiar nueva prueba hasta verificar retorno y aislamiento. Conservar APK,
+vínculo y ajustes originales; no QuickShare/transportes nuevos/QUERY/nativo.
+
 **Actual R108:** usuario reporta perfiles llamadas/audio y entrada activos.
 [Plan de aislamiento manual](rw4-bluetooth-profiles-plan.md) registra operación,
 persistencia en teléfono, reversión explícita, riesgo y límites de compatibilidad.

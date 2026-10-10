@@ -1,5 +1,10 @@
 # R106 — diagnóstico consolidado, una actualización
 
+**Actual R109:** [segundo PROBE r106 y plan de permiso Nearby](rw4-bluetooth-profiles-result.md).
+Fallo connect151ms/G08, cierre local registrado; no auth/GET. Posible actividad
+Mi Fitness observada por notificación, aún sin causa confirmada. Retorno actual
+pendiente; no ejecutar QUERY ni más PROBE hasta revisar aislamiento. APK sin cambios.
+
 **Actual R107:** [ensayo manual PROBE realizado](rw4-bluetooth-probe-result.md).
 Falló en `connect()` antes de protocolo/auth, con G08, y registró cierre local.
 El usuario informa funcionamiento de ambos y ~18 pasos de diferencia. No guiar

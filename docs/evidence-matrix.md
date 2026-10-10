@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**R109,2026-10-10:** [Segundo PROBE y actividad aparente](rw4-bluetooth-profiles-result.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Nuevo PROBE falla durante connect antes de D05/auth | RW4 M2315W1/2.2.86, clienteAndroidAPI36 | Informe manual r106 | CONFIRMADO EN RW4 por reporte del cliente | Alta sobre etapa | Manual usuario | D04→E03 151ms; mismoG08; close retorna6ms después |
+| Mi Fitness se reconectó y causó E03 | Este intento | Usuario cree inició app por notificación | SIN EVIDENCIA causal | No evaluable | No captura/proceso/enlace verificado | No confundir aviso con conexión Bluetooth |
+| Quick Share debe intermediar cualquier conexión Bluetooth | Android/cliente propio | Guía Google y ruta directa AndroidAPI | REFUTADO como requisito de nuestra implementación | Alta sobre arquitectura | Fuente | Presencia no confirma ni excluye actividad/contención radio |
+| Desactivar llamadas/entrada resolvió la conexión | Este intento después de guíaR108 | Sigue E03; estado de toggles no confirmado separadamente | SIN EVIDENCIA de solución | Alta sobre fallo, condición sin verificar | Manual usuario | No afirmar aislamiento perfecto de MiFitness |
+| Mi Fitness/reloj normales después de este intento | Unidad del usuario | Pregunta de retorno pendiente | SIN EVIDENCIA aún para R109 | Pendiente | No confirmado | R107 normalidad es observación anterior |
+
 **R108,2026-10-10:** [Perfiles del sistema y prueba propuesta](rw4-bluetooth-profiles-plan.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

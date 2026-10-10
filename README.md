@@ -1,5 +1,11 @@
 # DOOM en Redmi Watch 4
 
+**Actual R109:** [nuevo PROBE r106 y aislamiento de Mi Fitness](docs/rw4-bluetooth-profiles-result.md).
+Sigue fallando antes de autenticación (151ms). Una notificación de Mi Fitness
+sugiere actividad, sin demostrar reconexión; Quick Share no es intermediario
+requerido por nuestra app. Retorno de este intento pendiente; aislamiento del
+permiso de Mi Fitness preparado en documentación. Mismo APK; nativo RW4 pendiente.
+
 **Actual R107:** [prueba solo Bluetooth r106 realizada](docs/rw4-bluetooth-probe-result.md).
 La apertura falló en297ms, antes de autenticación/comandos Xiaomi; el cierre
 local terminó. Mi Fitness y reloj funcionan según el usuario, con una diferencia
