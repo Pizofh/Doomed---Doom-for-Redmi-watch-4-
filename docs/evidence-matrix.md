@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**R108,2026-10-10:** [Perfiles del sistema y prueba propuesta](rw4-bluetooth-profiles-plan.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Android indica llamadas/audio y entrada conectados y habilitados | Registro de esta unidad RW4 en HyperOS del teléfono | Lectura manual del usuario | CONFIRMADO EN RW4 por reporte de UI Android | Alta sobre reporte | Manual usuario | No identifica una sesión SPP ni protocolo exacto de entrada |
+| Estos perfiles causaron el fallo G08 de PROBE | Enlace RW4/teléfono | Observación sin ensayo de aislamiento | SIN EVIDENCIA causal | No evaluable | No | Plan manual pendiente; no nueva versión de APK |
+
 **R107,2026-10-09:** [Resultado real PROBE r106](rw4-bluetooth-probe-result.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
