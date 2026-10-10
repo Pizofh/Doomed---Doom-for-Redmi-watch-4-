@@ -1,5 +1,10 @@
 # R106 — diagnóstico consolidado, una actualización
 
+**Actual R113:** [PROBE con permiso Mi Fitness denegado falla igual](rw4-permission-isolated-probe-result.md).
+Connect386ms/G08, sin auth/GET, retorno normal por reporte tras restaurar permisos.
+No más intentos iguales: servicio/endpoint actual aún por identificar.
+APK sin cambios; guías inferiores son historial de ensayos anteriores.
+
 **Actual R109:** [segundo PROBE r106 y plan de permiso Nearby](rw4-bluetooth-profiles-result.md).
 Fallo connect151ms/G08, cierre local registrado; no auth/GET. Posible actividad
 Mi Fitness observada por notificación, aún sin causa confirmada. Retorno actual

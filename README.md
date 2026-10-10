@@ -1,5 +1,11 @@
 # DOOM en Redmi Watch 4
 
+**Actual R113:** [PROBE con Mi Fitness sin permiso Nearby](docs/rw4-permission-isolated-probe-result.md)
+también falla antes de autenticación. Permisos restaurados y funcionamiento
+normal confirmados. Filtro privado PC probado: logs existentes no identifican
+transporte del RW4. Siguiente meta: servicio/endpoint de datos actual; mismo APK,
+sin más intentos iguales ni cambios automáticos de transporte/firmware.
+
 **Actual R109:** [nuevo PROBE r106 y aislamiento de Mi Fitness](docs/rw4-bluetooth-profiles-result.md).
 Sigue fallando antes de autenticación (151ms). Una notificación de Mi Fitness
 sugiere actividad, sin demostrar reconexión; Quick Share no es intermediario

@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**R113,2026-10-10:** [PROBE con permiso Mi Fitness denegado](rw4-permission-isolated-probe-result.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| PROBE con NearbyMiFit denegado y ambas apps detenidas abrió el socket | Unidad M2315W1/2.2.86 y clienteAPI36 | Usuario confirma procedimiento; informe E03/G08 sinD05 | REFUTADO para este intento | Alta sobre reporte | Manual usuario | Connect386ms, close7ms; noauth/GET |
+| Mi Fitness/reloj funcionan tras restaurar permisos de R113 | Unidad del usuario | Confirmación explícita en mismo mensaje | CONFIRMADO EN RW4 por reporte | Alta sobre observación | Manual usuario | No recovery firmware probado ni igualdad de todo dato |
+| Los logs aportados prueban que RW4 usa BLE | Archivos privados Mi Fitness previos | Filtro fijo:12líneasBLE,0 misma-líneaRW4 | SIN EVIDENCIA suficiente | No evaluable | FiltroPC/test sí | No atribución a unidad ni ausencia de SPP demostrada |
+| Preferencia genérica force-connection-type selecciona BLE en coordinatorRW4 actual | Fuente Gadgetbridge0.94.0 | Override soloBOTH; RW4BT_CLASSIC | REFUTADO para este código | Alta | Inspección PC | No alterar coordinator para probar hardware sin evidencia |
+| Filtro de transporte exporta solo etiquetas fijas/contadores | Herramienta PC propia | Tests privacidad/UTF8/contadores y lectura real | CONFIRMADO en componente/test PC | Alta sobre alcance | Sí | No analiza paquetes ni credenciales, no radio |
+
 **R112,2026-10-10:** usuario dio pasos nuevos y reporta sincronización de esos
 pasos en Mi Fitness con llamadas/entrada OFF: **CONFIRMADO EN RW4 por reporte
 de prueba manual**. No implica transporte exacto identificado ni causa de G08.

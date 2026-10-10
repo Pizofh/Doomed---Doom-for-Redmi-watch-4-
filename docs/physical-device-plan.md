@@ -1,5 +1,11 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R113:** [aislamiento NearbyMiFit ensayado](rw4-permission-isolated-probe-result.md).
+Mismo fallo preauth386ms; usuario restauró permisos y todo funciona normalmente.
+No otro PROBE igual ni QUERY. Próximo checkpoint: identificar servicio/endpoint
+actual; no cambio automático a BLE/canales/insecure/unpair/firmware. No nuevo
+inventario radio implementado/ejecutado. Investigación PC no identifica aún transporte.
+
 **Actual R112:** sincronía de pasos nuevos con perfilesOFF reportada por usuario.
 Mantenerlos OFFdurante el aislamiento NearbySoloMiFit, sin exigir restauración
 previa ON; control de comunicación reciente cubierto por reporte. Un PROBE
