@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R118:** [inventario completo y retorno normal confirmados](docs/rw4-service-inventory.md).
+Reloj funcionando y Mi Fitness sincronizando tras la prueba. Siguiente paso:
+investigar el fallo de conexión SPP en PC; no otra prueba física o APK solicitado.
+Ejecución nativa e instalación de Doom en el reloj siguen pendientes.
+
 **Actual R117:** [segundo inventario completado en16,1s](docs/rw4-service-inventory.md).
 Android entregó SPP/HFP/HID; BLE recibió40callbacks sin anuncios atribuibles al
 reloj. Cierre retornó sin error registrado. Falta confirmar retorno a Mi Fitness;

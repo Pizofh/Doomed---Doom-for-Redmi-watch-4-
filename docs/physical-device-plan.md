@@ -1,5 +1,11 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R118:** usuario confirma reloj normal y Mi Fitness sincroniza después
+del segundo inventario completo. [Checkpoint cerrado](rw4-service-inventory.md).
+No recuperación integral ni conexión SPP funcional demostradas. Próximo trabajo
+solo investigación en PC; no nuevo intento físico solicitado. Nativo/firmware
+en reloj siguen CERRADOS.
+
 **Actual R117:** [segundo inventario completo por reporte](rw4-service-inventory.md),
 I1/16132ms, lista AndroidSPP/HFP/HID,40callbacksBLE sin coincidencias RW4,
 error0/cierre retornó. Falta retornoMiFit/normalidad después de este intento;

@@ -1,5 +1,9 @@
 # Matriz de evidencia
 
+**R118, 2026-10-10:** el usuario confirma retorno normal después del inventario
+completo: Mi Fitness sincroniza y reloj normal. [Resultado](rw4-service-inventory.md).
+Confirmado en esta unidad por reporte; no valida recovery integral ni SPP funcional.
+
 **R117, 2026-10-10:** [segundo inventario completado](rw4-service-inventory.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
@@ -8,7 +12,7 @@
 | Android entregó una lista del objetivo con SPP/HFP/HID | Solicitud para unidad M2315W1/2.2.86 | ACTION_UUID/5UUIDs/SPP1101 sí/HFP sí/HID sí | CONFIRMADO POR REPORTE EN TELÉFONO | Alta sobre reporte | Manual usuario | Respuesta puede contener caché; endpoint remoto actual sin validar |
 | El scanner BLE recibió callbacks | Cliente API36 | Ventana completada/40callbacks/error0 | CONFIRMADO POR REPORTE EN TELÉFONO | Alta sobre reporte | Manual usuario | No son necesariamente40dispositivos; no implica datos de Xiaomi |
 | Se identificaron anuncios BLE del RW4 | Unidad del usuario | 0coincidencias dirección/0candidatos nombre | SIN EVIDENCIA | Desconocida | No identificado | No descarta BLE ni anuncios con otros identificadores |
-| Mi Fitness/reloj retornaron normalmente tras segundo inventario | Unidad del usuario | Aún no reportado | SIN EVIDENCIA | Pendiente | No confirmado | Confirmación R115 corresponde al primer inventario |
+| Mi Fitness/reloj retornaron normalmente tras segundo inventario | Unidad del usuario | Confirmación explícita posterior R118 | CONFIRMADO EN RW4 POR REPORTE | Alta sobre reporte | Manual usuario | R115 corresponde al primero; R118 confirma el segundo, no recovery de firmware |
 
 **R116, 2026-10-10:** [desenlace del primer inventario r114](rw4-service-inventory.md).
 

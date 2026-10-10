@@ -1,5 +1,14 @@
 # Retomar el proyecto
 
+**R118, 2026-10-10:** usuario confirma «sí, todo nice» al preguntar por
+sincronización MiFitness y funcionamiento del reloj tras segundo inventario r114.
+[Inventario + retorno normal completados](rw4-service-inventory.md). No extrapolar
+al recovery de firmware, ejecución nativa o transporte SPP funcional. Siguiente
+único checkpoint: investigación del fallo del endpoint SPP en PC con fuentes
+verificables; sin otro intento radio, APK nuevo, QUERY/PROBE, cambio de clave,
+perfiles, permisos, vínculo o transporte automático. Documentación únicamente;
+ningún hardware ejecutado por herramientas. Instalación/nativo/firmware CERRADOS.
+
 **R117, 2026-10-10:** usuario mantuvo pantalla abierta y reporta segundo inventario
 r114/API36 completado I1/16132ms. [Resultado](rw4-service-inventory.md): ACTION_UUID
 con5UUIDs, SPP1101/HFP/HID sí, FE95 no observado; BLE ventana completada,

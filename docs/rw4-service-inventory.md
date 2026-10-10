@@ -1,5 +1,12 @@
 # R114 — inventario de servicios desde Android
 
+**R118, 2026-10-10:** el usuario confirma que, tras el segundo inventario completo,
+Mi Fitness sincroniza normalmente y el reloj sigue funcionando bien. Queda cerrado
+el checkpoint de inventario y retorno normal para este intento. No demuestra
+recuperación de firmware, seguridad de código nativo ni conexión SPP funcional.
+Siguiente investigación únicamente en PC: explicar el fallo del endpoint SPP
+con fuentes verificables. No otra prueba radio, APK o cambio del reloj solicitado.
+
 ## Resultado R117 — segundo inventario completado
 
 2026-10-10. El usuario mantuvo abierta la pantalla sin copiar ni cambiar de
@@ -21,11 +28,10 @@ funcional demostrado, ni acceso a código/apps/filesystem del reloj.
 
 No se pidió un tercer inventario, PROBE, QUERY, cambio de clave, canal o
 transporte. No nuevo APK/código/build/tests ni hardware desde herramientas.
-**Retorno a Mi Fitness y normalidad del reloj tras este segundo intento pendientes
-de confirmación**; el reporte positivo R115 corresponde al primero.
-El checkpoint de inventario está completado por reporte del usuario; siguiente
-paso inmediato: cerrar nuestra app, abrir Mi Fitness y verificar retorno normal.
-Después, investigar el endpoint SPP a partir de fuentes verificables en PC,
+**Retorno a Mi Fitness y normalidad del reloj tras este segundo intento confirmados
+en R118**; el reporte positivo R115 corresponde al primero.
+El checkpoint de inventario y retorno está completado por reporte del usuario.
+El siguiente paso es investigar el endpoint SPP a partir de fuentes verificables en PC,
 sin repetir el mismo socket o cambiar a BLE automáticamente. Instalación y
 ejecución nativa en M2315W1 siguen cerradas.
 
