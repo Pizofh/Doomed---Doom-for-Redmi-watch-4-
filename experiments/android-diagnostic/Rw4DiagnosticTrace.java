@@ -29,7 +29,18 @@ public final class Rw4DiagnosticTrace {
         COMMAND_BLOCKED("E07", "Filtro local bloqueó un comando"),
         LIMIT_REACHED("E08", "Terminó el límite de 30 segundos"),
         CONNECTION_EXCEPTION("E09", "Error local al iniciar la conexión"),
-        DISCONNECTED("D13", "Sesión cerrada");
+        DISCONNECTED("D13", "Sesión cerrada"),
+        TRANSPORT_TEST_PASSED("D14", "Socket abierto; prueba sin autenticación terminada"),
+        QUERIES_COMPLETE("D15", "Batería e información recibidas; se solicita cierre"),
+        CANCEL_REQUESTED("D16", "Cancelación solicitada desde la app"),
+        SOCKET_CLOSED("D17", "La llamada de cierre del socket terminó"),
+        SOCKET_CLOSE_FAILED("E10", "La llamada de cierre del socket falló"),
+        SOCKET_CREATED("D18", "Socket RFCOMM seguro creado; aún no conectado"),
+        PROTOCOL_V1("D19", "Cliente seleccionó protocolo SPP V1"),
+        PROTOCOL_V2("D20", "Cliente seleccionó protocolo SPP V2"),
+        AUTH_HMAC_VERIFIED("D21", "Verificación HMAC de la respuesta completada"),
+        AUTH_HMAC_MISMATCH("E12", "HMAC de respuesta no coincide"),
+        AUTH_LOCAL_EXCEPTION("E13", "Error local al procesar autenticación");
 
         public final String code;
         public final String text;

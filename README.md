@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R106:** [app de diagnóstico consolidada](docs/android-consolidated-diagnostic.md)
+lista en PC: caché/informe copiable, errores/tiempos, prueba solo Bluetooth,
+consulta limitada de batería/datos y cancelación. Un APK para estas herramientas;
+no nueva instalación/UI/radio reportadas todavía. No ejecución nativa RW4 demostrada.
+
 **R105:** lectura de caché r104 realizada por el usuario: vínculo confirmado,
 tipo clásico y SPP presente. Coincide con el transporte elegido por nuestra
 app; no prueba que el servicio remoto responda. [Resultado y siguiente diagnóstico](docs/android-bluetooth-cache.md).

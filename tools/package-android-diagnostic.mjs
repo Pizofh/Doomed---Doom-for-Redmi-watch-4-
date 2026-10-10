@@ -27,7 +27,7 @@ for (const file of state.files) {
 const bytes = fs.readFileSync(checked(reviewed.apkPath));
 if (hash(bytes) !== reviewed.apkSha256) throw Error('APK changed after inspection');
 const inspection = inspectApk(bytes);
-const revision = /^0\.94\.0-rw4-diagnostic-(r104)$/.exec(inspection.manifest.versionName)?.[1];
+const revision = /^0\.94\.0-rw4-diagnostic-(r106)$/.exec(inspection.manifest.versionName)?.[1];
 const certificate = '47eeb041e241c7ab785ed8bdcf06c6fcce90020e52d4794aa3c6c66590577709';
 if (!revision || inspection.signature.certificateSha256 !== certificate ||
     inspection.manifest.package !== 'nodomain.freeyourgadget.gadgetbridge.rw4diagnostic' ||
@@ -50,6 +50,6 @@ write(apkName, bytes);
 write('SHA256SUMS.txt', reviewed.apkSha256 + '  ' + apkName + '\n');
 write('review.json', JSON.stringify({version: inspection.manifest.versionName, apkSha256: reviewed.apkSha256,
   certificateSha256: certificate, androidUiTested: false, bluetoothTested: false,
-  phoneInstallationPerformed: false, hardwareGateOpen: false, mode: 'phone-local-cache-only'}, null, 2) + '\n');
+  phoneInstallationPerformed: false, hardwareGateOpen: false, mode: 'manual-consolidated-diagnostic'}, null, 2) + '\n');
 console.log(JSON.stringify({status: 'diagnostic-package-ready', apk: path.relative(root, path.join(folder, apkName)),
   apkSha256: reviewed.apkSha256, version: inspection.manifest.versionName, installationPerformed: false}));

@@ -60,18 +60,24 @@ support = replaceOnce(support, '    private final XiaomiAuthService authService'
 
     public boolean isRw4DiagnosticTransportOpen() {
         return getCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator
+                && !Rw4DiagnosticAttempt.PROCESS.isTransportOnly()
+                && !Rw4DiagnosticAttempt.PROCESS.isCancelled()
                 && diagnosticSession.isOpen();
     }
 
     public boolean isRw4DiagnosticCommandAllowed(final XiaomiProto.Command command) {
         return getCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator
+                && !Rw4DiagnosticAttempt.PROCESS.isTransportOnly()
+                && !Rw4DiagnosticAttempt.PROCESS.isCancelled()
                 && Rw4DiagnosticPolicy.allowsSerialized(diagnosticSession.phase(), command.toByteArray());
     }
 
     private final XiaomiAuthService authService`);
 support = body(support, 'public boolean useAutoConnect()', '        return false;');
 support = body(support, 'public void setAutoReconnect(boolean enabled)', '        super.setAutoReconnect(false);\n        if (connectionSupport != null) connectionSupport.setAutoReconnect(false);');
-support = body(support, 'public boolean connect()', `        if (!(getCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator) || !diagnosticSession.begin()) return false;
+support = body(support, 'public boolean connect()', `        if (!(getCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator)
+                || !Rw4DiagnosticAttempt.PROCESS.hasConsumed() || Rw4DiagnosticAttempt.PROCESS.isCancelled()
+                || !diagnosticSession.begin()) return false;
         diagnosticTimer.postDelayed(() -> {
             diagnosticSession.close();
             GBApplication.deviceService(getDevice()).disconnect();
@@ -88,7 +94,14 @@ support = body(support, 'public void handleCommandBytes(final byte[] plainValue)
         try { cmd = XiaomiProto.Command.parseFrom(plainValue); }
         catch (final Exception ignored) { LOG.warn("RW4 diagnostic: invalid incoming command"); return; }
         if (diagnosticSession.phase() == Rw4DiagnosticPolicy.Phase.HANDSHAKE && cmd.getType() == 1 && (cmd.getSubtype() == 26 || cmd.getSubtype() == 27)) {
-            authService.handleCommand(cmd);
+            try { authService.handleCommand(cmd); }
+            catch (RuntimeException error) {
+                Rw4DiagnosticStatus.record(getContext(), getDevice(), Rw4DiagnosticTrace.Event.AUTH_LOCAL_EXCEPTION);
+                Rw4DiagnosticStatus.error(getContext(), getDevice(), error);
+                diagnosticSession.close();
+                diagnosticTimer.removeCallbacksAndMessages(null);
+                GBApplication.deviceService(getDevice()).disconnect();
+            }
             return;
         }
         if (diagnosticSession.phase() != Rw4DiagnosticPolicy.Phase.QUERIES || cmd.getType() != 2 || !cmd.hasSystem()) return;
@@ -102,6 +115,12 @@ support = body(support, 'public void handleCommandBytes(final byte[] plainValue)
             version.fwVersion = cmd.getSystem().getDeviceInfo().getFirmware();
             version.hwVersion = cmd.getSystem().getDeviceInfo().getModel();
             evaluateGBDeviceEvent(version);
+        }
+        if (Rw4DiagnosticStatus.hasBoth(getContext())) {
+            Rw4DiagnosticStatus.record(getContext(), getDevice(), Rw4DiagnosticTrace.Event.QUERIES_COMPLETE);
+            diagnosticSession.close();
+            diagnosticTimer.removeCallbacksAndMessages(null);
+            GBApplication.deviceService(getDevice()).disconnect();
         }`);
 support = body(support, 'public void onSendConfiguration(final String config)', '        // Disabled in diagnostic preview.');
 support = body(support, 'public void onSetTime()', '        // Disabled in diagnostic preview.');
@@ -166,6 +185,8 @@ write('Rw4DiagnosticAttempt.java', fs.readFileSync(path.join(root, 'experiments/
 write('Rw4DiagnosticTrace.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticTrace.java'), 'utf8'), false);
 write('Rw4DiagnosticStatus.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticStatus.java'), 'utf8'), false);
 write('Rw4BluetoothCache.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4BluetoothCache.java'), 'utf8'), false);
+write('Rw4DiagnosticDetails.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticDetails.java'), 'utf8'), false);
+write('Rw4DiagnosticUi.java', fs.readFileSync(path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticUi.java'), 'utf8'), false);
 
 let service = load('DeviceCommunicationService.java');
 service = body(service, 'private final BroadcastReceiver mReceiver = new BroadcastReceiver()', `        @Override
@@ -190,13 +211,20 @@ service = body(service, 'public void onCreate()', `        super.onCreate();
         reconnectViaScan = false;
         startForeground();`);
 service = body(service, 'private void scanAllDevices()', '        // Automatic scanning disabled.');
-service = body(service, 'public synchronized int onStartCommand(Intent intent, int flags, int startId)', `        if (intent == null || intent.getAction() == null) return START_NOT_STICKY;
+service = body(service, 'public synchronized int onStartCommand(Intent intent, int flags, int startId)', `        if (intent == null || intent.getAction() == null) { stopSelf(); return START_NOT_STICKY; }
         final String action = intent.getAction();
         final GBDevice target = intent.getParcelableExtra(GBDevice.EXTRA_DEVICE);
         if (ACTION_CONNECT.equals(action)) {
-            // r104 is cache-only: even a direct internal CONNECT intent is denied.
-            stopSelf();
-            return START_NOT_STICKY;
+            if (target == null || !(target.getDeviceCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator)
+                    || intent.getBooleanExtra(EXTRA_CONNECT_FIRST_TIME, false)
+                    || !nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttempt.PROCESS.consume(
+                            target.getAddress(), intent.getStringExtra(nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttempt.EXTRA_TICKET),
+                            android.os.SystemClock.elapsedRealtime())) {
+                nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticStatus.record(this, target, nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticTrace.Event.REQUEST_REJECTED);
+                stopSelf(); return START_NOT_STICKY;
+            }
+            nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticStatus.record(this, target, nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticTrace.Event.SERVICE_ACCEPTED);
+            connectToDevice(target, false);
         } else if (ACTION_DISCONNECT.equals(action)) {
             for (GBDevice candidate : getGBDevices()) {
                 if (target != null && !candidate.getAddress().equals(target.getAddress())) continue;
@@ -204,7 +232,7 @@ service = body(service, 'public synchronized int onStartCommand(Intent intent, i
                 catch (Exception ignored) { LOG.warn("RW4 diagnostic disconnect failed"); }
             }
             stopSelf();
-        }
+        } else { stopSelf(); }
         // Every other request, including uploads/time/profile/notifications, is ignored.
         return START_NOT_STICKY;`);
 service = body(service, 'public void onDestroy()', `        super.onDestroy();
@@ -240,12 +268,9 @@ write('GBPrefs.java', prefs, true);
 
 let adapter = load('GBDeviceAdapterv2.java');
 adapter = body(adapter, 'void handleDeviceConnect(GBDevice device)', `        if (!(device.getDeviceCoordinator() instanceof nodomain.freeyourgadget.gadgetbridge.devices.xiaomi.watches.RedmiWatch4Coordinator)) return;
-        new MaterialAlertDialogBuilder(context)
-                .setTitle("Caché Bluetooth local — r104")
-                .setMessage(nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4BluetoothCache.read(context, device))
-                .setPositiveButton("Cerrar", null).show();`);
+        nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticUi.show(context, device);`);
 adapter = replaceOnce(adapter, 'menu.getMenu().findItem(R.id.controlcenter_device_submenu_connect).setVisible(!deviceConnected);',
-        'menu.getMenu().findItem(R.id.controlcenter_device_submenu_connect).setTitle("Consultar caché local").setVisible(!deviceConnected);');
+        'menu.getMenu().findItem(R.id.controlcenter_device_submenu_connect).setTitle("Diagnóstico RW4").setVisible(!deviceConnected);');
 adapter = replaceOnce(adapter, '                        showTransientSnackbar(R.string.controlcenter_snackbar_connecting);',
         '                        // Local cache dialog; do not show a connecting message.');
 adapter = replaceOnce(adapter, '                    showTransientSnackbar(R.string.controlcenter_snackbar_connecting);',
@@ -383,7 +408,7 @@ gradle = replaceOnce(gradle, '    buildTypes {', `    buildTypes {
         rw4diagnostic {
             initWith debug
             applicationIdSuffix ".rw4diagnostic"
-            versionNameSuffix "-rw4-diagnostic-r104"
+            versionNameSuffix "-rw4-diagnostic-r106"
             debuggable false
             minifyEnabled false
             signingConfig signingConfigs.debug

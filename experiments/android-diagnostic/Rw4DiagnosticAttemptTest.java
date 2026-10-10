@@ -47,6 +47,28 @@ public final class Rw4DiagnosticAttemptTest {
         start.countDown();
         for (Thread caller : callers) caller.join();
         require(successes.get() == 1);
+        var probe = new Rw4DiagnosticAttempt();
+        String probeTicket = probe.issue("synthetic-rw4", 100, Rw4DiagnosticAttempt.Mode.TRANSPORT_ONLY);
+        require(!probe.isTransportOnly() && !probe.hasConsumed());
+        require(!probe.consume("other", probeTicket, 101) && !probe.isTransportOnly());
+        require(probe.consume("synthetic-rw4", probeTicket, 102) && probe.isTransportOnly());
+        require(!probe.isExpired(30101) && probe.isExpired(30102) && probe.isExpired(101));
+        require(probe.issue("synthetic-rw4", 103, Rw4DiagnosticAttempt.Mode.QUERY) == null && probe.isTransportOnly());
+        var query = new Rw4DiagnosticAttempt();
+        require(query.consume("synthetic-rw4", query.issue("synthetic-rw4", 100, Rw4DiagnosticAttempt.Mode.QUERY), 101));
+        require(query.hasConsumed() && !query.isTransportOnly());
+        var swapped = new Rw4DiagnosticAttempt();
+        String stale = swapped.issue("synthetic-rw4", 100, Rw4DiagnosticAttempt.Mode.QUERY);
+        String latest = swapped.issue("synthetic-rw4", 101, Rw4DiagnosticAttempt.Mode.TRANSPORT_ONLY);
+        require(!swapped.consume("synthetic-rw4", stale, 102));
+        require(swapped.consume("synthetic-rw4", latest, 102) && swapped.isTransportOnly());
+        var cancelled = new Rw4DiagnosticAttempt();
+        String pending = cancelled.issue("synthetic-rw4", 100, Rw4DiagnosticAttempt.Mode.TRANSPORT_ONLY);
+        require(cancelled.hasIssued() && !cancelled.hasConsumed());
+        cancelled.cancel();
+        require(cancelled.isCancelled() && !cancelled.consume("synthetic-rw4", pending, 101));
+        require(cancelled.issue("synthetic-rw4", 102) == null);
+        query.cancel(); require(query.isCancelled());
         System.out.println("Manual attempt tests passed (expiry, target, replay, concurrency)");
     }
 }

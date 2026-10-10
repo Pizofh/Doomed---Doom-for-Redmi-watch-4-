@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**R106:** [Diagnóstico consolidado preparado](android-consolidated-diagnostic.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Toolkit consolidado compila/firma y conserva restricciones de manifiesto | APK Android propio r106 | Build, inspector, apksigner | CONFIRMADO en artefacto PC | Alta | Sí | No instalado/UI/radio r106 probados |
+| Probe retorna antes de lector/auth y gate deniega sus payloads | Cliente r106, no reloj probado | Fuente generada y contrato de modo/WriteAction | CONFIRMADO en código/pruebas PC | Alta sobre implementación | Sí | Apertura de enlace real futura; no asumir cero efectos internos del reloj |
+| Cancelación pendiente invalida un intent tardío | Ticket/proceso Java del cliente | Prueba cancel-before-consume, modo y replay/concurrencia | CONFIRMADO en prueba PC | Alta | Sí | No medición temporal de cierre radio en Android |
+| Informe no expone claves/MAC/serial/mensajes crudos | Componente propio de informe | Tests Details/Status con datos corruptos y errores sintéticos | CONFIRMADO sobre componente/prueba PC | Alta | Sí | No equivale a auditoría completa de todos los logs/menús heredados |
+| r106 abre socket o autentica en M2315W1/2.2.86 | Unidad física | Ensayo manual aún pendiente | SIN EVIDENCIA | No evaluable | No | Dos fallos anteriores y caché positiva no demuestran éxito |
+
 **R105,2026-10-09:** [Lectura real de caché](android-bluetooth-cache.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

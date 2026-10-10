@@ -86,9 +86,17 @@ for (const [command, args] of [
 const preview = path.join(root, 'build/android-diagnostic-preview-r83');
 const adapter = fs.readFileSync(path.join(preview, 'GBDeviceAdapterv2.java'), 'utf8');
 const handler = adapter.match(/void handleDeviceConnect\(GBDevice device\)\s*\{([\s\S]*?)\n    \}/)?.[1];
-if (!handler?.includes('Rw4BluetoothCache.read(context, device)') ||
+if (!handler?.includes('Rw4DiagnosticUi.show(context, device)') ||
     /PROCESS\.issue|startForegroundService|ACTION_CONNECT/.test(handler) ||
-    adapter.includes('snackbar_connecting')) throw Error('Adapter is not cache-only');
+    adapter.includes('snackbar_connecting')) throw Error('Adapter does not open local diagnostic menu');
 const service = fs.readFileSync(path.join(preview, 'DeviceCommunicationService.java'), 'utf8');
-if (!/if \(ACTION_CONNECT.equals\(action\)\) \{\s*\/\/[^\n]*\n\s*stopSelf\(\);\s*return START_NOT_STICKY;/.test(service)) throw Error('Service CONNECT not denied');
-console.log('PASS: generated adapter reads cache only and service rejects CONNECT intents.');
+if (!service.includes('Rw4DiagnosticAttempt.PROCESS.consume(') ||
+    !service.includes('Rw4DiagnosticTrace.Event.REQUEST_REJECTED')) throw Error('Manual ticket boundary missing');
+const queue = fs.readFileSync(path.join(preview, 'BtBRQueue.java'), 'utf8');
+const probe = queue.indexOf('if (nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttempt.PROCESS.isTransportOnly())');
+const reader = queue.indexOf('readThread = createReadThread();', probe);
+if (probe < 0 || reader < probe || !queue.slice(probe, reader).includes('TRANSPORT_TEST_PASSED') ||
+    !queue.slice(probe, reader).includes('return;')) throw Error('Probe must close/return before reader/initialization');
+const support = fs.readFileSync(path.join(preview, 'XiaomiSupport.java'), 'utf8');
+if (support.split('&& !Rw4DiagnosticAttempt.PROCESS.isTransportOnly()').length !== 3) throw Error('Probe output/read gates missing');
+console.log('PASS: local menu does not connect; service needs manual ticket; probe returns before protocol and output gates deny its payloads.');

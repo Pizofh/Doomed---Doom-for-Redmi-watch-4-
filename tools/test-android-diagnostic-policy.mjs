@@ -7,17 +7,20 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const out = path.join(root, 'build/android-diagnostic-policy');
 fs.mkdirSync(out, {recursive: true});
 for (const [cmd, args] of [
-  ['javac', ['--release', '17', '-d', out,
+  ['javac', ['--release', '17', '-encoding', 'UTF-8', '-d', out,
     path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticPolicy.java'),
     path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticSession.java'),
     path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticAttempt.java'),
     path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticTrace.java'),
     path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticTraceTest.java'),
+    path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticDetails.java'),
+    path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticDetailsTest.java'),
     path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticAttemptTest.java'),
     path.join(root, 'experiments/android-diagnostic/Rw4DiagnosticPolicyTest.java')]],
   ['java', ['-cp', out, 'nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticPolicyTest']],
   ['java', ['-cp', out, 'nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticAttemptTest']],
-  ['java', ['-cp', out, 'nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticTraceTest']]
+  ['java', ['-cp', out, 'nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticTraceTest']],
+  ['java', ['-cp', out, 'nodomain.freeyourgadget.gadgetbridge.service.devices.xiaomi.Rw4DiagnosticDetailsTest']]
 ]) {
   const run = spawnSync(cmd, args, {windowsHide: true, encoding: 'utf8'});
   if (run.stdout) process.stdout.write(run.stdout);

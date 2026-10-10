@@ -1,5 +1,10 @@
 # Diagnóstico Android limitado: prototipo en PC
 
+**Actual R106:** [toolkit consolidado y APK listo](../../docs/android-consolidated-diagnostic.md).
+Informe local copiable, dos modos de conexión explícitos y cancelación pendiente,
+sin uploads/auto-retries ni payloads en PROBE. Pruebas PC y build/firma pasan.
+Instalación/UI/radio pendientes. Todo lo inferior es historial.
+
 **R104:** [consulta de caché local](../../docs/android-bluetooth-cache.md).
 El toque anterior de conexión muestra tipo/vínculo/SPP guardados en Android;
 no emite tickets y el servicio rechaza CONNECT. Prueba del componente pasa.

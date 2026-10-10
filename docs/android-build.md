@@ -1,5 +1,10 @@
 # Build de la variante de diagnóstico
 
+**Actual R106:** [toolkit consolidado](android-consolidated-diagnostic.md),
+build final SUCCESSFUL1m58s, inspector/apksigner pasan, misma firma y permisos.
+APK listo en artifacts/android-diagnostic-r106. No compilación pendiente que
+deba hacer el usuario; instalación/UI/radio de esta versión aún no reportadas.
+
 **Actual R104,2026-10-09:** [consulta local de caché](android-bluetooth-cache.md)
 compilada/verificada/empaquetada. APK listo en artifacts/android-diagnostic-r104,
 sin instalación/UI real todavía. No nueva conexión al reloj. R101 y estados

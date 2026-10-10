@@ -1,5 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R106:** [plan concreto del diagnóstico consolidado](android-consolidated-diagnostic.md)
+con APK revisado, modo solo enlace y QUERY separados, límites, persistencia,
+rollback/riesgos/recovery/evidencia. No acción física automática ejecutada.
+Siguiente ensayo manual propuesto: únicamente PROBE; QUERY no encadenado.
+Conserva vínculo/clave; no watchfaces/nativo/firmware. Historial inferior corresponde
+a versiones anteriores y no debe usarse como guía de reintentos.
+
 **Actual R104:** [consulta de caché del teléfono](android-bluetooth-cache.md)
 preparada como siguiente diagnóstico sin otra conexión. Actualiza solo APK
 propio del teléfono, conserva vínculo/clave y no requiere detener Mi Fitness.

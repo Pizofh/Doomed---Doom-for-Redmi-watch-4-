@@ -1,5 +1,9 @@
 # Diagnóstico visible de conexión — R101
 
+**Actual R106:** [menú/informe y dos modos manuales](android-consolidated-diagnostic.md).
+Incluye etapas ampliadas, tiempos y error saneado. Batería/info y probe en mismo
+APK; no repetir builds/planes antiguos. R104/R101 inferiores son historial.
+
 **Actual R104:** el flujo se sustituyó por [consulta local de caché](android-bluetooth-cache.md).
 No emite tickets/Conectar y el servicio rechaza ACTION_CONNECT. La traza r101
 permanece como historial; los códigos B/T/S o C se leen en el nuevo diálogo.
