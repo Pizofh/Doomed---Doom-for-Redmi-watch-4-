@@ -1,5 +1,13 @@
 # Retomar el proyecto
 
+**R138,2026-10-11:** usuario no encuentra HCI, capturas solo audio/AVRCP/MAP/
+page scan/AudioDump/LEAudio, no inicio. No HCIausente en toda build demostrado.
+[Guía de localización](phone-hci-capture-plan.md): inicio del menú/buscarHCI,
+AOSP16 XMLprimary key bt_hci_snoop_log debugmisc antesUSB; HyperOSubicación
+desconocida. No tocarpageScan/audiodump, no activarPROBE aún. Si no aparece,
+captura del inicio paraidentificar, no root/setprop. AutorizaciónR137 vigente;
+captura/probe/copiarresultado aún pendientes, agente sinADB/radiofísico.
+
 **R137,2026-10-11:** usuario SÍ autoriza captura HCI nueva según
 [plan completo](phone-hci-capture-plan.md). No volver a pedir autorización para
 misma secuencia. Manual pendiente: teléfonoUSBnormal/MiFitnormal→HCIoriginal

@@ -1,5 +1,16 @@
 # R136/R137 — una captura HCI nueva autorizada
 
+**R138,2026-10-11:** usuario no encuentra ajuste HCI y aporta dos capturas
+de opciones de desarrollador: AVRCP/MAP/códecs y page scan/Audio Dump/LEAudio.
+Ningún control visible es el registro HCI. No concluir que esté ausente en todo
+HyperOS; comienzo del menú no visible. No PROBE/captura nueva reportados.
+Guía: buscar HCI desde Ajustes y revisar inicio del menú, sin tocar controles
+de audio/page scan. AOSP Android16 coloca bt_hci_snoop_log en debug_misc_category
+al inicio, antes de debug_debugging_category/USB; ubicación HyperOS no confirmada.
+[XML primario](https://raw.githubusercontent.com/aosp-mirror/platform_packages_apps_settings/android16-release/res/xml/development_settings.xml).
+Si sigue sin aparecer, inspeccionar captura del inicio del menú antes de más
+acciones; no setprop/privateAPI/root para habilitarlo. Autorización R137 vigente.
+
 **R137,2026-10-11:** el usuario responde «sí» al plan de captura detallada nueva.
 Autorizados registro HCI temporal del teléfono, un PROBE r131, copia privada
 collect-capture y análisis limitado a Bluetooth con restauración descrita abajo.
