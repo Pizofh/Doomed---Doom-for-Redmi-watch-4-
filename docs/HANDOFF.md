@@ -1,5 +1,12 @@
 # Retomar el proyecto
 
+**R157, 2026-10-11:** usuario completó target privado con MAC compacta (12 hex,
+sin separadores). Solo formato inspeccionado, sin exponer valor. Se normalizó
+address a pares con dos puntos, verificando mismo identificador y validateTarget
+correcto; JSON/modelo/FW/plan coinciden. Archivo sigue privado/ignorado. No radio,
+cache query o probe ejecutado. Usuario puede continuar el único ensayo ya
+autorizado R156; no repetir prueba si luego entrega resultado ni pedir MAC al chat.
+
 **R156, 2026-10-11:** usuario autoriza continuar el único [probe SPP Windows del
 plan](windows-spp-probe-plan-r154.md) tras aclarar unlink Mi Fitness. NO preguntar
 revisión otra vez. Se creó tools/local/pc-rfcomm/target.json con placeholder
