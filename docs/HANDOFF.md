@@ -1,5 +1,14 @@
 # Retomar el proyecto
 
+**R143, 2026-10-11:** [exportación fallida y diagnóstico preparado](phone-bluetooth-apk-plan-r142.md).
+Usuario aviso genérico exportfailed, BT/USBdebug encendidos; autorización/ruta/
+pkg no demostrados. PC exportdir ausente,3ADBhashpins coinciden, no partial.
+Nuevo diagnose-bluetooth SOLOusuario: getstate→pmpath fijo si device, no pull/
+radio/watch/APK. JSONstage+estado sinraw; pathsAPKprivados solo metadata en
+tools/local/phone-bluetooth-diagnostic-r143/package-path-metadata.json, nooverwrite.
+No relajar parser sin metadata, no variantespaquete. Tests fake pasan. Resultado
+pendiente, agente sinADB real. No repetirexport ni cambiarBT/keys/permisos.
+
 **R142, 2026-10-11:** usuario [consulta R141 completada](phone-bluetooth-config-plan-r141.md):
 user, modeUNSET/pathUNSET, config3NOT_FOUND. No ruta/cause/effective logging
 demostrados; no interpretarUNSET como Bluetoothausente/error. No otroPROBE/HCI/

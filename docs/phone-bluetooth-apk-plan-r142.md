@@ -1,5 +1,38 @@
 # R142 — revisar el componente Bluetooth de este teléfono
 
+## R143 — exportación fallida, causa aún no identificada
+
+El usuario recibe el aviso genérico de exportación fallida y confirma Bluetooth
+encendido/depuración USB activada. Esto no prueba autorización USB efectiva,
+presencia del paquete ni ruta aceptada. PC: carpeta de exportación ausente y
+los tres hashes ADB coinciden con los pins; no copia/partial local encontrados.
+No ADB real ejecutado por el agente. No afirmar todavía cuál fue el error.
+
+El mensaje original era demasiado genérico. Se prepara un diagnóstico completo
+de la fase anterior a la copia, sin repetir `pull` ni abrir Bluetooth:
+
+```powershell
+node tools/export-mi-fitness-apk.mjs diagnose-bluetooth
+```
+
+Solo `adb -d get-state` y, si autorizado, `adb -d shell pm path com.android.bluetooth`.
+Reporta estado USB, stage del fallo y aceptación/unicidad de la ruta. No copiar
+APK ni ejecutar/instalar nada. No variantes de paquete ni fallback automático.
+Si pm devuelve rutas APK, conserva únicamente esa metadata de software en
+`tools/local/phone-bluetooth-diagnostic-r143/package-path-metadata.json`, privado
+e ignorado. No logs, datos de usuario o nombres/rutas al JSON mostrado. La
+metadata permitirá revisar offline una ruta rechazada antes de ampliar el
+parser; no relajar validación por conjetura. No overwrite ni repetición cuando
+ya existe metadata. Errores no reconocidos se descartan.
+
+No cambios de configuración, permisos, vínculo, radio o reloj. Mi Fitness puede
+seguir abierta. Restauración: desactivar depuración USB si se activó para esto.
+Mismo alcance de lecturas USB del plan inferior; fallo razonable lectura fallida,
+timeout o escritura local de metadata, sin recovery del reloj requerido por
+estos comandos. Tests fake-ADB pasan (una/dos lecturas, error unauthorized,
+paquete vacío, formato desconocido, rutas aceptadas/rechazadas, privacidad y
+refusal antes de USB si hay metadata). Resultado real pendiente.
+
 2026-10-11. La consulta R141 no encontró configuración exportable: build user,
 dos propiedades sin valor explícito y tres archivos inexistentes. Ya tenemos
 APK Mi Fitness y Mi Connect Service; falta identificar el componente Bluetooth

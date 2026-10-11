@@ -4,7 +4,7 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
-import {copyInstalledMiFitness} from './export-mi-fitness-apk.mjs';
+import {copyInstalledMiFitness, diagnoseBluetoothExport} from './export-mi-fitness-apk.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const output = path.join(root, 'build/mi-fitness-export-test-' + Date.now());
 const calls = [];
@@ -86,4 +86,33 @@ for (const remote of ['/apex/com.android.bt/app/Bluetooth/../Bluetooth.apk',
 }
 const planned = spawnSync(process.execPath, ['tools/export-mi-fitness-apk.mjs', 'plan-bluetooth'], {cwd: root, encoding: 'utf8'});
 assert.equal(planned.status, 0); assert.equal(JSON.parse(planned.stdout).executionPerformed, false);
+for (const [label, state] of [['offline', 'offline'], ['unauthorized', 'unauthorized']]) {
+  let count = 0;
+  const result = diagnoseBluetoothExport(() => { count++; return {status: 0, stdout: state}; }, path.join(output, 'diagnose-' + label));
+  assert.equal(count, 1); assert.equal(result.usbState, state); assert.equal(result.copyPerformed, false);
+}
+assert.equal(diagnoseBluetoothExport(() => ({status: 1, stdout: '', stderr: 'error: device unauthorized PRIVATE'}),
+  path.join(output, 'diagnose-error')).usbState, 'unauthorized');
+for (const [label, response, stage, saved] of [
+  ['missing', '', 'PACKAGE_NO_PATH', false],
+  ['unexpected', 'private error with KEY', 'PACKAGE_RESPONSE_REFUSED', false],
+  ['allowed', 'package:/apex/com.android.bt/app/Bluetooth/Bluetooth.apk', 'READY_TO_COPY', true],
+  ['versioned', 'package:/apex/com.android.btservices/app/Bluetooth@PRIVATE-BUILD/Bluetooth.apk', 'PACKAGE_PATH_REFUSED', true],
+]) {
+  const calls = [];
+  const directory = path.join(output, 'diagnose-' + label);
+  const result = diagnoseBluetoothExport(args => {
+    calls.push(args);
+    if (args[1] === 'get-state') return {status: 0, stdout: 'device'};
+    assert.deepEqual(args, ['-d', 'shell', 'pm', 'path', 'com.android.bluetooth']);
+    return {status: 0, stdout: response, stderr: ''};
+  }, directory);
+  assert.equal(calls.length, 2); assert.equal(result.stage, stage);
+  assert.equal(result.privateMetadataSaved, saved); assert.equal(result.copyPerformed, false);
+  assert.ok(!/PRIVATE|KEY|\/apex\//.test(JSON.stringify(result)));
+  if (saved) {
+    assert.equal(JSON.parse(fs.readFileSync(path.join(directory, 'package-path-metadata.json'))).paths[0], response.slice(8));
+    assert.throws(() => diagnoseBluetoothExport(() => { throw Error('Must refuse before USB'); }, directory));
+  }
+}
 console.log('PASS: fake USB-only APK export, exact read commands, no raw paths/data in report, malformed-path rejection, no overwrite, no fallback; no real ADB/phone executed.');

@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**R143, 2026-10-11:** [copia fallida y fase de diagnóstico](phone-bluetooth-apk-plan-r142.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| APK Bluetooth fue exportado | PC/último intento usuario | Aviso fallido; carpeta de exportación ausente | SIN COPIA LOCAL | Alta sobre inspección | Sí, PC | Sin causa determinada; no partial encontrado |
+| Archivos ADB locales cambiaron respecto al pin | PC/proyecto | Tres SHA256 coinciden | REFUTADO PARA ARCHIVOS ACTUALES | Alta | Sí, PC | No confirma autorización USB efectiva |
+| BT encendido y depuración activada garantizan exportación | Flujo USB | Estado UI no valida autorización/package/path | SIN EVIDENCIA | Alta sobre limitación | No | Diagnóstico preparado; no ADB/radio automático |
+
 **R142, 2026-10-11:** [consulta completada](phone-bluetooth-config-plan-r141.md) y [revisión instalada propuesta](phone-bluetooth-apk-plan-r142.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

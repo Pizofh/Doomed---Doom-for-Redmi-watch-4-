@@ -48,6 +48,43 @@ const targets = Object.freeze({
   core: {package: 'com.xiaomi.mi_connect_service', file: 'MiConnectService-base.apk', directory: 'mi-connect-service'},
   bluetooth: {package: 'com.android.bluetooth', file: 'Bluetooth-base.apk', directory: 'phone-bluetooth'}
 });
+export function diagnoseBluetoothExport(run, destination) {
+  contained(destination);
+  const metadataFile = contained(path.join(destination, 'package-path-metadata.json'));
+  if (fs.existsSync(metadataFile)) throw Error('Existing diagnosis refused');
+  const report = {checkpoint: 'R143', diagnosticOnly: true, stage: 'USB_STATE',
+    usbState: 'NOT_ESTABLISHED', packageRows: 0, basePathAccepted: false,
+    privateMetadataSaved: false, copyPerformed: false, rawOutputExported: false,
+    phoneAppLaunched: false, bluetoothOperationRequested: false, watchCommandRequested: false};
+  const state = run(['-d', 'get-state']);
+  if (!state || state.error || state.status !== 0 || typeof state.stdout !== 'string' || state.stdout.length > 1024) {
+    const error = typeof state?.stderr === 'string' && state.stderr.length <= 4096 ? state.stderr : '';
+    report.usbState = /device unauthorized/i.test(error) ? 'unauthorized' :
+      /device offline/i.test(error) ? 'offline' : 'READ_FAILED'; return report;
+  }
+  const value = state.stdout.trim();
+  report.usbState = ['device', 'offline', 'unauthorized'].includes(value) ? value : 'UNRECOGNIZED';
+  if (value !== 'device') return report;
+  report.stage = 'PACKAGE_QUERY';
+  const reply = run(['-d', 'shell', 'pm', 'path', targets.bluetooth.package]);
+  if (!reply || reply.error || typeof reply.stdout !== 'string' || reply.stdout.length > 32768 ||
+      typeof reply.stderr !== 'string' || reply.stderr.length > 32768) return report;
+  if (reply.status !== 0) { report.stage = 'PACKAGE_QUERY_FAILED'; return report; }
+  if (!reply.stdout.trim()) { report.stage = 'PACKAGE_NO_PATH'; return report; }
+  const rows = reply.stdout.trim().split(/\r?\n/);
+  report.packageRows = rows.length;
+  if (rows.length > 64) { report.stage = 'PACKAGE_RESPONSE_REFUSED'; return report; }
+  // Retain only pm's APK path metadata, privately, for offline grammar review.
+  // Unknown text is not saved; nothing here is used as a shell/command input.
+  const paths = rows.map(row => row.match(/^package:(\/[^\r\n\0]{1,1024}\.apk)$/)?.[1]);
+  if (paths.some(value => !value)) { report.stage = 'PACKAGE_RESPONSE_REFUSED'; return report; }
+  try { installedBase(reply.stdout, true); report.basePathAccepted = true; report.stage = 'READY_TO_COPY'; }
+  catch { report.stage = 'PACKAGE_PATH_REFUSED'; }
+  fs.mkdirSync(destination, {recursive: true});
+  fs.writeFileSync(metadataFile, JSON.stringify({packageRequested: targets.bluetooth.package, paths}, null, 2) + '\n', {flag: 'wx'});
+  report.privateMetadataSaved = true;
+  return report;
+}
 export function copyInstalledMiFitness(run, destination, target = 'fitness') {
   if (!Object.hasOwn(targets, target)) throw Error('Unknown fixed package');
   const selectedTarget = targets[target];
@@ -85,9 +122,12 @@ function trustedRun(args) {
 }
 if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {
   const action = process.argv[2] ?? 'plan';
-  if (process.argv.length > 3 || !['plan', 'export', 'plan-core', 'export-core', 'plan-bluetooth', 'export-bluetooth'].includes(action)) throw Error('Only fixed plan/export modes supported');
+  if (process.argv.length > 3 || !['plan', 'export', 'plan-core', 'export-core', 'plan-bluetooth', 'export-bluetooth', 'diagnose-bluetooth'].includes(action)) throw Error('Only fixed plan/export modes supported');
   const target = action.endsWith('-core') ? 'core' : action.endsWith('-bluetooth') ? 'bluetooth' : 'fitness', selectedTarget = targets[target];
-  if (action.startsWith('plan')) {
+  if (action === 'diagnose-bluetooth') {
+    try { console.log(JSON.stringify(diagnoseBluetoothExport(trustedRun, path.join(root, 'tools/local/phone-bluetooth-diagnostic-r143')))); }
+    catch { console.error('Export diagnosis failed locally; no raw output, copy, radio action or retry performed.'); process.exitCode = 1; }
+  } else if (action.startsWith('plan')) {
     console.log(JSON.stringify({action: 'plan', executionPerformed: false,
       commands: ['adb -d get-state', 'adb -d shell pm path ' + selectedTarget.package, 'adb -d pull <base APK path returned by pm> <local partial file>'],
       sdkPlatformTools: '37.0.1, pinned local Windows binaries',
