@@ -1,6 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
-**Actual R150, 2026-10-11:** [plan de inspección del flujo stock de cambio de
+**Actual R151, 2026-10-11:** usuario informa pantalla QR tras inspección propuesta
+del flujo de cambio de teléfono. [Stop y retorno pendiente](pc-cache-and-migration-r150.md).
+No escanear, pairing PC, socket, reset o nuevo código. No afirmar vínculo anterior
+borrado o recuperación conseguida. Preguntar si puede salir y Mi Fitness reconecta;
+si no puede salir, obtener estado antes de proponer otra acción.
+
+**Historial R150, 2026-10-11:** [plan de inspección del flujo stock de cambio de
 teléfono](pc-cache-and-migration-r150.md) preparado para revisión, NO autorizado
 ni ejecutado. Consulta de caché Windows completada sin inquiry/pairing/socket.
 Ninguna autorización histórica de Android/HCI permite activar migración,

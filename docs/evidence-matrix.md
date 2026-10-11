@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**R151, 2026-10-11:** [pantalla QR reportada](pc-cache-and-migration-r150.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Flujo inspeccionado muestra QR para la app | Unidad M2315W1/2.2.86 del usuario | Reporte «sí, sale el qr … para ponerlo en la app» | CONFIRMADO POR REPORTE DEL USUARIO | Media | Usuario; no agente | No captura/QR guardados; detener antes de escanear/pairing |
+| Cancelación restaura Mi Fitness sin cambios | Misma unidad | Resultado de retorno aún no recibido | SIN EVIDENCIA | Desconocida | Pendiente | No asumir cancelabilidad ni bond borrado/recovery exitoso |
+
 **R150, 2026-10-11:** [caché Windows y migración](pc-cache-and-migration-r150.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

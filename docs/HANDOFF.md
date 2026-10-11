@@ -1,5 +1,12 @@
 # Retomar el proyecto
 
+**R151, 2026-10-11:** usuario reporta QR para la app al inspeccionar el flujo
+propuesto. [Resultado](pc-cache-and-migration-r150.md). STOP: no escanear ni pairing
+Windows/SPP/reset. No asumir bond borrado, cancelabilidad o visibilidad nueva.
+Se indicó gesto atrás; si sale, activar BT teléfono y abrir Mi Fitness; si no,
+reportar antes de otras acciones. RETORNO Y SINCRONIZACIÓN PENDIENTES. No repetir
+inspección ni proponer otro intento hasta conocer ese estado. Agente sin radio/ADB.
+
 **R150, 2026-10-11:** usuario buscó Windows con Bluetooth del teléfono apagado.
 [Caché Classic real](pc-cache-and-migration-r150.md) leída con aprobación, sin
 inquiry/pairing/sockets: 7 registros, 3 autenticados, cero candidatos RW4 por

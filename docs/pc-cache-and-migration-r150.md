@@ -1,5 +1,21 @@
 # R150 — caché local Windows y límite de migración
 
+## Resultado posterior R151: QR reportado, retorno pendiente
+
+2026-10-11. Tras proponer la inspección limitada, el usuario informa:
+«sí, sale el qr … para ponerlo en la app». Se registra pantalla de vinculación
+por reporte del usuario, sin captura, contenido del QR ni comandos del agente.
+No prueba que el vínculo anterior se haya borrado, que el reloj ahora sea visible
+en Windows, o que un emparejamiento con PC esté soportado. Tampoco demuestra
+que el flujo pueda cancelarse sin cambios persistentes.
+
+Se alcanza el stop previsto: no escanear QR, no emparejar Windows, no abrir SPP,
+no reset ni código. Intentar volver atrás con gesto habitual; si sale, activar
+Bluetooth del teléfono y abrir Mi Fitness. Si no puede salir del QR, comunicar
+ese estado antes de otras acciones. Retorno/sincronización aún NO confirmados.
+No pedir repetir la inspección. El plan inferior conserva el alcance propuesto
+como historial; no autoriza pasos adicionales de migración o recuperación.
+
 2026-10-11. El usuario aclara que mantuvo el Bluetooth del teléfono apagado
 durante la búsqueda de Windows sin RW4 por nombre. No atribuir ese resultado
 a una conexión activa del teléfono ni asegurar que apagarlo hace visible el reloj.
@@ -50,7 +66,7 @@ Fuentes primarias:
 
 ## Plan para revisión: inspección del flujo de cambio de teléfono
 
-**Pendiente, no autorizado ni ejecutado.** No es todavía un ensayo SPP o una
+**Historial del plan propuesto; QR reportado en R151, retorno pendiente.** No es un ensayo SPP o una
 instalación. Solo tendría sentido si el usuario acepta un posible cambio del
 estado de vinculación. No confundir tocar la entrada del menú con leer su nombre.
 
