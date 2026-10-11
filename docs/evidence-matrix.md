@@ -1,5 +1,17 @@
 # Matriz de evidencia
 
+**R145, 2026-10-11:** [revisión final Bluetooth](phone-bluetooth-apk-result-r145.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| APK instalado Bluetooth copiado y firma v3 válida | Teléfono Android 16 del usuario | Hash fijado, SDK apksigner/aapt2 | CONFIRMADO EN PC | Alta | Sí | Certificado fabricante sin referencia externa; no ejecutado |
+| Ruta Java de apertura delega a connectSocketNative | APK exacto del teléfono | Binder y AdapterNativeInterface leídos con SDK | CONFIRMADO EN CÓDIGO | Alta | Lectura PC | No atribuye cierre ni prueba negociación remota |
+| APK incluye implementación nativa RFCOMM | Copia base Bluetooth | Listado SDK sin .so; carga bluetooth_jni externa | REFUTADO PARA ESTE APK | Alta | Sí | No se copiaron otras bibliotecas/APEX |
+| Dump Xiaomi intenta copiar HCI de sdcard a logs MIUI | AdapterService.dump del APK | Flujo File/mkdirs/copyFile seguido | CONFIRMADO EN CÓDIGO | Alta | Lectura PC | No prueba origen existente, copia exitosa ni ruta del logger |
+| Los ZIP previos contienen esas rutas HCI Xiaomi | Dos informes privados existentes | Inventario de rutas exactas, cero coincidencias | REFUTADO PARA ENTRADAS BUSCADAS | Alta | Sí | No prueba ausencia en el teléfono fuera del ZIP |
+| Revisión aporta un cambio concreto que arregla SPP | Transporte físico RW4 | Ninguno encontrado en alcance acordado | SIN EVIDENCIA | Desconocida | No nuevo intento | Cerrar ronda repetitiva y buscar compatibilidad verificada |
+
+
 **R144, 2026-10-11:** [causa del fallo de copia identificada](phone-bluetooth-apk-plan-r142.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

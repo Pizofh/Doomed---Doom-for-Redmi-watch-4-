@@ -41,7 +41,13 @@ assert.equal(inspect(archive(['vendor/btsnoop_hci.log.filtered', 'vendor/hci_log
 const metadata = inspect(archive(['FS/vendor/etc/bluetooth/bt_stack.conf', 'FS/system/etc/bluetooth/bt_stack.conf',
   'FS/etc/bluetooth/bt_stack.conf', 'FS/data/vendor/bluetooth/PRIVATE.bin',
   'bluetooth-PRIVATE.zip', 'FS/data/bluetooth/nested.gz', 'private-app.zip']));
-assert.deepEqual(metadata.bluetoothMetadata, {stackConfigFiles: 3, vendorBluetoothFiles: 1, nestedBluetoothArchives: 2});
+assert.deepEqual(metadata.bluetoothMetadata, {stackConfigFiles: 3, vendorBluetoothFiles: 1, nestedBluetoothArchives: 2, xiaomiSnoopFiles: 0});
+const xiaomi = inspect(archive(['FS/sdcard/btsnoop_hci.log',
+  'FS/storage/emulated/0/MIUI/debug_log/common/com.android.bluetooth/btsnoop_hci.log',
+  'FS/sdcard/PRIVATE/btsnoop_hci.log']));
+assert.equal(xiaomi.bluetoothMetadata.xiaomiSnoopFiles, 2);
+assert.equal(xiaomi.bluetoothFileCandidates.length, 0);
+assert.ok(!JSON.stringify(xiaomi).includes('PRIVATE'));
 assert.ok(!JSON.stringify(metadata).includes('PRIVATE'));
 for (const canary of ['PRIVATE-PHONE-NAME', 'KEY-NOT-FOR-EXPORT', name, 'other/']) assert.ok(!JSON.stringify(result).includes(canary));
 assert.equal(inspect(archive(['unrelated.txt'])).bluetoothFileCandidates.length, 0);

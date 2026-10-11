@@ -5,6 +5,8 @@ is required before posting/contacting maintainers. No APKs, private logs, keys,
 addresses or device serials attached. This is a diagnostic fork, not a claim
 that the unmodified upstream application reproduces the issue.
 
+Updated after the bounded R145 offline review; still not posted.
+
 ## Suggested title
 
 Redmi Watch 4 2.2.86: secure SPP connection fails before auth on HyperOS / Android 16
@@ -36,6 +38,14 @@ exclusive ownership of the radio/socket or exclude Xiaomi's core service.
 Mi Fitness and the watch worked normally again after restoring settings.
 An authorized full-HCI bugreport copy only contained empty snoop buffers, so
 there is no packet-level failure attribution yet.
+
+A static review of the installed Bluetooth APK (com.android.bluetooth version
+16, signature verified) traced the ordinary socket binder to connectSocketNative.
+The JNI library is outside this APK, so this did not establish the native failure
+cause or a client-side fix. AdapterService.dump attempts to copy a snoop file
+from sdcard into MIUI debug logs; neither exact path was present in the two
+existing bugreport ZIPs. This is not proof of effective logging or file absence
+on the phone. No extra probe or logging cycle was run after that review.
 
 Could you point to a verified working firmware/Android setup, a known HyperOS
 SPP restriction, or a relevant transport change? I have not tested unpair/reset,

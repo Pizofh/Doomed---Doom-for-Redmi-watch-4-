@@ -1,5 +1,9 @@
 # R142 — revisar el componente Bluetooth de este teléfono
 
+**R145: copia y revisión completadas.** Ver [resultado y cierre de esta ronda](phone-bluetooth-apk-result-r145.md).
+No corrección concreta encontrada; no repetir export, PROBE ni HCI. La consulta
+upstream está actualizada y aún no enviada. Las secciones inferiores son historial.
+
 ## R144 — fallo del exporter identificado y estrategia acotada
 
 El usuario aporta stage=PACKAGE_PATH_REFUSED, usbState=device, una ruta y

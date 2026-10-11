@@ -50,7 +50,7 @@ function parseArchive(readAt, size) {
   const seen = new Set();
   const candidates = [];
   const selected = [];
-  const bluetoothMetadata = {stackConfigFiles: 0, vendorBluetoothFiles: 0, nestedBluetoothArchives: 0};
+  const bluetoothMetadata = {stackConfigFiles: 0, vendorBluetoothFiles: 0, nestedBluetoothArchives: 0, xiaomiSnoopFiles: 0};
   let offset = 0, reportTextCount = 0, unrelatedNameAnomalies = 0, otherHciNamedEntries = 0;
   for (let i = 0; i < count; i++) {
     if (offset + 46 > directory.length || directory.readUInt32LE(offset) !== 0x02014b50) throw Error('Invalid entry');
@@ -73,6 +73,9 @@ function parseArchive(readAt, size) {
     // Discovery is metadata only: never select/open an unknown vendor path.
     if (!match && /(?:btsnoop|btsnooz|hci[_-](?:snoop|log))/i.test(name.split('/').at(-1))) otherHciNamedEntries++;
     if (!ambiguous) {
+      // Paths traced in the verified phone APK's AdapterService.dump().
+      // Metadata only: do not expand the content-review whitelist.
+      if (/^FS\/(?:sdcard|storage\/emulated\/0)\/(?:MIUI\/debug_log\/common\/com\.android\.bluetooth\/)?btsnoop_hci\.log$/.test(name)) bluetoothMetadata.xiaomiSnoopFiles++;
       if (/^FS\/(?:system|vendor|etc)(?:\/etc)?\/bluetooth\/bt_stack\.conf$/.test(name)) bluetoothMetadata.stackConfigFiles++;
       if (/^FS\/data\/vendor\/bluetooth\//.test(name)) bluetoothMetadata.vendorBluetoothFiles++;
       if (/(?:^|\/)bluetooth(?:\/|[^/]*\.(?:zip|gz|tar)$)/i.test(name) && /\.(?:zip|gz|tar)$/i.test(name)) bluetoothMetadata.nestedBluetoothArchives++;

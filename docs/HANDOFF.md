@@ -1,5 +1,17 @@
 # Retomar el proyecto
 
+**R145, 2026-10-11:** [última revisión offline completada](phone-bluetooth-apk-result-r145.md).
+APK Bluetooth exportado por usuario, tamaño/hash fijados, manifest y firma v3
+verificados. Binder de apertura delega a connectSocketNative; libbluetooth_jni
+no está en el APK. No corrección concreta encontrada. AdapterService.dump intenta
+copiar HCI de /sdcard a logs MIUI; no prueba archivo/logging efectivo. Metadata
+de los dos ZIP previos: cero rutas exactas halladas, sin abrir entradas nuevas.
+Test de inventario pasa. Cerrar bucle PROBE/HCI/builds solo de detalle; siguiente
+checkpoint: compatibilidad externa verificada. Consulta upstream actualizada,
+todavía NO enviada/publicada. No nuevas operaciones físicas ni APK diagnóstica.
+Lectores SDK usados en PC con aprobación tras Java AccessDenied en sandbox.
+
+
 **R144, 2026-10-11:** diagnóstico usuario device/1path/PACKAGE_PATH_REFUSED.
 Metadata PC identifica Bluetooth@<build> dentro de APEX esperado: parser propio
 rechazaba sufijo, no USB ni ausenciapaquete. Corregido/testregresión pasa; no

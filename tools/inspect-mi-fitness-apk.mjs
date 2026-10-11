@@ -10,6 +10,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const commandArgs = process.argv.slice(2);
 let selector = 'fitness';
 if (commandArgs[0] === '--core') { commandArgs.shift(); selector = 'core'; }
+if (commandArgs[0] === '--bluetooth') { commandArgs.shift(); selector = 'bluetooth'; }
 const target = installedApkTargets[selector];
 const local = path.join(root, 'tools/local', target.directory);
 const apk = path.join(local, target.file);
@@ -53,6 +54,9 @@ function readClass(cls, label, method) {
 }
 if (mode === 'code') {
   readClass(commandArgs[1], commandArgs[2], commandArgs[3]);
+} else if (mode === 'packages') {
+  analyze('dex-packages', ['dex', 'packages', '--defined-only']);
+  console.log(JSON.stringify({packageIndexSaved: true, apkExecuted: false}));
 } else if (mode === 'code-batch') {
   const args = commandArgs.slice(1);
   if (!args.length || args.length % 2 || args.length > 16) throw Error('Use class/label pairs (max eight classes)');
