@@ -1,6 +1,11 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
-**Actual R151, 2026-10-11:** usuario informa pantalla QR tras inspección propuesta
+**Actual R152, 2026-10-11:** salida de QR/retorno Mi Fitness confirmado por usuario.
+[Plan manual limitado a descubrimiento Windows con QR abierto](pc-cache-and-migration-r150.md).
+Sin seleccionar/pairing/socket/código; cancelar y restaurar BT. No repetir pregunta
+de recuperación. Resultado de visibilidad pendiente; gates de instalación cerrados.
+
+**Historial R151, 2026-10-11:** usuario informa pantalla QR tras inspección propuesta
 del flujo de cambio de teléfono. [Stop y retorno pendiente](pc-cache-and-migration-r150.md).
 No escanear, pairing PC, socket, reset o nuevo código. No afirmar vínculo anterior
 borrado o recuperación conseguida. Preguntar si puede salir y Mi Fitness reconecta;

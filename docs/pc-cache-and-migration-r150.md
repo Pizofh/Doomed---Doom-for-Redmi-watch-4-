@@ -1,5 +1,37 @@
 # R150 — caché local Windows y límite de migración
 
+## R152: retorno confirmado y descubrimiento manual acotado
+
+2026-10-11. El usuario responde afirmativamente a salir del QR y reconectar
+Mi Fitness. Retorno confirmado por reporte para esta inspección en su unidad;
+no hubo pairing PC ni código enviado. No repetir la pregunta de recuperación.
+Esto permite una comparación útil: búsqueda Windows con la pantalla QR abierta,
+en lugar de seguir buscando con el reloj en su estado normal.
+
+Plan manual, sin ejecución del agente:
+
+- Unidad: la misma M2315W1/2.2.86; no otros modelos/firmware.
+- Abrir QR mediante Ajustes → Sistema → Conectar nuevo teléfono, como en la
+  inspección que el usuario acaba de cerrar correctamente.
+- Apagar temporalmente BT del teléfono; Windows → Agregar dispositivo → Bluetooth.
+  Observar si aparece un candidato llamado Redmi Watch 4; no seleccionarlo.
+- Cancelar búsqueda Windows, salir del QR como antes, reactivar BT del teléfono.
+- Componentes: descubrimiento desde el PC y UI stock. No autenticación Xiaomi,
+  socket SPP, pairing, transferencia ni código. El cliente R148 sigue bloqueado.
+- Persistencia: Windows puede actualizar su caché de descubrimiento; no se
+  solicita cambiar claves o almacenamiento del reloj. Escrituras internas de
+  la UI stock no auditadas; retorno anterior medido por reporte, no garantía
+  general de ausencia de escrituras.
+- Particiones/bootloader/firmware: sin herramientas ni escrituras solicitadas.
+- Reversión: cancelar/salir y restaurar BT; comprobado en inspección anterior,
+  no depender de reboot. No recovery completo de firmware necesario para ejecutar
+  código porque este ensayo no lo ejecuta; ese gate permanece cerrado.
+- Peor fallo razonable de este alcance: interrupción temporal de sincronización
+  o no poder salir/reconectar; en ese caso detener. No nuevos bonds ni reset.
+  Sin evidencia de soft/hard brick por este flujo stock, sin garantía universal.
+- Resultado solicitado: solo si aparece RW4 por nombre; no direcciones/QR/logs.
+  Un nombre visible no verifica identidad ni compatibilidad de pairing/SPP.
+
 ## Resultado posterior R151: QR reportado, retorno pendiente
 
 2026-10-11. Tras proponer la inspección limitada, el usuario informa:

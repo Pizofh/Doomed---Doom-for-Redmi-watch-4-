@@ -1,5 +1,11 @@
 # Retomar el proyecto
 
+**R152, 2026-10-11:** usuario confirma salida del QR y retorno normal a Mi Fitness;
+corregir exceso de cautela, no repetir pregunta de recuperación. [Siguiente prueba
+manual](pc-cache-and-migration-r150.md): descubrimiento Windows con QR abierto y
+BT teléfono apagado, sin seleccionar candidato/pairing; cancelar y restaurar.
+Resultado aún pendiente. No operación del agente, gate SPP/código cerrado.
+
 **R151, 2026-10-11:** usuario reporta QR para la app al inspeccionar el flujo
 propuesto. [Resultado](pc-cache-and-migration-r150.md). STOP: no escanear ni pairing
 Windows/SPP/reset. No asumir bond borrado, cancelabilidad o visibilidad nueva.
