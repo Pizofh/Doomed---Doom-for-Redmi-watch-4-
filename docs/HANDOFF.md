@@ -1,5 +1,13 @@
 # Retomar el proyecto
 
+**R139,2026-10-11:** HCI localizado por usuario: «Registro snoop de Bluetooth
+HCI», originalInhabilitado, opcionesFiltradohabilitado/Habilitado; registro
+pilasInformación y filtroHCI aparte. ElegirHabilitado, no tocarpilas/filtros;
+misma secuencia autorizadaR137. RestaurarInhabilitado SOLOdespuéscollect-capture
+y cicloBT. No activación/PROBE/copia136 reportados todavía; agente sinADB/radio.
+[Plan](phone-hci-capture-plan.md). No pedir otra aprobación; esperar JSON/informe/
+retorno, no rawZIP ni reintentos. Gate nativo/fw cerrado.
+
 **R138,2026-10-11:** usuario no encuentra HCI, capturas solo audio/AVRCP/MAP/
 page scan/AudioDump/LEAudio, no inicio. No HCIausente en toda build demostrado.
 [Guía de localización](phone-hci-capture-plan.md): inicio del menú/buscarHCI,

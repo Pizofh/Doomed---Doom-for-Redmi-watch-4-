@@ -1,5 +1,13 @@
 # R136/R137 — una captura HCI nueva autorizada
 
+**R139,2026-10-11:** usuario encuentra «Registro snoop de Bluetooth HCI»,
+estado original «Inhabilitado», opciones de filtrado habilitado y habilitado.
+También describe registro de pilas Bluetooth en Información y filtro HCI separado.
+Control correcto identificado por reporte; elegir «Habilitado» para captura
+autorizada, sin cambiar nivel de pilas ni filtros. Restaurar «Inhabilitado»
+DESPUÉS de copiar collect-capture y aplicar ciclo Bluetooth. Activación,
+PROBE y copia nueva aún no reportados; no nueva autorización necesaria.
+
 **R138,2026-10-11:** usuario no encuentra ajuste HCI y aporta dos capturas
 de opciones de desarrollador: AVRCP/MAP/códecs y page scan/Audio Dump/LEAudio.
 Ningún control visible es el registro HCI. No concluir que esté ausente en todo
