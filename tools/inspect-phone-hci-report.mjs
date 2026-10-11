@@ -50,7 +50,7 @@ function parseArchive(readAt, size) {
   const seen = new Set();
   const candidates = [];
   const selected = [];
-  let offset = 0, reportTextCount = 0, unrelatedNameAnomalies = 0;
+  let offset = 0, reportTextCount = 0, unrelatedNameAnomalies = 0, otherHciNamedEntries = 0;
   for (let i = 0; i < count; i++) {
     if (offset + 46 > directory.length || directory.readUInt32LE(offset) !== 0x02014b50) throw Error('Invalid entry');
     const nameSize = directory.readUInt16LE(offset + 28);
@@ -69,6 +69,8 @@ function parseArchive(readAt, size) {
     // They are never opened or extracted; retain strict uniqueness for candidates.
     if (ambiguous && (match || reportText)) throw Error('Ambiguous archive name');
     if (ambiguous) unrelatedNameAnomalies++;
+    // Discovery is metadata only: never select/open an unknown vendor path.
+    if (!match && /(?:btsnoop|btsnooz|hci[_-](?:snoop|log))/i.test(name.split('/').at(-1))) otherHciNamedEntries++;
     seen.add(name);
     if (reportText) reportTextCount++;
     if (match || reportText) {
@@ -90,7 +92,7 @@ function parseArchive(readAt, size) {
     offset = next;
   }
   if (offset !== directory.length) throw Error('Unexpected directory remainder');
-  return {selected, read, directoryOffset, report: {checkpoint: 'R135', metadataOnly: true, entryCount: count, unrelatedNameAnomalies, bluetoothFileCandidates: candidates,
+  return {selected, read, directoryOffset, report: {checkpoint: 'R135', metadataOnly: true, entryCount: count, unrelatedNameAnomalies, otherHciNamedEntries, bluetoothFileCandidates: candidates,
     reportTextCount, inlineSummarySearched: false, archiveIntegrityVerified: false,
     hciContentReviewed: false, attemptAttributionVerified: false,
     rawOutputSaved: false, extractedFiles: 0, adbExecuted: false}};
@@ -148,9 +150,30 @@ export function summarizeInlineSnooz(base64) {
   return {format: 'BTSNOOZ_INLINE', version, records, packetTypes,
     payloadExported: false, attemptAttributionVerified: false};
 }
+export function newBluetoothLogCounts() {
+  return {recognizedRows: 0, clientInitFailures: 0, openEventFailures: 0,
+    sdpFailureMarkers: 0, sendChannelFailures: 0, snoopOpenFailures: 0};
+}
+export function countBluetoothLogLine(line, counts) {
+  // Exact Android brief/threadtime log headers only; discard message after fixed counts.
+  // These are global historical markers, never attributed to our app or this attempt.
+  const brief = line.match(/^[VDIWEF]\/(bluetooth|bt_btif_sock|bt_btif_sock_rfcomm)\s*\(\s*\d{1,10}\):\s*(.*)$/);
+  const timed = line.match(/^\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}\s+\d{1,10}\s+\d{1,10}\s+[VDIWEF]\s+(bluetooth|bt_btif_sock|bt_btif_sock_rfcomm)\s*:\s*(.*)$/);
+  const match = brief ?? timed;
+  if (!match) return;
+  counts.recognizedRows++;
+  const message = match[2];
+  if (/INIT unsuccessful, status .*?\. Cleaning up slot_id\s+\d+/.test(message)) counts.clientInitFailures++;
+  if (/CONNECT unsuccessful, status .*?\. Cleaning up slot_id\s+\d+/.test(message)) counts.openEventFailures++;
+  if (/SDP service discovery completed for slot_id:\s*\d+\s+with the result status:/.test(message)) counts.sdpFailureMarkers++;
+  if (/send_app_scn\(\) failed, closing slot_id/.test(message)) counts.sendChannelFailures++;
+  if (/Unable to open snoop log at/.test(message)) counts.snoopOpenFailures++;
+}
 export async function reviewHciArchive(readAt, size) {
   const archive = parseArchive(readAt, size);
   const fileResults = [], inlineResults = [];
+  const configuredModeCounts = {disabled: 0, full: 0, filtered: 0, kernel: 0};
+  const bluetoothLogCounts = newBluetoothLogCounts();
   for (const entry of archive.selected) {
     const limit = entry.kind === 'REPORT_TEXT' ? 512 * 1024 ** 2 : 128 * 1024 ** 2;
     if (entry.uncompressedBytes > limit) throw Error('Bluetooth review limit exceeded');
@@ -173,6 +196,10 @@ export async function reviewHciArchive(readAt, size) {
     const data = [];
     const inline = [];
     function scanLine(line) {
+      countBluetoothLogLine(line, bluetoothLogCounts);
+      // Exact Bluetooth property only. No broad search, free text or other properties retained.
+      const mode = line.match(/^\s*\[persist\.bluetooth\.btsnooplogmode\]: \[(disabled|full|filtered|kernel)\]\s*$/);
+      if (mode) configuredModeCounts[mode[1]]++;
       if (line.includes('--- BEGIN:BTSNOOP_LOG_SUMMARY')) {
         if (inside || ++found > 1) throw Error('Ambiguous Bluetooth summary');
         inside = true;
@@ -211,7 +238,8 @@ export async function reviewHciArchive(readAt, size) {
     } finally { stream.destroy(); input.destroy(); }
   }
   return {checkpoint: 'R136', fileResults, inlineSummarySearched: archive.report.reportTextCount === 1,
-    inlineResults, selectedEntryCrcVerified: true, generalReportTextExported: false,
+    inlineResults, configuredModeCounts, bluetoothLogCounts, effectiveLoggingVerified: false,
+    selectedEntryCrcVerified: true, generalReportTextExported: false,
     rawOutputSaved: false, extractedFiles: 0, adbExecuted: false, attemptAttributionVerified: false};
 }
 async function inspectLocalReport(mode, directory = privateDirectory, checkpoint = 'R134') {

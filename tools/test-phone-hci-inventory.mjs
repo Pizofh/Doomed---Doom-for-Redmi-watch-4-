@@ -36,6 +36,8 @@ const result = inspect(fixture);
 assert.equal(result.entryCount, 5); assert.equal(result.reportTextCount, 1);
 assert.deepEqual(result.bluetoothFileCandidates.map(entry => entry.kind), ['SNOOZ_FILE', 'SNOOP_FILE']);
 assert.equal(result.extractedFiles, 0); assert.equal(result.archiveIntegrityVerified, false);
+assert.equal(result.otherHciNamedEntries, 1);
+assert.equal(inspect(archive(['vendor/btsnoop_hci.log.filtered', 'vendor/hci_log_PRIVATE.bin', 'private-app.txt'])).otherHciNamedEntries, 2);
 for (const canary of ['PRIVATE-PHONE-NAME', 'KEY-NOT-FOR-EXPORT', name, 'other/']) assert.ok(!JSON.stringify(result).includes(canary));
 assert.equal(inspect(archive(['unrelated.txt'])).bluetoothFileCandidates.length, 0);
 assert.equal(inspect(archive([{name, size: 200 * 1024 ** 2}])).bluetoothFileCandidates[0].payloadWithinReviewLimit, false);

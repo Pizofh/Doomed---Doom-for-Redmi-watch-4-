@@ -1,7 +1,8 @@
 // Complete synthetic ZIPs/packets only. No phone data, ADB or radio.
 import assert from 'node:assert/strict';
 import {deflateRawSync, deflateSync} from 'node:zlib';
-import {crc32, summarizeSnoop, summarizeInlineSnooz, reviewHciArchive} from './inspect-phone-hci-report.mjs';
+import {crc32, summarizeSnoop, summarizeInlineSnooz, reviewHciArchive,
+  newBluetoothLogCounts, countBluetoothLogLine} from './inspect-phone-hci-report.mjs';
 
 const magic = Buffer.from('6274736e6f6f700000000001000003ea', 'hex');
 const snoozName = 'FS/data/misc/bluetooth/logs/btsnooz_hci.log';
@@ -71,4 +72,26 @@ await assert.rejects(review(zip([{name: 'bugreport-fixture.txt', bytes: Buffer.f
 await assert.rejects(review(zip([{name: 'bugreport-fixture.txt', bytes: Buffer.concat([text, text])}])));
 const absent = await review(zip([{name: 'bugreport-fixture.txt', bytes: Buffer.from('PRIVATE NON BLUETOOTH')} ]));
 assert.equal(absent.inlineResults.length, 0); assert.equal(absent.inlineSummarySearched, true);
+const propertyText = Buffer.from('x'.repeat(65510) + '\n[persist.bluetooth.btsnooplogmode]: [full]\n' +
+  '[persist.bluetooth.btsnooplogmode]: [disabled]\n' +
+  '[persist.bluetooth.secret]: [PRIVATE-KEY]\n' +
+  'notification says [persist.bluetooth.btsnooplogmode]: [kernel]\n' +
+  '[persist.bluetooth.btsnooplogmode]: [PRIVATE-VALUE]\n');
+for (const method of [0, 8]) {
+  const properties = await review(zip([{name: 'bugreport-fixture.txt', bytes: propertyText, method}]));
+  assert.deepEqual(properties.configuredModeCounts, {disabled: 1, full: 1, filtered: 0, kernel: 0});
+  assert.equal(properties.effectiveLoggingVerified, false);
+  assert.ok(!JSON.stringify(properties).includes('PRIVATE'));
+}
+const logCounts = newBluetoothLogCounts();
+for (const line of [
+  'E/bluetooth(123): CONNECT unsuccessful, status PRIVATE. Cleaning up slot_id 7',
+  '10-11 10:00:00.001  123  456 E bt_btif_sock_rfcomm: send_app_scn() failed, closing slot_id 8 PRIVATE',
+  'E/bluetooth(123): Unable to open snoop log at PRIVATE-PATH, error: PRIVATE',
+  'E/private-app(123): CONNECT unsuccessful, status PRIVATE. Cleaning up slot_id 9',
+  'notification E/bluetooth(123): Unable to open snoop log at PRIVATE',
+]) countBluetoothLogLine(line, logCounts);
+assert.deepEqual(logCounts, {recognizedRows: 3, clientInitFailures: 0, openEventFailures: 1,
+  sdpFailureMarkers: 0, sendChannelFailures: 1, snoopOpenFailures: 1});
+assert.ok(!JSON.stringify(logCounts).includes('PRIVATE'));
 console.log('PASS: selected ZIP stream/CRC, bounded Bluetooth summaries, empty/truncated records, marker boundaries and privacy (synthetic only)');
