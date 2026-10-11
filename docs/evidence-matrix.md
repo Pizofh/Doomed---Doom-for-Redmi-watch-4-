@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**R153, 2026-10-11:** [Windows micrófono conectado / retorno pendiente](pc-cache-and-migration-r150.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Windows conecta el reloj y muestra micrófono | Unidad RW4 del usuario / Windows | Captura «Micrófono conectado», reporte de conexión desde QR | CONFIRMADO POR REPORTE Y CAPTURA DEL USUARIO | Alta para UI | Usuario; no agente | No prueba SPP, autenticación Xiaomi o nativo; HFP solo inferencia |
+| Puede volver normalmente tras conexión PC | Misma unidad | Usuario no puede salir del QR; reconexión Mi Fitness pendiente | SIN EVIDENCIA DE RETORNO EN ESTE ESTADO | Desconocida | Pendiente | La cancelación anterior sin pairing no basta; no asumir brick/bond borrado |
+
 **R151, 2026-10-11:** [pantalla QR reportada](pc-cache-and-migration-r150.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

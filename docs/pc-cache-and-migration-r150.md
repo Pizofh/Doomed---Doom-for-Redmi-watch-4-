@@ -1,5 +1,37 @@
 # R150 — caché local Windows y límite de migración
 
+## R153: emparejamiento Windows reportado; QR permanece
+
+2026-10-11. El usuario informa que conectó el reloj al PC después de hacerlo
+visible desde QR. La captura de Windows muestra el nombre RW4 y «Micrófono
+conectado». No se copia nombre completo/dirección o captura al repositorio.
+El usuario también informa que ahora no puede salir del QR ni usar el reloj
+normalmente sin vincularlo a la app. Esto es un estado NUEVO posterior al
+emparejamiento: el retorno confirmado en R152 no demuestra retorno desde aquí.
+No insistir en que ya está restaurado ni atribuirlo a un brick de firmware.
+
+Alcance observado: visibilidad y conexión Bluetooth reconocida como micrófono.
+HFP es una inferencia compatible con la etiqueta, no inspección del perfil.
+No prueba SPP abierto, autenticación Xiaomi, aplicaciones o ejecución nativa.
+El ensayo propuesto era solo discovery; el usuario reportó además conexión.
+El agente no inició pairing, sockets ni autenticación, y el gate R148 sigue cerrado.
+No dar por demostrado qué claves/bonds se reemplazaron ni qué queda persistente.
+
+Prioridad: recuperar Mi Fitness, sin más ensayos PC. Se pidió al usuario encender
+BT del teléfono, abrir Mi Fitness con la cuenta habitual y usar Conectar en el
+registro existente si aparece. Comunicar si vuelve la pantalla normal o el mensaje
+exacto sin identificadores. No borrar registro en Mi Fitness, añadir otro reloj,
+resetear, escanear QR o probar SPP mientras ese resultado esté pendiente.
+Windows aún podría mantener audio conectado; no apagar indiscriminadamente todo
+el BT del PC: la captura también contiene un teclado conectado. No ordenar
+«Quitar dispositivo» como si fuera desconexión temporal.
+
+Retorno desde esta conexión PC PENDIENTE. La recomendación de reconectar usa el
+flujo stock existente, sin código, firmware o herramientas de flash. La
+[FAQ Xiaomi](https://www.mi.com/uk/support/faq/details/KA-91528/) describe vinculación
+Mi Fitness y reconexión; no garantiza retorno exacto desde este pairing Windows.
+Si falla, obtener estado antes de proponer rebind/unpair/reset y actualizar el plan.
+
 ## R152: retorno confirmado y descubrimiento manual acotado
 
 2026-10-11. El usuario responde afirmativamente a salir del QR y reconectar

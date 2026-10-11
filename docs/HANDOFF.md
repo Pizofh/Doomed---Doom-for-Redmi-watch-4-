@@ -1,5 +1,13 @@
 # Retomar el proyecto
 
+**R153, 2026-10-11:** usuario conectó RW4 al PC; Windows «Micrófono conectado».
+Ahora QR no permite salir/usar normalmente: NUEVO estado tras conexión PC,
+retorno anterior R152 no aplica. [Resultado y restauración pendiente](pc-cache-and-migration-r150.md).
+Se pidió BT teléfono encendido → Mi Fitness cuenta habitual → Conectar si aparece
+en registro existente. Esperar resultado; no más pruebas PC/socket/código ni
+eliminar registro/reset/añadir reloj. No cortar BT de todo PC: teclado conectado.
+Nombre completo/imagen no publicados. Gate R148 sigue cerrado; SPP no verificado.
+
 **R152, 2026-10-11:** usuario confirma salida del QR y retorno normal a Mi Fitness;
 corregir exceso de cautela, no repetir pregunta de recuperación. [Siguiente prueba
 manual](pc-cache-and-migration-r150.md): descubrimiento Windows con QR abierto y
