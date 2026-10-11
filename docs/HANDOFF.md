@@ -1,5 +1,18 @@
 # Retomar el proyecto
 
+**R142, 2026-10-11:** usuario [consulta R141 completada](phone-bluetooth-config-plan-r141.md):
+user, modeUNSET/pathUNSET, config3NOT_FOUND. No ruta/cause/effective logging
+demostrados; no interpretarUNSET como Bluetoothausente/error. No otroPROBE/HCI/
+APKdebug. [Exportación Bluetooth instalada preparada](phone-bluetooth-apk-plan-r142.md):
+node tools/export-mi-fitness-apk.mjs export-bluetooth SOLOusuario; paquete fijo
+com.android.bluetooth, getstate/pmpath/pullAPK normalUSB, sinuser-data/radio/
+watch/instalar/ejecutar. Destino privado tools/local/phone-bluetooth. APKbase
+puede no incluir JNI; no garantizar solución. Extensión exporterAPEXestricto
+soloBT/testsfake pasan; plan noADB. Copia/JSON pendientes. Tras resultado:
+pin hash/tamaño, firma/manifest SDK antes de análisis; no inferiractualpath por
+strings ni ISA RW4 por teléfono. RetornoR140 normal ya confirmado, sin cambios
+de estado solicitados enR141. Gates nativo/fw cerrados, noagenteADB real.
+
 **R141, 2026-10-11:** [investigación y consulta de configuración preparada](phone-bluetooth-config-plan-r141.md).
 ZIP: metadata config/vendor/nestedBT counts0; no abrirunknown. AOSP16 socket
 live deshabilitado en user; ParameterProvider defaultpath+override, fuente

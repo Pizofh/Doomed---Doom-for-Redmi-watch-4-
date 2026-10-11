@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {fileURLToPath} from 'node:url';
+import {spawnSync} from 'node:child_process';
 import {copyInstalledMiFitness} from './export-mi-fitness-apk.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const output = path.join(root, 'build/mi-fitness-export-test-' + Date.now());
@@ -57,4 +58,32 @@ assert.equal(coreCalls[2][1], 'pull');
 assert.equal(fs.existsSync(path.join(output, 'core/MiConnectService-base.apk')), true);
 assert(!JSON.stringify(coreReport).includes('private-core-path'));
 assert.throws(() => copyInstalledMiFitness(fake, path.join(output, 'unknown'), 'arbitrary.package'));
+for (const remote of ['/apex/com.android.btservices/app/Bluetooth/Bluetooth.apk',
+  '/apex/com.android.bt@123456/app/Bluetooth/Bluetooth.apk',
+  '/system/app/Bluetooth/Bluetooth.apk']) {
+  const btCalls = [];
+  const result = copyInstalledMiFitness(args => {
+    btCalls.push(args);
+    if (args[1] === 'get-state') return {status: 0, stdout: 'device'};
+    if (args[1] === 'shell') { assert.deepEqual(args, ['-d', 'shell', 'pm', 'path', 'com.android.bluetooth']); return {status: 0, stdout: 'package:' + remote}; }
+    if (args[1] === 'pull') { assert.equal(args[2], remote); fs.writeFileSync(args[3], fakeZip); return {status: 0, stdout: 'PRIVATE'}; }
+    throw Error('Unexpected command');
+  }, path.join(output, 'bluetooth-' + calls.length + '-' + remote.length), 'bluetooth');
+  assert.equal(btCalls.length, 3);
+  assert.equal(result.packageRequested, 'com.android.bluetooth');
+  assert.equal(result.apkExecuted, false);
+  assert.ok(!JSON.stringify(result).includes(remote));
+}
+for (const remote of ['/apex/com.android.bt/app/Bluetooth/../Bluetooth.apk',
+  '/apex/private.module/app/Bluetooth/Bluetooth.apk', '/data/user/0/com.android.bluetooth/secret.apk']) {
+  let pulled = false;
+  assert.throws(() => copyInstalledMiFitness(args => {
+    if (args[1] === 'get-state') return {status: 0, stdout: 'device'};
+    if (args[1] === 'pull') pulled = true;
+    return {status: 0, stdout: 'package:' + remote};
+  }, path.join(output, 'rejected-bluetooth'), 'bluetooth'));
+  assert.equal(pulled, false);
+}
+const planned = spawnSync(process.execPath, ['tools/export-mi-fitness-apk.mjs', 'plan-bluetooth'], {cwd: root, encoding: 'utf8'});
+assert.equal(planned.status, 0); assert.equal(JSON.parse(planned.stdout).executionPerformed, false);
 console.log('PASS: fake USB-only APK export, exact read commands, no raw paths/data in report, malformed-path rejection, no overwrite, no fallback; no real ADB/phone executed.');

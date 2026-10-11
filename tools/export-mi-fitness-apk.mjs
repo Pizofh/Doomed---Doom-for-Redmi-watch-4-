@@ -1,4 +1,4 @@
-// Copy one of two fixed installed phone APKs only on explicit user-run export.
+// Copy one of three fixed installed phone APKs only on explicit user-run export.
 // No install, app launch, user-data read, Bluetooth operation or watch command.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -21,13 +21,15 @@ function contained(filename) {
   }
   return absolute;
 }
-function installedBase(text) {
+function installedBase(text, allowBluetoothApex = false) {
   if (typeof text !== 'string' || text.length > 32768) throw Error('Unexpected package response');
   const rows = text.trim().split(/\r?\n/);
   if (rows.length < 1 || rows.length > 64) throw Error('Unexpected package count');
   const paths = rows.map(row => {
     // Fixed package query, strict path grammar, direct argv to `pull` (no shell).
-    if (row.length > 1024 || !/^package:\/(?:data\/app|system\/app|system\/priv-app|product\/app|product\/priv-app|system_ext\/app|system_ext\/priv-app)\/[A-Za-z0-9_./+=~-]+\.apk$/.test(row)
+    const appPath = /^package:\/(?:data\/app|system\/app|system\/priv-app|product\/app|product\/priv-app|system_ext\/app|system_ext\/priv-app)\/[A-Za-z0-9_./+=~-]+\.apk$/.test(row);
+    const bluetoothApexPath = allowBluetoothApex && /^package:\/apex\/com\.android\.bt(?:services)?(?:@\d+)?\/app\/Bluetooth(?:Google)?\/[A-Za-z0-9_.-]+\.apk$/.test(row);
+    if (row.length > 1024 || !(appPath || bluetoothApexPath)
         || row.includes('/../') || row.includes('/./')) throw Error('Unexpected package path');
     return row.slice(8);
   });
@@ -43,7 +45,8 @@ function result(run, args) {
 }
 const targets = Object.freeze({
   fitness: {package: 'com.xiaomi.wearable', file: 'MiFitness-base.apk', directory: 'mi-fitness'},
-  core: {package: 'com.xiaomi.mi_connect_service', file: 'MiConnectService-base.apk', directory: 'mi-connect-service'}
+  core: {package: 'com.xiaomi.mi_connect_service', file: 'MiConnectService-base.apk', directory: 'mi-connect-service'},
+  bluetooth: {package: 'com.android.bluetooth', file: 'Bluetooth-base.apk', directory: 'phone-bluetooth'}
 });
 export function copyInstalledMiFitness(run, destination, target = 'fitness') {
   if (!Object.hasOwn(targets, target)) throw Error('Unknown fixed package');
@@ -53,7 +56,7 @@ export function copyInstalledMiFitness(run, destination, target = 'fitness') {
   const partial = contained(apk + '.partial'), review = contained(path.join(destination, 'export-review.json'));
   if ([apk, partial, review].some(p => fs.existsSync(p))) throw Error('Existing export refused');
   if (result(run, ['-d', 'get-state']).trim() !== 'device') throw Error('One authorized USB phone required');
-  const selected = installedBase(result(run, ['-d', 'shell', 'pm', 'path', selectedTarget.package]));
+  const selected = installedBase(result(run, ['-d', 'shell', 'pm', 'path', selectedTarget.package]), target === 'bluetooth');
   fs.mkdirSync(destination, {recursive: true});
   fs.closeSync(fs.openSync(partial, 'wx')); // Reserve own local file, never overwrite an earlier export.
   result(run, ['-d', 'pull', selected.remote, partial]);
@@ -82,8 +85,8 @@ function trustedRun(args) {
 }
 if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {
   const action = process.argv[2] ?? 'plan';
-  if (process.argv.length > 3 || !['plan', 'export', 'plan-core', 'export-core'].includes(action)) throw Error('Only fixed plan/export modes supported');
-  const target = action.endsWith('-core') ? 'core' : 'fitness', selectedTarget = targets[target];
+  if (process.argv.length > 3 || !['plan', 'export', 'plan-core', 'export-core', 'plan-bluetooth', 'export-bluetooth'].includes(action)) throw Error('Only fixed plan/export modes supported');
+  const target = action.endsWith('-core') ? 'core' : action.endsWith('-bluetooth') ? 'bluetooth' : 'fitness', selectedTarget = targets[target];
   if (action.startsWith('plan')) {
     console.log(JSON.stringify({action: 'plan', executionPerformed: false,
       commands: ['adb -d get-state', 'adb -d shell pm path ' + selectedTarget.package, 'adb -d pull <base APK path returned by pm> <local partial file>'],

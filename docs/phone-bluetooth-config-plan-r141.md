@@ -1,5 +1,24 @@
 # R141 — identificar configuración del registro sin repetir la conexión
 
+## Resultado R142, 2026-10-11
+
+El usuario completó la consulta: buildType=`user`, configuredSnoopMode=`UNSET`,
+legacyPathProperty=`UNSET`; los tres candidatos config devolvieron `NOT_FOUND`.
+Consulta completada, sin fallo del script ni lectura de configs disponible.
+UNSET significa respuesta vacía de getprop, no ausencia de Bluetooth o del
+mecanismo de logging. No confirma logging efectivo deshabilitado; el estado
+original restaurado fue confirmado por el usuario en R140. No volver a activar
+HCI ni repetir PROBE. No nuevo retorno funcional informado específicamente
+después de estas lecturas, y no se solicitaron cambios de estado.
+
+La ruta de exportación y la causa de EOF siguen sin identificar. La build user
+coincide con la condición que bloquea el socket live en el código AOSP revisado;
+no demuestra que el binario HyperOS sea idéntico. No inferir necesidad de root.
+[Siguiente revisión del componente instalado](phone-bluetooth-apk-plan-r142.md)
+preparada, sin APK nueva, captura, vinculación o ejecución de software copiado.
+
+Las secciones siguientes son el plan histórico anterior al resultado.
+
 2026-10-11. Investigación y herramientas PC terminadas; consulta del teléfono
 todavía no realizada. Se conserva el retorno normal confirmado en R140.
 

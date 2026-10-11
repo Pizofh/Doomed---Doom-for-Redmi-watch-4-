@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R142, 2026-10-11:** [consulta completada](phone-bluetooth-config-plan-r141.md) y [revisión instalada propuesta](phone-bluetooth-apk-plan-r142.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Teléfono es build user | HyperOS actual | JSON manual R141 buildType=user | CONFIRMADO POR CONSULTA DEL USUARIO | Alta | Manual | No identidad/equivalencia del módulo Bluetooth demostrada |
+| Propiedades consultadas revelan ruta del HCI | Teléfono actual después de restauración | modeUNSET y pathUNSET | SIN EVIDENCIA | Desconocida | Manual | Valor vacío no prueba ausencia ni estado efectivo del logging |
+| bt_stack.conf existe en las tres rutas candidatas | Teléfono actual/lecturas | Tres NOT_FOUND | REFUTADO PARA ESTAS RUTAS | Alta sobre respuesta | Manual | No búsqueda universal ni permiso denegado informado |
+| Exportar componente Bluetooth instala/ejecuta otra app | Exporter propio | Código y fake-ADB: getstate/pm path/pull | REFUTADO EN CASOS PROBADOS | Alta | Sí, sintético | Copia real pendiente; sin BT/watch ni lectura de datos de usuario |
+
 **R141, 2026-10-11:** [configuración y alternativa de exportación](phone-bluetooth-config-plan-r141.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
