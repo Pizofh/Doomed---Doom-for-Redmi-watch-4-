@@ -1,5 +1,17 @@
 # Retomar el proyecto
 
+**R140, 2026-10-11:** [captura nueva revisada](phone-hci-capture-result-r140.md).
+Usuario PROBE r131 G08/R02/L01, apertura529ms, sinD05/auth/GET; collect-capture
+exitoso. Confirma todo restaurado y funcionando: no pedir otra confirmación.
+PC inventory/review:13184 entradas, dosSNOOZ16B/cero registros/CRC seleccionados
+OK, sininline ni otros nombres HCI reconocibles. Propiedad exacta full1:
+configuración registrada, no logging efectivo demostrado. Tags/formatos nativos
+permitidos sin matches; causa inconclusa. Scanner ampliado con counts/enum sin
+raw y tests PC pasan. No agenteADB/radio. No otraAPK/PROBE/copia/clave por
+conjetura. Próximo: ruta/exportación efectiva HCI HyperOS específica; búsqueda
+primaria no la identificó (MiBox solootrodispositivo). Captura privada en
+tools/local/phone-hci-r136; no divulgar. Gates nativo/instalación/fw cerrados.
+
 **R139,2026-10-11:** HCI localizado por usuario: «Registro snoop de Bluetooth
 HCI», originalInhabilitado, opcionesFiltradohabilitado/Habilitado; registro
 pilasInformación y filtroHCI aparte. ElegirHabilitado, no tocarpilas/filtros;

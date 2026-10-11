@@ -1,5 +1,11 @@
 # R136/R137 — una captura HCI nueva autorizada
 
+**Estado actual R140:** secuencia completada; el usuario confirma ajustes
+restaurados, reloj normal y Mi Fitness funcionando. [Resultado](phone-hci-capture-result-r140.md):
+modo full registrado, dos archivos vacíos, ningún paquete disponible atribuible.
+No repetir esta secuencia ni generar otra APK. Los estados pendientes siguientes
+son históricos; no solicitar de nuevo la autorización ni la confirmación de retorno.
+
 **R139,2026-10-11:** usuario encuentra «Registro snoop de Bluetooth HCI»,
 estado original «Inhabilitado», opciones de filtrado habilitado y habilitado.
 También describe registro de pilas Bluetooth en Información y filtro HCI separado.

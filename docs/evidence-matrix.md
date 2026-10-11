@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R140, 2026-10-11:** [captura autorizada revisada y retorno confirmado](phone-hci-capture-result-r140.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Nueva copia privada contiene paquetes atribuibles al intento | ZIP capture del teléfono actual | Dos BTSNOOP válidos de16B, records0, sininline | REFUTADO PARA CONTENIDO REVISADO | Alta | Sí, PC/CRC seleccionados | No descarta datos fuera de entradas permitidas o con nombres vendor desconocidos |
+| HCI estaba configurado full en el informe | Teléfono HyperOS3.0.302.0 | Propiedad exacta Bluetooth con full, una coincidencia | CONFIRMADO EN COPIA LOCAL | Alta | Sí, scanner probado | No demuestra modo aplicado ni paquetes guardados durante PROBE |
+| Este diagnóstico identifica quién cerró la conexión | Intento r131 nuevo | G08/R02/L01, apertura529ms, sin paquetes/nativo atribuible | SIN EVIDENCIA | Desconocida | Manual/PC | No modificar transporte por conjetura |
+| Ajustes restaurados y reloj/Mi Fitness normales tras captura | Unidad/teléfono del usuario | «Sí, todo restaurado y funciona» | CONFIRMADO POR USUARIO | Alta sobre reporte | Manual | No implica recovery integral |
+
 **R137,2026-10-11:** [captura nueva autorizada](phone-hci-capture-plan.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
