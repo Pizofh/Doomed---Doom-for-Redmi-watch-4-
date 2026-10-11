@@ -1,5 +1,15 @@
 # Retomar el proyecto
 
+**R156, 2026-10-11:** usuario autoriza continuar el único [probe SPP Windows del
+plan](windows-spp-probe-plan-r154.md) tras aclarar unlink Mi Fitness. NO preguntar
+revisión otra vez. Se creó tools/local/pc-rfcomm/target.json con placeholder
+inválido/sin MAC, EXE y fuentes hash coinciden; sin recompilar o repetir tests.
+Instrucciones manuales: completar address local desde Acerca, desvincular Mi
+Fitness según flujo ya observado, BT teléfono OFF, pairing Windows desde QR,
+node tools/pc-rfcomm.mjs probe UNA vez, quitar solo vínculo PC, volver a Mi Fitness.
+Pedir solo JSON fijo/no MAC. Agente no ejecutó radio/probe; resultado y retorno
+posteriores pendientes. No API Xiaomi/clave/upload/código/retry autorizado.
+
 **R155, 2026-10-11:** aclaración importante: usuario también DESVINCULÓ EN MI
 FITNESS antes del pairing PC, no solo Bluetooth. Aviso reportado «no se pierden
 datos»; retorno completo ya comprobado. [Plan R154 corregido](windows-spp-probe-plan-r154.md).

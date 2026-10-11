@@ -1,5 +1,14 @@
 # R154 — un intento SPP Windows, pendiente de revisión
 
+**Actual R156, 2026-10-11:** usuario responde «ok. sigamos entonces» después del
+plan y la corrección de desvinculación Mi Fitness. Autoriza esa única prueba
+manual SPP; no pedir revisión nuevamente para la misma secuencia. No ejecución
+automática por el agente. Se creó plantilla privada target.json (placeholder
+inválido, sin MAC) y se verificaron hashes de EXE/fuentes: coinciden. Usuario
+debe completar MAC localmente antes de desvincular y ejecutar probe UNA vez.
+Resultado físico y retorno posteriores PENDIENTES; no registrar éxito antes del JSON.
+Permiso no cubre autenticación Xiaomi, uploads, cambios de firmware o retries.
+
 **Corrección R155, 2026-10-11:** el usuario aclara que para su ensayo también
 desvinculó desde Mi Fitness, no solo desde Bluetooth del teléfono. Informa un
 aviso de que no se pierden datos. El procedimiento descrito inicialmente abajo
@@ -80,7 +89,7 @@ El placeholder es inválido a propósito. No pegar MAC/QR/claves en el chat.
 revisión del usuario en esta conversación. Ejecución directa de worker también
 es física; no usarla para saltarse el supervisor. `test` no llama preflight real.
 
-## Secuencia manual propuesta: NO ejecutar hasta revisión
+## Secuencia manual revisada: autorizada en R156, un intento por el usuario
 
 1. Partir de Mi Fitness funcional, misma cuenta, datos habituales sincronizados.
    Verificar modelo/FW/MAC en Acerca; no modificar versión ni actualizar firmware.

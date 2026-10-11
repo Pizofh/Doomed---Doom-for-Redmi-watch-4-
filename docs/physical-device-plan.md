@@ -1,6 +1,13 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
-**Actual R154, 2026-10-11:** retorno completo confirmado por usuario tras quitar
+**Actual R156, 2026-10-11:** usuario autoriza una ejecución manual del [probe SPP
+Windows](windows-spp-probe-plan-r154.md), con desvinculación Mi Fitness aclarada
+R155 y retorno observado. NO pedir nuevamente aprobación de esa secuencia.
+Target privado plantilla listo/sin MAC; hashes build/fuentes coinciden. Agente
+no ejecuta radio o hardware. Esperar JSON y retorno del usuario; sin retries,
+autenticación Xiaomi, uploads/firmware/nativo RW4. Gates de instalación cerrados.
+
+**Historial R154, 2026-10-11:** retorno completo confirmado por usuario tras quitar
 vínculo PC y volver a Mi Fitness. [Plan de un intento SPP Windows](windows-spp-probe-plan-r154.md)
 con herramienta y pruebas offline listo para revisión; NO autorizado/ejecutado.
 Incluye pairing temporal con cambios de claves, retorno observado, riesgos,
