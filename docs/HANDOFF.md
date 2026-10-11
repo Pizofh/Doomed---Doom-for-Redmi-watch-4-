@@ -1,5 +1,17 @@
 # Retomar el proyecto
 
+**R141, 2026-10-11:** [investigación y consulta de configuración preparada](phone-bluetooth-config-plan-r141.md).
+ZIP: metadata config/vendor/nestedBT counts0; no abrirunknown. AOSP16 socket
+live deshabilitado en user; ParameterProvider defaultpath+override, fuente
+oficial descargada autorizada/hash documentado, no ejecución. HyperOS ruta
+efectiva aún desconocida. Nuevo phone-bluetooth-config.mjs collect SOLOusuario:
+7lecturasUSB fijas (getstate,3getprop,3cat de bt_stack.conf), sinradio/watch/
+logging/permisos/stop/reporte nuevo; MiFitnormal/HCIoff. Reporta enums/categorías,
+denied/missing sinfallback/raw, noleerbt_config.conf/keys. Testsfake pasan,
+plan/default noADB. Resultado real pendiente; entregar uncomando/JSONsolo,
+sinAPK nueva/PROBE/captura/reinicio. RetornoR140 confirmado, no repetir pregunta.
+Gate firmware/nativo cerrado; no afirmar ruta activa por config declarada.
+
 **R140, 2026-10-11:** [captura nueva revisada](phone-hci-capture-result-r140.md).
 Usuario PROBE r131 G08/R02/L01, apertura529ms, sinD05/auth/GET; collect-capture
 exitoso. Confirma todo restaurado y funcionando: no pedir otra confirmación.

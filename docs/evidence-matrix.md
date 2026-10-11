@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R141, 2026-10-11:** [configuración y alternativa de exportación](phone-bluetooth-config-plan-r141.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Socket HCI live disponible en build user AOSP16 revisada | Código AOSP Android16 | SnoopLogger::Start condiciona creación a ro.build.type != user | REFUTADO PARA FUENTE REVISADA | Alta | Lectura PC | No equivalencia HyperOS demostrada; no forwarding solicitado |
+| Ruta AOSP por defecto es la revisada en R140 | AOSP ParameterProvider Android16 | SnoopLogFilePath default y override interno | CONFIRMADO EN FUENTE | Alta | Lectura PC | Ruta efectiva HyperOS desconocida |
+| ZIP contiene config/ruta vendor que resuelve exportación | Entradas candidatas conocidas | Metadata: stackConfig0/vendorBluetooth0/nestedBluetooth0 | SIN EVIDENCIA | Desconocida | Sí, PC | No búsqueda universal; ninguna entrada desconocida abierta |
+| Consulta USB nueva modifica logging o conecta el reloj | Herramienta propia R141 | Comandos fijos/testfake: getstate/getprop/cat config | REFUTADO EN CÓDIGO/TESTS | Alta para casos | Sí, sintético | Consulta real aún pendiente; no abrir logs ni pairing config |
+
 **R140, 2026-10-11:** [captura autorizada revisada y retorno confirmado](phone-hci-capture-result-r140.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

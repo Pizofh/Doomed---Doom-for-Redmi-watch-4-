@@ -50,6 +50,7 @@ function parseArchive(readAt, size) {
   const seen = new Set();
   const candidates = [];
   const selected = [];
+  const bluetoothMetadata = {stackConfigFiles: 0, vendorBluetoothFiles: 0, nestedBluetoothArchives: 0};
   let offset = 0, reportTextCount = 0, unrelatedNameAnomalies = 0, otherHciNamedEntries = 0;
   for (let i = 0; i < count; i++) {
     if (offset + 46 > directory.length || directory.readUInt32LE(offset) !== 0x02014b50) throw Error('Invalid entry');
@@ -71,6 +72,11 @@ function parseArchive(readAt, size) {
     if (ambiguous) unrelatedNameAnomalies++;
     // Discovery is metadata only: never select/open an unknown vendor path.
     if (!match && /(?:btsnoop|btsnooz|hci[_-](?:snoop|log))/i.test(name.split('/').at(-1))) otherHciNamedEntries++;
+    if (!ambiguous) {
+      if (/^FS\/(?:system|vendor|etc)(?:\/etc)?\/bluetooth\/bt_stack\.conf$/.test(name)) bluetoothMetadata.stackConfigFiles++;
+      if (/^FS\/data\/vendor\/bluetooth\//.test(name)) bluetoothMetadata.vendorBluetoothFiles++;
+      if (/(?:^|\/)bluetooth(?:\/|[^/]*\.(?:zip|gz|tar)$)/i.test(name) && /\.(?:zip|gz|tar)$/i.test(name)) bluetoothMetadata.nestedBluetoothArchives++;
+    }
     seen.add(name);
     if (reportText) reportTextCount++;
     if (match || reportText) {
@@ -92,7 +98,7 @@ function parseArchive(readAt, size) {
     offset = next;
   }
   if (offset !== directory.length) throw Error('Unexpected directory remainder');
-  return {selected, read, directoryOffset, report: {checkpoint: 'R135', metadataOnly: true, entryCount: count, unrelatedNameAnomalies, otherHciNamedEntries, bluetoothFileCandidates: candidates,
+  return {selected, read, directoryOffset, report: {checkpoint: 'R135', metadataOnly: true, entryCount: count, unrelatedNameAnomalies, otherHciNamedEntries, bluetoothMetadata, bluetoothFileCandidates: candidates,
     reportTextCount, inlineSummarySearched: false, archiveIntegrityVerified: false,
     hciContentReviewed: false, attemptAttributionVerified: false,
     rawOutputSaved: false, extractedFiles: 0, adbExecuted: false}};
