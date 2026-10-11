@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**R155, 2026-10-11:** [aclaración del flujo de vinculación](windows-spp-probe-plan-r154.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Ensayo PC incluyó desvincular desde Mi Fitness | Flujo usado por usuario / RW4 | Aclaración explícita, además de Bluetooth | CONFIRMADO POR REPORTE DEL USUARIO | Alta para ensayo | Usuario | Corrige secuencia previa incompleta; cambia asociación de la app |
+| Flujo muestra aviso de no pérdida de datos | Mismo flujo stock | Usuario informa «dice que no se pierden datos» | CONFIRMADO COMO AVISO REPORTADO | Media | No captura agente | No prueba persistencia de una futura app/ELF/WAD propios |
+
 **R154, 2026-10-11:** [retorno observado y cliente SPP preparado](windows-spp-probe-plan-r154.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

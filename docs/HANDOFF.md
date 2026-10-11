@@ -1,5 +1,13 @@
 # Retomar el proyecto
 
+**R155, 2026-10-11:** aclaración importante: usuario también DESVINCULÓ EN MI
+FITNESS antes del pairing PC, no solo Bluetooth. Aviso reportado «no se pierden
+datos»; retorno completo ya comprobado. [Plan R154 corregido](windows-spp-probe-plan-r154.md).
+No tratarlo como desconexión temporal de radio; asociación app sí cambia.
+Aviso no demuestra supervivencia de futuros ELF/WAD. No repetir preguntas de
+retorno; único intento SPP sigue pendiente de revisión, no ejecutarlo por esta
+aclaración. No tocar firmware/reset/botón basura como equivalentes.
+
 **R154, 2026-10-11:** usuario confirma que quitó RW4 del PC y volvió a vincular
 Mi Fitness, restaurando todas las funciones. No repetir preguntas de retorno.
 Trabajar con un vínculo a la vez para este ensayo; no inferir límite universal.

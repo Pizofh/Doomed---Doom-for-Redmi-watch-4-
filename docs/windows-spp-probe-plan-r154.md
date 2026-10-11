@@ -1,5 +1,14 @@
 # R154 — un intento SPP Windows, pendiente de revisión
 
+**Corrección R155, 2026-10-11:** el usuario aclara que para su ensayo también
+desvinculó desde Mi Fitness, no solo desde Bluetooth del teléfono. Informa un
+aviso de que no se pierden datos. El procedimiento descrito inicialmente abajo
+era incompleto; la secuencia propuesta se corrige con este cambio de asociación
+en la app. Retorno y funciones normales ya confirmados; no pedirlos otra vez.
+El aviso es evidencia reportada del flujo stock, no prueba de que una futura
+app/ELF/WAD propios sobrevivan a cada desvinculación. No inspeccionamos el texto
+exacto ni los archivos internos. No ensayo SPP autorizado/ejecutado aún.
+
 2026-10-11. Usuario confirma que eliminó el vínculo PC y volvió a vincular en
 Mi Fitness; reloj recuperó todas sus funciones. Durante su ensayo no conservó
 ambos vínculos. Trabajar con uno a la vez: no elevar esta observación a un límite
@@ -77,8 +86,11 @@ es física; no usarla para saltarse el supervisor. `test` no llama preflight rea
    Verificar modelo/FW/MAC en Acerca; no modificar versión ni actualizar firmware.
 2. Preparar el target privado anterior con la MAC verificada. No requiere claves
    de Mi Fitness, instalación de APK, USB o ADB.
-3. Como en el ensayo del usuario, apagar temporalmente BT del teléfono, abrir
-   Conectar nuevo teléfono en el reloj y emparejar desde Windows. Verificar los
+3. Como en el ensayo aclarado por el usuario, desvincular desde Mi Fitness
+   mediante el flujo que ya utilizó y que muestra conservar datos; no confundir
+   con eliminar/resetear u otro botón. Si aparece aviso de borrado, detener.
+   Apagar temporalmente BT del teléfono y usar la pantalla QR del reloj para
+   emparejar desde Windows. Verificar los
    códigos coincidentes en reloj y PC; cancelar si identidad/código no coinciden.
    Este paso SÍ cambia claves/registro de vinculación; no esconderlo como read-only.
 4. Ejecutar UNA vez desde raíz del repo:
@@ -98,7 +110,7 @@ es física; no usarla para saltarse el supervisor. `test` no llama preflight rea
 |---|---|
 | Modelo/firmware | M2315W1/2.2.86 comunicados; pairing PC y retorno Mi Fitness observados por usuario. No evidencia SPP funcional todavía |
 | Componentes | Bluetooth stock del reloj/Windows, flujo de vinculación Mi Fitness; programa propio ejecuta en PC |
-| Persistencia | Pairing cambia registros/claves persistentes del host y posiblemente reloj. SPP seguro podría afectar estado interno de conexión; no solicita archivos/config Xiaomi |
+| Persistencia | Desvincular en Mi Fitness cambia asociación de la app; pairing cambia registros/claves persistentes del host y posiblemente reloj. Usuario reporta aviso stock sin pérdida de datos, no conservación probada de archivos propios. SPP no solicita archivos/config Xiaomi |
 | Particiones/bootloader/firmware | No herramientas de flash, escrituras de particiones o cambios solicitados. Escrituras internas de stock no auditadas |
 | Reversible por reboot | No garantía ni mecanismo elegido: quitar vínculo PC y volver a vincular Mi Fitness, ya observado en esta unidad |
 | Backup | Datos sincronizados habituales en Mi Fitness; no backup integral ni garantía de conservar cada archivo/watchface/config al volver a vincular |
