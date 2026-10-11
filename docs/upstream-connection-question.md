@@ -1,11 +1,19 @@
 # Draft: RW4 connection compatibility question
 
-Prepared locally in R144, 2026-10-11. **Not sent or published.** User authorization
-is required before posting/contacting maintainers. No APKs, private logs, keys,
+Prepared locally in R144, 2026-10-11. **Not sent or published.** The user explicitly
+authorized publication in R146; do not request that authorization again. No APKs, private logs, keys,
 addresses or device serials attached. This is a diagnostic fork, not a claim
 that the unmodified upstream application reproduces the issue.
 
 Updated after the bounded R145 offline review; still not posted.
+
+R146: official project README directs support to
+https://codeberg.org/Freeyourgadget/Gadgetbridge/issues/new/choose . Browser
+inventory returned no browsers; attempts to open IAB and Chrome returned
+"Browser is not available". No publication was performed. The user can post
+the [body-only message](upstream-connection-message.md) with the title below.
+Record the actual issue URL only after a successful publication. No alternative
+recipient, account creation or credential access attempted.
 
 ## Suggested title
 

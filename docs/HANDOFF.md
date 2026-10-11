@@ -1,5 +1,15 @@
 # Retomar el proyecto
 
+**R146, 2026-10-11:** usuario autoriza explícitamente publicar la consulta de
+compatibilidad en soporte Gadgetbridge. Autorización vigente; no pedirla de nuevo.
+README oficial dirige a Codeberg/Freeyourgadget/Gadgetbridge/issues/new/choose.
+Herramienta UI: inventario sin navegadores, IAB y Chrome no disponibles. No se
+publicó nada. [Mensaje solo cuerpo](upstream-connection-message.md) preparado
+para publicación manual o desde una sesión conectada. Esperar enlace real antes
+de registrar envío/resultado. No crear cuentas, usar credenciales ni publicar
+en otro destinatario como alternativa automática. Sin nuevas pruebas del reloj.
+
+
 **R145, 2026-10-11:** [última revisión offline completada](phone-bluetooth-apk-result-r145.md).
 APK Bluetooth exportado por usuario, tamaño/hash fijados, manifest y firma v3
 verificados. Binder de apertura delega a connectSocketNative; libbluetooth_jni
