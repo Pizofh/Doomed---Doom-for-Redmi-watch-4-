@@ -1,5 +1,15 @@
 # Retomar el proyecto
 
+**R150, 2026-10-11:** usuario buscó Windows con Bluetooth del teléfono apagado.
+[Caché Classic real](pc-cache-and-migration-r150.md) leída con aprobación, sin
+inquiry/pairing/sockets: 7 registros, 3 autenticados, cero candidatos RW4 por
+nombre; no identidad verificada/alias descartado. Script propio y layouts x64
+validados; sandbox ExecutionPolicy se resolvió por escalación, no Bypass.
+Usuario confirma opción de menú preguntada; no pulsada/nombre exacto no transcrito.
+Plan de inspección de «Conectar nuevo teléfono» preparado, PENDIENTE revisión,
+puede cambiar estado de vínculo incluso antes de confirmar. No asumir rollback
+por reboot ni mandar al usuario migrar/resetear. Gate RFCOMM físico cerrado.
+
 **R149, captura posterior:** usuario buscó manualmente desde «Agregar un
 dispositivo» de Windows; no aparece RW4 por nombre, sí dispositivos desconocidos
 sin identidad. No atribuirlos al reloj ni tratar la búsqueda como prueba de

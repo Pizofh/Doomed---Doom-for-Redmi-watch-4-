@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R150, 2026-10-11:** [caché Windows y migración](pc-cache-and-migration-r150.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Caché Classic devuelve cero candidatos por nombre RW4 | Windows / consulta sin inquiry | 7 registros, 3 autenticados, cero coincidencias; consulta completa | CONFIRMADO EN PC | Alta | Sí | No verifica identidad ni descarta alias/BLE/claves obsoletas |
+| Apagar BT del teléfono basta para encontrar RW4 en Windows | Unidad del usuario | Usuario no lo ve por nombre con teléfono apagado | SIN EVIDENCIA | Baja | Observación usuario | No prueba causa o incompatibilidad; no repetir ciclos |
+| Existe entrada de menú preguntada en Sistema | RW4 2.2.86 del usuario | Respuesta «sí sale» a pregunta sobre Connect New Phone/visibilidad | CONFIRMADO POR REPORTE DEL USUARIO | Media | No por agente | Nombre exacto/pantalla posterior no registrados; no activada |
+| Abrir Connect New Phone conserva vínculo/cancelación fiable | RW4 2.2.86 | FAQ solo describe migración; sin prueba local | SIN EVIDENCIA | Desconocida | No | Plan de inspección pendiente de decisión; no garantía reboot |
+
 **R149, 2026-10-11:** [preflight del vínculo y documentación oficial](pc-link-preflight-r149.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

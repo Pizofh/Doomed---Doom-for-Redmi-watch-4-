@@ -1,6 +1,13 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
-**Actual R137,2026-10-11:** captura nueva y un PROBE manual AUTORIZADOS por
+**Actual R150, 2026-10-11:** [plan de inspección del flujo stock de cambio de
+teléfono](pc-cache-and-migration-r150.md) preparado para revisión, NO autorizado
+ni ejecutado. Consulta de caché Windows completada sin inquiry/pairing/socket.
+Ninguna autorización histórica de Android/HCI permite activar migración,
+emparejar el PC, abrir SPP Windows o cargar código. Mantener vínculo Mi Fitness
+salvo decisión explícita sobre el plan; no garantía de reversión por reboot.
+
+**Historial R137,2026-10-11:** captura nueva y un PROBE manual AUTORIZADOS por
 respuesta «sí» al [plan](phone-hci-capture-plan.md). No pedir aprobación otra vez
 para esa secuencia; no ejecución automática. Mantener orden copia antes de
 restaurar HCI, restauración completa aun si hay error, sin reintento. Misma
