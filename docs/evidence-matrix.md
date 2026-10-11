@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**R136,2026-10-11:** [diagnóstico existente revisado](phone-hci-review-plan.md),
+[captura nueva pendiente de decisión](phone-hci-capture-plan.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Informe privado obtenido en PC | Teléfono del usuario | JSON collect exitoso y archivo local | CONFIRMADO POR USUARIO/PC | Alta | Sí | ZIP244073738B/13173entradas; no ejecución de ADB por agente |
+| Este historial disponible contiene paquetes del intento | Entradas permitidas/ZIP real | SNOOZ16B, cabecera válida, records0; sin resumen inline | REFUTADO PARA HISTORIAL REVISADO | Alta | Sí, sección BT/CRC | No implica ausencia en rutas vendor desconocidas ni causa del fallo |
+| Lector puede revisar sección sin exportar campos generales/claves | Herramienta propia | Tests stream/CRC/markers/canarios y review real saneado | CONFIRMADO EN CASOS PROBADOS | Alta | Sí | Texto general descartado al localizar marker; CRC no firma/integridad ZIP total |
+| Nueva captura HCI está autorizada | Sesión actual | Autorización anterior solo informe existente | SIN AUTORIZACIÓN AÚN | Alta sobre alcance | No aplica | Plan concreto preparado; no otra APK/PROBE automático |
+
 **R135,2026-10-11:** [autorización y lector de estructura ZIP](phone-hci-review-plan.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

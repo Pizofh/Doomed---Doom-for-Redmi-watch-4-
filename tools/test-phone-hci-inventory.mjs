@@ -1,6 +1,6 @@
 // Synthetic central directories only; no real report, extraction, ADB or radio.
 import assert from 'node:assert/strict';
-import {inventoryHciArchive} from './inspect-phone-hci-report.mjs';
+import {inventoryHciArchive, inventoryFailureCode} from './inspect-phone-hci-report.mjs';
 
 function archive(names) {
   const locals = [], entries = [];
@@ -39,12 +39,19 @@ assert.equal(result.extractedFiles, 0); assert.equal(result.archiveIntegrityVeri
 for (const canary of ['PRIVATE-PHONE-NAME', 'KEY-NOT-FOR-EXPORT', name, 'other/']) assert.ok(!JSON.stringify(result).includes(canary));
 assert.equal(inspect(archive(['unrelated.txt'])).bluetoothFileCandidates.length, 0);
 assert.equal(inspect(archive([{name, size: 200 * 1024 ** 2}])).bluetoothFileCandidates[0].payloadWithinReviewLimit, false);
-for (const names of [[name, name], ['../escape'], ['/absolute'], ['C:\\private'], ['bad\0name'],
+for (const names of [[name, name],
   [{name, flags: 1}], [{name, method: 99}], [{name, mode: 0xa000}], [{name, disk: 1}]]) assert.throws(() => inspect(archive(names)));
+const unrelated = inspect(archive(['../escape', '/absolute', 'C:\\private', 'bad\0name', 'same', 'same']));
+assert.equal(unrelated.unrelatedNameAnomalies, 5);
+assert.equal(unrelated.extractedFiles, 0);
+assert.equal(unrelated.bluetoothFileCandidates.length, 0);
 assert.throws(() => inspect(fixture.subarray(0, fixture.length - 1)));
 assert.throws(() => inventoryHciArchive(() => Buffer.alloc(0), fixture.length));
 assert.throws(() => inventoryHciArchive(() => { throw Error('Must not read'); }, 2 * 1024 ** 3 + 1));
 const split = Buffer.from(fixture); split.writeUInt16LE(1, split.length - 18); assert.throws(() => inspect(split));
-const excessive = Buffer.from(fixture); excessive.writeUInt16LE(8193, excessive.length - 12); assert.throws(() => inspect(excessive));
+const excessive = Buffer.from(fixture); excessive.writeUInt16LE(32769, excessive.length - 12); assert.throws(() => inspect(excessive));
+assert.equal(inventoryFailureCode(Error('ZIP64, split or unexpected directory')), 'Z08');
+assert.equal(inventoryFailureCode(Error('PRIVATE-NAME-DO-NOT-EXPORT')), 'Z00');
+assert.equal(inspect(archive(Array.from({length: 13173}, (_, i) => 'synthetic/' + i))).entryCount, 13173);
 const remainder = Buffer.concat([fixture, Buffer.from('extra')]); assert.throws(() => inspect(remainder));
 console.log('PASS: bounded ZIP inventory, fixed Bluetooth paths, no content/extraction, privacy and malformed inputs (synthetic only)');

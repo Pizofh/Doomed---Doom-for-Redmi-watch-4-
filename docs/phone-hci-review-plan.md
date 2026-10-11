@@ -1,5 +1,42 @@
 # R134/R135 — diagnóstico Bluetooth privado del teléfono
 
+## Resultado R136,2026-10-11 — copia válida, historial disponible vacío
+
+Usuario completa collect con privateReportSaved/headerRecognized=true, contenido
+no revisado entonces, hciIncluded=null, sin radio/comandos reloj/configuración
+logging solicitados. Agente analiza únicamente el ZIP local autorizado, sin ADB.
+
+Archivo244,073,738bytes,13,173entradas y directorio central1,319,885bytes. Límite
+inicial8192entradas rechazó el archivo; aumentado a32768 conservando límites de
+bytes/formatos y probado con fixture13,173. Además hay nombres repetidos/colon
+en entradas ajenas a Bluetooth: se ignoran sin abrir/extracción; unicidad y rutas
+siguen estrictas para candidatos y texto principal. No interpretar ese rechazo
+inicial como informe corrupto ni solicitar otra copia. Clasificación de errores
+del lector ahora códigos Zxx fijos, sin nombres/rutas/mensajes privados.
+
+Inventario reconoce un archivo SNOOZ de16bytes. Revisión seleccionada valida
+cabecera BTSNOOPv1/HCIUART1002 y CRC/tamaño ZIP de las entradas revisadas:
+**cero registros HCI**. Scanner del texto principal, en streaming, descarta texto
+general y solo busca delimitadores BTSNOOP_LOG_SUMMARY: **ningún resumen inline**.
+No se analizan campos de otras apps ni se exponen nombres/identificadores.
+No archivos extraídos o payloads guardados/exportados. El ZIP completo permanece
+privado/ignorado; integridad del archivo completo no comprobada, CRC no es firma.
+
+No evidencia atribuible de la causa del fallo: este historial disponible está
+vacío. No prueba que Bluetooth nunca funcione/registre, que el canal esté libre
+o que la causa esté en el reloj. Sin otro PROBE/logging/ajustes por agente.
+
+Lector: `node tools/inspect-phone-hci-report.mjs review` (solo PC). Pruebas PC:
+test-phone-hci-inventory.mjs, test-phone-hci-review.mjs y test-phone-hci-report.mjs
+pasan. Cubren formatos/stream/CRC, datos truncados, marcadores divididos entre
+bloques, canarios privados, ausencia/v1/v2 y colector con destinos fijos separados.
+Decoder cuenta tipos de paquete; no interpreta aún causas/enlace/RFCOMM del
+tráfico real, porque no hay paquetes disponibles.
+
+Siguiente alternativa preparada: [captura HCI de un único PROBE](phone-hci-capture-plan.md),
+**aprobación nueva pendiente** por activar registro detallado y hacer otra prueba.
+La autorización R135 era para el informe existente, no para esta captura nueva.
+
 **R135,2026-10-11:** el usuario respondió «sí» a obtener el informe privado
 del teléfono en su PC con análisis limitado a Bluetooth. Autorización vigente;
 no volver a solicitarla para este mismo paso. Se entregó el comando manual
@@ -123,7 +160,7 @@ Identificación conocida M2315W1/2.2.86, HyperOS3.0.302.0/API36, Mi Fitness3.59.
 compatibilidad del diagnóstico vendor pendiente. Si falla, detenerse sin root,
 lectura de rutas protegidas o cambiar firmware para obtener logs.
 
-**Gate actual R135:** autorización de privacidad recibida. Recolector manual
-entregado; resultado pendiente. No collect/ADB físico por el agente, captura
-completa o intento Bluetooth nuevo. Autorización no incluye activar logging,
-repetir PROBE, divulgar el informe completo o cargar código en el reloj.
+**Gate actual R136:** copia y revisión del historial existente completadas.
+Ningún ADB físico por agente. Autorización no incluye activar logging, repetir
+PROBE, divulgar el informe completo o cargar código en el reloj. Captura nueva
+propuesta por separado; no ejecutar todavía.

@@ -50,7 +50,14 @@ for (const label of ['missing', 'bad-header', 'two-zips', 'timeout']) {
   }, path.join(session, label)));
   assert.equal(count, 2); // No retry or fallback.
 }
-for (const args of [[], ['plan'], ['unknown'], ['collect', 'extra']]) {
+const captured = collectPhoneReport((args) => {
+  if (args[1] === 'get-state') return {status: 0, stdout: 'device'};
+  fs.writeFileSync(path.join(args[2], 'synthetic.zip'), Buffer.concat([Buffer.from([0x50, 0x4b, 0x03, 0x04]), Buffer.alloc(30)]));
+  return {status: 0};
+}, path.join(session, 'capture'), 'R136');
+assert.equal(captured.checkpoint, 'R136');
+assert.throws(() => collectPhoneReport(() => { throw Error('Must not run'); }, path.join(session, 'bad-checkpoint'), 'arbitrary'));
+for (const args of [[], ['plan'], ['plan-capture'], ['unknown'], ['collect', 'extra'], ['collect-capture', 'extra']]) {
   const run = spawnSync(process.execPath, [path.join(root, 'tools/phone-hci-report.mjs'), ...args], {encoding: 'utf8'});
   assert.equal(run.status, args.length <= 1 && args[0] !== 'unknown' ? 0 : 1);
   if (run.status === 0) assert.equal(JSON.parse(run.stdout).executionPerformed, false);

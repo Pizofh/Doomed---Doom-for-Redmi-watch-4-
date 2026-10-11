@@ -1,5 +1,24 @@
 # Retomar el proyecto
 
+**R136,2026-10-11:** usuario collect exitoso R134; copia local244073738B,
+13173entries/central1319885B. Agente SOLOPC inventario/review, noADB. Límite
+8192 demasiado bajo→32768 con fixture13173; unrelated duplicates/colon ignorados
+sin abrir, candidates/maintext uniqueness strict. ErrorZxx fijo, private names
+noexport. [Resultado](phone-hci-review-plan.md): únicoSNOOZ16B/BTSNOOPv1UART1002,
+CRC/tamañoselectedentriesOK, records0; streamingmaintext soloBTSNOOPmarkers,
+sininline. Historialdisponible VACÍO, causa noatribuida. Decoder cuenta tipos,
+no causas reales; sinraw/extract/noappssemantic read. Tests inventory/review/
+collector pasan (stream/CRC/markers/trunc/privacy/v1v2). Fuente btsnooz/AOSPprevia.
+[Nueva captura plan completo](phone-hci-capture-plan.md) preparada; DECISIÓN
+PRIVACIDAD NUEVA PENDIENTE (registroHCI completo+unPROBE no cubiertos por R135).
+MismaAPKr131, UI HCIoriginal→enable→Nearby SOLOMiFit/stop ambas→OFF10sON→unPROBE
+→collect-captureANTESloggingrestore (AOSPdisabled puede borrar logs)→HCIoriginal/
+OFFON/Nearbyrestore/MiFitnormal→debugUSBoff. Destino tools/local/phone-hci-r136
+fresh distinto134, dosUSBreads getstate+bugreport sinfallback; modes plan-capture
+sinADB, inventory-capture/review-capture PC preparados, tests destinosseparados.
+NOactivar/probe/colectar poragente. No ZIP/rawchat/Drive/Git. No más aprobación
+para historial existente; nueva captura requiere síexplícito. Nativo/fwcerrados.
+
 **R135,2026-10-11:** usuario SÍ autoriza obtener bugreport privado en PC y
 analizar solo Bluetooth. No volver a pedir aprobación para misma copia. Manual
 entregado phone-hci-report.mjs collect (SIN punto/args), teléfonoUSBnormal,

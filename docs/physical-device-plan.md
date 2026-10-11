@@ -1,5 +1,14 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R136,2026-10-11:** informe privado copiado por usuario; revisión PC
+autorizada encuentra archivoBluetooth16B/cero paquetes/sin resumen inline.
+[Resultado y pruebas](phone-hci-review-plan.md). Sin causa atribuible. Nuevo
+[plan completo de captura](phone-hci-capture-plan.md) preparado: HCI teléfono,
+un PROBE r131, collect-capture privado antes de restaurar logging, restauración
+HCI/BT/Nearby/MiFit/USB. **Autorización nueva pendiente** por privacidad/captura;
+la anterior solo cubría historial existente. Sin ADB físico/radio por agente.
+No QUERY, modificación del core/vínculo/nativo/firmware autorizado.
+
 **Actual R135,2026-10-11:** usuario autoriza diagnóstico privado del teléfono
 según [plan](phone-hci-review-plan.md). Comando collect entregado para ejecución
 manual; resultado pendiente. PC inventory preparado/probado solo metadataZIP,

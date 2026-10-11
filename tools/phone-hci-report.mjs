@@ -9,7 +9,8 @@ import {fileURLToPath, pathToFileURL} from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const destination = path.join(root, 'tools/local/phone-hci-r134');
 const maxOutput = 1024 * 1024;
-export function collectPhoneReport(run, directory) {
+export function collectPhoneReport(run, directory, checkpoint = 'R134') {
+  if (!['R134', 'R136'].includes(checkpoint)) throw Error('Unknown report checkpoint');
   // Refuse overwrite or reuse; no cleanup, retry, Bluetooth or logging fallback.
   if (!path.isAbsolute(directory) || fs.existsSync(directory)) throw Error('Fresh private directory required');
   const state = run(['-d', 'get-state'], 30000);
@@ -34,7 +35,7 @@ export function collectPhoneReport(run, directory) {
   try { if (fs.readSync(fd, prefix, 0, 4, 0) !== 4) throw Error('Short archive'); }
   finally { fs.closeSync(fd); }
   if (!prefix.equals(Buffer.from([0x50, 0x4b, 0x03, 0x04]))) throw Error('Unexpected archive header');
-  const result = {checkpoint: 'R134', privateReportSaved: true,
+  const result = {checkpoint, privateReportSaved: true,
     archiveHeaderRecognized: true, archiveContentReviewed: false, hciIncluded: null,
     rawConsoleOutputSaved: false, bluetoothOperationRequested: false,
     watchCommandRequested: false, logConfigurationChanged: false,
@@ -60,16 +61,18 @@ function trustedRun(args, timeout) {
 }
 if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {
   const action = process.argv[2] ?? 'plan';
-  if (action === 'plan' && [2, 3].includes(process.argv.length)) {
+  if (['plan', 'plan-capture'].includes(action) && [2, 3].includes(process.argv.length)) {
     console.log(JSON.stringify({executionPerformed: false, userDecisionRequired: true,
-      commands: [['-d', 'get-state'], ['-d', 'bugreport', 'tools/local/phone-hci-r134']],
+      commands: [['-d', 'get-state'], ['-d', 'bugreport', action === 'plan-capture' ? 'tools/local/phone-hci-r136' : 'tools/local/phone-hci-r134']],
       reportContainsOtherPhoneDiagnostics: true, watchCommandRequested: false,
       bluetoothOperationRequested: false, logConfigurationChanged: false}));
-  } else if (action === 'collect' && process.argv.length === 3) {
-    try { console.log(JSON.stringify(collectPhoneReport(trustedRun, destination))); }
+  } else if (['collect', 'collect-capture'].includes(action) && process.argv.length === 3) {
+    try { console.log(JSON.stringify(collectPhoneReport(trustedRun,
+      action === 'collect-capture' ? path.join(root, 'tools/local/phone-hci-r136') : destination,
+      action === 'collect-capture' ? 'R136' : 'R134'))); }
     catch {
       console.error('Private report collection refused or failed. Do not share raw output or retry; private partial files may remain.');
       process.exitCode = 1;
     }
-  } else { console.error('Use plan or collect'); process.exitCode = 1; }
+  } else { console.error('Use plan, collect, plan-capture or collect-capture'); process.exitCode = 1; }
 }
