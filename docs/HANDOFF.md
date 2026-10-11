@@ -1,5 +1,17 @@
 # Retomar el proyecto
 
+**R149, 2026-10-11:** usuario pregunta cómo conservar vínculo al usar PC.
+[Preflight y límite](pc-link-preflight-r149.md): lectura PnP local aprobada cuenta
+cero registros por nombre RW4; NO prueba bond inexistente/identidad. Ninguna
+operación de radio o reloj. Falta consulta de caché autenticada sin inquiry.
+FAQ oficial RW4 documenta migración de teléfono, no PC/dual-host. Tabla oficial
+en FAQ Watch6 tiene columna RW4 explícita: SPP Android y BLE iOS; RAM32/ROM256
+comerciales, no memoria libre ni ABI medida. Evidencia etiquetada en matriz.
+Cliente R148 sigue offline/gate cerrado; coexistencia no demostrable por simulación.
+No emparejar/migrar/reset sin plan concreto y revisión. Consulta autorizada aún
+no publicada. No cambios de código ni recompilación necesarios en R149.
+
+
 **R148, 2026-10-11:** [cliente C# Windows offline](../experiments/pc-rfcomm/README.md)
 implementado. node tools/pc-rfcomm.mjs build/test; compiler oficial de Windows
 con firma válida, sin instalaciones. Tests pasan, 113 aserciones con clocks/API

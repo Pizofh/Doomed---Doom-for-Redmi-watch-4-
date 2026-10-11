@@ -1,5 +1,16 @@
 # Matriz de evidencia
 
+**R149, 2026-10-11:** [preflight del vínculo y documentación oficial](pc-link-preflight-r149.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Inventario PnP tiene registros llamados Redmi Watch 4 | PC / lectura actual | Filtro por nombre devuelve cero | REFUTADO PARA ESTE FILTRO | Alta | Sí | No prueba ausencia de bond, alias o caché Bluetooth |
+| Migración de teléfono documentada | RW4 | FAQ Xiaomi KA-91528, Connect New Phone para misma cuenta | CONFIRMADO EN DOCUMENTACIÓN RW4 | Alta | No operación | No prueba segundo vínculo Windows/coexistencia |
+| SPP Android y BLE iPhone declarados para RW4 | RW4 / especificación comercial | Columna RW4 de tabla oficial KA-694585 | CONFIRMADO EN DOCUMENTACIÓN RW4 | Alta | No nueva prueba | Tabla alojada en FAQ Watch6, columna explícita RW4; no disponibilidad Windows/firmware2.2.86 |
+| RW4 anunciado con RAM32 MB/ROM256 MB | RW4 / especificación comercial | Misma columna oficial Xiaomi | CONFIRMADO EN DOCUMENTACIÓN RW4 | Alta | No medición | No distingue SRAM/PSRAM, flash ni RAM libre de aplicaciones |
+| PC puede vincularse conservando Mi Fitness sin migrar | Unidad M2315W1 2.2.86 | Ningún contrato ni ensayo específico | SIN EVIDENCIA | Desconocida | No | No deducirlo de simulación ni de FAQ de migración |
+
+
 **R148, 2026-10-11:** [cliente PC offline](../experiments/pc-rfcomm/README.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
