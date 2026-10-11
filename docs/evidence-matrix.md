@@ -1,5 +1,16 @@
 # Matriz de evidencia
 
+**R134, 2026-10-11:** [resultado tras plan OFF→ON](phone-adapter-restart-plan.md)
+y [plan de diagnóstico privado existente](phone-hci-review-plan.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| La prueba propuesta con ciclo del adaptador logró abrir SPP | Teléfono/RW4 del usuario | Informe nuevo G08/R02/L01, connect191ms, sinD05 | REFUTADO PARA ENSAYO REPORTADO | Alta sobre informe | Manual usuario | Cada ajuste no observado; no exclusividad probada ni causa identificada |
+| Mi Fitness sigue sincronizando tras este ensayo | Unidad del usuario | «sincroniza correctamente» | CONFIRMADO POR USUARIO | Alta sobre reporte | Manual usuario | No implica recovery integral |
+| AOSP conserva cabeceras útiles sin logging completo habilitado | Android16 SnoopLogger revisado | Modo disabled mantiene buffer: CMD/EVT completos, L2CAP signalling y ACL normalmente14bytes | CONFIRMADO EN FUENTE AOSP | Alta sobre código | Lectura PC | No anonimato integral, HyperOS ni disponibilidad actual probados |
+| Nuestro teléfono ofrece un HCI atribuible al intento en un bugreport | HyperOS/API36 | Solo mecanismo documentado/plan preparado | SIN EVIDENCIA | Desconocida | No | Buffer puede faltar/sobrescribirse; aprobación privacidad pendiente |
+| Recolector privado inicia radio o habilita captura | Herramienta propia | Plan/default sinADB; mock solo getstate+bugreport | REFUTADO EN CÓDIGO/TESTS PC | Alta sobre casos | Sí, sintético | Genera diagnóstico persistente del teléfono y ZIP amplio; no lectura sin escrituras |
+
 **R133, 2026-10-10:** [lectura pasiva completada](rw4-opening-result-r132.md) y
 [plan de un ciclo del adaptador](phone-adapter-restart-plan.md).
 

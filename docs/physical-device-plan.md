@@ -1,5 +1,13 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R134,2026-10-11:** ensayo respondido tras planOFF→ON vuelve a
+G08/R02/L01,191ms; Mi Fitness sincroniza. No repetir variantes/recompilarAPK
+genérico. [Siguiente plan revisable](phone-hci-review-plan.md): diagnóstico
+existente del teléfono por USB getstate+bugreport, ZIP amplio privado; sin
+PROBE/captura nueva/ajustes Bluetooth/comandos reloj. **Decisión de privacidad
+pendiente**, no ejecutarlo automáticamente. Persistencia phone/PC, privacidad,
+reversión y efectos documentados; no recovery/nativo/firmware nuevo autorizado.
+
 **Actual R133:** lector pasivo ejecutado manualmente: sin cabeceras nativas
 reconocidas, ceros inconclusos. [Plan concreto siguiente](phone-adapter-restart-plan.md):
 teléfono, Nearby SOLOMiFit denegado temporalmente/stop ambas→adaptadorOFF10s→ON

@@ -1,5 +1,25 @@
 # R133 — un PROBE después de apagar y encender Bluetooth del teléfono
 
+## Resultado R134 — mismo fallo; sincronización restaurada
+
+2026-10-11. El usuario responde al plan con un informe r131/API36 nuevo y
+«sincroniza correctamente». Tiempos0/139/145/148/148/339/343/359ms;
+D01→D02→D03→D18→D04→E03→D17→D13, G08/R02/L01, sin cierre local ya solicitado.
+connect hasta error191ms; sinD05/auth/GET y clave no evaluada. El inventario r114
+16,132ms/40callbacks adjunto es histórico, no otro escaneo. La ejecución de cada
+ajuste OFF/ON no fue observada por el agente; se registra como resultado aportado
+en respuesta a la secuencia propuesta, no como telemetría del adaptador.
+
+El ensayo no logró la apertura. No prueba que el core no pudiera reconectar ni
+descarta un problema del vínculo/pila/remoto. No repetir variantes de permisos,
+perfiles o reinicios ni cambiar UUID/clave por conjetura. Sincronización de Mi
+Fitness confirmada; no se solicitó otra comprobación del mismo retorno.
+
+Siguiente plan: [obtener diagnóstico existente del teléfono](phone-hci-review-plan.md),
+sin nuevo PROBE ni habilitar captura completa. **Requiere decisión explícita
+por privacidad**, porque el bugreport contiene información de otras apps.
+No ejecutado. El resto conserva el plan histórico preparado en R133.
+
 2026-10-10. Plan manual preparado, no realizado. La lectura pasiva R132 terminó
 sin registros nativos reconocidos. No hay una corrección de transporte demostrada.
 Se reutiliza la app r131 instalada; no se compila, instala ni instrumenta otra APK.

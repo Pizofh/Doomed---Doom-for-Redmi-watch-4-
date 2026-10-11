@@ -1,5 +1,25 @@
 # Retomar el proyecto
 
+**R134, 2026-10-11:** respuesta al planOFF→ON: r131/API36/P00/B01T01S01,
+traceD01D02D03D18D04E03D17D13, times0/139/145/148/148/339/343/359ms;
+connect191ms/G08R02L01/no cierre local previo/noD05/auth/GET. Usuario dice
+sincroniza correctamente: retorno sync confirmado, no pedir misma confirmación.
+Inventoryr11440callbacks/16132ms es histórico. Pasos OFF/ON no observados por
+agente; no prueba exclusividad/cierre core/causa. [Resultado](phone-adapter-restart-plan.md).
+No repetir variantes permisos/perfiles/PROBE ni APK soloinstrumentación.
+[Siguiente plan privado](phone-hci-review-plan.md): fuentes AOSP btsnooz.py/
+SnoopLogger oficiales obtenidas con permisos, sin ejecutar; memoria con HCI y
+L2CAP/RFCOMMheaders posible, HyperOS/bufferactual desconocidos. HCI completo
+NO habilitado; fuentes/hashes/doc. Herramienta phone-hci-report.mjs defaultplan
+NOADB; collectSOLOusuario tras decisión PRIVACIDAD, getstate+bugreport USB,
+ZIP privado completo tools/local/phone-hci-r134 destinofresh, timeout30/300s,
+SDKpins/no rawconsole/no fallback; ZIPheader no análisis/HCI prueba. Tests
+mock/privacy/nooverwrite/invalid/offline/default/syntax pasan PC. Extractor de
+paquetes aún NO implementado; prepararlo/probar antes de leer contenido real.
+No collect ni ADB/radio por agente; aprobación privacidad pendiente porque ZIP
+incluye diagnóstico otrasapps. No archivos crudos al chat/Drive/Git. Firmware/
+nativo/instalación reloj CERRADOS, core/bond intactos. No publicar APK/firmware.
+
 **R133, 2026-10-10:** usuario completó lector pasivo R132: cabeceras nativas
 false, cierres propios0, candidatos4 y PORT25 todos0. Completó sin error; sin
 atribución r131 ni socket actual. Inconcluso, no repetir lector ni pedir rawlogs.
