@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R147, 2026-10-11:** [ruta alternativa desde PC](pc-transport-alternative.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Windows detecta adaptador Bluetooth Realtek con estado OK | PC del usuario | CIM Win32_PnPEntity, filtro BTHUSB, lectura aprobada | CONFIRMADO EN PC | Alta | Sí | No escaneo, dirección ni pairing; no valida radio encendida |
+| Windows ofrece API de cliente RFCOMM | Plataforma Windows | Documentación Microsoft socket/connect AF_BTH | CONFIRMADO EN DOCUMENTACIÓN | Alta | No socket ejecutado | No prueba soporte remoto RW4 |
+| Cliente PC conectará RW4 sin cambiar vínculo actual | M2315W1 2.2.86 | No ensayo ni contrato verificado | SIN EVIDENCIA | Desconocida | No | Preparar offline; plan y revisión antes de pairing/conexión |
+
+
 **R145, 2026-10-11:** [revisión final Bluetooth](phone-bluetooth-apk-result-r145.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -1,5 +1,16 @@
 # Retomar el proyecto
 
+**R147, 2026-10-11:** usuario pregunta por avance independiente de upstream.
+[Alternativa Windows evaluada](pc-transport-alternative.md): lectura CIM aprobada
+fuera del sandbox detecta Realtek Bluetooth Adapter, estado OK. No direcciones,
+seriales, discovery, pairing ni conexión. Resuelve disponibilidad del adaptador
+reportado, no radio encendida/compatibilidad RW4. API Microsoft RFCOMM documentada.
+Checkpoint autónomo propuesto: cliente PC y pruebas simuladas, sin reloj. Antes
+de físico: compatibilidad y vínculo actual, plan explícito y revisión; no bonding
+automático/unpair/reset/inseguro/canales manuales. Upstream ayuda, no dependencia.
+Autorización de publicación R146 sigue vigente; consulta aún no publicada.
+
+
 **R146, 2026-10-11:** usuario autoriza explícitamente publicar la consulta de
 compatibilidad en soporte Gadgetbridge. Autorización vigente; no pedirla de nuevo.
 README oficial dirige a Codeberg/Freeyourgadget/Gadgetbridge/issues/new/choose.
