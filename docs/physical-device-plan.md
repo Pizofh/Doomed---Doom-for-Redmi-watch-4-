@@ -1,5 +1,11 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R135,2026-10-11:** usuario autoriza diagnóstico privado del teléfono
+según [plan](phone-hci-review-plan.md). Comando collect entregado para ejecución
+manual; resultado pendiente. PC inventory preparado/probado solo metadataZIP,
+sin ADB ni contenido real por agente. Esta autorización no incluye otra prueba
+de radio/captura completa/divulgación de logs/nativo/instalación del reloj.
+
 **Actual R134,2026-10-11:** ensayo respondido tras planOFF→ON vuelve a
 G08/R02/L01,191ms; Mi Fitness sincroniza. No repetir variantes/recompilarAPK
 genérico. [Siguiente plan revisable](phone-hci-review-plan.md): diagnóstico

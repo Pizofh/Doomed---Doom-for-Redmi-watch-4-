@@ -1,5 +1,19 @@
 # Retomar el proyecto
 
+**R135,2026-10-11:** usuario SÍ autoriza obtener bugreport privado en PC y
+analizar solo Bluetooth. No volver a pedir aprobación para misma copia. Manual
+entregado phone-hci-report.mjs collect (SIN punto/args), teléfonoUSBnormal,
+MiFitnormal; pegarJSON/avisofijo, no ZIP/raw. Resultado/copiapendiente, no ADB
+por agente. [Plan actualizado](phone-hci-review-plan.md).
+Nuevo inspect-phone-hci-report.mjs inventory PC: ZIPcentralmetadataONLY,
+max2GiB/8MiBcentral/8192entries, fixedFS Bluetoothnames +countbugreporttext,
+no contenido/extracción/nombresexport/CRC/HCI/atribución; rejects invalid/ZIP64/
+split/traversal/duplicates/encryptedmethods/symlinkcandidates. Tests sintéticos
+privacy/bounds/paths/format pasan, defaultplan/syntaxOK; ZIPreal no presente
+al check de preparación. Siguiente: cuando usuario aporteJSON, inventory local
+y elegir decoder solo secciónBT según formato encontrado, tests antes de leer
+contenido real. No loggingfull/PROBE/corestop/nativo/firmware autorizado.
+
 **R134, 2026-10-11:** respuesta al planOFF→ON: r131/API36/P00/B01T01S01,
 traceD01D02D03D18D04E03D17D13, times0/139/145/148/148/339/343/359ms;
 connect191ms/G08R02L01/no cierre local previo/noD05/auth/GET. Usuario dice

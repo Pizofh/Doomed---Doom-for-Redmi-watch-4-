@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**R135,2026-10-11:** [autorización y lector de estructura ZIP](phone-hci-review-plan.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Usuario autoriza copiar informe privado y analizar sección Bluetooth | Sesión actual | Respuesta «sí» a plan R134 | CONFIRMADO EN SESIÓN | Alta | No aplica | Copia manual aún pendiente; no autoriza capturas nuevas/divulgación/nativo |
+| Inventario exporta solo metadata fija sin nombres/contenido | Lector ZIP propio PC | Tests sintéticos con canarios y entradas malformadas | CONFIRMADO EN TESTS PC | Alta para casos | Sí, sintético | No CRC/decodificación ni validación de ZIP real; rutas vendor no reconocidas posibles |
+
 **R134, 2026-10-11:** [resultado tras plan OFF→ON](phone-adapter-restart-plan.md)
 y [plan de diagnóstico privado existente](phone-hci-review-plan.md).
 

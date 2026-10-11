@@ -1,4 +1,23 @@
-# R134 — diagnóstico Bluetooth existente, pendiente de decisión de privacidad
+# R134/R135 — diagnóstico Bluetooth privado del teléfono
+
+**R135,2026-10-11:** el usuario respondió «sí» a obtener el informe privado
+del teléfono en su PC con análisis limitado a Bluetooth. Autorización vigente;
+no volver a solicitarla para este mismo paso. Se entregó el comando manual
+`node tools/phone-hci-report.mjs collect`; aclarado que termina en collect sin
+punto ni argumentos. Copia/resultado todavía no recibidos. No ADB por agente.
+
+Lector inicial preparado: `node tools/inspect-phone-hci-report.mjs inventory`
+en PC solamente. Default plan/import sin acceso al informe. Lee el directorio
+central ZIP, no los contenidos, con archivo máximo2GiB/directorio8MiB y8192
+entradas. Rechaza ZIP64/multidisco, nombres ambiguos/rutas peligrosas, candidatos
+cifrados/con métodos desconocidos/enlaces. Solo reconoce entradas bajo
+FS/data/misc/bluetooth/logs/btsnoop_hci.log o btsnooz_hci.log, incluyendo .last;
+otras rutas vendor quedan fuera. No atribuir ausencia de candidatos a ausencia
+total de Bluetooth. Cuenta también posibles textos bugreport, pero no los abre
+ni busca aún su resumen inline. JSON sin nombres, identificadores ni contenido.
+No extracción/integridad CRC/decodificación de paquetes realizadas o prometidas
+por ese inventario. Pruebas sintéticas de límites/rutas/métodos/destino/privacidad
+y plan/sintaxis pasan; informe real aún no disponible al preparar el lector.
 
 2026-10-11. El PROBE informado después del plan OFF→ON termina con R02/L01,
 connect191ms; Mi Fitness vuelve a sincronizar. No corrección demostrada, otra
@@ -104,5 +123,7 @@ Identificación conocida M2315W1/2.2.86, HyperOS3.0.302.0/API36, Mi Fitness3.59.
 compatibilidad del diagnóstico vendor pendiente. Si falla, detenerse sin root,
 lectura de rutas protegidas o cambiar firmware para obtener logs.
 
-**Gate actual:** aprobación por privacidad pendiente. No collect/ADB físico,
-ZIP real, captura completa o intento Bluetooth nuevo ejecutados en esta sesión.
+**Gate actual R135:** autorización de privacidad recibida. Recolector manual
+entregado; resultado pendiente. No collect/ADB físico por el agente, captura
+completa o intento Bluetooth nuevo. Autorización no incluye activar logging,
+repetir PROBE, divulgar el informe completo o cargar código en el reloj.
