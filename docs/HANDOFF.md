@@ -1,5 +1,17 @@
 # Retomar el proyecto
 
+**R137,2026-10-11:** usuario SÍ autoriza captura HCI nueva según
+[plan completo](phone-hci-capture-plan.md). No volver a pedir autorización para
+misma secuencia. Manual pendiente: teléfonoUSBnormal/MiFitnormal→HCIoriginal
+anotado/enablefull→Nearby SOLOMiFit deny/stop ambas→BTOFF10sON→unPROBEr131
+→copiarinforme/cerrarapp→collect-capture ANTESHCIrestore/Bluetoothrestart
+→HCIoriginal/OFFON/Nearbyrestore/MiFitnormal/USBdebugoff. Destino fresh136,
+mismaAPKr131 sinupdate. Plan-capture verificado sinADB. Pedir solo JSON/informe
+filtrado/retorno, no ZIP/raw. Si ajuste no claro o falta, detener y etiquetas;
+sierror restaurar sinretry. No QUERY/bond/corestop/nativo/fw. Resultados
+todavía pendientes; agente noADB/radiofísico. RevisiónlocalBT autorizada,
+decodercausas ampliar/probar antes de leer paquetes reales si aparecen.
+
 **R136,2026-10-11:** usuario collect exitoso R134; copia local244073738B,
 13173entries/central1319885B. Agente SOLOPC inventario/review, noADB. Límite
 8192 demasiado bajo→32768 con fixture13173; unrelated duplicates/colon ignorados

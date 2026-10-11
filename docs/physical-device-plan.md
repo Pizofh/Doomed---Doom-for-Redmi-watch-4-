@@ -1,5 +1,11 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R137,2026-10-11:** captura nueva y un PROBE manual AUTORIZADOS por
+respuesta «sí» al [plan](phone-hci-capture-plan.md). No pedir aprobación otra vez
+para esa secuencia; no ejecución automática. Mantener orden copia antes de
+restaurar HCI, restauración completa aun si hay error, sin reintento. Misma
+app r131; resultados pendientes. No QUERY/core/vínculo/nativo/firmware nuevos.
+
 **Actual R136,2026-10-11:** informe privado copiado por usuario; revisión PC
 autorizada encuentra archivoBluetooth16B/cero paquetes/sin resumen inline.
 [Resultado y pruebas](phone-hci-review-plan.md). Sin causa atribuible. Nuevo

@@ -1,4 +1,12 @@
-# R136 — una captura HCI nueva, preparada pero no autorizada
+# R136/R137 — una captura HCI nueva autorizada
+
+**R137,2026-10-11:** el usuario responde «sí» al plan de captura detallada nueva.
+Autorizados registro HCI temporal del teléfono, un PROBE r131, copia privada
+collect-capture y análisis limitado a Bluetooth con restauración descrita abajo.
+No solicitar otra aprobación para esta misma secuencia. Ejecución manual y
+resultados todavía pendientes; no ADB/radio físico por el agente. No incluye
+QUERY, reintentos, cambios de vínculo/core, divulgar datos o instalar código
+en el reloj. El modo plan-capture se comprobó sin ADB.
 
 2026-10-11. Historial existente vacío: archivo de16bytes, cero paquetes y ningún
 resumen inline. Sigue G08/R02/L01; clave/auth no alcanzados. La siguiente evidencia
@@ -102,5 +110,6 @@ fuentes primarias. No atribuir tráfico global al intento por proximidad tempora
   automáticamente. Comparar alternativas antes de otro ensayo.
 - Retorno anómalo: detener ensayos y atender restauración.
 
-**Estado:** plan concreto listo, autorización de captura nueva PENDIENTE. No
-activar logging ni ejecutar PROBE/collect-capture automáticamente.
+**Estado R137:** autorización recibida; secuencia manual y resultado pendientes.
+No activar logging ni ejecutar PROBE/collect-capture automáticamente. Ante
+error, restaurar ajustes y reportar sin repetir el intento.

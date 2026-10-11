@@ -1,5 +1,11 @@
 # Matriz de evidencia
 
+**R137,2026-10-11:** [captura nueva autorizada](phone-hci-capture-plan.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Usuario autoriza HCI temporal, un PROBE y copia/análisis privado | Sesión actual | Respuesta «sí» al plan R136 | CONFIRMADO EN SESIÓN | Alta | No aplica | Ejecución/resultados pendientes; no QUERY/reintentos/nativo/firmware |
+
 **R136,2026-10-11:** [diagnóstico existente revisado](phone-hci-review-plan.md),
 [captura nueva pendiente de decisión](phone-hci-capture-plan.md).
 
