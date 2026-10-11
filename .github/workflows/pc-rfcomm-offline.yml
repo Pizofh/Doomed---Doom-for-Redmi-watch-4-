@@ -6,11 +6,15 @@ on:
     paths:
       - 'experiments/pc-rfcomm/**'
       - 'tools/pc-rfcomm.mjs'
+      - 'tools/pc-rfcomm-supervisor.mjs'
+      - 'tools/test-pc-rfcomm-supervisor.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
   pull_request:
     paths:
       - 'experiments/pc-rfcomm/**'
       - 'tools/pc-rfcomm.mjs'
+      - 'tools/pc-rfcomm-supervisor.mjs'
+      - 'tools/test-pc-rfcomm-supervisor.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
 
 permissions:
@@ -27,6 +31,9 @@ jobs:
       - name: Compile own offline client
         shell: pwsh
         run: node tools/pc-rfcomm.mjs build
-      - name: Test lifecycle and disabled physical boundary
+      - name: Test lifecycle and default physical boundary
         shell: pwsh
         run: node tools/pc-rfcomm.mjs test
+      - name: Test worker supervision without radio
+        shell: pwsh
+        run: node tools/test-pc-rfcomm-supervisor.mjs

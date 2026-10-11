@@ -1,5 +1,17 @@
 # Retomar el proyecto
 
+**R154, 2026-10-11:** usuario confirma que quitó RW4 del PC y volvió a vincular
+Mi Fitness, restaurando todas las funciones. No repetir preguntas de retorno.
+Trabajar con un vínculo a la vez para este ensayo; no inferir límite universal.
+[Cliente/plan SPP Windows](windows-spp-probe-plan-r154.md) preparados, NO ensayo
+físico autorizado/ejecutado. Ahora probe explícito disponible; requiere target
+privado verificado/modeloFW/plan, caché autenticada y único radio. Worker supervisado,
+20s controlador/30s padre; cierre forzado no confirmado. Default gate sigue,
+134 aserciones C# +10 escenarios JS pasan sin sockets/radio. CI actualizado/no run.
+No APK nueva, clave Xiaomi o código enviado; target privado no creado. Antes de
+indicar pairing/probe obtener revisión del plan; luego instrucciones de una sola
+prueba y retorno observado (quitar PC, Mi Fitness). No invocar worker directamente.
+
 **R153, 2026-10-11:** usuario conectó RW4 al PC; Windows «Micrófono conectado».
 Ahora QR no permite salir/usar normalmente: NUEVO estado tras conexión PC,
 retorno anterior R152 no aplica. [Resultado y restauración pendiente](pc-cache-and-migration-r150.md).

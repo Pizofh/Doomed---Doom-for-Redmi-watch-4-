@@ -1,4 +1,4 @@
-// Own source. Offline CLI only in R148; physical access remains closed.
+// Own source. Offline default; explicit R154 worker is supervised externally.
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -45,14 +45,15 @@ namespace Rw4.PcRfcomm
         internal long ElapsedMs;
         internal int StartRequests;
         internal bool CloseConfirmed;
-        internal string Json(bool simulated)
+        internal string Json(bool simulated, bool physical = false)
         {
             // Fixed enums/numbers only. Never exception text, addresses or payloads.
-            return "{\"checkpoint\":\"R148\",\"simulated\":" +
+            return "{\"checkpoint\":\"" + (physical ? "R154" : "R148") + "\",\"simulated\":" +
                 (simulated ? "true" : "false") + ",\"outcome\":\"" + Outcome +
                 "\",\"elapsedMs\":" + ElapsedMs + ",\"startRequests\":" + StartRequests +
                 ",\"closeConfirmed\":" + (CloseConfirmed ? "true" : "false") +
-                ",\"physicalEnabled\":false,\"bluetoothOperationRequested\":false," +
+                ",\"physicalEnabled\":" + (physical ? "true" : "false") +
+                ",\"bluetoothOperationRequested\":" + (physical && StartRequests > 0 ? "true" : "false") + "," +
                 "\"watchCommandRequested\":false}";
         }
     }
@@ -132,6 +133,8 @@ namespace Rw4.PcRfcomm
                 return 0;
             }
             if (args.Length == 1 && args[0] == "test") return SelfTests.Run(output);
+            if (args.Length == 1 && args[0] == "worker-reviewed-r154")
+                return PhysicalWorker.Run(Console.In, output);
             if (args.Length == 2 && args[0] == "simulate" &&
                 Array.IndexOf(new[] { "success", "refused", "timeout", "error", "close-failure" }, args[1]) >= 0)
             {
@@ -139,7 +142,7 @@ namespace Rw4.PcRfcomm
                 output.WriteLine(report.Json(true));
                 return report.Outcome == Outcome.Opened && report.CloseConfirmed ? 0 : 1;
             }
-            // No physical factory, MAC input, unlock flag, environment bypass or pairing.
+            // Unrecognized arguments never unlock physical mode.
             output.WriteLine("{\"checkpoint\":\"R148\",\"outcome\":\"GateClosed\",\"physicalEnabled\":false,\"bluetoothOperationRequested\":false,\"watchCommandRequested\":false}");
             return 2;
         }
@@ -149,7 +152,7 @@ namespace Rw4.PcRfcomm
             try { return Dispatch(args, Console.Out); }
             catch (Exception)
             {
-                Console.Error.WriteLine("Offline client failed; no raw exception exported.");
+                Console.Error.WriteLine("PC client failed; no raw exception exported.");
                 return 1;
             }
         }

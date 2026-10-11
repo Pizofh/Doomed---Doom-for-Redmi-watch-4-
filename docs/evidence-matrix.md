@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R154, 2026-10-11:** [retorno observado y cliente SPP preparado](windows-spp-probe-plan-r154.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Quitar vínculo Windows y volver a Mi Fitness restaura funciones | Unidad M2315W1/2.2.86 | Confirmación explícita del usuario | CONFIRMADO POR REPORTE DEL USUARIO | Alta para ensayo | Usuario; no agente | No garantías universales; no firmware/recovery completo |
+| Ambos vínculos convivieron en este ensayo | Misma unidad | Usuario tuvo que quitar PC para volver a Mi Fitness | NO DEMOSTRADO; TRABAJAR CON UNO A LA VEZ | Media | Reporte usuario | No inferir límite universal de todos los perfiles/firmwares |
+| Cliente soporta preflight/supervisión/un único Start | PC / fuentes propias | Build +134 aserciones C# y diez escenarios JS falsos | CONFIRMADO EN PC OFFLINE | Alta | Sí | Native cache preflight/driver/socket reales NO ejecutados en estas pruebas |
+| Conexión SPP Windows funciona con RW4 | Unidad actual | Solo UI de micrófono, no prueba SPP | SIN EVIDENCIA | Desconocida | No | Probe listo, revisión pendiente |
+
 **R153, 2026-10-11:** [Windows micrófono conectado / retorno pendiente](pc-cache-and-migration-r150.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

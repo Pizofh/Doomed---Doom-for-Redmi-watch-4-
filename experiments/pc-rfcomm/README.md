@@ -1,5 +1,35 @@
 # Cliente RFCOMM de Windows — R148
 
+## Actual R154: modo físico explícito preparado, ensayo pendiente
+
+El usuario ya observó pairing Windows y volvió a Mi Fitness quitando ese vínculo.
+[Plan concreto de UN intento SPP y retorno](../../docs/windows-spp-probe-plan-r154.md).
+Default/build/test/simulate siguen offline. `node tools/pc-rfcomm.mjs probe`
+está implementado pero NO autorizado ni ejecutado sobre hardware en esta sesión.
+Requiere target privado MAC/modelo/FW/plan, build validado por hash, caché
+autenticada y un único radio local. No devuelve identificadores ni claves.
+
+`PhysicalWorker.cs` consulta cache/handles antes de permitir native transport.
+El constructor por defecto conserva el gate; solo factory física explícita,
+después del preflight, usa opt-in. Esto es una restricción de la herramienta,
+no sandbox; ejecutar directamente el worker evita la supervisión y no es el
+procedimiento autorizado. Parent JS supervisa timeout/cancelación, valida JSON,
+descarta stderr; kill no garantiza cierre remoto. No send/recv/comandos Xiaomi.
+
+Resultados locales R154: build x64 sin warnings; **134 aserciones** C# y **diez
+escenarios** del supervisor sin procesos/radio reales. Tests de preflight usan
+funciones inyectadas, no prueban proveedor Realtek o SPP del reloj. CI actualizado
+con pruebas del supervisor; aún no ejecutado en GitHub. No target privado creado.
+
+```powershell
+node tools/pc-rfcomm.mjs build
+node tools/pc-rfcomm.mjs test
+node tools/test-pc-rfcomm-supervisor.mjs
+```
+
+Las secciones siguientes describen el checkpoint histórico R148. Sus frases
+«solo offline»/«sin entrada física» corresponden a esa versión, no al modo R154.
+
 Fuente propia, C# compilado con el compilador .NET Framework ya instalado.
 **La CLI solo permite preparación y simulaciones. No ofrece conexión física.**
 No sustituye al cliente Android ni demuestra comunicación con M2315W1.

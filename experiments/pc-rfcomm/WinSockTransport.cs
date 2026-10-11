@@ -39,11 +39,15 @@ namespace Rw4.PcRfcomm
     {
         private readonly IWinSockApi api;
         private readonly BluetoothEndpoint endpoint;
+        private readonly bool physicalReviewed;
         private bool attempted, started, hasSocket, closed, closeConfirmed = true;
         private UIntPtr socket;
         internal WinSockTransport(IWinSockApi api, ulong address)
+            : this(api, address, false) { }
+        internal WinSockTransport(IWinSockApi api, ulong address, bool physicalReviewed)
         {
             this.api = api;
+            this.physicalReviewed = physicalReviewed;
             endpoint = BluetoothEndpoint.Spp(address);
         }
         internal static UIntPtr InvalidSocket
@@ -69,9 +73,9 @@ namespace Rw4.PcRfcomm
         {
             if (attempted || closed) throw new InvalidOperationException("One attempt only");
             attempted = true;
-            // Hard gate before ANY OS API. Future physical use needs reviewed bonding,
-            // compatibility and process supervision; no runtime switch opens this gate.
-            if (api.Physical) return new Step(Outcome.GateClosed);
+            // Default remains offline. The R154 worker opts in only after cached
+            // authenticated target checks, with an external process supervisor.
+            if (api.Physical && !physicalReviewed) return new Step(Outcome.GateClosed);
             int error = api.Startup();
             if (error != 0) return new Step(ErrorCategory(error));
             started = true;

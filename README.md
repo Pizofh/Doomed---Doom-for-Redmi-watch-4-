@@ -1,6 +1,14 @@
 # DOOM en Redmi Watch 4
 
-**Actual R148:** [cliente Windows preparado y probado offline](experiments/pc-rfcomm/README.md).
+**Actual R154:** usuario logró pairing Windows (micrófono) y retorno completo a
+Mi Fitness tras quitar el vínculo PC. [Un intento SPP Windows preparado](docs/windows-spp-probe-plan-r154.md),
+con preflight de caché/destino, seguridad y supervisión del worker. Build y pruebas
+offline pasan: 134 aserciones C# y diez escenarios del supervisor. **SPP físico
+todavía no ejecutado ni autorizado**; modo probe explícito requiere revisión y
+target privado verificado. No código/config Xiaomi transferidos ni Doom físico.
+CI actualizado, aún no ejecutado en GitHub. [Estado completo](docs/HANDOFF.md).
+
+**Historial R148:** [cliente Windows preparado y probado offline](experiments/pc-rfcomm/README.md).
 Compilación x64 y pruebas simuladas de apertura, timeout, cancelación y cierre
 pasan. Conexión física deshabilitada; no se escaneó ni conectó el reloj desde PC.
 Primer workflow CI para este cliente preparado, aún no ejecutado en GitHub.

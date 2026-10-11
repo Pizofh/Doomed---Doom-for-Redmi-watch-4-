@@ -1,9 +1,10 @@
-// Build/run own offline Windows client. No ADB, Bluetooth or arbitrary commands.
+// Offline by default. Explicit probe uses a reviewed private target and supervisor.
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {supervise, validateTarget} from './pc-rfcomm-supervisor.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dir = path.join(root, 'experiments/pc-rfcomm');
@@ -11,7 +12,7 @@ const output = path.join(root, 'artifacts/pc-rfcomm');
 const exe = path.join(output, 'Rw4PcRfcomm.exe');
 const metadata = path.join(output, 'build.json');
 const compiler = 'C:/Windows/Microsoft.NET/Framework64/v4.0.30319/csc.exe';
-const sources = ['Probe.cs', 'WinSockTransport.cs', 'SelfTests.cs'];
+const sources = ['Probe.cs', 'WinSockTransport.cs', 'PhysicalWorker.cs', 'SelfTests.cs'];
 const args = process.argv.slice(2);
 const action = args[0] ?? 'plan';
 const hashFile = file => {
@@ -31,7 +32,7 @@ function run(file, argv) {
 try {
   if (action === 'plan' && args.length <= 1) {
     console.log(JSON.stringify({checkpoint: 'R148', physicalEnabled: false,
-      actions: ['build', 'test', 'simulate success|refused|timeout|error|close-failure'],
+      actions: ['build', 'test', 'simulate success|refused|timeout|error|close-failure', 'probe (review R154 first)'],
       bluetoothOperationRequested: false, watchCommandRequested: false}));
   } else if (action === 'build' && args.length === 1) {
     const inputs = sourceHashes();
@@ -41,17 +42,27 @@ try {
       '/warn:4', '/warnaserror+', '/out:' + exe, ...sources.map(file => path.join(dir, file))]);
     if (status !== 0) throw Error('Compilation failed');
     fs.writeFileSync(metadata, JSON.stringify({checkpoint: 'R148', sourceHashes: inputs,
-      compilerSha256, executableSha256: hashFile(exe), physicalEnabled: false}, null, 2) + '\n');
+      compilerSha256, executableSha256: hashFile(exe), physicalEnabled: false,
+      physicalProbePrepared: true}, null, 2) + '\n');
     console.log(JSON.stringify({checkpoint: 'R148', built: true,
       executableSha256: hashFile(exe), physicalEnabled: false, bluetoothOperationRequested: false}));
-  } else if ((action === 'test' && args.length === 1) || (action === 'simulate' && args.length === 2 &&
+  } else if ((action === 'test' && args.length === 1) || (action === 'probe' && args.length === 1) ||
+      (action === 'simulate' && args.length === 2 &&
       ['success', 'refused', 'timeout', 'error', 'close-failure'].includes(args[1]))) {
     const prior = JSON.parse(fs.readFileSync(metadata, 'utf8'));
     if (prior.physicalEnabled !== false || prior.executableSha256 !== hashFile(exe) ||
         JSON.stringify(prior.sourceHashes) !== JSON.stringify(sourceHashes())) throw Error('Rebuild changed/unverified source');
-    process.exitCode = run(exe, args);
-  } else throw Error('Use plan, build, test or a documented simulation; physical mode unavailable');
+    if (action === 'probe') {
+      const targetFile = path.join(root, 'tools/local/pc-rfcomm/target.json');
+      const stat = fs.lstatSync(targetFile);
+      if (!stat.isFile() || stat.isSymbolicLink() || stat.size > 4096) throw Error('Target refused');
+      const address = validateTarget(JSON.parse(fs.readFileSync(targetFile, 'utf8')));
+      const report = await supervise(exe, address);
+      console.log(JSON.stringify(report));
+      process.exitCode = report.outcome === 'Opened' && report.closeConfirmed && report.workerExitConfirmed ? 0 : 1;
+    } else process.exitCode = run(exe, args);
+  } else throw Error('Unsupported action');
 } catch {
-  console.error('PC RFCOMM refused or failed. Use plan/build/test or a documented simulation; no physical mode.');
+  console.error('PC RFCOMM refused or failed. Check documented action, build hashes and private reviewed target; no fallback or raw errors.');
   process.exitCode = 1;
 }

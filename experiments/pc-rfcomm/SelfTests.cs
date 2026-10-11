@@ -203,6 +203,35 @@ namespace Rw4.PcRfcomm
             var plan = new StringWriter();
             Check(Program.Dispatch(new string[0], plan) == 0);
             Check(plan.ToString().Contains("\"physicalEnabled\":false"));
+
+            Check(CachedTarget.LayoutValid());
+            ulong parsed;
+            Check(CachedTarget.Parse("AABBCCDDEE01", out parsed) && parsed == 0xAABBCCDDEE01UL);
+            foreach (string bad in new[] { "", "000000000000", "AABBCCDDEE01\n", "AA:BB:CC:DD:EE:01", "PRIVATE-CANARY" })
+                Check(!CachedTarget.Parse(bad, out parsed));
+            int factoryCalls = 0, preflightCalls = 0;
+            var workerOutput = new StringWriter();
+            Check(PhysicalWorker.Run(new StringReader("PRIVATE-CANARY"), workerOutput,
+                address => { preflightCalls++; return Preflight.Ready; },
+                address => { factoryCalls++; return new FakeTransport(); }, new FakeClock()) == 2);
+            Check(preflightCalls == 0 && factoryCalls == 0 && !workerOutput.ToString().Contains("PRIVATE"));
+            foreach (Preflight rejected in new[] { Preflight.NotBonded, Preflight.MultipleRadios,
+                Preflight.CleanupFailed, Preflight.CacheLookupFailed }) {
+                workerOutput = new StringWriter();
+                Check(PhysicalWorker.Run(new StringReader("AABBCCDDEE01"), workerOutput,
+                    address => rejected, address => { factoryCalls++; return new FakeTransport(); },
+                    new FakeClock()) == 2);
+                Check(factoryCalls == 0 && !workerOutput.ToString().Contains("AABBCCDDEE01"));
+            }
+            workerOutput = new StringWriter();
+            t = new FakeTransport { Begin = () => new Step(Outcome.Opened) };
+            Check(PhysicalWorker.Run(new StringReader("AABBCCDDEE01"), workerOutput,
+                address => Preflight.Ready, address => t, new FakeClock()) == 0);
+            Check(t.Starts == 1 && t.Closes == 1 && workerOutput.ToString().Contains("\"bluetoothOperationRequested\":true"));
+            Check(!workerOutput.ToString().Contains("AABBCCDDEE01"));
+            api = new FakeApi { PhysicalFlag = true };
+            r = Probe.Run(new WinSockTransport(api, 1, true), new FakeClock(), 100, () => false);
+            Check(r.Outcome == Outcome.Opened && r.CloseConfirmed && api.Connects == 1);
             output.WriteLine("{\"checkpoint\":\"R148\",\"testsPassed\":true,\"assertions\":" + assertions +
                 ",\"nativeSocketCalls\":0,\"bluetoothOperationRequested\":false,\"watchCommandRequested\":false}");
             return 0;

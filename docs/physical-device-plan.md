@@ -1,6 +1,13 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
-**Actual R153, 2026-10-11:** conexión PC como micrófono reportada; ahora QR no
+**Actual R154, 2026-10-11:** retorno completo confirmado por usuario tras quitar
+vínculo PC y volver a Mi Fitness. [Plan de un intento SPP Windows](windows-spp-probe-plan-r154.md)
+con herramienta y pruebas offline listo para revisión; NO autorizado/ejecutado.
+Incluye pairing temporal con cambios de claves, retorno observado, riesgos,
+MAC verificada y supervisión. No repetir recuperación ni probar socket automáticamente.
+Código nativo de este cliente corre solo en PC; no habilita loader/nativo RW4.
+
+**Historial R153, 2026-10-11:** conexión PC como micrófono reportada; ahora QR no
 permite salir. [Estado y retorno a Mi Fitness pendiente](pc-cache-and-migration-r150.md).
 No nuevo ensayo PC. Reconexión desde registro existente/cuenta habitual propuesta;
 no eliminar/resetear/añadir reloj antes del resultado. No asumir retorno R152
