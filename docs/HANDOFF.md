@@ -1,5 +1,12 @@
 # Retomar el proyecto
 
+**R149, captura posterior:** usuario buscó manualmente desde «Agregar un
+dispositivo» de Windows; no aparece RW4 por nombre, sí dispositivos desconocidos
+sin identidad. No atribuirlos al reloj ni tratar la búsqueda como prueba de
+incompatibilidad/bond. [Registro](pc-link-preflight-r149.md). Ruta PC sin validar;
+no solicitar nuevas búsquedas, seleccionar desconocidos o migrar/resetear como
+atajo. Captura con datos personales no copiada al repo. Agente sin radio/ADB.
+
 **R149, 2026-10-11:** usuario pregunta cómo conservar vínculo al usar PC.
 [Preflight y límite](pc-link-preflight-r149.md): lectura PnP local aprobada cuenta
 cero registros por nombre RW4; NO prueba bond inexistente/identidad. Ninguna

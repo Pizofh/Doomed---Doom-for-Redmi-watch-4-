@@ -22,6 +22,22 @@ sin inquiry ni conexión; aún no implementada/ejecutada.
 
 ## Evidencia oficial RW4
 
+### Búsqueda manual de Windows reportada por el usuario
+
+El usuario abrió «Agregar un dispositivo» de Windows y compartió una captura:
+no aparece una entrada identificada como Redmi Watch 4 y hay entradas de
+«Dispositivo desconocido». Esto es descubrimiento iniciado manualmente por el
+usuario, distinto de la lectura PnP anterior. No atribuir las entradas desconocidas
+al reloj ni concluir incompatibilidad, ausencia de bond o causa de invisibilidad.
+La captura no demuestra un emparejamiento completado; una de las entradas muestra
+un aviso para intentar conectar de nuevo, sin identidad establecida. No se pidió
+seleccionarla, repetir intentos, migrar, desvincular ni restablecer el reloj.
+No se copia la imagen al repositorio: contiene información personal del PC.
+
+La ruta Windows sigue sin validarse. La ausencia de nombre en una búsqueda no
+justifica habilitar el cliente físico ni sustituye evidencia de compatibilidad
+del procedimiento de emparejamiento con M2315W1/2.2.86.
+
 [FAQ original Xiaomi RW4](https://www.mi.com/uk/support/faq/details/KA-91528/),
 sección de cambiar teléfono: para la misma cuenta describe Connect New Phone;
 para una cuenta diferente describe reset y nuevo enlace. Esto es documentación
