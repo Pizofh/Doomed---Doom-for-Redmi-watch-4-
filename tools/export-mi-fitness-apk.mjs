@@ -28,7 +28,7 @@ function installedBase(text, allowBluetoothApex = false) {
   const paths = rows.map(row => {
     // Fixed package query, strict path grammar, direct argv to `pull` (no shell).
     const appPath = /^package:\/(?:data\/app|system\/app|system\/priv-app|product\/app|product\/priv-app|system_ext\/app|system_ext\/priv-app)\/[A-Za-z0-9_./+=~-]+\.apk$/.test(row);
-    const bluetoothApexPath = allowBluetoothApex && /^package:\/apex\/com\.android\.bt(?:services)?(?:@\d+)?\/app\/Bluetooth(?:Google)?\/[A-Za-z0-9_.-]+\.apk$/.test(row);
+    const bluetoothApexPath = allowBluetoothApex && /^package:\/apex\/com\.android\.bt(?:services)?(?:@\d+)?\/app\/Bluetooth(?:Google)?(?:@[A-Za-z0-9][A-Za-z0-9_.-]{0,63})?\/[A-Za-z0-9_.-]+\.apk$/.test(row);
     if (row.length > 1024 || !(appPath || bluetoothApexPath)
         || row.includes('/../') || row.includes('/./')) throw Error('Unexpected package path');
     return row.slice(8);

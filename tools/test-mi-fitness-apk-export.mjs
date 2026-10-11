@@ -60,6 +60,7 @@ assert(!JSON.stringify(coreReport).includes('private-core-path'));
 assert.throws(() => copyInstalledMiFitness(fake, path.join(output, 'unknown'), 'arbitrary.package'));
 for (const remote of ['/apex/com.android.btservices/app/Bluetooth/Bluetooth.apk',
   '/apex/com.android.bt@123456/app/Bluetooth/Bluetooth.apk',
+  '/apex/com.android.bt/app/Bluetooth@BP2A.250605.031.A3/Bluetooth.apk',
   '/system/app/Bluetooth/Bluetooth.apk']) {
   const btCalls = [];
   const result = copyInstalledMiFitness(args => {
@@ -75,6 +76,8 @@ for (const remote of ['/apex/com.android.btservices/app/Bluetooth/Bluetooth.apk'
   assert.ok(!JSON.stringify(result).includes(remote));
 }
 for (const remote of ['/apex/com.android.bt/app/Bluetooth/../Bluetooth.apk',
+  '/apex/com.android.bt/app/Bluetooth@../Bluetooth.apk',
+  '/apex/com.android.bt/app/Bluetooth@build;command/Bluetooth.apk',
   '/apex/private.module/app/Bluetooth/Bluetooth.apk', '/data/user/0/com.android.bluetooth/secret.apk']) {
   let pulled = false;
   assert.throws(() => copyInstalledMiFitness(args => {
@@ -97,7 +100,8 @@ for (const [label, response, stage, saved] of [
   ['missing', '', 'PACKAGE_NO_PATH', false],
   ['unexpected', 'private error with KEY', 'PACKAGE_RESPONSE_REFUSED', false],
   ['allowed', 'package:/apex/com.android.bt/app/Bluetooth/Bluetooth.apk', 'READY_TO_COPY', true],
-  ['versioned', 'package:/apex/com.android.btservices/app/Bluetooth@PRIVATE-BUILD/Bluetooth.apk', 'PACKAGE_PATH_REFUSED', true],
+  ['versioned', 'package:/apex/com.android.btservices/app/Bluetooth@PRIVATE-BUILD/Bluetooth.apk', 'READY_TO_COPY', true],
+  ['unknown-dir', 'package:/apex/com.android.btservices/app/Other@PRIVATE-BUILD/Bluetooth.apk', 'PACKAGE_PATH_REFUSED', true],
 ]) {
   const calls = [];
   const directory = path.join(output, 'diagnose-' + label);

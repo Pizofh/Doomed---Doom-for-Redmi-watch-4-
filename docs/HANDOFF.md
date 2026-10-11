@@ -1,5 +1,18 @@
 # Retomar el proyecto
 
+**R144, 2026-10-11:** diagnóstico usuario device/1path/PACKAGE_PATH_REFUSED.
+Metadata PC identifica Bluetooth@<build> dentro de APEX esperado: parser propio
+rechazaba sufijo, no USB ni ausenciapaquete. Corregido/testregresión pasa; no
+copy real aún, no repetirdiagnose ni borrar metadata. Usuario pide opciones y
+cambio estrategia: [decisión acotada](phone-bluetooth-apk-plan-r142.md), no bucle
+HCI/PROBE/APKsdebug. [Draft upstream](upstream-connection-question.md) listo,
+NO enviado/publicado; requiere instrucción explícita para comunicar. Última
+copia/análisisoffline posible con export-bluetooth corregido, buscar fix concreto;
+si no, cambiar vía. Otro hostPC/prestado solo alternativa no compat probada,
+otrophone no disponible; inventarioCIMPC opcionaldenied/no disponibilidad
+establecida. No nuevos vínculos/migración/reset sinplan/decisión. Gatesnativo/fw
+cerrados, éxitoexport no resuelve EOF delreloj por sísolo.
+
 **R143, 2026-10-11:** [exportación fallida y diagnóstico preparado](phone-bluetooth-apk-plan-r142.md).
 Usuario aviso genérico exportfailed, BT/USBdebug encendidos; autorización/ruta/
 pkg no demostrados. PC exportdir ausente,3ADBhashpins coinciden, no partial.

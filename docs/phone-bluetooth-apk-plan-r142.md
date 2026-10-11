@@ -1,5 +1,44 @@
 # R142 — revisar el componente Bluetooth de este teléfono
 
+## R144 — fallo del exporter identificado y estrategia acotada
+
+El usuario aporta stage=PACKAGE_PATH_REFUSED, usbState=device, una ruta y
+metadata privada guardada. Revisión PC: el APK devuelto está dentro de
+`/apex/com.android.bt/app/Bluetooth@<build>/Bluetooth.apk`. El parser omitía
+el sufijo de build del directorio. **Error de validación propio**, no rechazo
+Bluetooth, fallo de autorización USB ni paquete ausente en esta consulta.
+No modifica/explica todavía el EOF del socket al reloj.
+
+Corregido el patrón únicamente para directorio Bluetooth/BluetoothGoogle
+con sufijo @build ASCII acotado; se mantienen módulo APEX fijo, rechazo de
+traversal/caracteres de shell, base única y selector de paquete fijo. Regresión
+con la forma exacta observada y casos negativos pasa. No pull/ADB real por el
+agente. La copia ahora puede intentarse con el comando export-bluetooth del
+plan inferior; no repetir diagnose-bluetooth ni borrar su metadata.
+
+El usuario pide cambiar de estrategia tras demasiadas iteraciones. Decisión:
+no seguir variaciones HCI/logging ni nuevas APKs solo de instrumentación. Una
+revisión offline del componente, si se completa la copia, debe aportar una
+corrección/ruta concreta; si no, registrar el límite y cambiar de vía. No
+convertir cada incógnita en otra prueba física.
+
+Se preparó [consulta técnica para upstream](upstream-connection-question.md),
+sin enviar/publicar. RW4 continúa experimental/cobertura desconocida en su
+documentación. No suponer que una actualización disponible arregla el fallo
+ni instalar el cliente completo con envíos automáticos de configuración.
+
+Alternativa de otro host (PC o Android prestado): potencialmente separa el
+problema HyperOS, pero compatibilidad, transporte y necesidad/efectos de un
+nuevo vínculo no demostrados. Usuario no tiene otro teléfono disponible.
+Inventario CIM del radio PC fue denegado en sandbox; disponibilidad desconocida,
+no equivale a ausencia y no se solicitaron permisos para esa rama opcional.
+No iniciar pairing, migración/reset o transferencia hasta plan/decisión expresa.
+
+Checkpoint recomendado: compatibilidad real del enlace, combinando el último
+análisis offline acotado y evidencia upstream. Firmware/nativo/instalación en el
+reloj siguen pendientes aunque se resuelva Bluetooth; no prometer Doom físico
+como consecuencia automática de abrir SPP.
+
 ## R143 — exportación fallida, causa aún no identificada
 
 El usuario recibe el aviso genérico de exportación fallida y confirma Bluetooth

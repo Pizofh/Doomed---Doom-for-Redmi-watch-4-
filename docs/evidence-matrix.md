@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**R144, 2026-10-11:** [causa del fallo de copia identificada](phone-bluetooth-apk-plan-r142.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Export falló porque USB no estaba autorizado/paquete ausente | Consulta R143 | device, una ruta APK; metadata revisada | REFUTADO PARA ESTA CONSULTA | Alta | Manual/PC | Ruta legítima de pm rechazada por validador propio |
+| Parser omitía directorios Bluetooth con @build | Exporter propio | Ruta observada, patrón previo y regresión nueva | CONFIRMADO EN CÓDIGO/PC | Alta | Sí, sintético | Corregido; copia real todavía pendiente |
+| Corrección de exportador soluciona EOF del socket RW4 | Enlace físico | Ninguna prueba de relación causal | SIN EVIDENCIA | Desconocida | No | Son fallos diferentes; no PROBE nuevo |
+
 **R143, 2026-10-11:** [copia fallida y fase de diagnóstico](phone-bluetooth-apk-plan-r142.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
