@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**R148, 2026-10-11:** [cliente PC offline](../experiments/pc-rfcomm/README.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Cliente PC compila y controlador maneja cierre/timeout/cancelación | Windows x64 / fuentes propias | Build csc oficial, tests API/reloj falsos | CONFIRMADO EN PC | Alta | Sí | 113 aserciones; no ensayos físicos |
+| Backend nativo disponible para conexión física en esta CLI | Ejecutable R148 | Entrada física ausente; wrapper Physical bloqueado antes de API | REFUTADO PARA ESTA VERSIÓN | Alta | Sí | No flags/env de desbloqueo, no llamada socket OS |
+| Interoperabilidad funciona con Realtek y RW4 | Driver/firmware físicos | Ninguna llamada nativa ni ensayo | SIN EVIDENCIA | Desconocida | No | Layouts verificados no equivalen a ejecución nativa validada |
+| Pipeline CI pasó en GitHub | Workflow nuevo | Archivo preparado; sin ejecución remota | SIN EVIDENCIA | Desconocida | Solo comandos local | Sin secrets, firmware o WAD; build/test offline |
+
+
 **R147, 2026-10-11:** [ruta alternativa desde PC](pc-transport-alternative.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

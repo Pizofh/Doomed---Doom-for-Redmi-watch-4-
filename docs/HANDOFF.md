@@ -1,5 +1,20 @@
 # Retomar el proyecto
 
+**R148, 2026-10-11:** [cliente C# Windows offline](../experiments/pc-rfcomm/README.md)
+implementado. node tools/pc-rfcomm.mjs build/test; compiler oficial de Windows
+con firma válida, sin instalaciones. Tests pasan, 113 aserciones con clocks/API
+falsas; cinco simulaciones CLI ejercitadas. Backend Winsock preparado con UUID
+SPP/auth+encrypt/nonblocking/select/SO_ERROR, pero api.Physical=true bloquea antes
+de WSAStartup y no hay entrada física en CLI. Native API real NO ejecutada.
+Sin discovery, pairing, ADB o cambio del reloj. Resource cleanup, errores,
+deadline/cancel/late results, layouts y guard físico probados. Fixture Poll
+corregido al detectar que retenía el error anterior; suite final pasa.
+Workflow GitHub Actions Windows preparado, NO ejecutado ni subido; repo sin remote.
+Próximo: vínculo Windows/RW4, preflight/adapter y supervisor antes de habilitar
+probe físico; plan y revisión todavía obligatorios. No prometer timeout de driver
+nativo solo por simulation ni sandbox de módulos. Consulta R146 aún no publicada.
+
+
 **R147, 2026-10-11:** usuario pregunta por avance independiente de upstream.
 [Alternativa Windows evaluada](pc-transport-alternative.md): lectura CIM aprobada
 fuera del sandbox detecta Realtek Bluetooth Adapter, estado OK. No direcciones,

@@ -1,5 +1,17 @@
 # DOOM en Redmi Watch 4
 
+**Actual R148:** [cliente Windows preparado y probado offline](experiments/pc-rfcomm/README.md).
+Compilación x64 y pruebas simuladas de apertura, timeout, cancelación y cierre
+pasan. Conexión física deshabilitada; no se escaneó ni conectó el reloj desde PC.
+Primer workflow CI para este cliente preparado, aún no ejecutado en GitHub.
+Siguiente: compatibilidad del vínculo Windows/RW4 antes de proponer una prueba.
+La consulta upstream está autorizada y preparada, pero sigue sin publicarse por
+falta de navegador disponible. Doom funciona en emulador S3; ejecución RW4 física
+todavía no demostrada. [Retomar estado completo](docs/HANDOFF.md).
+
+Las entradas inferiores conservan el historial de checkpoints anteriores.
+
+
 **Actual R128:** [comparación de servicios terminada; reloj y Mi Fitness normales](docs/phone-core-state-plan.md).
 Al detener Mi Fitness desaparece el registro core externo. Su objeto de conexión
 tiene un ciclo distinto; socket libre y causa de E03 siguen sin probar.
