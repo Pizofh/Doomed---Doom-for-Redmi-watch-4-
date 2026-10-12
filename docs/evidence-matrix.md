@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**R171, 2026-10-12:** [healthcheck físico correcto](healthcheck-physical-r171.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Healthcheck conjunto devuelve batería/info/catálogo | M2315W1/2.2.86 físico | Complete/V1/HMAC/auth/cifrado;97 %;21 esferas/1 activa | CONFIRMADO EN RW4 | Alta | Sí, sesión autorizada del agente | 6TX/12RX,1727ms,cierre normal;sin archivos |
+| ID propio365799910 permanece ausente | Snapshot físico R171 | testFacePresent=false,catálogo sin IDs desconocidos | CONFIRMADO PARA ESTE SNAPSHOT | Alta | Sí | Reconsultar al instalar; no reserva permanente |
+| Salud de UI/render tras este chequeo | Misma unidad | Sin observación visual/API de pantalla | SIN EVIDENCIA | Desconocida | No | Control plane responde; no prueba funciones completas |
+
 **R170, 2026-10-12:** [healthcheck remoto preparado, no ejecutado físicamente](healthcheck-r170.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

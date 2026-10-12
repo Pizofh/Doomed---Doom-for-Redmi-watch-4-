@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R171:** [healthcheck real completado desde el PC](docs/healthcheck-physical-r171.md):
+autenticación/cifrado válidos,97 % de batería,firmware2.2.86 y21 esferas/1 activa.
+Cierre correcto,sin archivos enviados. No verifica pantalla/UI ni autoriza
+instalación; el paquete propio todavía está ausente y la escritura sigue bloqueada.
+
 **Actual R170:** [healthcheck del servicio de control preparado](docs/healthcheck-r170.md).
 Agrupa las consultas existentes de batería/info/catálogo; 8 sesiones sintéticas
 y1 IPC pasan. No prueba pantalla/UI ni recovery y no se ejecutó en el reloj.

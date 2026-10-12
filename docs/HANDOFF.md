@@ -1,5 +1,15 @@
 # Retomar el proyecto
 
+**Actual R171, 2026-10-12:** [healthcheck físico correcto](healthcheck-physical-r171.md).
+Usuario «bueno,dale;cuando sea necesario lo hago yo» autoriza avanzar con
+chequeo previamente descrito. Agente ejecutó una vez `pc-rfcomm.mjs healthcheck`:
+Complete/V1/HMAC+auth+cifrado,batería97,modelo reconocido,FW2.2.86,21faces/1activa/
+0unknown,propio365799910 ausente,6TX12RX/1727ms,close+workertrue/exit0/sinerror.
+Sin archivos/USB/ADB/phone/pairing/reintentos. UI/render/recovery no observados.
+No pedir retorno a Mi Fitness ni repetir healthcheck sin nueva necesidad.
+Gate de primera escritura estática sigue cerrado; falta revisión/autorización
+separada del plan R169. No interpretar health positivo como permiso INSTALL.
+
 **Actual R170, 2026-10-12:** [healthcheck preparado](healthcheck-r170.md) tras
 pregunta del usuario sobre supervisión remota. Nueva acción manual
 `pc-rfcomm.mjs healthcheck`: auth + batería/info/lista en la misma sesión,

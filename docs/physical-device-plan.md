@@ -1,5 +1,11 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**R171:** [healthcheck real correcto](healthcheck-physical-r171.md), autorizado
+por el usuario y ejecutado una vez desde el PC. Auth/cifrado,97 %,FW2.2.86,
+21 esferas/1 activa,cierre normal,sin archivos. Sin observación UI/render ni
+recovery nuevo. La primera escritura estática aún requiere revisión separada;
+gates Node/nativo cerrados. No reparejar ni migrar entre estas consultas.
+
 **R170:** [healthcheck de consultas preparado](healthcheck-r170.md), útil para
 supervisión remota del canal. No ejecutado físicamente ni habilita escritura;
 no verifica pantalla/UI o recovery. El plan de primera instalación sigue pendiente.
