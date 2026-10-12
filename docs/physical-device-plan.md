@@ -1,5 +1,10 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**R174:** [plan concreto de ensayo del ID alternativo](static-id-trial-plan-r174.md)
+preparado. Adaptador fijo r173/journal separado probado offline; sin operación
+física. Gates cerrados. Revisar cambio de ID/hash antes de un nuevo intento;
+no borrar registro incierto original ni reinterpretarlo como recibo válido.
+
 **R172/R173:** usuario autoriza primera esfera y confirma que puede intervenir.
 [InstallStart rechazado](static-watchface-physical-r172.md) antes de subir archivo;
 0partes,cierre normal. UI/menús confirmados y catálogo/flags/activa conservados

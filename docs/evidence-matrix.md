@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**R174, 2026-10-12:** [perfil alternativo y ensayo limitado preparados](static-id-trial-plan-r174.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Flujo limitado acepta solo hash/ID del perfil elegido | ClientePC | Pruebas de ambos perfiles y rechazo de hash/etiqueta ajenos | CONFIRMADO OFFLINE | Alta | Sí | No habilita variante arbitraria o hardware |
+| Recibo/journal de un perfil no sirve para otro | ClientePC | Caso cruzado rechazado antes de abrir link | CONFIRMADO OFFLINE | Alta | Sí | Ledger r173 separado, original incierto preservado |
+| Variante alternativa completa envío/retirada en peers sintéticos | PeersPC | 12codec/API y22wire/IPC/journal del r173 pasan | CONFIRMADO OFFLINE | Alta | Sí | No acceptance/render/DELETE en RW4 |
+| Healthcheck reconoce presencia del nuevo ID previsto | PeerV1 | Caso específico r173 con flags sanitizados | CONFIRMADO OFFLINE | Alta | Sí | Solo presencia, no prueba de propiedad del archivo |
+| Cambiar ID resolverá el rechazo físico | RW4/2.2.86 | Todavía no probado | SIN EVIDENCIA FÍSICA | Desconocida | No | Hipótesis; no borrar otras esferas o insistir a ciegas |
+
 **R172/R173, 2026-10-12:** [rechazo de InstallStart](static-watchface-physical-r172.md), [alternativa offline](static-id-alternative-r173.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -1,5 +1,11 @@
 # DOOM en Redmi Watch 4
 
+**Actual R174:** [ensayo del ID alternativo preparado y probado offline](docs/static-id-trial-plan-r174.md).
+Perfil r173 fijado por SHA/ID, registro separado y protección contra recibos de
+otro perfil. Ambas variantes pasan las pruebas locales; gates físicos cerrados.
+Pendiente revisar un intento del nuevo paquete; no hubo Bluetooth ni escritura
+al reloj en esta sesión y no está demostrada la causa del rechazo anterior.
+
 **Actual R172/R173:** [primer InstallStart rechazado antes de enviar el archivo](docs/static-watchface-physical-r172.md).
 Usuario confirma esfera/menús normales; GET posterior conserva todos los IDs,
 flags y selección. Escritura de nuevo bloqueada. [Alternativa de ID preparada

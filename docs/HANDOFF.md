@@ -1,5 +1,24 @@
 # Retomar el proyecto
 
+**Actual R174, 2026-10-12:** [ensayo alternativo preparado](static-id-trial-plan-r174.md).
+Usuario «adelante» a preparar ID alternativo. Ningún hardware/BT/phone/ADB usado
+en este turno. Nuevo módulo static-watchface-spec fija r167 y r173 (NO IDs/files
+genéricos); factory exige SHA/ID del perfil, CLI etiqueta explícita r173 y
+journal separado static-watchface-r173.json. El original incierto NO tocado.
+Se comprueba matches(plan) entre journal/perfil antes de abrir link; prueba
+cruzada rechaza variante equivocada. Healthcheck identifica ambos IDs previstos
+con flags propios, no ownership/render por presencia.
+
+Ambas variantes pasan12codec/API y22wire/IPC/journal cada una. Regresión y
+9healthchecks sintéticos+1IPC pasan; worker258assertions/gates ambos perfiles
+y native cerrados pasan. Build yprepare r173 confirmados, physicalfalse.
+Gates Node/native FALSE, REVIEWED_VARIANT=r167: no instalar ahora ni solo por
+poner r173 como argumento. Nuevo perfil bytes/hash los de R173, no modificado.
+Plan preparado incluye install r173/remove r173; nuevo paquete/ID necesitan
+revisión del ensayo limitado antes de abrir gates, un solo intento, noautoSET,
+ni otrosIDs/deleteajenos/firmware. No pedir otra recuperación del intentoR172,
+ya confirmada. Próximo único checkpoint: ensayo limitado tras revisión concreta.
+
 **Actual R172/R173, 2026-10-12:** [primer intento físico rechazado](static-watchface-physical-r172.md),
 [alternativa de ID solo PC](static-id-alternative-r173.md). Usuario aprobó la
 prueba estática y puede manejar el reloj. Se habilitaron temporalmente ambas
