@@ -5,15 +5,21 @@ import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {projectRoot as root,packageRoot} from './verify-emulator.mjs';
 import {guardEmulator,snapshotData,resetGuest} from './emulator-ui.mjs';
-if(process.argv.length!==2)throw Error('NoArguments');
-const id='365219991',guest='/data/app/watchface/market/'+id;
-const build=path.join(root,'artifacts/lua-minimal-r177');
-const dest=path.join(root,'artifacts/emulator/lua-minimal-r177');
+const diagnostic=process.argv[2]==='diagnostic';
+if(process.argv.length!==(diagnostic?3:2))throw Error('OnlyOptionalDiagnosticAccepted');
+const id=diagnostic?'365219992':'365219991',guest='/data/app/watchface/market/'+id;
+const name=diagnostic?'LuaDiag':'LuaProbe',checkpoint=diagnostic?'R180':'R177';
+const label=diagnostic?'lua-diagnostic-r180':'lua-minimal-r177';
+const size=diagnostic?10524:19796;
+const pinnedHash=diagnostic?'140b2a05618f617e70a7f5f28029beefed64251c43af0086cfaacfe0a681c8f1':
+  'a40c85607a8c208823f2dd6064ebca3c907a850e9a392c0b3eb0d718d3c9490a';
+const build=path.join(root,'artifacts',label);
+const dest=path.join(root,'artifacts/emulator',label);
 const hash=b=>createHash('sha256').update(b).digest('hex');
 const review=JSON.parse(fs.readFileSync(path.join(build,'review.json'),'utf8'));
-const bytes=fs.readFileSync(path.join(build,'LuaProbe-id-only.face'));
-const source=fs.readFileSync(path.join(root,'experiments/lua-minimal/main.lua'));
-if(review.id!==id||review.size!==19796||review.sha256!=='a40c85607a8c208823f2dd6064ebca3c907a850e9a392c0b3eb0d718d3c9490a'||
+const bytes=fs.readFileSync(path.join(build,name+'-id-only.face'));
+const source=fs.readFileSync(path.join(root,'experiments',diagnostic?'lua-diagnostic':'lua-minimal','main.lua'));
+if(review.id!==id||review.size!==size||review.sha256!==pinnedHash||
   hash(bytes)!==review.sha256||hash(source)!==review.sourceSha256||!bytes.includes(source)||bytes[5]!==0||bytes.subarray(40,49).toString('ascii')!==id)throw Error('PackageChanged');
 if(fs.existsSync(dest)){
   // Preserve a failed local preflight only; never resume a recorded installation.
@@ -31,14 +37,14 @@ adb(['pull','/data/app/watchface/watchface_list.json',path.join(dest,'list-befor
 const before=JSON.parse(fs.readFileSync(path.join(dest,'list-before.json'),'utf8')).watchface_list;
 if(before.some(f=>f.id===id)||before.filter(f=>String(f.in_use)==='1').length<1)throw Error('UnexpectedCatalog');
 const snapshot=await snapshotData();
-const record={checkpoint:'R177',id,guest,sha256:review.sha256,headerByte5:0,snapshot,physicalTransport:false,
+const record={checkpoint,id,guest,sha256:review.sha256,headerByte5:0,snapshot,physicalTransport:false,
   sourceSha256:review.sourceSha256,resetRequested:false,priorActiveIds:before.filter(f=>String(f.in_use)==='1').map(f=>f.id)};
 fs.writeFileSync(path.join(dest,'install.json'),JSON.stringify(record,null,2)+'\n');
 adb(['shell','mkdir',guest],'mkdir');
-adb(['push',path.join(build,'LuaProbe-id-only.face'),guest+'/resource.bin'],'push');
+adb(['push',path.join(build,name+'-id-only.face'),guest+'/resource.bin'],'push');
 const rb=path.join(dest,'resource-readback.bin');adb(['pull',guest+'/resource.bin',rb],'readback');
 if(hash(fs.readFileSync(rb))!==review.sha256)throw Error('ReadbackMismatch');
 adb(['shell','rm','/data/app/watchface/watchface_list.json'],'invalidate-emulator-cache');
 await resetGuest();record.resetRequested=true;
 fs.writeFileSync(path.join(dest,'install.json'),JSON.stringify(record,null,2)+'\n');
-console.log(JSON.stringify({checkpoint:'R177',id,readbackMatched:true,headerByte5:0,resetRequested:true,physicalTransport:false}));
+console.log(JSON.stringify({checkpoint,id,readbackMatched:true,headerByte5:0,resetRequested:true,physicalTransport:false}));

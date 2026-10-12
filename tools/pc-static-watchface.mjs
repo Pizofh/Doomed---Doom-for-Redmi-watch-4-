@@ -23,7 +23,7 @@ const digest = data => createHash('sha256').update(data).digest('hex');
 function prepared(spec) {
   const bytes = read(path.join(root,spec.artifact),spec.size);
   const plan = prepareStatic(bytes,{variant:spec.variant});
-  if(spec.contentKind === 'lua-minimal'){
+  if(spec.contentKind !== 'static-image'){
     const source = read(path.join(root,spec.sourceArtifact),65536);
     if(digest(source)!==spec.sourceSha256 || !bytes.includes(source))throw Error();
   }
@@ -46,7 +46,7 @@ try {
   if (afterSpace && spec.variant !== 'r173') throw Error();
   const operation = action.startsWith('install') ? 'install' : 'remove';
   const enabled = PHYSICAL_WRITES_REVIEWED && spec.variant === REVIEWED_VARIANT;
-  const checkpoint = spec.variant === 'r177' ? 'R178' : spec.variant === 'r173' ? 'R174' : 'R169';
+  const checkpoint = spec.variant === 'r180' ? 'R181' : spec.variant === 'r177' ? 'R178' : spec.variant === 'r173' ? 'R174' : 'R169';
   if (['install','remove','install-after-space','remove-after-space'].includes(action)) {
     if (!enabled) {
       console.log(JSON.stringify({checkpoint,variant:spec.variant,contentKind:spec.contentKind,status:'PhysicalGateClosed',
@@ -74,7 +74,7 @@ try {
   } else {
     const {plan,metadata} = prepared(spec);
     console.log(JSON.stringify({checkpoint,variant:spec.variant,contentKind:spec.contentKind,status:'OfflinePrepared',id:plan.id,size:plan.size,sha256:plan.sha256,
-      scriptsIncluded:spec.contentKind==='lua-minimal',nativeCodeIncluded:false,
+      scriptsIncluded:spec.contentKind!=='static-image',nativeCodeIncluded:false,
       defaultParts:chunks(plan).length,staticTxBudget:32768,readonlyTxBudget:16384,
       executableSha256:metadata.executableSha256,buildInputsVerified:true,
       persistentJournalImplemented:true,physicalEntry:enabled ? 'ReviewedWatchfaceOnly' : 'GateClosed',physicalEnabled:enabled,

@@ -5,7 +5,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
-import {watchfaceVariants} from './static-watchface-spec.mjs';
+import {staticSpec,watchfaceVariants} from './static-watchface-spec.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 for (const action of ['install','remove']) for(const variant of watchfaceVariants) {
   const result = spawnSync(process.execPath,[path.join(root,'tools/pc-static-watchface.mjs'),action,variant],
@@ -14,7 +14,7 @@ for (const action of ['install','remove']) for(const variant of watchfaceVariant
   const report = JSON.parse(result.stdout);
   assert.equal(report.status,'PhysicalGateClosed');assert.equal(report.bluetoothOperationRequested,false);
   assert.equal(report.variant,variant);
-  assert.equal(report.contentKind,variant==='r177'?'lua-minimal':'static-image');
+  assert.equal(report.contentKind,staticSpec(variant).contentKind);
   assert.equal(report.watchCommandRequested,false);assert.equal(report.filesTransferred,false);
 }
 for(const action of ['install-after-space','remove-after-space']) {

@@ -213,7 +213,7 @@ const kindRecord=JSON.parse(fs.readFileSync(kindFile,'utf8'));
 kindRecord.contentKind=spec.contentKind==='lua-minimal'?'static-image':'lua-minimal';
 fs.writeFileSync(kindFile,JSON.stringify(kindRecord));assert.throws(()=>new StaticJournal(kindFile,address,plan));
 delete kindRecord.contentKind;const legacyText=JSON.stringify(kindRecord);fs.writeFileSync(kindFile,legacyText);
-if(spec.contentKind==='lua-minimal')assert.throws(()=>new StaticJournal(kindFile,address,plan));
+if(spec.contentKind!=='static-image')assert.throws(()=>new StaticJournal(kindFile,address,plan));
 else {const legacy=new StaticJournal(kindFile,address,plan);legacy.close();assert.equal(fs.readFileSync(kindFile,'utf8'),legacyText);}
 scenarios++;
 console.log(JSON.stringify({checkpoint:'R169',variant:spec.variant,staticWireIpcJournalTestsPassed:true,scenarios,
