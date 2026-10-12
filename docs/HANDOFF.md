@@ -1,5 +1,20 @@
 # Retomar el proyecto
 
+**Actual R161, 2026-10-12:** [dos sesiones con Xiaomi v1 y AuthHmacMismatch](windows-auth-result-r161.md).
+2TX/2RX cada una, 7433/1762ms, close+worker true/exit0, sin nativeError/supervisor.
+Primera pidió pairing; usuario aceptó y repitió manualmente. No auth-final/GET/
+upload/archivos. SPP y nonce response físicos CONFIRMADOS; clave histórica NO
+autentica, causa rotación probable/no demostrada. Orden KDF/HMAC coincide con
+XiaomiAuthService del worktree existente; no cambio/build/tests nuevos. Guía GB
+reconsultada advierte invalidación al desvincular. NO repetir session ni guesses.
+Próximo: una vuelta Mi Fitness, sincronizar, copiar logs actuales a privado
+tools/local/mi-fitness-logs-current/ (directorio preparado; aún vacío). Mantener
+Mi Fitness asociado después: NO otro unlink/Conectar nuevo teléfono hasta revisar
+credencial y acceso Windows que preserve asociación. auth.json viejo NO renovado;
+prep actual solo usa directorio histórico y no sobrescribe, no ejecutarlo para
+renovar. Agente no radio/ADB. Retorno de estos intentos aún pendiente, no asumir
+recovery ni datos físicos/nativo/Doom. No nueva APK/HCI/cloud/login.
+
 **R160, 2026-10-12:** [batch falla antes de Xiaomi en20147ms](windows-session-open-failure-r160.md),
 workerexit1 confirmado, categoría nativa no guardada; no inferir key/proto.
 Usuario reactivó Conectar nuevo teléfono pero WINDOWS CONSERVÓ VÍNCULO VIEJO.

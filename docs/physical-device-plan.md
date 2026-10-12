@@ -1,6 +1,13 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
-**Actual R160, 2026-10-12:** [apertura batch fallida/revisión](windows-session-open-failure-r160.md).
+**Actual R161, 2026-10-12:** [dos sesiones llegaron a Xiaomi v1](windows-auth-result-r161.md),
+HMAC histórico no coincide; ambas cerraron normalmente. No auth-final, queries
+o archivos. No repetir con esa clave. Retorno stock Mi Fitness ya autorizado y
+copia local privada de logs recientes; luego conservar asociación y revisar
+acceso PC antes de otra prueba. No nuevo unlink para reciclar credenciales.
+Agente no ejecuta radio; retorno actual aún no comunicado. Gate nativo intacto.
+
+**Historial R160, 2026-10-12:** [apertura batch fallida/revisión](windows-session-open-failure-r160.md).
 Windows mantenía vínculo antiguo tras nuevo flujo del reloj. Corrección parent
 terminal-close y detalle sanitizado, no cambio de payload. Próxima secuencia:
 pairing Windows nuevo desde QR actual, teléfono BT OFF, un lote manual, mantener

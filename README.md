@@ -1,6 +1,13 @@
 # DOOM en Redmi Watch 4
 
-**Actual R160:** [primer lote falló antes de enviar comandos](docs/windows-session-open-failure-r160.md).
+**Actual R161:** [el reloj responde al protocolo Xiaomi v1](docs/windows-auth-result-r161.md)
+en dos sesiones Windows; falla HMAC con la clave histórica. Sin auth-final,
+consultas de datos o archivos enviados; cierre y worker confirmados en ambas.
+Siguiente: logs recientes tras volver a Mi Fitness, conservando esa asociación
+para no invalidar otra vez el candidato. No repetir con la misma clave ni subir
+logs al chat. Doom físico y ejecución nativa siguen sin demostrar.
+
+**Historial R160:** [primer lote falló antes de enviar comandos](docs/windows-session-open-failure-r160.md).
 Windows conservaba vínculo anterior después de cambiar el modo del reloj.
 Se corrigió parent-close y reporte nativo, sin alterar payload/alcance del lote;
 build y regresiones offline pasan. Próximo: pairing Windows nuevo desde QR

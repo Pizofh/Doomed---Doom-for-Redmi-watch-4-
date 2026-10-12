@@ -1,5 +1,11 @@
 # R159 — una sesión agrupada de consultas Xiaomi
 
+**Resultado R161:** [dos intercambios Xiaomi v1](windows-auth-result-r161.md)
+terminan en AuthHmacMismatch con el candidato histórico, cierre/worker OK.
+No repetir el lote con esa credencial; no auth-final/GET/archivos. Obtener logs
+recientes tras volver a Mi Fitness y CONSERVAR esa asociación antes de revisar
+otra ruta de acceso PC. Las instrucciones inferiores son historial del ensayo.
+
 **Corrección R160:** [primer lote no abrió el canal](windows-session-open-failure-r160.md).
 Windows conservaba vínculo antiguo tras nuevo flujo del reloj. Parent terminal
 close corregido/probado, reporte nativo acotado ampliado, sin nuevos payloads.

@@ -1,5 +1,16 @@
 # Matriz de evidencia
 
+**R161, 2026-10-12:** [protocolo físico y rechazo HMAC](windows-auth-result-r161.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| El cliente Windows intercambia versión y desafío Xiaomi v1 | Unidad M2315W1/2.2.86 reportada | Dos JSON protocolVersion=1, 2TX/2RX y AuthHmacMismatch | CONFIRMADO EN RW4 POR PRUEBA DEL USUARIO | Alta | Usuario | Respuesta parseable; autenticación de aplicación pendiente |
+| La clave histórica autentica los intentos actuales | Misma unidad / algoritmo del cliente | HMAC no coincide en ambas sesiones | REFUTADO PARA ESTOS INTENTOS | Alta | Usuario | No demuestra por sí solo rotación ni algoritmo exacto del firmware |
+| Desvinculaciones anteriores invalidaron esa clave concreta | Unidad del usuario | Historial de unlink y advertencia primaria de Gadgetbridge | INFERENCIA RAZONABLE | Media | No comparación de clave actual | Hipótesis principal; requiere logs recientes y validación HMAC |
+| Hubo consulta de batería/info o transferencia de archivos | Estos dos intentos | 2TX antes de auth-final; informes null/filesTransferred=false | REFUTADO PARA ESTOS INTENTOS | Alta | Usuario y revisión de cliente | Solo versión y nonce; no código o firmware enviados |
+| Socket y worker cerraron normalmente | PC / dos sesiones | closeConfirmed=true, workerExitConfirmed=true, exit0, nativeError=false | CONFIRMADO EN PC POR REPORTE DEL USUARIO | Alta | Usuario | No prueba retorno Mi Fitness; estado remoto no inspeccionado |
+| Orden de derivación/HMAC coincide con fuente Gadgetbridge disponible | Código propio PC / worktree de diagnóstico | Relectura de computeAuthStep3Hmac/handleWatchNonce contra derive/authResponse | CONFIRMADO EN CÓDIGO | Alta | Inspección local | Worktree parcheado, no firmware ni prueba criptográfica hardware |
+
 **R160, 2026-10-12:** [primer lote fallido y corrección](windows-session-open-failure-r160.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
