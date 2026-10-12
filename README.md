@@ -1,11 +1,19 @@
 # DOOM en Redmi Watch 4
 
-**Actual R179:** [LuaProbe instalada sin activación automática](docs/lua-physical-result-r179.md).
+**Actual R180/R181:** [diagnóstico Lua sin fuente explícita ni timer validado en emulador](docs/lua-diagnostic-r180.md),
+[plan físico preparado y bloqueado](docs/lua-diagnostic-physical-plan-r181.md).
+PreviewX separado de panelmagenta/marcadores,textoconfuente por defecto y
+objetos pequeños sincaptura de toques. Salida aStorage y cierreLua confirmados
+soloS3. Usuario confirma retorno a esfera habitual y pulsaciónlarga trasR179.
+Nuevo paquete no enviado al reloj; pendiente revisar único ensayoLuaDiag.
+
+**Historial R179:** [LuaProbe instalada sin activación automática](docs/lua-physical-result-r179.md).
 Usuario autorizó ensayo Lua con observación. Un único envío de diez partes;
 GET independiente confirma catálogo12→13,propia inactiva/eliminable y anteriores
 conservadas. Gates cerrados otra vez. Observación física posterior: fondo azul
 sin texto/contador, pulsación larga no permite cambiar esfera; otros menús
-funcionan. Prueba funcional fallida. Retorno por Ajustes solicitado y pendiente.
+funcionan. Prueba funcional fallida. Retorno por Ajustes y recuperación de
+pulsación larga confirmados. Desbordamiento del selector descrito, causa pendiente.
 
 **Historial R178:** [instalador y plan físico Lua preparados](docs/lua-physical-plan-r178.md).
 Perfil fijo r177 separado de las imágenes, registro propio y comprobación de

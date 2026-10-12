@@ -1,6 +1,44 @@
 # Retomar el proyecto
 
-**Actual R179, 2026-10-12:** [LuaProbe registrada, prueba funcional fallida](lua-physical-result-r179.md).
+**Actual R180/R181, 2026-10-12:** [diagnósticoPC/emulador](lua-diagnostic-r180.md) y
+[plan revisable](lua-diagnostic-physical-plan-r181.md).
+Usuario CONFIRMA retorno a esfera habitual víaAjustes y pulsaciónlarga normal
+trasfalloazulR179. También describe cuadrado desbordado enselector; sin captura
+física noasignarpreview/runtime/clipping ni decirsoloestético. NO DELETE/nuevo
+radio/comandos alreloj enesteturno. LuaProbeinstalada,no reabrirla a ciegas.
+
+Fuente experiments/lua-diagnostic/main.lua:panel192x144centrado,root/marcadores
+sinCLICKABLE/SCROLLABLE,labelparent:Label+defaultFontconpcall,sintimer/hook/touch.
+PreviewnegroXblanca distinta delruntime magenta+amarillo+verde/rojo. Verde:
+callLabeldevolvióobjeto,no prueba textorender. Root/timer/fonts causaR179sigue
+hipótesis,sinlog físico. No VMsandbox/privilegiofísico caracterizado.
+
+PaqueteID365219992,size10524,SHA140b2a05618f617e70a7f5f28029beefed64251c43af0086cfaacfe0a681c8f1,
+fuenteSHA7dece1ba7dac11e500157cf5569b92dc0999c3ea1e95c4b1d07e61b7b60115bd.
+Artifacts/lua-diagnostic-r180/LuaDiag-id-only.face byte5=0. PChelpers
+package/install/check-lua-minimal-emulator.mjs diagnostic explícito,seconserva
+modooriginaldefault. No reemplazos;emuidnuevo/sourceextraída/readbackexactos.
+S3previewXcontenida,panel+marcadores+texto vistos,colorescheckautomático,
+panelstockabre/cierra conPNG idénticoalretorno,Storageseleccionada ycloseLua.
+Owninactiva,26IDspreviospreservados,total27. Longpressno probado:settingOFF.
+
+Perfilr180/contentKindlua-diagnostic integradoenstaticSpec,prepare/CLI/journal
+separado tools/local/pc-rfcomm/lua-diagnostic-r181.json. GatesFALSE,
+REVIEWED_VARIANTr167,hashbuildcerrado
+eeb17d09e2b4ee571186f80cd8066c62f031f015996e4906cdc36bf53118cf27.
+Cuatroperfiles12codec/API+26wire/IPC/journalcadauno,todosparescruzados/gates
+cerrados/regresionesquerieshealth pasan, sin sockets físicos en tests.
+Prepare r180:SCRIPTSincluidos,NATIVECpropiofalse,seispartes,gatescerrados.
+
+Siguiente: revisión paraunensayo install r180,selecciónmanual/observaciónmarcadores
+ytexto,retornoAjus→habitual,retiradaopcional remove r180 si decidióyretornó.
+NO autoSET/deletesferasajenas/reintentos/C/Doom/firmware. AutorizacióndeR179
+eraúnicoensayodelpaqueteanterior,yausada; nuevoperfilrequierenueva revisión.
+No tocarLuaProbe/evidenciaRegistrosanteriores. MantenerbondPCbloque; no
+migrarMiFit porrutina. Registrarbuildhabilitado trasautorizar,únicoinstall,
+cerrargates/rebuild yGETantesobservación. Aprobar no sustituye observación.
+
+**Historial R179, 2026-10-12:** [LuaProbe registrada, prueba funcional fallida](lua-physical-result-r179.md).
 Usuario autoriza explícitamenteensayo ypuede observarreloj segúnpreguntaR178.
 Una instalación r177 completada:RegisteredInactive,10partes,20329TXbytes,
 19TX16RX,cierre/workertrueexit0. Own365219991inactiva/eliminable,anterioractiva.
@@ -16,7 +54,7 @@ restaurada y documentación del resultado.
 Usuarioobserva previewconbarras peroalactivarqueda soloazul,sintexto/contador.
 Pulsaciónlarga noabreselector; atrás/notificaciones/arriba/derecha/menús sí
 funcionan. NOconfirmar timer/runtimelifecycle; fallo funcional físico. Pregunta
-manualpendiente: Ajustes→Esferas→habitual, sinreabrirLuaProbe/reiniciar/borrar.
+manualresuelta: usuariovolvióvíaAjustes→habitual yrecuperópulsaciónlarga.
 No másradio/comandos despuésdeeste reporte. Prioridad retorno normal.
 PC: objetoazulsecreaantesprimeraLabel/Fontmisansw regular24; fuente/binding
 es hipótesisdeexcepción,sinlogreal. Previewyrootmismocolor,azulsolo noes prueba

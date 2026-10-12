@@ -1,14 +1,25 @@
 # Matriz de evidencia
 
-**R179, 2026-10-12:** [instalación física de LuaProbe](lua-physical-result-r179.md).
+**R180/R181, 2026-10-12:** [diagnóstico nuevo PC/S3](lua-diagnostic-r180.md) y [perfil físico bloqueado](lua-diagnostic-physical-plan-r181.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Retorno a esfera habitual y pulsación larga se recuperaron tras LuaProbe | M2315W1/2.2.86 | Usuario confirma salida por Ajustes | CONFIRMADO EN RW4 POR USUARIO | Alta | Usuario | No reboot,firmware o borrado |
+| LuaProbe rebasa visualmente límites en selector | Misma unidad | Descripción del usuario | OBSERVADO POR USUARIO; CAUSA SIN IDENTIFICAR | Media | Usuario | Sin captura; no decir únicamente estético |
+| LuaDiag sin fuente explícita/timer renderiza texto y fases | Emulador S3 | Captura magenta/amarillo/verde/texto,logs,fuente exacta | CONFIRMADO EN EMULADOR | Alta | Sí | No identifica causa del azul físico |
+| Preview nuevo separado visualmente de runtime y contenido en miniatura | Emulador S3 | PreviewX yruntimecolores distintos vistos | CONFIRMADO EN EMULADOR | Alta | Sí | No confirma clipping del selector RW4 |
+| Salida/pausa de UI de LuaDiag conserva render y cierra VM | Emulador S3 | PNGidéntico traspanel,Storage activa/closeLua | CONFIRMADO EN EMULADOR | Alta | Sí | Sin hooks ni timer; longpressno probado |
+| LuaDiag funciona o restaura longpress en RW4 | M2315W1/2.2.86 | Todavía no enviado | SIN EVIDENCIA | Desconocida | No | Perfil preparado/gates cerrados para revisión |
+
+**Historial R179, 2026-10-12:** [instalación física de LuaProbe](lua-physical-result-r179.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|
 | Paquete propio con Lua fue transferido y registrado | M2315W1/2.2.86 | RegisteredInactive,10partes,GET independiente12→13 | CONFIRMADO EN RW4 | Alta | Sí, autorizado | No se activó automáticamente; no prueba ejecución |
 | Esferas/selección anteriores conservadas tras instalar LuaProbe | Misma unidad | Comparación12IDs/flags/activa contra journal nuevo | CONFIRMADO EN RW4 | Alta | Sí | No sustitución/borrado de otras |
 | Prueba LuaProbe muestra texto/contador en físico | Misma unidad | Usuario observa solo fondo azul al seleccionarla | REFUTADO PARA ESTE PAQUETE/ENSAYO | Alta | Usuario | Sin logs físicos; causa no identificada |
-| Pulsación larga permite cambiar esfera con LuaProbe | Misma unidad | Usuario no puede abrir selector así | REFUTADO PARA ESTE ENSAYO | Alta | Usuario | Ajustes→Esferas aún pendiente de confirmar |
-| Navegación y menús del reloj responden con LuaProbe | Misma unidad | Usuario confirma atrás/notificaciones/arriba/derecha/menús | CONFIRMADO EN RW4 POR USUARIO | Alta | Usuario | No equivale retorno a esfera habitual aún |
+| Pulsación larga permite cambiar esfera con LuaProbe | Misma unidad | Usuario no puede abrir selector así | REFUTADO PARA ESTE ENSAYO | Alta | Usuario | Retorno por Ajustes confirmó esfera habitual/longpress recuperados |
+| Navegación y menús del reloj responden con LuaProbe | Misma unidad | Usuario confirma atrás/notificaciones/arriba/derecha/menús | CONFIRMADO EN RW4 POR USUARIO | Alta | Usuario | Retorno habitual confirmado después |
 | Fuente misansw regular24 explica ausencia de labels | Misma unidad | Orden del código crea fondo antes de evaluar Font | INFERENCIA RAZONABLE | Limitada | Revisión PC | Sin excepción/log físico; no declarar causa demostrada |
 | LuaProbe eliminable y retirada completada | Misma unidad | FlagcanDelete sí; DELETE no ejecutado | FLAG CONFIRMADO; RETIRADA SIN PROBAR | Alta sobre flag | GET | Retirada opcional requiere retorno/decisión |
 

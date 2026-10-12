@@ -46,10 +46,19 @@ derecha y menús, según su observación. No reporta reboot o bloqueo global.
 No afirmar runtime completo, timer funcional o lifecycle correcto en RW4.
 
 Se pidió volver por Ajustes→Esferas a su esfera habitual, sin volver a elegir
-LuaProbe ni depender de la pulsación larga. Confirmación de retorno pendiente.
+LuaProbe ni depender de la pulsación larga. El usuario confirma después que
+ya volvió a su esfera habitual y recuperó también la pulsación larga para
+cambiar esfera. Retorno funcional normal confirmado sin reboot.
 No nueva conexión/comando al reloj después de recibir esta observación.
 Retirada opcional autorizada no ejecutada: requiere retorno confirmado,
-decisión de retirarla y comprobación propia inactiva/eliminable.
+decisión de retirarla y comprobación propia inactiva/eliminable. Se conserva
+instalada; no hubo decisión de retirarla ni DELETE.
+
+El usuario también describe un cuadrado que sobresale de los límites de la
+UI al ver LuaProbe en el selector. Sin captura de esa pantalla, no atribuirlo
+definitivamente al preview, al objeto Lua o a un fallo de clipping. El propio
+paquete usa preview rectangular390×450 y crea un objeto de pantalla completa;
+ambas superficies merecen revisión. No afirmar que sea únicamente estético.
 
 ## Diagnóstico inicial solo PC
 
@@ -68,6 +77,5 @@ color diferentes del preview y usar fuente por defecto, primero sin timer.
 Requeriría paquete/hash/plan propios y nueva revisión antes de envío físico.
 No modificar/reinstalar este perfil fijo ni saltar a C para diagnosticarlo.
 
-**Siguiente checkpoint inmediato:** confirmar retorno normal por selector de
-Ajustes. Después preparar diagnóstico mínimo en PC, sin nuevos envíos.
+**Siguiente checkpoint:** diagnóstico mínimo en PC, sin nuevos envíos.
 No C/ELF/Doom físico autorizado por este ensayo.

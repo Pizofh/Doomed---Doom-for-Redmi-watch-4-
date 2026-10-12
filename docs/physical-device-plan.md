@@ -1,10 +1,16 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R179:** [LuaProbe instalada tras autorización explícita](lua-physical-result-r179.md).
+**Actual R180/R181:** [nueva LuaDiag preparada soloPC/S3](lua-diagnostic-r180.md)
+y[plan físico revisable](lua-diagnostic-physical-plan-r181.md). Texto/defaultfont,
+marcadores y salida validados enS3; objetos pequeños sincaptura touch,nocontador.
+Perfilr180fijo/seispartes/registropropio,gates cerrados; ensayo no autorizado.
+Usuario confirma retornohabitual ylongpress trasfalloR179. No nuevo envío oDELETE.
+
+**Historial R179:** [LuaProbe instalada tras autorización explícita](lua-physical-result-r179.md).
 Diezpartes,GETposterior13esferas ypropia inactiva/eliminable,anterioresconservadas.
 NoautoSET/DELETE. Gates cerrados otra vez. Observación: soloazul,sintexto/contador,
 pulsaciónlarga noabreselector; otrosmenúsfuncionan. Prueba funcionalfallida.
-Retorno porAjustes solicitado,pendiente. Retirada propia opcionalautorizada,
+Retorno porAjustes yesferahabitual/longpress normales confirmados. Retirada propia opcionalautorizada,
 esperaconfirmaciónretorno ydecisión. No reabrir/reenviarLuaProbe a ciegas.
 Nada de C/ELF/Doom ni firmware autorizado.
 
