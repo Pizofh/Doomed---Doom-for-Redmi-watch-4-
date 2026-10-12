@@ -1,5 +1,13 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R164, 2026-10-12:** [usuario confirma Mi Fitness conectado+sync](synchronized-auth-r164.md),
+logs USB posteriores y candidata nueva preparada localmente, sin HMAC nuevo.
+Próximo intento manual normal Bluetooth dirigido según planR163, conservando
+asociación Mi Fitness; no unlink/Conectar nuevo teléfono. No API de reloj del
+agente ni nueva instalación; resultado todavía pendiente. Plan explicita que
+bonding persiste y podría alterar asociación; no garantía de recuperación por
+reboot ni habilitación de firmware/ELF/esferas.
+
 **Actual R163, 2026-10-12:** [API Windows dirigida preparada y plan](windows-directed-pairing-plan-r163.md),
 sin radio real. Usuario confirma nuevo pairing solo con código Windows, reloj
 sigue QR tras apagado completo; causa desconocida, Mi Fitness actual no probado.

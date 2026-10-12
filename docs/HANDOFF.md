@@ -1,5 +1,20 @@
 # Retomar el proyecto
 
+**Actual R164, 2026-10-12:** [Mi Fitness sincronizado y candidata nueva](synchronized-auth-r164.md).
+Usuario confirma retorno/conectado+sync; NO preguntarotra vez. USB4logs COMPLETO
+a tools/local/mi-fitness-logs-usb-r164/; sinBT/watch/app/phonefilewrites. Unvalor,
+3líneasRW4, encryptKey/token, fecha cercana12, noJSONsameobject/MACreconocida.
+Distinto deR159fallido yR162. auth-candidate-r164.json preparado y PROMOVIDO a
+auth.json conbackup privado auth-historical-r159.json, tmp/rename/readback;
+HMAC NO probado. No hashes/valoresprivados públicos. Scripts locales r164ignorados.
+ClienteSPP/exeR160 no cambiado, pairingR163 sin cambios/retests extra.
+Próximo MANUAL único `node tools/pc-pairing.mjs pair`: teléfono BT OFF temporal,
+SIN unlinkMiFit ni Conectar nuevo teléfono; reloj menúsnormales/encendido,
+WindowsUI códigoambosverificar, cancelPIN/diferente/reset. PlanR163+R164 efectos
+revisables; alcanceBluetoothstock ya solicitado, agenteNOAPI/radio. No session
+todavía; esperarJSON, no retornoentrecadaquery/repeatpair. Bond dirigido real/
+preservaciónapp todavía NO probados. SiQR/falla revisarantesotro vínculo.
+
 **Actual R163, 2026-10-12:** [pairing por dirección preparado/plan](windows-directed-pairing-plan-r163.md).
 Usuario clarifica reloj se apagó COMPLETO, volvió encender/confirmar código
 Windows, no Conectar nuevo teléfono/unlink en último pairing. SIGUE EN QR:

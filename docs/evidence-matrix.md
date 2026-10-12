@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R164, 2026-10-12:** [retorno Mi Fitness y preparación de credencial](synchronized-auth-r164.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Mi Fitness volvió a conectar y sincronizar tras los intentos Windows | Unidad usuario | Confirmación explícita posterior a R163 | CONFIRMADO POR REPORTE DEL USUARIO | Alta | Usuario | Retorno normal, no recuperación de firmware |
+| Logs posteriores contienen un único candidato distinto de R161 y R162 | Teléfono propio / snapshot USB R164 | 4archivos,1con valores,3líneasRW4,comparaciones privadas | CONFIRMADO EN LOGS LOCALES | Alta | Sí | encryptKey/token concordantes; sin exponer secretos |
+| La candidata del vínculo nuevo autentica el reloj | RW4 actual | auth.json preparado sin desafío nuevo | SIN EVIDENCIA HMAC TODAVÍA | Desconocida | No radio | Procedencia reforzada por sync/lectura posterior; parsing de identidad limitado |
+| auth.json usa ahora R164 y conserva backup anterior privado | Configuración del cliente PC | validateAuth/escritura temporal/rename/readback | CONFIRMADO EN PC | Alta | Sí | Cambio reversible, sin envíos al reloj |
+
 **R163, 2026-10-12:** [estado QR y preparación de pairing dirigido](windows-directed-pairing-plan-r163.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

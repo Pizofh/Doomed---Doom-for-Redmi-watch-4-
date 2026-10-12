@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R163:** [cliente de pairing por dirección y plan preparados](docs/windows-directed-pairing-plan-r163.md),
+**Actual R164:** [Mi Fitness volvió a sincronizar y se preparó otra clave candidata](docs/synchronized-auth-r164.md)
+desde logs USB posteriores. Cliente preparado, HMAC pendiente. Siguiente: un
+intento manual de pairing dirigido con el [plan R163](docs/windows-directed-pairing-plan-r163.md),
+conservando Mi Fitness asociado y sin volver a QR. No conexión del agente ni
+archivos/código nuevos en el reloj; esperar resultado antes de session.
+
+**Historial R163:** [cliente de pairing por dirección y plan preparados](docs/windows-directed-pairing-plan-r163.md),
 14 pruebas C# y seis de supervisión simuladas pasan; sin conexión física nueva.
 El reloj sigue en QR tras confirmar código Windows. Primero retornar a Mi Fitness
 y obtener logs del vínculo activo; después revisar la operación dirigida sin
