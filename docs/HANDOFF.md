@@ -1,5 +1,20 @@
 # Retomar el proyecto
 
+**Actual R163, 2026-10-12:** [pairing por dirección preparado/plan](windows-directed-pairing-plan-r163.md).
+Usuario clarifica reloj se apagó COMPLETO, volvió encender/confirmar código
+Windows, no Conectar nuevo teléfono/unlink en último pairing. SIGUE EN QR:
+no asumir retorno Mi Fitness por haber copiado logs. Causa apagado no documentada.
+Siguiente MANUAL solo retorno conocido: quitar SOLO RW4 Windows→Mi Fitness
+cuenta habitual/sync/menús normales, avisar; después leer logs USB de eseestado.
+No session/keyvieja/nuevaprobe. DirectedPairing.cs +tools/pc-pairing.mjs preparados
+soloPC: NativeAPI AuthenticateDeviceEx MITM3 stockUI/direcciónprivada/sin inquiry,
+unradio/layout/cachegate (AlreadyAuth no retry)/cleanup/supervisor60s. Build/test
+14C#fakes y6JSfakes sinAPI/radio pasan. EXE separado ignorado/metadatahashes;
+SPP R160 no modificado. Nueva operación pair requiere revisión del plan y vínculo
+Mi Fitness conservado; NO ejecutada ni autorizada por preparación/clarificación.
+No autoconfirmación/PIN/fallback/cachedelete/keyread/Xiaomi payloads. CI añade
+soloJSfake supervisor, no run; compilador localpinned no portableCI aún.
+
 **Actual R162, 2026-10-12:** [logs actuales y segundo candidato](current-auth-candidate-r162.md).
 Usuario copió4logs y autorizó lectura directa USB; Unauthorized resuelto con
 aprobación manual del teléfono, colección SDK-pins fuera sandbox COMPLETE4files.

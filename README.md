@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R162:** [logs actuales leídos por USB y segunda clave candidata](docs/current-auth-candidate-r162.md),
+**Actual R163:** [cliente de pairing por dirección y plan preparados](docs/windows-directed-pairing-plan-r163.md),
+14 pruebas C# y seis de supervisión simuladas pasan; sin conexión física nueva.
+El reloj sigue en QR tras confirmar código Windows. Primero retornar a Mi Fitness
+y obtener logs del vínculo activo; después revisar la operación dirigida sin
+desvincular de la app. No ejecutar pair/session todavía.
+
+**Historial R162:** [logs actuales leídos por USB y segunda clave candidata](docs/current-auth-candidate-r162.md),
 guardada por separado y aún sin validar. No nueva conexión al reloj; auth.json
 sigue con la clave anterior. Mantener Mi Fitness asociado mientras se investiga
 acceso SPP desde PC sin otra desvinculación. No ejecutar session todavía.

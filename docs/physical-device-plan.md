@@ -1,5 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R163, 2026-10-12:** [API Windows dirigida preparada y plan](windows-directed-pairing-plan-r163.md),
+sin radio real. Usuario confirma nuevo pairing solo con código Windows, reloj
+sigue QR tras apagado completo; causa desconocida, Mi Fitness actual no probado.
+Próximo solo retorno stock ya conocido y logs de ese vínculo. Nueva operación
+dirigida requiere revisar plan antes de ejecutar; ninguna escritura/app/código
+de reloj autorizada por estas pruebas offline.
+
 **Actual R161, 2026-10-12:** [dos sesiones llegaron a Xiaomi v1](windows-auth-result-r161.md),
 HMAC histórico no coincide; ambas cerraron normalmente. No auth-final, queries
 o archivos. No repetir con esa clave. Retorno stock Mi Fitness ya autorizado y

@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R163, 2026-10-12:** [estado QR y preparación de pairing dirigido](windows-directed-pairing-plan-r163.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Última reconexión fue código Windows sin nuevo menú de migración | Unidad usuario | Respuesta explícita | CONFIRMADO POR REPORTE DEL USUARIO | Alta | Usuario | Reloj sigue QR; asociación Mi Fitness actual no demostrada |
+| El apagado observado fue solo de pantalla | Unidad usuario | Usuario tuvo que encender dispositivo completo | REFUTADO POR REPORTE DEL USUARIO | Alta para observación | Usuario | Causa/timeout normal no establecidos |
+| Cliente dirigido tiene límites y falla sin radio en tests | Código PC propio | Build,14escenarios C# falsos,6supervisor JS falsos | CONFIRMADO OFFLINE | Alta | Sí | Sin API native/diálogo real; no prueba aceptación RW4 |
+| Pairing dirigido conserva asociación Mi Fitness en RW4 | Unidad M2315W1/2.2.86 | Hipótesis y plan, sin ejecución | SIN EVIDENCIA | Desconocida | No | Bonding puede escribir claves/cambiar estado; no prometer conservación |
+
 **R162, 2026-10-12:** [logs actuales y candidato separado](current-auth-candidate-r162.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
