@@ -58,7 +58,7 @@ jobs:
       - name: Test Xiaomi batch against synthetic peers
         shell: pwsh
         run: node tools/test-rw4-xiaomi-session.mjs
-      - name: Verify static watchface physical entries remain closed
+      - name: Verify image and Lua watchface physical entries remain closed
         shell: pwsh
         run: node tools/test-static-watchface-gates.mjs
       - name: Test directed pairing supervision without radio

@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {prepareStatic,crc32,installStart,uploadStart,chunks,installStatic,removeStatic} from './static-watchface-transfer.mjs';
-import {staticSpec} from './static-watchface-spec.mjs';
+import {staticSpec,watchfaceVariants} from './static-watchface-spec.mjs';
 import {fields,one,decodeCommand} from './rw4-xiaomi-protocol.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 if(process.argv.length>3)throw Error('Unexpected arguments');
@@ -14,10 +14,10 @@ const plan=prepareStatic(data,{variant:spec.variant});
 assert.equal(crc32(Buffer.from('123456789')),0xcbf43926);
 const damaged=Buffer.from(data);damaged[0]^=1;assert.throws(()=>prepareStatic(damaged,{variant:spec.variant}));
 assert.throws(()=>prepareStatic(data,{variant:'unreviewed'}));
-assert.throws(()=>prepareStatic(data,{variant:spec.variant==='r167'?'r173':'r167'}));
+for(const other of watchfaceVariants.filter(v=>v!==spec.variant))assert.throws(()=>prepareStatic(data,{variant:other}));
 assert.throws(()=>installStart({...plan}));assert.throws(()=>uploadStart({...plan}));
 const start=decodeCommand(installStart(plan));assert.equal(start.type,4);assert.equal(start.subtype,4);
-const item=fields(one(fields(one(start.parsed,6,2)),6,2));assert.equal(one(item,1,2).toString(),STATIC_ID);assert.equal(one(item,2,0),25224);
+const item=fields(one(fields(one(start.parsed,6,2)),6,2));assert.equal(one(item,1,2).toString(),STATIC_ID);assert.equal(one(item,2,0),spec.size);
 const upload=decodeCommand(uploadStart(plan));assert.equal(upload.type,22);assert.equal(upload.subtype,0);
 const request=fields(one(fields(one(upload.parsed,24,2)),1,2));assert.equal(one(request,1,0),16);assert.equal(one(request,2,2).length,16);
 for(const size of [512,2048,4080]){
@@ -48,7 +48,7 @@ function fake(scenario='ok'){
 const ok=fake();const installed=await installStatic(ok,plan);assert.equal(installed.status,'RegisteredInactive');
 assert.equal(installed.selectedByClient,false);assert.equal(installed.registeredVerified,true);assert.equal(installed.transferAcceptanceVerified,false);
 const removed=await removeStatic(ok,installed.receipt);assert.equal(removed.status,'RemovedVerified');
-assert.deepEqual(ok.mutations,[[4,4],[22,0],[4,2]]);assert.equal(ok.parts.length,13);
+assert.deepEqual(ok.mutations,[[4,4],[22,0],[4,2]]);assert.equal(ok.parts.length,Math.ceil((spec.size+26)/2044));
 for(const scenario of ['wrong-fw','collision','no-active']){const api=fake(scenario);await assert.rejects(installStatic(api,plan));assert.deepEqual(api.mutations,[]);}
 const lowBudget=fake();lowBudget.txBudgetBytes=16384;await assert.rejects(installStatic(lowBudget,plan));assert.deepEqual(lowBudget.mutations,[]);
 const noReduction=fake();await assert.rejects(installStatic(noReduction,plan,{initialCountBelow:1}));assert.deepEqual(noReduction.mutations,[]);

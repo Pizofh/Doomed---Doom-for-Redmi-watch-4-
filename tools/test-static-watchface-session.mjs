@@ -8,7 +8,7 @@ import {PassThrough} from 'node:stream';
 import {hkdfSync,createHmac,createCipheriv,createDecipheriv,createHash,randomUUID} from 'node:crypto';
 import {fields,one,uint,bytes,decodeCommand,FrameReader,v1Frame,command} from './rw4-xiaomi-protocol.mjs';
 import {prepareStatic,crc32} from './static-watchface-transfer.mjs';
-import {staticSpec} from './static-watchface-spec.mjs';
+import {staticSpec,watchfaceVariants} from './static-watchface-spec.mjs';
 import {StaticJournal} from './static-watchface-journal.mjs';
 import {StaticWatchfaceSession,runStaticSession,createStaticPipe} from './static-watchface-session.mjs';
 
@@ -103,7 +103,7 @@ class Peer {
       const disk = JSON.parse(fs.readFileSync(this.journalFile,'utf8'));
       assert.equal(disk.phase,cmd.type === 22 ? 'InstallAck' : cmd.subtype === 4 ? 'Intent' : 'DeleteIntent');
     }
-    if (cmd.type === 4 && cmd.subtype === 4) { response(6,uint(5,this.scenario === 'install-reject' ? 2 : 0));return; }
+    if (cmd.type === 4 && cmd.subtype === 4) { response(6,uint(5,this.scenario === 'install-reject' ? 2 : this.scenario === 'install-storage-reject' ? 3 : 0));return; }
     if (cmd.type === 22 && cmd.subtype === 0) {
       response(24,bytes(2,Buffer.concat([bytes(1,plan.md5()),uint(2,0),uint(4,this.scenario === 'resume' ? 5 : 0),uint(5,this.chunkSize)])));return;
     }
@@ -153,7 +153,7 @@ for (const chunkSize of [512,2048,4080]) {
   assert.equal(JSON.stringify({installed,removed}).includes(address),false);
   assert.equal(JSON.stringify({installed,removed}).includes('PRIVATE-CANARY'),false);
 }
-for (const scenario of ['v2','bad-key','bad-auth-ack','wrong-fw','wrong-model','collision','clear-response','install-reject','resume','mid-stream','missing','unrelated-lost','unsupported-chunk','close-failure']) {
+for (const scenario of ['v2','bad-key','bad-auth-ack','wrong-fw','wrong-model','collision','clear-response','install-reject','install-storage-reject','resume','mid-stream','missing','unrelated-lost','unsupported-chunk','close-failure']) {
   const file = journalFile(scenario),journal = new StaticJournal(file,address,plan),peer = new Peer(scenario,scenario === 'unsupported-chunk' ? 4096 : 2048),key = Buffer.from(secret);
   peer.journalFile = file;
   const result = await runStaticSession(pipe(peer),plan,key,journal);
@@ -164,6 +164,12 @@ for (const scenario of ['v2','bad-key','bad-auth-ack','wrong-fw','wrong-model','
   if (scenario === 'install-reject') {
     assert.equal(result.protocolPhase,'Rejected');assert.equal(result.installStatus,2);
     assert.equal(result.uploadParameters,null);assert.equal(result.fileDataSendRequested,false);
+    assert.deepEqual(peer.mutations,[[4,4]]);assert.equal(peer.parts.length,0);
+  }
+  if (scenario === 'install-storage-reject') {
+    assert.equal(result.protocolPhase,'Rejected');assert.equal(result.installStatus,3);
+    assert.equal(result.installStatusInterpretation,'MiFitness3.59.1iWatchfaceStorageLow');
+    assert.equal(result.fileDataSendRequested,false);assert.equal(result.transferPartsWritten,0);
     assert.deepEqual(peer.mutations,[[4,4]]);assert.equal(peer.parts.length,0);
   }
   if (scenario === 'mid-stream')assert.equal(peer.parts.length,2);
@@ -190,12 +196,25 @@ assert.equal(noPartialDelete.status,'StoppedNeedsReview');assert.equal(opened,0)
 const session = new StaticWatchfaceSession({},plan);
 await assert.rejects(session.mass(Buffer.alloc(10)));await assert.rejects(session.request(command(2,1)));
 assert.equal(process.listenerCount('SIGINT'),0);
-const otherSpec=staticSpec(spec.variant==='r167'?'r173':'r167');
+for(const otherVariant of watchfaceVariants.filter(v=>v!==spec.variant)){
+const otherSpec=staticSpec(otherVariant);
 const otherPlan=prepareStatic(fs.readFileSync(path.join(root,otherSpec.artifact)),{variant:otherSpec.variant});
-const mismatch=new StaticJournal(journalFile('mismatch'),address,plan);opened=0;
+const mismatch=new StaticJournal(journalFile('mismatch-'+otherVariant),address,plan);opened=0;
 const mismatched=await runStaticSession(()=>{opened++;throw Error();},otherPlan,Buffer.from(secret),mismatch);
 assert.equal(mismatched.status,'StoppedNeedsReview');assert.equal(opened,0);assert.equal(mismatch.matches(otherPlan),false);
 mismatch.close();scenarios++;
 assert.throws(()=>new StaticJournal(lockFile,address,otherPlan));
+}
+// Images retain compatibility with old journals lacking a contentKind field.
+// A Lua journal cannot be relabelled or accepted as a legacy image journal.
+const kindFile=journalFile('kind'),kindJournal=new StaticJournal(kindFile,address,plan);
+kindJournal.begin([{id:'1',active:true,canDelete:false}]);kindJournal.close();
+const kindRecord=JSON.parse(fs.readFileSync(kindFile,'utf8'));
+kindRecord.contentKind=spec.contentKind==='lua-minimal'?'static-image':'lua-minimal';
+fs.writeFileSync(kindFile,JSON.stringify(kindRecord));assert.throws(()=>new StaticJournal(kindFile,address,plan));
+delete kindRecord.contentKind;const legacyText=JSON.stringify(kindRecord);fs.writeFileSync(kindFile,legacyText);
+if(spec.contentKind==='lua-minimal')assert.throws(()=>new StaticJournal(kindFile,address,plan));
+else {const legacy=new StaticJournal(kindFile,address,plan);legacy.close();assert.equal(fs.readFileSync(kindFile,'utf8'),legacyText);}
+scenarios++;
 console.log(JSON.stringify({checkpoint:'R169',variant:spec.variant,staticWireIpcJournalTestsPassed:true,scenarios,
   journalReloadAndRemovalVerified:true,nativeSocketCalls:0,bluetoothOperationRequested:false,physicalFilesTransferred:false}));

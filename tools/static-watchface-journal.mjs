@@ -31,7 +31,8 @@ export class StaticJournal {
   #file; #tag; #record; #lockFile; #lock; #spec;
   constructor(file,address,plan) {
     this.#spec = staticSpec(plan.variant);
-    if (plan.id !== this.#spec.id || plan.sha256 !== this.#spec.sha256 || plan.size !== this.#spec.size) fail();
+    if (plan.id !== this.#spec.id || plan.sha256 !== this.#spec.sha256 || plan.size !== this.#spec.size ||
+        plan.contentKind !== this.#spec.contentKind) fail();
     this.#file = path.resolve(file); this.#tag = targetTag(address); this.#record = null;
     const parent = fs.lstatSync(path.dirname(this.#file));
     if (!parent.isDirectory() || parent.isSymbolicLink()) fail();
@@ -49,7 +50,8 @@ export class StaticJournal {
   }
   validate() {
     const r = this.#record;
-    if (!r || r.schema !== 1 || (r.variant ?? 'r167') !== this.#spec.variant || r.id !== this.#spec.id ||
+    if (!r || r.schema !== 1 || (r.variant ?? 'r167') !== this.#spec.variant ||
+        (r.contentKind ?? 'static-image') !== this.#spec.contentKind || r.id !== this.#spec.id ||
         r.sha256 !== this.#spec.sha256 || r.size !== this.#spec.size ||
         r.targetTag !== this.#tag || r.model !== 'M2315W1' || r.firmware !== '2.2.86' ||
         !/^[a-f0-9-]{36}$/.test(r.transaction) || !phases.has(r.phase) ||
@@ -73,7 +75,7 @@ export class StaticJournal {
     if (this.#lock === null || this.#record !== null) fail();
     validateRows(before,this.#spec.id);
     this.#record = {schema:1,transaction:randomUUID(),targetTag:this.#tag,
-      model:'M2315W1',firmware:'2.2.86',variant:this.#spec.variant,
+      model:'M2315W1',firmware:'2.2.86',variant:this.#spec.variant,contentKind:this.#spec.contentKind,
       id:this.#spec.id,sha256:this.#spec.sha256,size:this.#spec.size,
       phase:'Intent',partsWritten:0,registeredVerified:false,
       before:before.map(row => ({...row})),updatedUtc:new Date().toISOString()};
@@ -98,7 +100,7 @@ export class StaticJournal {
     return {before:this.#record.before.map(row => ({...row})),registeredVerified:true};
   }
   matches(plan) {
-    return this.#lock !== null && plan.variant === this.#spec.variant &&
+    return this.#lock !== null && plan.variant === this.#spec.variant && plan.contentKind === this.#spec.contentKind &&
       plan.id === this.#spec.id && plan.sha256 === this.#spec.sha256 && plan.size === this.#spec.size;
   }
   uncertain() {

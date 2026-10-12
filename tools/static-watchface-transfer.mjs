@@ -18,7 +18,7 @@ export function prepareStatic(bytesValue,{variant = 'r167'} = {}){
     bytesValue.subarray(0,4).toString('hex')!=='5aa53412'||bytesValue[5]!==0||
     bytesValue.subarray(40,49).toString('ascii')!==spec.id||bytesValue[49]!==0)refused();
   const owned=Buffer.from(bytesValue);
-  const plan={variant:spec.variant,id:spec.id,size:owned.length,sha256:spec.sha256,
+  const plan={variant:spec.variant,contentKind:spec.contentKind,id:spec.id,size:owned.length,sha256:spec.sha256,
     copy:()=>Buffer.from(owned),md5:()=>createHash('md5').update(owned).digest()};
   Object.freeze(plan);plans.add(plan);return plan;
 }

@@ -1,4 +1,4 @@
-// One pinned static package. Physical writes require explicit reviewed gates.
+// Pinned watchface packages. Lua has its own explicit profile and review gate.
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -21,7 +21,12 @@ function read(file,maxSize) {
 }
 const digest = data => createHash('sha256').update(data).digest('hex');
 function prepared(spec) {
-  const plan = prepareStatic(read(path.join(root,spec.artifact),spec.size),{variant:spec.variant});
+  const bytes = read(path.join(root,spec.artifact),spec.size);
+  const plan = prepareStatic(bytes,{variant:spec.variant});
+  if(spec.contentKind === 'lua-minimal'){
+    const source = read(path.join(root,spec.sourceArtifact),65536);
+    if(digest(source)!==spec.sourceSha256 || !bytes.includes(source))throw Error();
+  }
   const metadata = JSON.parse(read(path.join(root,'artifacts/pc-rfcomm/build.json'),65536));
   const sources = ['Probe.cs','WinSockTransport.cs','PhysicalWorker.cs','SessionWorker.cs','SelfTests.cs'];
   const modules = ['pc-rfcomm-supervisor.mjs','pc-rfcomm-session.mjs','rw4-xiaomi-protocol.mjs',
@@ -41,10 +46,10 @@ try {
   if (afterSpace && spec.variant !== 'r173') throw Error();
   const operation = action.startsWith('install') ? 'install' : 'remove';
   const enabled = PHYSICAL_WRITES_REVIEWED && spec.variant === REVIEWED_VARIANT;
-  const checkpoint = spec.variant === 'r173' ? 'R174' : 'R169';
+  const checkpoint = spec.variant === 'r177' ? 'R178' : spec.variant === 'r173' ? 'R174' : 'R169';
   if (['install','remove','install-after-space','remove-after-space'].includes(action)) {
     if (!enabled) {
-      console.log(JSON.stringify({checkpoint,variant:spec.variant,status:'PhysicalGateClosed',
+      console.log(JSON.stringify({checkpoint,variant:spec.variant,contentKind:spec.contentKind,status:'PhysicalGateClosed',
         physicalEnabled:false,bluetoothOperationRequested:false,watchCommandRequested:false,filesTransferred:false}));
       process.exitCode = 2;
     } else {
@@ -57,24 +62,25 @@ try {
         journal = new StaticJournal(path.join(privateDir,afterSpace ? 'static-watchface-r173-after-space.json' : spec.journal),address,plan);
         const report = await runStaticSession(() => createStaticPipe(executable,address),plan,key,journal,
           {action:operation,...(afterSpace && operation === 'install' ? {initialCountBelow:21} : {})});
-        console.log(JSON.stringify({checkpoint,variant:spec.variant,id:spec.id,afterSpace,...report,physicalEnabled:true}));
+        console.log(JSON.stringify({checkpoint,variant:spec.variant,contentKind:spec.contentKind,id:spec.id,afterSpace,...report,physicalEnabled:true}));
         process.exitCode = ['RegisteredInactive','RemovedVerified'].includes(report.status) &&
           report.closeConfirmed && report.workerExitConfirmed ? 0 : 1;
       } finally { key.fill(0);journal?.close(); }
     }
   } else if (action === 'plan') {
-    console.log(JSON.stringify({checkpoint,variant:spec.variant,status:'ReviewPreparationOnly',physicalEnabled:enabled,
+    console.log(JSON.stringify({checkpoint,variant:spec.variant,contentKind:spec.contentKind,status:'ReviewPreparationOnly',physicalEnabled:enabled,
       actions:enabled ? ['plan','prepare','install','remove'] : ['plan','prepare'],physicalWritesRequireReview:true,
       bluetoothOperationRequested:false,watchCommandRequested:false}));
   } else {
     const {plan,metadata} = prepared(spec);
-    console.log(JSON.stringify({checkpoint,variant:spec.variant,status:'OfflinePrepared',id:plan.id,size:plan.size,sha256:plan.sha256,
+    console.log(JSON.stringify({checkpoint,variant:spec.variant,contentKind:spec.contentKind,status:'OfflinePrepared',id:plan.id,size:plan.size,sha256:plan.sha256,
+      scriptsIncluded:spec.contentKind==='lua-minimal',nativeCodeIncluded:false,
       defaultParts:chunks(plan).length,staticTxBudget:32768,readonlyTxBudget:16384,
       executableSha256:metadata.executableSha256,buildInputsVerified:true,
-      persistentJournalImplemented:true,physicalEntry:enabled ? 'ReviewedStaticOnly' : 'GateClosed',physicalEnabled:enabled,
+      persistentJournalImplemented:true,physicalEntry:enabled ? 'ReviewedWatchfaceOnly' : 'GateClosed',physicalEnabled:enabled,
       bluetoothOperationRequested:false,watchCommandRequested:false,filesTransferred:false}));
   }
 } catch {
-  console.error('Static package refused or failed; inspect build and private journal. Do not retry automatically; no fallback attempted.');
+  console.error('Watchface package refused or failed; inspect build and private journal. Do not retry automatically; no fallback attempted.');
   process.exitCode = 1;
 }

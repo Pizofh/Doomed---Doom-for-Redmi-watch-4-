@@ -122,6 +122,8 @@ class Peer {
       const records=[bytes(1,row)];
       if(this.scenario==='health-alt-face')records.push(bytes(1,Buffer.concat([
         bytes(1,Buffer.from('365219990')),uint(3,0),uint(4,1)])));
+      if(this.scenario==='health-lua-face')records.push(bytes(1,Buffer.concat([
+        bytes(1,Buffer.from('365219991')),uint(3,0),uint(4,1)])));
       const root = Buffer.concat([uint(1,4),uint(2,0),bytes(6,bytes(1,Buffer.concat(records)))]);
       this.reply(root,this.scenario !== 'clear-data'); return;
     }
@@ -301,5 +303,12 @@ assert.equal(altHealth.healthcheck.testFaceActive,false);assert.equal(altHealth.
 assert.deepEqual(altHealth.healthcheck.testFaces.find(face=>face.id==='365219990'),
   {id:'365219990',present:true,active:false,canDelete:true});
 assert.equal(JSON.stringify(altHealth).includes('PRIVATE-CANARY'),false);
+const luaPeer=new Peer(1,'health-lua-face');
+const luaHealth=await new XiaomiSession(luaPeer,{profile:'healthcheck',clock:()=>luaPeer.now,
+  sleep:async ms=>{luaPeer.now+=ms;},phoneNonce:()=>phone}).run(secret);
+assert.equal(luaHealth.status,'Complete');assert.equal(luaHealth.healthcheck.testFacePresent,true);
+assert.deepEqual(luaHealth.healthcheck.testFaces.find(face=>face.id==='365219991'),
+  {id:'365219991',present:true,active:false,canDelete:true});
+assert.equal(luaHealth.healthcheck.uiVerified,false);assert.equal(luaHealth.healthcheck.renderVerified,false);
 console.log(JSON.stringify({checkpoint:'R166',protocolTestsPassed:true,syntheticSessions:22,ipcFullSessions:4,ipcFailureScenarios:6,
-  healthcheckSyntheticSessions:9,healthcheckIpcSessions:1,nativeSocketCalls:0,bluetoothOperationRequested:false}));
+  healthcheckSyntheticSessions:10,healthcheckIpcSessions:1,nativeSocketCalls:0,bluetoothOperationRequested:false}));
