@@ -107,7 +107,8 @@ export async function runStaticSession(createLink,plan,secret,journal,options = 
     const receipt = options.action === 'remove' ? restoreStaticReceipt(plan,journal) : null;
     link = await createLink(); client.link = link;
     await link.opened(); await client.initialize(secret);
-    const result = receipt ? await removeStatic(client,receipt,{journal}) : await installStatic(client,plan,{journal});
+    const result = receipt ? await removeStatic(client,receipt,{journal}) :
+      await installStatic(client,plan,{journal,initialCountBelow:options.initialCountBelow ?? null});
     if (result.status === 'SentNotVerified') journal.uncertain();
     // Never export receipt, inventory, device address, key or wire payload.
     const {receipt:_,...report} = result;
@@ -125,6 +126,7 @@ export async function runStaticSession(createLink,plan,secret,journal,options = 
     return {status:'StoppedNeedsReview',journalRecorded,...closed,
       protocolPhase:client?.phase ?? 'BeforeConnection',
       installStatus:client?.installStatus ?? null,uploadParameters:client?.uploadParameters ?? null,
+      installStatusInterpretation:client?.installStatus === 3 ? 'MiFitness3.59.1iWatchfaceStorageLow' : null,
       failureReason:new Set(['StaticSessionRefused','StaticTransferRefused','StaticJournalRefused',
         'Timeout','MalformedProtocol','DecryptionFailed','AuthOrQueryRejected','TransportFailure',
         'PreflightOrOpenFailed','ProtocolLimit','UnsupportedProtocol','AuthHmacMismatch']).has(error?.message)

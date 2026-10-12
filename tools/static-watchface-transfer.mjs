@@ -54,11 +54,13 @@ function faces(value){
   }
   return value.entries;
 }
-export async function installStatic(api,plan,{journal = null} = {}){
+export async function installStatic(api,plan,{journal = null,initialCountBelow = null} = {}){
   preflight(api,plan);
   const info=await api.info();if(info.modelRecognized!==true||info.firmware!=='2.2.86')refused();
   const before=faces(await api.faces());if(before.some(f=>f.id===plan.id))refused();
   if(before.filter(f=>f.active).length!==1)refused();
+  if(initialCountBelow!==null&&(!Number.isInteger(initialCountBelow)||initialCountBelow<1||initialCountBelow>129||
+    before.length>=initialCountBelow))refused();
   if(journal){if(!isOwnedJournal(journal)||!journal.matches(plan))refused();journal.begin(before);}
   const result={status:'PreflightPassed',writeRequested:false,bytesSent:0,selectedByClient:false,registeredVerified:false,
     transferAcceptanceVerified:false,removableFlagObserved:false};

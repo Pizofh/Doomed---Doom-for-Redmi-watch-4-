@@ -51,6 +51,7 @@ const removed=await removeStatic(ok,installed.receipt);assert.equal(removed.stat
 assert.deepEqual(ok.mutations,[[4,4],[22,0],[4,2]]);assert.equal(ok.parts.length,13);
 for(const scenario of ['wrong-fw','collision','no-active']){const api=fake(scenario);await assert.rejects(installStatic(api,plan));assert.deepEqual(api.mutations,[]);}
 const lowBudget=fake();lowBudget.txBudgetBytes=16384;await assert.rejects(installStatic(lowBudget,plan));assert.deepEqual(lowBudget.mutations,[]);
+const noReduction=fake();await assert.rejects(installStatic(noReduction,plan,{initialCountBelow:1}));assert.deepEqual(noReduction.mutations,[]);
 const resume=fake('resume');await assert.rejects(installStatic(resume,plan));assert.equal(resume.parts.length,0);
 const rejected=fake('start-rejected');await assert.rejects(installStatic(rejected,plan));assert.equal(rejected.parts.length,0);assert.deepEqual(rejected.mutations,[[4,4]]);
 for(const scenario of ['activated','protected']){const api=fake(scenario),result=await installStatic(api,plan);await assert.rejects(removeStatic(api,result.receipt));assert.deepEqual(api.mutations,[[4,4],[22,0]]);}

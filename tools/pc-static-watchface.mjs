@@ -35,11 +35,14 @@ function prepared(spec) {
   return {plan,metadata,executable};
 }
 try {
-  if (args.length > 2 || !['plan','prepare','install','remove'].includes(action)) throw Error();
+  if (args.length > 2 || !['plan','prepare','install','remove','install-after-space','remove-after-space'].includes(action)) throw Error();
   const spec = staticSpec(args[1] ?? 'r167');
+  const afterSpace = action.endsWith('-after-space');
+  if (afterSpace && spec.variant !== 'r173') throw Error();
+  const operation = action.startsWith('install') ? 'install' : 'remove';
   const enabled = PHYSICAL_WRITES_REVIEWED && spec.variant === REVIEWED_VARIANT;
   const checkpoint = spec.variant === 'r173' ? 'R174' : 'R169';
-  if (action === 'install' || action === 'remove') {
+  if (['install','remove','install-after-space','remove-after-space'].includes(action)) {
     if (!enabled) {
       console.log(JSON.stringify({checkpoint,variant:spec.variant,status:'PhysicalGateClosed',
         physicalEnabled:false,bluetoothOperationRequested:false,watchCommandRequested:false,filesTransferred:false}));
@@ -51,9 +54,10 @@ try {
       const key = validateAuth(JSON.parse(read(path.join(privateDir,'auth.json'),4096)));
       let journal;
       try {
-        journal = new StaticJournal(path.join(privateDir,spec.journal),address,plan);
-        const report = await runStaticSession(() => createStaticPipe(executable,address),plan,key,journal,{action});
-        console.log(JSON.stringify({checkpoint,variant:spec.variant,id:spec.id,...report,physicalEnabled:true}));
+        journal = new StaticJournal(path.join(privateDir,afterSpace ? 'static-watchface-r173-after-space.json' : spec.journal),address,plan);
+        const report = await runStaticSession(() => createStaticPipe(executable,address),plan,key,journal,
+          {action:operation,...(afterSpace && operation === 'install' ? {initialCountBelow:21} : {})});
+        console.log(JSON.stringify({checkpoint,variant:spec.variant,id:spec.id,afterSpace,...report,physicalEnabled:true}));
         process.exitCode = ['RegisteredInactive','RemovedVerified'].includes(report.status) &&
           report.closeConfirmed && report.workerExitConfirmed ? 0 : 1;
       } finally { key.fill(0);journal?.close(); }

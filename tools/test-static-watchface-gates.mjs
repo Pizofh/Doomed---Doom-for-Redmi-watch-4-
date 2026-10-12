@@ -15,6 +15,11 @@ for (const action of ['install','remove']) for(const variant of ['r167','r173'])
   assert.equal(report.variant,variant);
   assert.equal(report.watchCommandRequested,false);assert.equal(report.filesTransferred,false);
 }
+for(const action of ['install-after-space','remove-after-space']) {
+  const result=spawnSync(process.execPath,[path.join(root,'tools/pc-static-watchface.mjs'),action,'r173'],
+    {cwd:root,shell:false,windowsHide:true,encoding:'utf8',timeout:3000,maxBuffer:4096});
+  assert.equal(result.status,2);assert.equal(JSON.parse(result.stdout).status,'PhysicalGateClosed');
+}
 const exe = path.join(root,'artifacts/pc-rfcomm/Rw4PcRfcomm.exe');
 const metadata = JSON.parse(fs.readFileSync(path.join(root,'artifacts/pc-rfcomm/build.json'),'utf8'));
 const stat = fs.lstatSync(exe);assert(stat.isFile() && !stat.isSymbolicLink());
