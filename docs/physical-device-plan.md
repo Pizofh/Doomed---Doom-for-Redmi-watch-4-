@@ -1,5 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R168,2026-10-12:** [paquete estático probado y retirado solo en emulador](static-watchface-emulator-r168.md).
+Prototipo INSTALL/DELETE exclusivos de paquete propio únicamente APIsfalsas,
+sin backendreal. No envío físico/Byte5patch ni autorización deinstalar por
+estos resultados. Faltan transportemodo32KiB(lecturasactual16KiB no sirve),
+diarioprivado persistente,wire/IPC yplan/retirada física antesdepedirrevisión.
+No autoSET,deleteactiva/ajena,FW/RPK/Lua/C/kernel oarchivosgenéricos.
+
 **Actual R167,2026-10-12:** [GETlista físico confirmado](watchface-inventory-result-r167.md):
 21faces/1active/20canDelete,sinmutaciónycierrecorrecto. Paquete estático propio
 RW4Probe preparado en PC,IDausente en snapshot,soloIDpatch/nobyte5emu.

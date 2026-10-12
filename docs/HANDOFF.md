@@ -1,5 +1,40 @@
 # Retomar el proyecto
 
+**Actual R168, 2026-10-12:** [validación de la esfera y prototipo offline](static-watchface-emulator-r168.md).
+
+No se usaron el reloj, el teléfono ni Bluetooth en esta sesión. El usuario
+conserva el vínculo PC. Se archivó el registro obsoleto del emulador tras
+verificar procesos y puertos; se inició el launcher oculto. Al terminar seguía
+ejecutándose QEMU PID25900, con ADB dedicado 5039 sin USB. Verificar identidad
+actual antes de cualquier operación; los PID documentados no autorizan matar procesos.
+
+El paquete exacto RW4Probe, ID365799910 y byte5 original0, renderizó texto y
+barras RGB. Se volvió a Storage sin reboot. Después se retiraron únicamente
+sus archivos, verificando hash, inactividad y nombres permitidos. Tras rescan
+la esfera propia estaba ausente y los 25 IDs ajenos seguían presentes.
+La esfera de prueba YA ESTÁ RETIRADA; no repetir instalación o borrado.
+Se corrigió una colisión entre nombre de log ADB y archivo de caché: la primera
+retirada falló antes de borrar; la retirada final sí quedó verificada.
+El backup pausado no incluye RAM ni garantiza toda la consistencia del filesystem.
+
+La variante bridge no se usó. Byte5=10 se muestra como version2560 en otras
+esferas del emulador; no atribuirle automáticamente una versión física.
+La retirada por filesystem no prueba la API Xiaomi DELETE. El paquete está
+validado en este emulador S3, no en hardware RW4.
+
+`tools/static-watchface-transfer.mjs` prepara INSTALL, partes tipo16 y retirada
+exclusiva con APIs falsas, sin backend Bluetooth. Pasaron 12 escenarios y las
+pruebas del codec. No selecciona automáticamente la esfera y diferencia registro
+en catálogo de aceptación del contenido. La lista real de comandos permitidos
+sigue siendo de lectura. El recibo de propiedad solo vive en RAM: falta el diario
+privado persistente para otra ejecución o transferencia parcial.
+
+**Próximo checkpoint:** integrar un modo de transporte separado, limitado a
+este paquete y 32KiB, más diario de propiedad y pruebas de wire/IPC/retirada.
+El worker actual admite 16KiB, menos que el paquete; no iniciar el envío con él.
+Después preparar el plan físico concreto para revisión del usuario. No hay
+instalación física autorizada ni comandos nuevos que el usuario deba ejecutar hoy.
+
 **Actual R167,2026-10-12:** [inventario físico correcto/paquete estático PC](watchface-inventory-result-r167.md).
 User watchfaces Complete/v1/HMAC+auth+encryptedtrue,21faces/1active/20canDelete/
 0unknownIDs,4TX10RX/1959ms/close+workertrue/exit0/noerror/filesfalse. No device

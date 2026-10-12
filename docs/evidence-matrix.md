@@ -1,5 +1,17 @@
 # Matriz de evidencia
 
+**R168,2026-10-12:** [validación del paquete y prototipo offline](static-watchface-emulator-r168.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Candidato estático original byte5=0 renderiza | MiWatchEmulator/S3,390×450 | ReadbackSHA idéntico,selector ystatic-r168-render.png | CONFIRMADO EN EMULADOR | Alta | Sí | No modificar versión necesario en este caso; no firmwareRW4 exacto |
+| Permite menús/cambio a una esfera conocida | Mismo guest | Panel→Settings→Watchfaces→Storage,cachépropia in_use0 | CONFIRMADO EN EMULADOR | Alta | Sí | Sin reboot para salir; no APIstockRW4 probada |
+| Solo sus archivos/ID fueron retirados | Guest emulado | Hash+inactivo+whitelist,rmdir,snapshot y comparación25IDsajenos | CONFIRMADO EN EMULADOR | Alta | Sí | Retirada filesystem conADB,NO XiaomiDELETE real |
+| Paquete será eliminado por API en firmwareRW4 | RW4 real | Solo flags previos y simulatedDELETE | SIN EVIDENCIA FÍSICA | Desconocida | No | No instalar por esa inferencia ni borraresferas ajenas |
+| Prototipo genera tipo16/MD5/CRC/13partes y retirada restringida | Código propioPC | 12escenariosfakes y checkscodec | CONFIRMADO OFFLINE | Alta | Sí | Backend real ausente,receiptRAM; aceptación de contenido no verificada |
+| Workerlecturas16KiB permite enviar paquete25KiB | ClientePC | Constante16384 ybytes25224 | REFUTADO | Alta | Código/archivo | Prototipo bloquea antesdewrite; falta modo específico acotado32KiB |
+| Callbacklocal de envío prueba aceptación del paquete | Cliente de familia | OriginalonSend llamadoalencolar | REFUTADO COMO GARANTÍA | Alta | Inspección | Lista prueba registro,nohash/render/commitfinal |
+
 **R167,2026-10-12:** [inventario y candidato estático](watchface-inventory-result-r167.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

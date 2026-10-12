@@ -1,5 +1,9 @@
 # RW4Probe — primera esfera candidata, imagen estática
 
+**R168:** [render,menús,retorno yretirada confirmados en emulador](../../docs/static-watchface-emulator-r168.md)
+con el candidato ID-only/byte5original0. No variante bridge usada ni archivo
+físico cambiado. Eso no acredita aceptación/retirada por protocolo en RW4.
+
 Proyecto propio DeviceType365,390×450, un widget Image/Shape30. La imagen propia
 «RW4 PROBE» y barras RGB se generan al empaquetar; no assets Doom, código Lua,
 touch, timers, llamadas OS, shell, ELF o módulos. No representa un reloj con
