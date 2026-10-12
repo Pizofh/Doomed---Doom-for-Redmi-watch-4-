@@ -6,6 +6,12 @@ import {setTimeout as delay} from 'node:timers/promises';
 import {VERSION_QUERY,SESSION_START,FrameReader,v1Frame,v2Frame,command,nonceCommand,
   authResponse,decodeCommand,readBattery,readDeviceInfo,ccmEncrypt,ccmDecrypt,packetNonce,ctr} from './rw4-xiaomi-protocol.mjs';
 
+const nativeOutcomes = new Set(['InvalidTarget','LayoutRefused','NoRadio','MultipleRadios',
+  'CacheLookupFailed','NotBonded','WrongName','CleanupFailed','LocalFailure','Pending',
+  'Opened','Deadline','Cancelled','GateClosed','AuthenticationOrAccess','RadioTimeout',
+  'Disconnected','ChannelInUse','Resources','DriverOrArgument','NativeFailure','TransportFailure']);
+const nativeStages = new Set(['Cache','Opening','Opened','Send','Receive','Close','RequestLimit']);
+
 export function validateAuth(value) {
   if (!value || typeof value.authKey !== 'string' || !/^(?:0x)?[a-fA-F0-9]{32}$/.test(value.authKey) ||
       Object.keys(value).some(k => !['authKey','sourceTag'].includes(k)) ||
@@ -19,6 +25,8 @@ class PrivatePipe {
     this.queue = []; this.waiters = []; this.text = ''; this.failure = null;
     this.closeConfirmed = false; this.workerExitConfirmed = false; this.forced = false;
     this.nativeError = false; this.workerExitCode = null;
+    this.terminal = false; this.nativeOutcome = null; this.nativeStage = null;
+    this.nativeErrorCode = null; this.failureStage = null; this.connectionRequested = false;
     this.exit = new Promise(resolve => { this.resolveExit = resolve; });
     this.cancel = () => this.force('Cancelled'); process.on('SIGINT',this.cancel);
     this.timer = setTimeout(() => this.force('SupervisorDeadline'),limitMs);
@@ -29,11 +37,29 @@ class PrivatePipe {
       let newline;
       while ((newline = this.text.indexOf('\n')) >= 0) {
         const line = this.text.slice(0,newline).replace(/\r$/,''); this.text = this.text.slice(newline + 1);
-        if (!/^(OPEN|WAIT|SENT|CLOSED:[01]|E:[A-Za-z]+|D:(?:[0-9A-F]{2}){1,4096})$/.test(line)) {
+        if (line.startsWith('P:')) {
+          const stage = line.slice(2);
+          if (!nativeStages.has(stage)) { this.force('OutputRefused'); return; }
+          this.nativeStage = stage;
+          if (stage === 'Opening') this.connectionRequested = true;
+          continue;
+        }
+        if (!/^(OPEN|WAIT|SENT|CLOSED:[01]|E:[A-Za-z]+(?::\d{1,5}:[A-Za-z]+)?|D:(?:[0-9A-F]{2}){1,4096})$/.test(line)) {
           this.force('OutputRefused'); return;
         }
         if (line === 'CLOSED:1') this.closeConfirmed = true;
-        if (line.startsWith('E:')) this.nativeError = true;
+        if (line.startsWith('CLOSED:')) this.terminal = true;
+        if (line === 'OPEN') this.nativeStage = 'Opened';
+        if (line.startsWith('E:')) {
+          const [_,outcome,code,stage] = line.split(':');
+          if (!nativeOutcomes.has(outcome) || (stage !== undefined && !nativeStages.has(stage)) ||
+              (code !== undefined && Number(code) !== 0 && (Number(code) < 10000 || Number(code) > 11999))) {
+            this.force('OutputRefused'); return;
+          }
+          this.nativeError = true; this.terminal = true;
+          this.nativeOutcome ??= outcome; this.failureStage ??= stage ?? this.nativeStage;
+          this.nativeErrorCode ??= code !== undefined && Number(code) !== 0 ? Number(code) : null;
+        }
         if (this.waiters.length) this.waiters.shift().resolve(line);
         else if (this.queue.length < 8) this.queue.push(line);
         else { this.force('OutputRefused'); return; }
@@ -41,7 +67,11 @@ class PrivatePipe {
     });
     this.child.stderr.resume(); this.child.stderr.on('error',() => {});
     this.child.stdout.on('error',() => this.force('OutputRefused'));
-    this.child.stdin.on('error',() => this.force('TransportFailure'));
+    this.child.stdin.on('error',() => {
+      // A worker which already reported its terminal result is closing stdin.
+      // Do not kill it or erase an observed resource-close confirmation.
+      if (!this.terminal) this.force('TransportFailure');
+    });
     this.child.on('error',() => this.force('TransportFailure'));
     this.child.on('close',code => {
       this.workerExitConfirmed = true;
@@ -84,7 +114,7 @@ class PrivatePipe {
     return Buffer.from(line.slice(2),'hex');
   }
   async close() {
-    if (!this.workerExitConfirmed && !this.forced) {
+    if (!this.workerExitConfirmed && !this.forced && !this.terminal) {
       try {
         this.child.stdin.write('C\n');
         // Consume already-queued error/close lines; never expose them to console.
@@ -98,6 +128,8 @@ class PrivatePipe {
     return {closeConfirmed:this.closeConfirmed && !this.forced,
       workerExitConfirmed:this.workerExitConfirmed,supervisor:this.failure,
       workerExitCode:this.workerExitCode,nativeError:this.nativeError,
+      nativeOutcome:this.nativeOutcome,nativeStage:this.nativeStage,failureStage:this.failureStage,
+      nativeErrorCode:this.nativeErrorCode,connectionRequested:this.connectionRequested,
       ...(!this.workerExitConfirmed ? {workerPid:this.child.pid ?? null} : {})};
   }
 }
@@ -236,6 +268,6 @@ export async function runSession(executable,address,secret,options = {}) {
   if (['Complete','PartialData'].includes(report.status) &&
       (closed.nativeError || closed.workerExitCode !== 0)) report.status = 'TransportFailure';
   return {...report,...closed,elapsedMs:Math.max(0,Math.round(performance.now() - began)),
-    bluetoothOperationRequested:report.status === 'PreflightOrOpenFailed' ? null : true,
+    bluetoothOperationRequested:report.status === 'PreflightOrOpenFailed' ? closed.connectionRequested : true,
     watchCommandRequested:(report.sentFrames ?? 0) > 0};
 }

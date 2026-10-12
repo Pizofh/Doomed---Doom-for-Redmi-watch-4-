@@ -1,6 +1,13 @@
 # DOOM en Redmi Watch 4
 
-**Actual R159, 2026-10-12:** [SPP físico Windows abierto y cerrado](docs/windows-spp-result-r158.md),
+**Actual R160:** [primer lote falló antes de enviar comandos](docs/windows-session-open-failure-r160.md).
+Windows conservaba vínculo anterior después de cambiar el modo del reloj.
+Se corrigió parent-close y reporte nativo, sin alterar payload/alcance del lote;
+build y regresiones offline pasan. Próximo: pairing Windows nuevo desde QR
+actual y una sesión manual, sin repetir cambios de modo entre pasos. Protocolo/
+auth/datos reales siguen sin probarse; SPP anterior sí confirmado.
+
+**Historial R159, 2026-10-12:** [SPP físico Windows abierto y cerrado](docs/windows-spp-result-r158.md),
 un intento/1337ms, sin comandos de aplicación. Usuario mantiene vínculo PC y
 pide agrupar pruebas. [Lote preparado](docs/windows-xiaomi-session-plan-r159.md):
 versión/auth/batería/modelo/firmware en una sesión, sin uploads o ajustes. Build y

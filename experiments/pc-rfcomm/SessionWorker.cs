@@ -8,6 +8,13 @@ namespace Rw4.PcRfcomm
 {
     internal static class SessionWorker
     {
+        private sealed class IoFailure : Exception {
+            internal readonly int Code;
+            internal readonly Outcome Category;
+            internal IoFailure(int code, Outcome? category = null) {
+                Code = code; Category = category ?? WinSockTransport.ErrorCategory(code);
+            }
+        }
         internal static byte[] ParseSend(string line) {
             if (line == null || !line.StartsWith("S:") || line.Length < 4 ||
                 line.Length > 8194 || (line.Length - 2) % 2 != 0) return null;
@@ -26,6 +33,7 @@ namespace Rw4.PcRfcomm
             return -1;
         }
         internal static int Run(TextReader input, TextWriter output) {
+            output.WriteLine("P:Cache"); output.Flush();
             ulong address;
             if (!CachedTarget.Parse(input.ReadLine(), out address)) {
                 output.WriteLine("E:InvalidTarget"); output.Flush(); return 2;
@@ -38,13 +46,18 @@ namespace Rw4.PcRfcomm
             var transport = new WinSockTransport(api, address, true);
             var clock = Stopwatch.StartNew();
             int exit = 1, requests = 0, sent = 0, received = 0, frames = 0;
+            string stage = "Opening";
             try {
+                output.WriteLine("P:Opening"); output.Flush();
                 Step step = transport.Start();
                 while (step.Outcome == Outcome.Pending && clock.ElapsedMilliseconds < 20000) {
                     Thread.Sleep(10); step = transport.Poll();
                 }
                 if (step.Outcome != Outcome.Opened || clock.ElapsedMilliseconds >= 20000) {
-                    output.WriteLine("E:" + (step.Outcome == Outcome.Pending ? Outcome.Deadline : step.Outcome));
+                    bool deadline = clock.ElapsedMilliseconds >= 20000 &&
+                        (step.Outcome == Outcome.Pending || step.Outcome == Outcome.Opened);
+                    output.WriteLine("E:" + (deadline ? Outcome.Deadline : step.Outcome) +
+                        ":" + (deadline ? 0 : step.NativeError) + ":Opening");
                     output.Flush(); return 1;
                 }
                 output.WriteLine("OPEN"); output.Flush();
@@ -52,11 +65,13 @@ namespace Rw4.PcRfcomm
                     string line = input.ReadLine();
                     if (line == "C" || line == null) { exit = 0; break; }
                     if (line == "R") {
+                        stage = "Receive"; output.WriteLine("P:Receive"); output.Flush();
                         byte[] data = new byte[4096];
                         int count = api.Receive(transport.ActiveSocket, data);
-                        if (count == 0) throw new IOException("Disconnected");
+                        if (count == 0) throw new IoFailure(0, Outcome.Disconnected);
                         if (count < 0) {
-                            if (api.LastError() != 10035) throw new IOException("Receive failed");
+                            int error = api.LastError();
+                            if (error != 10035) throw new IoFailure(error);
                             output.WriteLine("WAIT");
                         } else {
                             received += count;
@@ -64,6 +79,7 @@ namespace Rw4.PcRfcomm
                             output.WriteLine("D:" + BitConverter.ToString(data, 0, count).Replace("-", ""));
                         }
                     } else {
+                        stage = "Send"; output.WriteLine("P:Send"); output.Flush();
                         byte[] data = ParseSend(line);
                         if (data == null || ++frames > 96 || sent + data.Length > 16384)
                             throw new IOException("Send refused");
@@ -71,7 +87,9 @@ namespace Rw4.PcRfcomm
                         while (offset < data.Length && clock.ElapsedMilliseconds < 55000) {
                             int count = api.Send(transport.ActiveSocket, data, offset, data.Length - offset);
                             if (count <= 0) {
-                                if (count == 0 || api.LastError() != 10035) throw new IOException("Send failed");
+                                if (count == 0) throw new IoFailure(0, Outcome.NativeFailure);
+                                int error = api.LastError();
+                                if (error != 10035) throw new IoFailure(error);
                                 Thread.Sleep(10);
                             } else offset += count;
                         }
@@ -81,9 +99,12 @@ namespace Rw4.PcRfcomm
                     output.Flush();
                 }
                 if (exit != 0) throw new IOException("Session budget");
-            } catch (Exception) {
-                output.WriteLine("E:TransportFailure"); output.Flush(); exit = 1;
+            } catch (Exception error) {
+                IoFailure io = error as IoFailure;
+                output.WriteLine("E:" + (io != null ? io.Category : Outcome.LocalFailure) +
+                    ":" + (io != null ? io.Code : 0) + ":" + stage); output.Flush(); exit = 1;
             } finally {
+                output.WriteLine("P:Close"); output.Flush();
                 bool closed = transport.Close();
                 output.WriteLine(closed ? "CLOSED:1" : "CLOSED:0"); output.Flush();
                 if (!closed) exit = 1;

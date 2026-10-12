@@ -1,6 +1,13 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
-**Actual R159, 2026-10-12:** [SPP Windows confirmado por usuario](windows-spp-result-r158.md),
+**Actual R160, 2026-10-12:** [apertura batch fallida/revisión](windows-session-open-failure-r160.md).
+Windows mantenía vínculo antiguo tras nuevo flujo del reloj. Corrección parent
+terminal-close y detalle sanitizado, no cambio de payload. Próxima secuencia:
+pairing Windows nuevo desde QR actual, teléfono BT OFF, un lote manual, mantener
+PC para revisión. Scope agrupado existente; sin firmware/reset/código. No
+ejecución automática; no causa stale ni cierre previo reinterpretados como hechos.
+
+**Historial R159, 2026-10-12:** [SPP Windows confirmado por usuario](windows-spp-result-r158.md),
 quien mantiene PC y pide agrupar pruebas sin re-pair por consulta. [Plan concreto
 del lote manual](windows-xiaomi-session-plan-r159.md) preparado: versión/auth/
 solo batería ydeviceInfo, límites, cierre, un retorno Mi Fitness al final. Sin

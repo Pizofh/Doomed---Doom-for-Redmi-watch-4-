@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R160, 2026-10-12:** [primer lote fallido y corrección](windows-session-open-failure-r160.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Primer lote R159 llegó a comandos Xiaomi | Unidad usuario | PreflightOrOpenFailed/20147ms/watchCommandRequested=false | REFUTADO PARA ESTE INTENTO | Alta | Usuario | No conclusión sobre auth key/protocolo; socket anterior sí abrió |
+| Windows mantenía vínculo anterior tras cambiar modo reloj | PC/reloj del usuario | Respuesta explícita | CONFIRMADO POR REPORTE DEL USUARIO | Alta | Usuario | Claves stale posibles, causa NO demostrada |
+| Parent podía perder cierre confirmado tras error terminal | Herramienta PC | Fixture error→stdin-error→CLOSED1; fallo de diseño revisado | CONFIRMADO OFFLINE Y CORREGIDO | Alta | Sí | No reinterpretar close=false del intento viejo sin pipe crudo |
+| Ambas listas con reloj funcional demuestran hosts activos simultáneos | Misma unidad | Observación de presencia en listas | SIN EVIDENCIA SUFICIENTE | Desconocida | No perfiles verificados | No inferir límite universal de uno ni compatibilidad dual |
+
 **R158/R159, 2026-10-12:** [resultado SPP](windows-spp-result-r158.md), [lote](windows-xiaomi-session-plan-r159.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

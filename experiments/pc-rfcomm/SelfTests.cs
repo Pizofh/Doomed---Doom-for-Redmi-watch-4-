@@ -192,6 +192,9 @@ namespace Rw4.PcRfcomm
             Check(WinSockTransport.ErrorCategory(10048) == Outcome.ChannelInUse);
             Check(WinSockTransport.ErrorCategory(10022) == Outcome.DriverOrArgument);
             Check(WinSockTransport.ErrorCategory(99999) == Outcome.NativeFailure);
+            api = new FakeApi { FailAt = "connect" };
+            var failedOpen = new WinSockTransport(api,1);
+            Check(failedOpen.Start().NativeError == 10013); Check(failedOpen.Close());
 
             foreach (string[] args in new[] { new[] { "probe", "PRIVATE-CANARY" },
                 new[] { "--unlock" }, new[] { "simulate", "PRIVATE-CANARY" } })

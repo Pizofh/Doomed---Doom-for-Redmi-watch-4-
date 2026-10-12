@@ -16,7 +16,8 @@ namespace Rw4.PcRfcomm
     internal struct Step
     {
         internal readonly Outcome Outcome;
-        internal Step(Outcome outcome) { Outcome = outcome; }
+        internal readonly int NativeError;
+        internal Step(Outcome outcome, int nativeError = 0) { Outcome = outcome; NativeError = nativeError; }
     }
 
     internal interface ITransport

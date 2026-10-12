@@ -74,7 +74,7 @@ namespace Rw4.PcRfcomm
                 default: return Outcome.NativeFailure;
             }
         }
-        private Step Failure() { return new Step(ErrorCategory(api.LastError())); }
+        private Step Failure() { int error = api.LastError(); return new Step(ErrorCategory(error), error); }
         public Step Start()
         {
             if (attempted || closed) throw new InvalidOperationException("One attempt only");
@@ -83,7 +83,7 @@ namespace Rw4.PcRfcomm
             // authenticated target checks, with an external process supervisor.
             if (api.Physical && !physicalReviewed) return new Step(Outcome.GateClosed);
             int error = api.Startup();
-            if (error != 0) return new Step(ErrorCategory(error));
+            if (error != 0) return new Step(ErrorCategory(error), error);
             started = true;
             socket = api.CreateSocket();
             if (socket == InvalidSocket) return Failure();
@@ -93,8 +93,8 @@ namespace Rw4.PcRfcomm
             if (api.Nonblocking(socket) != 0) return Failure();
             if (api.Connect(socket, endpoint) == 0) return new Step(Outcome.Opened);
             error = api.LastError();
-            if (error == 10035 || error == 10036 || error == 10037) return new Step(Outcome.Pending);
-            return new Step(ErrorCategory(error));
+            if (error == 10035 || error == 10036 || error == 10037) return new Step(Outcome.Pending, error);
+            return new Step(ErrorCategory(error), error);
         }
         public Step Poll()
         {
@@ -102,7 +102,7 @@ namespace Rw4.PcRfcomm
             int error;
             int ready = api.Poll(socket, out error);
             if (ready == 0) return new Step(Outcome.Pending);
-            if (ready < 0 || error != 0) return new Step(ErrorCategory(error));
+            if (ready < 0 || error != 0) return new Step(ErrorCategory(error), error);
             return new Step(Outcome.Opened);
         }
         public bool Close()

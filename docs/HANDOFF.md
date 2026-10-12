@@ -1,5 +1,16 @@
 # Retomar el proyecto
 
+**R160, 2026-10-12:** [batch falla antes de Xiaomi en20147ms](windows-session-open-failure-r160.md),
+workerexit1 confirmado, categoría nativa no guardada; no inferir key/proto.
+Usuario reactivó Conectar nuevo teléfono pero WINDOWS CONSERVÓ VÍNCULO VIEJO.
+Hipótesis stale, no causa probada. Corregido bug parent-close: no C/kill al worker
+terminal; regresiones E→EPIPE→CLOSED1 pasan. Nuevos enums/WSA real/stages acotados,
+sin datos crudos. Un nuevo pairing Windows (quitar SOLO RW4, QR actual, código)
+y una sesión manual del mismo lote; no volver a cambiar vínculo reloj después.
+BT teléfono OFF durante ensayo. No APK/repeatprobe/retries auto. Ambas listas
+con reloj funcional observadas, no prueba de dos conexiones activas. PC sigue;
+retorno actual pendiente por decisión usuario. Agente no radio.
+
 **Actual R159, 2026-10-12:** usuario exige pruebas AGRUPADAS/una sesión, no
 desconectar entre consultas. [Lote listo/plan](windows-xiaomi-session-plan-r159.md):
 node tools/pc-rfcomm.mjs session MANUAL, un socket, versión→auth→battery/info→close.

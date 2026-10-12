@@ -1,5 +1,13 @@
 # R159 — una sesión agrupada de consultas Xiaomi
 
+**Corrección R160:** [primer lote no abrió el canal](windows-session-open-failure-r160.md).
+Windows conservaba vínculo antiguo tras nuevo flujo del reloj. Parent terminal
+close corregido/probado, reporte nativo acotado ampliado, sin nuevos payloads.
+Pairing Windows nuevo desde QR actual antes de un lote manual, teléfono BT OFF;
+no cambiar otra vez el modo del reloj tras confirmar el código. Herramienta
+recompilada; 144 aserciones C#, seis fallos IPC (dos regresiones terminal-close).
+Esto no demuestra causa del fallo anterior ni éxito del siguiente.
+
 2026-10-12. Después de [SPP real confirmado](windows-spp-result-r158.md), el usuario
 pide reunir las pruebas para no volver a Mi Fitness entre cada consulta. La
 secuencia de handshake/consultas se prepara para ejecución MANUAL; no ejecución

@@ -166,8 +166,19 @@ function nativeFixture(version,scenario = 'success') {
           child.stderr.write('PRIVATE-CANARY-STDERR');
           if (scenario === 'hang' || scenario === 'unkillable') continue;
           if (scenario === 'cancel') { process.emit('SIGINT'); continue; }
+          if (scenario === 'open-error' || scenario === 'radio-timeout') {
+            child.stdout.write('P:Cache\nP:Opening\n' +
+              (scenario === 'open-error' ? 'E:Deadline:0:Opening\n' : 'E:RadioTimeout:10060:Opening\n'));
+            queueMicrotask(() => {
+              child.stdin.emit('error',Error('PRIVATE-CANARY-CLOSED-PIPE'));
+              child.stdout.write('P:Close\nCLOSED:1\n');
+              queueMicrotask(() => child.emit('close',1));
+            });
+            continue;
+          }
           child.stdout.write(scenario === 'invalid' ? 'PRIVATE-CANARY-OUTPUT\n' : 'OPEN\n');
         } else if (line === 'C') {
+          assert.ok(!['open-error','radio-timeout'].includes(scenario),'Do not write to terminal worker');
           child.stdout.write('CLOSED:1\n'); queueMicrotask(() => child.emit('close',0));
         } else if (line === 'R') {
           const data = await peer.read(); child.stdout.write(data.length ? 'D:'+data.toString('hex').toUpperCase()+'\n' : 'WAIT\n');
@@ -199,6 +210,17 @@ for (const scenario of ['invalid','hang','cancel','unkillable']) {
   assert.equal(JSON.stringify(report).includes('PRIVATE-CANARY'),false);
   assert.equal(JSON.stringify(report).includes('AABBCCDDEE01'),false);
 }
+for (const scenario of ['open-error','radio-timeout']) {
+  const report = await runSession('NO-REAL-EXECUTABLE','AABBCCDDEE01',Buffer.from(secret),
+    {spawnWorker:nativeFixture(1,scenario),limitMs:1000});
+  assert.equal(report.status,'PreflightOrOpenFailed');
+  assert.equal(report.closeConfirmed,true); assert.equal(report.workerExitConfirmed,true);
+  assert.equal(report.supervisor,null); assert.equal(report.watchCommandRequested,false);
+  assert.equal(report.bluetoothOperationRequested,true); assert.equal(report.failureStage,'Opening');
+  assert.equal(report.nativeOutcome,scenario === 'open-error' ? 'Deadline' : 'RadioTimeout');
+  assert.equal(report.nativeErrorCode,scenario === 'open-error' ? null : 10060);
+  assert.equal(JSON.stringify(report).includes('PRIVATE-CANARY'),false);
+}
 assert.equal(process.listenerCount('SIGINT'),0);
-console.log(JSON.stringify({checkpoint:'R159',protocolTestsPassed:true,syntheticSessions:12,ipcFullSessions:2,ipcFailureScenarios:4,
+console.log(JSON.stringify({checkpoint:'R160',protocolTestsPassed:true,syntheticSessions:12,ipcFullSessions:2,ipcFailureScenarios:6,
   nativeSocketCalls:0,bluetoothOperationRequested:false}));
