@@ -1,6 +1,12 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R178:** [plan concreto y adaptador de LuaProbe](lua-physical-plan-r178.md).
+**Actual R179:** [LuaProbe instalada tras autorización explícita](lua-physical-result-r179.md).
+Diezpartes,GETposterior13esferas ypropia inactiva/eliminable,anterioresconservadas.
+NoautoSET/DELETE. Gates cerrados otra vez. Pendiente observación de Lua/contador
+yretorno. Retirada propia opcionalautorizada,esperaconfirmaciónretorno ydecisión.
+Nada de C/ELF/Doom ni firmware autorizado.
+
+**Historial R178:** [plan concreto y adaptador de LuaProbe](lua-physical-plan-r178.md).
 Perfil r177/SHA/ID365219991 separado, journal propio y fuente exacta verificados;
 envío/retirada probados solo offline con peers. Ambos gates cerrados, no nueva
 operación al reloj. Revisión pendiente del único ensayo Lua físico, observación

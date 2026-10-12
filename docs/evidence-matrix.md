@@ -1,6 +1,15 @@
 # Matriz de evidencia
 
-**R178, 2026-10-12:** [perfil Lua e instalador físico preparados y bloqueados](lua-physical-plan-r178.md).
+**R179, 2026-10-12:** [instalación física de LuaProbe](lua-physical-result-r179.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Paquete propio con Lua fue transferido y registrado | M2315W1/2.2.86 | RegisteredInactive,10partes,GET independiente12→13 | CONFIRMADO EN RW4 | Alta | Sí, autorizado | No se activó automáticamente; no prueba ejecución |
+| Esferas/selección anteriores conservadas tras instalar LuaProbe | Misma unidad | Comparación12IDs/flags/activa contra journal nuevo | CONFIRMADO EN RW4 | Alta | Sí | No sustitución/borrado de otras |
+| Script/contador funcionan y salida es normal | Misma unidad | Observación solicitada y pendiente | SIN EVIDENCIA FÍSICA TODAVÍA | Desconocida | No | No inferir de presencia o aceptación de upload |
+| LuaProbe eliminable y retirada completada | Misma unidad | FlagcanDelete sí; DELETE no ejecutado | FLAG CONFIRMADO; RETIRADA SIN PROBAR | Alta sobre flag | GET | Retirada opcional requiere retorno/decisión |
+
+**Historial R178, 2026-10-12:** [perfil Lua e instalador físico preparados y bloqueados](lua-physical-plan-r178.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

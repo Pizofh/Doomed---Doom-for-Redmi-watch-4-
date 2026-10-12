@@ -1,6 +1,28 @@
 # Retomar el proyecto
 
-**Actual R178, 2026-10-12:** [plan físico Lua completo y adaptador bloqueado](lua-physical-plan-r178.md).
+**Actual R179, 2026-10-12:** [LuaProbe instalada, observación pendiente](lua-physical-result-r179.md).
+Usuario autoriza explícitamenteensayo ypuede observarreloj segúnpreguntaR178.
+Una instalación r177 completada:RegisteredInactive,10partes,20329TXbytes,
+19TX16RX,cierre/workertrueexit0. Own365219991inactiva/eliminable,anterioractiva.
+GETposteriorindependiente12→13,12IDs/flags/activa previos conservados.
+SinSET/DELETE/reboot/pairing/firmware. NO repetir instalación. Registro
+tools/local/pc-rfcomm/lua-minimal-r178.json Registered/contentKindlua-minimal.
+Reportes/exehabilitado/source archivados privados artifacts/lua-r179-reviewed.
+AmbosgatesFALSE,REVIEWED_VARIANT=r167,buildcerradoSHA
+818e3d06a9662cff879771c6cea736b83fe7ed4f740c39b600f7d8d1f673c03b.
+Gate tests pasan; no código de implementación nuevo, solo habilitación temporal
+restaurada y documentación del resultado.
+
+Pregunta manual enviada: elegirLuaProbe (previewcian10barras),esperar15s,
+textoRW4LUAPROBE/Updates10/10,volveresfera habitual/menú. Respuesta pendiente
+al guardar; presencia no demuestra ejecución ni lifecycle. Próximo: incorporar
+observación real antesdeafirmarLuaenRW4. Si blanco/bloqueo, no reabrir/reintentar.
+Retirada opcional YAautorizada dentroensayo, pero requiereconfirmaciónretorno
+ydecisiónderetirarla,GETowninactiva/eliminable/journalválido. No pedir otra
+autorización delmismoalcance si usuario eligerealizarla. Nada de C/ELF/Doom
+autorizado. ConservarbondPCdurantebloque,sin migraciónMiFit por rutina.
+
+**Historial R178, 2026-10-12:** [plan físico Lua completo y adaptador bloqueado](lua-physical-plan-r178.md).
 Usuario «ok» a preparar instalador/plan: NO autorización de envío Lua físico
 todavía. No radio/phone/ADB/watch usados aquí, solo PC y lectura web FAQsXiaomi.
 staticSpec ahora fija tresperfiles: imágenesr167/r173 y Luaminimalr177 separado,

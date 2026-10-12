@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R178:** [instalador y plan físico Lua preparados](docs/lua-physical-plan-r178.md).
+**Actual R179:** [LuaProbe instalada sin activación automática](docs/lua-physical-result-r179.md).
+Usuario autorizó ensayo Lua con observación. Un único envío de diez partes;
+GET independiente confirma catálogo12→13,propia inactiva/eliminable y anteriores
+conservadas. Gates cerrados otra vez. Pendiente comprobación manual de texto,
+contador10/10 y retorno normal; todavía no afirmar Lua ejecutado en hardware.
+
+**Historial R178:** [instalador y plan físico Lua preparados](docs/lua-physical-plan-r178.md).
 Perfil fijo r177 separado de las imágenes, registro propio y comprobación de
 fuente/hash. Tres perfiles pasan pruebas de envío/retirada y recibos cruzados;
 entrada Lua, imagen y worker nativo siguen bloqueados. No comandos nuevos al
