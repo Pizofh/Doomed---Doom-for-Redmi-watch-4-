@@ -17,7 +17,8 @@ export function bytes(field, value) {
 }
 const string = (field, value) => bytes(field, Buffer.from(value, 'utf8'));
 export function command(type, subtype, auth = null) {
-  if (!((type === 1 && [26,27].includes(subtype)) || (type === 2 && [1,2].includes(subtype))))
+  if (!((type === 1 && [26,27].includes(subtype)) || (type === 2 && [1,2].includes(subtype)) ||
+      (type === 4 && subtype === 0)))
     throw Error('CommandRefused');
   return Buffer.concat([uint(1, type), uint(2, subtype), ...(auth ? [bytes(3, auth)] : [])]);
 }
@@ -167,4 +168,27 @@ export function readDeviceInfo(message) {
   const firmware = firmwareBytes.toString('utf8'), model = modelBytes.toString('utf8');
   return {firmware:/^\d+(?:\.\d+){1,4}$/.test(firmware) ? firmware : null,
     modelRecognized:['M2315W1','Redmi Watch 4','RedmiWatch4'].includes(model)};
+}
+export function readWatchfaces(message) {
+  const watchface = fields(one(message.parsed,6,2));
+  const list = fields(one(watchface,1,2)), records = list.get(1) ?? [];
+  if (records.length > 128) fail();
+  const entries = [], seen = new Set(); let activeCount = 0, deletableCount = 0, unknownIdCount = 0;
+  for (const record of records) {
+    if (record.wire !== 2) fail();
+    const info = fields(record.value), idBytes = one(info,1,2);
+    if (idBytes.length < 1 || idBytes.length > 128) fail();
+    const idText = idBytes.toString('utf8');
+    const numeric = /^\d{1,10}$/.test(idText) && BigInt(idText) <= 4294967295n;
+    const id = numeric ? BigInt(idText).toString() : null;
+    // Unknown identifiers are never printed; names/images are never returned.
+    const identity = numeric ? 'numeric:'+id : 'opaque:'+idBytes.toString('hex');
+    if (seen.has(identity)) fail(); seen.add(identity);
+    const active = one(info,3,0,false) ?? 0, canDelete = one(info,4,0,false) ?? 0;
+    if (![0,1].includes(active) || ![0,1].includes(canDelete)) fail();
+    activeCount += active; deletableCount += canDelete;
+    if (numeric) entries.push({id,active:active === 1,canDelete:canDelete === 1});
+    else unknownIdCount++;
+  }
+  return {count:records.length,activeCount,deletableCount,unknownIdCount,entries};
 }

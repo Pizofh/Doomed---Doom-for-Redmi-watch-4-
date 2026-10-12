@@ -35,7 +35,7 @@ function run(file, argv) {
 try {
   if (action === 'plan' && args.length <= 1) {
     console.log(JSON.stringify({checkpoint: 'R148', physicalEnabled: false,
-      actions: ['build', 'test', 'simulate success|refused|timeout|error|close-failure', 'probe', 'session (review R159 first)'],
+      actions: ['build', 'test', 'simulate success|refused|timeout|error|close-failure', 'probe', 'session (review R159 first)', 'watchfaces (review R166 first)'],
       bluetoothOperationRequested: false, watchCommandRequested: false}));
   } else if (action === 'build' && args.length === 1) {
     const inputs = sourceHashes();
@@ -49,27 +49,27 @@ try {
       physicalProbePrepared: true,protocolHashes:protocolHashes()}, null, 2) + '\n');
     console.log(JSON.stringify({checkpoint: 'R148', built: true,
       executableSha256: hashFile(exe), physicalEnabled: false, bluetoothOperationRequested: false}));
-  } else if ((['test','probe','session'].includes(action) && args.length === 1) ||
+  } else if ((['test','probe','session','watchfaces'].includes(action) && args.length === 1) ||
       (action === 'simulate' && args.length === 2 &&
       ['success', 'refused', 'timeout', 'error', 'close-failure'].includes(args[1]))) {
     const prior = JSON.parse(fs.readFileSync(metadata, 'utf8'));
     if (prior.physicalEnabled !== false || prior.executableSha256 !== hashFile(exe) ||
         JSON.stringify(prior.sourceHashes) !== JSON.stringify(sourceHashes()) ||
         JSON.stringify(prior.protocolHashes) !== JSON.stringify(protocolHashes())) throw Error('Rebuild changed/unverified source');
-    if (action === 'probe' || action === 'session') {
+    if (action === 'probe' || action === 'session' || action === 'watchfaces') {
       const targetFile = path.join(root, 'tools/local/pc-rfcomm/target.json');
       const stat = fs.lstatSync(targetFile);
       if (!stat.isFile() || stat.isSymbolicLink() || stat.size > 4096) throw Error('Target refused');
       const address = validateTarget(JSON.parse(fs.readFileSync(targetFile, 'utf8')));
       let report;
-      if (action === 'session') {
+      if (action === 'session' || action === 'watchfaces') {
         const authFile = path.join(root,'tools/local/pc-rfcomm/auth.json'), authStat = fs.lstatSync(authFile);
         if (!authStat.isFile() || authStat.isSymbolicLink() || authStat.size > 4096) throw Error('Private key refused');
         const key = validateAuth(JSON.parse(fs.readFileSync(authFile,'utf8')));
-        report = await runSession(exe,address,key);
+        report = await runSession(exe,address,key,{profile:action === 'watchfaces' ? 'watchfaces' : 'device'});
       } else report = await supervise(exe, address);
       console.log(JSON.stringify(report));
-      process.exitCode = (action === 'session' ? report.status === 'Complete' : report.outcome === 'Opened') &&
+      process.exitCode = (action !== 'probe' ? report.status === 'Complete' : report.outcome === 'Opened') &&
         report.closeConfirmed && report.workerExitConfirmed ? 0 : 1;
     } else process.exitCode = run(exe, args);
   } else throw Error('Unsupported action');

@@ -4,7 +4,7 @@ import {performance} from 'node:perf_hooks';
 import {randomBytes} from 'node:crypto';
 import {setTimeout as delay} from 'node:timers/promises';
 import {VERSION_QUERY,SESSION_START,FrameReader,v1Frame,v2Frame,command,nonceCommand,
-  authResponse,decodeCommand,readBattery,readDeviceInfo,ccmEncrypt,ccmDecrypt,packetNonce,ctr} from './rw4-xiaomi-protocol.mjs';
+  authResponse,decodeCommand,readBattery,readDeviceInfo,readWatchfaces,ccmEncrypt,ccmDecrypt,packetNonce,ctr} from './rw4-xiaomi-protocol.mjs';
 
 const nativeOutcomes = new Set(['InvalidTarget','LayoutRefused','NoRadio','MultipleRadios',
   'CacheLookupFailed','NotBonded','WrongName','CleanupFailed','LocalFailure','Pending',
@@ -134,7 +134,9 @@ class PrivatePipe {
   }
 }
 export class XiaomiSession {
-  constructor(link,{clock = () => performance.now(),sleep = delay,phoneNonce = () => randomBytes(16)} = {}) {
+  constructor(link,{clock = () => performance.now(),sleep = delay,phoneNonce = () => randomBytes(16),profile = 'device'} = {}) {
+    if (!['device','watchfaces'].includes(profile)) throw Error('CommandRefused');
+    this.profile = profile;
     this.link = link; this.clock = clock; this.sleep = sleep; this.phoneNonce = phoneNonce;
     this.reader = new FrameReader(); this.version = 1; this.serial = 0; this.counter = 0;
     this.keys = null; this.sentFrames = 0; this.receivedFrames = 0;
@@ -207,6 +209,7 @@ export class XiaomiSession {
     const report = {checkpoint:'R159',status:'LocalFailure',protocolVersion:null,keyHmacVerified:false,
       authenticationAck:false,encryptedDataReceived:false,battery:null,modelRecognized:null,firmware:null,
       sentFrames:0,receivedFrames:0,rawOutputSaved:false,filesTransferred:false};
+    if (this.profile === 'watchfaces') Object.assign(report,{checkpoint:'R166',mode:'watchface-inventory',watchfaces:null});
     const knownErrors = new Set(['MalformedProtocol','AuthHmacMismatch','UnsupportedProtocol','Timeout',
       'ProtocolLimit','DecryptionFailed','AuthOrQueryRejected','TransportFailure','PreflightOrOpenFailed']);
     try {
@@ -238,6 +241,13 @@ export class XiaomiSession {
       this.keys = keys; report.keyHmacVerified = true;
       await this.send(this.encode(payload,true));
       await this.waitCommand(1,27); report.authenticationAck = true;
+      if (this.profile === 'watchfaces') {
+        await this.send(this.encode(command(4,0)));
+        const reply = await this.waitCommand(4,0);
+        if (!reply.encrypted) throw Error('DecryptionFailed');
+        report.encryptedDataReceived = true; report.watchfaces = readWatchfaces(reply);
+        report.status = 'Complete'; return report;
+      }
       for (const subtype of [1,2]) {
         await this.send(this.encode(command(2,subtype)));
         try {
@@ -255,14 +265,16 @@ export class XiaomiSession {
   }
 }
 export async function runSession(executable,address,secret,options = {}) {
+  if (!['device','watchfaces'].includes(options.profile ?? 'device')) { secret.fill(0); throw Error('CommandRefused'); }
   const began = performance.now();
   const link = new PrivatePipe(executable,address,options);
   let report;
   try {
     await link.opened();
-    report = await new XiaomiSession(link).run(secret);
+    report = await new XiaomiSession(link,{profile:options.profile ?? 'device'}).run(secret);
   } catch {
     report = {checkpoint:'R159',status:'PreflightOrOpenFailed',rawOutputSaved:false,filesTransferred:false};
+    if (options.profile === 'watchfaces') Object.assign(report,{checkpoint:'R166',mode:'watchface-inventory'});
   } finally { secret.fill(0); }
   const closed = await link.close();
   if (['Complete','PartialData'].includes(report.status) &&

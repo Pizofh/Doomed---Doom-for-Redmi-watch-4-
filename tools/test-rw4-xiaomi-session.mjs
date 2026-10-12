@@ -4,7 +4,7 @@ import {EventEmitter} from 'node:events';
 import {PassThrough} from 'node:stream';
 import {hkdfSync,createHmac,createCipheriv,createDecipheriv} from 'node:crypto';
 import {VERSION_QUERY,FrameReader,v1Frame,v2Frame,crc16,uint,bytes,fields,one,command,
-  derive,ccmEncrypt,ccmDecrypt,packetNonce,decodeCommand} from './rw4-xiaomi-protocol.mjs';
+  derive,ccmEncrypt,ccmDecrypt,packetNonce,decodeCommand,readWatchfaces} from './rw4-xiaomi-protocol.mjs';
 import {XiaomiSession,validateAuth,runSession} from './pc-rfcomm-session.mjs';
 
 const secret = Buffer.from('000102030405060708090a0b0c0d0e0f','hex');
@@ -17,6 +17,8 @@ assert.deepEqual(keys.rxNonce,expanded.subarray(32,36)); assert.deepEqual(keys.t
 assert.equal(crc16(Buffer.from('123456789')),0xbb3d); // CRC-16/ARC check value.
 assert.equal(v1Frame(0,Buffer.alloc(0),{op:0,dataType:0,flags:192}).toString('hex'),VERSION_QUERY.toString('hex'));
 assert.throws(() => command(2,5)); assert.throws(() => command(2,3)); assert.throws(() => command(22,1));
+for (const subtype of [1,2,3,4,5]) assert.throws(() => command(4,subtype));
+assert.equal(decodeCommand(command(4,0)).subtype,0);
 assert.throws(() => fields(Buffer.from([0]))); assert.throws(() => fields(Buffer.from([10,255])));
 assert.throws(() => one(fields(Buffer.concat([uint(1,1),uint(1,2)])),1,0));
 assert.throws(() => validateAuth({authKey:'PRIVATE-CANARY'}));
@@ -112,6 +114,14 @@ class Peer {
       if (this.scenario !== 'no-ack') this.reply(command(1,27,bytes(33,uint(1,1))));
       return;
     }
+    if (c.type === 4 && c.subtype === 0) {
+      this.queries.push('watchfaces');
+      if (this.scenario === 'watchface-timeout') return;
+      const row = Buffer.concat([bytes(1,Buffer.from('123456789')),bytes(2,Buffer.from('PRIVATE-CANARY-FACE-NAME')),
+        uint(3,1),uint(4,0)]);
+      const root = Buffer.concat([uint(1,4),uint(2,0),bytes(6,bytes(1,bytes(1,row)))]);
+      this.reply(root,this.scenario !== 'clear-data'); return;
+    }
     assert.equal(c.type,2); assert.ok([1,2].includes(c.subtype)); this.queries.push(c.subtype);
     if (c.subtype === 1 && this.scenario === 'battery-timeout') return;
     const system = c.subtype === 1 ? bytes(2,bytes(1,uint(1,73))) : bytes(3,Buffer.concat([
@@ -149,6 +159,35 @@ const noVersion = new Peer(1); noVersion.send = async () => {};
 const noVersionReport = await new XiaomiSession(noVersion,{clock:() => noVersion.now,
   sleep:async ms => {noVersion.now += ms;},phoneNonce:() => phone}).run(secret);
 assert.equal(noVersionReport.status,'Timeout'); assert.equal(noVersionReport.sentFrames,1);
+for (const version of [1,2]) for (const scenario of ['success','bad-key','no-ack','watchface-timeout','clear-data']) {
+  const peer = new Peer(version,scenario);
+  const client = new XiaomiSession(peer,{clock:()=>peer.now,sleep:async ms=>{peer.now+=ms;},phoneNonce:()=>phone,profile:'watchfaces'});
+  const report = await client.run(secret);
+  assert.equal(JSON.stringify(report).includes('PRIVATE-CANARY'),false);
+  if(scenario==='success') {
+    assert.equal(report.status,'Complete'); assert.equal(report.keyHmacVerified,true); assert.equal(report.encryptedDataReceived,true);
+    assert.equal(report.watchfaces.count,1); assert.equal(report.watchfaces.activeCount,1);
+    assert.equal(report.watchfaces.deletableCount,0); assert.equal(report.watchfaces.entries[0].id,'123456789');
+    assert.deepEqual(peer.queries,['watchfaces']); assert.equal(report.battery,null);
+  }else {
+    assert.equal(report.status,scenario==='bad-key'?'AuthHmacMismatch':scenario==='clear-data'?'DecryptionFailed':'Timeout');
+    if(['bad-key','no-ack'].includes(scenario))assert.deepEqual(peer.queries,[]);
+  }
+}
+const faceReply = rows => decodeCommand(Buffer.concat([uint(1,4),uint(2,0),bytes(6,bytes(1,Buffer.concat(rows.map(row=>bytes(1,row)))))]));
+const faceRow = (id,active=0,canDelete=0) => Buffer.concat([bytes(1,Buffer.from(id)),uint(3,active),uint(4,canDelete)]);
+assert.equal(readWatchfaces(faceReply([])).count,0);
+const unknownFace=readWatchfaces(faceReply([faceRow('PRIVATE-CANARY-ID')]));
+assert.equal(unknownFace.unknownIdCount,1);assert.equal(unknownFace.entries.length,0);
+assert.equal(JSON.stringify(unknownFace).includes('PRIVATE-CANARY'),false);
+assert.throws(()=>readWatchfaces(faceReply([faceRow('01'),faceRow('1')])));
+assert.throws(()=>readWatchfaces(faceReply([faceRow('1',2)])));
+assert.throws(()=>readWatchfaces(faceReply(Array.from({length:129},(_,i)=>faceRow(String(i))))));
+assert.throws(()=>new XiaomiSession({}, {profile:'install'}));
+const invalidProfileSecret=Buffer.from(secret);let invalidProfileSpawns=0;
+await assert.rejects(runSession('NO-REAL-EXECUTABLE','AABBCCDDEE01',invalidProfileSecret,
+  {profile:'install',spawnWorker:()=>{invalidProfileSpawns++;throw Error();}}));
+assert.equal(invalidProfileSpawns,0);assert(invalidProfileSecret.every(b=>b===0));
 function nativeFixture(version,scenario = 'success') {
   return (executable,args,options) => {
     assert.equal(executable,'NO-REAL-EXECUTABLE'); assert.deepEqual(args,['session-reviewed-r159']);
@@ -210,6 +249,13 @@ for (const scenario of ['invalid','hang','cancel','unkillable']) {
   assert.equal(JSON.stringify(report).includes('PRIVATE-CANARY'),false);
   assert.equal(JSON.stringify(report).includes('AABBCCDDEE01'),false);
 }
+for (const version of [1,2]) {
+  const report=await runSession('NO-REAL-EXECUTABLE','AABBCCDDEE01',Buffer.from(secret),
+    {spawnWorker:nativeFixture(version),limitMs:1000,profile:'watchfaces'});
+  assert.equal(report.status,'Complete');assert.equal(report.mode,'watchface-inventory');
+  assert.equal(report.watchfaces.count,1);assert.equal(report.closeConfirmed,true);assert.equal(report.workerExitConfirmed,true);
+  assert.equal(JSON.stringify(report).includes('PRIVATE-CANARY'),false);
+}
 for (const scenario of ['open-error','radio-timeout']) {
   const report = await runSession('NO-REAL-EXECUTABLE','AABBCCDDEE01',Buffer.from(secret),
     {spawnWorker:nativeFixture(1,scenario),limitMs:1000});
@@ -222,5 +268,5 @@ for (const scenario of ['open-error','radio-timeout']) {
   assert.equal(JSON.stringify(report).includes('PRIVATE-CANARY'),false);
 }
 assert.equal(process.listenerCount('SIGINT'),0);
-console.log(JSON.stringify({checkpoint:'R160',protocolTestsPassed:true,syntheticSessions:12,ipcFullSessions:2,ipcFailureScenarios:6,
+console.log(JSON.stringify({checkpoint:'R166',protocolTestsPassed:true,syntheticSessions:22,ipcFullSessions:4,ipcFailureScenarios:6,
   nativeSocketCalls:0,bluetoothOperationRequested:false}));

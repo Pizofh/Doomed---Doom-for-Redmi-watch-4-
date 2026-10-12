@@ -1,5 +1,15 @@
 # Cliente RFCOMM de Windows — R148
 
+## Actual R166: autenticación física completa e inventario preparado
+
+[Sesión del usuario](../../docs/windows-xiaomi-success-r166.md) confirma v1,
+HMAC/ACK/CCM válidos,97%,FW2.2.86,cierre correcto y menús normales desde PC.
+No archivos/código de reloj enviados. Conservar el vínculo Windows durante
+el bloque. `session` mantiene las dos consultas previas; `watchfaces` prepara
+solo GET4/0 tras auth, con [plan separado](../../docs/windows-watchface-inventory-plan-r166.md).
+No selección, borrado, instalación o imágenes. Build/test22sesiones sintéticas,
+4IPCfull,6IPCfail,144aserciones C# sin radio; inventario físico aún pendiente.
+
 ## Actual R159: lote en una sesión
 
 [Resultado físico R158](../../docs/windows-spp-result-r158.md): SPP Windows real
