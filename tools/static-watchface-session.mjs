@@ -16,6 +16,7 @@ export class StaticWatchfaceSession extends XiaomiSession {
     this.protocolVersion = null; this.txBudgetBytes = 32768; this.txBytes = 0;
     this.phase = 'New'; this.expectedParts = null; this.nextPart = 0;
     this.massAttempts = 0;
+    this.installStatus = null; this.uploadParameters = null;
   }
   async send(frame) {
     if (!Buffer.isBuffer(frame) || frame.length > 4096 || this.txBytes + frame.length > 32768) fail();
@@ -57,6 +58,8 @@ export class StaticWatchfaceSession extends XiaomiSession {
     if (next === 'InstallRequested') {
       const wf = fields(one(reply.parsed,6,2));
       const installStatus = one(wf,5,0);
+      if (!Number.isInteger(installStatus) || installStatus < 0 || installStatus > 4294967295) fail();
+      this.installStatus = installStatus;
       this.phase = installStatus === 0 ? 'InstallAck' : 'Rejected';
       return {installStatus};
     }
@@ -64,6 +67,8 @@ export class StaticWatchfaceSession extends XiaomiSession {
       const upload = fields(one(reply.parsed,24,2)), ack = fields(one(upload,2,2));
       const unknown2 = one(ack,2,0), resumePosition = one(ack,4,0,false) ?? 0;
       const md5 = one(ack,1,2,false), chunkSize = one(ack,5,0,false) ?? 2048;
+      this.uploadParameters = {unknown2,resumePosition,chunkSize,md5Present:md5 !== null,
+        md5Matches:md5 === null ? null : md5.equals(this.plan.md5())};
       if (unknown2 !== 0 || resumePosition !== 0 || (md5 !== null && !md5.equals(this.plan.md5()))) fail();
       this.expectedParts = chunks(this.plan,chunkSize); this.phase = 'Uploading';
       return {unknown2,resumePosition,chunkSize,...(md5 !== null ? {md5} : {})};
@@ -91,8 +96,8 @@ export class StaticWatchfaceSession extends XiaomiSession {
   }
 }
 
-// Injectable link factory: tests use fake streams. The native entry remains
-// GateClosed in Program.Dispatch. No install/remove CLI is exposed yet.
+// Injectable link factory: tests use fake streams. Physical mode also requires
+// both reviewed gates in the CLI and native worker; no automatic connection.
 export async function runStaticSession(createLink,plan,secret,journal,options = {}) {
   let link,client;
   try {
@@ -112,11 +117,17 @@ export async function runStaticSession(createLink,plan,secret,journal,options = 
       sentFrames:client.sentFrames,receivedFrames:client.receivedFrames,
       transferPartsWritten:client.nextPart,fileDataSendRequested:client.massAttempts > 0,
       watchCommandRequested:client.sentFrames > 0,bluetoothOperationRequested:closed.connectionRequested ?? null};
-  } catch {
+  } catch (error) {
     let journalRecorded = true;
     try { journal?.uncertain(); } catch { journalRecorded = false; }
     const closed = link ? await link.close() : {closeConfirmed:true,workerExitConfirmed:true,connectionRequested:false};
     return {status:'StoppedNeedsReview',journalRecorded,...closed,
+      protocolPhase:client?.phase ?? 'BeforeConnection',
+      installStatus:client?.installStatus ?? null,uploadParameters:client?.uploadParameters ?? null,
+      failureReason:new Set(['StaticSessionRefused','StaticTransferRefused','StaticJournalRefused',
+        'Timeout','MalformedProtocol','DecryptionFailed','AuthOrQueryRejected','TransportFailure',
+        'PreflightOrOpenFailed','ProtocolLimit','UnsupportedProtocol','AuthHmacMismatch']).has(error?.message)
+        ? error.message : 'LocalFailure',
       txBytes:client?.txBytes ?? 0,sentFrames:client?.sentFrames ?? 0,
       transferPartsWritten:client?.nextPart ?? 0,fileDataSendRequested:(client?.massAttempts ?? 0) > 0,
       transferAcceptanceVerified:false,watchCommandRequested:(client?.sentFrames ?? 0) > 0,

@@ -100,7 +100,7 @@ class Peer {
       const disk = JSON.parse(fs.readFileSync(this.journalFile,'utf8'));
       assert.equal(disk.phase,cmd.type === 22 ? 'InstallAck' : cmd.subtype === 4 ? 'Intent' : 'DeleteIntent');
     }
-    if (cmd.type === 4 && cmd.subtype === 4) { response(6,uint(5,0));return; }
+    if (cmd.type === 4 && cmd.subtype === 4) { response(6,uint(5,this.scenario === 'install-reject' ? 2 : 0));return; }
     if (cmd.type === 22 && cmd.subtype === 0) {
       response(24,bytes(2,Buffer.concat([bytes(1,plan.md5()),uint(2,0),uint(4,this.scenario === 'resume' ? 5 : 0),uint(5,this.chunkSize)])));return;
     }
@@ -150,7 +150,7 @@ for (const chunkSize of [512,2048,4080]) {
   assert.equal(JSON.stringify({installed,removed}).includes(address),false);
   assert.equal(JSON.stringify({installed,removed}).includes('PRIVATE-CANARY'),false);
 }
-for (const scenario of ['v2','bad-key','bad-auth-ack','wrong-fw','wrong-model','collision','clear-response','resume','mid-stream','missing','unrelated-lost','unsupported-chunk','close-failure']) {
+for (const scenario of ['v2','bad-key','bad-auth-ack','wrong-fw','wrong-model','collision','clear-response','install-reject','resume','mid-stream','missing','unrelated-lost','unsupported-chunk','close-failure']) {
   const file = journalFile(scenario),journal = new StaticJournal(file,address,plan),peer = new Peer(scenario,scenario === 'unsupported-chunk' ? 4096 : 2048),key = Buffer.from(secret);
   peer.journalFile = file;
   const result = await runStaticSession(pipe(peer),plan,key,journal);
@@ -158,6 +158,11 @@ for (const scenario of ['v2','bad-key','bad-auth-ack','wrong-fw','wrong-model','
   assert(result.closeConfirmed || scenario === 'close-failure');assert.equal(result.workerExitConfirmed,true);assert(key.every(b => b === 0));
   if (['v2','bad-key','bad-auth-ack','wrong-fw','wrong-model','collision','clear-response'].includes(scenario))assert.equal(peer.mutations.length,0);
   if (['resume','unsupported-chunk'].includes(scenario))assert.equal(peer.parts.length,0);
+  if (scenario === 'install-reject') {
+    assert.equal(result.protocolPhase,'Rejected');assert.equal(result.installStatus,2);
+    assert.equal(result.uploadParameters,null);assert.equal(result.fileDataSendRequested,false);
+    assert.deepEqual(peer.mutations,[[4,4]]);assert.equal(peer.parts.length,0);
+  }
   if (scenario === 'mid-stream')assert.equal(peer.parts.length,2);
   assert.equal(JSON.stringify(result).includes('PRIVATE-CANARY'),false);
   journal.close();scenarios++;

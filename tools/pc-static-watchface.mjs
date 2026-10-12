@@ -1,4 +1,4 @@
-// R169 review/build inspection only. Physical writes deliberately have no entry.
+// One pinned static package. Physical writes require explicit reviewed gates.
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -54,18 +54,18 @@ try {
       } finally { key.fill(0);journal?.close(); }
     }
   } else if (action === 'plan') {
-    console.log(JSON.stringify({checkpoint:'R169',status:'ReviewPreparationOnly',physicalEnabled:false,
-      actions:['plan','prepare'],physicalWritesRequireReview:true,
+    console.log(JSON.stringify({checkpoint:'R169',status:'ReviewPreparationOnly',physicalEnabled:PHYSICAL_WRITES_REVIEWED,
+      actions:PHYSICAL_WRITES_REVIEWED ? ['plan','prepare','install','remove'] : ['plan','prepare'],physicalWritesRequireReview:true,
       bluetoothOperationRequested:false,watchCommandRequested:false}));
   } else {
     const {plan,metadata} = prepared();
     console.log(JSON.stringify({checkpoint:'R169',status:'OfflinePrepared',id:plan.id,size:plan.size,sha256:plan.sha256,
       defaultParts:chunks(plan).length,staticTxBudget:32768,readonlyTxBudget:16384,
       executableSha256:metadata.executableSha256,buildInputsVerified:true,
-      persistentJournalImplemented:true,physicalEntry:'GateClosed',physicalEnabled:false,
+      persistentJournalImplemented:true,physicalEntry:PHYSICAL_WRITES_REVIEWED ? 'ReviewedStaticOnly' : 'GateClosed',physicalEnabled:PHYSICAL_WRITES_REVIEWED,
       bluetoothOperationRequested:false,watchCommandRequested:false,filesTransferred:false}));
   }
 } catch {
-  console.error('Static package preparation refused; inspect local build and pinned package. No physical operation attempted.');
+  console.error('Static package refused or failed; inspect build and private journal. Do not retry automatically; no fallback attempted.');
   process.exitCode = 1;
 }
