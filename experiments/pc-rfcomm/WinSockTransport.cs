@@ -54,6 +54,12 @@ namespace Rw4.PcRfcomm
         {
             get { return UIntPtr.Size == 8 ? new UIntPtr(ulong.MaxValue) : new UIntPtr(uint.MaxValue); }
         }
+        internal UIntPtr ActiveSocket {
+            get {
+                if (!hasSocket || closed) throw new InvalidOperationException("No active socket");
+                return socket;
+            }
+        }
         internal static Outcome ErrorCategory(int error)
         {
             switch (error)
@@ -169,6 +175,11 @@ namespace Rw4.PcRfcomm
             return 1;
         }
         public int CloseSocket(UIntPtr socket) { return closesocket(socket); }
+        internal int Send(UIntPtr handle, byte[] bytes, int offset, int count) {
+            var remaining = new byte[count]; Buffer.BlockCopy(bytes, offset, remaining, 0, count);
+            return send(handle, remaining, count, 0);
+        }
+        internal int Receive(UIntPtr handle, byte[] bytes) { return recv(handle, bytes, bytes.Length, 0); }
 
         [StructLayout(LayoutKind.Sequential)]
         internal struct FdSet
@@ -202,5 +213,9 @@ namespace Rw4.PcRfcomm
             out int value, ref int length);
         [DllImport("ws2_32.dll", ExactSpelling = true)]
         private static extern int closesocket(UIntPtr socket);
+        [DllImport("ws2_32.dll", ExactSpelling = true)]
+        private static extern int send(UIntPtr socket, byte[] data, int length, int flags);
+        [DllImport("ws2_32.dll", ExactSpelling = true)]
+        private static extern int recv(UIntPtr socket, [Out] byte[] data, int length, int flags);
     }
 }

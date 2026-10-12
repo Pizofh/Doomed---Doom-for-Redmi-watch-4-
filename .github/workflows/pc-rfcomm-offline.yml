@@ -8,6 +8,10 @@ on:
       - 'tools/pc-rfcomm.mjs'
       - 'tools/pc-rfcomm-supervisor.mjs'
       - 'tools/test-pc-rfcomm-supervisor.mjs'
+      - 'tools/pc-rfcomm-session.mjs'
+      - 'tools/pc-rfcomm-auth-prepare.mjs'
+      - 'tools/rw4-xiaomi-protocol.mjs'
+      - 'tools/test-rw4-xiaomi-session.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
   pull_request:
     paths:
@@ -15,6 +19,10 @@ on:
       - 'tools/pc-rfcomm.mjs'
       - 'tools/pc-rfcomm-supervisor.mjs'
       - 'tools/test-pc-rfcomm-supervisor.mjs'
+      - 'tools/pc-rfcomm-session.mjs'
+      - 'tools/pc-rfcomm-auth-prepare.mjs'
+      - 'tools/rw4-xiaomi-protocol.mjs'
+      - 'tools/test-rw4-xiaomi-session.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
 
 permissions:
@@ -37,3 +45,6 @@ jobs:
       - name: Test worker supervision without radio
         shell: pwsh
         run: node tools/test-pc-rfcomm-supervisor.mjs
+      - name: Test Xiaomi batch against synthetic peers
+        shell: pwsh
+        run: node tools/test-rw4-xiaomi-session.mjs

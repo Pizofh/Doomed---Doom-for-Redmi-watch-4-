@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**R158/R159, 2026-10-12:** [resultado SPP](windows-spp-result-r158.md), [lote](windows-xiaomi-session-plan-r159.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| SPP Windows abre y cierra con la unidad RW4 | M2315W1/2.2.86 del usuario | JSON physical/Opened/1337ms/1Start/cierre+worker OK | CONFIRMADO EN RW4 POR PRUEBA DEL USUARIO | Alta | Usuario | Sin payload Xiaomi; no solo perfil micrófono |
+| Este intento regresó después a Mi Fitness | Misma unidad | Usuario difiere retorno, mantiene PC | PENDIENTE | Desconocida | No todavía | Retorno anterior probado, no presumir actual |
+| Lote V1/V2 funciona con peers simulados | Código propio PC | 12synthetic sessions +2IPC full +4IPC failures | CONFIRMADO OFFLINE | Alta | Sí | No prueba protocolo/auth HW2.2.86; no paquetes reales enviados |
+| Clave histórica sigue vigente para auth | Misma unidad | Un candidato contextual en logs previos | SIN EVIDENCIA DE VIGENCIA | Desconocida | Preparación PC | HMAC futuro; no probar alternativas/bypass |
+| Reloj responde comandos Xiaomi/batería al cliente Windows | Misma unidad | Lote físico no ejecutado | SIN EVIDENCIA | Desconocida | No | SPP Opened no lo demuestra |
+
 **R155, 2026-10-11:** [aclaración del flujo de vinculación](windows-spp-probe-plan-r154.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

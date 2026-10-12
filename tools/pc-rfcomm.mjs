@@ -5,6 +5,7 @@ import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {supervise, validateTarget} from './pc-rfcomm-supervisor.mjs';
+import {runSession,validateAuth} from './pc-rfcomm-session.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dir = path.join(root, 'experiments/pc-rfcomm');
@@ -12,7 +13,8 @@ const output = path.join(root, 'artifacts/pc-rfcomm');
 const exe = path.join(output, 'Rw4PcRfcomm.exe');
 const metadata = path.join(output, 'build.json');
 const compiler = 'C:/Windows/Microsoft.NET/Framework64/v4.0.30319/csc.exe';
-const sources = ['Probe.cs', 'WinSockTransport.cs', 'PhysicalWorker.cs', 'SelfTests.cs'];
+const sources = ['Probe.cs', 'WinSockTransport.cs', 'PhysicalWorker.cs', 'SessionWorker.cs', 'SelfTests.cs'];
+const protocolModules = ['pc-rfcomm-supervisor.mjs','pc-rfcomm-session.mjs','rw4-xiaomi-protocol.mjs'];
 const args = process.argv.slice(2);
 const action = args[0] ?? 'plan';
 const hashFile = file => {
@@ -21,6 +23,7 @@ const hashFile = file => {
   return createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 };
 const sourceHashes = () => Object.fromEntries(sources.map(file => [file, hashFile(path.join(dir, file))]));
+const protocolHashes = () => Object.fromEntries(protocolModules.map(file => [file,hashFile(path.join(root,'tools',file))]));
 function run(file, argv) {
   const result = spawnSync(file, argv, {cwd: root, encoding: 'utf8', windowsHide: true,
     shell: false, timeout: 60000, maxBuffer: 1024 * 1024});
@@ -32,7 +35,7 @@ function run(file, argv) {
 try {
   if (action === 'plan' && args.length <= 1) {
     console.log(JSON.stringify({checkpoint: 'R148', physicalEnabled: false,
-      actions: ['build', 'test', 'simulate success|refused|timeout|error|close-failure', 'probe (review R154 first)'],
+      actions: ['build', 'test', 'simulate success|refused|timeout|error|close-failure', 'probe', 'session (review R159 first)'],
       bluetoothOperationRequested: false, watchCommandRequested: false}));
   } else if (action === 'build' && args.length === 1) {
     const inputs = sourceHashes();
@@ -43,23 +46,31 @@ try {
     if (status !== 0) throw Error('Compilation failed');
     fs.writeFileSync(metadata, JSON.stringify({checkpoint: 'R148', sourceHashes: inputs,
       compilerSha256, executableSha256: hashFile(exe), physicalEnabled: false,
-      physicalProbePrepared: true}, null, 2) + '\n');
+      physicalProbePrepared: true,protocolHashes:protocolHashes()}, null, 2) + '\n');
     console.log(JSON.stringify({checkpoint: 'R148', built: true,
       executableSha256: hashFile(exe), physicalEnabled: false, bluetoothOperationRequested: false}));
-  } else if ((action === 'test' && args.length === 1) || (action === 'probe' && args.length === 1) ||
+  } else if ((['test','probe','session'].includes(action) && args.length === 1) ||
       (action === 'simulate' && args.length === 2 &&
       ['success', 'refused', 'timeout', 'error', 'close-failure'].includes(args[1]))) {
     const prior = JSON.parse(fs.readFileSync(metadata, 'utf8'));
     if (prior.physicalEnabled !== false || prior.executableSha256 !== hashFile(exe) ||
-        JSON.stringify(prior.sourceHashes) !== JSON.stringify(sourceHashes())) throw Error('Rebuild changed/unverified source');
-    if (action === 'probe') {
+        JSON.stringify(prior.sourceHashes) !== JSON.stringify(sourceHashes()) ||
+        JSON.stringify(prior.protocolHashes) !== JSON.stringify(protocolHashes())) throw Error('Rebuild changed/unverified source');
+    if (action === 'probe' || action === 'session') {
       const targetFile = path.join(root, 'tools/local/pc-rfcomm/target.json');
       const stat = fs.lstatSync(targetFile);
       if (!stat.isFile() || stat.isSymbolicLink() || stat.size > 4096) throw Error('Target refused');
       const address = validateTarget(JSON.parse(fs.readFileSync(targetFile, 'utf8')));
-      const report = await supervise(exe, address);
+      let report;
+      if (action === 'session') {
+        const authFile = path.join(root,'tools/local/pc-rfcomm/auth.json'), authStat = fs.lstatSync(authFile);
+        if (!authStat.isFile() || authStat.isSymbolicLink() || authStat.size > 4096) throw Error('Private key refused');
+        const key = validateAuth(JSON.parse(fs.readFileSync(authFile,'utf8')));
+        report = await runSession(exe,address,key);
+      } else report = await supervise(exe, address);
       console.log(JSON.stringify(report));
-      process.exitCode = report.outcome === 'Opened' && report.closeConfirmed && report.workerExitConfirmed ? 0 : 1;
+      process.exitCode = (action === 'session' ? report.status === 'Complete' : report.outcome === 'Opened') &&
+        report.closeConfirmed && report.workerExitConfirmed ? 0 : 1;
     } else process.exitCode = run(exe, args);
   } else throw Error('Unsupported action');
 } catch {

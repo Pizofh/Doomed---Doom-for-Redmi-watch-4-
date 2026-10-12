@@ -135,6 +135,8 @@ namespace Rw4.PcRfcomm
             if (args.Length == 1 && args[0] == "test") return SelfTests.Run(output);
             if (args.Length == 1 && args[0] == "worker-reviewed-r154")
                 return PhysicalWorker.Run(Console.In, output);
+            if (args.Length == 1 && args[0] == "session-reviewed-r159")
+                return SessionWorker.Run(Console.In, output);
             if (args.Length == 2 && args[0] == "simulate" &&
                 Array.IndexOf(new[] { "success", "refused", "timeout", "error", "close-failure" }, args[1]) >= 0)
             {

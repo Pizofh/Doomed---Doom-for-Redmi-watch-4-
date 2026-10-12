@@ -1,6 +1,14 @@
 # DOOM en Redmi Watch 4
 
-**Actual R154:** usuario logró pairing Windows (micrófono) y retorno completo a
+**Actual R159, 2026-10-12:** [SPP físico Windows abierto y cerrado](docs/windows-spp-result-r158.md),
+un intento/1337ms, sin comandos de aplicación. Usuario mantiene vínculo PC y
+pide agrupar pruebas. [Lote preparado](docs/windows-xiaomi-session-plan-r159.md):
+versión/auth/batería/modelo/firmware en una sesión, sin uploads o ajustes. Build y
+pruebas offline pasan; una clave histórica candidata privada, vigencia pendiente
+de HMAC. Lote físico todavía NO ejecutado. Retorno después del probe pendiente;
+retorno anterior confirmado. Doom físico/ABI/loader no demostrados.
+
+**Historial R154:** usuario logró pairing Windows (micrófono) y retorno completo a
 Mi Fitness tras quitar el vínculo PC. [Un intento SPP Windows preparado](docs/windows-spp-probe-plan-r154.md),
 con preflight de caché/destino, seguridad y supervisión del worker. Build y pruebas
 offline pasan: 134 aserciones C# y diez escenarios del supervisor. **SPP físico

@@ -1,5 +1,28 @@
 # Retomar el proyecto
 
+**Actual R159, 2026-10-12:** usuario exige pruebas AGRUPADAS/una sesión, no
+desconectar entre consultas. [Lote listo/plan](windows-xiaomi-session-plan-r159.md):
+node tools/pc-rfcomm.mjs session MANUAL, un socket, versión→auth→battery/info→close.
+Sin uploads/config/initialize completo. Usuario sigue PC; no pedir re-pair
+innecesario ni repetir probe. Auth candidata histórica única preparada en
+tools/local/pc-rfcomm/auth.json, sin exponer/hashing key; asociación por línea,
+vigencia solo futura HMAC. Target existente válido. No radio del agente.
+Build/tests:142C# assertions,12synthetic protocol sessions,2fake IPC full,4IPC
+failures,10previous supervisor cases; CI actualizado/no run. Hashes incluyen
+5C# y3JS protocolos. Lote real/retorno posterior PENDIENTES; retorno previo sí.
+Comando del usuario tarda hasta~1min; único JSON sin keys/MAC/serial/raw. Tras
+terminar lote vuelve Mi Fitness una vez. No autoriza firmware/módulos/ELF físicos.
+
+**R158/R159, 2026-10-12:** [SPP real Opened/1337ms/1Start/cierre y worker OK](windows-spp-result-r158.md).
+No appcomandos. NO repetir probe. Usuario mantiene vínculo PC y difiere volver
+a Mi Fitness; no asumir retorno actual o fallo, anterior sí comprobado. Solicita
+AGRUPar pruebas en UNA sesión y no volver entre cada consulta. Preparar versión,
+auth con HMAC/claves vigentes si disponibles, battery/device info, cierre; una
+vuelta Mi Fitness al final. No APK nueva/initialize completo/config/uploads.
+Auditoría de fuentes existentes identifica V1/V2 y auth HMAC+CCM/CTR, no firmware
+RE. Batch aún en preparación, no ejecutar radio automáticamente. Mantener alcance
+solo lecturas/handshake: código nativo y firmware siguen fuera de autorización.
+
 **R157, 2026-10-11:** usuario completó target privado con MAC compacta (12 hex,
 sin separadores). Solo formato inspeccionado, sin exponer valor. Se normalizó
 address a pares con dos puntos, verificando mismo identificador y validateTarget

@@ -1,6 +1,13 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
-**Actual R156, 2026-10-11:** usuario autoriza una ejecución manual del [probe SPP
+**Actual R159, 2026-10-12:** [SPP Windows confirmado por usuario](windows-spp-result-r158.md),
+quien mantiene PC y pide agrupar pruebas sin re-pair por consulta. [Plan concreto
+del lote manual](windows-xiaomi-session-plan-r159.md) preparado: versión/auth/
+solo batería ydeviceInfo, límites, cierre, un retorno Mi Fitness al final. Sin
+ejecución automática ni retries/guesses/código/firmware. Auth candidata privada
+histórica, vigencia aún desconocida. JSON y retorno posterior pendientes.
+
+**Historial R156, 2026-10-11:** usuario autoriza una ejecución manual del [probe SPP
 Windows](windows-spp-probe-plan-r154.md), con desvinculación Mi Fitness aclarada
 R155 y retorno observado. NO pedir nuevamente aprobación de esa secuencia.
 Target privado plantilla listo/sin MAC; hashes build/fuentes coinciden. Agente

@@ -205,6 +205,9 @@ namespace Rw4.PcRfcomm
             Check(plan.ToString().Contains("\"physicalEnabled\":false"));
 
             Check(CachedTarget.LayoutValid());
+            Check(SessionWorker.ParseSend("S:00ff").Length == 2);
+            foreach (string bad in new[] { "", "S:", "S:0", "S:GG", "R", "S:00\n", "S:" + new string('0',8194) })
+                Check(SessionWorker.ParseSend(bad) == null);
             ulong parsed;
             Check(CachedTarget.Parse("AABBCCDDEE01", out parsed) && parsed == 0xAABBCCDDEE01UL);
             foreach (string bad in new[] { "", "000000000000", "AABBCCDDEE01\n", "AA:BB:CC:DD:EE:01", "PRIVATE-CANARY" })

@@ -1,0 +1,94 @@
+// Private pipe transport for the explicit R159 batch. No secrets in argv/logs.
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Threading;
+
+namespace Rw4.PcRfcomm
+{
+    internal static class SessionWorker
+    {
+        internal static byte[] ParseSend(string line) {
+            if (line == null || !line.StartsWith("S:") || line.Length < 4 ||
+                line.Length > 8194 || (line.Length - 2) % 2 != 0) return null;
+            byte[] bytes = new byte[(line.Length - 2) / 2];
+            for (int i = 0; i < bytes.Length; i++) {
+                int hi = Digit(line[2 + 2 * i]), lo = Digit(line[3 + 2 * i]);
+                if (hi < 0 || lo < 0) return null;
+                bytes[i] = (byte)(hi * 16 + lo);
+            }
+            return bytes;
+        }
+        private static int Digit(char c) {
+            if (c >= '0' && c <= '9') return c - '0';
+            if (c >= 'a' && c <= 'f') return c - 'a' + 10;
+            if (c >= 'A' && c <= 'F') return c - 'A' + 10;
+            return -1;
+        }
+        internal static int Run(TextReader input, TextWriter output) {
+            ulong address;
+            if (!CachedTarget.Parse(input.ReadLine(), out address)) {
+                output.WriteLine("E:InvalidTarget"); output.Flush(); return 2;
+            }
+            Preflight check = CachedTarget.Check(address);
+            if (check != Preflight.Ready) {
+                output.WriteLine("E:" + check); output.Flush(); return 2;
+            }
+            var api = new NativeWinSockApi();
+            var transport = new WinSockTransport(api, address, true);
+            var clock = Stopwatch.StartNew();
+            int exit = 1, requests = 0, sent = 0, received = 0, frames = 0;
+            try {
+                Step step = transport.Start();
+                while (step.Outcome == Outcome.Pending && clock.ElapsedMilliseconds < 20000) {
+                    Thread.Sleep(10); step = transport.Poll();
+                }
+                if (step.Outcome != Outcome.Opened || clock.ElapsedMilliseconds >= 20000) {
+                    output.WriteLine("E:" + (step.Outcome == Outcome.Pending ? Outcome.Deadline : step.Outcome));
+                    output.Flush(); return 1;
+                }
+                output.WriteLine("OPEN"); output.Flush();
+                while (clock.ElapsedMilliseconds < 55000 && ++requests <= 4096) {
+                    string line = input.ReadLine();
+                    if (line == "C" || line == null) { exit = 0; break; }
+                    if (line == "R") {
+                        byte[] data = new byte[4096];
+                        int count = api.Receive(transport.ActiveSocket, data);
+                        if (count == 0) throw new IOException("Disconnected");
+                        if (count < 0) {
+                            if (api.LastError() != 10035) throw new IOException("Receive failed");
+                            output.WriteLine("WAIT");
+                        } else {
+                            received += count;
+                            if (received > 131072) throw new IOException("Receive limit");
+                            output.WriteLine("D:" + BitConverter.ToString(data, 0, count).Replace("-", ""));
+                        }
+                    } else {
+                        byte[] data = ParseSend(line);
+                        if (data == null || ++frames > 96 || sent + data.Length > 16384)
+                            throw new IOException("Send refused");
+                        int offset = 0;
+                        while (offset < data.Length && clock.ElapsedMilliseconds < 55000) {
+                            int count = api.Send(transport.ActiveSocket, data, offset, data.Length - offset);
+                            if (count <= 0) {
+                                if (count == 0 || api.LastError() != 10035) throw new IOException("Send failed");
+                                Thread.Sleep(10);
+                            } else offset += count;
+                        }
+                        if (offset != data.Length) throw new IOException("Send timeout");
+                        sent += data.Length; output.WriteLine("SENT");
+                    }
+                    output.Flush();
+                }
+                if (exit != 0) throw new IOException("Session budget");
+            } catch (Exception) {
+                output.WriteLine("E:TransportFailure"); output.Flush(); exit = 1;
+            } finally {
+                bool closed = transport.Close();
+                output.WriteLine(closed ? "CLOSED:1" : "CLOSED:0"); output.Flush();
+                if (!closed) exit = 1;
+            }
+            return exit;
+        }
+    }
+}

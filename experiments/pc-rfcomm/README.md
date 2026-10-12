@@ -1,5 +1,27 @@
 # Cliente RFCOMM de Windows — R148
 
+## Actual R159: lote en una sesión
+
+[Resultado físico R158](../../docs/windows-spp-result-r158.md): SPP Windows real
+abierto/cerrado en 1337ms, un intento. El usuario conserva vínculo PC y solicita
+agrupar consultas. [Plan del lote](../../docs/windows-xiaomi-session-plan-r159.md),
+comando explícito `node tools/pc-rfcomm.mjs session`: versión V1/V2, auth con una
+clave conocida/HMAC verificado, dos queries battery/device info, cierre.
+No ejecutar inicialización de servicios completa ni reenviar prueba probe.
+
+`SessionWorker.cs` mueve bytes por pipe privado con límites y socket seguro;
+`rw4-xiaomi-protocol.mjs` implementa campos/framing/crypto;
+`pc-rfcomm-session.mjs` negocia/auth/consultas y supervisa 60s/Ctrl+C.
+No archivos transmitidos, setters, shell, módulos o firmware. Raw en memoria
+solamente; metadatos sanitizados al usuario. No ejecutar worker directo.
+MAC/auth en tools/local ignorados. Wrapper liga hashes del EXE, C# y módulos JS.
+Preparación auth desde logs históricos no implica clave vigente: HMAC decide.
+
+Build/default/test/simulate siguen offline. Resultados locales: 142 aserciones
+C#, 12 sesiones sintéticas protocolo, dos IPC completas falsas y cuatro fallos
+IPC/supervisión; diez escenarios del supervisor previo. CI preparado/no run.
+Lote real pendiente. R154 y R148 debajo son historial.
+
 ## Actual R154: modo físico explícito preparado, ensayo pendiente
 
 El usuario ya observó pairing Windows y volvió a Mi Fitness quitando ese vínculo.
