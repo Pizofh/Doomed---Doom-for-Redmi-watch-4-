@@ -1,5 +1,30 @@
 # Retomar el proyecto
 
+**Actual R172/R173, 2026-10-12:** [primer intento físico rechazado](static-watchface-physical-r172.md),
+[alternativa de ID solo PC](static-id-alternative-r173.md). Usuario aprobó la
+prueba estática y puede manejar el reloj. Se habilitaron temporalmente ambas
+entradas y build aprobado, luego UN install. Rejected/StaticTransferRefused:
+6TX225bytes,0partes,sin upload22/0,close+workertrue/exit0/sinerror. Número del
+installStatus no conservado; NO asumir2/cuota/ID bloqueado. Added capture
+sanitizada para futuros ensayos,21 escenarios offline pasan, sin reintento.
+Registro privado original sigue Uncertain/previousIntent/parts0; NO borrarlo,
+reclasificarlo o cambiarlo para permitir retry. Copia del exe habilitado en
+artifacts/static-r172-reviewed sirve solo como evidencia, no ejecutarlo.
+
+Usuario confirma esfera/menús normales. Gates Node/nativo restauradosfalse,
+build cerrado y test gates pasan. Un GET posterior comparó journal inicial:
+21faces/1activa,propio ausente,todos los IDs yflags iguales,mismaactiva;close/exit
+normal. Sin phone/pairing/delete/SET. No pedir otra recuperación ya confirmada.
+
+Hallazgo offline: IDs actuales prefijos36511(1),36521(17),36522(2),36523(1);
+compiler ID167210065. Propio365799910 tiene prefijo no observado, posible
+validación de ID es INFERENCIA, NO causa. Alternativa365219990 preparada solo
+PC cambiando3bytes del ID;SHA90069d708bea26770e85464c087dfce51ae3640e565ab33ad44f78526d5f35e5.
+El adaptador actual NO acepta ese SHA/ID y no fue modificado para hacerlo.
+Próximo: revisar motivo de InstallStart/alternativa, preparar backend limitado
+y journal separado antes de considerar nuevo ensayo. No borrar otras esferas,
+no cambiar firmware, no repetir escritura para obtener número perdido.
+
 **Actual R171, 2026-10-12:** [healthcheck físico correcto](healthcheck-physical-r171.md).
 Usuario «bueno,dale;cuando sea necesario lo hago yo» autoriza avanzar con
 chequeo previamente descrito. Agente ejecutó una vez `pc-rfcomm.mjs healthcheck`:

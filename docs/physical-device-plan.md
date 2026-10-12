@@ -1,5 +1,13 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**R172/R173:** usuario autoriza primera esfera y confirma que puede intervenir.
+[InstallStart rechazado](static-watchface-physical-r172.md) antes de subir archivo;
+0partes,cierre normal. UI/menús confirmados y catálogo/flags/activa conservados
+por GET posterior. Gates restaurados cerrados,registro incierto preservado.
+[ID alternativo preparado PC](static-id-alternative-r173.md) no enviado ni
+aceptado por adaptador; pendiente revisar/implementar ensayo limitado. No
+modificación de otras esferas/firmware/nativo ni retry automático.
+
 **R171:** [healthcheck real correcto](healthcheck-physical-r171.md), autorizado
 por el usuario y ejecutado una vez desde el PC. Auth/cifrado,97 %,FW2.2.86,
 21 esferas/1 activa,cierre normal,sin archivos. Sin observación UI/render ni

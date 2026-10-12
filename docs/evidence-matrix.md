@@ -1,5 +1,16 @@
 # Matriz de evidencia
 
+**R172/R173, 2026-10-12:** [rechazo de InstallStart](static-watchface-physical-r172.md), [alternativa offline](static-id-alternative-r173.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| InstallStart del ID365799910 fue rechazado | M2315W1/2.2.86 | FaseRejected,installStatus no cero,6TX225bytes,0partes | CONFIRMADO EN RW4 | Alta | Sí, autorizado | Código numérico perdido; no upload22/0 ni archivo enviado |
+| Catálogo/selección anteriores conservados | Misma unidad | GET posterior comparado con journal:21IDs yflags iguales,mismactiva | CONFIRMADO EN RW4 | Alta | Sí | No prueba ausencia de staging interno |
+| Esfera y menús siguen normales | Misma unidad | Usuario lo confirma después del intento | CONFIRMADO EN RW4 POR OBSERVACIÓN DEL USUARIO | Alta | Usuario | No reinicio/retorno Mi Fitness exigidos |
+| La causa es espacio/cupo lleno | Firmware2.2.86 | FAQ describe caso posible; sin código/cuota medidos | SIN EVIDENCIA DE CAUSA | Desconocida | No | No declarar máximo20 ni borrar esferas ajenas |
+| La causa es prefijo de ID no admitido | Misma unidad | ID36579 distinto de prefijos observados36511/21/22/23 | INFERENCIA RAZONABLE | Limitada | Comparación local | No contrato de prefijos ni código del firmware |
+| Alternativa365219990 solo cambia el ID | Archivo propio PC | Comparación3bytes43/44/47;hash review | CONFIRMADO EN PC | Alta | Sí | No enviado,adaptador no lo acepta todavía |
+
 **R171, 2026-10-12:** [healthcheck físico correcto](healthcheck-physical-r171.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

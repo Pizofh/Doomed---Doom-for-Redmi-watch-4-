@@ -1,5 +1,11 @@
 # DOOM en Redmi Watch 4
 
+**Actual R172/R173:** [primer InstallStart rechazado antes de enviar el archivo](docs/static-watchface-physical-r172.md).
+Usuario confirma esfera/menús normales; GET posterior conserva todos los IDs,
+flags y selección. Escritura de nuevo bloqueada. [Alternativa de ID preparada
+solo en PC](docs/static-id-alternative-r173.md), sin enviarla ni habilitarla:
+un prefijo diferente es una hipótesis, no causa demostrada del rechazo.
+
 **Actual R171:** [healthcheck real completado desde el PC](docs/healthcheck-physical-r171.md):
 autenticación/cifrado válidos,97 % de batería,firmware2.2.86 y21 esferas/1 activa.
 Cierre correcto,sin archivos enviados. No verifica pantalla/UI ni autoriza
