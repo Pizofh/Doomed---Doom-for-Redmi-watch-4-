@@ -12,6 +12,9 @@ on:
       - 'tools/pc-rfcomm-auth-prepare.mjs'
       - 'tools/rw4-xiaomi-protocol.mjs'
       - 'tools/test-rw4-xiaomi-session.mjs'
+      - 'tools/static-watchface-*.mjs'
+      - 'tools/pc-static-watchface.mjs'
+      - 'tools/test-static-watchface-gates.mjs'
       - 'tools/pc-pairing.mjs'
       - 'tools/test-pc-pairing.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
@@ -25,6 +28,9 @@ on:
       - 'tools/pc-rfcomm-auth-prepare.mjs'
       - 'tools/rw4-xiaomi-protocol.mjs'
       - 'tools/test-rw4-xiaomi-session.mjs'
+      - 'tools/static-watchface-*.mjs'
+      - 'tools/pc-static-watchface.mjs'
+      - 'tools/test-static-watchface-gates.mjs'
       - 'tools/pc-pairing.mjs'
       - 'tools/test-pc-pairing.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
@@ -52,6 +58,9 @@ jobs:
       - name: Test Xiaomi batch against synthetic peers
         shell: pwsh
         run: node tools/test-rw4-xiaomi-session.mjs
+      - name: Verify static watchface physical entries remain closed
+        shell: pwsh
+        run: node tools/test-static-watchface-gates.mjs
       - name: Test directed pairing supervision without radio
         shell: pwsh
         run: node tools/test-pc-pairing.mjs

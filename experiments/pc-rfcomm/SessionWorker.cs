@@ -8,6 +8,15 @@ namespace Rw4.PcRfcomm
 {
     internal static class SessionWorker
     {
+        internal sealed class SendBudget {
+            internal readonly int Limit;
+            private int sent, frames;
+            internal SendBudget(bool staticPackage) { Limit = staticPackage ? 32768 : 16384; }
+            internal bool Reserve(int bytes) {
+                if (bytes < 1 || bytes > 4096 || frames >= 96 || bytes > Limit - sent) return false;
+                sent += bytes; frames++; return true;
+            }
+        }
         private sealed class IoFailure : Exception {
             internal readonly int Code;
             internal readonly Outcome Category;
@@ -32,7 +41,7 @@ namespace Rw4.PcRfcomm
             if (c >= 'A' && c <= 'F') return c - 'A' + 10;
             return -1;
         }
-        internal static int Run(TextReader input, TextWriter output) {
+        internal static int Run(TextReader input, TextWriter output, bool staticPackage = false) {
             output.WriteLine("P:Cache"); output.Flush();
             ulong address;
             if (!CachedTarget.Parse(input.ReadLine(), out address)) {
@@ -45,7 +54,8 @@ namespace Rw4.PcRfcomm
             var api = new NativeWinSockApi();
             var transport = new WinSockTransport(api, address, true);
             var clock = Stopwatch.StartNew();
-            int exit = 1, requests = 0, sent = 0, received = 0, frames = 0;
+            int exit = 1, requests = 0, received = 0;
+            var budget = new SendBudget(staticPackage);
             string stage = "Opening";
             try {
                 output.WriteLine("P:Opening"); output.Flush();
@@ -81,7 +91,7 @@ namespace Rw4.PcRfcomm
                     } else {
                         stage = "Send"; output.WriteLine("P:Send"); output.Flush();
                         byte[] data = ParseSend(line);
-                        if (data == null || ++frames > 96 || sent + data.Length > 16384)
+                        if (data == null || !budget.Reserve(data.Length))
                             throw new IOException("Send refused");
                         int offset = 0;
                         while (offset < data.Length && clock.ElapsedMilliseconds < 55000) {
@@ -94,7 +104,7 @@ namespace Rw4.PcRfcomm
                             } else offset += count;
                         }
                         if (offset != data.Length) throw new IOException("Send timeout");
-                        sent += data.Length; output.WriteLine("SENT");
+                        output.WriteLine("SENT");
                     }
                     output.Flush();
                 }

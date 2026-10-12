@@ -126,6 +126,8 @@ namespace Rw4.PcRfcomm
 
     internal static class Program
     {
+        // Change only after reviewing the concrete static-package physical plan.
+        private static readonly bool StaticPhysicalReviewed = false;
         internal static int Dispatch(string[] args, TextWriter output)
         {
             if (args.Length == 0 || (args.Length == 1 && args[0] == "plan"))
@@ -138,6 +140,14 @@ namespace Rw4.PcRfcomm
                 return PhysicalWorker.Run(Console.In, output);
             if (args.Length == 1 && args[0] == "session-reviewed-r159")
                 return SessionWorker.Run(Console.In, output);
+            // R169 static adapter is tested through injected IPC only. This entry
+            // stays closed until the concrete physical plan is reviewed by the user.
+            if (args.Length == 1 && args[0] == "session-static-r169") {
+                if (!StaticPhysicalReviewed) {
+                    output.WriteLine("E:GateClosed"); output.Flush(); return 2;
+                }
+                return SessionWorker.Run(Console.In, output, true);
+            }
             if (args.Length == 2 && args[0] == "simulate" &&
                 Array.IndexOf(new[] { "success", "refused", "timeout", "error", "close-failure" }, args[1]) >= 0)
             {

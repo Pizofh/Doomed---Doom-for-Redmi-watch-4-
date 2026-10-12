@@ -4,6 +4,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {uint,bytes} from './rw4-xiaomi-protocol.mjs';
+import {isOwnedJournal} from './static-watchface-journal.mjs';
 export const STATIC_ID='365799910';
 export const STATIC_SHA='7df88688c61e63b1aaab208ddf2b3976bf912fbaa08c01bf6f0d0e986ad9e93a';
 const plans=new WeakSet(),receipts=new WeakSet();
@@ -51,25 +52,36 @@ function faces(value){
   }
   return value.entries;
 }
-export async function installStatic(api,plan){
+export async function installStatic(api,plan,{journal = null} = {}){
   preflight(api,plan);
   const info=await api.info();if(info.modelRecognized!==true||info.firmware!=='2.2.86')refused();
   const before=faces(await api.faces());if(before.some(f=>f.id===plan.id))refused();
   if(before.filter(f=>f.active).length!==1)refused();
+  if(journal){if(!isOwnedJournal(journal))refused();journal.begin(before);}
   const result={status:'PreflightPassed',writeRequested:false,bytesSent:0,selectedByClient:false,registeredVerified:false,
     transferAcceptanceVerified:false,removableFlagObserved:false};
   result.writeRequested=true;
   const start=await api.request(installStart(plan));if(start.installStatus!==0)refused();
+  journal?.advance('InstallAck');
   const ack=await api.request(uploadStart(plan));
   if(ack.unknown2!==0||(ack.resumePosition??0)!==0||
     (ack.md5!==undefined&&(!Buffer.isBuffer(ack.md5)||!ack.md5.equals(plan.md5()))))refused();
-  for(const part of chunks(plan,ack.chunkSize??2048)){await api.mass(part);result.bytesSent+=part.length;}
+  const parts=chunks(plan,ack.chunkSize??2048);journal?.advance('UploadReady');
+  for(const [index,part] of parts.entries()){
+    journal?.advance('Sending',{part:index+1});
+    await api.mass(part);result.bytesSent+=part.length;
+    journal?.advance('PartWritten');
+  }
   // A local write/queue callback is NOT confirmation that the watch installed it.
   for(let attempt=0;attempt<6;attempt++){
-    const own=faces(await api.faces()).find(f=>f.id===plan.id);
+    const after=faces(await api.faces());
+    if(before.some(f=>!after.some(a=>a.id===f.id)))refused();
+    const own=after.find(f=>f.id===plan.id);
     if(own){
       result.registeredVerified=true;result.removableFlagObserved=own.canDelete;
-      result.status=own.active?'UnexpectedActivation':own.canDelete?'RegisteredInactive':'RegisteredNotRemovable';
+      result.previousFaceStillActive=after.some(f=>f.id===before.find(b=>b.active).id&&f.active);
+      journal?.advance('Registered');
+      result.status=own.active?'UnexpectedActivation':!result.previousFaceStillActive?'UnexpectedSelection':own.canDelete?'RegisteredInactive':'RegisteredNotRemovable';
       const receipt=Object.freeze({plan,before:Object.freeze(before.map(f=>Object.freeze({...f}))),registeredVerified:true});receipts.add(receipt);
       return {...result,receipt};
     }
@@ -77,14 +89,24 @@ export async function installStatic(api,plan){
   }
   return {...result,status:'SentNotVerified'};
 }
-export async function removeStatic(api,receipt){
+export function restoreStaticReceipt(plan,journal){
+  validated(plan);if(!isOwnedJournal(journal))refused();
+  const evidence=journal.evidence();
+  const receipt=Object.freeze({plan,before:Object.freeze(evidence.before.map(f=>Object.freeze({...f}))),registeredVerified:true});
+  receipts.add(receipt);return receipt;
+}
+export async function removeStatic(api,receipt,{journal = null} = {}){
   if(!receipts.has(receipt)||receipt.registeredVerified!==true)refused();
   const plan=receipt.plan;preflight(api,plan);
+  const info=await api.info();if(info.modelRecognized!==true||info.firmware!=='2.2.86')refused();
   const current=faces(await api.faces()),own=current.find(f=>f.id===plan.id);
   if(!own||own.active||!own.canDelete)refused();
+  if(receipt.before.some(f=>!current.some(c=>c.id===f.id)))refused();
+  if(journal){if(!isOwnedJournal(journal))refused();journal.evidence();journal.advance('DeleteIntent');}
   const ack=await api.request(deleteOwn(plan));if(ack.ack!==1)refused();
   const after=faces(await api.faces());
   if(after.some(f=>f.id===plan.id)||current.some(f=>f.id!==plan.id&&!after.some(a=>a.id===f.id)))refused();
+  journal?.advance('Removed');
   return {status:'RemovedVerified',deletedId:plan.id,unrelatedEntriesPreserved:true};
 }
 if(process.argv[1]&&pathToFileURL(path.resolve(process.argv[1])).href===import.meta.url){

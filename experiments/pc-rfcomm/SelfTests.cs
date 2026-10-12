@@ -209,6 +209,19 @@ namespace Rw4.PcRfcomm
 
             Check(CachedTarget.LayoutValid());
             Check(SessionWorker.ParseSend("S:00ff").Length == 2);
+            var readBudget = new SessionWorker.SendBudget(false);
+            for (int i = 0; i < 4; i++) Check(readBudget.Reserve(4096));
+            Check(!readBudget.Reserve(1) && readBudget.Limit == 16384);
+            var staticBudget = new SessionWorker.SendBudget(true);
+            for (int i = 0; i < 8; i++) Check(staticBudget.Reserve(4096));
+            Check(!staticBudget.Reserve(1) && staticBudget.Limit == 32768);
+            var frameBudget = new SessionWorker.SendBudget(true);
+            Check(!frameBudget.Reserve(0) && !frameBudget.Reserve(4097));
+            for (int i = 0; i < 96; i++) Check(frameBudget.Reserve(1));
+            Check(!frameBudget.Reserve(1));
+            var staticGate = new StringWriter();
+            Check(Program.Dispatch(new[] { "session-static-r169" }, staticGate) == 2);
+            Check(staticGate.ToString().Contains("E:GateClosed"));
             foreach (string bad in new[] { "", "S:", "S:0", "S:GG", "R", "S:00\n", "S:" + new string('0',8194) })
                 Check(SessionWorker.ParseSend(bad) == null);
             ulong parsed;

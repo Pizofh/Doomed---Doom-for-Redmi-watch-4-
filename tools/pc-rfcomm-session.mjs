@@ -19,9 +19,10 @@ export function validateAuth(value) {
     throw Error('PrivateKeyRefused');
   return Buffer.from(value.authKey.replace(/^0x/,''),'hex');
 }
-class PrivatePipe {
-  constructor(executable,address,{spawnWorker = spawn,limitMs = 60000} = {}) {
-    this.child = spawnWorker(executable,['session-reviewed-r159'],{stdio:['pipe','pipe','pipe'],windowsHide:true,shell:false});
+export class PrivatePipe {
+  constructor(executable,address,{spawnWorker = spawn,limitMs = 60000,workerProfile = 'readonly'} = {}) {
+    if (!['readonly','static-r169'].includes(workerProfile)) throw Error('CommandRefused');
+    this.child = spawnWorker(executable,[workerProfile === 'readonly' ? 'session-reviewed-r159' : 'session-static-r169'],{stdio:['pipe','pipe','pipe'],windowsHide:true,shell:false});
     this.queue = []; this.waiters = []; this.text = ''; this.failure = null;
     this.closeConfirmed = false; this.workerExitConfirmed = false; this.forced = false;
     this.nativeError = false; this.workerExitCode = null;
@@ -205,6 +206,37 @@ export class XiaomiSession {
     }
     throw Error('Timeout');
   }
+  async authenticate(secret,allowedVersions = [1,2]) {
+    await this.send(VERSION_QUERY);
+    const deadline = this.clock() + 5000; let version;
+    while (this.clock() < deadline) {
+      const frame = await this.frame(deadline);
+      if (frame.version === 1 && frame.channel === 0 && frame.payload.length > 0 && frame.payload.length <= 16) {
+        version = frame.payload[0]; break;
+      }
+    }
+    this.negotiatedVersion = version ?? null;
+    if (![1,2].includes(version) || !allowedVersions.includes(version)) throw Error('UnsupportedProtocol');
+    this.version = version; this.reader.version = version;
+    if (version === 2) {
+      await this.send(SESSION_START);
+      const until = this.clock() + 5000; let started = false;
+      while (this.clock() < until) {
+        const frame = await this.frame(until);
+        if (frame.type === 2 && frame.payload.length > 0 && frame.payload[0] === 2) { started = true; break; }
+      }
+      if (!started) throw Error('Timeout');
+    }
+    const phone = this.phoneNonce();
+    if (!Buffer.isBuffer(phone) || phone.length !== 16) throw Error('MalformedProtocol');
+    await this.send(this.encode(nonceCommand(phone),true));
+    const watch = await this.waitCommand(1,26);
+    const {keys,payload} = authResponse(secret,phone,watch.payload);
+    this.keys = keys; this.hmacVerified = true;
+    await this.send(this.encode(payload,true));
+    this.authenticationReply = await this.waitCommand(1,27);
+    this.authenticated = true;
+  }
   async run(secret) {
     const report = {checkpoint:'R159',status:'LocalFailure',protocolVersion:null,keyHmacVerified:false,
       authenticationAck:false,encryptedDataReceived:false,battery:null,modelRecognized:null,firmware:null,
@@ -213,34 +245,7 @@ export class XiaomiSession {
     const knownErrors = new Set(['MalformedProtocol','AuthHmacMismatch','UnsupportedProtocol','Timeout',
       'ProtocolLimit','DecryptionFailed','AuthOrQueryRejected','TransportFailure','PreflightOrOpenFailed']);
     try {
-      await this.send(VERSION_QUERY);
-      const deadline = this.clock() + 5000; let version;
-      while (this.clock() < deadline) {
-        const frame = await this.frame(deadline);
-        if (frame.version === 1 && frame.channel === 0 && frame.payload.length > 0 && frame.payload.length <= 16) {
-          version = frame.payload[0]; break;
-        }
-      }
-      report.protocolVersion = version ?? null;
-      if (![1,2].includes(version)) throw Error('UnsupportedProtocol');
-      this.version = version; this.reader.version = version;
-      if (version === 2) {
-        await this.send(SESSION_START);
-        const until = this.clock() + 5000; let started = false;
-        while (this.clock() < until) {
-          const frame = await this.frame(until);
-          if (frame.type === 2 && frame.payload.length > 0 && frame.payload[0] === 2) { started = true; break; }
-        }
-        if (!started) throw Error('Timeout');
-      }
-      const phone = this.phoneNonce();
-      if (!Buffer.isBuffer(phone) || phone.length !== 16) throw Error('MalformedProtocol');
-      await this.send(this.encode(nonceCommand(phone),true));
-      const watch = await this.waitCommand(1,26);
-      const {keys,payload} = authResponse(secret,phone,watch.payload);
-      this.keys = keys; report.keyHmacVerified = true;
-      await this.send(this.encode(payload,true));
-      await this.waitCommand(1,27); report.authenticationAck = true;
+      await this.authenticate(secret);
       if (this.profile === 'watchfaces') {
         await this.send(this.encode(command(4,0)));
         const reply = await this.waitCommand(4,0);
@@ -260,7 +265,12 @@ export class XiaomiSession {
       }
       report.status = report.battery !== null && report.modelRecognized !== null ? 'Complete' : 'PartialData';
     } catch (error) { report.status = knownErrors.has(error.message) ? error.message : 'LocalFailure'; }
-    finally { report.sentFrames = this.sentFrames; report.receivedFrames = this.receivedFrames; }
+    finally {
+      report.protocolVersion = this.negotiatedVersion ?? null;
+      report.keyHmacVerified = this.hmacVerified === true;
+      report.authenticationAck = this.authenticated === true;
+      report.sentFrames = this.sentFrames; report.receivedFrames = this.receivedFrames;
+    }
     return report;
   }
 }
