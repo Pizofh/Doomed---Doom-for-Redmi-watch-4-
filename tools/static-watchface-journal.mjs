@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash,randomUUID} from 'node:crypto';
-import {STATIC_ID,STATIC_SHA} from './static-watchface-transfer.mjs';
+import {staticSpec} from './static-watchface-spec.mjs';
 
 const owned = new WeakSet();
 const phases = new Set(['Intent','InstallAck','UploadReady','Sending','PartWritten','Registered','DeleteIntent','Removed','Uncertain']);
@@ -12,11 +12,11 @@ function targetTag(address) {
   if (!/^[A-Fa-f0-9]{12}$/.test(address) || address === '000000000000') fail();
   return createHash('sha256').update('rw4-static-target:' + address.toUpperCase()).digest('hex');
 }
-function validateRows(rows) {
+function validateRows(rows,id) {
   if (!Array.isArray(rows) || rows.length < 1 || rows.length > 128) fail();
   const ids = new Set();
   for (const row of rows) {
-    if (!row || !/^\d{1,10}$/.test(row.id) || ids.has(row.id) || row.id === STATIC_ID ||
+    if (!row || !/^\d{1,10}$/.test(row.id) || ids.has(row.id) || row.id === id ||
         typeof row.active !== 'boolean' || typeof row.canDelete !== 'boolean' ||
         Object.keys(row).some(k => !['id','active','canDelete'].includes(k))) fail();
     ids.add(row.id);
@@ -28,9 +28,10 @@ function regular(file,maxSize) {
   if (!stat.isFile() || stat.isSymbolicLink() || stat.size > maxSize) fail();
 }
 export class StaticJournal {
-  #file; #tag; #record; #lockFile; #lock;
+  #file; #tag; #record; #lockFile; #lock; #spec;
   constructor(file,address,plan) {
-    if (plan.id !== STATIC_ID || plan.sha256 !== STATIC_SHA || plan.size !== 25224) fail();
+    this.#spec = staticSpec(plan.variant);
+    if (plan.id !== this.#spec.id || plan.sha256 !== this.#spec.sha256 || plan.size !== this.#spec.size) fail();
     this.#file = path.resolve(file); this.#tag = targetTag(address); this.#record = null;
     const parent = fs.lstatSync(path.dirname(this.#file));
     if (!parent.isDirectory() || parent.isSymbolicLink()) fail();
@@ -48,12 +49,13 @@ export class StaticJournal {
   }
   validate() {
     const r = this.#record;
-    if (!r || r.schema !== 1 || r.id !== STATIC_ID || r.sha256 !== STATIC_SHA || r.size !== 25224 ||
+    if (!r || r.schema !== 1 || (r.variant ?? 'r167') !== this.#spec.variant || r.id !== this.#spec.id ||
+        r.sha256 !== this.#spec.sha256 || r.size !== this.#spec.size ||
         r.targetTag !== this.#tag || r.model !== 'M2315W1' || r.firmware !== '2.2.86' ||
         !/^[a-f0-9-]{36}$/.test(r.transaction) || !phases.has(r.phase) ||
         !Number.isInteger(r.partsWritten) || r.partsWritten < 0 || r.partsWritten > 64 ||
         typeof r.registeredVerified !== 'boolean') fail();
-    validateRows(r.before);
+    validateRows(r.before,this.#spec.id);
     if (r.phase === 'Registered' && r.registeredVerified !== true) fail();
   }
   persist(first = false) {
@@ -69,9 +71,10 @@ export class StaticJournal {
   }
   begin(before) {
     if (this.#lock === null || this.#record !== null) fail();
-    validateRows(before);
+    validateRows(before,this.#spec.id);
     this.#record = {schema:1,transaction:randomUUID(),targetTag:this.#tag,
-      model:'M2315W1',firmware:'2.2.86',id:STATIC_ID,sha256:STATIC_SHA,size:25224,
+      model:'M2315W1',firmware:'2.2.86',variant:this.#spec.variant,
+      id:this.#spec.id,sha256:this.#spec.sha256,size:this.#spec.size,
       phase:'Intent',partsWritten:0,registeredVerified:false,
       before:before.map(row => ({...row})),updatedUtc:new Date().toISOString()};
     this.persist(true);
@@ -93,6 +96,10 @@ export class StaticJournal {
     this.validate();
     if (this.#lock === null || this.#record.phase !== 'Registered') fail();
     return {before:this.#record.before.map(row => ({...row})),registeredVerified:true};
+  }
+  matches(plan) {
+    return this.#lock !== null && plan.variant === this.#spec.variant &&
+      plan.id === this.#spec.id && plan.sha256 === this.#spec.sha256 && plan.size === this.#spec.size;
   }
   uncertain() {
     if (this.#record && !['Registered','Removed','Uncertain'].includes(this.#record.phase)) this.advance('Uncertain');

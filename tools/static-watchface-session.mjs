@@ -101,7 +101,8 @@ export class StaticWatchfaceSession extends XiaomiSession {
 export async function runStaticSession(createLink,plan,secret,journal,options = {}) {
   let link,client;
   try {
-    if (typeof createLink !== 'function' || !isOwnedJournal(journal) || !Buffer.isBuffer(secret) || secret.length !== 16) fail();
+    if (typeof createLink !== 'function' || !isOwnedJournal(journal) || !journal.matches(plan) ||
+        !Buffer.isBuffer(secret) || secret.length !== 16) fail();
     client = new StaticWatchfaceSession({},plan,options);
     const receipt = options.action === 'remove' ? restoreStaticReceipt(plan,journal) : null;
     link = await createLink(); client.link = link;
@@ -128,7 +129,7 @@ export async function runStaticSession(createLink,plan,secret,journal,options = 
         'Timeout','MalformedProtocol','DecryptionFailed','AuthOrQueryRejected','TransportFailure',
         'PreflightOrOpenFailed','ProtocolLimit','UnsupportedProtocol','AuthHmacMismatch']).has(error?.message)
         ? error.message : 'LocalFailure',
-      txBytes:client?.txBytes ?? 0,sentFrames:client?.sentFrames ?? 0,
+      txBytes:client?.txBytes ?? 0,sentFrames:client?.sentFrames ?? 0,receivedFrames:client?.receivedFrames ?? 0,
       transferPartsWritten:client?.nextPart ?? 0,fileDataSendRequested:(client?.massAttempts ?? 0) > 0,
       transferAcceptanceVerified:false,watchCommandRequested:(client?.sentFrames ?? 0) > 0,
       bluetoothOperationRequested:closed.connectionRequested ?? null};

@@ -5,18 +5,20 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath,pathToFileURL} from 'node:url';
 import {uint,bytes} from './rw4-xiaomi-protocol.mjs';
 import {isOwnedJournal} from './static-watchface-journal.mjs';
-export const STATIC_ID='365799910';
-export const STATIC_SHA='7df88688c61e63b1aaab208ddf2b3976bf912fbaa08c01bf6f0d0e986ad9e93a';
+import {staticSpec} from './static-watchface-spec.mjs';
+export const STATIC_ID=staticSpec().id;
+export const STATIC_SHA=staticSpec().sha256;
 const plans=new WeakSet(),receipts=new WeakSet();
 const refused=()=>{throw Error('StaticTransferRefused');};
 export function crc32(data){let crc=0xffffffff;for(const b of data){crc^=b;for(let i=0;i<8;i++)crc=(crc>>>1)^((crc&1)?0xedb88320:0);}return(crc^0xffffffff)>>>0;}
-export function prepareStatic(bytesValue){
-  if(!Buffer.isBuffer(bytesValue)||bytesValue.length!==25224||
-    createHash('sha256').update(bytesValue).digest('hex')!==STATIC_SHA||
+export function prepareStatic(bytesValue,{variant = 'r167'} = {}){
+  const spec=staticSpec(variant);
+  if(!Buffer.isBuffer(bytesValue)||bytesValue.length!==spec.size||
+    createHash('sha256').update(bytesValue).digest('hex')!==spec.sha256||
     bytesValue.subarray(0,4).toString('hex')!=='5aa53412'||bytesValue[5]!==0||
-    bytesValue.subarray(40,49).toString('ascii')!==STATIC_ID||bytesValue[49]!==0)refused();
+    bytesValue.subarray(40,49).toString('ascii')!==spec.id||bytesValue[49]!==0)refused();
   const owned=Buffer.from(bytesValue);
-  const plan={id:STATIC_ID,size:owned.length,sha256:STATIC_SHA,
+  const plan={variant:spec.variant,id:spec.id,size:owned.length,sha256:spec.sha256,
     copy:()=>Buffer.from(owned),md5:()=>createHash('md5').update(owned).digest()};
   Object.freeze(plan);plans.add(plan);return plan;
 }
@@ -57,7 +59,7 @@ export async function installStatic(api,plan,{journal = null} = {}){
   const info=await api.info();if(info.modelRecognized!==true||info.firmware!=='2.2.86')refused();
   const before=faces(await api.faces());if(before.some(f=>f.id===plan.id))refused();
   if(before.filter(f=>f.active).length!==1)refused();
-  if(journal){if(!isOwnedJournal(journal))refused();journal.begin(before);}
+  if(journal){if(!isOwnedJournal(journal)||!journal.matches(plan))refused();journal.begin(before);}
   const result={status:'PreflightPassed',writeRequested:false,bytesSent:0,selectedByClient:false,registeredVerified:false,
     transferAcceptanceVerified:false,removableFlagObserved:false};
   result.writeRequested=true;
@@ -90,7 +92,7 @@ export async function installStatic(api,plan,{journal = null} = {}){
   return {...result,status:'SentNotVerified'};
 }
 export function restoreStaticReceipt(plan,journal){
-  validated(plan);if(!isOwnedJournal(journal))refused();
+  validated(plan);if(!isOwnedJournal(journal)||!journal.matches(plan))refused();
   const evidence=journal.evidence();
   const receipt=Object.freeze({plan,before:Object.freeze(evidence.before.map(f=>Object.freeze({...f}))),registeredVerified:true});
   receipts.add(receipt);return receipt;
@@ -102,7 +104,7 @@ export async function removeStatic(api,receipt,{journal = null} = {}){
   const current=faces(await api.faces()),own=current.find(f=>f.id===plan.id);
   if(!own||own.active||!own.canDelete)refused();
   if(receipt.before.some(f=>!current.some(c=>c.id===f.id)))refused();
-  if(journal){if(!isOwnedJournal(journal))refused();journal.evidence();journal.advance('DeleteIntent');}
+  if(journal){if(!isOwnedJournal(journal)||!journal.matches(plan))refused();journal.evidence();journal.advance('DeleteIntent');}
   const ack=await api.request(deleteOwn(plan));if(ack.ack!==1)refused();
   const after=faces(await api.faces());
   if(after.some(f=>f.id===plan.id)||current.some(f=>f.id!==plan.id&&!after.some(a=>a.id===f.id)))refused();

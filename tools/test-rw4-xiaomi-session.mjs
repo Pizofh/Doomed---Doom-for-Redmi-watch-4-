@@ -119,7 +119,10 @@ class Peer {
       if (this.scenario === 'watchface-timeout') return;
       const row = Buffer.concat([bytes(1,Buffer.from('123456789')),bytes(2,Buffer.from('PRIVATE-CANARY-FACE-NAME')),
         uint(3,1),uint(4,0)]);
-      const root = Buffer.concat([uint(1,4),uint(2,0),bytes(6,bytes(1,bytes(1,row)))]);
+      const records=[bytes(1,row)];
+      if(this.scenario==='health-alt-face')records.push(bytes(1,Buffer.concat([
+        bytes(1,Buffer.from('365219990')),uint(3,0),uint(4,1)])));
+      const root = Buffer.concat([uint(1,4),uint(2,0),bytes(6,bytes(1,Buffer.concat(records)))]);
       this.reply(root,this.scenario !== 'clear-data'); return;
     }
     assert.equal(c.type,2); assert.ok([1,2].includes(c.subtype)); this.queries.push(c.subtype);
@@ -290,5 +293,13 @@ const healthReport = await runSession('NO-REAL-EXECUTABLE','AABBCCDDEE01',Buffer
   {spawnWorker:nativeFixture(1),limitMs:1000,profile:'healthcheck'});
 assert.equal(healthReport.status,'Complete');assert.equal(healthReport.healthcheck.expectedDevice,true);
 assert.equal(healthReport.closeConfirmed,true);assert.equal(healthReport.workerExitConfirmed,true);
+const altPeer=new Peer(1,'health-alt-face');
+const altHealth=await new XiaomiSession(altPeer,{profile:'healthcheck',clock:()=>altPeer.now,
+  sleep:async ms=>{altPeer.now+=ms;},phoneNonce:()=>phone}).run(secret);
+assert.equal(altHealth.status,'Complete');assert.equal(altHealth.healthcheck.testFacePresent,true);
+assert.equal(altHealth.healthcheck.testFaceActive,false);assert.equal(altHealth.healthcheck.testFaceDeletable,true);
+assert.deepEqual(altHealth.healthcheck.testFaces.find(face=>face.id==='365219990'),
+  {id:'365219990',present:true,active:false,canDelete:true});
+assert.equal(JSON.stringify(altHealth).includes('PRIVATE-CANARY'),false);
 console.log(JSON.stringify({checkpoint:'R166',protocolTestsPassed:true,syntheticSessions:22,ipcFullSessions:4,ipcFailureScenarios:6,
-  healthcheckSyntheticSessions:8,healthcheckIpcSessions:1,nativeSocketCalls:0,bluetoothOperationRequested:false}));
+  healthcheckSyntheticSessions:9,healthcheckIpcSessions:1,nativeSocketCalls:0,bluetoothOperationRequested:false}));

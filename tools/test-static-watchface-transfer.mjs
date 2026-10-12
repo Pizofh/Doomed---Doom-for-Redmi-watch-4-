@@ -3,13 +3,18 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {STATIC_ID,prepareStatic,crc32,installStart,uploadStart,chunks,installStatic,removeStatic} from './static-watchface-transfer.mjs';
+import {prepareStatic,crc32,installStart,uploadStart,chunks,installStatic,removeStatic} from './static-watchface-transfer.mjs';
+import {staticSpec} from './static-watchface-spec.mjs';
 import {fields,one,decodeCommand} from './rw4-xiaomi-protocol.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const data=fs.readFileSync(path.join(root,'artifacts/static-watchface-r167/RW4Probe-id-only.face'));
-const plan=prepareStatic(data);
+if(process.argv.length>3)throw Error('Unexpected arguments');
+const spec=staticSpec(process.argv[2]??'r167'),STATIC_ID=spec.id;
+const data=fs.readFileSync(path.join(root,spec.artifact));
+const plan=prepareStatic(data,{variant:spec.variant});
 assert.equal(crc32(Buffer.from('123456789')),0xcbf43926);
-const damaged=Buffer.from(data);damaged[0]^=1;assert.throws(()=>prepareStatic(damaged));
+const damaged=Buffer.from(data);damaged[0]^=1;assert.throws(()=>prepareStatic(damaged,{variant:spec.variant}));
+assert.throws(()=>prepareStatic(data,{variant:'unreviewed'}));
+assert.throws(()=>prepareStatic(data,{variant:spec.variant==='r167'?'r173':'r167'}));
 assert.throws(()=>installStart({...plan}));assert.throws(()=>uploadStart({...plan}));
 const start=decodeCommand(installStart(plan));assert.equal(start.type,4);assert.equal(start.subtype,4);
 const item=fields(one(fields(one(start.parsed,6,2)),6,2));assert.equal(one(item,1,2).toString(),STATIC_ID);assert.equal(one(item,2,0),25224);
@@ -52,5 +57,5 @@ for(const scenario of ['activated','protected']){const api=fake(scenario),result
 const missing=await installStatic(fake('missing'),plan);assert.equal(missing.status,'SentNotVerified');assert.equal(missing.registeredVerified,false);
 const otherLost=fake('other-lost'),otherResult=await installStatic(otherLost,plan);await assert.rejects(removeStatic(otherLost,otherResult.receipt));
 await assert.rejects(removeStatic(fake(),{plan,registeredVerified:true}));
-console.log(JSON.stringify({checkpoint:'R168',offlineTransferTestsPassed:true,scenarioChecks:12,
+console.log(JSON.stringify({checkpoint:'R168',variant:spec.variant,offlineTransferTestsPassed:true,scenarioChecks:12,
   nativeTransportIntegrated:false,bluetoothOperationRequested:false,physicalFilesTransferred:false}));

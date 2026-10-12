@@ -6,12 +6,13 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-for (const action of ['install','remove']) {
-  const result = spawnSync(process.execPath,[path.join(root,'tools/pc-static-watchface.mjs'),action],
+for (const action of ['install','remove']) for(const variant of ['r167','r173']) {
+  const result = spawnSync(process.execPath,[path.join(root,'tools/pc-static-watchface.mjs'),action,variant],
     {cwd:root,shell:false,windowsHide:true,encoding:'utf8',timeout:3000,maxBuffer:4096});
   assert.equal(result.status,2);assert.equal(result.stderr,'');
   const report = JSON.parse(result.stdout);
   assert.equal(report.status,'PhysicalGateClosed');assert.equal(report.bluetoothOperationRequested,false);
+  assert.equal(report.variant,variant);
   assert.equal(report.watchCommandRequested,false);assert.equal(report.filesTransferred,false);
 }
 const exe = path.join(root,'artifacts/pc-rfcomm/Rw4PcRfcomm.exe');

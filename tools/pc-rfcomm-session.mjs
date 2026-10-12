@@ -3,6 +3,7 @@ import {spawn} from 'node:child_process';
 import {performance} from 'node:perf_hooks';
 import {randomBytes} from 'node:crypto';
 import {setTimeout as delay} from 'node:timers/promises';
+import {staticTestIds} from './static-watchface-spec.mjs';
 import {VERSION_QUERY,SESSION_START,FrameReader,v1Frame,v2Frame,command,nonceCommand,
   authResponse,decodeCommand,readBattery,readDeviceInfo,readWatchfaces,ccmEncrypt,ccmDecrypt,packetNonce,ctr} from './rw4-xiaomi-protocol.mjs';
 
@@ -275,9 +276,11 @@ export class XiaomiSession {
           controlQueriesComplete:report.status === 'Complete',
           expectedDevice:report.modelRecognized === true && report.firmware === '2.2.86',
           watchfaceCount:catalog.count,activeCount:catalog.activeCount,unknownIdCount:catalog.unknownIdCount,
-          testFacePresent:catalog.entries.some(face => face.id === '365799910'),
-          testFaceActive:catalog.entries.some(face => face.id === '365799910' && face.active),
-          testFaceDeletable:catalog.entries.some(face => face.id === '365799910' && face.canDelete),
+          testFacePresent:catalog.entries.some(face => staticTestIds.includes(face.id)),
+          testFaceActive:catalog.entries.some(face => staticTestIds.includes(face.id) && face.active),
+          testFaceDeletable:catalog.entries.some(face => staticTestIds.includes(face.id) && face.canDelete),
+          testFaces:staticTestIds.map(id=>{const face=catalog.entries.find(face=>face.id===id);
+            return {id,present:!!face,active:face?.active ?? false,canDelete:face?.canDelete ?? false};}),
           uiVerified:false,renderVerified:false,physicalRecoveryVerified:false
         };
       }

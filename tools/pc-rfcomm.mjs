@@ -15,7 +15,7 @@ const metadata = path.join(output, 'build.json');
 const compiler = 'C:/Windows/Microsoft.NET/Framework64/v4.0.30319/csc.exe';
 const sources = ['Probe.cs', 'WinSockTransport.cs', 'PhysicalWorker.cs', 'SessionWorker.cs', 'SelfTests.cs'];
 const protocolModules = ['pc-rfcomm-supervisor.mjs','pc-rfcomm-session.mjs','rw4-xiaomi-protocol.mjs',
-  'static-watchface-transfer.mjs','static-watchface-journal.mjs','static-watchface-session.mjs','pc-static-watchface.mjs'];
+  'static-watchface-transfer.mjs','static-watchface-journal.mjs','static-watchface-session.mjs','pc-static-watchface.mjs','static-watchface-spec.mjs'];
 const args = process.argv.slice(2);
 const action = args[0] ?? 'plan';
 const hashFile = file => {

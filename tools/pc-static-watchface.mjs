@@ -8,8 +8,10 @@ import {StaticJournal} from './static-watchface-journal.mjs';
 import {createStaticPipe,runStaticSession} from './static-watchface-session.mjs';
 import {validateTarget} from './pc-rfcomm-supervisor.mjs';
 import {validateAuth} from './pc-rfcomm-session.mjs';
+import {staticSpec} from './static-watchface-spec.mjs';
 // Not an environment/CLI switch. User review + new pinned build are required.
 const PHYSICAL_WRITES_REVIEWED = false;
+const REVIEWED_VARIANT = 'r167';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const args = process.argv.slice(2), action = args[0] ?? 'plan';
 function read(file,maxSize) {
@@ -18,12 +20,12 @@ function read(file,maxSize) {
   return fs.readFileSync(file);
 }
 const digest = data => createHash('sha256').update(data).digest('hex');
-function prepared() {
-  const plan = prepareStatic(read(path.join(root,'artifacts/static-watchface-r167/RW4Probe-id-only.face'),25224));
+function prepared(spec) {
+  const plan = prepareStatic(read(path.join(root,spec.artifact),spec.size),{variant:spec.variant});
   const metadata = JSON.parse(read(path.join(root,'artifacts/pc-rfcomm/build.json'),65536));
   const sources = ['Probe.cs','WinSockTransport.cs','PhysicalWorker.cs','SessionWorker.cs','SelfTests.cs'];
   const modules = ['pc-rfcomm-supervisor.mjs','pc-rfcomm-session.mjs','rw4-xiaomi-protocol.mjs',
-    'static-watchface-transfer.mjs','static-watchface-journal.mjs','static-watchface-session.mjs','pc-static-watchface.mjs'];
+    'static-watchface-transfer.mjs','static-watchface-journal.mjs','static-watchface-session.mjs','pc-static-watchface.mjs','static-watchface-spec.mjs'];
   const executable = path.join(root,'artifacts/pc-rfcomm/Rw4PcRfcomm.exe');
   if (metadata.physicalEnabled !== false || Object.keys(metadata.sourceHashes).length !== sources.length ||
       Object.keys(metadata.protocolHashes).length !== modules.length ||
@@ -33,36 +35,39 @@ function prepared() {
   return {plan,metadata,executable};
 }
 try {
-  if (args.length > 1 || !['plan','prepare','install','remove'].includes(action)) throw Error();
+  if (args.length > 2 || !['plan','prepare','install','remove'].includes(action)) throw Error();
+  const spec = staticSpec(args[1] ?? 'r167');
+  const enabled = PHYSICAL_WRITES_REVIEWED && spec.variant === REVIEWED_VARIANT;
+  const checkpoint = spec.variant === 'r173' ? 'R174' : 'R169';
   if (action === 'install' || action === 'remove') {
-    if (!PHYSICAL_WRITES_REVIEWED) {
-      console.log(JSON.stringify({checkpoint:'R169',status:'PhysicalGateClosed',
+    if (!enabled) {
+      console.log(JSON.stringify({checkpoint,variant:spec.variant,status:'PhysicalGateClosed',
         physicalEnabled:false,bluetoothOperationRequested:false,watchCommandRequested:false,filesTransferred:false}));
       process.exitCode = 2;
     } else {
-      const {plan,executable} = prepared();
+      const {plan,executable} = prepared(spec);
       const privateDir = path.join(root,'tools/local/pc-rfcomm');
       const address = validateTarget(JSON.parse(read(path.join(privateDir,'target.json'),4096)));
       const key = validateAuth(JSON.parse(read(path.join(privateDir,'auth.json'),4096)));
       let journal;
       try {
-        journal = new StaticJournal(path.join(privateDir,'static-watchface-r169.json'),address,plan);
+        journal = new StaticJournal(path.join(privateDir,spec.journal),address,plan);
         const report = await runStaticSession(() => createStaticPipe(executable,address),plan,key,journal,{action});
-        console.log(JSON.stringify({checkpoint:'R169',...report,physicalEnabled:true}));
+        console.log(JSON.stringify({checkpoint,variant:spec.variant,id:spec.id,...report,physicalEnabled:true}));
         process.exitCode = ['RegisteredInactive','RemovedVerified'].includes(report.status) &&
           report.closeConfirmed && report.workerExitConfirmed ? 0 : 1;
       } finally { key.fill(0);journal?.close(); }
     }
   } else if (action === 'plan') {
-    console.log(JSON.stringify({checkpoint:'R169',status:'ReviewPreparationOnly',physicalEnabled:PHYSICAL_WRITES_REVIEWED,
-      actions:PHYSICAL_WRITES_REVIEWED ? ['plan','prepare','install','remove'] : ['plan','prepare'],physicalWritesRequireReview:true,
+    console.log(JSON.stringify({checkpoint,variant:spec.variant,status:'ReviewPreparationOnly',physicalEnabled:enabled,
+      actions:enabled ? ['plan','prepare','install','remove'] : ['plan','prepare'],physicalWritesRequireReview:true,
       bluetoothOperationRequested:false,watchCommandRequested:false}));
   } else {
-    const {plan,metadata} = prepared();
-    console.log(JSON.stringify({checkpoint:'R169',status:'OfflinePrepared',id:plan.id,size:plan.size,sha256:plan.sha256,
+    const {plan,metadata} = prepared(spec);
+    console.log(JSON.stringify({checkpoint,variant:spec.variant,status:'OfflinePrepared',id:plan.id,size:plan.size,sha256:plan.sha256,
       defaultParts:chunks(plan).length,staticTxBudget:32768,readonlyTxBudget:16384,
       executableSha256:metadata.executableSha256,buildInputsVerified:true,
-      persistentJournalImplemented:true,physicalEntry:PHYSICAL_WRITES_REVIEWED ? 'ReviewedStaticOnly' : 'GateClosed',physicalEnabled:PHYSICAL_WRITES_REVIEWED,
+      persistentJournalImplemented:true,physicalEntry:enabled ? 'ReviewedStaticOnly' : 'GateClosed',physicalEnabled:enabled,
       bluetoothOperationRequested:false,watchCommandRequested:false,filesTransferred:false}));
   }
 } catch {

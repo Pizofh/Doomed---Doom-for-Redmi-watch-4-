@@ -7,13 +7,16 @@ import {EventEmitter} from 'node:events';
 import {PassThrough} from 'node:stream';
 import {hkdfSync,createHmac,createCipheriv,createDecipheriv,createHash,randomUUID} from 'node:crypto';
 import {fields,one,uint,bytes,decodeCommand,FrameReader,v1Frame,command} from './rw4-xiaomi-protocol.mjs';
-import {prepareStatic,STATIC_ID,crc32} from './static-watchface-transfer.mjs';
+import {prepareStatic,crc32} from './static-watchface-transfer.mjs';
+import {staticSpec} from './static-watchface-spec.mjs';
 import {StaticJournal} from './static-watchface-journal.mjs';
 import {StaticWatchfaceSession,runStaticSession,createStaticPipe} from './static-watchface-session.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const data = fs.readFileSync(path.join(root,'artifacts/static-watchface-r167/RW4Probe-id-only.face'));
-const plan = prepareStatic(data), secret = Buffer.alloc(16,37), address = 'AABBCCDDEE01';
+if(process.argv.length>3)throw Error('Unexpected arguments');
+const spec=staticSpec(process.argv[2]??'r167'),STATIC_ID=spec.id;
+const data = fs.readFileSync(path.join(root,spec.artifact));
+const plan = prepareStatic(data,{variant:spec.variant}), secret = Buffer.alloc(16,37), address = 'AABBCCDDEE01';
 const directory = path.join(root,'artifacts/static-r169-tests',randomUUID());
 fs.mkdirSync(directory,{recursive:true});
 const journalFile = label => path.join(directory,label + '.json');
@@ -187,5 +190,12 @@ assert.equal(noPartialDelete.status,'StoppedNeedsReview');assert.equal(opened,0)
 const session = new StaticWatchfaceSession({},plan);
 await assert.rejects(session.mass(Buffer.alloc(10)));await assert.rejects(session.request(command(2,1)));
 assert.equal(process.listenerCount('SIGINT'),0);
-console.log(JSON.stringify({checkpoint:'R169',staticWireIpcJournalTestsPassed:true,scenarios,
+const otherSpec=staticSpec(spec.variant==='r167'?'r173':'r167');
+const otherPlan=prepareStatic(fs.readFileSync(path.join(root,otherSpec.artifact)),{variant:otherSpec.variant});
+const mismatch=new StaticJournal(journalFile('mismatch'),address,plan);opened=0;
+const mismatched=await runStaticSession(()=>{opened++;throw Error();},otherPlan,Buffer.from(secret),mismatch);
+assert.equal(mismatched.status,'StoppedNeedsReview');assert.equal(opened,0);assert.equal(mismatch.matches(otherPlan),false);
+mismatch.close();scenarios++;
+assert.throws(()=>new StaticJournal(lockFile,address,otherPlan));
+console.log(JSON.stringify({checkpoint:'R169',variant:spec.variant,staticWireIpcJournalTestsPassed:true,scenarios,
   journalReloadAndRemovalVerified:true,nativeSocketCalls:0,bluetoothOperationRequested:false,physicalFilesTransferred:false}));
