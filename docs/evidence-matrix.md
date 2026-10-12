@@ -1,6 +1,20 @@
 # Matriz de evidencia
 
-**R174, 2026-10-12:** [perfil alternativo y ensayo limitado preparados](static-id-trial-plan-r174.md).
+**R175/R176, 2026-10-12:** [código 3 trazado](static-id-physical-result-r175.md) y [esfera propia instalada](static-space-trial-r176.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Variante r173 rechazó preinstalación con estado 3 | M2315W1/2.2.86 | R175, 0 partes, 6TX/225 bytes; cierre confirmado | CONFIRMADO EN RW4 | Alta | Sí | No archivo enviado en ese intento |
+| Mi Fitness interpreta ese estado 3 como falta de espacio para esferas | APK instalado 3.59.1i | Campo5 → callback failure3 → recurso face_hint_storage_low | CONFIRMADO EN CÓDIGO DE CLIENTE | Alta | Estático PC | No RAM/freebytes/cupo exacto ni fuente firmware |
+| Cambiar solo el ID resolvió el rechazo con catálogo de 21 | M2315W1/2.2.86 | R175 volvió a rechazar antes de upload | REFUTADO PARA ESE ENSAYO | Alta | Sí | No descarta otras restricciones de IDs |
+| Mismo paquete se instaló después de eliminar esferas manualmente | M2315W1/2.2.86 | R176 count11→12,13partes,ID propio en GET independiente | CONFIRMADO EN RW4 | Alta | Sí, autorizado | No cambios de paquete ni borrado desde PC |
+| Instalador conserva esfera activa y otras entradas | Misma unidad | GET contra baseline nuevo:11IDs/flags/activa iguales | CONFIRMADO EN RW4 | Alta | Sí | Usuario borró antes; no comparar con viejo catálogo21 |
+| Imagen RW4Probe renderiza físicamente | Misma unidad | Usuario selecciona y responde «se ve bien» | CONFIRMADO EN RW4 POR USUARIO | Alta | Usuario | Retorno/menús no confirmado aparte aún |
+| Lua/C/Doom funcionan en hardware físico | M2315W1/2.2.86 | Esta prueba solo contiene imagen | SIN EVIDENCIA | Desconocida | No | DOOM y C demostrados solo en emulador |
+
+Las filas inferiores conservan evidencia e incógnitas históricas de cada checkpoint.
+
+**Historial R174, 2026-10-12:** [perfil alternativo y ensayo limitado preparados](static-id-trial-plan-r174.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

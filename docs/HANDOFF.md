@@ -1,6 +1,36 @@
 # Retomar el proyecto
 
-**Actual R174, 2026-10-12:** [ensayo alternativo preparado](static-id-trial-plan-r174.md).
+**Actual R176, 2026-10-12:** [esfera estática instalada y visible](static-space-trial-r176.md).
+Tras R175 rechazado con status3, inspección estática del APK Mi Fitness3.59.1i
+trazó el campo installStatus hasta recurso face_hint_storage_low: ver
+[resultado y método](static-id-physical-result-r175.md). No límite20/bytes medidos.
+Usuario eliminó varias por sí mismo y autorizó «vuelve a intentar» el MISMO
+paquete r173, ID365219990/hash90069d…; NO otrosIDs/Lua/C/Doom/firmware.
+
+Nuevo action install-after-space r173 usa registro fijo
+tools/local/pc-rfcomm/static-watchface-r173-after-space.json, exige count<21
+antes de INSTALL. Un único intento: RegisteredInactive,13partes,22TX16RX,
+25814bytesTX. GET independiente count11→12,own presente/inactivo/eliminable,
+11IDs/flags/activa anteriores preservados, close/worker confirmados.
+Usuario seleccionó la esfera y dice «se ve bien»: render confirmado por él.
+No confirmación separada de retorno a esfera habitual/menús todavía.
+Paquete permanece instalado. NO SET/DELETE desde PC. Registros r169 y r173
+anteriores Uncertain quedan intactos; el nuevo Registered es el recibo válido.
+
+Gates Node/native FALSE, REVIEWED_VARIANT=r167. Build cerrado SHA256
+3dbcb5dab5df5dcec024963beba36636c64a2de5e876535110818de1ccba7d1e.
+Build habilitado/exe/sources y reportes sanitizados archivados ignorados en
+artifacts/static-r176-reviewed; no reejecutar copias. Pruebas transfer/session
+r173 y gates pasan; test condición de reducción sin mutaciones.
+Vínculo PC se conserva durante el bloque: no pedir otro pairing/Mi Fitness
+sin necesidad. Siguiente: preparar en PC Lua mínima de texto con lifecycle,
+salida y plan; prueba física de scripts aún NO autorizada.
+Si retirar propia en otro paso revisado, usar remove-after-space r173 con
+registro nuevo e ID inactivo/eliminable; nunca borrar otras esferas.
+
+Las entradas siguientes son historial, no instrucciones del estado actual.
+
+**Historial R174, 2026-10-12:** [ensayo alternativo preparado](static-id-trial-plan-r174.md).
 Usuario «adelante» a preparar ID alternativo. Ningún hardware/BT/phone/ADB usado
 en este turno. Nuevo módulo static-watchface-spec fija r167 y r173 (NO IDs/files
 genéricos); factory exige SHA/ID del perfil, CLI etiqueta explícita r173 y

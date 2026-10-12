@@ -1,6 +1,19 @@
 # DOOM en Redmi Watch 4
 
-**Actual R174:** [ensayo del ID alternativo preparado y probado offline](docs/static-id-trial-plan-r174.md).
+**Actual R176:** [primera esfera propia instalada y visible en M2315W1/2.2.86](docs/static-space-trial-r176.md).
+RW4Probe es una imagen estática, sin scripts. Después de eliminar esferas
+manualmente, el usuario autorizó reintentar el mismo paquete: catálogo 11→12,
+13 partes enviadas, registro propio confirmado y anteriores conservadas.
+El usuario confirma «se ve bien». Retorno a esfera habitual/menús pendiente
+de confirmación aparte. Paquete almacenado; ningún SET/DELETE desde PC.
+Gates cerrados otra vez. [Estado 3 interpretado por Mi Fitness como espacio
+insuficiente](docs/static-id-physical-result-r175.md), no límite exacto medido.
+Siguiente: preparar en PC una prueba Lua mínima para revisión. Lua/C/Doom
+físico todavía sin demostrar; no cambio de firmware.
+
+Las entradas siguientes son historial de sus respectivos checkpoints.
+
+**Historial R174:** [ensayo del ID alternativo preparado y probado offline](docs/static-id-trial-plan-r174.md).
 Perfil r173 fijado por SHA/ID, registro separado y protección contra recibos de
 otro perfil. Ambas variantes pasan las pruebas locales; gates físicos cerrados.
 Pendiente revisar un intento del nuevo paquete; no hubo Bluetooth ni escritura

@@ -1,4 +1,13 @@
-# M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
+# M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
+
+**Actual R176:** [prueba estática completada](static-space-trial-r176.md), mismo
+paquete r173 tras liberación manual de esferas autorizada por el usuario.
+Count11→12, propia inactiva/eliminable, anteriores preservadas; imagen visible
+confirmada por usuario. No SET/DELETE desde PC. Retorno habitual/menús sin
+confirmación separada aún. Gates cerrados, originales inciertos conservados,
+nuevo registro after-space válido. No Lua/C/Doom ni firmware autorizado.
+[Interpretación del estado 3](static-id-physical-result-r175.md) verificada en
+cliente Mi Fitness. Las entradas siguientes son historial.
 
 **R174:** [plan concreto de ensayo del ID alternativo](static-id-trial-plan-r174.md)
 preparado. Adaptador fijo r173/journal separado probado offline; sin operación
