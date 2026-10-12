@@ -7,6 +7,8 @@ import { spawnSync } from 'node:child_process';
 import { projectRoot } from './verify-emulator.mjs';
 
 const target = path.resolve(process.argv[2] ?? '');
+const schemaMode = process.argv[3] === 'schema';
+if (process.argv.length !== (schemaMode ? 4 : 3)) throw new Error('Only pinned compiler and optional schema accepted');
 const allowed = path.join(projectRoot, 'tools/local/easyface-v4.23-review/Compiler.exe');
 if (target !== allowed) throw new Error('Only the pinned, inspected EasyFace compiler is supported');
 const sha256 = crypto.createHash('sha256').update(fs.readFileSync(target)).digest('hex');
@@ -35,7 +37,11 @@ foreach ($field in [Reflection.Emit.OpCodes].GetFields([Reflection.BindingFlags]
 }
 $flags = [Reflection.BindingFlags]'Public,NonPublic,Static,Instance,DeclaredOnly'
 $methods = [Collections.Generic.List[object]]::new()
-foreach ($type in $assembly.GetTypes()) {
+$selectedAssembly = $assembly
+$selectedTypes = $assembly.GetTypes()
+${schemaMode ? `$selectedAssembly = [AppDomain]::CurrentDomain.ReflectionOnlyGetAssemblies() | Where-Object { $_.GetName().Name -eq 'XiaomiWatch.Common' }
+$selectedTypes = @($selectedAssembly.GetType('XiaomiWatch.Common.FaceFile.WidgetFactory'), $selectedAssembly.GetType('XiaomiWatch.Common.FaceFile.FaceWidgetImage'))` : ''}
+foreach ($type in $selectedTypes) {
  foreach ($method in @($type.GetMethods($flags)) + @($type.GetConstructors($flags))) {
   $body = $method.GetMethodBody()
   if (-not $body) { continue }
@@ -88,7 +94,7 @@ foreach ($type in $assembly.GetTypes()) {
   $methods.Add([pscustomobject]@{ type=$type.FullName; method=$method.Name; signature=$method.ToString(); instructions=$instructions.ToArray() })
  }
 }
-[pscustomobject]@{ assembly=$assembly.FullName; executionPerformed=$false; methods=$methods.ToArray() } | ConvertTo-Json -Depth 10 -Compress
+[pscustomobject]@{ assembly=$selectedAssembly.FullName; executionPerformed=$false; methods=$methods.ToArray() } | ConvertTo-Json -Depth 10 -Compress
 `;
 const result = spawnSync(path.join(process.env.SystemRoot, 'System32/WindowsPowerShell/v1.0/powershell.exe'),
   ['-NoProfile', '-NonInteractive', '-EncodedCommand', Buffer.from(script, 'utf16le').toString('base64')],
@@ -96,7 +102,7 @@ const result = spawnSync(path.join(process.env.SystemRoot, 'System32/WindowsPowe
 if (result.error || result.status !== 0) throw new Error(result.error?.message ?? result.stderr);
 const report = JSON.parse(result.stdout.replace(/^\uFEFF/, ''));
 report.sha256 = sha256;
-const destination = path.join(projectRoot, 'artifacts/package-review/easyface-managed-il.json');
+const destination = path.join(projectRoot, `artifacts/package-review/easyface-${schemaMode ? 'schema' : 'managed'}-il.json`);
 fs.writeFileSync(destination, JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify({ assembly: report.assembly, methods: report.methods.length,
   executionPerformed: false, report: path.relative(projectRoot, destination) }, null, 2));
