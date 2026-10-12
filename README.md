@@ -1,6 +1,11 @@
 # DOOM en Redmi Watch 4
 
-**Actual R161:** [el reloj responde al protocolo Xiaomi v1](docs/windows-auth-result-r161.md)
+**Actual R162:** [logs actuales leídos por USB y segunda clave candidata](docs/current-auth-candidate-r162.md),
+guardada por separado y aún sin validar. No nueva conexión al reloj; auth.json
+sigue con la clave anterior. Mantener Mi Fitness asociado mientras se investiga
+acceso SPP desde PC sin otra desvinculación. No ejecutar session todavía.
+
+**Historial R161:** [el reloj responde al protocolo Xiaomi v1](docs/windows-auth-result-r161.md)
 en dos sesiones Windows; falla HMAC con la clave histórica. Sin auth-final,
 consultas de datos o archivos enviados; cierre y worker confirmados en ambas.
 Siguiente: logs recientes tras volver a Mi Fitness, conservando esa asociación

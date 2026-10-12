@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**R162, 2026-10-12:** [logs actuales y candidato separado](current-auth-candidate-r162.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Logs actuales de Mi Fitness contienen un segundo valor candidato | Teléfono del usuario / archivos propios | 4copias y 4lecturas USB; 2valores,1archivo,9líneasRW4 | CONFIRMADO EN LOGS LOCALES | Alta | Sí | Valores secretos no exportados; viejo→nuevo en orden del archivo |
+| La segunda clave autentica el RW4 actualmente | Unidad M2315W1/2.2.86 | Candidato separado preparado, sin desafío real nuevo | SIN EVIDENCIA CRIPTOGRÁFICA TODAVÍA | Desconocida | No radio | Sin misma-objeto JSON/MAC reconocida; línea RW4 no prueba unidad física |
+| Copias recientes prueban que las líneas de clave son del día12 | Logs propios | Fecha12 en actividad, fecha11 en línea cercana a candidatos | NO DEMOSTRADO | Desconocida | Inspección PC | No timestamp propio reconocido de clave; conservan historial |
+| Se leyeron logs directamente por USB sin operaciones de reloj | Teléfono usuario / SDK oficial fijado | Autorización usuario y helper COMPLETE/4files/noRadio/noWatch | CONFIRMADO EN TELÉFONO | Alta | Sí | La autorización ADB manual puede persistir; no cambios de archivos remotos del helper |
+| Windows puede solicitar pairing a una dirección conocida | API Win32, no RW4 específico | Documentación Microsoft BluetoothAuthenticateDeviceEx | CONFIRMADO DOCUMENTALMENTE | Alta | No API ejecutada | UI stock; aceptación y conservación de asociación RW4 desconocidas |
+
 **R161, 2026-10-12:** [protocolo físico y rechazo HMAC](windows-auth-result-r161.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

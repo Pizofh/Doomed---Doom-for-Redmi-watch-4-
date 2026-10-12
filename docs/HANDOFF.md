@@ -1,5 +1,23 @@
 # Retomar el proyecto
 
+**Actual R162, 2026-10-12:** [logs actuales y segundo candidato](current-auth-candidate-r162.md).
+Usuario copió4logs y autorizó lectura directa USB; Unauthorized resuelto con
+aprobación manual del teléfono, colección SDK-pins fuera sandbox COMPLETE4files.
+Solo Mi Fitness/files/log .log actuales a tools/local/mi-fitness-logs-usb-r162/;
+sin app/radio/watch/phonefilewrites. Copias yUSB:2valores distintos,1archivo,
+9líneasRW4,0JSONsameObject/MACtarget reconocida. Viejo→nuevo sin reversión.
+Logs máximafecha12, candidatos contextual fecha11 previa: NO clavevigente probada.
+Un valor nuevo separado en tools/local/pc-rfcomm/auth-candidate-r162.json,
+sourceTag user-supplied porlogs propios; validateAuth OK. auth.json NO cambiado,
+session sigueclavevieja: NO ejecutar. No HMACnuevo/keys/hashes/MACpublicados.
+Helpers locales ignorados current-auth-inspection.mjs (copies/usb/prepare) y
+current-phone-logs.mjs (one-shot refuseexistingdest); preparación soloPC, sin
+rebuild/tests de motor. Mantener Mi Fitness asociado; NO otro unlink/Conectar
+nuevo teléfono para invalidarcredencial. Investigar pairing Windows a MACconocida
+API BluetoothAuthenticateDeviceEx normalUI (docs consultadas); NO construida,
+ejecutada o validadaRW4. Próximo meta accesoSPP sin migraciónapp; requiere preparar
+herramienta/plan antes de acción física. No APK/HCI/cloud/root/nativewatch.
+
 **Actual R161, 2026-10-12:** [dos sesiones con Xiaomi v1 y AuthHmacMismatch](windows-auth-result-r161.md).
 2TX/2RX cada una, 7433/1762ms, close+worker true/exit0, sin nativeError/supervisor.
 Primera pidió pairing; usuario aceptó y repitió manualmente. No auth-final/GET/
