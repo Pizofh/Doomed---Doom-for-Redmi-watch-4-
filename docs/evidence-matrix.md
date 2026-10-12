@@ -1,6 +1,16 @@
 # Matriz de evidencia
 
-**R175/R176, 2026-10-12:** [código 3 trazado](static-id-physical-result-r175.md) y [esfera propia instalada](static-space-trial-r176.md).
+**R177, 2026-10-12:** [Lua mínima, misma candidata, validada en guest S3](lua-minimal-r177.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| RW4 volvió a esfera habitual con funciones normales tras R176 | M2315W1/2.2.86 | Confirmación explícita del usuario | CONFIRMADO EN RW4 POR USUARIO | Alta | Usuario | No prueba duración ilimitada ni recovery de firmware |
+| Paquete Lua minimal byte5=0 renderiza y ejecuta sin ajuste de versión | Emulador Xiaomi Watch S3 | Capturas texto/contador y fuente extraída exacta | CONFIRMADO EN EMULADOR | Alta | Sí | No emulación exacta M2315W1 |
+| Contador se detiene a diez actualizaciones | Mismo guest | Logs tick1…10/limit y captura10/10 | CONFIRMADO EN EMULADOR | Alta | Sí | No medición de precisión1Hz |
+| Panel stock pausa/resume Lua y selección Storage cierra VM | Mismo guest | Hooks entre tick9/10 y closeLua al cambiar | CONFIRMADO EN EMULADOR | Alta | Sí | Hooks no confirmados en RW4 físico |
+| Script Lua nuevo funciona en M2315W1/2.2.86 | Reloj físico | Paquete no enviado | SIN EVIDENCIA | Desconocida | No | Perfil físico aún no integrado ni ensayo autorizado |
+
+**Historial R175/R176, 2026-10-12:** [código 3 trazado](static-id-physical-result-r175.md) y [esfera propia instalada](static-space-trial-r176.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|
@@ -9,7 +19,7 @@
 | Cambiar solo el ID resolvió el rechazo con catálogo de 21 | M2315W1/2.2.86 | R175 volvió a rechazar antes de upload | REFUTADO PARA ESE ENSAYO | Alta | Sí | No descarta otras restricciones de IDs |
 | Mismo paquete se instaló después de eliminar esferas manualmente | M2315W1/2.2.86 | R176 count11→12,13partes,ID propio en GET independiente | CONFIRMADO EN RW4 | Alta | Sí, autorizado | No cambios de paquete ni borrado desde PC |
 | Instalador conserva esfera activa y otras entradas | Misma unidad | GET contra baseline nuevo:11IDs/flags/activa iguales | CONFIRMADO EN RW4 | Alta | Sí | Usuario borró antes; no comparar con viejo catálogo21 |
-| Imagen RW4Probe renderiza físicamente | Misma unidad | Usuario selecciona y responde «se ve bien» | CONFIRMADO EN RW4 POR USUARIO | Alta | Usuario | Retorno/menús no confirmado aparte aún |
+| Imagen RW4Probe renderiza físicamente | Misma unidad | Usuario selecciona y responde «se ve bien», luego confirma retorno normal | CONFIRMADO EN RW4 POR USUARIO | Alta | Usuario | Retorno a su esfera y funciones normales confirmados |
 | Lua/C/Doom funcionan en hardware físico | M2315W1/2.2.86 | Esta prueba solo contiene imagen | SIN EVIDENCIA | Desconocida | No | DOOM y C demostrados solo en emulador |
 
 Las filas inferiores conservan evidencia e incógnitas históricas de cada checkpoint.

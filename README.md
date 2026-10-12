@@ -1,11 +1,18 @@
 # DOOM en Redmi Watch 4
 
-**Actual R176:** [primera esfera propia instalada y visible en M2315W1/2.2.86](docs/static-space-trial-r176.md).
+**Actual R177:** [Lua mínima probada en emulador](docs/lua-minimal-r177.md):
+texto, contador acotado a diez, pausa/resume con panel y salida a Storage con
+cierre de Lua. Mismo paquete byte5=0, fuente extraída exacta. No envío al reloj.
+El usuario confirma retorno normal a su esfera después de R176. Siguiente:
+adaptador/plan físico revisable para este paquete Lua; todavía no autorizado
+el ensayo de scripts. Doom permanece en C, no se traduce a Lua.
+
+**Historial R176:** [primera esfera propia instalada y visible en M2315W1/2.2.86](docs/static-space-trial-r176.md).
 RW4Probe es una imagen estática, sin scripts. Después de eliminar esferas
 manualmente, el usuario autorizó reintentar el mismo paquete: catálogo 11→12,
 13 partes enviadas, registro propio confirmado y anteriores conservadas.
-El usuario confirma «se ve bien». Retorno a esfera habitual/menús pendiente
-de confirmación aparte. Paquete almacenado; ningún SET/DELETE desde PC.
+El usuario confirma «se ve bien» y luego retorno a esfera habitual y uso normal.
+Paquete almacenado; ningún SET/DELETE desde PC.
 Gates cerrados otra vez. [Estado 3 interpretado por Mi Fitness como espacio
 insuficiente](docs/static-id-physical-result-r175.md), no límite exacto medido.
 Siguiente: preparar en PC una prueba Lua mínima para revisión. Lua/C/Doom

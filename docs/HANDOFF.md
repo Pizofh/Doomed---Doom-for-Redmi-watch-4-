@@ -1,6 +1,31 @@
 # Retomar el proyecto
 
-**Actual R176, 2026-10-12:** [esfera estática instalada y visible](static-space-trial-r176.md).
+**Actual R177, 2026-10-12:** [Lua mínima validada solo en emulador](lua-minimal-r177.md).
+Usuario confirma esfera habitual/menús normales tras R176 y autoriza preparar
+Lua en PC. Fuente experiments/lua-minimal/main.lua: texto +timer1000ms,10ticks,
+pausa al ocultarse/resume si presupuesto pendiente; mantiene gestos stock.
+NO os/shell/files/ELF/native/sensores. No traducir DoomC aLua; launcher/bridge
+en S3 existen pero ABI/loader/privilegios físicos siguen sin demostrar.
+
+Build fijo artifacts/lua-minimal-r177/LuaProbe-id-only.face,ID365219991,
+19796bytes,SHAa40c85607a8c208823f2dd6064ebca3c907a850e9a392c0b3eb0d718d3c9490a.
+Compiler revisado sinADB; parche soloID,byte5=0 conservado. Mismo paquete
+instalado en guestS3,readback exacto; sin header emu10 ni fuente derivada escrita.
+Render visto; fuenteextraída exacta,Lua5.4,ticks1…10,limit,pausa/resume entre9/10,
+closeLua al seleccionarStorage. LuaProbe almacenada/inactiva,Storage365700764
+activa,25IDs anteriores conservados. Header0 validado solo runtimeS3.
+Tools package/install/check-lua-minimal-emulator.mjs reproducibles, la instalación
+no se repite sobreunregistro previo. Primero preflight rechazó dosin_use de
+distintostipos antes de mutar; inspección aclaró normal/AOD. Selectorrequiere
+esperaranimaciones. Pressholdguest se activó accidentalmente y restauróOFF.
+
+No Bluetooth/phone/USB/reloj usado en R177. Gates físicos false,perfilLua NO
+incluido en staticSpec ni adaptador físico. Scripts físicos NO autorizados
+todavía. Siguiente: perfilpinned/registro separado,tests cruzados yplan revisable
+de instalación/retirada, sin autoSET/borradoajeno. No pedir permiso hasta que
+ese paso concreto esté implementado/probado. No ejecutar imagenr173 comoLua.
+
+**Historial R176, 2026-10-12:** [esfera estática instalada y visible](static-space-trial-r176.md).
 Tras R175 rechazado con status3, inspección estática del APK Mi Fitness3.59.1i
 trazó el campo installStatus hasta recurso face_hint_storage_low: ver
 [resultado y método](static-id-physical-result-r175.md). No límite20/bytes medidos.
@@ -13,7 +38,7 @@ antes de INSTALL. Un único intento: RegisteredInactive,13partes,22TX16RX,
 25814bytesTX. GET independiente count11→12,own presente/inactivo/eliminable,
 11IDs/flags/activa anteriores preservados, close/worker confirmados.
 Usuario seleccionó la esfera y dice «se ve bien»: render confirmado por él.
-No confirmación separada de retorno a esfera habitual/menús todavía.
+Usuario después confirma retorno a esfera habitual y funcionamiento normal.
 Paquete permanece instalado. NO SET/DELETE desde PC. Registros r169 y r173
 anteriores Uncertain quedan intactos; el nuevo Registered es el recibo válido.
 

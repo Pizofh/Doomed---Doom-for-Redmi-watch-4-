@@ -53,8 +53,9 @@ en la documentación y su directorio de evidencia.
 
 Usuario seleccionó la esfera y respondió **«se ve bien»** a la comprobación
 de texto/bloques de colores: render físico confirmado por observación del
-usuario. El retorno a la esfera habitual y los menús todavía no fue
-confirmado por separado. No se retiró el paquete: permanece instalado.
+usuario. Posteriormente confirmó: «todo está funcionando con normalidad.
+ya puse de nuevo mi esfera, todo normal»: retorno y uso habitual confirmados.
+No se retiró el paquete: permanece instalado.
 
 Ambos gates restaurados a false, variante revisada r167. Build cerrado:
 `3dbcb5dab5df5dcec024963beba36636c64a2de5e876535110818de1ccba7d1e`.

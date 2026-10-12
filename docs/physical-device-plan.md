@@ -1,10 +1,16 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R176:** [prueba estática completada](static-space-trial-r176.md), mismo
+**Actual R177:** [preparación Lua solo PC/emulador](lua-minimal-r177.md).
+Script texto/contador acotado con pausa/resume y salida stock validados en S3.
+Ninguna operación física; Lua no añadido al instalador físico ni autorizado
+su envío. Usuario confirma retorno de R176 a esfera habitual y uso normal.
+Siguiente: construir perfil/registro y plan concreto antes de revisar scripts.
+
+**Historial R176:** [prueba estática completada](static-space-trial-r176.md), mismo
 paquete r173 tras liberación manual de esferas autorizada por el usuario.
 Count11→12, propia inactiva/eliminable, anteriores preservadas; imagen visible
-confirmada por usuario. No SET/DELETE desde PC. Retorno habitual/menús sin
-confirmación separada aún. Gates cerrados, originales inciertos conservados,
+confirmada por usuario. No SET/DELETE desde PC. Retorno habitual y uso normal
+confirmados posteriormente. Gates cerrados, originales inciertos conservados,
 nuevo registro after-space válido. No Lua/C/Doom ni firmware autorizado.
 [Interpretación del estado 3](static-id-physical-result-r175.md) verificada en
 cliente Mi Fitness. Las entradas siguientes son historial.
