@@ -1,5 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R165, 2026-10-12:** [API dirigida devuelve258; menús/sync normales](directed-pairing-result-r165.md).
+No protocolo Xiaomi ni archivos. No repetir/culparclave por este timeout.
+Plan alternativo listo para revisión: modo Conectar nuevo teléfono del reloj,
+sin unlink Mi Fitness, Windows GUI y batch R159 con R164. Puede cambiar vínculo/
+key; preservación desconocida. No ejecutar automáticamente ni asumir aprobación
+del usuario por este reporte. Gate firmware/nativo físico permanece cerrado.
+
 **Actual R164, 2026-10-12:** [usuario confirma Mi Fitness conectado+sync](synchronized-auth-r164.md),
 logs USB posteriores y candidata nueva preparada localmente, sin HMAC nuevo.
 Próximo intento manual normal Bluetooth dirigido según planR163, conservando

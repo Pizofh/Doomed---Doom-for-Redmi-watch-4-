@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R164:** [Mi Fitness volvió a sincronizar y se preparó otra clave candidata](docs/synchronized-auth-r164.md)
+**Actual R165:** [pairing dirigido terminó en WAIT_TIMEOUT/258](docs/directed-pairing-result-r165.md),
+sin código, sin comandos Xiaomi; reloj y Mi Fitness siguen normales. No repetir
+ese intento. Propuesta pendiente de revisión: modo del reloj Conectar nuevo
+teléfono conservando registro Mi Fitness, pairing GUI y una sesión con candidata
+R164. No prueba de conservación de clave ni instalación física de Doom.
+
+**Historial R164:** [Mi Fitness volvió a sincronizar y se preparó otra clave candidata](docs/synchronized-auth-r164.md)
 desde logs USB posteriores. Cliente preparado, HMAC pendiente. Siguiente: un
 intento manual de pairing dirigido con el [plan R163](docs/windows-directed-pairing-plan-r163.md),
 conservando Mi Fitness asociado y sin volver a QR. No conexión del agente ni

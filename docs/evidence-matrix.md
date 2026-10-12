@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**R165, 2026-10-12:** [resultado dirigido y separación de hipótesis](directed-pairing-result-r165.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Pairing dirigido logró un bond usable con RW4 en estado normal | Unidad usuario | NativeRejected/258, sin código, bondCurrentlyUsableVerified=false | NO DEMOSTRADO; ENSAYO FALLIDO | Alta para intento | Usuario | 258 WAIT_TIMEOUT, no rechazo remoto explícito ni causa probada |
+| El supervisor mató este worker por su deadline | Herramienta PC | supervisor=null,pairingApiCompleted=true,workerExitConfirmed=true | REFUTADO PARA ESTE INTENTO | Alta | Usuario | Retorno 258 de API, no deadline propio |
+| Mi Fitness y menús siguen funcionando después del intento | Misma unidad | Usuario confirma normal+sync | CONFIRMADO POR REPORTE DEL USUARIO | Alta | Usuario | No preguntar otra vez; no prueba ausencia de writes internos |
+| Conectar nuevo teléfono sin unlink conserva clave R164 para Windows | Misma unidad | Plan distinto, todavía sin ejecutar | SIN EVIDENCIA | Desconocida | No | FAQ documenta migración misma cuenta, no garantía clave/PC |
+
 **R164, 2026-10-12:** [retorno Mi Fitness y preparación de credencial](synchronized-auth-r164.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -1,5 +1,19 @@
 # Retomar el proyecto
 
+**Actual R165, 2026-10-12:** [pairing dirigido258 y propuesta distinta](directed-pairing-result-r165.md).
+Un intento user NativeRejected/nativeResult258=WAIT_TIMEOUT,1request, sinUIcode,
+handlesClosed+workerExittrue,pairingApiCompletedtrue,supervisornull. NoXiaomi/
+keyused/files. Usuario confirma menúsnormales+MiFitnesssync tras BTON; no repetir
+pregunta ni pairingdirigido/APK/debug. Causa NOdemostrada, no rechazo remoto
+explícito ni claveinválida; no duraciónenJSON. No cambios/build/tests nuevos.
+authR164 candidata NOHMAC probada. Próxima hipótesis preparada/revisión PENDIENTE:
+Conectar nuevo teléfono SOLOreloj mientrasMiFitconectado, NOunlink/basura/appdelete,
+BTOFFteléfono→GUIpairingWindows código→UNsessionR159 conauthR164. STOPborrado/reset/
+cuenta/Desvincular requerido/HMACbad; noactivarConectarNuevootra vezdespuéspair.
+Planefectos/retorno/no guarantee key en docR165. No indicarejecutarantesdecisión
+usuario; no radioagente. No volverMiFit entrequeries si bloquesiguePC. Root/
+firmware/nativo/instalación siguen fuera.
+
 **Actual R164, 2026-10-12:** [Mi Fitness sincronizado y candidata nueva](synchronized-auth-r164.md).
 Usuario confirma retorno/conectado+sync; NO preguntarotra vez. USB4logs COMPLETO
 a tools/local/mi-fitness-logs-usb-r164/; sinBT/watch/app/phonefilewrites. Unvalor,
