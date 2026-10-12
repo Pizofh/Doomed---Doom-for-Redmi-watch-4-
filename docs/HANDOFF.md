@@ -1,6 +1,39 @@
 # Retomar el proyecto
 
-**Actual R177, 2026-10-12:** [Lua mínima validada solo en emulador](lua-minimal-r177.md).
+**Actual R178, 2026-10-12:** [plan físico Lua completo y adaptador bloqueado](lua-physical-plan-r178.md).
+Usuario «ok» a preparar instalador/plan: NO autorización de envío Lua físico
+todavía. No radio/phone/ADB/watch usados aquí, solo PC y lectura web FAQsXiaomi.
+staticSpec ahora fija tresperfiles: imágenesr167/r173 y Luaminimalr177 separado,
+ID365219991/tamaño19796/SHAa40c8560…(completoenplan). SourceSHAe871590b…,
+prepare exige fuente exacta embebida. contentKind explicit lua-minimal/static-image
+en plan/reporte/journal; nombresStatic internos históricos, no imagen sin scripts.
+
+Comandos propuestos install r177/remove r177 en tools/pc-static-watchface.mjs.
+Journal exclusivo tools/local/pc-rfcomm/lua-minimal-r178.json ligado a
+target/model/FW/hash/variante/contentKind; no reutilizar registros r169/r173
+inciertos ni after-space Registered de esfera estática. Lua journal sinKind o
+maletiquetado rechazado; antiguosimagencompatibles sinreescribirlos.
+
+Pruebas3perfiles:12codec/API+25wire/IPC/journal porperfil, todosparescruzados
+rechazadosanteslink. Estado3storageInterpretation y0partes probado. Native258,
+gates3perfiles +afterspace +native cerrados; queries22synthetic4IPC6fallos;
+health10synthetic1IPC incluyenIdLua pero no UI/render. CIofflinetambiénLua gate,
+noCIremoto. Prepare R178 confirma source/package/build/gateclosed/diezpartes.
+Build cerrado SHA78e03bb41a151961832e03f05920df3f2dcc5947253995ab51d749d30a486a0b.
+
+Próximo paso: pedir revisión del plan para un solo ensayo Lua con usuario
+presente: instalar sinautoSET, seleccionar manual, contador10,retorno habitual;
+retirada propia opcional dentrodealcance explícitamenteautorizado, esperando
+confirmaciónde retorno+GETinactivo/eliminable antesDELETE. DELETE4/2 aún NO
+probado físicamente; no asegurar recoverycompleto. Dosgates siguenFALSE y
+REVIEWED_VARIANT=r167. Si autoriza: habilitar SOLO r177 temporalmente, rebuild,
+registrar exe/hash/sourceantesuna instalación, cerrar/rebuildposterior. No
+repetir permisos del mismoalcance. Sin firmware/ELF/C/Doom ni otroID autorizado.
+Si enerror no reintentar ni borrarsferasajenas/staging incierto. ConservarbondPC
+durantebloque; no exigir migraciónMiFit entre pasos. Solicitud de autorización
+queda separada de los comentarios históricos inferiores.
+
+**Historial R177, 2026-10-12:** [Lua mínima validada solo en emulador](lua-minimal-r177.md).
 Usuario confirma esfera habitual/menús normales tras R176 y autoriza preparar
 Lua en PC. Fuente experiments/lua-minimal/main.lua: texto +timer1000ms,10ticks,
 pausa al ocultarse/resume si presupuesto pendiente; mantiene gestos stock.

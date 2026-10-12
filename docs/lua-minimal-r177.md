@@ -1,5 +1,8 @@
 # R177 — Lua mínima preparada y probada en emulador
 
+Continuación: [R178 integra el perfil fijo y plan físico](lua-physical-plan-r178.md),
+con gates cerrados. Este documento conserva el resultado y pendientes de R177.
+
 2026-10-12. El usuario confirmó retorno a su esfera habitual y funcionamiento
 normal del RW4 después de R176. Autorizó preparar la siguiente prueba en PC.
 **No se enviaron comandos Bluetooth ni archivos al reloj en este checkpoint.**

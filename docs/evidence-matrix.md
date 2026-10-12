@@ -1,6 +1,16 @@
 # Matriz de evidencia
 
-**R177, 2026-10-12:** [Lua mínima, misma candidata, validada en guest S3](lua-minimal-r177.md).
+**R178, 2026-10-12:** [perfil Lua e instalador físico preparados y bloqueados](lua-physical-plan-r178.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Instalador admite únicamente Lua minimal de hash/ID/tamaño fijados | Cliente PC | Prepare r177 verifica paquete y fuente embebida exacta | CONFIRMADO OFFLINE | Alta | Sí | Gates cerrados; no Lua enviado al reloj |
+| Recibos de imágenes no permiten retirar Lua ni viceversa | Cliente PC | Tests todos pares de tres perfiles antes de link | CONFIRMADO OFFLINE | Alta | Sí, sintético | Journal ligado a contentKind; legacy solo imagen |
+| Perfil Lua completa envío/retirada con cifrado y framing | Peer sintético PC | 12codec/API y25wire/IPC/journal | CONFIRMADO OFFLINE | Alta | Sí | DELETE físico todavía no probado |
+| Gates CLI Lua y nativo evitan conexión actual | Cliente PC | Test install/remove r177 y entrada worker cerrados | CONFIRMADO OFFLINE | Alta | Sí | No claves/target reales usados en tests |
+| Lua minimal o DELETE funcionan en esta unidad | M2315W1/2.2.86 | Todavía no ejecutados | SIN EVIDENCIA | Desconocida | No | Plan listo para revisión; emulador no confirma hardware |
+
+**Historial R177, 2026-10-12:** [Lua mínima, misma candidata, validada en guest S3](lua-minimal-r177.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

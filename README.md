@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R177:** [Lua mínima probada en emulador](docs/lua-minimal-r177.md):
+**Actual R178:** [instalador y plan físico Lua preparados](docs/lua-physical-plan-r178.md).
+Perfil fijo r177 separado de las imágenes, registro propio y comprobación de
+fuente/hash. Tres perfiles pasan pruebas de envío/retirada y recibos cruzados;
+entrada Lua, imagen y worker nativo siguen bloqueados. No comandos nuevos al
+reloj. Pendiente autorización explícita del ensayo Lua con observación del usuario.
+
+**Historial R177:** [Lua mínima probada en emulador](docs/lua-minimal-r177.md):
 texto, contador acotado a diez, pausa/resume con panel y salida a Storage con
 cierre de Lua. Mismo paquete byte5=0, fuente extraída exacta. No envío al reloj.
 El usuario confirma retorno normal a su esfera después de R176. Siguiente:

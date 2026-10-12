@@ -1,6 +1,12 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R177:** [preparación Lua solo PC/emulador](lua-minimal-r177.md).
+**Actual R178:** [plan concreto y adaptador de LuaProbe](lua-physical-plan-r178.md).
+Perfil r177/SHA/ID365219991 separado, journal propio y fuente exacta verificados;
+envío/retirada probados solo offline con peers. Ambos gates cerrados, no nueva
+operación al reloj. Revisión pendiente del único ensayo Lua físico, observación
+y retirada propia opcional; nada de C/ELF/Doom ni firmware autorizado.
+
+**Historial R177:** [preparación Lua solo PC/emulador](lua-minimal-r177.md).
 Script texto/contador acotado con pausa/resume y salida stock validados en S3.
 Ninguna operación física; Lua no añadido al instalador físico ni autorizado
 su envío. Usuario confirma retorno de R176 a esfera habitual y uso normal.
