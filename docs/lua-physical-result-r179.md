@@ -37,13 +37,37 @@ Ambos gates restaurados FALSE,REVIEWED_VARIANT=r167. Build cerrado SHA256:
 `818e3d06a9662cff879771c6cea736b83fe7ed4f740c39b600f7d8d1f673c03b`.
 Tests de gates Node/nativo pasan sin conexiones físicas.
 
-## Observación manual pendiente
+## Observación manual: prueba funcional fallida
 
-Se pidió al usuario seleccionar LuaProbe,esperar unos15s,comprobar texto y
-Updates10/10,después volver a esfera habitual y abrir menú. Aún sin respuesta
-al guardar esta nota: no confirmar ejecución Lua/contador/retorno por catálogo.
-Retirada autorizada opcional no ejecutada; esperaría confirmación del retorno,
+Usuario confirma preview con barras, pero al seleccionar LuaProbe queda
+únicamente fondo azul: **sin texto ni contador**. La pulsación larga no abre
+el cambio de esfera. Sí funcionan atrás, notificaciones, navegación superior,
+derecha y menús, según su observación. No reporta reboot o bloqueo global.
+No afirmar runtime completo, timer funcional o lifecycle correcto en RW4.
+
+Se pidió volver por Ajustes→Esferas a su esfera habitual, sin volver a elegir
+LuaProbe ni depender de la pulsación larga. Confirmación de retorno pendiente.
+No nueva conexión/comando al reloj después de recibir esta observación.
+Retirada opcional autorizada no ejecutada: requiere retorno confirmado,
 decisión de retirarla y comprobación propia inactiva/eliminable.
 
-**Siguiente checkpoint:** observación física de Lua/contador y retorno normal.
+## Diagnóstico inicial solo PC
+
+El script crea un objeto raíz azul antes de crear las labels. La primera
+label evalúa `lvgl.Font("misansw regular",24)` antes de construir el objeto.
+Una excepción al resolver esa fuente o un binding distinto podría interrumpir
+la inicialización dejando el fondo, sin alcanzar las siguientes labels/timer.
+Es hipótesis, **no error identificado en un log del firmware físico**.
+La versión32 del mismo nombre figura en TouchEvents upstream etiquetado RW4;
+ni ese sample ni el éxito del tamaño24 en S3 demuestran la fuente en2.2.86.
+
+El fondo observado coincide con el objeto Lua pero también con el fondo del
+preview generado: no tomar solo su color como prueba inequívoca de ejecución.
+Una futura variante de diagnóstico podría distinguir fases con bloques de
+color diferentes del preview y usar fuente por defecto, primero sin timer.
+Requeriría paquete/hash/plan propios y nueva revisión antes de envío físico.
+No modificar/reinstalar este perfil fijo ni saltar a C para diagnosticarlo.
+
+**Siguiente checkpoint inmediato:** confirmar retorno normal por selector de
+Ajustes. Después preparar diagnóstico mínimo en PC, sin nuevos envíos.
 No C/ELF/Doom físico autorizado por este ensayo.

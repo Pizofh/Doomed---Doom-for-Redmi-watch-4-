@@ -2,8 +2,10 @@
 
 **Actual R179:** [LuaProbe instalada tras autorización explícita](lua-physical-result-r179.md).
 Diezpartes,GETposterior13esferas ypropia inactiva/eliminable,anterioresconservadas.
-NoautoSET/DELETE. Gates cerrados otra vez. Pendiente observación de Lua/contador
-yretorno. Retirada propia opcionalautorizada,esperaconfirmaciónretorno ydecisión.
+NoautoSET/DELETE. Gates cerrados otra vez. Observación: soloazul,sintexto/contador,
+pulsaciónlarga noabreselector; otrosmenúsfuncionan. Prueba funcionalfallida.
+Retorno porAjustes solicitado,pendiente. Retirada propia opcionalautorizada,
+esperaconfirmaciónretorno ydecisión. No reabrir/reenviarLuaProbe a ciegas.
 Nada de C/ELF/Doom ni firmware autorizado.
 
 **Historial R178:** [plan concreto y adaptador de LuaProbe](lua-physical-plan-r178.md).

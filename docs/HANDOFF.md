@@ -1,6 +1,6 @@
 # Retomar el proyecto
 
-**Actual R179, 2026-10-12:** [LuaProbe instalada, observación pendiente](lua-physical-result-r179.md).
+**Actual R179, 2026-10-12:** [LuaProbe registrada, prueba funcional fallida](lua-physical-result-r179.md).
 Usuario autoriza explícitamenteensayo ypuede observarreloj segúnpreguntaR178.
 Una instalación r177 completada:RegisteredInactive,10partes,20329TXbytes,
 19TX16RX,cierre/workertrueexit0. Own365219991inactiva/eliminable,anterioractiva.
@@ -13,10 +13,15 @@ AmbosgatesFALSE,REVIEWED_VARIANT=r167,buildcerradoSHA
 Gate tests pasan; no código de implementación nuevo, solo habilitación temporal
 restaurada y documentación del resultado.
 
-Pregunta manual enviada: elegirLuaProbe (previewcian10barras),esperar15s,
-textoRW4LUAPROBE/Updates10/10,volveresfera habitual/menú. Respuesta pendiente
-al guardar; presencia no demuestra ejecución ni lifecycle. Próximo: incorporar
-observación real antesdeafirmarLuaenRW4. Si blanco/bloqueo, no reabrir/reintentar.
+Usuarioobserva previewconbarras peroalactivarqueda soloazul,sintexto/contador.
+Pulsaciónlarga noabreselector; atrás/notificaciones/arriba/derecha/menús sí
+funcionan. NOconfirmar timer/runtimelifecycle; fallo funcional físico. Pregunta
+manualpendiente: Ajustes→Esferas→habitual, sinreabrirLuaProbe/reiniciar/borrar.
+No másradio/comandos despuésdeeste reporte. Prioridad retorno normal.
+PC: objetoazulsecreaantesprimeraLabel/Fontmisansw regular24; fuente/binding
+es hipótesisdeexcepción,sinlogreal. Previewyrootmismocolor,azulsolo noes prueba
+inequívoca deLua. FuturodiagnósticoPC: bloquesfasecontrastadosrespectopreview,
+Labelmétodoparent/defaultfont,sintimeralprincipio; NO enviarsin nueva revisión.
 Retirada opcional YAautorizada dentroensayo, pero requiereconfirmaciónretorno
 ydecisiónderetirarla,GETowninactiva/eliminable/journalválido. No pedir otra
 autorización delmismoalcance si usuario eligerealizarla. Nada de C/ELF/Doom

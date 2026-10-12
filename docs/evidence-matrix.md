@@ -6,7 +6,10 @@
 |---|---|---|---|---|---|---|
 | Paquete propio con Lua fue transferido y registrado | M2315W1/2.2.86 | RegisteredInactive,10partes,GET independiente12→13 | CONFIRMADO EN RW4 | Alta | Sí, autorizado | No se activó automáticamente; no prueba ejecución |
 | Esferas/selección anteriores conservadas tras instalar LuaProbe | Misma unidad | Comparación12IDs/flags/activa contra journal nuevo | CONFIRMADO EN RW4 | Alta | Sí | No sustitución/borrado de otras |
-| Script/contador funcionan y salida es normal | Misma unidad | Observación solicitada y pendiente | SIN EVIDENCIA FÍSICA TODAVÍA | Desconocida | No | No inferir de presencia o aceptación de upload |
+| Prueba LuaProbe muestra texto/contador en físico | Misma unidad | Usuario observa solo fondo azul al seleccionarla | REFUTADO PARA ESTE PAQUETE/ENSAYO | Alta | Usuario | Sin logs físicos; causa no identificada |
+| Pulsación larga permite cambiar esfera con LuaProbe | Misma unidad | Usuario no puede abrir selector así | REFUTADO PARA ESTE ENSAYO | Alta | Usuario | Ajustes→Esferas aún pendiente de confirmar |
+| Navegación y menús del reloj responden con LuaProbe | Misma unidad | Usuario confirma atrás/notificaciones/arriba/derecha/menús | CONFIRMADO EN RW4 POR USUARIO | Alta | Usuario | No equivale retorno a esfera habitual aún |
+| Fuente misansw regular24 explica ausencia de labels | Misma unidad | Orden del código crea fondo antes de evaluar Font | INFERENCIA RAZONABLE | Limitada | Revisión PC | Sin excepción/log físico; no declarar causa demostrada |
 | LuaProbe eliminable y retirada completada | Misma unidad | FlagcanDelete sí; DELETE no ejecutado | FLAG CONFIRMADO; RETIRADA SIN PROBAR | Alta sobre flag | GET | Retirada opcional requiere retorno/decisión |
 
 **Historial R178, 2026-10-12:** [perfil Lua e instalador físico preparados y bloqueados](lua-physical-plan-r178.md).
