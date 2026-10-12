@@ -1,5 +1,13 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R169, 2026-10-12:** [plan concreto de instalación estática](static-watchface-physical-plan-r169.md)
+y [adaptador/registro offline](static-watchface-transport-r169.md) preparados.
+Paquete R167 sin cambios,20 escenarios sintéticos pasan, entradas Node/nativa
+siguen cerradas. El usuario está remoto y no puede observar el reloj: ninguna
+operación física del agente, tampoco consultas. Revisar el plan cuando pueda
+observar y manejar la unidad. Requiere autorización separada antes de habilitar
+instalación/retirada; consultas previas no la conceden. No Lua/C/Doom/firmware.
+
 **Actual R168,2026-10-12:** [paquete estático probado y retirado solo en emulador](static-watchface-emulator-r168.md).
 Prototipo INSTALL/DELETE exclusivos de paquete propio únicamente APIsfalsas,
 sin backendreal. No envío físico/Byte5patch ni autorización deinstalar por

@@ -1,5 +1,33 @@
 # Retomar el proyecto
 
+**Actual R169, 2026-10-12:** [transporte y registro offline](static-watchface-transport-r169.md).
+El usuario está remoto y no puede observar el reloj. NO usar hardware/ADB/radio
+en este bloque. Conservó el vínculo PC anteriormente; su estado actual no fue
+consultado. No preguntas de pairing o regreso a Mi Fitness necesarias ahora.
+
+Implementados adaptador V1 limitado al paquete R167, canal MASS5, control de
+partes exactas y presupuesto TX32KiB aislado (lecturas conservan16KiB).
+Registro privado persistente antes de INSTALL/cada parte/DELETE; lock exclusivo,
+target/hash/ID ligados. Recibo restaurado desde otra instancia; estados parciales
+o inciertos bloquean borrado/reinstalación automática. Sin SET ni reintentos.
+No confundir registro del catálogo con aceptación/render del contenido.
+
+CLI `pc-static-watchface.mjs prepare` verifica paquete/build sin transporte.
+`install`/`remove` devuelven PhysicalGateClosed. También la entrada nativa
+`session-static-r169` devuelve GateClosed antes de leer target/caché/Winsock.
+Ruta operativa preparada detrás de dos constantes de código falsas, NO flags
+de usuario/env. No habilitarlas sin revisión física explícita y nuevo build/hash.
+El ejecutable se reconstruyó; usar build.json/prepare actuales, no hashes históricos.
+258 assertions nativas, regresión R166 y20 escenarios wire/IPC/journal pasan.
+Suites del paquete requieren artefacto local; CI solo prueba native/read/gates
+sin esa fixture. Workflow actualizado, sin ejecución remota de CI.
+
+**Próximo checkpoint único:** revisar [plan de primera instalación estática](static-watchface-physical-plan-r169.md)
+cuando el usuario pueda observar/manejar el reloj. Paquete exacto anterior
+25224bytes/ID365799910/SHA7df88688...d9e93a; no Lua/C/Doom físicos. No exigir
+otra migración de vínculo entre pruebas del mismo bloque. Stock delete/reboot
+documentados, no recovery integral2.2.86 ni garantía de parser/package físico.
+
 **Actual R168, 2026-10-12:** [validación de la esfera y prototipo offline](static-watchface-emulator-r168.md).
 
 No se usaron el reloj, el teléfono ni Bluetooth en esta sesión. El usuario

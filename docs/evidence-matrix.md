@@ -1,5 +1,17 @@
 # Matriz de evidencia
 
+**R169, 2026-10-12:** [adaptador y registro preparados](static-watchface-transport-r169.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Transferencia V1 cifrada reconstruye el paquete exacto | Peer sintético en PC | Flujo completo por IPC, MD5/CRC/contenido y20 escenarios | CONFIRMADO OFFLINE | Alta | Sí | No valida upload en RW4 |
+| Registro permite retirada en otra ejecución | PC, target sintético | Reapertura del journal y DELETE propio simulado | CONFIRMADO OFFLINE | Alta | Sí | No prueba DELETE físico ni recovery de reloj |
+| Presupuesto de transferencia independiente | Worker propio Windows | Tests16KiB lecturas/32KiB static, frame4096 y96 frames | CONFIRMADO OFFLINE | Alta | Sí | Modo nuevo no abrió un socket real |
+| Entradas nuevas físicas cerradas | CLI y exe propios | GateClosed antes de target/caché/socket | CONFIRMADO EN PC | Alta | Sí | No permiso de instalación por preparar el backend |
+| AuthStep4.unknown1=1 es condición de éxito demostrada | Protocolo de familia | Proto lo llama unknown1; handler original acepta CMD_AUTH sin esa comparación | SIN EVIDENCIA SEMÁNTICA | Desconocida | Fuente | No imponer ese valor; exigir HMAC y consultas cifradas |
+| Paquete registrará/renderizará y se retirará en2.2.86 | RW4 real | Solo render S3 e inventario físico anterior | SIN EVIDENCIA FÍSICA DE INSTALACIÓN | Desconocida | No | Usuario debe observar primer ensayo tras revisión |
+| Gestión de esferas y reboot están documentados para RW4 | Documentación Xiaomi | FAQ KA-228715 yKA-228897 reconsultadas | CONFIRMADO DOCUMENTAL | Alta | No ensayo propio | No recovery integral ni garantía para build2.2.86 |
+
 **R168,2026-10-12:** [validación del paquete y prototipo offline](static-watchface-emulator-r168.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

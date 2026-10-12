@@ -1,5 +1,11 @@
 # RW4Probe — primera esfera candidata, imagen estática
 
+**R169:** [transporte y registro privado preparados y probados offline](../../docs/static-watchface-transport-r169.md).
+`node tools/pc-static-watchface.mjs prepare` inspecciona el paquete y su build,
+sin Bluetooth. INSTALL/DELETE siguen bloqueados en CLI y cliente nativo hasta
+revisión del [plan físico](../../docs/static-watchface-physical-plan-r169.md).
+Ninguna operación física durante esta sesión remota.
+
 **R168:** [render,menús,retorno yretirada confirmados en emulador](../../docs/static-watchface-emulator-r168.md)
 con el candidato ID-only/byte5original0. No variante bridge usada ni archivo
 físico cambiado. Eso no acredita aceptación/retirada por protocolo en RW4.

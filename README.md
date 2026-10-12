@@ -1,5 +1,12 @@
 # DOOM en Redmi Watch 4
 
+**Actual R169:** [adaptador de transferencia y registro persistente preparados](docs/static-watchface-transport-r169.md),
+con20 escenarios sintéticos y gate nativo/CLI comprobados. Consultas conservan
+su límite16KiB; el envío tiene modo propio32KiB, todavía cerrado físicamente.
+Siguiente: revisar [la primera instalación estática](docs/static-watchface-physical-plan-r169.md)
+cuando el usuario pueda observar el reloj. Esta sesión remota no utilizó el
+reloj, el teléfono ni Bluetooth; no hay archivo propio instalado en hardware.
+
 **Actual R168:** [RW4Probe renderiza en el emulador con el mismo paquete](docs/static-watchface-emulator-r168.md),
 permite volver a Storage y sus archivos propios se retiraron sin perder otras
 esferas. No archivo al reloj físico. Prototipo de transferencia/retirada probado
