@@ -1,5 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R166, 2026-10-12:** [auth/lecturas cifradas físicas completas](windows-xiaomi-success-r166.md),
+HMAC R164 válido,97%,FW2.2.86,menús normales con PC/teléfono BTOFF yregistro
+Mi Fitness conservado. No exigir retorno entreconsultas; usuario mantiene PC.
+[Plan GETinventario](windows-watchface-inventory-plan-r166.md) preparado,
+sin instalación/selección/delete/upload; siguiente comando manual watchfaces.
+No operación de hardware del agente ni evidencia C/loader/Doom instalado.
+
 **Actual R165, 2026-10-12:** [API dirigida devuelve258; menús/sync normales](directed-pairing-result-r165.md).
 No protocolo Xiaomi ni archivos. No repetir/culparclave por este timeout.
 Plan alternativo listo para revisión: modo Conectar nuevo teléfono del reloj,

@@ -1,6 +1,13 @@
 # DOOM en Redmi Watch 4
 
-**Actual R165:** [pairing dirigido terminó en WAIT_TIMEOUT/258](docs/directed-pairing-result-r165.md),
+**Actual R166:** [primera sesión Xiaomi completa en el reloj físico](docs/windows-xiaomi-success-r166.md):
+v1, HMAC/auth y respuestas cifradas válidas, batería97, firmware2.2.86, cierre
+correcto. El usuario conserva el registro Mi Fitness y ya usa los menús del
+reloj vinculado al PC con Bluetooth del teléfono apagado. No archivos ni Doom
+instalados todavía. Próximo: [inventario de esferas, solo GET](docs/windows-watchface-inventory-plan-r166.md)
+con el mismo vínculo. Cliente preparado y probado offline; consulta física pendiente.
+
+**Historial R165:** [pairing dirigido terminó en WAIT_TIMEOUT/258](docs/directed-pairing-result-r165.md),
 sin código, sin comandos Xiaomi; reloj y Mi Fitness siguen normales. No repetir
 ese intento. Propuesta pendiente de revisión: modo del reloj Conectar nuevo
 teléfono conservando registro Mi Fitness, pairing GUI y una sesión con candidata

@@ -1,5 +1,24 @@
 # Retomar el proyecto
 
+**Actual R166, 2026-10-12:** [ÉXITO Xiaomi físico completo](windows-xiaomi-success-r166.md).
+User session Complete/v1/HMACtrue/authAcktrue/encryptedtrue/battery97/modeltrue/
+FW2.2.86/5TX12RX/662ms/close+workertrue/exit0/noNativeError. Usuario confirma
+Conectar nuevo teléfono→Windows SINborrar registro Mi Fitness; después auth
+MENÚSNORMALES, BTcelOFF. PC mantiene; NO repetirpair ni pedirretornoahora.
+R164key CRIPTOvalidadaenestasesión; preocupación invalidaciónnecesaria por ese
+menú refutadaPARAESTE ciclo, no universal. Trasadvertenciaverbalse recibióensayo
+hecho: registrarlo, noinventarsecuencia. RetornoMiFitpostComplete aúnpendiente,
+retornosprevios sí. NoDoom/C/instalación/loader/ABI/RAMfree HW demostrados.
+Preparado [inventarioesferas GET4/0](windows-watchface-inventory-plan-r166.md),
+comandoMANUAL `node tools/pc-rfcomm.mjs watchfaces` MISMOvínculo; NOagente ejecutó.
+Auth→unGET,no battery/info repetidos; outputIDnumérico+active/canDeletecounts,
+no nombres/imágenes/idsraros/credenciales; desconocidos contados,noarraycompleta
+asumir. Whitelist solo4/0; sets/delete/install/upload siguenbloqueados. No
+archivo/flash/nativo/runtime. Buildnuevohash5593fb2e...49a505,144C#tests,22synthetic,
+4IPCfull,6IPCfail pasan offline; defaultsessionbase sin cambio, inventarioHW NO.
+Próximo metaJSONdeinventario, noinstalarpaquetesni shell. CIprevio incluye tests
+actualizados automáticamente/no run. No extra toolchain/APK, no nuevoshasheskey.
+
 **Actual R165, 2026-10-12:** [pairing dirigido258 y propuesta distinta](directed-pairing-result-r165.md).
 Un intento user NativeRejected/nativeResult258=WAIT_TIMEOUT,1request, sinUIcode,
 handlesClosed+workerExittrue,pairingApiCompletedtrue,supervisornull. NoXiaomi/

@@ -1,5 +1,18 @@
 # Matriz de evidencia
 
+**R166, 2026-10-12:** [sesión física completa](windows-xiaomi-success-r166.md), [siguiente inventario preparado](windows-watchface-inventory-plan-r166.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Cliente Windows completa auth Xiaomi v1 y lecturas cifradas | Unidad M2315W1/2.2.86 reportada | Complete/HMACtrue/ACKtrue/encryptedtrue/5TX12RX | CONFIRMADO EN RW4 POR PRUEBA DEL USUARIO | Alta | Usuario | No files ni código nuevo en el reloj |
+| Clave R164 corresponde criptográficamente a esa sesión | Misma unidad | HMAC correcto y respuestas CCM válidas | CONFIRMADO EN RW4 | Alta | Usuario | No implica que sobreviva a futuras desvinculaciones/reset |
+| Servicio devuelve batería97 y firmware2.2.86/modelo reconocido | Misma unidad | JSON Complete/battery97/FW2.2.86/modelRecognized=true | CONFIRMADO EN RW4 | Alta | Usuario | Cadena exacta de modelo no exportada; M2315W1 identidad física reportada |
+| Auth desde PC permite menús con teléfono BT apagado | Misma unidad | Confirmación explícita después de Complete | CONFIRMADO POR REPORTE DEL USUARIO | Alta | Usuario | No conexiones simultáneas probadas |
+| Conectar nuevo teléfono necesariamente invalidó R164 al conservar Mi Fitness | Este ciclo de esta unidad | Usuario confirma modo+registro conservado y HMAC válido | REFUTADO PARA ESTE CICLO | Alta | Usuario | No garantizar comportamiento universal de menú/firmware |
+| Socket/worker cerraron normalmente tras datos reales | Cliente PC / sesión real | closeConfirmed+workerExitConfirmed=true,exit0,supervisornull | CONFIRMADO EN PC POR REPORTE DEL USUARIO | Alta | Usuario | Retorno Mi Fitness de este éxito pendiente por bloque PC conservado |
+| Inventario GET4/0 funciona con peers sintéticos | Código propio, V1/V2 | 10escenarios de inventario y2IPCfull nuevos | CONFIRMADO OFFLINE | Alta | Sí | Consulta física aún no ejecutada, no permisos de escritura |
+| Hay Doom/C nativo o una watchface propia instalada en RW4 | Unidad física | Ningún archivo transferido, solo API stock | SIN EVIDENCIA | Desconocida | No | Emulador permanece evidencia separada |
+
 **R165, 2026-10-12:** [resultado dirigido y separación de hipótesis](directed-pairing-result-r165.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
