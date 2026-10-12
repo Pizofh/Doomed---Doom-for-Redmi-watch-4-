@@ -268,5 +268,27 @@ for (const scenario of ['open-error','radio-timeout']) {
   assert.equal(JSON.stringify(report).includes('PRIVATE-CANARY'),false);
 }
 assert.equal(process.listenerCount('SIGINT'),0);
+for (const version of [1,2]) for (const scenario of ['success','battery-timeout','watchface-timeout','clear-data']) {
+  const peer = new Peer(version,scenario);
+  const client = new XiaomiSession(peer,{profile:'healthcheck',clock:()=>peer.now,
+    sleep:async ms=>{peer.now+=ms;},phoneNonce:()=>phone});
+  const report = await client.run(secret);
+  assert.equal(report.mode,'healthcheck');assert.equal(report.filesTransferred,false);
+  if (scenario === 'success' || scenario === 'battery-timeout') {
+    assert.equal(report.healthcheck.expectedDevice,true);
+    assert.equal(report.healthcheck.controlQueriesComplete,scenario === 'success');
+    assert.equal(report.healthcheck.watchfaceCount,1);assert.equal(report.healthcheck.activeCount,1);
+    assert.equal(report.healthcheck.uiVerified,false);assert.equal(report.healthcheck.renderVerified,false);
+    assert.deepEqual(peer.queries,[1,2,'watchfaces']);
+  } else {
+    assert.equal(report.status,scenario === 'watchface-timeout' ? 'Timeout' : 'DecryptionFailed');
+    assert.equal(report.healthcheck,null);
+  }
+  assert.equal(JSON.stringify(report).includes('PRIVATE-CANARY'),false);
+}
+const healthReport = await runSession('NO-REAL-EXECUTABLE','AABBCCDDEE01',Buffer.from(secret),
+  {spawnWorker:nativeFixture(1),limitMs:1000,profile:'healthcheck'});
+assert.equal(healthReport.status,'Complete');assert.equal(healthReport.healthcheck.expectedDevice,true);
+assert.equal(healthReport.closeConfirmed,true);assert.equal(healthReport.workerExitConfirmed,true);
 console.log(JSON.stringify({checkpoint:'R166',protocolTestsPassed:true,syntheticSessions:22,ipcFullSessions:4,ipcFailureScenarios:6,
-  nativeSocketCalls:0,bluetoothOperationRequested:false}));
+  healthcheckSyntheticSessions:8,healthcheckIpcSessions:1,nativeSocketCalls:0,bluetoothOperationRequested:false}));

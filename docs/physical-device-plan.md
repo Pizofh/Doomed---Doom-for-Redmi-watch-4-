@@ -1,5 +1,9 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**R170:** [healthcheck de consultas preparado](healthcheck-r170.md), útil para
+supervisión remota del canal. No ejecutado físicamente ni habilita escritura;
+no verifica pantalla/UI o recovery. El plan de primera instalación sigue pendiente.
+
 **Actual R169, 2026-10-12:** [plan concreto de instalación estática](static-watchface-physical-plan-r169.md)
 y [adaptador/registro offline](static-watchface-transport-r169.md) preparados.
 Paquete R167 sin cambios,20 escenarios sintéticos pasan, entradas Node/nativa

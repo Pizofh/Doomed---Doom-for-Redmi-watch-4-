@@ -136,7 +136,7 @@ export class PrivatePipe {
 }
 export class XiaomiSession {
   constructor(link,{clock = () => performance.now(),sleep = delay,phoneNonce = () => randomBytes(16),profile = 'device'} = {}) {
-    if (!['device','watchfaces'].includes(profile)) throw Error('CommandRefused');
+    if (!['device','watchfaces','healthcheck'].includes(profile)) throw Error('CommandRefused');
     this.profile = profile;
     this.link = link; this.clock = clock; this.sleep = sleep; this.phoneNonce = phoneNonce;
     this.reader = new FrameReader(); this.version = 1; this.serial = 0; this.counter = 0;
@@ -242,6 +242,7 @@ export class XiaomiSession {
       authenticationAck:false,encryptedDataReceived:false,battery:null,modelRecognized:null,firmware:null,
       sentFrames:0,receivedFrames:0,rawOutputSaved:false,filesTransferred:false};
     if (this.profile === 'watchfaces') Object.assign(report,{checkpoint:'R166',mode:'watchface-inventory',watchfaces:null});
+    if (this.profile === 'healthcheck') Object.assign(report,{checkpoint:'R170',mode:'healthcheck',healthcheck:null});
     const knownErrors = new Set(['MalformedProtocol','AuthHmacMismatch','UnsupportedProtocol','Timeout',
       'ProtocolLimit','DecryptionFailed','AuthOrQueryRejected','TransportFailure','PreflightOrOpenFailed']);
     try {
@@ -264,6 +265,22 @@ export class XiaomiSession {
         } catch (error) { if (error.message !== 'Timeout') throw error; }
       }
       report.status = report.battery !== null && report.modelRecognized !== null ? 'Complete' : 'PartialData';
+      if (this.profile === 'healthcheck') {
+        await this.send(this.encode(command(4,0)));
+        const reply = await this.waitCommand(4,0);
+        if (!reply.encrypted) throw Error('DecryptionFailed');
+        report.encryptedDataReceived = true;
+        const catalog = readWatchfaces(reply);
+        report.healthcheck = {
+          controlQueriesComplete:report.status === 'Complete',
+          expectedDevice:report.modelRecognized === true && report.firmware === '2.2.86',
+          watchfaceCount:catalog.count,activeCount:catalog.activeCount,unknownIdCount:catalog.unknownIdCount,
+          testFacePresent:catalog.entries.some(face => face.id === '365799910'),
+          testFaceActive:catalog.entries.some(face => face.id === '365799910' && face.active),
+          testFaceDeletable:catalog.entries.some(face => face.id === '365799910' && face.canDelete),
+          uiVerified:false,renderVerified:false,physicalRecoveryVerified:false
+        };
+      }
     } catch (error) { report.status = knownErrors.has(error.message) ? error.message : 'LocalFailure'; }
     finally {
       report.protocolVersion = this.negotiatedVersion ?? null;
@@ -275,7 +292,7 @@ export class XiaomiSession {
   }
 }
 export async function runSession(executable,address,secret,options = {}) {
-  if (!['device','watchfaces'].includes(options.profile ?? 'device')) { secret.fill(0); throw Error('CommandRefused'); }
+  if (!['device','watchfaces','healthcheck'].includes(options.profile ?? 'device')) { secret.fill(0); throw Error('CommandRefused'); }
   const began = performance.now();
   const link = new PrivatePipe(executable,address,options);
   let report;
@@ -285,6 +302,7 @@ export async function runSession(executable,address,secret,options = {}) {
   } catch {
     report = {checkpoint:'R159',status:'PreflightOrOpenFailed',rawOutputSaved:false,filesTransferred:false};
     if (options.profile === 'watchfaces') Object.assign(report,{checkpoint:'R166',mode:'watchface-inventory'});
+    if (options.profile === 'healthcheck') Object.assign(report,{checkpoint:'R170',mode:'healthcheck',healthcheck:null});
   } finally { secret.fill(0); }
   const closed = await link.close();
   if (['Complete','PartialData'].includes(report.status) &&

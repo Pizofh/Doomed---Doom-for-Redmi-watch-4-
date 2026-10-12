@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R170:** [healthcheck del servicio de control preparado](docs/healthcheck-r170.md).
+Agrupa las consultas existentes de batería/info/catálogo; 8 sesiones sintéticas
+y1 IPC pasan. No prueba pantalla/UI ni recovery y no se ejecutó en el reloj.
+Instalación física sigue cerrada.
+
 **Actual R169:** [adaptador de transferencia y registro persistente preparados](docs/static-watchface-transport-r169.md),
 con20 escenarios sintéticos y gate nativo/CLI comprobados. Consultas conservan
 su límite16KiB; el envío tiene modo propio32KiB, todavía cerrado físicamente.

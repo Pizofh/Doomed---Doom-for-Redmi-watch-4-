@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**R170, 2026-10-12:** [healthcheck remoto preparado, no ejecutado físicamente](healthcheck-r170.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Batería/info/lista pueden consultarse en una sola sesión del cliente | Peers V1/V2 sintéticos | 8 sesiones y1 IPC pasan | CONFIRMADO OFFLINE | Alta | Sí | Consultas individuales físicas ya probadas, acción conjunta aún no |
+| Respuesta Bluetooth demuestra pantalla/UI funcionando | RW4 | Sin observación ni API visual remota validada | SIN EVIDENCIA | Desconocida | No | Healthcheck del servicio de control no verifica render/input |
+| Healthcheck recupera un reloj que no responde | RW4 | No mecanismo de recovery por esta consulta | SIN EVIDENCIA | Desconocida | No | No reboot/flash/reintento/rollback automático |
+
 **R169, 2026-10-12:** [adaptador y registro preparados](static-watchface-transport-r169.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

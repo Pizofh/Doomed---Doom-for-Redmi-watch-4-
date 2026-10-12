@@ -1,5 +1,15 @@
 # Retomar el proyecto
 
+**Actual R170, 2026-10-12:** [healthcheck preparado](healthcheck-r170.md) tras
+pregunta del usuario sobre supervisión remota. Nueva acción manual
+`pc-rfcomm.mjs healthcheck`: auth + batería/info/lista en la misma sesión,
+solo whitelist anterior de consultas/worker16KiB. 8 sesiones sintéticas y1 IPC
+pasan, además de regresión. No ejecutado físicamente. No lista de IDs ajenos
+en JSON; flags propios365799910 y conteos. No prueba render/UI/recovery ni
+ausencia de reboots. INSTALL/SET/DELETE/upload siguen bloqueados. No usar el
+healthcheck como autorización de instalación desatendida. Rebuild/hash local
+actualizado; no usar pins anteriores.
+
 **Actual R169, 2026-10-12:** [transporte y registro offline](static-watchface-transport-r169.md).
 El usuario está remoto y no puede observar el reloj. NO usar hardware/ADB/radio
 en este bloque. Conservó el vínculo PC anteriormente; su estado actual no fue
