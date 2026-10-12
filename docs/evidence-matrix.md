@@ -1,5 +1,16 @@
 # Matriz de evidencia
 
+**R167,2026-10-12:** [inventario y candidato estático](watchface-inventory-result-r167.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| GET4/0 devuelve lista cifrada de esferas del RW4 | UnidadM2315W1/2.2.86 | JSONComplete/21entradas/1activa/20canDelete/0unknown | CONFIRMADO EN RW4 POR PRUEBA DEL USUARIO | Alta | Usuario | Cierre y worker normales, sin upload/selección/delete |
+| canDelete garantiza retirada desde cliente propio | Misma unidad | Solo flags GET, sin DELETE | SIN EVIDENCIA DE OPERACIÓN | Desconocida | No | Marca del firmware, no permiso de borrar cualquier esfera |
+| ID365799910 no colisiona con lista recibida | Snapshot físicoR167 | Comparación con21IDs privados | CONFIRMADO PARA ESTE SNAPSHOT | Alta | Sí | Reconsultar antes de install; no reserva permanente |
+| RW4Probe se empaqueta para perfil365 con una imagen propia | Empaquetador PC | Compiler4.23/RW4/NoErrors/25224bytes,Shape30metadata | CONFIRMADO EN PC | Alta | Sí | SinLua/nativo; no render emulador ni HW de este paquete todavía |
+| Byte5=10 del bridge emulador es necesario para paquete físico | RW4firmware | Método pertenece a AdbBridge, sin evidenciaHW | SIN EVIDENCIA | Desconocida | No | Candidato físico conserva byte5original0; soloIDeditado |
+| Preview PNG visto demuestra render del paquete en RW4 | PC vsRW4 | Solo imagen fuente inspeccionada | NO DEMOSTRADO | Desconocida | PreviewPC | Formato/tablas/runtime/aceptación requieren más validación |
+
 **R166, 2026-10-12:** [sesión física completa](windows-xiaomi-success-r166.md), [siguiente inventario preparado](windows-watchface-inventory-plan-r166.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

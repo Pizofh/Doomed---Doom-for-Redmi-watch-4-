@@ -1,5 +1,12 @@
 # M2315W1 — intentos de conexión registrados; instalación/nativo CERRADOS
 
+**Actual R167,2026-10-12:** [GETlista físico confirmado](watchface-inventory-result-r167.md):
+21faces/1active/20canDelete,sinmutaciónycierrecorrecto. Paquete estático propio
+RW4Probe preparado en PC,IDausente en snapshot,soloIDpatch/nobyte5emu.
+Preview no equivale a validación runtime. No instalar todavía: faltan estructura/
+render e instalador exclusivo con rechazofirmware y retirada/revisión física.
+Nada de C/Doom/ELF/kernel del reloj habilitado por la respuesta de inventario.
+
 **Actual R166, 2026-10-12:** [auth/lecturas cifradas físicas completas](windows-xiaomi-success-r166.md),
 HMAC R164 válido,97%,FW2.2.86,menús normales con PC/teléfono BTOFF yregistro
 Mi Fitness conservado. No exigir retorno entreconsultas; usuario mantiene PC.

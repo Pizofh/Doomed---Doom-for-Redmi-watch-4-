@@ -1,5 +1,24 @@
 # Retomar el proyecto
 
+**Actual R167,2026-10-12:** [inventario físico correcto/paquete estático PC](watchface-inventory-result-r167.md).
+User watchfaces Complete/v1/HMAC+auth+encryptedtrue,21faces/1active/20canDelete/
+0unknownIDs,4TX10RX/1959ms/close+workertrue/exit0/noerror/filesfalse. No device
+queryrepeat; nullbattery/model/FW esperados. No re-pair/retornoentrequeries.
+SnapshotIDS+activeID PRIVADO tools/local/pc-rfcomm/watchfaces-r167.json.
+ID365799910 libreenSNAPSHOT. Preparado experiments/static-watchface/RW4Probe.fprj
+y tools/package-static-watchface.mjs: imagen390450own,sinLua/nativo/timers/input;
+Shape30metadataImage/Device365RW4 confirmados ReflectionOnly esquema compiler
+embedCommon, tools/inspect-managed.mjs opcional schema conserva modo anterior.
+BuildPC25224bytes,NoErrors/RW4/noADB,previewPNG visto. artefactos ignorados
+artifacts/static-watchface-r167/, candidatoID-only.face sha7df88688...d9e93a.
+CAMBIO SOLOoffset40..48-ID; byte5=0ORIGINAL PRESERVADO, no parche emu10. Original
+.face guardado. ValidaciónheaderSUBSET,NOemurender/NOHWaccept/NOinstall; no code
+hecho uploader. GETmodelo vigentehistórico,R164keycontinúaválidaenGETsincronizado.
+Siguientecheckpoint estructura/render candidata emulador+PC yinstaladorrestringido
+conrollbackANTESdeaprobarwritesHW. UpstreamINSTALL4/4+uploadsharedFW yautoSET;
+no copiarautoSETniusarfilegenerico. Whitelistactualmutacionesbloqueadas. No
+physicalesfera/nativeC/Doom. No nuevoscomandosuser hoy; keepPCsiquierebloque.
+
 **Actual R166, 2026-10-12:** [ÉXITO Xiaomi físico completo](windows-xiaomi-success-r166.md).
 User session Complete/v1/HMACtrue/authAcktrue/encryptedtrue/battery97/modeltrue/
 FW2.2.86/5TX12RX/662ms/close+workertrue/exit0/noNativeError. Usuario confirma

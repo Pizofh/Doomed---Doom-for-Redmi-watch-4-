@@ -1,6 +1,13 @@
 # DOOM en Redmi Watch 4
 
-**Actual R166:** [primera sesión Xiaomi completa en el reloj físico](docs/windows-xiaomi-success-r166.md):
+**Actual R167:** [inventario físico recibido y primera esfera candidata preparada](docs/watchface-inventory-result-r167.md):
+21entradas,1activa,20marcadas eliminables,cierre correcto. RW4Probe es una imagen
+propia390×450,ID libre en el snapshot,paquete25224bytes generado solo en PC.
+SinLua/nativo; preview visto, paquete aún no validado en runtime ni instalado.
+Siguiente: comprobar estructura/render y preparar transferencia/retirada exclusiva
+antes de revisar una escritura física. El vínculo PC se conserva para el bloque.
+
+**Historial R166:** [primera sesión Xiaomi completa en el reloj físico](docs/windows-xiaomi-success-r166.md):
 v1, HMAC/auth y respuestas cifradas válidas, batería97, firmware2.2.86, cierre
 correcto. El usuario conserva el registro Mi Fitness y ya usa los menús del
 reloj vinculado al PC con Bluetooth del teléfono apagado. No archivos ni Doom
