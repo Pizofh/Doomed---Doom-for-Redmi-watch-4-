@@ -31,7 +31,12 @@ const specs = Object.freeze({
     sha256:'bf3bfbd4147ed27527fc7659aac0098472252016725af6ef2750e86cd2f5cbf9',
     sourceSha256:'b431f91f31c36fe1fb58a48595a51ee6c5593f5c2d0924c37746988ed3ed7c85',
     sourceArtifact:'artifacts/first-c-r197/app/lua/main.lua',nativeCodeIncluded:true,
-    artifact:'artifacts/first-c-r197/FirstC-id-only.face',journal:'first-c-r198.json'})
+    artifact:'artifacts/first-c-r197/FirstC-id-only.face',journal:'first-c-r198.json'}),
+  r202:Object.freeze({variant:'r202',contentKind:'native-first-c-corrected',id:'365219998',size:24736,
+    sha256:'7229a104de8cc8031ab3e689e0b11564b371aa55a7d2c3182a28d3d3710e4e67',
+    sourceSha256:'1ef5835d1c9c2d062acf13190a398ba97af1a9d3e82cc3e0788d6e70a801b40f',
+    sourceArtifact:'artifacts/first-c-r202/app/lua/main.lua',nativeCodeIncluded:true,
+    artifact:'artifacts/first-c-r202/FirstC2-id-only.face',journal:'first-c-r203.json'})
 });
 export function staticSpec(variant = 'r167') {
   if (typeof variant !== 'string' || !Object.hasOwn(specs,variant)) throw Error('StaticSpecRefused');
