@@ -1,5 +1,9 @@
 # R202 — FirstC2 preparada en PC; hardware cerrado
 
+**Resultado posterior R204:** [usuario confirma carga/retirada C y retorno normal](first-c-corrected-physical-result-r203.md).
+Ensayo R203 autorizado y completado; gates cerrados. Este documento conserva
+la preparación en PC, sin autorizar otra ejecución.
+
 2026-10-13. Corrige la preparación de [FirstC R197](first-c-adapter-r197.md)
 sin modificar su paquete, archivos o instalación física. El usuario confirmó
 retorno/navegación normales tras la UI fallida; no hay ejecución C física confirmada.

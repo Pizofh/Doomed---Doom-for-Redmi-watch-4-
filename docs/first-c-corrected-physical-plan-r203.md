@@ -1,7 +1,8 @@
 # R203 — plan revisado de FirstC2
 
 **Estado posterior:** usuario autorizó el ensayo; único envío completado,
-gates cerrados y observación manual pendiente. [Resultado de instalación](first-c-corrected-physical-result-r203.md).
+gates cerrados. En R204 confirmó cinco indicadores verdes y retorno normal:
+[resultado físico completo](first-c-corrected-physical-result-r203.md).
 La especificación siguiente conserva el plan aprobado; no autoriza repetirlo.
 
 2026-10-13. **NO EJECUTADO, gates cerrados.** [Preparación y validación R202](first-c-corrected-r202.md).

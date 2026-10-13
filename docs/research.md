@@ -1,5 +1,11 @@
 # Investigación inicial
 
+**Actual R204:** [C propio mínimo ejecutado/retirado en RW4 M2315W1/2.2.86](first-c-corrected-physical-result-r203.md).
+Cinco indicadores condicionados por fuente revisada y retorno/navegación
+normales comunicados por usuario. Mecanismo Lua→NSH stock, sin reemplazar firmware.
+Sin rawtrace/heap, imports/APIs o aislamiento probados; próximo análisis de exports
+y contratos solo PC. Los resultados Rxx siguientes conservan la historia.
+
 **R72, 2026-10-04:** [Sesion90s a50ms](doom-stability-emulator.md) pasa:90164ms/3156tics,1580entregas totales, giro y FIRE a30/70s. Cache constante, Umem20-90s oscila263432bytes y termina+1760bytes; EXIT libera13reservas/streams, sin reboot. Diferencia global post-EXIT+666920bytes no atribuida; final tras Storage/tmp18,10MB. Siguiente: persistencia ELF/WAD en emulador; gate M2315W1 cerrado.
 
 **Historial R71, 2026-10-04:** [Timer50ms medido](doom-50ms-emulator.md).17,45entregas/s frente a4,87; giros12,67-13,55cambios visibles/s observados frente aunos5. Motor ~35tics/s, pausa400ms y EXIT limpios. Mismo C/ELF R67, Lua R71; solo emulador S3. Siguiente: una sesion de90s para observar estabilidad/memoria, gate M2315W1 cerrado.
@@ -10,7 +16,7 @@
 
 Resultado historico **R68:** [foco stock y STOP mantenido](doom-focus-emulator.md). Doom se congela en panel, espera RESUME y retira worker/módulo con FIRE down; mismo binario/Lua R67, sin compilación nueva. Nueve muestras/siete capturas, worker104/13alloc-free/streams0, sin reboot para salir. Un reset de baseline por screen OFF antes de C. Sin pérdida de foco con acción mantenida ni cierre sin EXIT del motor probado. Siguiente: cambio de watchface mientras corre Doom/recolección al reentrar. Gate físico cerrado.
 
-Checkpoint actual: **R67**, [Doom en UI/control real del emulador](doom-ui-emulator.md). Resultados Rxx debajo son cronología; no extrapolar a hardware ni interpretar pendientes antiguos como estado actual.
+Checkpoint histórico: **R67**, [Doom en UI/control real del emulador](doom-ui-emulator.md). Resultados Rxx debajo son cronología; no extrapolar a hardware ni interpretar pendientes antiguos como estado actual.
 
 Fecha: 2026-10-02. Fuentes técnicas primarias primero; código inspeccionado remotamente mediante GitHub. Las revisiones se fijan en [dependencies.lock.json](../third_party/dependencies.lock.json). Ninguna afirmación documental implica que se probó el reloj del usuario.
 

@@ -1,6 +1,32 @@
 # Retomar el proyecto
 
-**Actual R203, 2026-10-13:** [FirstC2 instalada una vez tras autorización](first-c-corrected-physical-result-r203.md).
+**Actual R204, 2026-10-13:** [primer C propio RW4 ejecutado/retirado y retorno normal](first-c-corrected-physical-result-r203.md).
+Usuario: «al darle run c file,mark,l oad, unload y end quedaron verdes».
+Después «todo ok, volvi a la original» a menús/desplazamiento/pulsación larga.
+Ensayo R203 completado. No reabrir/repetir, borrar marca o retirar esfera
+automáticamente. Ningún nuevo comando al reloj/teléfono/BT este turno.
+
+FILE prueba ELF784bytes exacto; MARK write/flush/close/readback+presencia;
+LOAD registro propio tras ausencia, UNLOAD inventario final sin propio y
+END Complete. Parser solo acepta inventarios sin rw4minr197: anterior también
+ausente al final; no se descargó. No reconstruir primer FirstC fallido.
+Fuente fija SHA1ef5835d1c9c2d062acf13190a398ba97af1a9d3e82cc3e0788d6e70a801b40f,
+paquete7229a104de8cc8031ab3e689e0b11564b371aa55a7d2c3182a28d3d3710e4e67,
+payload8248f76bdabd9c44aee6df46e8ba4d8c999acc9ca1d0c8367e1652ce0675da6d.
+Code movs0/bxlr, no imports/tareas/APIs/relocs. Ejecución C confirmada por
+indicadores+loader inspeccionado, no resultado sintético de UiOnly. Sin raw
+lsmod/trace físico. Marco de privilegios desconocido/potencialmente amplio.
+
+No hello/logging C aún: texto/colores son Lua. No native display/input/FS,
+ABI flotante/FPU/core completo, symtab/exportspointers, RAM suficiente o recovery
+integral demostrados. Marca readback no prueba powerloss/reboot. Paquete queda
+almacenado, módulo retirado; un intento solamente, no reapertura Doom validada.
+Gates Node/C# false; helper cerrado a9c232582c008c21c0ac47b599346d36a7e3ed7e130d312d9ebca66134a0c923.
+Siguiente checkpoint SOLO PC: identificar exports/contrato de APIs para un
+mensaje desde C; investigar imagen RW4 y fuentes, no nuevas consultas/cargas
+físicas sin paquete/plan/revisión. No usar direcciones/ELF/ABI del emulador S3.
+
+**Historial R203, 2026-10-13:** [FirstC2 instalada una vez tras autorización](first-c-corrected-physical-result-r203.md).
 Usuario «adelante» al plan fijo R203 y presencia/batería≥50% solicitadas.
 ID365219998,24.736bytes/SHA7229a104de8cc8031ab3e689e0b11564b371aa55a7d2c3182a28d3d3710e4e67.
 Prepare con helper temporal habilitado c166433a30d558850d99483b6d83b5deac906039953ceaade8b75848ce71b7dc,

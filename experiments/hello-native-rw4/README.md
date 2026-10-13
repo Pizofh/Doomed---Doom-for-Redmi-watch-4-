@@ -1,6 +1,11 @@
-# Inicializador C mínimo RW4 — preparación en PC, hardware pendiente
+# Inicializador C mínimo RW4 — carga y retirada físicas confirmadas
 
-**Actual R202/R203:** [FirstC2 corregida, preparada solo PC](../../docs/first-c-corrected-r202.md).
+**Actual R204:** [usuario confirma cinco verdes y retorno normal a esfera original](../../docs/first-c-corrected-physical-result-r203.md).
+FirstC2 ejecutó el candidato784bytes/int init(void*) return0 y confirmó registro/
+retirada. No logging C o APIs externas; UI es Lua. Ensayo completado, gates cerrados
+y sin reintentos/rearme. Próximo checkpoint: contrato de exports/API solo en PC.
+
+**Historial R202/R203:** [FirstC2 corregida, preparada solo PC](../../docs/first-c-corrected-r202.md).
 main-r202.lua incluye UI/controller/adapter estáticos; adapter incorpora
 normalizador, bloquea rw4minr197 y usa ID365219998/marca/nombre propios.
 Fuente de producción pasó38 casos con I/O real y carga/widgets simulados.

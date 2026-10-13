@@ -1,6 +1,18 @@
 # Matriz de evidencia
 
-**Actual R203:** [FirstC2 instalada, observación pendiente](first-c-corrected-physical-result-r203.md).
+**Actual R204:** [C propio cargado/retirado y retorno normal en RW4](first-c-corrected-physical-result-r203.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Lua puede iniciar C propio sin reemplazar firmware | M2315W1/FW2.2.86 | FirstC2 cinco verdes, fuente/hash fijados, loader llama init inspeccionado | CONFIRMADO EN RW4 | Alta para este payload | Sí, usuario/instrumentación | ELF784bytes; init retorna0, no imports/APIs |
+| insmod/lsmod/rmmod funcionan mediante Lua | Misma unidad | Inventario previo, registro rw4minr202 y ausencia final condicionan Complete | CONFIRMADO EN RW4 | Alta | Sí, visual | Sin shell interactivo/ADB físico o dump crudo |
+| io permite escritura/flush/cierre/readback de marca propia | Misma unidad | MARK verde con readback exacto y presencia independiente | CONFIRMADO EN RW4 | Alta para esa ruta | Sí | No prueba durabilidad por powerloss o FS desde C |
+| Módulos rw4minr202 y rw4minr197 ausentes al acabar | Misma unidad | UNLOAD/END verdes; parser rechaza cualquier fila del anterior | CONFIRMADO EN RW4 | Alta según instrumentación | Sí | No reconstruye ejecución histórica del primero ni mide heap |
+| UI FirstC2/touch y retorno a esfera habitual funcionan | Misma unidad | Usuario pulsó RUN C, cinco verdes y «todo ok, volvi a la original» | CONFIRMADO EN RW4 | Alta según observación | Sí | Menús/desplazamiento/cambio normales; no input nativo Doom |
+| Contrato de int init(void*) sirve para candidato sin imports | Misma unidad + imagen FW | ELF/text4bytes verificados y registro/retirada completos | CONFIRMADO EN RW4 PARA ESTE CANDIDATO | Alta | Sí | No valida ABI flotante, core exacto o APIs de Doom |
+| Aislamiento, exports, libc/display/timers/FS desde C o RAM para Doom probados | Misma unidad | Inicializador solo retorna0 | SIN EVIDENCIA | Desconocida | No | Tratar módulo como potencialmente privilegiado |
+
+**Historial R203:** [FirstC2 instalada, observación pendiente](first-c-corrected-physical-result-r203.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

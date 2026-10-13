@@ -1,6 +1,13 @@
-# Contrato nativo pendiente de M2315W1/2.2.86
+# Contrato nativo parcial de M2315W1/2.2.86
 
-Actualización R195, 2026-10-13: [carrier con ELF intacto y plan de primer ensayo](first-c-plan-r195.md).
+Actualización R204: [candidato C ejecutado y retirado físicamente](first-c-corrected-physical-result-r203.md).
+Cinco indicadores y retorno habitual normales confirmados por el usuario.
+ELF784bytes, código4bytes, retorno0 sin imports/relocs/APIs: valida ese candidato
+y la secuencia stock de módulos, no un SDK/ABI completo. Sigue sin evidencia de
+aislamiento, FPU/core exactos o APIs nativas de logging/display/input/FS/timers.
+Siguiente checkpoint solo PC: exports y contrato de un mensaje desde C.
+
+Historial R195, 2026-10-13: [carrier con ELF intacto y plan de primer ensayo](first-c-plan-r195.md).
 Lua del carrier solo lee/compara; no se instaló ni ejecutó C. Config/privilegios
 exactos siguen desconocidos: tratar carga como potencialmente privilegiada.
 Controlador final y revisión física pendientes; no deducir FLAT por insmod.
@@ -16,25 +23,25 @@ con checksum de metadata verificado e identificadores internos M2315W1/2.2.86.
 Rutas armv8-m y modlib son pistas de implementación; ABI/FPU/exports y privilegios
 siguen pendientes. Solo PC; ningún loader físico ejecutado.
 
-[NativeInfo físico R191](native-info-physical-result-r190.md)
+Historial [NativeInfo físico R191](native-info-physical-result-r190.md)
 confirma Lua→shell, NuttX/arm en uname y comandos de módulos anunciados. El
 usuario volvió a habitual con funcionamiento normal. **No se ejecutó C propio.**
 
 ## Lo conocido frente a lo necesario
 
-| Aspecto | Evidencia actual | Antes del helloC físico |
+| Aspecto | Evidencia actual | Pendiente para C con APIs/Doom |
 |---|---|---|
-| Entrada/archivos/UI | Watchface instalada, Lua/Image, captura propia leída y retirada | Mantener launcher y salida independientes del módulo |
+| Entrada/archivos/UI | Watchface instalada, Lua/Image/touch, ELF propio leído exacto y marca write/readback R204 | Mantener launcher y salida independientes del módulo |
 | Sistema/arquitectura general | uname NuttX/arm; arranque ARMv8-M/Thumb; loader comprueba ARM32 LE | Core/config exactos y atributos de APIs; no identificar core solo por ISA |
-| Shell/carga | help físico y handlers/implementación en imagen RW4 | Contexto de ejecución, ruta de instalación y retorno fiables |
-| Formato | Imagen RW4 admite ELF32 ARM LE ET_REL; caso R_ARM_ABS32 inspeccionado | Validar las relocaciones concretas de cada payload, sin heredar flags S3 |
-| ABI/toolchain | Firma int init(modinfo*) y rmmod observadas; candidato PC sin imports | ABI/FPU/libc/tipos de APIs para Doom; no inferir hard-float por VFP en código |
+| Shell/carga | insmod/lsmod/rmmod y retorno efectivos R204, desde Lua stock | Contexto de ejecución/privilegios exactos; no shell interactivo demostrado |
+| Formato | ELF32 ARM LE ET_REL del candidato aceptado R204; R_ARM_ABS32 inspeccionado en imagen | Relocaciones/imports efectivos de futuros payloads; candidato no los usa |
+| ABI/toolchain | Firma init inspeccionada; retorno0 del candidato funciona R204 | ABI/FPU/libc/tipos de APIs para Doom; argumento no usado, no inferir layout completo |
 | Símbolos | Ninguna tablaRW4 verificada | Exports/imports y resolución; no usar direcciones absolutasS3 |
-| Lifecycle | init y callback opcional/retirada identificados estáticamente | Validación efectiva de carga/descarga y propiedad de tareas/referencias |
+| Lifecycle | Inicialización/registro/retirada efectivos R204, sin tareas ni callback uninit propio | Propiedad/cleanup de tareas/referencias/exports para payloads complejos |
 | Privilegios | Desconocidos | FLAT/PROTECTED/KERNEL y contexto de módulos; asumir acceso amplio mientras no se demuestre aislamiento |
 | Memoria | Especificación comercial, no heap libre | Presupuesto real y memoria pico; no diseñar sobre32MB libres |
 | WASM/loadlib | iwasm ausente del helpcapturado; loadlibfunction sin invocar | No convertir ausencia de token/presencia de función en prueba de runtime funcional |
-| Recuperación | Cambio de esfera normal probado; rebootdocumentado | Revisión específica de fallo nativo; sin recovery integral validado |
+| Recuperación | Retorno normal tras C mínimo R204; rebootdocumentado | Fallo nativo/FS no probado; sin recovery integral validado |
 
 ## Adquisición prevista solo PC
 
@@ -59,7 +66,10 @@ al shell del reloj no están autorizadas automáticamente por NativeInfo; cualqu
 nuevo script/comando físico necesita plan concreto y revisión. No repetir el
 diagnóstico solo para recuperar texto que no se conservó en el PC.
 
-## Primer payload futuro, condicionado al contrato
+## Historial: primer payload previsto antes de R204
+
+El inicializador entero sin imports ya se ejecutó en R204. El apartado conserva
+la propuesta anterior; no autoriza un siguiente payload o nuevo ensayo físico.
 
 Preferir un hello mínimo sin UI, drivers, hooks, tareas o persistencia. Reducir
 imports cuando sea razonable; **cero imports no elimina ISA/ABI/lifecycle ni

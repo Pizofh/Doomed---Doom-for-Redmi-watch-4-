@@ -1,4 +1,9 @@
-# R203 — FirstC2 instalada; ejecución manual pendiente
+# R203/R204 — C propio cargado y retirado en M2315W1
+
+**Resultado R204:** usuario observó FILE/MARK/LOAD/UNLOAD/END verdes tras RUN C
+y confirmó retorno a esfera original con navegación/cambio normales. La sección
+de observación pendiente inferior conserva el estado previo a esas respuestas.
+Interpretación y límites del resultado al final de este documento.
 
 2026-10-13. El usuario respondió «adelante» al
 [plan R203](first-c-corrected-physical-plan-r203.md), que solicitaba revisión del
@@ -58,3 +63,44 @@ Después volver a habitual desde Ajustes y comprobar menús/pulsación larga.
 éxito nativo por instalación. No nuevo envío, rearmar/borrar marca, abrir FirstC
 anterior o rmmod remoto ciego. El guard de rw4minr197 y las limitaciones de
 privilegios/recovery del plan siguen aplicando al toque autorizado.
+
+## R204 — ejecución y retorno confirmados por el usuario
+
+Respuesta al ensayo: «al darle run c file,mark,l oad, unload y end quedaron verdes».
+«l oad» corresponde a la única fila LOAD de las cinco etiquetas. Se pidió volver
+a la esfera habitual sin reabrir o repetir. El usuario respondió «todo ok, volvi
+a la original» a la pregunta sobre menús, desplazamiento y pulsación larga.
+El ensayo autorizado queda completado; no se necesitan nuevos comandos al reloj.
+
+| Fila observada verde | Condición de la fuente de producción R202 |
+|---|---|
+| FILE | Archivo784bytes leído y comparado completamente con ELF revisado |
+| MARK | Escritura/flush/cierre/readback exacto y consulta independiente de presencia de marca propia |
+| LOAD | insmod retornó y lsmod reconocido mostró rw4minr202 después de ausencia previa |
+| UNLOAD | rmmod retornó y lsmod reconocido confirmó ausencia propia |
+| END | Controller terminó Complete; secuencia sin incertidumbre de inventario/carga/retirada |
+
+La observación corresponde al paquete fijado por SHA y fuente materializada
+verificada byte a byte. Es evidencia instrumental de **ejecución de C propio
+y retirada de un módulo en RW4 físico/firmware2.2.86**, usando Lua→NSH stock.
+El loader inspeccionado llama al inicializador; el binario contiene únicamente
+movs r0,#0;bx lr. No existe otro camino en nuestra fuente que ponga las cinco
+filas verdes; no es un resultado sintético como el de UiOnly.
+
+El parser exige ausencia de rw4minr197 en todos esos inventarios reconocidos:
+el módulo anterior y el nuevo quedaron ausentes en el inventario final, según
+esta instrumentación. Esto no reconstruye lo ocurrido en el ensayo FirstC fallido.
+No se descargó el módulo anterior o un módulo ajeno.
+
+Sin captura física cruda, foto/CPU trace o heap medido: el resultado se apoya en
+los indicadores comunicados por el usuario y la lógica revisada. No afirmar
+logging C (los textos/colores son Lua), native LVGL/touch/filesystem, exports,
+ABI flotante/core exacto, memoria suficiente para Doom, ausencia de fugas,
+aislamiento de privilegios o recovery integral. Persistencia de marca comprobada
+por readback, no por reboot/powerloss. Los archivos del paquete no se borran;
+esta prueba es de un solo intento y no valida reapertura jugable sin PC.
+
+No nuevo envío, ejecución, GET, DELETE, reset/revinculación o modificación de
+firmware al registrar estas respuestas. Gates siguen cerrados; script/paquete
+almacenados, módulo retirado. Siguiente checkpoint solo PC: identificar exports
+y contrato de APIs para un mensaje emitido desde C, antes de un nuevo plan físico.

@@ -1,9 +1,14 @@
 # Arquitectura
 
-R182: Lua/objetos LVGL propios confirmados en M2315W1/2.2.86,texto ausente.
+R204: [C mínimo físico cargado/retirado y retorno habitual confirmados](first-c-corrected-physical-result-r203.md).
+Ruta demostrada: paquete instalado→watchface Lua→NSH insmod→init C→lsmod→rmmod.
+El archivo se conserva con la esfera, el módulo deja de estar registrado. No
+imports, tareas o API nativa de display/input/FS usados en este candidato.
+
+R182: Lua/objetos LVGL propios confirmados en M2315W1/2.2.86,texto Label ausente.
 R183: [texto LVGL no es requisito del renderer Doom](adr/0004-lvgl-labels-are-not-a-doom-rendering-gate.md).
 R73: [Doom persistente en S3 emulado](doom-persistence-emulator.md),carga/salida/reapertura.
-Ejecución C física sigue condicionada por ABI,loader,APIs,privilegios,RAM y recovery.
+El port C de Doom sigue condicionado por ABI completo,APIs,privilegios,RAM y recovery.
 [Matriz](evidence-matrix.md).
 
 ## Objetivo físico condicionado
@@ -13,14 +18,16 @@ flowchart TD
     S[Firmware Xiaomi stock] --> W[Funciones normales]
     S --> L[Watchface Lua y objetos LVGL confirmados]
     S -. compatibilidad pendiente .-> A[App / QuickApp físico]
-    L -. mecanismo fisico pendiente .-> D[DOOM original / doomgeneric]
+    L --> N[NSH insmod / lsmod / rmmod confirmados]
+    N --> C[Inicializador C minimo cargado y retirado]
+    C -. APIs y recursos fisicos pendientes .-> D[DOOM original / doomgeneric]
     D --> P[Adaptador display / input / tiempo / FS]
     P -. ABI y APIs fisicas pendientes .-> V[Xiaomi Vela / NuttX pertinente]
-    F[Ejecutable y WAD persistentes] -. carga bajo demanda .-> D
+    F[Objetivo: ejecutable y WAD persistentes] -. carga bajo demanda .-> D
     D -. cierre y liberacion .-> W
 ```
 
-Dependencias discontinuas sin validar en RW4. Ni host Windows AMD64 ni emulador Cortex-A determinan ISA del BES2700iBP. No hay adaptador nativo aprobado para hardware.
+Dependencias discontinuas sin validar en RW4. Ni host Windows AMD64 ni emulador Cortex-A determinan ISA del BES2700iBP. Primer inicializador confirmado, sin adaptador Doom nativo aprobado para hardware.
 
 ## Implementación ejecutada en emulador
 

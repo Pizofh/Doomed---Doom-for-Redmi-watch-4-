@@ -1,6 +1,11 @@
 # Modelo de riesgo
 
-**Actual R203:** [FirstC2 instalada inactiva](first-c-corrected-physical-result-r203.md).
+**Actual R204:** [C mínimo cargó/se retiró y el usuario volvió normalmente](first-c-corrected-physical-result-r203.md).
+Compatible para este payload de dos instrucciones. El éxito no prueba
+aislamiento, seguridad de imports/APIs/tareas ni recovery integral. No heap
+medido o reboot/powerloss de marca; sin ampliar permisos a nuevo C. Gates cerrados.
+
+**Historial R203:** [FirstC2 instalada inactiva](first-c-corrected-physical-result-r203.md).
 Paquete persistente, ejecución solo manual; todavía sin observación de UI/C/retirada.
 Gates cerrados, otros registros/selección conservados. No ampliar el único ensayo
 a otro payload/reintento/unload previo; privilegios y recovery siguen pendientes.

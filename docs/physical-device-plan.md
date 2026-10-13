@@ -1,6 +1,11 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R203:** [FirstC2 instalada una vez tras revisión](first-c-corrected-physical-result-r203.md).
+**Actual R204:** [ensayo FirstC2 completado con carga/retirada C y retorno normal](first-c-corrected-physical-result-r203.md).
+Usuario confirma cinco verdes y esfera original/menús/cambio normales. Ambos
+módulos propios ausentes al final según parser. Autorización utilizada, gates
+cerrados; no reintentos/borrado/carga adicional. Próximo checkpoint de APIs solo PC.
+
+**Historial R203:** [FirstC2 instalada una vez tras revisión](first-c-corrected-physical-result-r203.md).
 Autorización de envío utilizada, gates cerrados e inventario independiente
 conserva esferas previas. Pendiente toque/observación/retorno del ensayo autorizado;
 no instalar otra vez, borrar marca, retirar esferas o descargar módulos a ciegas.

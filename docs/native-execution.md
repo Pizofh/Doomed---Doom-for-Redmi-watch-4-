@@ -1,6 +1,13 @@
 # Ejecución y privilegios
 
-**Actual R203:** [FirstC2 registrada tras revisión](first-c-corrected-physical-result-r203.md),
+**Actual R204:** [C propio ejecutado/retirado en M2315W1/2.2.86](first-c-corrected-physical-result-r203.md).
+Lua→NSH stock cargó ELF mínimo, observó registro y retiró el módulo; cinco
+verdes/retorno normal confirmados por usuario. C sin imports/APIs, no app
+userspace aislada demostrada. Config/privilegios exactos siguen pendientes;
+tratar como potencialmente privilegiado. Próximo trabajo solo PC: exports/API
+para mensaje desde C; ninguna nueva carga física autorizada.
+
+**Historial R203:** [FirstC2 registrada tras revisión](first-c-corrected-physical-result-r203.md),
 inactiva y sin C al abrir. Selección/toque y resultado aún pendientes; no afirmar
 ejecución o ausencia de módulos por transporte. Gates cerrados y sin reintentos.
 

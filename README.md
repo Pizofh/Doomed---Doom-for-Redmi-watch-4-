@@ -1,6 +1,13 @@
 # DOOM en Redmi Watch 4
 
-**Actual R203:** [FirstC2 instalada tras autorización](docs/first-c-corrected-physical-result-r203.md).
+**Actual R204:** [C propio ejecutado y retirado en el RW4 físico](docs/first-c-corrected-physical-result-r203.md).
+Usuario observa FILE/MARK/LOAD/UNLOAD/END verdes y confirma vuelta a esfera
+original con navegación/cambio normales. Inicializador mínimo de784bytes,
+sin imports; firmware stock, mecanismo Lua→NSH/insmod/rmmod existente.
+Siguiente checkpoint PC: exports y contrato de APIs para emitir un mensaje desde C.
+Privilegios/ABI completo/RAM/recovery siguen pendientes; gates cerrados.
+
+**Historial R203:** [FirstC2 instalada tras autorización](docs/first-c-corrected-physical-result-r203.md).
 Un envío,13partes; catálogo15→16 con entradas/flags/selección anteriores
 conservados y propia inactiva/eliminable. Gates cerrados otra vez. Pendiente
 selección y RUN C único del usuario, observación de cinco filas y retorno.
