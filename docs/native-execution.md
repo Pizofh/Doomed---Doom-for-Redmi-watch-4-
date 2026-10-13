@@ -1,5 +1,10 @@
 # Ejecución y privilegios
 
+**R188/R189:** [NativeInfo preparado](native-route-r188.md) consulta comandos sin
+ejecutar loaders. Pasó S3; [nuevo ensayo físico aún cerrado](native-info-physical-plan-r189.md).
+Función expuesta no equivale a implementación; listadoinsmod no prueba ABI o
+privilegios seguros. C/ELF sigue condicionado a contrato específico2.2.86.
+
 **R187, 2026-10-12:** [Lua/LVGL Image con PNG propio funciona en M2315W1/2.2.86](lua-image-physical-result-r186.md),
 según imagen y retorno normal confirmados por el usuario. No es ejecución C
 propia: runtime/bindings nativos stock presentan el recurso estático. Shell,

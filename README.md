@@ -1,6 +1,13 @@
 # DOOM en Redmi Watch 4
 
-**Actual R187:** [imagen propia mostrada desde Lua en el RW4 físico](docs/lua-image-physical-result-r186.md).
+**Actual R188/R189:** [ruta nativa investigada y diagnóstico único preparado](docs/native-route-r188.md),
+[plan físico cerrado](docs/native-info-physical-plan-r189.md). NativeInfo reúne
+shell/comandos/funciones en una pantalla; dos consultas máximas help/uname,
+sin cargar C. Pasó S3 con retorno y captura propia retirada. Próximo ensayo
+requiere revisión: usa os.execute y escribe/borrar captura en su propio directorio.
+Se omite una nueva prueba aislada de animación. No nuevo envío al reloj.
+
+**Historial R187:** [imagen propia mostrada desde Lua en el RW4 físico](docs/lua-image-physical-result-r186.md).
 Usuario confirma cuatro colores/cruz blanca, marcadores amarillo/verde y retorno
 normal a su esfera, menús y pulsación larga. Sin nuevo envío o retirada; gates
 cerrados. Esto valida Image con un recurso estático, todavía no frames dinámicos

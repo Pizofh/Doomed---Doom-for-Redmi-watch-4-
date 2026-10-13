@@ -76,6 +76,7 @@ Image estático no demuestra actualización continua de frames, timer o touch
 programático. C/ELF/loader/ABI/privilegios y Doom siguen sin prueba física.
 El resultado no convierte el ELF/direcciones S3 en compatibles con RW4.
 
-**Siguiente checkpoint único:** preparar en PC una actualización de imagen
-con temporizador acotado, sin fuentes ni C. Cualquier nuevo paquete físico
-necesita su plan concreto y revisión; el ensayo r184 ya terminó.
+**Checkpoint propuesto enR187:** refresco con timer. El usuario pidió omitir
+otra prueba aislada de animación; [ADR0005](adr/0005-query-native-route-before-more-animation-tests.md)
+lo sustituye por [inventario de la ruta nativaR188](native-route-r188.md).
+Cualquier nuevo paquete físico necesita su plan y revisión; el ensayo r184 terminó.

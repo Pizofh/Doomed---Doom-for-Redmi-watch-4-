@@ -1,6 +1,11 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R187:** [Image estático y retorno normal confirmados físicamente](lua-image-physical-result-r186.md).
+**Actual R188/R189:** [NativeInfo preparado soloPC/S3](native-route-r188.md) y
+[plan físico revisable](native-info-physical-plan-r189.md). Dosconsultashelp/uname
+con captura propia temporal en almacenamiento, sininsmod/C/Doom. Gatescerrados;
+sin nuevo envío o activación. Noequivale auna operación completamenteread-only.
+
+**Historial R187:** [Image estático y retorno normal confirmados físicamente](lua-image-physical-result-r186.md).
 Usuario ve cuadrantes/cruz y amarillo/verde; vuelve a habitual y confirma menús
 y pulsación larga. Sin nueva conexión, envío o retirada. Gates cerrados;
 timer/frames dinámicos/C/ELF/Doom no demostrados. Siguiente preparación solo PC.

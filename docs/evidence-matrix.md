@@ -1,6 +1,17 @@
 # Matriz de evidencia
 
-**R187, 2026-10-12:** [imagen y retorno confirmados por usuario](lua-image-physical-result-r186.md).
+**R188/R189:** [diagnóstico nativo solo PC](native-route-r188.md), [gate físico cerrado](native-info-physical-plan-r189.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| NativeApps tiene targetM2315W1/2.2.86 en head consultado | Repoa392529 | Árbol completo y platform/README reconsultados | REFUTADO PARA ESA REVISIÓN | Alta estática | Lectura PC | No refuta otros proyectos o viabilidad |
+| Autor relaciona Lua/shell/comandos módulos con su investigaciónRW4 | Relato original Habr1079066 | Preparación mencionaRW4; ejemplo actualMB10Pro | INFERENCIA RAZONABLE PARA RW4 | Limitada paraunidad | Lectura | No firmware/transcript2.2.86 |
+| NativeInfo capturahelp/uname y anuncia insmod/rmmod/lsmod/iwasm | GuestS3 | Logsclasificados,marcadores,archivoausente ycierreLua | CONFIRMADO EN EMULADOR | Alta local | Sí | No ejecuta loaders; no pruebaRW4 |
+| package.loadlib expuesto demuestra cargador funcional | GuestS3 | Amarillofunción; historialstubdeshabilitado | REFUTADO COMO SUPOSICIÓN | Alta | Historial/emulador | Amarillo noesverde |
+| NativeInfo funciona o shell existe en2.2.86 | M2315W1 | Nuevo paquete no enviado | SIN EVIDENCIA | Desconocida | No | Perfilr188 cerrado,consulta exige revisión |
+| SharedSRAM2.2MB ydualSTAR-MC1 describenBES2700iBP | SoC fabricante | Briefdatasheetp2–3 | CONFIRMADO EN FUENTE DEL SOC | Alta documental | Lectura | No heaplibre/config/ISA/ABI deunidad |
+
+**Historial R187, 2026-10-12:** [imagen y retorno confirmados por usuario](lua-image-physical-result-r186.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|
