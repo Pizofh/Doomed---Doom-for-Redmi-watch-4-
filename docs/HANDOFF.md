@@ -1,6 +1,44 @@
 # Retomar el proyecto
 
-**Actual R196, 2026-10-13:** [controlador puro pasó24 pruebas Lua/backend simulado](controller-r196.md).
+**Actual R197/R198, 2026-10-13:** [adaptador, UI manual y paquete final preparados](first-c-adapter-r197.md).
+Siguiente acción: pedir revisión expresa del [plan físico R198](first-c-physical-plan-r198.md)
+y presencia del usuario antes de habilitar gates o enviar nada. El «go» actual
+autoriza preparación PC; no el primer C potencialmente privilegiado en hardware.
+
+FirstC ID365219996,22.500bytes; artifacts/first-c-r197/FirstC-id-only.face
+SHA bf3bfbd4147ed27527fc7659aac0098472252016725af6ef2750e86cd2f5cbf9.
+Lua materializada SHA b431f91f31c36fe1fb58a48595a51ee6c5593f5c2d0924c37746988ed3ed7c85.
+ELF784bytes intacto SHA8248f76bdabd9c44aee6df46e8ba4d8c999acc9ca1d0c8367e1652ce0675da6d.
+Dos instrucciones return0, sin imports/relocs/APIs/tareas; no hello/logging/Doom.
+No ejecutado física ni emuladamente. No instalar paquete armado en S3 Cortex-A7.
+
+Adapter usa path fijo validado .../365219996/lua/, ELF comparado completo,
+marca propia antes de insmod; parser estricto lsmod, nombre rw4minr197.
+Abrir esfera solo dibuja/lee marca; RUN C manual se consume antes del backend.
+Máximo un insmod y un rmmod atribuible, inventario final exige ausencia.
+No retries/timeout duro/sandbox. Incertidumbre detiene, no unload ciego.
+Marca flush/readback no garantiza durabilidad por powerloss ni atomicidad multivm.
+
+Tests:24 core previos +29 adapter actuales en Lua5.4 S3, I/O tmpfs real,
+executor/widgets simulados. Report final artifacts/emulator/adapter-r197-v3.
+ELF solo fixture de datos; lsmod real idéntico antes/después, árbol propio retirado.
+UI LVGL real y toque específicos FirstC aún no validados. FPRJ/compiler/records
+del paquete comprobados; fuente materializada final coincide con reporte.
+El test negativo v2 representaba load ausente con and/or incorrecto: corregido
+a nil explícito; fixture anterior retirado con propiedad/readback verificados.
+
+Perfil r197 añadido CERRADO. prepare r197 R198 pasa12partes; gates pasan todos
+los perfiles. Transfer12 escenarios y sesión29 escenarios ejecutados con r197,
+sin sockets. Helper cerrado SHA3ec38ceabd9c9a15dd86a8d229afd29be13e11637720d34bbd7465a8cf921d97.
+Node PHYSICAL_WRITES_REVIEWED=false/REVIEWED_VARIANT=r167; C#StaticPhysicalReviewed=false.
+Journal tools/local/pc-rfcomm/first-c-r198.json todavía no creado.
+Preflight comprueba modelo/FW2.2.86/catálogo, NO batería: usuario comprueba≥50%.
+No operaciones teléfono/BT/reloj este turno; no tocar vínculo ni borrar esferas.
+Emulador sigue en launcher15696/QEMU14908 del arranque R196, ADB5039/emulator-5554.
+No repetir pruebas ya pasadas sin cambios. Tras aprobación: un único install,
+cerrar gates, GET independiente y selección/click manual observado por usuario.
+
+**Historial R196, 2026-10-13:** [controlador puro pasó24 pruebas Lua/backend simulado](controller-r196.md).
 experiments/hello-native-rw4/controller.lua: M.new(backend).run(), latch por
 instancia antes de backend, marker_state/check_file/list_modules/write_marker,
 readback independiente de marca, load→registroobservado→unload→ausenciaconfirmada.

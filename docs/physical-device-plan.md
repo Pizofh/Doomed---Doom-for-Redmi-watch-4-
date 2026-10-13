@@ -1,6 +1,13 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R195:** [borrador del primer ensayo C y carrier verificado solo PC](first-c-plan-r195.md).
+**Actual R197/R198:** [plan concreto del primer C preparado para revisión](first-c-physical-plan-r198.md).
+FirstC ID365219996/22.500bytes, hash y comandos fijos; instalar inactiva,
+selección manual y un RUN C para cargar/retirar candidato mínimo. Controller y
+adaptador pasan pruebas con ejecución nativa simulada. Gates físicos siguen
+cerrados; ningún envío o C nuevo. Requiere usuario presente, batería≥50% y
+aceptación del contexto potencialmente privilegiado sin recovery integral validado.
+
+**Historial R195:** [borrador del primer ensayo C y carrier verificado solo PC](first-c-plan-r195.md).
 No nuevo ensayo autorizado. ELF íntegro en paquete, pero Lua solo lee/compara;
 sin ejecución nativa ni perfil de transferencia. Faltan controlador de un intento,
 retirada atribuible y revisión del riesgo de contexto potencialmente privilegiado.

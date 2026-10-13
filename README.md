@@ -1,6 +1,14 @@
 # DOOM en Redmi Watch 4
 
-**Actual R196:** [controlador Lua pasó24 escenarios con backend simulado](docs/controller-r196.md).
+**Actual R197/R198:** [FirstC preparado y comprobado en PC/emulador](docs/first-c-adapter-r197.md).
+Paquete de22.500bytes, ID365219996; botón manual RUN C, un intento con marca
+previa, comprobación del registro y retirada.29 escenarios del adaptador con
+archivos reales y executor/widgets simulados; transferencia/sesión offline
+validadas para este paquete. **No se ha ejecutado C propio en el reloj.**
+[Plan físico pendiente de revisión](docs/first-c-physical-plan-r198.md): contexto
+potencialmente privilegiado, recuperación integral sin validar; gates cerrados.
+
+**Historial R196:** [controlador Lua pasó24 escenarios con backend simulado](docs/controller-r196.md).
 Protege contra repetición, módulos previos y descarga sin atribución. Ejecutado
 en Lua5.4 S3, sin cargar el ELF RW4 ni tocar hardware. Falta adaptador concreto,
 UI con acción manual y paquete/plan final para revisión física.

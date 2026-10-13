@@ -1,5 +1,14 @@
 # Modelo de riesgo
 
+**Actual R197/R198:** [plan concreto FirstC aún sin ejecutar](first-c-physical-plan-r198.md).
+Botón manual; la selección/reinicio no carga C. Marca previa y estado por
+instancia limitan repetición; no prueban fsync, exclusión entre VMs o sandbox.
+Inventario estricto impide tocar un módulo previo/descargar con atribución
+incierta.29 tests del adaptador usan archivos reales pero carga/widgets simulados.
+El loader/contexto físico sigue potencialmente privilegiado; deadlock/panic o
+corrupción persistente no descartados y sin recuperación integral validada.
+Gates cerrados hasta revisión expresa y usuario presente. No modificar firmware.
+
 **R195:** [plan del primer C, aún sin ejecución](first-c-plan-r195.md).
 Inspección del loader identifica llamada directa; config/privilegios exactos
 desconocidos. Tratarlo como potencialmente privilegiado, sin sandbox. Carrier

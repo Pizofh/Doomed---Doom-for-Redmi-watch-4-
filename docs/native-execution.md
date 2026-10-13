@@ -1,5 +1,13 @@
 # Ejecución y privilegios
 
+**Actual R197/R198:** [FirstC preparado con activación manual](first-c-adapter-r197.md).
+Archivos/marca/parser y secuencia verificados con executor simulado; no C propio
+ejecutado en RW4. El [primer ensayo físico](first-c-physical-plan-r198.md) propone
+un inicializador de dos instrucciones, registro observado y retirada confirmada.
+No APIs, procesos, Doom o aislamiento demostrados. Privilegios reales siguen
+desconocidos: tratar módulo como potencialmente privilegiado. Gates cerrados,
+revisión expresa del usuario pendiente; no aplicar ELF ARMv8-M al emulador S3.
+
 **R194:** [ruta insmod y contrato parcial inspeccionados en imagen RW4](rw4-loader-r194.md).
 Se comprueban ELF32 ARM LE ET_REL, int init(modinfo*) y callback opcional de
 retirada. Llamada directa al initializer sin nueva tarea/transición visible en

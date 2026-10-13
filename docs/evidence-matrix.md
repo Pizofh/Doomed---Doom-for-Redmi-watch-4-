@@ -1,6 +1,18 @@
 # Matriz de evidencia
 
-**R196:** [controlador propio validado en Lua con backend simulado](controller-r196.md).
+**R197/R198:** [adaptador real y paquete FirstC preparados](first-c-adapter-r197.md),
+[plan físico pendiente de revisión](first-c-physical-plan-r198.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Adaptador comprueba archivos/marca/captura propia | Lua5.4 S3, tmpfs real |29 escenarios, fuentes de producción | CONFIRMADO EN EMULADOR | Alta para casos probados | Sí | Ejecutor y widgets simulados; no carga nativa |
+| Abrir UI no inicia comandos; un click limita ejecución | UI de producción con widgets simulados | Conteos de comandos, reentrada y marca retenida | CONFIRMADO EN SIMULACIÓN | Alta para lógica | Sí | Render y toque LVGL específicos no probados |
+| Paquete conserva exactamente ELF y Lua revisados | FirstC ID365219996, PC |22.500bytes, cuatro registros serializados íntegros, SHA fijado | CONFIRMADO EN PC | Alta | Sí | Perfil físico cerrado; no enviado |
+| Transferencia/sesión del perfil r197 pasan offline | PC, peer sintético |12 escenarios de transferencia y29 de sesión/journal | CONFIRMADO EN SIMULACIÓN | Alta para protocolo modelado | Sí | Cero sockets; no confirma servicio físico |
+| FirstC ya carga y retira C en M2315W1 | Reloj físico | Ningún ensayo realizado | SIN EVIDENCIA | Desconocida | No | Revisión expresa y observación pendientes |
+| Marca garantiza exclusión y durabilidad ante powerloss | Filesystem físico | No fsync/exclusive-create o prueba de powerloss | SIN EVIDENCIA | Desconocida | No | Un actor/click; no carga automática al abrir |
+
+**Historial R196:** [controlador propio validado en Lua con backend simulado](controller-r196.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|
