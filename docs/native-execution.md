@@ -1,6 +1,11 @@
 # Ejecución y privilegios
 
-**Actual R200/R201:** [UI separada funciona en S3 sin C](ui-only-emulator-r200.md);
+**Actual R202/R203:** [FirstC2 lista con UI/ruta corregidas](first-c-corrected-r202.md).
+Bloquea el módulo previo;38 escenarios simulados con I/O real, ELF idéntico.
+No carga/retirada física demostradas, gates cerrados y [revisión nueva pendiente](first-c-corrected-physical-plan-r203.md).
+No global load ni loader Lua externo; módulo C sigue potencialmente privilegiado.
+
+**Historial R200/R201:** [UI separada funciona en S3 sin C](ui-only-emulator-r200.md);
 [guard de rutas anterior falla con separador runtime duplicado](first-c-path-r201.md).
 Helper puro normaliza conservando validación. No nuevo C físico o permiso de
 carga: antes de sucesor debe revisarse inventario previo incluido rw4minr197.

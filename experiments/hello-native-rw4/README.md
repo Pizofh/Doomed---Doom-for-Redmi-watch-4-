@@ -1,6 +1,25 @@
 # Inicializador C mínimo RW4 — preparación en PC, hardware pendiente
 
-**Actual R200/R201:** [UI real emulada validada, sin C](../../docs/ui-only-emulator-r200.md).
+**Actual R202/R203:** [FirstC2 corregida, preparada solo PC](../../docs/first-c-corrected-r202.md).
+main-r202.lua incluye UI/controller/adapter estáticos; adapter incorpora
+normalizador, bloquea rw4minr197 y usa ID365219998/marca/nombre propios.
+Fuente de producción pasó38 casos con I/O real y carga/widgets simulados.
+
+```powershell
+node tools/test-rw4-adapter-r202.mjs
+node tools/package-first-c-r202.mjs
+node tools/pc-rfcomm.mjs build
+node tools/pc-static-watchface.mjs prepare r202
+node tools/test-static-watchface-transfer.mjs r202
+node tools/test-static-watchface-session.mjs r202
+```
+
+Ya realizados; reportes existentes se conservan y no se repiten por rutina.
+No instalar el paquete armado en S3; su ELF es RW4 ARMv8-M, no Cortex-A7.
+[Plan físico R203](../../docs/first-c-corrected-physical-plan-r203.md) pendiente de
+revisión expresa. Gates false; los comandos anteriores no envían nada al reloj.
+
+**Historial R200/R201:** [UI real emulada validada, sin C](../../docs/ui-only-emulator-r200.md).
 main-ui-r200.lua incluye factory estática sin global load; UiOnly tiene imágenes
 y un callback sintético. No perfil físico. [path-r201.lua](../../docs/first-c-path-r201.md)
 normaliza separadores internos y mantiene guard de ID/carácteres/ruta.

@@ -1,6 +1,42 @@
 # Retomar el proyecto
 
-**Actual R200/R201, 2026-10-13:** [UI real emulada validada](ui-only-emulator-r200.md),
+**Actual R202/R203, 2026-10-13:** [FirstC2 lista solo PC](first-c-corrected-r202.md).
+Siguiente acción: solicitar autorización expresa y presencia del usuario para
+el [plan fijo R203](first-c-corrected-physical-plan-r203.md). No habilitar gates,
+instalar o hacer nuevas consultas al reloj sin esa autorización. El «dale» de
+este turno autoriza preparar el sucesor; no reutilizar la revisión R198.
+
+FirstC2 ID365219998,24.736bytes, artifacts/first-c-r202/FirstC2-id-only.face,
+SHA7229a104de8cc8031ab3e689e0b11564b371aa55a7d2c3182a28d3d3710e4e67.
+Fuente materializada15.267bytes SHA1ef5835d1c9c2d062acf13190a398ba97af1a9d3e82cc3e0788d6e70a801b40f.
+ELF original784bytes SHA8248f76bdabd9c44aee6df46e8ba4d8c999acc9ca1d0c8367e1652ce0675da6d,
+sin ejecutar. Controller R196, UI R199 y normalizador R201 sin cambios.
+main-r202 compila factories estáticas, muestra UI antes del backend; no load,
+loadfile/dofile. Botón solo se habilita tras setup/ausencia de marca.
+
+Adapter r202 normaliza path validado a /365219998/lua/, nombre rw4minr202,
+marca/captura propias r202. Cualquier fila rw4minr197 hace recognized=false:
+abort antes de carga, o antes de retiro si aparece después. No descargar el
+anterior ni atribuir un inventario mixto al nuevo. Own module previo también
+bloquea. Un intento, marca/readback, registro/retirada/ausencia confirmados.
+
+38 casos pasaron en Lua5.4 S3, I/O tmpfs real, executor/widgets simulados.
+Incluyen ruta duplicada, load ausente, backend ausente con UI visible y módulos
+previos/mixtos. Report final artifacts/emulator/adapter-r202/summary.json;
+árbol temporal retirado, lsmod real idéntico. ELF solo datos, no instalado el
+paquete armado en S3. Primer harness pasó segundo retorno de gsub como
+missing_system; corregido con paréntesis. Fixture anterior validada/retirada,
+reporte preservado adapter-r202-failed-harness. No cambio de producción por él.
+
+Compiler sinADB y4records íntegros. Perfil r202 CERRADO; prepare R20313partes.
+Transfer12 casos y sesión30 casos para r202, cero sockets; gates Node/C# false.
+Helper cerrado nuevo SHAdcb923c4f3fefdf9756c22401b211a6be286306b39919c84a76673d86538c617.
+Journal tools/local/pc-rfcomm/first-c-r203.json aún no creado. No borrar/reabrir
+FirstC ni su marca, no rmmod remoto. No Bluetooth/teléfono/reloj este turno.
+UI factory real R200 y normalizador16casos R201 reutilizados por hash; no
+afirmar UI completa FirstC2 física o C probado. Privilegios/recovery pendientes.
+
+**Historial R200/R201, 2026-10-13:** [UI real emulada validada](ui-only-emulator-r200.md),
 [rechazo de doble slash reproducido y normalizador puro](first-c-path-r201.md).
 Usuario confirma cambio a habitual/pulsación larga y menús/desplazamiento normales.
 Recuerda4grises/blancos+inferiorrojo,total5,sin reacción. CompatibleSetupStopped,

@@ -1,6 +1,12 @@
 # Modelo de riesgo
 
-**Actual R200/R201:** retorno/menús físicos normales confirmados. [UiOnly S3](ui-only-emulator-r200.md)
+**Actual R202/R203:** [ensayo FirstC2 preparado pero cerrado](first-c-corrected-physical-plan-r203.md).
+UI previa al backend, sin global load; ruta normalizada conserva guard. Ante
+módulo anterior o inventario mixto se detiene sin unload ciego.38 escenarios
+simulados con archivos reales; no amplían la autorización física R198 ni prueban
+aislamiento/recuperación. Paquete nuevo requiere revisión y usuario presente.
+
+**Historial R200/R201:** retorno/menús físicos normales confirmados. [UiOnly S3](ui-only-emulator-r200.md)
 no incluye C; colores son un resultado sintético de UI. [Normalizador de path](first-c-path-r201.md)
 no amplía permisos ni aislamiento. Estado C previo físico no confirmado;
 próximo sucesor debe comprobar que tampoco exista rw4minr197 antes de cargar.

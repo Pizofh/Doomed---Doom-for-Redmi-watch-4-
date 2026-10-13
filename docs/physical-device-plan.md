@@ -1,6 +1,11 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R200/R201:** usuario confirma retorno habitual/cambio y navegación
+**Actual R202/R203:** [FirstC2 y su plan concreto preparados](first-c-corrected-physical-plan-r203.md).
+Nuevo ID/hash, instalación inactiva y un click manual. Inventario anterior
+rw4minr197 bloquea carga/retirada. Sin nuevo ensayo autorizado o ejecutado;
+gates cerrados, FirstC original intacta y retorno normal previo confirmado.
+
+**Historial R200/R201:** usuario confirma retorno habitual/cambio y navegación
 normales tras FirstC. [UI real validada solo en S3](ui-only-emulator-r200.md),
 [fallo de path reproducido en PC/emulador](first-c-path-r201.md). Sin operación
 física nueva. Sucesor C requiere inventario previo, nuevo paquete/plan y revisión;

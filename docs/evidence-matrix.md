@@ -1,6 +1,17 @@
 # Matriz de evidencia
 
-**Actual R200/R201:** [UI real S3](ui-only-emulator-r200.md), [helper de ruta](first-c-path-r201.md).
+**Actual R202/R203:** [FirstC2 preparada](first-c-corrected-r202.md), [plan cerrado](first-c-corrected-physical-plan-r203.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Main corregido funciona sin global load y con ID//lua/ | Lua5.4 S3, I/O real y widgets/executor simulados | Fuente materializada y38 escenarios | CONFIRMADO EN EMULADOR/SIMULACIÓN | Alta para casos probados | Sí | No C ejecutado |
+| Módulo anterior bloquea nueva carga/retirada | Mismo harness | Fila rw4minr197 antes y después de carga simulada; cero carga antes, cero unload después | CONFIRMADO EN SIMULACIÓN | Alta para lógica | Sí | Sin estado real del módulo RW4 leído |
+| Backend fallido deja UI construida y botón deshabilitado | Main de producción, widgets simulados | Dos imágenes presentes, END rojo, sin callback/shell | CONFIRMADO EN SIMULACIÓN | Alta | Sí | Factory idéntica a UI real R200 |
+| Paquete FirstC2 conserva ELF/fuentes exactos | PC |24.736bytes, ID365219998, cuatro registros byte a byte | CONFIRMADO EN PC | Alta | Sí | No envío físico |
+| Perfil r202 puede transmitir con gates cerrados | PC | Entradas install/remove y helper rechazan sin sockets | REFUTADO CON GATES ACTUALES | Alta | Sí | Transfer12/sesión30 casos offline |
+| FirstC2 carga/retira C en M2315W1 | RW4 físico | Nuevo ensayo no realizado/autorizado todavía | SIN EVIDENCIA | Desconocida | No | Revisión R203 pendiente |
+
+**Historial R200/R201:** [UI real S3](ui-only-emulator-r200.md), [helper de ruta](first-c-path-r201.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

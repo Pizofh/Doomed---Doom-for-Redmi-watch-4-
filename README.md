@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R200/R201:** [UI separada funciona con LVGL real en emulador](docs/ui-only-emulator-r200.md):
+**Actual R202/R203:** [FirstC2 corregida y preparada en PC](docs/first-c-corrected-r202.md).
+UI estática visible antes del backend, ruta normalizada, sin global load y bloqueo
+si aparece el módulo anterior.38 escenarios pasan con archivos reales y carga
+simulada. Paquete24.736bytes, ID365219998; envío físico cerrado. [Plan para revisión](docs/first-c-corrected-physical-plan-r203.md).
+No nuevo C ejecutado o enviado al reloj; privilegios/recovery integral pendientes.
+
+**Historial R200/R201:** [UI separada funciona con LVGL real en emulador](docs/ui-only-emulator-r200.md):
 etiquetas/botón, un toque, bloqueo de repetición y salida a esfera normal.
 Sin C. [Fallo de ruta reproducido y helper corregido](docs/first-c-path-r201.md):
 el runtime S3 usa ID//lua/, rechazado por nuestro adapter anterior;16 casos pasan.
