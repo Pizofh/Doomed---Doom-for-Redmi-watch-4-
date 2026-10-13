@@ -1,6 +1,11 @@
 # Modelo de riesgo
 
-**Actual R202/R203:** [ensayo FirstC2 preparado pero cerrado](first-c-corrected-physical-plan-r203.md).
+**Actual R203:** [FirstC2 instalada inactiva](first-c-corrected-physical-result-r203.md).
+Paquete persistente, ejecución solo manual; todavía sin observación de UI/C/retirada.
+Gates cerrados, otros registros/selección conservados. No ampliar el único ensayo
+a otro payload/reintento/unload previo; privilegios y recovery siguen pendientes.
+
+**Historial R202/R203:** [ensayo FirstC2 preparado pero cerrado](first-c-corrected-physical-plan-r203.md).
 UI previa al backend, sin global load; ruta normalizada conserva guard. Ante
 módulo anterior o inventario mixto se detiene sin unload ciego.38 escenarios
 simulados con archivos reales; no amplían la autorización física R198 ni prueban

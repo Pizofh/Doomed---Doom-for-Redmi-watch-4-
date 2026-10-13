@@ -1,6 +1,14 @@
 # Matriz de evidencia
 
-**Actual R202/R203:** [FirstC2 preparada](first-c-corrected-r202.md), [plan cerrado](first-c-corrected-physical-plan-r203.md).
+**Actual R203:** [FirstC2 instalada, observación pendiente](first-c-corrected-physical-result-r203.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| FirstC2 registrada e inactiva | M2315W1/FW2.2.86 | Envío autorizado13partes y GET/journal independiente | CONFIRMADO EN RW4 | Alta | Sí, transporte real |15→16; IDs/flags anteriores conservados |
+| UI corregida/carga/retirada C funcionan físicamente | Mismo reloj | Respuesta visual y retorno aún pendientes | SIN EVIDENCIA TODAVÍA | Desconocida | No | Instalación no demuestra ejecución |
+| Gates físicos se cerraron tras envío | PC | Source restaurado/rebuild y test de entradas cerradas | CONFIRMADO EN PC | Alta | Sí | Socket/worker envío y GET cerrados |
+
+**Historial R202/R203:** [FirstC2 preparada](first-c-corrected-r202.md), [plan cerrado](first-c-corrected-physical-plan-r203.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

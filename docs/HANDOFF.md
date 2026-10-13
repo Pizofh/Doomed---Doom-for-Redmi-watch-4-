@@ -1,6 +1,29 @@
 # Retomar el proyecto
 
-**Actual R202/R203, 2026-10-13:** [FirstC2 lista solo PC](first-c-corrected-r202.md).
+**Actual R203, 2026-10-13:** [FirstC2 instalada una vez tras autorización](first-c-corrected-physical-result-r203.md).
+Usuario «adelante» al plan fijo R203 y presencia/batería≥50% solicitadas.
+ID365219998,24.736bytes/SHA7229a104de8cc8031ab3e689e0b11564b371aa55a7d2c3182a28d3d3710e4e67.
+Prepare con helper temporal habilitado c166433a30d558850d99483b6d83b5deac906039953ceaade8b75848ce71b7dc,
+archivado con build/CLI/Probe bajo artifacts/first-c-r203-reviewed; no reejecutar.
+Un install r202: RegisteredInactive,13partes,24814bytesstream/25326TX,22TX/16RX,
+sin SET/autoactivación,close/exit0,sin error nativo. No C ejecutado por envío.
+
+Gates restaurados/rebuild ANTES del GET independiente. Helper cerrado ahora
+SHAa9c232582c008c21c0ac47b599346d36a7e3ed7e130d312d9ebca66134a0c923.
+GET Complete:15→16,anteriores IDs/flags exactos,propia inactiva/eliminable,
+activa365210175,FirstC365219996 sigue almacenada/inactiva. Snapshot ya tenía15
+antes de este ensayo; no atribuir a nosotros diferencias con el antiguo R198.
+Journal first-c-r203.json Registered13partes,sinlock,autorizaciónenvío utilizada.
+Dos sockets/workers cerrados. Gates test pasa sin radio. Node/C#gates false.
+
+Pregunta async pendiente: seleccionar FirstC2(noFirstC), labelsFILE/MARK/LOAD/
+UNLOAD/END y5grises→RUN C UNA vez→colores→volverAjustes/habitual y confirmar
+menús/longpress. ENDrojo inicial/labels ausentes/falloUI: no tocar/repetir.
+Todavía no UI/C/retirada físicos observados. No nuevoenvío/DELETE/insmod/rmmod,
+borrar/rearmarmarca o abrirFirstCantigua. Guard de rw4minr197 sigue bloqueando.
+Al llegar resultado, registrar literalmente; no inferir C por transporte.
+
+**Historial R202/R203, 2026-10-13:** [FirstC2 lista solo PC](first-c-corrected-r202.md).
 Siguiente acción: solicitar autorización expresa y presencia del usuario para
 el [plan fijo R203](first-c-corrected-physical-plan-r203.md). No habilitar gates,
 instalar o hacer nuevas consultas al reloj sin esa autorización. El «dale» de

@@ -1,6 +1,10 @@
 # Ejecución y privilegios
 
-**Actual R202/R203:** [FirstC2 lista con UI/ruta corregidas](first-c-corrected-r202.md).
+**Actual R203:** [FirstC2 registrada tras revisión](first-c-corrected-physical-result-r203.md),
+inactiva y sin C al abrir. Selección/toque y resultado aún pendientes; no afirmar
+ejecución o ausencia de módulos por transporte. Gates cerrados y sin reintentos.
+
+**Historial R202/R203:** [FirstC2 lista con UI/ruta corregidas](first-c-corrected-r202.md).
 Bloquea el módulo previo;38 escenarios simulados con I/O real, ELF idéntico.
 No carga/retirada física demostradas, gates cerrados y [revisión nueva pendiente](first-c-corrected-physical-plan-r203.md).
 No global load ni loader Lua externo; módulo C sigue potencialmente privilegiado.

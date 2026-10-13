@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R202/R203:** [FirstC2 corregida y preparada en PC](docs/first-c-corrected-r202.md).
+**Actual R203:** [FirstC2 instalada tras autorización](docs/first-c-corrected-physical-result-r203.md).
+Un envío,13partes; catálogo15→16 con entradas/flags/selección anteriores
+conservados y propia inactiva/eliminable. Gates cerrados otra vez. Pendiente
+selección y RUN C único del usuario, observación de cinco filas y retorno.
+**C físico/retirada todavía no confirmados.**
+
+**Historial R202/R203:** [FirstC2 corregida y preparada en PC](docs/first-c-corrected-r202.md).
 UI estática visible antes del backend, ruta normalizada, sin global load y bloqueo
 si aparece el módulo anterior.38 escenarios pasan con archivos reales y carga
 simulada. Paquete24.736bytes, ID365219998; envío físico cerrado. [Plan para revisión](docs/first-c-corrected-physical-plan-r203.md).
