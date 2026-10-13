@@ -1,6 +1,13 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R180/R181:** [nueva LuaDiag preparada soloPC/S3](lua-diagnostic-r180.md)
+**Actual R182:** [LuaDiag física ejecuta y dibuja objetos](lua-diagnostic-physical-result-r182.md).
+Usuario autorizaúnicoinstallr180;6partes,GET13→14,anterioresconservadas;gates
+cerrados otra vez. Panel/marcadores confirmanLua+LVGL físicamente;textoausente.
+Usuario confirma longpress/cambioesferas/restofuncionesnormales. NoDELETE,
+modificaciónfirmware oC/ELF/Doom autorizado/probado. Próximo solo investigaciónPC
+del textobinding/font; no otro envío automático.
+
+**Historial R180/R181:** [nueva LuaDiag preparada soloPC/S3](lua-diagnostic-r180.md)
 y[plan físico revisable](lua-diagnostic-physical-plan-r181.md). Texto/defaultfont,
 marcadores y salida validados enS3; objetos pequeños sincaptura touch,nocontador.
 Perfilr180fijo/seispartes/registropropio,gates cerrados; ensayo no autorizado.

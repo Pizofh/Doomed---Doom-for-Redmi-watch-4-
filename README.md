@@ -1,6 +1,13 @@
 # DOOM en Redmi Watch 4
 
-**Actual R180/R181:** [diagnóstico Lua sin fuente explícita ni timer validado en emulador](docs/lua-diagnostic-r180.md),
+**Actual R182:** [Lua y formas LVGL confirmadas en el RW4 físico](docs/lua-diagnostic-physical-result-r182.md).
+LuaDiag instalada una vez: catálogo13→14,anteriores conservadas. Usuario ve
+panel magenta y marcadores amarillo/verde distintos del preview; pulsación
+larga/cambio de esferas y demás funciones normales. **Texto no aparece**:
+verde indica llamada Label completada, no render de texto. Gates cerrados;
+sin C/ELF/Doom físicos. Siguiente: investigar fuentes/API de texto en PC.
+
+**Historial R180/R181:** [diagnóstico Lua sin fuente explícita ni timer validado en emulador](docs/lua-diagnostic-r180.md),
 [plan físico preparado y bloqueado](docs/lua-diagnostic-physical-plan-r181.md).
 PreviewX separado de panelmagenta/marcadores,textoconfuente por defecto y
 objetos pequeños sincaptura de toques. Salida aStorage y cierreLua confirmados

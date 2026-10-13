@@ -1,6 +1,17 @@
 # Matriz de evidencia
 
-**R180/R181, 2026-10-12:** [diagnóstico nuevo PC/S3](lua-diagnostic-r180.md) y [perfil físico bloqueado](lua-diagnostic-physical-plan-r181.md).
+**R182, 2026-10-12:** [LuaDiag física, formas funcionan y texto ausente](lua-diagnostic-physical-result-r182.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Código Lua propio ejecuta y crea objetos LVGL | M2315W1/2.2.86 | Panelmagenta/amarillo/verde de script vistos; no existen en previewX | CONFIRMADO EN RW4 POR USUARIO | Alta | Usuario,ensayo autorizado | No prueba versiónLua o ABI/privilegios |
+| Creación de label terminó sin excepción y retorno no falso | Misma unidad | Verde solo en rama pcall+assert exitosos | CONFIRMADO EN RW4 POR OBSERVACIÓN DEL USUARIO | Alta | Usuario | No identifica tipo real ni font ni render |
+| Texto con fuente por defecto se ve en este ensayo | Misma unidad | Usuario aclara «No,soloelpanel ylosmarcadores» | REFUTADO PARA ESTE PAQUETE/ENSAYO | Alta | Usuario | Causa sin identificar/log físico |
+| Pulsación larga/cambio de esferas y demás funciones responden | Misma unidad | Usuario lo confirma tras probar LuaDiag | CONFIRMADO EN RW4 POR USUARIO | Alta | Usuario | No evidencia de hooks/cierreVM porlog |
+| Previewnuevo corrige desbordamiento en selector físico | Misma unidad | No respuesta específica de ese detalle | SIN EVIDENCIA FÍSICA | Desconocida | No confirmado | Soloemuladorcontenidoenminiatura confirmado |
+| C nativo/Doom pueden lanzarse desde Lua en RW4 | Misma unidad | Solo objetos/script UI probados | SIN EVIDENCIA | Desconocida | No | No extrapolar módulo/ABI del S3 |
+
+**Historial R180/R181, 2026-10-12:** [diagnóstico nuevo PC/S3](lua-diagnostic-r180.md) y [perfil físico bloqueado](lua-diagnostic-physical-plan-r181.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

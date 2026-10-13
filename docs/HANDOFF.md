@@ -1,6 +1,34 @@
 # Retomar el proyecto
 
-**Actual R180/R181, 2026-10-12:** [diagnósticoPC/emulador](lua-diagnostic-r180.md) y
+**Actual R182, 2026-10-12:** [Lua/objetos LVGL físicos confirmados,texto ausente](lua-diagnostic-physical-result-r182.md).
+Usuario «Sí,autorizar elensayoLuaDiag» aplanR181; una installr180 completada
+RegisteredInactive,6partes,10979bytesTX,15TX17RX,cierre/workertrueexit0.
+GETposterior13→14,13IDs/flags/activa anterioresconservadas,own365219992
+presente/inactiva/eliminable. Journal tools/local/pc-rfcomm/lua-diagnostic-r181.json
+Registered/contentKindlua-diagnostic. Reportes/buildhabilitado privados
+artifacts/lua-r182-reviewed. SinSET/DELETE/reboot/reenlace/firmware.
+GatesFALSE,REVIEWED_VARIANTr167,buildcerradoSHA
+03d3be0cb02ef6cea717a11fc4cb82c6ca66cd8d51d8186107149961e4af217b.
+Gates tests pasan,no cambionuevoimplementación(solo habilitar/restaurar).
+
+Observaciónusuario: negro,panel pequeñoMAGENTA,AMARILLO+VERDE; longpress/cambio
+aotras yrestofuncionesnormales. Aclaró SIN TEXTO,no reabrirparacomprobar.
+RuntimeobjetoscoloresNOexistenpreviewX: pruebainequívocaLua ejecuta/creaobjetos
+enRW42.2.86. Verde: pcallLabel devuelveverdadero,no pruebafont/render/tipo real.
+NOTexto/timer/inputprogramático/C/ELF/privilegios/doomconfirmados. No hooks
+pause/resume/cierreVM observadosporlogfísico. Nuevopreviewdesborde noaclarado,
+noprometer corregidoenRW4. NoGETtrasobservación: owninactivo es snapshotantes
+manual,nodespués. AmbasLuaalmacenadas,retiradaopcionalyaautorizada pero sin
+decisiónderetirar; nodelete/reinstalar/reabrira ciegas.
+
+Siguiente: investigaciónPC fuentes/bindingLabelRW4(parent:Label ypropiedades,
+fuentesdefault/nombres/tamaños/estilo). CausaR179/R182sigueSINLOGFÍSICO:
+noatribuirafont24 porque cambióvariasdependencias. Nada nuevofísico autorizado
+salvoretiradaspropias opcionales anteriores,que requieren decisión/retorno/GET
+inactivo/eliminable. No pedirconfirmación de seguridadotra vez: usuarioreportó
+normallongpress/otras/fullfunciones; no migrarMiFit/reemparejar porrutina.
+
+**Historial R180/R181, 2026-10-12:** [diagnósticoPC/emulador](lua-diagnostic-r180.md) y
 [plan revisable](lua-diagnostic-physical-plan-r181.md).
 Usuario CONFIRMA retorno a esfera habitual víaAjustes y pulsaciónlarga normal
 trasfalloazulR179. También describe cuadrado desbordado enselector; sin captura
