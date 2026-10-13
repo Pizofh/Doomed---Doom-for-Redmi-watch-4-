@@ -1,6 +1,29 @@
 # Retomar el proyecto
 
-**Actual R198, 2026-10-13:** [FirstC instalada una vez tras autorización](first-c-physical-result-r198.md).
+**Actual R199, 2026-10-13:** [FirstC falló en UI; C físico no confirmado](first-c-ui-failure-r199.md).
+Usuario no ve FILE/MARK/LOAD/UNLOAD/END ni RUN C; solo panel gris/cuadritos
+posiblemente blancos. Tocó y no pasó nada; menús funcionan. Segunda pregunta
+async pendiente: volver por Ajustes a habitual y confirmar pulsación larga.
+No reabrir/tocar/reinstalar/borrar FirstC o marca; no asumir módulo ausente.
+Toques sin respuesta no prueban ausencia de callback/carga; ningún Complete.
+
+Hallazgo PC: main R197 crea imágenes/botón DESPUÉS de load/controller/adapter/
+path. Un fallo temprano oculta leyenda/botón. No afirmar causa: global load,
+sufijoSCRIPT_PATH e imágenes/backend son hipótesis no verificadas físicamente.
+NativeInfo probó package.loadlib expuesta, NO global load. Source/paqueteR197
+intactos; gates físicosFALSE, helper cerrado f64ead8b42f5872198ac0aaa52cafba5bf2cd22e75bbc0fd95a347af0b8fec44.
+
+ui-r199.lua nueva factory SIN io/os/load/shell/timers/C, construye imágenes y
+botón deshabilitado antes del backend; arm registra antes de habilitar, stop
+es terminal, callback/error/reentrada consumen un intento. No paquete enviado.
+tools/test-rw4-ui-r199.mjs pasó6 casos en Lua5.4S3 con widgetsSIMULADOS, Lua tmp
+propia retirada y lsmod real idéntico. Report artifacts/emulator/ui-r199.
+Source807119943a71900d5a73e9da4c27045f59e06ae266ff6e97dce2b7ebc3aa9592.
+No LVGL real/render/toque validados por esos casos. Próximo checkpoint PC:
+integrar/observar UI separada en LVGL real emulado SIN C RW4, preparar sucesor
+con revisión. No nuevo C físico sin inventario previo/atribución y plan revisado.
+
+**Historial R198, 2026-10-13:** [FirstC instalada una vez tras autorización](first-c-physical-result-r198.md).
 Usuario «si» al plan concreto y presencia/batería≥50% solicitadas. Instalada
 ID365219996/22.500bytes/SHA bf3bfbd4147ed27527fc7659aac0098472252016725af6ef2750e86cd2f5cbf9.
 Helper habilitado SHAa6404d9d00c6c5377cef4a7fa8ac9a8389b61c75a911e4d8eedd0a16d922f924

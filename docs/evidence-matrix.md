@@ -1,6 +1,15 @@
 # Matriz de evidencia
 
-**Actual R198:** [FirstC instalada, activación pendiente](first-c-physical-result-r198.md).
+**Actual R199:** [UI FirstC no operativa según observación física](first-c-ui-failure-r199.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| FirstC muestra cinco filas y botón operativos | M2315W1/2.2.86 | Usuario no los ve, toques sin respuesta | REFUTADO PARA ESTE ENSAYO | Alta para fallo funcional | Sí, usuario | Menús funcionan; colores/punto exacto inciertos |
+| Carga/retirada C quedaron confirmadas | Misma unidad | Sin indicadores reconocidos ni Complete | SIN EVIDENCIA | Desconocida | No | No afirmar ausencia de callback por falta de respuesta |
+| UI nueva conserva leyenda/botón ante backend detenido | Lua5.4 S3, widgets simulados | Seis escenarios, factory sin backend de ejecución | CONFIRMADO EN SIMULACIÓN | Alta para lógica probada | Sí | UI real todavía no validada |
+| Falta de global load causó el fallo físico | M2315W1/2.2.86 | Código depende de ella; no dato runtime | SIN EVIDENCIA | Desconocida | No | No confundir con package.loadlib expuesta |
+
+**Historial R198:** [FirstC instalada, activación pendiente](first-c-physical-result-r198.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

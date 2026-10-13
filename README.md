@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R198:** [FirstC instalada tras autorización](docs/first-c-physical-result-r198.md).
+**Actual R199:** [FirstC no mostró la interfaz esperada en el reloj](docs/first-c-ui-failure-r199.md).
+Usuario ve panel/cuadritos, sin etiquetas/botón reconocidos; tocó sin respuesta
+y los menús funcionan. Carga/retirada C siguen sin confirmar; no repetir.
+Interfaz separada del backend preparada en PC, seis pruebas con widgets simulados.
+Siguiente: comprobar render/eventos LVGL reales en emulador sin ejecutar C RW4.
+
+**Historial R198:** [FirstC instalada tras autorización](docs/first-c-physical-result-r198.md).
 Un envío, doce partes; catálogo16→17 con entradas/flags/selección anteriores
 conservados y FirstC inactiva/eliminable. Gates cerrados otra vez. Pendiente
 selección manual, RUN C único y observación del retorno. **Carga y retirada

@@ -1,6 +1,11 @@
 # Ejecución y privilegios
 
-**Actual R198:** [FirstC instalada inactiva tras revisión](first-c-physical-result-r198.md).
+**Actual R199:** [interfaz FirstC falló; estado de ejecución nativa desconocido](first-c-ui-failure-r199.md).
+Toques sin respuesta y menús normales no confirman carga/retirada o ausencia
+del módulo. No repetir/descargar a ciegas. Se trabaja en UI independiente solo
+PC; no habilitar nuevos envíos o asumir que el problema es el loader C.
+
+**Historial R198:** [FirstC instalada inactiva tras revisión](first-c-physical-result-r198.md).
 ELF almacenado como dato, sin carga automática. La selección/click y los cinco
 resultados visuales siguen pendientes: no afirmar C ejecutado o rmmod físico
 por instalación satisfactoria. Gates cerrados; no reintentos o unload remoto.

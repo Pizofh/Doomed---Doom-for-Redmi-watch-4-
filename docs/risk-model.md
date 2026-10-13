@@ -1,6 +1,11 @@
 # Modelo de riesgo
 
-**Actual R198:** [FirstC instalada inactiva tras autorización](first-c-physical-result-r198.md).
+**Actual R199:** [FirstC no ofrece UI/resultado reconocidos](first-c-ui-failure-r199.md).
+Usuario tocó sin respuesta; no atribuir ausencia de carga/estado del módulo.
+Menús normales no sustituyen comprobación de registro/retirada. Gates cerrados,
+sin nuevas operaciones al reloj. No rmmod remoto ciego, borrar marca o repetir.
+
+**Historial R198:** [FirstC instalada inactiva tras autorización](first-c-physical-result-r198.md).
 Paquete persistente; selección/click aún pendientes. Gates cerrados y otros
 registros/selección conservados. No ejecución C o retirada observadas todavía;
 no carga automática al abrir. Riesgo/privilegios/recovery del plan no cambian.

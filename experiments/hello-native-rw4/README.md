@@ -1,5 +1,17 @@
 # Inicializador C mínimo RW4 — preparación en PC, hardware pendiente
 
+**Actual R199:** [FirstC física no mostró la UI esperada](../../docs/first-c-ui-failure-r199.md).
+C/retirada no confirmados, sin reintentos. ui-r199.lua separa UI y habilitación
+del callback; sin backend de ejecución, load, io u os. Su prueba de seis casos
+usa widgets simulados en Lua5.4 S3, no render/eventos reales:
+
+```powershell
+node tools/test-rw4-ui-r199.mjs
+```
+
+Reporte ya existente; no repetir sin cambios. Paquete/sourceR197 originales
+intactos. Falta validar UI independiente con LVGL real solo en emulador.
+
 **R197/R198:** shell-adapter.lua, main.lua y FirstC.fprj preparan el ensayo
 con activación manual. Abrir esfera no carga C; RUN C consume un único intento
 con marca previa y confirma registro/retirada. [Resultados y límites](../../docs/first-c-adapter-r197.md),

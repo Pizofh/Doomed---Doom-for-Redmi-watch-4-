@@ -1,5 +1,9 @@
 # R198 — FirstC instalada; ejecución C pendiente de observación
 
+**Actualización R199:** [usuario observa UI fallida y toques sin respuesta](first-c-ui-failure-r199.md).
+Menús funcionan; carga/retirada C no confirmadas. No repetir ensayo. La sección
+de observación pendiente inferior conserva el estado anterior a esta respuesta.
+
 2026-10-13. El usuario respondió «si» a la revisión del
 [plan R198](first-c-physical-plan-r198.md), que solicitaba autorización del único
 ensayo y presencia junto al reloj con batería≥50%. No permiso para Doom,

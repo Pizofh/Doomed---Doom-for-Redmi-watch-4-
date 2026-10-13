@@ -1,6 +1,11 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R198:** [FirstC instalada tras revisión expresa](first-c-physical-result-r198.md).
+**Actual R199:** [UI FirstC fallida, sin resultado C confirmado](first-c-ui-failure-r199.md).
+No reintento/reinstalación/retiro o unload ciego. Gates cerrados. Menús normales
+comunicados; retorno habitual/pulsación larga pendientes de respuesta. Siguiente
+trabajo de UI en PC/emulador, sin nueva operación física automática.
+
+**Historial R198:** [FirstC instalada tras revisión expresa](first-c-physical-result-r198.md).
 Autorización del único envío utilizada; gates cerrados y catálogo independiente
 conserva esferas previas. Pendiente activación/click manual observado, resultado
 y retorno. No instalar/repetir/borrar mientras falta esa observación.
