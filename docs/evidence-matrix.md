@@ -1,6 +1,15 @@
 # Matriz de evidencia
 
-**R194:** [loader RW4 inspeccionado y candidato C solo PC](rw4-loader-r194.md).
+**R195:** [carrier y plan C aún cerrado](first-c-plan-r195.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Esfera empaqueta el ELF R194 sin modificarlo | Paquete propio NativeCarrier/PC | Descriptor/nombre/límites y readback completo SHA | CONFIRMADO EN PC | Alta | Sí | Extracción/filesystem físico no probado |
+| Lua del carrier carga C | Paquete deshabilitado | Source solo lee/compara, sin shell/loadlib | REFUTADO PARA ESTE PAQUETE | Alta por source | Build/readback | No enviado; no usarlo como ensayo físico intermedio |
+| Insmod implica build FLAT | NuttX referencia12.3 + unidadRW4 | CONFIG_MODULE no tiene ese depends en sched/Kconfig; config Xiaomi desconocida | SIN EVIDENCIA PARA RW4 | Desconocida | Lectura de source | Tratar contexto nativo como potencialmente privilegiado |
+| Primer C físico ya listo/autorizado | M2315W1/2.2.86 | Controlador/riesgo final pendientes, perfil físico ausente | REFUTADO PARA ESTE CHECKPOINT | Alta | Verificado offline | Sin nuevos comandos al reloj |
+
+**Historial R194:** [loader RW4 inspeccionado y candidato C solo PC](rw4-loader-r194.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

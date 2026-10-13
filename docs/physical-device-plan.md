@@ -1,6 +1,12 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R191:** [shell NuttX y comandos de módulos anunciados enRW4](native-info-physical-result-r190.md).
+**Actual R195:** [borrador del primer ensayo C y carrier verificado solo PC](first-c-plan-r195.md).
+No nuevo ensayo autorizado. ELF íntegro en paquete, pero Lua solo lee/compara;
+sin ejecución nativa ni perfil de transferencia. Faltan controlador de un intento,
+retirada atribuible y revisión del riesgo de contexto potencialmente privilegiado.
+No instalar el carrier como ensayo aislado ni ejecutar insmod por este borrador.
+
+**Historial R191:** [shell NuttX y comandos de módulos anunciados enRW4](native-info-physical-result-r190.md).
 Usuario confirma indicadores, iwasm ausente del help y retorno normal. No
 cargas C/ELF, envíos/consultas nuevas o retirada. Gates cerrados; antes de
 helloC físico falta [contrato2.2.86/privilegios](rw4-native-contract.md).

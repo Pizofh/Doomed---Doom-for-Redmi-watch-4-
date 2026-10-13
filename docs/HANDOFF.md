@@ -1,6 +1,32 @@
 # Retomar el proyecto
 
-**Actual R194, 2026-10-13:** [loader RW4 y primer C compilado solo PC](rw4-loader-r194.md).
+**Actual R195, 2026-10-13:** [carrier y borrador del primer ensayo C](first-c-plan-r195.md).
+Solo PC. package-lua-minimal.mjs native-carrier produjo ID365219995,
+12.452bytes, artifacts/native-carrier-r195/NativeCarrier-id-only.face,
+SHA6bfb350bdf5bc362b9598a2110b5e05a681481ed0999784feae6e539a28e0aa1.
+ELF R194784bytes idéntico; verify-native-carrier.mjs verifica registros app
+header20/nombre/highbyte/lenlow24/data, no mera aparición de magic.
+Lua materializada3502bytes SHA41cd28d20f825365d6cfa51c9efbf4fee0ba373d8c5cfda813ccf55f57947115;
+source template experiments/lua-native-carrier/main.lua usa token ELFHEX sustituido
+en build, no sourceArtifact físico. Solo io.open(rb)/read785/comparación/cierre,
+UI/Image propios. No shell/loadlib/timers/C ejecutado. Modelo/probe mismo2.2.86;
+extracción/runtime del carrier no probados. No instalarlo como ensayo intermedio.
+
+Perfil r195 AUSENTE en staticSpec: readback verificó rechazo. Gates físicos false;
+sin teléfono/ADB/Bluetooth/reloj usado, firmware/C no ejecutados. No borrar esferas.
+NuttX12.3 sched/Kconfig CONFIG_MODULE sin depends BUILD_FLAT en ese bloque; no
+inferir FLAT por insmod. Contexto real desconocido, tratar código como potencialmente
+privilegiado. Reboot12s documentado Xiaomi no es recovery integral ni garantía.
+
+Primer C final aún NO preparado/autorizable: falta controlador de un intento,
+marca persistente ANTES deinsmod para impedir recarga por reboot/reentrada,
+lsmodpre para no tocar módulos previos,insmodúnico,lsmodconfirmación,rmmodpropio,
+lsmodausencia,capturaspropias acotadas. No retries/kill/unload ciego/hardtimeout
+prometido. Preparar/testear con backend simulado en PC; no ejecutar ELFARMv8-M
+en S3Cortex-A7. Hash/IDfinal cambiarán y requerirán revisión del plan concreto.
+No aprobar/ejecutar hardware usando el carrier deshabilitado o este borrador.
+
+**Historial R194, 2026-10-13:** [loader RW4 y primer C compilado solo PC](rw4-loader-r194.md).
 Imagen SHA2c486395a01fb4e1d4a0f8b9b749fd6b1c3d522edc3c2f3813deaea9ab7388db.
 Objdump revisado usado solo como lector. Startup Thumb MSP/MSPLIM/CONTROL refuerza
 ARMv8-M; no Cortex-A7. Tabla NSH: handler insmod offset220910→loader1bb6cc.

@@ -1,6 +1,11 @@
 # Contrato nativo pendiente de M2315W1/2.2.86
 
-Actualización R194, 2026-10-13: [loader inspeccionado y C mínimo compilado en PC](rw4-loader-r194.md).
+Actualización R195, 2026-10-13: [carrier con ELF intacto y plan de primer ensayo](first-c-plan-r195.md).
+Lua del carrier solo lee/compara; no se instaló ni ejecutó C. Config/privilegios
+exactos siguen desconocidos: tratar carga como potencialmente privilegiada.
+Controlador final y revisión física pendientes; no deducir FLAT por insmod.
+
+Historial R194: [loader inspeccionado y C mínimo compilado en PC](rw4-loader-r194.md).
 Ruta insmod identificada: ELF32 ARM LE ET_REL, inicializador recibe modinfo y
 devuelve int; rmmod incluye callback opcional/liberación. Candidato entero sin
 imports ni relocaciones, no ejecutado. Contexto/privilegios y contrato de APIs

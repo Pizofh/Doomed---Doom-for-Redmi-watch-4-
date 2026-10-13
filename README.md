@@ -1,6 +1,11 @@
 # DOOM en Redmi Watch 4
 
-**Actual R194:** [loader RW4 inspeccionado y primer C mínimo compilado en PC](docs/rw4-loader-r194.md).
+**Actual R195:** [carrier verificado en PC y borrador del primer ensayo C](docs/first-c-plan-r195.md).
+ELF empaquetado byte a byte sin cambios; Lua solo lee/compara, ejecución nativa
+deshabilitada. No perfil físico o envío. El controlador final deberá limitarse
+a un intento y confirmar descarga; su plan/paquete aún requieren preparación/revisión.
+
+**Historial R194:** [loader RW4 inspeccionado y primer C mínimo compilado en PC](docs/rw4-loader-r194.md).
 ELF32 ARM LE ET_REL, firma del inicializador y ruta rmmod identificados.
 Candidato de 784 bytes, dos instrucciones, sin imports/relocaciones; no ejecutado
 ni enviado. Falta cerrar contexto/privilegios y plan del primer ensayo C físico.

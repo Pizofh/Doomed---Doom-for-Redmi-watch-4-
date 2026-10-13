@@ -1,5 +1,13 @@
 # Modelo de riesgo
 
+**R195:** [plan del primer C, aún sin ejecución](first-c-plan-r195.md).
+Inspección del loader identifica llamada directa; config/privilegios exactos
+desconocidos. Tratarlo como potencialmente privilegiado, sin sandbox. Carrier
+solo PC conserva el ELF y no tiene ruta de carga. El controlador futuro deberá
+guardar marca persistente antes de un único intento, verificar registro/retirada
+y no recargar por reboot. No timeout duro de os.execute ni recovery integral
+validado; revisión física pendiente. No modificación de firmware prevista.
+
 **R69, 2026-10-04:** [Cierre sin EXIT y reentrada](doom-close-emulator.md) pasan con Doom original. Seleccionar Storage detiene el worker104 y libera13 reservas/streams; conserva modulo/copias hasta reentrada UI, que recoge todo. Sin reboot para salir ni unload host. C/Lua/ELF R67 intactos; solo emulador S3, gate M2315W1 cerrado. Siguiente: medir frames presentados, costo de copia y latencia antes de optimizar.
 
 **Historial R68:** [Foco stock/STOP mantenido](doom-focus-emulator.md) se probaron con el motor real sin cambios al payload: panel congela, retorno exige RESUME, STOP con FIRE down deja driver neutral y limpia recursos antes de unload UI. No host kill/unload ni reboot para salir. Falta cierre sin EXIT con motor, foco perdido con acción mantenida, estabilidad/crash y recovery física. La diferencia global de memoria/cache no tiene causa aislada; no atribuirla al motor ni afirmar ausencia de fugas. Sigue siendo FLAT, sin sandbox y sin autorización física.
