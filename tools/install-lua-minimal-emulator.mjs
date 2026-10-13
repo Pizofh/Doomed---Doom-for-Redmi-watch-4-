@@ -5,22 +5,26 @@ import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {projectRoot as root,packageRoot} from './verify-emulator.mjs';
 import {guardEmulator,snapshotData,resetGuest} from './emulator-ui.mjs';
-const diagnostic=process.argv[2]==='diagnostic';
-if(process.argv.length!==(diagnostic?3:2))throw Error('OnlyOptionalDiagnosticAccepted');
-const id=diagnostic?'365219992':'365219991',guest='/data/app/watchface/market/'+id;
-const name=diagnostic?'LuaDiag':'LuaProbe',checkpoint=diagnostic?'R180':'R177';
-const label=diagnostic?'lua-diagnostic-r180':'lua-minimal-r177';
-const size=diagnostic?10524:19796;
-const pinnedHash=diagnostic?'140b2a05618f617e70a7f5f28029beefed64251c43af0086cfaacfe0a681c8f1':
+const mode=process.argv[2]??'minimal',diagnostic=mode==='diagnostic',imageMode=mode==='image';
+if(!['minimal','diagnostic','image'].includes(mode)||process.argv.length!==(process.argv[2]?3:2))throw Error('OnlyFixedLuaModesAccepted');
+const id=imageMode?'365219993':diagnostic?'365219992':'365219991',guest='/data/app/watchface/market/'+id;
+const name=imageMode?'LuaImage':diagnostic?'LuaDiag':'LuaProbe',checkpoint=imageMode?'R184':diagnostic?'R180':'R177';
+const label=imageMode?'lua-image-r184':diagnostic?'lua-diagnostic-r180':'lua-minimal-r177';
+const size=imageMode?9328:diagnostic?10524:19796;
+const pinnedHash=imageMode?'150f285b7e63cc99519b32cde0b93fe35784cc5ba2d60a5d01746f1064483e49':diagnostic?'140b2a05618f617e70a7f5f28029beefed64251c43af0086cfaacfe0a681c8f1':
   'a40c85607a8c208823f2dd6064ebca3c907a850e9a392c0b3eb0d718d3c9490a';
 const build=path.join(root,'artifacts',label);
 const dest=path.join(root,'artifacts/emulator',label);
 const hash=b=>createHash('sha256').update(b).digest('hex');
 const review=JSON.parse(fs.readFileSync(path.join(build,'review.json'),'utf8'));
 const bytes=fs.readFileSync(path.join(build,name+'-id-only.face'));
-const source=fs.readFileSync(path.join(root,'experiments',diagnostic?'lua-diagnostic':'lua-minimal','main.lua'));
+const source=fs.readFileSync(path.join(root,'experiments',imageMode?'lua-image':diagnostic?'lua-diagnostic':'lua-minimal','main.lua'));
 if(review.id!==id||review.size!==size||review.sha256!==pinnedHash||
   hash(bytes)!==review.sha256||hash(source)!==review.sourceSha256||!bytes.includes(source)||bytes[5]!==0||bytes.subarray(40,49).toString('ascii')!==id)throw Error('PackageChanged');
+if(imageMode){
+  const asset=fs.readFileSync(path.join(build,'app/lua/pattern.png'));
+  if(review.imageSha256!=='2988d113d2d69931201b4c4274a3828aaa49ef689352c9d18548e7c30730bfe1'||hash(asset)!==review.imageSha256||!bytes.includes(asset))throw Error('ImageChanged');
+}
 if(fs.existsSync(dest)){
   // Preserve a failed local preflight only; never resume a recorded installation.
   if(fs.existsSync(path.join(dest,'install.json')))throw Error('ExistingInstall');
