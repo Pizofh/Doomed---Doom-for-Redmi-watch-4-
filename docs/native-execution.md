@@ -1,6 +1,11 @@
 # Ejecución y privilegios
 
-**Actual R210:** [candidato logging C soloPC](rw4-log-candidate-r210.md).
+**Actual R215/R216:** [NativeLog lista soloPC/emulador](native-log-r215.md),
+[nuevo plan pendiente de revisión](native-log-physical-plan-r216.md).
+Supuesto stdout capture refutado en S3; C candidato escribe archivo propio
+con5bindings de imagen. Payload físico aún no ejecutado; privilegios no aislados.
+
+**Historial R210:** [candidato logging C soloPC](rw4-log-candidate-r210.md).
 loadlib fallback deshabilitado en imagen; insmod ya demostrado sigue elegido.
 Tres bindings de stdio inferidos del print stock, específicos de la imagen;
 no comprobados en hardware y potencialmente privilegiados. Candidato no enviado.

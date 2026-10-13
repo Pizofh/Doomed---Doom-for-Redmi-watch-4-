@@ -1,6 +1,11 @@
 # Contrato nativo parcial de M2315W1/2.2.86
 
-Actualización R210: [candidato C logging compilado soloPC](rw4-log-candidate-r210.md).
+Actualización R215/R216: [carrier y C de archivo preparados soloPC](native-log-r215.md).
+Captura stdout descartada por prueba S3; nuevo C usa5bindings de FILE, marker y
+archivo exclusivo propios.31casos simulatedexec/I/Oreal pasan. Nuevas APIs/ruta
+de código físicas pendientes; envío cerrado y [revisión R216](native-log-physical-plan-r216.md).
+
+Historial R210: [candidato C logging compilado soloPC](rw4-log-candidate-r210.md).
 Tres bindings específicos de imagen, inferidos de print stock y callees;
 todavía sin llamadas/direcciones/lectura de código físicas verificadas. loadlib
 coincide con fallback deshabilitado en imagen; no usar como loader funcional.

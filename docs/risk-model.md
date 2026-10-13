@@ -1,6 +1,13 @@
 # Modelo de riesgo
 
-**Actual R204:** [C mínimo cargó/se retiró y el usuario volvió normalmente](first-c-corrected-physical-result-r203.md).
+**Actual R215/R216:** [nuevo plan de NativeLog pendiente de revisión](native-log-physical-plan-r216.md).
+Ahora el candidato incluye lecturas de código y cinco llamadas FILE, creación
+exclusiva solicitada de archivo propio y cleanup. Fingerprints no contienen
+faults/ABI incorrecto; APIs pueden asignar/bloquear/escribir FS.31casos de
+orquestación simulada no prueban llamadas C, ausencia de fugas o recuperación.
+Sin nuevo ensayo físico ni autorización; gates cerrados.
+
+**Historial R204:** [C mínimo cargó/se retiró y el usuario volvió normalmente](first-c-corrected-physical-result-r203.md).
 Compatible para este payload de dos instrucciones. El éxito no prueba
 aislamiento, seguridad de imports/APIs/tareas ni recovery integral. No heap
 medido o reboot/powerloss de marca; sin ampliar permisos a nuevo C. Gates cerrados.

@@ -1,6 +1,11 @@
 # Inicializador C mínimo RW4 — carga y retirada físicas confirmadas
 
-**Actual R210:** [candidato de logging compilado soloPC](../../docs/rw4-log-candidate-r210.md).
+**Actual R215/R216:** [NativeLog preparada, sin envío](../../docs/native-log-r215.md).
+file-r214.c escribe resultado directo en archivo exclusivo propio; root exacta
+guardada por Lua. Carrier31casos simulados, paquete28348bytes, gates cerrados.
+[Ensayo único requiere revisión nueva](../../docs/native-log-physical-plan-r216.md).
+
+**Historial R210:** [candidato de logging compilado soloPC](../../docs/rw4-log-candidate-r210.md).
 log-r210.c/ld y build-rw4-log-r210.mjs producen ELF1120bytes,3bindings de versión
 y fingerprintchecks,1ABS32 interna. No ejecutado/empaquetado/autorizado para
 hardware. No reemplazar FirstC2 o su marca. Siguiente carrier/captura/cleanup.

@@ -1,6 +1,10 @@
 # Investigación inicial
 
-**Actual R210:** [loadlib/print inspeccionados en PC](rw4-lua-bridge-r209.md)
+**Actual R215/R216:** [captura stdout probada S3 y carrier de archivo C preparado](native-log-r215.md).
+31casos con I/O real/backend simulado, paquete/hash cerrados; no nuevo C físico.
+[Revisión única pendiente](native-log-physical-plan-r216.md), sin nuevos permisos implícitos.
+
+**Historial R210:** [loadlib/print inspeccionados en PC](rw4-lua-bridge-r209.md)
 y [C logging candidato compilado](rw4-log-candidate-r210.md).1120bytes,3bindings
 específicos de imagen, fingerprints y1ABS32 interna. Sin hardware ejecutado.
 Siguiente carrier con captura del mensaje/retirada para revisión posterior.

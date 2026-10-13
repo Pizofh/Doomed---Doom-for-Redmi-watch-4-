@@ -1,6 +1,49 @@
 # Retomar el proyecto
 
-**Actual R210, 2026-10-13:** [C logging candidato solo PC](rw4-log-candidate-r210.md).
+**Actual R215/R216, 2026-10-13:** [NativeLog lista PC](native-log-r215.md),
+[plan físico pendiente de autorización](native-log-physical-plan-r216.md).
+Siguiente: pedir autorización concreta para un envío/selección/RUN C único y
+usuario presente. NO ejecutar/habilitar gates por el «ok/sigamos» de investigación.
+Sin nuevo permiso físico, no nuevo GET/BT/reloj/teléfono. FirstC2/marca intactas.
+
+R211 test nativo S3 antiguo hello-bound1020B/SHA125cc7167fb0ae27c6c598504e0604c679e838ea5c8eb781e8c56b4f34559008
+desdeLua os.execute insmod >tmpfile: native capture0bytes, mensaje sale alcaller.
+S3 SHA849a04...; módulo retirado/inventario idéntico, fixturetmpretirada. No RW4 C
+ejecutado. Diseño stdout descartado; R210 candidato histórico NOusar en carrier.
+R212/R213 LuaIO y callees RW4: fopen1ebf0c, fclose1ebff4, fread1ec130;
+fwrite1ec4e4/fflush1ec608 siguen. Modeparserx→OR8/O_EXCL inferido, no FS físico.
+
+C file-r214.c +build-rw4-file-r214.mjs: build/hello-native-rw4/r214/log.elf
+1500B,SHA9dff873fd6d41669de0d336528a35c7c281fa1e03ee1eb5ebcddd6d6907ca652,
+source3f240e2486d776c0bf56be53542213ff33924e767b0a3617c099c36ec92d186d.
+ET_REL entry1,text465aligned8,7ABS32,cero imports POR NOMBRE/5APIsfijas, sin tareas.
+5FNV64guard, lee19B marca, fopen ownoutput wbx(nofallback), write16B RW4_C_FILE_R214
+newline/flush/close; init0 solo fullsuccess. FILEopaco, APIs asignan/bloquean;
+no safe-read/ABI físico probado. Privilegios amplios y sin recovery integral.
+
+Controller/adapter/main R211, raíz EXACTA /data/app/watchface/market/365219999/lua/
+normalizada, ui antesbackend/no globalload, ui199 solo condición C TEXT modificada.
+FILE/MARK/C TEXT/UNLOAD/END. Captures native-stdout-r211.txt (archivo C directo,
+no >), log-inspect-r211.txt (NSH), marca log-attempt-r211.txt nunca borrada.
+31escenarios pasaron, report artifacts/emulator/log-r211/summary.json,
+I/Orealtranslatedtmpfixture +executor/widgets SIMULADOS; C solo datos/inventario
+real idéntico/árbolretirado. Firstfailedharness gsub segundo retorno hizo absent_os,
+corregido paréntesis; report log-r211-failed-harness preservado. No prodchange.
+Con execnormal + registropropio confirmado, read/logfailure aún intenta retiro.
+Exec/inventarioincierto o módulos197/202 bloquean unloadciego. Initrechazo/ausente
+no rmmod. Complete requieremsg/carga/retiro/cleanup; repaintrojo conunloadverde.
+
+NativeLog ID365219999,28348B,SHA1e88ce20dcbb28f6680be89f1625c22682890fb8efc8f2a605b0d34bde6579eb,
+artifacts/native-log-r215/NativeLog-id-only.face. Lua18156B
+SHAdf5c6cc3171d3441839d3dd9bd00e4aae98aaa24876be380f12e0627b9a28477.
+Compiler sinADB/4records exactos. Perfilr215CERRADO,prepare14parts; native-log-r216.json
+y.lock ausentes. Transfer12/sesión31offline pasan; gates test0sockets.
+Helperclosed nuevo b8d7a688d0d3a6765a21ad3dadac34cda2a46a877ad0c1853fc583aa068ebc85.
+Reportes build/test/package existentes rechazan overwrite; no repetir/borrar.
+Usuario comentó aviso OpenAI desconocido: no vimos texto y no lo atribuimos;
+continuó alcancePC. No datos privados crudos publicados ni firmware/toolsflash.
+
+**Historial R210, 2026-10-13:** [C logging candidato solo PC](rw4-log-candidate-r210.md).
 loadlib registrada0xb0408→código0x2fdf10: flujo de fallback deshabilitado,
 DLMSG/absent/init, caso cache/* solo true; no nueva invocación física. Contrastado
 Lua5.4.0 upstream. [R207–R209](rw4-lua-bridge-r209.md) sigue Lua print: nombre

@@ -1,6 +1,12 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R204:** [ensayo FirstC2 completado con carga/retirada C y retorno normal](first-c-corrected-physical-result-r203.md).
+**Actual R215/R216:** [NativeLog preparada en PC](native-log-r215.md),
+[plan concreto de ensayo pendiente de revisión](native-log-physical-plan-r216.md).
+Nuevo C con cinco APIs de archivo inferidas de imagen, sin llamadas físicas
+probadas. No autorización nueva ni envío; gates cerrados. Presencia del usuario
+y revisión del paquete/writes/riesgo obligatorias antes de ejecutar ese plan.
+
+**Historial R204:** [ensayo FirstC2 completado con carga/retirada C y retorno normal](first-c-corrected-physical-result-r203.md).
 Usuario confirma cinco verdes y esfera original/menús/cambio normales. Ambos
 módulos propios ausentes al final según parser. Autorización utilizada, gates
 cerrados; no reintentos/borrado/carga adicional. Próximo checkpoint de APIs solo PC.

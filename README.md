@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R210:** [hello de logging C compilado solo PC](docs/rw4-log-candidate-r210.md).
+**Actual R215/R216:** [NativeLog preparada y validada solo PC/emulador](docs/native-log-r215.md).
+Mensaje C en archivo propio, carrier31escenarios, paquete28.348bytes. Se corrigió
+la suposición de captura stdout tras comprobarla en S3. Nuevas APIs C aún sin
+ejecutar en RW4; [plan de ensayo único pendiente de revisión](docs/native-log-physical-plan-r216.md).
+Gates cerrados, ningún nuevo envío físico.
+
+**Historial R210:** [hello de logging C compilado solo PC](docs/rw4-log-candidate-r210.md).
 1.120bytes, bindings específicos de imagen y fingerprints antes de llamadas;
 todavía no ejecutado/empaquetado para hardware. [loadlib deshabilitada y ruta
 stock de stdout inspeccionadas](docs/rw4-lua-bridge-r209.md). Siguiente: carrier

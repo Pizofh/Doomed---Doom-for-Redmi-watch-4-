@@ -1,6 +1,17 @@
 # Matriz de evidencia
 
-**Actual R210:** [ruta Lua/stdio inspeccionada](rw4-lua-bridge-r209.md), [C logging compilado soloPC](rw4-log-candidate-r210.md).
+**Actual R215/R216:** [carrier preparado, sin envío](native-log-r215.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| NSH > captura automáticamente stdout C | S3 emulado exacto | Hello previo desde Lua; captura0bytes/mensaje al caller | REFUTADO EN EMULADOR | Alta | Sí, C S3 conocido | No ensayo equivalente RW4; carrier usa archivo C directo |
+| fopen/fclose/fread/fwrite/fflush candidatos identificados | Imagen RW42.2.86 | LuaIO/callers/callees y anclas R212–R214 | INFERENCIA RAZONABLE | Alta para flujo/firmas | Sí, PC | Cinco bindings absolutos; no llamadas físicas probadas |
+| Mode x solicita exclusión de archivo previo | Misma imagen + NuttX ref | Rama modeparser OR8/O_EXCL | INFERENCIA RAZONABLE | Alta para parser | Sí, PC | Sin atomicidad/FS físico demostrado; no fallback wb |
+| Carrier retira módulo confirmado aun si mensaje/captura falla | Lua5.4S3, I/O real +exec/widgets simulados |31casos/hash fuente R211 | CONFIRMADO EN SIMULACIÓN | Alta para casos | Sí | Exec/inventarioincierto no autoriza retiro ciego |
+| Paquete NativeLog/fuente/ELF exactos y perfil cerrado | PC |4records byte a byte, prepare14partes, transfer12/session31/gates | CONFIRMADO EN PC | Alta | Sí | ID365219999,28348bytes; sin envío |
+| Nuevo C escribe/lee archivos en RW4 físico | M2315W1/FW2.2.86 | Nuevo payload no ejecutado | SIN EVIDENCIA | Desconocida | No | FirstC2 no probó FS desde C; revisión R216 pendiente |
+
+**Historial R210:** [ruta Lua/stdio inspeccionada](rw4-lua-bridge-r209.md), [C logging compilado soloPC](rw4-log-candidate-r210.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

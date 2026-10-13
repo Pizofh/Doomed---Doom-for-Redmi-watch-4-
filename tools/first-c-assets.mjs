@@ -21,3 +21,10 @@ export function uiOnlyAssets(){
     run:png(96,20,(x,y)=>ownTextPixel('TEST UI',x,y,[36,92,128])),
     preview:png(390,450,(x,y)=>x>=150&&x<240&&y>=180&&y<258&&(y-180)%26<16?[255,255,255]:[0,0,0])};
 }
+// Native logging uses the same reviewed geometry and original pixel glyphs.
+export function logCAssets(){
+  const names=['FILE','MARK','C TEXT','UNLOAD','END'];
+  return {legend:png(180,160,(x,y)=>ownTextPixel(names[Math.floor(y/32)]??'',x,y%32)),
+    run:png(96,20,(x,y)=>ownTextPixel('RUN C',x,y,[36,92,128])),
+    preview:png(390,450,(x,y)=>x>=150&&x<240&&y>=160&&y<290&&(y-160)%26<16?[0,255,255]:[0,0,0])};
+}
