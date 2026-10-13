@@ -1,6 +1,11 @@
 # DOOM en Redmi Watch 4
 
-**Actual R193:** [firmware 2.2.86 obtenido e inspeccionado en PC](docs/firmware-analysis-r193.md).
+**Actual R194:** [loader RW4 inspeccionado y primer C mínimo compilado en PC](docs/rw4-loader-r194.md).
+ELF32 ARM LE ET_REL, firma del inicializador y ruta rmmod identificados.
+Candidato de 784 bytes, dos instrucciones, sin imports/relocaciones; no ejecutado
+ni enviado. Falta cerrar contexto/privilegios y plan del primer ensayo C físico.
+
+**Historial R193:** [firmware 2.2.86 obtenido e inspeccionado en PC](docs/firmware-analysis-r193.md).
 Checksum de metadata verificado; imagen principal con M2315W1, NuttX,
 rutas armv8-m, Lua 5.4.0 y referencias modlib. ABI/FPU/exports y privilegios
 siguen pendientes. Sin ejecución de firmware, nuevos comandos al reloj o C físico.

@@ -1,6 +1,38 @@
 # Retomar el proyecto
 
-**Actual R193, 2026-10-13:** [firmware e imagen principal adquiridos, solo PC](firmware-analysis-r193.md).
+**Actual R194, 2026-10-13:** [loader RW4 y primer C compilado solo PC](rw4-loader-r194.md).
+Imagen SHA2c486395a01fb4e1d4a0f8b9b749fd6b1c3d522edc3c2f3813deaea9ab7388db.
+Objdump revisado usado solo como lector. Startup Thumb MSP/MSPLIM/CONTROL refuerza
+ARMv8-M; no Cortex-A7. Tabla NSH: handler insmod offset220910→loader1bb6cc.
+ELFverify1e800c solo ET_REL; archcheck1e6a24 ARM40/class1/data1. Init1bb734:
+textalloc+e_entry, r0=module+24, BLX y retorno int (negativo error). Rmmod1bb79c
+callback módulo+24/arg+28, dependencies y free/registro. Tipo2 R_ARM_ABS32 caso
+1e6bf0 confirmado con TBH. No native/module execution física o emulada R194.
+
+Scripts propios review-rw4-loader/references/disassemble; outputs PRIVADOS bajo
+artifacts/research/rw4-loader-r194. Mapeo datos inicial0x2c falló; ranking ancho
+halló tabla validada: strings de ese grupo base3bff187c, handlers codeBase0c100000.
+No generalizar ese delta a todo memorymap o usarlo como APIheader. Report correcto
+candidate-references-v2.json corrige codeBase del primer candidato exploratorio.
+Globals symtab/número leídos pero contenido runtime no recuperado. printf/free
+en tabla NSH no prueban función libc. VFP en loader no identifica ABI float.
+Referencias NuttX12.3.0 son comparación, no source Xiaomi exacto.
+
+experiments/hello-native-rw4/minimal.c: int init(void*) return0, alineado8,
+sin imports/relocs, sin writes/APIs/tasks/callbacks. node tools/build-rw4-minimal.mjs
+compiló784bytes/código4bytes movs r0,0;bx lr, entry1 ARMv8-M mainline soft.
+ELF privado build/hello-native-rw4/r194/minimal.elf SHA
+8248f76bdabd9c44aee6df46e8ba4d8c999acc9ca1d0c8367e1652ce0675da6d.
+Source4b63f15f8e9223b338d3932e4c54bf10339c5e3dc0693682ad51a87a6aaa53bb.
+Primer build falló por alineación2, se conservó en raíz del build privado; nueva
+alineación explícita8 pasó. No printshello: candidato de contrato, no hello
+ejecutado. Soft para intsinllamadas no fija ABI de todo Doom.
+
+Gates físicos FALSE, ningún teléfono/ADB/radio/comando reloj en esta sesión.
+Siguiente checkpoint: cerrar contexto/privilegios, carrier/retirada y plan concreto
+del primer ensayo C físico, sin ejecutarlo antes de revisión. No enviar ELF todavía.
+
+**Historial R193, 2026-10-13:** [firmware e imagen principal adquiridos, solo PC](firmware-analysis-r193.md).
 Shell físico confirmado R191: NativeInfo mostró funciones OS/IO/loadlib amarillas,
 shell/insmod/rmmod/lsmod/NuttX/arm/cleanup verdes, iwasm rojo. Usuario volvió a
 habitual con menús/pulsación larga normales. No C físico. LuaImage física R187

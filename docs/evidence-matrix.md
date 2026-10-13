@@ -1,6 +1,17 @@
 # Matriz de evidencia
 
-**R193:** [paquete 2.2.86 e imagen principal inspeccionados en PC](firmware-analysis-r193.md).
+**R194:** [loader RW4 inspeccionado y candidato C solo PC](rw4-loader-r194.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Ruta insmod acepta ELF32 ARM LE ET_REL | Imagen M2315W1/2.2.86 | Tabla NSH, llamada loader y checks de magic/type/machine/class/data | CONFIRMADO EN IMAGEN | Alta estática | Sí, PC | Ningún ELF físico cargado |
+| Inicializador recibe modinfo y devuelve int | Misma imagen | Cálculo textalloc+e_entry, r0=module+24 y BLX | CONFIRMADO EN IMAGEN | Alta estática | Sí | No main(argc,argv) ni nuevo proceso |
+| rmmod contempla callback y libera módulo | Misma imagen | Handler, dependencia/callback/free/registro | CONFIRMADO EN IMAGEN | Alta para ruta inspeccionada | Sí | No descarga propia física probada |
+| Relocación R_ARM_ABS32 implementada | Misma imagen | Caso tipo2/tabla TBH, add/store; especificación Arm | CONFIRMADO EN IMAGEN | Alta | Sí | No todas las relocaciones del futuro Doom validadas |
+| Candidato ARMv8-M Thumb conforme a checks mínimos | Build local R194 | ELF784bytes, entry1, código4bytes, imports/relocs0 | CONFIRMADO EN PC | Alta para binario | Sí, compilación/inspección | No ejecución o compatibilidad física verificadas |
+| ABI flotante/exports/aislamiento ya resueltos | M2315W1/2.2.86 | VFP presente, globals de símbolos aún sin contenido runtime | SIN EVIDENCIA SUFICIENTE | Desconocida | No | VFP no prueba hard-float; NSH printf no es dirección libc |
+
+**Historial R193:** [paquete 2.2.86 e imagen principal inspeccionados en PC](firmware-analysis-r193.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

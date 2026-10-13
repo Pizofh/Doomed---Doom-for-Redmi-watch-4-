@@ -1,5 +1,12 @@
 # Ejecución y privilegios
 
+**R194:** [ruta insmod y contrato parcial inspeccionados en imagen RW4](rw4-loader-r194.md).
+Se comprueban ELF32 ARM LE ET_REL, int init(modinfo*) y callback opcional de
+retirada. Llamada directa al initializer sin nueva tarea/transición visible en
+ese tramo; FLAT/PROTECTED/KERNEL y privilegio de NSH no establecidos. Candidato
+sin imports compilado solo en PC, no ejecutado. No llamar sandbox al loader ni
+aplicar ABI/direcciones S3. Primer ensayo C físico requiere su revisión concreta.
+
 **R191:** [Lua→shell NuttX confirmado en2.2.86](native-info-physical-result-r190.md),
 con lectura de captura y eliminación devuelta comoexitosa. help anuncia
 insmod/rmmod/lsmod; iwasm ausente deese listado. package.loadlib solo expuesto,

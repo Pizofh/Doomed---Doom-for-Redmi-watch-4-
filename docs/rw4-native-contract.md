@@ -1,6 +1,12 @@
 # Contrato nativo pendiente de M2315W1/2.2.86
 
-Actualización R193, 2026-10-13: [paquete stock e imagen principal inspeccionados](firmware-analysis-r193.md),
+Actualización R194, 2026-10-13: [loader inspeccionado y C mínimo compilado en PC](rw4-loader-r194.md).
+Ruta insmod identificada: ELF32 ARM LE ET_REL, inicializador recibe modinfo y
+devuelve int; rmmod incluye callback opcional/liberación. Candidato entero sin
+imports ni relocaciones, no ejecutado. Contexto/privilegios y contrato de APIs
+siguen pendientes; gates físicos cerrados.
+
+Historial R193: [paquete stock e imagen principal inspeccionados](firmware-analysis-r193.md),
 con checksum de metadata verificado e identificadores internos M2315W1/2.2.86.
 Rutas armv8-m y modlib son pistas de implementación; ABI/FPU/exports y privilegios
 siguen pendientes. Solo PC; ningún loader físico ejecutado.
@@ -14,12 +20,12 @@ usuario volvió a habitual con funcionamiento normal. **No se ejecutó C propio.
 | Aspecto | Evidencia actual | Antes del helloC físico |
 |---|---|---|
 | Entrada/archivos/UI | Watchface instalada, Lua/Image, captura propia leída y retirada | Mantener launcher y salida independientes del módulo |
-| Sistema/arquitectura general | uname contiene NuttX y arm; SoCpublicadoBES2700iBP/STAR-MC1 | ISA ejecutable/core exacto, endian, wordsize y atributos de compilación |
-| Shell/carga | help anuncia insmod/rmmod/lsmod | Implementación/config del loader, formatos habilitados y semántica de carga |
-| Formato | ELF usado enS3/otrosXiaomi | ELFclass/e_machine/tipo/relocs admisibles en2.2.86, no heredarlos |
-| ABI/toolchain | Toolchain host disponible, contratoS3 conocido | ABI/FPU/libc/tipos/stack/entrypoint propios deRW4 |
+| Sistema/arquitectura general | uname NuttX/arm; arranque ARMv8-M/Thumb; loader comprueba ARM32 LE | Core/config exactos y atributos de APIs; no identificar core solo por ISA |
+| Shell/carga | help físico y handlers/implementación en imagen RW4 | Contexto de ejecución, ruta de instalación y retorno fiables |
+| Formato | Imagen RW4 admite ELF32 ARM LE ET_REL; caso R_ARM_ABS32 inspeccionado | Validar las relocaciones concretas de cada payload, sin heredar flags S3 |
+| ABI/toolchain | Firma int init(modinfo*) y rmmod observadas; candidato PC sin imports | ABI/FPU/libc/tipos de APIs para Doom; no inferir hard-float por VFP en código |
 | Símbolos | Ninguna tablaRW4 verificada | Exports/imports y resolución; no usar direcciones absolutasS3 |
-| Lifecycle | Navegación Lua normal observada | init/uninit, propiedad de tareas/referencias y retirada del módulo |
+| Lifecycle | init y callback opcional/retirada identificados estáticamente | Validación efectiva de carga/descarga y propiedad de tareas/referencias |
 | Privilegios | Desconocidos | FLAT/PROTECTED/KERNEL y contexto de módulos; asumir acceso amplio mientras no se demuestre aislamiento |
 | Memoria | Especificación comercial, no heap libre | Presupuesto real y memoria pico; no diseñar sobre32MB libres |
 | WASM/loadlib | iwasm ausente del helpcapturado; loadlibfunction sin invocar | No convertir ausencia de token/presencia de función en prueba de runtime funcional |
