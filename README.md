@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R191:** [shell NuttX confirmado en M2315W1/2.2.86](docs/native-info-physical-result-r190.md).
+**Actual R193:** [firmware 2.2.86 obtenido e inspeccionado en PC](docs/firmware-analysis-r193.md).
+Checksum de metadata verificado; imagen principal con M2315W1, NuttX,
+rutas armv8-m, Lua 5.4.0 y referencias modlib. ABI/FPU/exports y privilegios
+siguen pendientes. Sin ejecución de firmware, nuevos comandos al reloj o C físico.
+Siguiente: identificar el contrato del loader en esa imagen.
+
+**Historial R191:** [shell NuttX confirmado en M2315W1/2.2.86](docs/native-info-physical-result-r190.md).
 NativeInfo: os.execute/io.open/loadlib expuestos, help/uname reconocidos,
 insmod/rmmod/lsmod anunciados, iwasm no aparece enhelp; captura retirada según
 retorno deos.remove. Usuario confirma salida y funciones normales. No C/ELF

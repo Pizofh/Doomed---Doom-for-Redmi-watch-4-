@@ -1,6 +1,11 @@
 # Contrato nativo pendiente de M2315W1/2.2.86
 
-ActualizaciónR191,2026-10-12. [NativeInfo físico](native-info-physical-result-r190.md)
+Actualización R193, 2026-10-13: [paquete stock e imagen principal inspeccionados](firmware-analysis-r193.md),
+con checksum de metadata verificado e identificadores internos M2315W1/2.2.86.
+Rutas armv8-m y modlib son pistas de implementación; ABI/FPU/exports y privilegios
+siguen pendientes. Solo PC; ningún loader físico ejecutado.
+
+[NativeInfo físico R191](native-info-physical-result-r190.md)
 confirma Lua→shell, NuttX/arm en uname y comandos de módulos anunciados. El
 usuario volvió a habitual con funcionamiento normal. **No se ejecutó C propio.**
 
@@ -22,8 +27,10 @@ usuario volvió a habitual con funcionamiento normal. **No se ejecutó C propio.
 
 ## Adquisición prevista solo PC
 
-Primer resultado: [R192, logs locales ausentes y APKcache disponible](firmware-acquisition-r192.md).
-Todavía no hay firmware/SDK exacto obtenido ni contrato verificado.
+Primer resultado: [R192, carpeta inicial vacía y APKcache disponible](firmware-acquisition-r192.md).
+[R193](firmware-analysis-r193.md) reutilizó otras copias locales y obtuvo un paquete
+con versión/modelo internos coincidentes. No hay SDK, exports o contrato completo
+verificados; no se ha validado una firma criptográfica independiente del firmware.
 
 1. Buscar metadatos de OTA/build en las copias locales ya obtenidas de Mi
    Fitness/logs/APK, sin lanzar la app, solicitar OTA al reloj o usar credenciales
@@ -36,7 +43,7 @@ Todavía no hay firmware/SDK exacto obtenido ni contrato verificado.
    Si el paquete está cifrado o faltan símbolos/configuración, documentar la
    limitación y usar fuentes/SDK verificables. No explotar el reloj para extraerlo.
 
-No se afirma que un firmware/SDK exacto esté disponible. Consultas futuras
+La imagen obtenida no sustituye un SDK o un contrato de carga demostrado. Consultas futuras
 al shell del reloj no están autorizadas automáticamente por NativeInfo; cualquier
 nuevo script/comando físico necesita plan concreto y revisión. No repetir el
 diagnóstico solo para recuperar texto que no se conservó en el PC.

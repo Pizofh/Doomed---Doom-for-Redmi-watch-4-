@@ -1,6 +1,18 @@
 # Matriz de evidencia
 
-**R191:** [shell NuttX confirmado y retorno normal](native-info-physical-result-r190.md).
+**R193:** [paquete 2.2.86 e imagen principal inspeccionados en PC](firmware-analysis-r193.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Metadata local enlaza paquete con RW4/2.2.86 | Logs Mi Fitness de esta unidad | LatestVersion/fullPackageUrl en registro de éxito | CONFIRMADO EN METADATA LOCAL | Alta para asociación | Sí, PC | No firma firmware independiente |
+| Descarga coincide con checksum de metadata | Archivo CDN Xiaomi, 53.979.532 bytes | MD5 verificado y SHA256 fijado | CONFIRMADO EN ARCHIVO | Alta para integridad frente a registro | Sí, PC | Sin ejecución/flash |
+| Imagen vela_ap.bin contiene M2315W1/2.2.86 | Componente descomprimido del paquete | Strings internos, CRC ZIP y SHA256 | CONFIRMADO EN ARCHIVO | Alta para presencia | Sí, PC | No prueba ABI o región de unidad |
+| Código de familia ARMv8-M presente | Misma imagen | Rutas armv8-m/arm_busfault.c, arm_hardfault.c, arm_memfault.c | INFERENCIA RAZONABLE | Alta como pista de arquitectura | Sí, estático | No core/FPU/ABI/config exacta |
+| Lua 5.4.0 y modlib presentes | Misma imagen | Versionstring y rutas modlib_load.c/modlib_loadshdrs.c | CONFIRMADO EN ARCHIVO | Alta para strings | Sí, PC | No llamada loader o consulta versión runtime |
+| /dev/fb0 accesible en reloj | Misma imagen/unidad | String presente, sin open físico | SIN EVIDENCIA DE ACCESO | Desconocida | Solo búsqueda estática | No convertir string en dispositivo accesible |
+| ABI/exports/privilegios ya suficientes para C | M2315W1/2.2.86 | Contrato pendiente | SIN EVIDENCIA | Desconocida | No C físico | Gates cerrados; análisis continúa PC |
+
+**Historial R191:** [shell NuttX confirmado y retorno normal](native-info-physical-result-r190.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

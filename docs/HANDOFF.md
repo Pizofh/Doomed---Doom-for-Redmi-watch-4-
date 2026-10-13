@@ -1,6 +1,39 @@
 # Retomar el proyecto
 
-**Actual R183, 2026-10-12:** [investigación de fuentes solo PC](lua-font-research-r183.md).
+**Actual R193, 2026-10-13:** [firmware e imagen principal adquiridos, solo PC](firmware-analysis-r193.md).
+Shell físico confirmado R191: NativeInfo mostró funciones OS/IO/loadlib amarillas,
+shell/insmod/rmmod/lsmod/NuttX/arm/cleanup verdes, iwasm rojo. Usuario volvió a
+habitual con menús/pulsación larga normales. No C físico. LuaImage física R187
+muestra cuadrantes/cruz y salida normal; Label físico sigue sin texto.
+
+No pedir más logs: tres snapshots ya existentes R162/R164 resolvieron metadata.
+tools/local/firmware-research/candidates-r193.json contiene URLs firmadas PRIVADAS;
+no imprimirlas ni parámetros, firmas, claves o líneas crudas. Original HEAD403
+no significaba expiración: SDK FDS firma método; GET Range0–0 funcionó206.
+GET descargó53.979.532bytes, MD5 de mismo registro LatestVersion verificado,
+SHA256 d9dee6871ca6dc893000214d04ef6f5429a1b0f9ea57c79d8db9caf83cff6321.
+No firma fabricante independiente verificada. Blob propietario ignorado:
+tools/local/firmware-research/rw4-stock-candidate-r193/rw4-stock-2.2.86-candidate.bin.
+
+325ZIP embebidos validados por límites/headers, no CRC de todos. Solo vela_ap.bin
+descomprimido con CRC/longitud/consumo verificados:6.636.408bytes,
+SHA2562c486395a01fb4e1d4a0f8b9b749fd6b1c3d522edc3c2f3813deaea9ab7388db.
+Archivo privado vela-ap-inspection-only.bin; reports artifacts/research/*r193.json.
+Modelo M2315W1/Redmi Watch4/2.2.86 internos; strings armv8-m/modlib/NuttX/Lua5.4.0.
+No FPU/ABI/exports/FLAT/PROTECTED/KERNEL demostrados. /dev/fb0 string no open probado.
+
+Native gates permanecen FALSE; no nuevo ADB/radio/hardware en R193, no herramientas
+de flash, ejecución firmware, C/ELF/insmod físicos. NativeInfo autorizó solo help
+y uname y su captura propia; no ampara nuevos scripts/consultas. No borrar esferas.
+Downloader PC whitelist --head/--probe/--download, URL datos nunca shellsource,
+no redirects/cookies/TLSbypass; source/size/checksum/hashes fijados. Prefix escalado
+node tools/retrieve-rw4-firmware.mjs aprobado. Reejecuciones rechazan overwrite.
+
+Siguiente checkpoint único: inspección estática de loader/exports en vela_ap.bin
+para completar docs/rw4-native-contract.md. No aplicar headers/direcciones S3 o
+ELF Cortex-A7. Solo después preparar helloC específico y plan físico revisable.
+
+**Historial R183, 2026-10-12:** [investigación de fuentes solo PC](lua-font-research-r183.md).
 Usuario autorizó investigar/probar en PC, sin otro envío físico. Muestra
 AnalogTimeAnimated/RW4 de m0tral, commit5af6e14, usa BUILTIN_FONT.MONTSERRAT_14.
 TouchEvents usa MiSansW regular32. Son muestras, no pruebas de la unidad2.2.86.

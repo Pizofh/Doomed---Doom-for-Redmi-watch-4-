@@ -1,5 +1,9 @@
 # R192 — inicio de adquisición de metadatos, solo PC
 
+**Continuación R193:** [otras copias locales permitieron obtener e inspeccionar
+el paquete 2.2.86](firmware-analysis-r193.md). Este documento conserva el resultado
+de la carpeta original vacía; no describe la totalidad de los logs disponibles.
+
 2026-10-12. Después de [confirmar el shellRW4](native-info-physical-result-r190.md)
 se busca evidencia del [contrato nativo2.2.86](rw4-native-contract.md), sin
 probar un loader con un ELF desconocido.
