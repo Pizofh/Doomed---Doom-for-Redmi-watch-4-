@@ -1,6 +1,14 @@
 # Matriz de evidencia
 
-**R195:** [carrier y plan C aún cerrado](first-c-plan-r195.md).
+**R196:** [controlador propio validado en Lua con backend simulado](controller-r196.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Un intento, marca previa, atribución y descarga confirmada | Lua5.4 S3 + backend simulado | 24 escenarios, source real en entorno sin io/os | CONFIRMADO EN SIMULACIÓN | Alta para orquestación | Sí | No carga o retiro físico demostrados |
+| Reentrada/reinicio con marca conservada no repiten carga | Misma simulación | Estado conservado entre instancias, pérdida de RAM modelada | CONFIRMADO EN SIMULACIÓN | Alta para condición modelada | Sí | Durabilidad/atomicidad del FS real pendientes |
+| Prueba cargó ELF o modificó módulos reales | Emulador S3 | Solo bundle Lua; lsmod antes/después idéntico; tmp retirado | REFUTADO PARA ESTA PRUEBA | Alta | Sí | No usa ELF ARMv8-M en Cortex-A7 |
+
+**Historial R195:** [carrier y plan C aún cerrado](first-c-plan-r195.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

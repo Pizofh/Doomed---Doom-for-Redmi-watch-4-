@@ -1,5 +1,10 @@
 # R195 — preparación del primer ensayo C, sin ejecución física
 
+**Continuación R196:** [controlador puro pasó24 escenarios en Lua con backend
+simulado](controller-r196.md). Falta adaptador shell/filesystem/UI y artefacto
+final revisable. La selección de la futura esfera no ejecutará C: requerirá
+acción manual dedicada. No aprobar ni ejecutar el borrador por ese resultado.
+
 2026-10-13. **Borrador técnico; no autoriza envío, selección o carga.**
 El candidato C de [R194](rw4-loader-r194.md) existe y su carrier se construyó
 en PC. Aún falta el controlador de carga/retirada y su validación de fallos;

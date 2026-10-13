@@ -1,6 +1,11 @@
 # DOOM en Redmi Watch 4
 
-**Actual R195:** [carrier verificado en PC y borrador del primer ensayo C](docs/first-c-plan-r195.md).
+**Actual R196:** [controlador Lua pasó24 escenarios con backend simulado](docs/controller-r196.md).
+Protege contra repetición, módulos previos y descarga sin atribución. Ejecutado
+en Lua5.4 S3, sin cargar el ELF RW4 ni tocar hardware. Falta adaptador concreto,
+UI con acción manual y paquete/plan final para revisión física.
+
+**Historial R195:** [carrier verificado en PC y borrador del primer ensayo C](docs/first-c-plan-r195.md).
 ELF empaquetado byte a byte sin cambios; Lua solo lee/compara, ejecución nativa
 deshabilitada. No perfil físico o envío. El controlador final deberá limitarse
 a un intento y confirmar descarga; su plan/paquete aún requieren preparación/revisión.

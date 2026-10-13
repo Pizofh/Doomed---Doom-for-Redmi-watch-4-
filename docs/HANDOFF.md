@@ -1,6 +1,33 @@
 # Retomar el proyecto
 
-**Actual R195, 2026-10-13:** [carrier y borrador del primer ensayo C](first-c-plan-r195.md).
+**Actual R196, 2026-10-13:** [controlador puro pasó24 pruebas Lua/backend simulado](controller-r196.md).
+experiments/hello-native-rw4/controller.lua: M.new(backend).run(), latch por
+instancia antes de backend, marker_state/check_file/list_modules/write_marker,
+readback independiente de marca, load→registroobservado→unload→ausenciaconfirmada.
+Sin io/os; 'returned' indica retorno síncrono, no éxito exitcode. Error/incertidumbre
+detiene secuencia; no retry/unloadciego ni tocarmóduloprevio. No backend real/UI.
+
+tools/test-rw4-controller.mjs usó guardPropiedadADB5039/emulator-5554. Source real
+ejecutado en Lua5.4 S3 con env limitado y backend simulado. 24 escenarios éxito,
+erroresFS/inventario/carga/descarga,reentrada,marca retenida trasreinicio simulado.
+No ELF transferido/ejecutado, lsmod real antes/después idéntico, tmp propio
+/tmp/rw4-controller-r196.lua creado/readbackexacto/retirado/ausencia comprobada.
+Report privado artifacts/emulator/controller-r196. Source060db50622dd1577ad62092a1cf0d4b202633d2c856064a85ca6563f1030b08d;
+testsfb4b902351418d6b250ee1a2d891905956547ed8c723622cf7d0b2cf5ccae654.
+
+Emulador antes apagado con recordstalePID440; ausenciaPID/QEMU confirmada, record
+guardado stale-before-controller-r196.json y marcadoexited. Primerlaunch sandbox
+falló perfilVVD; reintentoautorizado arrancólauncher15696/QEMU14908. Sesiónexec7688
+mantiene launcher; ADBconnect89481 mostródevice, puede seguirpendiente por FDdaemon.
+hoststdout/stderr ahora de nuevoarranque, no logsR188. No nuevas operaciones
+teléfono/Bluetooth/reloj; gates físicosFALSE. No tocar vínculoPC/reloj/esferas.
+
+Siguientecheckpoint: backend real shell/archivos y UI MANUAL (no runalselección),
+testear sin ELF RW4 cargado y generar paquete/hash/plan físico final. Marca real
+no prueba durabilidad porpowerloss ni atomicidad multivm; gesto manual impide
+carga automática alboot aunque marcadorse pierda. No aprobaciónHW todavía.
+
+**Historial R195, 2026-10-13:** [carrier y borrador del primer ensayo C](first-c-plan-r195.md).
 Solo PC. package-lua-minimal.mjs native-carrier produjo ID365219995,
 12.452bytes, artifacts/native-carrier-r195/NativeCarrier-id-only.face,
 SHA6bfb350bdf5bc362b9598a2110b5e05a681481ed0999784feae6e539a28e0aa1.
