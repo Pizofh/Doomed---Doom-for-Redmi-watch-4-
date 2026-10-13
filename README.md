@@ -1,6 +1,13 @@
 # DOOM en Redmi Watch 4
 
-**Actual R199:** [FirstC no mostró la interfaz esperada en el reloj](docs/first-c-ui-failure-r199.md).
+**Actual R200/R201:** [UI separada funciona con LVGL real en emulador](docs/ui-only-emulator-r200.md):
+etiquetas/botón, un toque, bloqueo de repetición y salida a esfera normal.
+Sin C. [Fallo de ruta reproducido y helper corregido](docs/first-c-path-r201.md):
+el runtime S3 usa ID//lua/, rechazado por nuestro adapter anterior;16 casos pasan.
+RW4 vuelve a esfera/navegación normales según usuario. C físico sigue sin
+confirmar; nuevo paquete C/revisión pendientes, gates cerrados.
+
+**Historial R199:** [FirstC no mostró la interfaz esperada en el reloj](docs/first-c-ui-failure-r199.md).
 Usuario ve panel/cuadritos, sin etiquetas/botón reconocidos; tocó sin respuesta
 y los menús funcionan. Carga/retirada C siguen sin confirmar; no repetir.
 Interfaz separada del backend preparada en PC, seis pruebas con widgets simulados.

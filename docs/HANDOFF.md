@@ -1,6 +1,43 @@
 # Retomar el proyecto
 
-**Actual R199, 2026-10-13:** [FirstC falló en UI; C físico no confirmado](first-c-ui-failure-r199.md).
+**Actual R200/R201, 2026-10-13:** [UI real emulada validada](ui-only-emulator-r200.md),
+[rechazo de doble slash reproducido y normalizador puro](first-c-path-r201.md).
+Usuario confirma cambio a habitual/pulsación larga y menús/desplazamiento normales.
+Recuerda4grises/blancos+inferiorrojo,total5,sin reacción. CompatibleSetupStopped,
+no prueba directa de C/retirada. No reabrir FirstC; no borrar marca/unload ciego.
+
+UiOnly365219997 sin ELF/controller/io/os/shell/timers/global load invocado;
+factory inlineestática, labelsFRAME/ICON/INPUT/TOUCH/END, TEST UI y resultado
+sintético solo visual. Paquete12784SHAecb3f0cb9f5fceac877c20eb77944a3ecf6ebbc6f97fe48a6197eb9e39ea8e84,
+Lua4293SHA12ea3bc8395bca3fdc8d83e68839c848952f5ef5a8b1b8d537051584ebb43820.
+Perfil físico NOregistrado; solo emulador. Preparecompiler sinADB y3records exactos.
+Instalación emulador guardADBOwnership5039, backupdata pausada, recurso/readback,
+invalidatecache/resetguest. Primerpreflight read-only falló por2activas(tipo1Storage,
+tipo2AOD362150001); preservado -preflight, aceptadosIDsconcretos sineditarflags.
+
+LVGL real: capturaslabels/button/gray→greenclick, logcallback1, segundo tap y
+retorno panel idénticos. VolvióStockStorage, closeLua observado,29→30 IDs anteriores
+preservados,UIOnlyinactiva,source/assets extraídos SHA exactos,modregistryvacío.
+Checker artifacts/emulator/ui-only-r200/validation.json. Screenshotpixelchecker
+verifica bitmaps enteros/toleranciaRGB565, no C. TogglelongpressOFF sincambiar.
+
+BUG concretoS3: hostlog pmainSCRIPT_PATH /data/app/watchface/market/365219997//lua/;
+global load function S3, sufijo esperadofalse. Oldadapter niega // y no dibuja
+legend/button antesbackend. No ruta físicaRW4 confirmada; causa física inferida.
+path-r201.lua normaliza internal/+ trasvalidarASCII/límite/absoluta; rejectsleading//,
+traversal/metacaracteres/IDajeno yexigesufijoID/lua.16cases LuaCLI conoldadapter
+constructor rechazoformaobservada/aceptacióncanonical,ceroIO/shellinLua.
+Report artifacts/emulator/path-r201/summary.json, Lua tmp retirada,modulesidénticos.
+Pathsource4edc7473370f3ce624a67df1b5fa77b42ca0bb4e867aca9ad554e0e01558ddbf.
+
+NextcheckpointPC: integrarUI estática+normalizador+backendprimerC, priorinventory
+DEBEtambiénbloquear módulo anteriorrw4minr197 antesdecargarnuevo;noautocarga,
+unintento,atribución/unloadyconfirmación. NuevoID/hash/paquete/plan requeriránrevisión;
+NOautorizadosporR198. Privilege/recoveryintegral aún desconocidos. PaqueteR197
+intacto,FirstCno tocada,Node/C#gatesfalse,helperf64ead8b42f5872198ac0aaa52cafba5bf2cd22e75bbc0fd95a347af0b8fec44.
+No operacioneshardware este turno. No repetir pruebasya pasadas sin cambios.
+
+**Historial R199, 2026-10-13:** [FirstC falló en UI; C físico no confirmado](first-c-ui-failure-r199.md).
 Usuario no ve FILE/MARK/LOAD/UNLOAD/END ni RUN C; solo panel gris/cuadritos
 posiblemente blancos. Tocó y no pasó nada; menús funcionan. Segunda pregunta
 async pendiente: volver por Ajustes a habitual y confirmar pulsación larga.

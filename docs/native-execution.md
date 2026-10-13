@@ -1,6 +1,12 @@
 # Ejecución y privilegios
 
-**Actual R199:** [interfaz FirstC falló; estado de ejecución nativa desconocido](first-c-ui-failure-r199.md).
+**Actual R200/R201:** [UI separada funciona en S3 sin C](ui-only-emulator-r200.md);
+[guard de rutas anterior falla con separador runtime duplicado](first-c-path-r201.md).
+Helper puro normaliza conservando validación. No nuevo C físico o permiso de
+carga: antes de sucesor debe revisarse inventario previo incluido rw4minr197.
+Menús/retorno habitual físico normales, no equivalen a módulo ausente.
+
+**Historial R199:** [interfaz FirstC falló; estado de ejecución nativa desconocido](first-c-ui-failure-r199.md).
 Toques sin respuesta y menús normales no confirman carga/retirada o ausencia
 del módulo. No repetir/descargar a ciegas. Se trabaja en UI independiente solo
 PC; no habilitar nuevos envíos o asumir que el problema es el loader C.

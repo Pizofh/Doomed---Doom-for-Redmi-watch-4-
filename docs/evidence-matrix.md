@@ -1,6 +1,17 @@
 # Matriz de evidencia
 
-**Actual R199:** [UI FirstC no operativa según observación física](first-c-ui-failure-r199.md).
+**Actual R200/R201:** [UI real S3](ui-only-emulator-r200.md), [helper de ruta](first-c-path-r201.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Interfaz separada renderiza bitmaps y recibe un toque | S3 emulado, UiOnly | Capturas/píxeles, un callback, segundo toque bloqueado, salida Stock | CONFIRMADO EN EMULADOR | Alta | Sí, LVGL real | Sin C o controller nativo |
+| Runtime de watchface entrega ID//lua/ | Misma UiOnly | Log pmain propio, sufijo canónico false | CONFIRMADO EN EMULADOR | Alta | Sí | No ruta de RW4 físico leída |
+| Adapter anterior rechaza ese separador antes de UI | SourceR197 + forma de pathS3 | Constructor reproduce rechazo sin IO, luego acepta path normalizado | CONFIRMADO EN PC/EMULADOR | Alta | Sí | ID sustituido a fijoR197, no carga C |
+| Misma validación causó el fallo del RW4 | M2315W1/2.2.86 | Cinco indicadores, inferior rojo, labels/botón ausentes | INFERENCIA RAZONABLE | Media | No directamente | Global load/path físico siguen sin observar |
+| Normalizador mantiene rechazo de rutas peligrosas/ajenas | Lua5.4 S3, función pura |16 escenarios, separadores internos canónicos y entradas rechazadas | CONFIRMADO EN EMULADOR | Alta para casos probados | Sí | No amplía permisos/privilegios |
+| Retorno habitual y navegación normales tras FirstC | RW4 físico | Confirmación del usuario, pulsación larga/cambio normales | CONFIRMADO EN RW4 | Alta según observación | Sí, usuario | No prueba C/ausencia de módulo |
+
+**Historial R199:** [UI FirstC no operativa según observación física](first-c-ui-failure-r199.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

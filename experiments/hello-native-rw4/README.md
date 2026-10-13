@@ -1,6 +1,24 @@
 # Inicializador C mínimo RW4 — preparación en PC, hardware pendiente
 
-**Actual R199:** [FirstC física no mostró la UI esperada](../../docs/first-c-ui-failure-r199.md).
+**Actual R200/R201:** [UI real emulada validada, sin C](../../docs/ui-only-emulator-r200.md).
+main-ui-r200.lua incluye factory estática sin global load; UiOnly tiene imágenes
+y un callback sintético. No perfil físico. [path-r201.lua](../../docs/first-c-path-r201.md)
+normaliza separadores internos y mantiene guard de ID/carácteres/ruta.
+
+```powershell
+node tools/package-ui-only-r200.mjs
+node tools/install-ui-only-emulator-r200.mjs
+# Seleccionar UiOnly en menús del guest; TEST UI una vez, segundo toque,
+# panel stock y retorno; volver a Storage por selector, sin C.
+node tools/check-ui-only-emulator-r200.mjs
+node tools/test-rw4-path-r201.mjs
+```
+
+Ya ejecutados; scripts rechazan reportes/instalación existentes. UiOnly aún
+almacenada e inactiva en S3. FirstC del reloj intacta; sucesor C no preparado
+o autorizado. No usar assets/verdes sintéticos como evidencia de carga C.
+
+**Historial R199:** [FirstC física no mostró la UI esperada](../../docs/first-c-ui-failure-r199.md).
 C/retirada no confirmados, sin reintentos. ui-r199.lua separa UI y habilitación
 del callback; sin backend de ejecución, load, io u os. Su prueba de seis casos
 usa widgets simulados en Lua5.4 S3, no render/eventos reales:

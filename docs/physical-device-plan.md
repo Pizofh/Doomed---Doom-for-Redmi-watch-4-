@@ -1,6 +1,12 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R199:** [UI FirstC fallida, sin resultado C confirmado](first-c-ui-failure-r199.md).
+**Actual R200/R201:** usuario confirma retorno habitual/cambio y navegación
+normales tras FirstC. [UI real validada solo en S3](ui-only-emulator-r200.md),
+[fallo de path reproducido en PC/emulador](first-c-path-r201.md). Sin operación
+física nueva. Sucesor C requiere inventario previo, nuevo paquete/plan y revisión;
+no repetir FirstC, borrar su marca o descargar un módulo a ciegas.
+
+**Historial R199:** [UI FirstC fallida, sin resultado C confirmado](first-c-ui-failure-r199.md).
 No reintento/reinstalación/retiro o unload ciego. Gates cerrados. Menús normales
 comunicados; retorno habitual/pulsación larga pendientes de respuesta. Siguiente
 trabajo de UI en PC/emulador, sin nueva operación física automática.

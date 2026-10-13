@@ -1,6 +1,12 @@
 # Modelo de riesgo
 
-**Actual R199:** [FirstC no ofrece UI/resultado reconocidos](first-c-ui-failure-r199.md).
+**Actual R200/R201:** retorno/menús físicos normales confirmados. [UiOnly S3](ui-only-emulator-r200.md)
+no incluye C; colores son un resultado sintético de UI. [Normalizador de path](first-c-path-r201.md)
+no amplía permisos ni aislamiento. Estado C previo físico no confirmado;
+próximo sucesor debe comprobar que tampoco exista rw4minr197 antes de cargar.
+No nuevas operaciones al reloj, gates cerrados y recovery integral sin validar.
+
+**Historial R199:** [FirstC no ofrece UI/resultado reconocidos](first-c-ui-failure-r199.md).
 Usuario tocó sin respuesta; no atribuir ausencia de carga/estado del módulo.
 Menús normales no sustituyen comprobación de registro/retirada. Gates cerrados,
 sin nuevas operaciones al reloj. No rmmod remoto ciego, borrar marca o repetir.

@@ -1,5 +1,13 @@
 # R199 — interfaz FirstC fallida; estado nativo no confirmado
 
+**Actualización R200/R201:** el usuario confirma retorno habitual, cambio por
+pulsación larga y navegación normales. Recuerda cuatro indicadores grises o
+blancos y el inferior rojo, cinco en total, sin reacción a los toques.
+Ese patrón es compatible con SetupStopped; no confirma carga/retirada C.
+[UI separada ya validada en LVGL real S3](ui-only-emulator-r200.md) y
+[rechazo de separador duplicado reproducido/corregido en helper puro](first-c-path-r201.md).
+La ruta del RW4 físico y la causa exacta física todavía no verificadas.
+
 2026-10-13. Continuación del [único envío autorizado R198](first-c-physical-result-r198.md).
 No nueva instalación, consulta Bluetooth, ejecución de shell en el reloj,
 retirada o modificación de firmware durante esta revisión.
@@ -15,7 +23,8 @@ ni comunicó un resultado Complete. No se pidió abrirla o tocarla de nuevo.
 Tocar una pantalla sin respuesta tampoco prueba que no se invocó un callback.
 La descripción no identifica con certeza los colores/objetos, ni permite
 deducir el punto exacto del fallo. Los menús funcionan según el usuario;
-retorno explícito a esfera habitual y pulsación larga aún pendientes de respuesta.
+Retorno/pulsación larga pendientes en ese momento, confirmados posteriormente
+en la actualización superior.
 No asumir que un módulo está presente/ausente o ejecutar rmmod a ciegas.
 
 ## Hallazgo de código, sin atribuir causa al reloj
