@@ -1,5 +1,11 @@
 # Inicializador C mínimo RW4 — solo compilación en PC
 
+**R196:** [controlador Lua validado con backend simulado](../../docs/controller-r196.md).
+controller.lua no usa io/os ni ejecuta nada al construir una instancia. Su run
+se limita a un intento y exige marca e inventario antes de cargar/retirar.
+24 escenarios pasaron en Lua5.4 S3; no se ejecutó minimal.elf. Backend real,
+activación manual y plan físico final siguen pendientes.
+
 R194. `minimal.c` recibe el puntero que entrega el loader observado en la
 imagen M2315W1/2.2.86 y devuelve cero. No hace logging, imports, asignaciones,
 threads, callbacks, escrituras o acceso a drivers. No es DOOM ni un hello C
