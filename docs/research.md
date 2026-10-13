@@ -1,6 +1,11 @@
 # Investigación inicial
 
-**Actual R204:** [C propio mínimo ejecutado/retirado en RW4 M2315W1/2.2.86](first-c-corrected-physical-result-r203.md).
+**Actual R206:** [imports y tabla seleccionada investigados en PC](rw4-exports-r206.md).
+Ruta de resolución identificada; tabla usable todavía pendiente. No se infiere
+API exportada de nombres de comandos NSH. Próximo: puente Lua/nativo y logging.
+Sin nuevos comandos al hardware.
+
+**Historial R204:** [C propio mínimo ejecutado/retirado en RW4 M2315W1/2.2.86](first-c-corrected-physical-result-r203.md).
 Cinco indicadores condicionados por fuente revisada y retorno/navegación
 normales comunicados por usuario. Mecanismo Lua→NSH stock, sin reemplazar firmware.
 Sin rawtrace/heap, imports/APIs o aislamiento probados; próximo análisis de exports

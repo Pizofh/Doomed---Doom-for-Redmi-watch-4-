@@ -1,6 +1,15 @@
 # Matriz de evidencia
 
-**Actual R204:** [C propio cargado/retirado y retorno normal en RW4](first-c-corrected-physical-result-r203.md).
+**Actual R206:** [resolución de imports inspeccionada en PC](rw4-exports-r206.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Loader busca imports por nombre en módulos y tabla seleccionada | Imagen candidata M2315W1/2.2.86 | Getter/lookup y flujo inspeccionados R205/R206 | INFERENCIA RAZONABLE SOBRE RW4 | Alta para flujo de imagen | Sí, análisis estático PC | No import probado físicamente |
+| Globals de tabla/cantidad pertenecen a BSS zeroed | Misma imagen | Anclas getter y arranque R206 | INFERENCIA RAZONABLE SOBRE RW4 | Alta para flujo inspeccionado | Sí, PC | No valor RAM leído ni tabla vacía permanente demostrada |
+| printf importable porque existe comando shell printf | NSH vs módulo C RW4 | Entrada de comando no tabla de exports | SIN EVIDENCIA | Desconocida | No import ensayado | No se refuta libc o imports por otros mecanismos |
+| END rojo al reabrir FirstC2 concuerda con bloqueo por marca | Misma unidad | Observación usuario posterior y guard de fuente R202 | INFERENCIA RAZONABLE | Media | Observación física, sin logs | Rojo también representa setup incierto; no prueba reboot/segunda carga |
+
+**Historial R204:** [C propio cargado/retirado y retorno normal en RW4](first-c-corrected-physical-result-r203.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

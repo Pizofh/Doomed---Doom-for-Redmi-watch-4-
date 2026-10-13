@@ -1,6 +1,25 @@
 # Retomar el proyecto
 
-**Actual R204, 2026-10-13:** [primer C propio RW4 ejecutado/retirado y retorno normal](first-c-corrected-physical-result-r203.md).
+**Actual R206, 2026-10-13:** [exports investigados solo PC](rw4-exports-r206.md).
+Scripts research-rw4-exports-r205.mjs / research-rw4-export-selection-r206.mjs
+pasaron hashes/anclas sobre imagen privada R193. Reportes ya existen en
+artifacts/research/rw4-exports-r205 y rw4-export-selection-r206; scripts rechazan
+sobrescribir. No repetir ni borrar reportes para continuar.
+Loader intenta imports vía módulos y getter0x1e7f48/lookup0x1ef738. Getter lee
+globals3c1aef98/94, ambos en BSS puesta a cero; no fallback visible ni setter
+identificado. Un literal exacto cada uno, cero MOVWlow16exactos. No exhaustivo:
+bases/otrasimágenes/runtime pueden inicializar. No afirmar tabla vacía permanente
+ni APIs imposibles. printf/usleep son NSH; fopen/fread revisados son mensajes,
+no exports. gettimeofday otraestructura sin clasificar. NuttX12.3 ref fijada,
+no fuente exacta Xiaomi. Sin logging C/nuevo binario/medición de RAM.
+Usuario reabrió FirstC2 y vio ENDrojo inicial: coherente con marca, color no
+prueba causa exacta/otra carga/reboot. Guardado en resultadoR203; no rearmar.
+No operaciones reloj/teléfono/BT. Gates sin cambios/cerrados.
+Siguiente solo PC: rastrear puente Lua/nativo y su resolución de funciones para
+identificar logging con contrato comprobado. No llamadas absolutas basadas en
+nombres/tablas sin clasificar; no nueva autorización física disponible.
+
+**Historial R204, 2026-10-13:** [primer C propio RW4 ejecutado/retirado y retorno normal](first-c-corrected-physical-result-r203.md).
 Usuario: «al darle run c file,mark,l oad, unload y end quedaron verdes».
 Después «todo ok, volvi a la original» a menús/desplazamiento/pulsación larga.
 Ensayo R203 completado. No reabrir/repetir, borrar marca o retirar esfera

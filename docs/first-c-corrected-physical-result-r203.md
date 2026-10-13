@@ -52,14 +52,14 @@ privados bajo artifacts/first-c-r203-reviewed. Sin claves/MAC/serial/paquetes cr
 publicados. Fuentes temporales de habilitación restauradas, sin cambios pendientes
 en herramientas o C#.
 
-## Observación pendiente
+## Historial: observación pendiente al terminar la instalación
 
 Se pidió seleccionar FirstC2 (no FirstC), comprobar etiquetas y cinco indicadores
 grises, pulsar RUN C una sola vez y comunicar FILE/MARK/LOAD/UNLOAD/END.
 Si END rojo inicial, etiquetas ausentes o UI falla: no pulsar ni repetir.
 Después volver a habitual desde Ajustes y comprobar menús/pulsación larga.
 
-**No observación física de UI, carga C o retirada recibida todavía.** No afirmar
+En ese momento no había observación física de UI, carga C o retirada. No afirmar
 éxito nativo por instalación. No nuevo envío, rearmar/borrar marca, abrir FirstC
 anterior o rmmod remoto ciego. El guard de rw4minr197 y las limitaciones de
 privilegios/recovery del plan siguen aplicando al toque autorizado.
@@ -104,3 +104,14 @@ No nuevo envío, ejecución, GET, DELETE, reset/revinculación o modificación d
 firmware al registrar estas respuestas. Gates siguen cerrados; script/paquete
 almacenados, módulo retirado. Siguiente checkpoint solo PC: identificar exports
 y contrato de APIs para un mensaje emitido desde C, antes de un nuevo plan físico.
+
+## R205 — observación posterior de reapertura
+
+El usuario volvió a seleccionar FirstC2 por iniciativa propia y comunicó END
+rojo desde el principio. No comunicó una segunda secuencia de carga exitosa.
+Es coherente con la marca del intento anterior: main-r202.lua llama ui.stop()
+antes de habilitar RUN C si marker_state() no es absent. El mismo rojo sirve
+para estado incierto o fallo de setup: solo el color no identifica inequívocamente
+la causa ni demuestra un nuevo inventario físico. No prueba durabilidad por reboot.
+No se borró/rearmó la marca ni se pidió repetir. El retorno normal R204 sigue
+siendo la observación de cierre del ensayo autorizado.
