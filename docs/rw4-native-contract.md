@@ -22,6 +22,9 @@ usuario volvió a habitual con funcionamiento normal. **No se ejecutó C propio.
 
 ## Adquisición prevista solo PC
 
+Primer resultado: [R192, logs locales ausentes y APKcache disponible](firmware-acquisition-r192.md).
+Todavía no hay firmware/SDK exacto obtenido ni contrato verificado.
+
 1. Buscar metadatos de OTA/build en las copias locales ya obtenidas de Mi
    Fitness/logs/APK, sin lanzar la app, solicitar OTA al reloj o usar credenciales
    en red. Las URLs serían candidatos privados, no prueba de compatibilidad.
