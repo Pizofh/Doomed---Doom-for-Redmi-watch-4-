@@ -26,7 +26,12 @@ const specs = Object.freeze({
     sha256:'e0fe5fb93311460eb784d44b449613ec0defc20841e061096811b4b42eea9c4d',
     sourceSha256:'764d532c6810a51999434c1f7847ec075e5d85c273792ab9b5777a91c7a2f4a7',
     sourceArtifact:'experiments/lua-native-info/main.lua',
-    artifact:'artifacts/lua-native-info-r188/NativeInfo-id-only.face',journal:'lua-native-info-r189.json'})
+    artifact:'artifacts/lua-native-info-r188/NativeInfo-id-only.face',journal:'lua-native-info-r189.json'}),
+  r197:Object.freeze({variant:'r197',contentKind:'native-first-c',id:'365219996',size:22500,
+    sha256:'bf3bfbd4147ed27527fc7659aac0098472252016725af6ef2750e86cd2f5cbf9',
+    sourceSha256:'b431f91f31c36fe1fb58a48595a51ee6c5593f5c2d0924c37746988ed3ed7c85',
+    sourceArtifact:'artifacts/first-c-r197/app/lua/main.lua',nativeCodeIncluded:true,
+    artifact:'artifacts/first-c-r197/FirstC-id-only.face',journal:'first-c-r198.json'})
 });
 export function staticSpec(variant = 'r167') {
   if (typeof variant !== 'string' || !Object.hasOwn(specs,variant)) throw Error('StaticSpecRefused');
