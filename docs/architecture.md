@@ -1,13 +1,18 @@
 # Arquitectura
 
-R73: [Doom persistente en S3 emulado](doom-persistence-emulator.md), carga bajo demanda/salida/reapertura tras reset. M2315W1 sigue condicionado por ABI, APIs, privilegios, RAM y recovery desconocidos. [Matriz](evidence-matrix.md).
+R182: Lua/objetos LVGL propios confirmados en M2315W1/2.2.86,texto ausente.
+R183: [texto LVGL no es requisito del renderer Doom](adr/0004-lvgl-labels-are-not-a-doom-rendering-gate.md).
+R73: [Doom persistente en S3 emulado](doom-persistence-emulator.md),carga/salida/reapertura.
+Ejecución C física sigue condicionada por ABI,loader,APIs,privilegios,RAM y recovery.
+[Matriz](evidence-matrix.md).
 
 ## Objetivo físico condicionado
 
 ```mermaid
 flowchart TD
     S[Firmware Xiaomi stock] --> W[Funciones normales]
-    S --> L[Entrada Lua / app / QuickApp por demostrar]
+    S --> L[Watchface Lua y objetos LVGL confirmados]
+    S -. compatibilidad pendiente .-> A[App / QuickApp físico]
     L -. mecanismo fisico pendiente .-> D[DOOM original / doomgeneric]
     D --> P[Adaptador display / input / tiempo / FS]
     P -. ABI y APIs fisicas pendientes .-> V[Xiaomi Vela / NuttX pertinente]

@@ -1,6 +1,11 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R182:** [LuaDiag física ejecuta y dibuja objetos](lua-diagnostic-physical-result-r182.md).
+**Actual R183:** [investigación de fuentes en PC/S3](lua-font-research-r183.md).
+Sin operación nueva alreloj. builtinMONTSERRAT14 pistaRW4,expone/creaS3CLI,
+render2.2.86 sinprobar. Gatescerrados; no nuevopaquetefísico oloaderC autorizado.
+Texto no será requisito para estudiarImage/Doom; próxima preparación soloPC.
+
+**Historial R182:** [LuaDiag física ejecuta y dibuja objetos](lua-diagnostic-physical-result-r182.md).
 Usuario autorizaúnicoinstallr180;6partes,GET13→14,anterioresconservadas;gates
 cerrados otra vez. Panel/marcadores confirmanLua+LVGL físicamente;textoausente.
 Usuario confirma longpress/cambioesferas/restofuncionesnormales. NoDELETE,

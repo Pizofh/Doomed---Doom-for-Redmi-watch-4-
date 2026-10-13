@@ -1,6 +1,18 @@
 # Matriz de evidencia
 
-**R182, 2026-10-12:** [LuaDiag física, formas funcionan y texto ausente](lua-diagnostic-physical-result-r182.md).
+**R183, 2026-10-12:** [fuentes upstream y CLI S3 contrastados](lua-font-research-r183.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Muestra AnalogTimeAnimated etiquetada RW4 usa MONTSERRAT_14 | Código comunitario RW4 | main.lua de5af6e14,Gitblob/SHA verificados | CONFIRMADO EN FUENTE DE MUESTRA | Alta documental | Estático | No instalado ni confirmado en2.2.86 |
+| MONTSERRAT12/14/16 están expuestas y Fontmontserrat14 se crea | EmuladorS3/LuaCLI | ProbeR183,typeuserdata/created | CONFIRMADO EN EMULADOR | Alta | Sí | No render de esta fuente medido aquí |
+| MiSans24/32 se crea desde CLI de este guest | EmuladorS3/LuaCLI | pcall devuelve cannot-create-font | REFUTADO PARA ESE CONTEXTO | Alta | Sí | MiSans24 sírenderizóR177enwatchfaceS3 |
+| Resultado CLI equivale al contexto watchface | EmuladorS3 | Resultados diferentes de mismafamilia/tamaño | REFUTADO COMO SUPOSICIÓN GENERAL | Alta | Sí/historial | No causaexactadel callback inspeccionada enbinario |
+| Resolver familia externa puede depender de callback contexto | LuaVGLupstream62868a0 | _luavgl_font_create consulta ctx.make_font | CONFIRMADO EN CÓDIGO UPSTREAM | Alta | Estático | No fuenteexactadel firmwareRW4/S3 |
+| Color numérico es inválido para estilo en este upstream | LuaVGLupstream | luavgl_tocolor acepta enteros RGB ystrings | REFUTADO EN UPSTREAM CONSULTADO | Alta | Estático | Semántica exactaforkfísico sin demostrar |
+| MONTSERRAT_14 resuelve texto ausente en RW4 | M2315W1/2.2.86 | Pista comunitaria,noprobadaenunidad | INFERENCIA RAZONABLE | Limitada | No | No enviar otra variante automáticamente |
+
+**Historial R182, 2026-10-12:** [LuaDiag física, formas funcionan y texto ausente](lua-diagnostic-physical-result-r182.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

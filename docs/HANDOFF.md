@@ -1,6 +1,36 @@
 # Retomar el proyecto
 
-**Actual R182, 2026-10-12:** [Lua/objetos LVGL físicos confirmados,texto ausente](lua-diagnostic-physical-result-r182.md).
+**Actual R183, 2026-10-12:** [investigación de fuentes solo PC](lua-font-research-r183.md).
+Usuario autorizó investigar/probar en PC, sin otro envío físico. Muestra
+AnalogTimeAnimated/RW4 de m0tral, commit5af6e14, usa BUILTIN_FONT.MONTSERRAT_14.
+TouchEvents usa MiSansW regular32. Son muestras, no pruebas de la unidad2.2.86.
+LuaVGL62868a0 resuelve builtin según configuración y puede consultar
+ctx.make_font para otras familias; no es fuente exacta del firmware.
+
+Diez fuentes/licencia obtenidas como datos del conector GitHub coinciden con
+GitblobSHA1 y SHA256. Caché ignorada artifacts/research/lua-fonts-r183; metadata
+pública docs/lua-font-sources-r183.json. LuaVGL MIT conservada; licencia m0tral
+no identificada, no publicar scripts/assets. verify-font-research.mjs verifica
+bytes sin ejecutar fuentes o usar ADB.
+
+inspect-fonts-emulator.mjs ejecutó el Lua propio finito en S3, guard de QEMU y
+ADB5039/emulator-5554 sin USB. Lua5.4, Font función, MONTSERRAT12/14/16 userdata,
+Font montserrat14 creado; MiSansW regular24/32 dieron cannot-create-font.
+No widgets/timers/archivos guest/shell desde Lua. Require/Font inicializan
+bindings o reservan objetos: no lectura pura. Storage visible después, sin
+reset o cambios de paquetes. No render de esta constante medido en R183.
+R177 sí renderizó MiSans24 en watchface S3; no extrapolar fallos de CLI al
+contexto watchface o atribuir causa exacta a callback sin inspección del binario.
+
+Sin Bluetooth/teléfono/USB/reloj físico usado. Gates false, build nativo R182
+03d3be0cb02ef6cea717a11fc4cb82c6ca66cd8d51d8186107149961e4af217b.
+ADR0004: texto LVGL no bloquea el renderer de Doom, que usa buffers y WAD.
+Siguiente checkpoint único: preparar una Image mínima en PC sin labels,
+basada en wrapper RW4. Antes del hardware: paquete/plan/revisión concretos.
+Mantener MONTSERRAT14 como pista, sin encadenar ensayos físicos de fuentes.
+C/ABI/loader/privilegios siguen sin demostrar; Lua/formas físicas son R182.
+
+**Historial R182, 2026-10-12:** [Lua/objetos LVGL físicos confirmados,texto ausente](lua-diagnostic-physical-result-r182.md).
 Usuario «Sí,autorizar elensayoLuaDiag» aplanR181; una installr180 completada
 RegisteredInactive,6partes,10979bytesTX,15TX17RX,cierre/workertrueexit0.
 GETposterior13→14,13IDs/flags/activa anterioresconservadas,own365219992

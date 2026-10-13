@@ -1,0 +1,78 @@
+{
+  "checkpoint": "R183",
+  "files": [
+    {
+      "name": "luavgl-font.c",
+      "bytes": 6803,
+      "gitBlobSha1": "a3d94e9a167ae7fe16a8b17577a6300211f7ae5f",
+      "sha256": "d60dc1c7b82d9e3945d5a8404f69479c2a701452755131ec45e38c55a77c4bbf",
+      "url": "https://github.com/XuNeo/luavgl/blob/62868a05b0b3e79b91f49ce9c3661750ffe55d02/src/font.c"
+    },
+    {
+      "name": "luavgl-label.c",
+      "bytes": 1293,
+      "gitBlobSha1": "230591e76b2484dadcb663018fd9b2559a309775",
+      "sha256": "a6637321b4612d40526c18754e9aba5c11ae45ea064c1de53b21b6a7ed2e596c",
+      "url": "https://github.com/XuNeo/luavgl/blob/62868a05b0b3e79b91f49ce9c3661750ffe55d02/src/widgets/label.c"
+    },
+    {
+      "name": "luavgl-obj.c",
+      "bytes": 30931,
+      "gitBlobSha1": "c50749fdb74495e2a58c90b9143ecc5f4a12e2d8",
+      "sha256": "156834fdfbea64b691f2318ca13c61e1bd0c92630b4a47a74e26ec45365f998d",
+      "url": "https://github.com/XuNeo/luavgl/blob/62868a05b0b3e79b91f49ce9c3661750ffe55d02/src/obj.c"
+    },
+    {
+      "name": "luavgl-style.c",
+      "bytes": 24936,
+      "gitBlobSha1": "766ab6e1899818a68aab82c4f372bf7a099bdf21",
+      "sha256": "ef3c53749a9ab4ac06e14c590172b8d0a6e3f577c0047e2a36522678962d95da",
+      "url": "https://github.com/XuNeo/luavgl/blob/62868a05b0b3e79b91f49ce9c3661750ffe55d02/src/style.c"
+    },
+    {
+      "name": "luavgl-constants.c",
+      "bytes": 25287,
+      "gitBlobSha1": "a7ff98b4aa05281f1f8aebbf662ebd215fedb918",
+      "sha256": "91b0a20b24ef6bd72836309bea24764ec9ce935a41f9836da2fdfd4389f8db71",
+      "url": "https://github.com/XuNeo/luavgl/blob/62868a05b0b3e79b91f49ce9c3661750ffe55d02/src/constants.c"
+    },
+    {
+      "name": "luavgl-util.c",
+      "bytes": 15456,
+      "gitBlobSha1": "b2d702389bf4f01e92f226825146c69ac8e566bf",
+      "sha256": "f16ebe89fe3ae95c93f41927680bc38dc8c77a11f4c0c060c4ab63e6089f0898",
+      "url": "https://github.com/XuNeo/luavgl/blob/62868a05b0b3e79b91f49ce9c3661750ffe55d02/src/util.c"
+    },
+    {
+      "name": "luavgl-luavgl.h",
+      "bytes": 8512,
+      "gitBlobSha1": "a3557f9e81522190680051468ef53d7a509e6990",
+      "sha256": "7fc0164210c451fd6914e5943e2cdad57f795e8ee9035e8354b084f839eb4c27",
+      "url": "https://github.com/XuNeo/luavgl/blob/62868a05b0b3e79b91f49ce9c3661750ffe55d02/src/luavgl.h"
+    },
+    {
+      "name": "rw4-analog-main.lua",
+      "bytes": 2534,
+      "gitBlobSha1": "5ff48c72bf2ea88a45cbf85580829886a28a63ac",
+      "sha256": "b035b8f6734c4163aa19e91225004f8786b21f908f7b879376405fa199de4cd1",
+      "url": "https://github.com/m0tral/MiWatchLuaWatchfaces/blob/5af6e14ea92830a394c88dc04f76ceef697a6ded/RedmiWatch4/AnalogTimeAnimated/app/lua/main.lua"
+    },
+    {
+      "name": "rw4-diffusion-main.lua",
+      "bytes": 28264,
+      "gitBlobSha1": "b4368ddbef5893b305ba6c72e295923959b5f10d",
+      "sha256": "07baa8529e3fe82b445648c3ed805d41f9bccc2dfbc9945c889a19c825c7d58f",
+      "url": "https://github.com/m0tral/MiWatchLuaWatchfaces/blob/5af6e14ea92830a394c88dc04f76ceef697a6ded/RedmiWatch4/Diffusion/app/main.lua"
+    },
+    {
+      "name": "luavgl-LICENSE",
+      "bytes": 1063,
+      "gitBlobSha1": "5c9071dd10d0624275c4d7e1b998bf7af19ed2ed",
+      "sha256": "403c223d977fe5944be0dbbb73a3e2265839e49670fd56300aa392f80e02b119",
+      "url": "https://github.com/XuNeo/luavgl/blob/62868a05b0b3e79b91f49ce9c3661750ffe55d02/LICENSE"
+    }
+  ],
+  "executed": false,
+  "cacheDirectory": "artifacts/research/lua-fonts-r183",
+  "scope": "Primary source inspection; Luavgl upstream is not a verified RW4 firmware source"
+}

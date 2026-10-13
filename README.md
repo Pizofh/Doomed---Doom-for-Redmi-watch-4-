@@ -1,6 +1,14 @@
 # DOOM en Redmi Watch 4
 
-**Actual R182:** [Lua y formas LVGL confirmadas en el RW4 físico](docs/lua-diagnostic-physical-result-r182.md).
+**Actual R183:** [investigación de fuentes solo en PC](docs/lua-font-research-r183.md).
+Una muestra RW4 usa BUILTIN_FONT.MONTSERRAT_14; el emulador expone esa constante
+y crea montserrat14 desde CLI,pero MiSans24/32 falla en ese contexto. No se
+demuestra aún la causa del texto ausente ni la constante en2.2.86. Fuentes
+primarias con hashes verificados,ningún nuevo envío al reloj.
+[Decisión](docs/adr/0004-lvgl-labels-are-not-a-doom-rendering-gate.md): texto LVGL
+no bloqueará render de Doom. Siguiente: preparar prueba Image en PC,sin labels.
+
+**Historial R182:** [Lua y formas LVGL confirmadas en el RW4 físico](docs/lua-diagnostic-physical-result-r182.md).
 LuaDiag instalada una vez: catálogo13→14,anteriores conservadas. Usuario ve
 panel magenta y marcadores amarillo/verde distintos del preview; pulsación
 larga/cambio de esferas y demás funciones normales. **Texto no aparece**:
