@@ -1,5 +1,11 @@
 # Ejecución y privilegios
 
+**R191:** [Lua→shell NuttX confirmado en2.2.86](native-info-physical-result-r190.md),
+con lectura de captura y eliminación devuelta comoexitosa. help anuncia
+insmod/rmmod/lsmod; iwasm ausente deese listado. package.loadlib solo expuesto,
+no invocado. Retorno normal confirmado porusuario. [Contrato nativoRW4](rw4-native-contract.md)
+pendiente: ninguna cargaC/ELF o conclusión de aislamiento por este ensayo.
+
 **R190:** [NativeInfo registrada en el RW4 tras revisión](native-info-physical-result-r190.md),
 sin activación por PC. Gates cerrados; consultas de shell/io/loader anunciado
 siguen pendientes de observación manual. Nada de C/ELF/insmod físico ejecutado.

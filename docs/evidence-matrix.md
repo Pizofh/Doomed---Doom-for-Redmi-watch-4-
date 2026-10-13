@@ -1,6 +1,19 @@
 # Matriz de evidencia
 
-**R190:** [NativeInfo registrada físicamente; inventario visual pendiente](native-info-physical-result-r190.md).
+**R191:** [shell NuttX confirmado y retorno normal](native-info-physical-result-r190.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| os.execute ejecuta help/uname desde watchfaceLua | M2315W1/2.2.86 | SHELL/NUTTX verdes por salida capturada reconocida | CONFIRMADO EN RW4 | Alta por source y observación | Usuario | No shellinteractivo o permisos aislados |
+| io.open lee/cierra captura propia; os.remove devuelveéxito | Misma unidad | Flujo avanza a indicadores yCLEANUPverde | CONFIRMADO EN RW4 | Alta para llamada/lectura | Usuario | No io.write probado ni readback adicional de ausencia |
+| help anuncia insmod/rmmod/lsmod | Misma unidad | Tres filas verdes | CONFIRMADO EN RW4 | Alta para listado | Usuario | No comandos de módulos invocados ni ELF cargado |
+| iwasm anunciado en este helpcapturado | Misma unidad | IWASMrojo | REFUTADO PARA ESTE LISTADO | Alta para resultado | Usuario | WAMR interno uotra interfaz siguen sin evidencia |
+| NuttX/arm aparecen enuname | Misma unidad | Dos filas verdes | CONFIRMADO EN RW4 | Alta para tokens | Usuario | No versiónNuttX/ISA/FPU/ABI obuildmodel |
+| package.loadlib expuesto comofunction | Misma unidad | LOAD FUNC amarillo | CONFIRMADO EN RW4 | Alta para tipo | Usuario | No invocación, puede serstub |
+| Retornohabitual/menús/pulsaciónlarga normales | Misma unidad | Confirmaciónposterior explícita | CONFIRMADO EN RW4 | Alta comunicada | Usuario | No cierreVM ocrashrecovery demostrado |
+| El loader acepta nuestro C oejecutaenuserspaceaislado | Misma unidad | No payloadC/contrato ejecutados | SIN EVIDENCIA | Desconocida | No | ContratoRW4pendiente, gatescerrados |
+
+**Historial R190:** [NativeInfo registrada físicamente; inventario visual entonces pendiente](native-info-physical-result-r190.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|
@@ -843,16 +856,16 @@ Continuación 2026-10-03: lua-api confirmó disp.load_scr/get_scr_act y Timer en
 
 | # | Claim | Device | Evidence | Classification | Confidence | Tested locally | Notes / siguiente evidencia necesaria |
 |---|---|---|---|---|---|---|---|
-| 1 | Lua permite `os.execute()` | RW4, firmware desconocido | R74 articulo original m0tral, preparacion | INFERENCIA RAZONABLE | Media como relato, sin contrato | No | No version/region/transcript RW4;10sources no la llaman |
-| 2 | Shell NuttX accesible indirectamente | RW4, firmware desconocido | R74 relato autor sobre Lua/shell | INFERENCIA RAZONABLE | Media como relato | No | Requiere prueba especifica antes de uso |
-| 3 | Shell incluye `insmod` | RW4 | R29 upstream | SIN EVIDENCIA | No evaluable | No | `help` de build real, después gate físico |
+| 1 | Lua permite `os.execute()` | M2315W1/2.2.86 | R191 NativeInfo/help/uname reconocidos | CONFIRMADO EN RW4 | Alta por source/observación | Usuario | Dos comandos fijos aprobados; no acceso arbitrario probado |
+| 2 | Shell NuttX accesible indirectamente | M2315W1/2.2.86 | R191 SHELL/NUTTX verdes | CONFIRMADO EN RW4 | Alta para consultas | Usuario | Contexto/privilegios/versión exacta pendientes |
+| 3 | Shell incluye `insmod` | M2315W1/2.2.86 | R191 help anuncia token | CONFIRMADO EN RW4 | Alta para listado | Usuario | No insmod ejecutado, ELF/ABI/exports sin probar |
 | 4 | Carga módulos ELF nativos | RW4 | R28 upstream | SIN EVIDENCIA | No evaluable | No | Loader/config/exports/ABI concretos |
 | 5 | Módulos persistentes cargables bajo demanda | RW4 | Diseño deseado | SIN EVIDENCIA | No evaluable | No | FS escribible persistente y loader |
-| 6 | Existe `rmmod` | RW4 | R29 upstream | SIN EVIDENCIA | No evaluable | No | Compilación/semántica concretas |
-| 7 | Existe `lsmod` | RW4 | R29 upstream | SIN EVIDENCIA | No evaluable | No | Inspección específica |
-| 8 | Existe `iwasm`/WAMR | RW4 | No runtime específico hallado | SIN EVIDENCIA | No evaluable | No | No confundir WASM web con reloj |
+| 6 | Existe `rmmod` | M2315W1/2.2.86 | R191 help anuncia token | CONFIRMADO EN RW4 | Alta para listado | Usuario | Semántica/unload no ejecutados |
+| 7 | Existe `lsmod` | M2315W1/2.2.86 | R191 help anuncia token | CONFIRMADO EN RW4 | Alta para listado | Usuario | No lista real de módulos consultada |
+| 8 | Existe `iwasm`/WAMR | M2315W1/2.2.86 | R191 iwasm ausente de help capturado | SIN EVIDENCIA de runtime | Alta para ausencia del token, runtime desconocido | Usuario, listado | iwasm anunciado refutado solo para este listado; no WAMR interno refutado |
 | 9 | ELF userspace sin privilegios kernel | RW4 | R27 posibilidades upstream | SIN EVIDENCIA | No evaluable | No | Build model y servicio de ejecución |
-| 10 | C nativo con firmware stock | RW4 | No mecanismo demostrado | SIN EVIDENCIA | No evaluable | No | No root como premisa |
+| 10 | C nativo con firmware stock | M2315W1/2.2.86 | Shell+comandos de módulos anunciados R191, sin cargaC | SIN EVIDENCIA de ejecución C | Desconocida | No | Ruta candidata concreta; falta contrato y ensayo autorizado |
 | 11 | Acceso directo a framebuffer | RW4 | R13 emulador | SIN EVIDENCIA | No evaluable | No | Permisos/formato/ownership del driver |
 | 12 | `/dev/fb0` existe en firmware real | RW4 | R13 solo emulador | SIN EVIDENCIA | No evaluable | No | Inventario real aún prohibido |
 | 13 | LVGL utilizable desde C nativo propio | RW4 | R09 solo binding Lua | SIN EVIDENCIA | No evaluable | No | ABI/símbolos y task/UI ownership |

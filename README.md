@@ -1,6 +1,13 @@
 # DOOM en Redmi Watch 4
 
-**Actual R190:** [NativeInfo instalada tras autorización](docs/native-info-physical-result-r190.md).
+**Actual R191:** [shell NuttX confirmado en M2315W1/2.2.86](docs/native-info-physical-result-r190.md).
+NativeInfo: os.execute/io.open/loadlib expuestos, help/uname reconocidos,
+insmod/rmmod/lsmod anunciados, iwasm no aparece enhelp; captura retirada según
+retorno deos.remove. Usuario confirma salida y funciones normales. No C/ELF
+cargado ni nuevo envío; gates cerrados. Siguiente: [contrato nativo exacto](docs/rw4-native-contract.md),
+con investigación de fuentes/firmware verificable soloPC.
+
+**Historial R190:** [NativeInfo instalada tras autorización](docs/native-info-physical-result-r190.md).
 Un envío de siete partes; GET15→16 con entradas/flags/selección anteriores
 conservados y propia inactiva/eliminable. Gates cerrados. Falta selección manual,
 lectura de indicadores y retorno habitual; shell/C físico todavía no demostrado.

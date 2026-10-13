@@ -1,6 +1,11 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R190:** [NativeInfo instalada una vez tras revisión](native-info-physical-result-r190.md).
+**Actual R191:** [shell NuttX y comandos de módulos anunciados enRW4](native-info-physical-result-r190.md).
+Usuario confirma indicadores, iwasm ausente del help y retorno normal. No
+cargas C/ELF, envíos/consultas nuevas o retirada. Gates cerrados; antes de
+helloC físico falta [contrato2.2.86/privilegios](rw4-native-contract.md).
+
+**Historial R190:** [NativeInfo instalada una vez tras revisión](native-info-physical-result-r190.md).
 Catálogo15→16,anteriores conservadas,propia inactiva; gates cerrados y sockets
 terminados. Pendiente diagnóstico visual/retorno del usuario. No C/loaders/ELF
 o firmware autorizado por este ensayo. No nuevos envíos mientras queda pendiente.

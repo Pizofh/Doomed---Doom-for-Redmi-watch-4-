@@ -1,5 +1,8 @@
 # R189 — NativeInfo preparado, envío físico aún sin autorizar
 
+**Resultado R191:** [usuario confirma shell/comandos y retorno normal](native-info-physical-result-r190.md).
+No hay autorización para cargar módulos por ese resultado.
+
 **Actualización R190:** usuario autorizó y se realizó un único envío;
 [registrada/inactiva con gates cerrados](native-info-physical-result-r190.md).
 Selección/inventario visual/retorno pendientes. Texto inferior conserva la
