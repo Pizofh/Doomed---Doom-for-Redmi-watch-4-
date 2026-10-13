@@ -1,6 +1,11 @@
 # Investigación inicial
 
-**Actual R206:** [imports y tabla seleccionada investigados en PC](rw4-exports-r206.md).
+**Actual R210:** [loadlib/print inspeccionados en PC](rw4-lua-bridge-r209.md)
+y [C logging candidato compilado](rw4-log-candidate-r210.md).1120bytes,3bindings
+específicos de imagen, fingerprints y1ABS32 interna. Sin hardware ejecutado.
+Siguiente carrier con captura del mensaje/retirada para revisión posterior.
+
+**Historial R206:** [imports y tabla seleccionada investigados en PC](rw4-exports-r206.md).
 Ruta de resolución identificada; tabla usable todavía pendiente. No se infiere
 API exportada de nombres de comandos NSH. Próximo: puente Lua/nativo y logging.
 Sin nuevos comandos al hardware.

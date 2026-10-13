@@ -1,6 +1,12 @@
 # Ejecución y privilegios
 
-**Actual R204:** [C propio ejecutado/retirado en M2315W1/2.2.86](first-c-corrected-physical-result-r203.md).
+**Actual R210:** [candidato logging C soloPC](rw4-log-candidate-r210.md).
+loadlib fallback deshabilitado en imagen; insmod ya demostrado sigue elegido.
+Tres bindings de stdio inferidos del print stock, específicos de la imagen;
+no comprobados en hardware y potencialmente privilegiados. Candidato no enviado.
+Siguiente carrier/captura/cleanup con backend simulado, gates físicos cerrados.
+
+**Historial R204:** [C propio ejecutado/retirado en M2315W1/2.2.86](first-c-corrected-physical-result-r203.md).
 Lua→NSH stock cargó ELF mínimo, observó registro y retiró el módulo; cinco
 verdes/retorno normal confirmados por usuario. C sin imports/APIs, no app
 userspace aislada demostrada. Config/privilegios exactos siguen pendientes;

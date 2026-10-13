@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R206:** [funciones externas investigadas en PC](docs/rw4-exports-r206.md).
+**Actual R210:** [hello de logging C compilado solo PC](docs/rw4-log-candidate-r210.md).
+1.120bytes, bindings específicos de imagen y fingerprints antes de llamadas;
+todavía no ejecutado/empaquetado para hardware. [loadlib deshabilitada y ruta
+stock de stdout inspeccionadas](docs/rw4-lua-bridge-r209.md). Siguiente: carrier
+con captura del mensaje y retirada del módulo; gates físicos cerrados.
+
+**Historial R206:** [funciones externas investigadas en PC](docs/rw4-exports-r206.md).
 Loader y búsqueda por nombre identificados; todavía sin tabla de APIs RW4
 verificada para un mensaje desde C. Siguiente: rastrear el puente Lua/nativo
 en PC. No hubo nueva prueba física; FirstC2 sigue limitada a un intento.

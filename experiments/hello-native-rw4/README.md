@@ -1,6 +1,11 @@
 # Inicializador C mínimo RW4 — carga y retirada físicas confirmadas
 
-**Actual R204:** [usuario confirma cinco verdes y retorno normal a esfera original](../../docs/first-c-corrected-physical-result-r203.md).
+**Actual R210:** [candidato de logging compilado soloPC](../../docs/rw4-log-candidate-r210.md).
+log-r210.c/ld y build-rw4-log-r210.mjs producen ELF1120bytes,3bindings de versión
+y fingerprintchecks,1ABS32 interna. No ejecutado/empaquetado/autorizado para
+hardware. No reemplazar FirstC2 o su marca. Siguiente carrier/captura/cleanup.
+
+**Historial R204:** [usuario confirma cinco verdes y retorno normal a esfera original](../../docs/first-c-corrected-physical-result-r203.md).
 FirstC2 ejecutó el candidato784bytes/int init(void*) return0 y confirmó registro/
 retirada. No logging C o APIs externas; UI es Lua. Ensayo completado, gates cerrados
 y sin reintentos/rearme. Próximo checkpoint: contrato de exports/API solo en PC.

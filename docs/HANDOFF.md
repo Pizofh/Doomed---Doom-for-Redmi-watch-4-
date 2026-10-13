@@ -1,6 +1,32 @@
 # Retomar el proyecto
 
-**Actual R206, 2026-10-13:** [exports investigados solo PC](rw4-exports-r206.md).
+**Actual R210, 2026-10-13:** [C logging candidato solo PC](rw4-log-candidate-r210.md).
+loadlib registrada0xb0408→código0x2fdf10: flujo de fallback deshabilitado,
+DLMSG/absent/init, caso cache/* solo true; no nueva invocación física. Contrastado
+Lua5.4.0 upstream. [R207–R209](rw4-lua-bridge-r209.md) sigue Lua print: nombre
+es sufijo compartido, offset0xb1474, tabla0xb0ff4, caller0x303590. Tres callees:
+streambase0x1bcba4 sin args (TCB/group+92), writer0x1ec4e4 tipo fwrite,
+flush0x1ec608 tipo fflush; stdoutbase+128 en caller. Contraste NuttX10.3,
+no versión Xiaomi identificada ni SDK. Import normal todavía sin symtab usable.
+
+log-r210.c +ld, build-rw4-log-r210.mjs: build/hello-native-rw4/r210-final/log.elf,
+1120bytes,SHAcbfcae4a6fb3b0d9cae9389b8f99d774cd8df8af40b0170c144ebb0b41b2157e.
+ET_REL ARMv8M/Thumb,entry1,text226aligned8,cero imports POR NOMBRE,3APIsfijas,
+1ABS32 interno; sin writableestado/heap/tasks/FPU. Fuente SHAe7a27a884b97ea545ac1eb925cb605d698ffa9f677d8988d2fafed36a687f965.
+BindingsThumb0c2bcba5/0c2ec4e5/0c2ec609, tres FNV64bytes guard, mensaje17bytes
+RW4_C_HELLO_R210+newline; write+flush→0 o negativo. Guard puede fault al leer,
+no sandbox/recovery/ABI proof; stdout/NSHcontext pendiente, puede bloquear.
+Primerbuild privado r210 rechazado por3THMCALLhelper; always_inline dejaABS32,
+finalr210-final separado/review/disasm. No reejecutar ninguna copia ni borrar
+outputs existentes (scripts rechazan). SHAheadersmetadatos no firmwarecodepublicado.
+
+Sin carrier/ID/journal/physicalprofile/plan final; no autorización nueva ni
+operaciones reloj/teléfono/BT. FirstC2/marker no tocar. Siguiente soloPC:
+carrier captura acotada exacta de mensaje C y cleanup también cuando init
+rechaza/no registro; simular backend, NO ejecutar ARMv8M/direccionesRW4 enS3.
+Revisión física solamente después de paquete/hash/plan concreto. Gates cerrados.
+
+**Historial R206, 2026-10-13:** [exports investigados solo PC](rw4-exports-r206.md).
 Scripts research-rw4-exports-r205.mjs / research-rw4-export-selection-r206.mjs
 pasaron hashes/anclas sobre imagen privada R193. Reportes ya existen en
 artifacts/research/rw4-exports-r205 y rw4-export-selection-r206; scripts rechazan

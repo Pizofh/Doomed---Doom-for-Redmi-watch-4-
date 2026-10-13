@@ -1,6 +1,15 @@
 # Matriz de evidencia
 
-**Actual R206:** [resolución de imports inspeccionada en PC](rw4-exports-r206.md).
+**Actual R210:** [ruta Lua/stdio inspeccionada](rw4-lua-bridge-r209.md), [C logging compilado soloPC](rw4-log-candidate-r210.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| package.loadlib tiene backend dinámico funcional | Imagen candidata M2315W1/2.2.86 | Registro→función completa y fallback DLMSG/absent/init | REFUTADO EN LA IMAGEN INSPECCIONADA | Alta, estática | Sí, PC; no invocación física | No generalizar a otras versiones ni runtime parcheado |
+| print stock usa base streams+128, writer/flush identificables | Misma imagen | Caller Lua y tres callees, anclas BL y fuentes primarias | INFERENCIA RAZONABLE SOBRE RW4 | Alta para contratos inspeccionados | Sí, PC | Direcciones/contexto/lectura física no probados |
+| Candidato hello logging compila con solo ABS32 interna | PC, Arm14.3 y fuente propia | Build/readelf/disassembly R210 | CONFIRMADO EN PC | Alta | Sí |1120bytes,3bindings absolutos,no SDK/import por nombre |
+| C hello imprimió en el RW4 físico | M2315W1/2.2.86 | Candidato no desplegado/ejecutado | SIN EVIDENCIA | Desconocida | No | FirstC2 solo retorna0; no logging C previo |
+
+**Historial R206:** [resolución de imports inspeccionada en PC](rw4-exports-r206.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

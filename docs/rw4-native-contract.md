@@ -1,6 +1,12 @@
 # Contrato nativo parcial de M2315W1/2.2.86
 
-Actualización R206: [resolución de imports inspeccionada solo PC](rw4-exports-r206.md).
+Actualización R210: [candidato C logging compilado soloPC](rw4-log-candidate-r210.md).
+Tres bindings específicos de imagen, inferidos de print stock y callees;
+todavía sin llamadas/direcciones/lectura de código físicas verificadas. loadlib
+coincide con fallback deshabilitado en imagen; no usar como loader funcional.
+Siguiente carrier con captura/retirada, antes de nuevo plan/revisión física.
+
+Historial R206: [resolución de imports inspeccionada solo PC](rw4-exports-r206.md).
 Getter y búsqueda por nombre identificados; tabla de APIs utilizable todavía
 sin verificar. Globals en BSS zeroed no prueban tabla vacía permanente. Siguiente:
 rastrear puente Lua/nativo para logging, sin nuevo ensayo físico.
@@ -41,7 +47,7 @@ usuario volvió a habitual con funcionamiento normal. **No se ejecutó C propio.
 | Shell/carga | insmod/lsmod/rmmod y retorno efectivos R204, desde Lua stock | Contexto de ejecución/privilegios exactos; no shell interactivo demostrado |
 | Formato | ELF32 ARM LE ET_REL del candidato aceptado R204; R_ARM_ABS32 inspeccionado en imagen | Relocaciones/imports efectivos de futuros payloads; candidato no los usa |
 | ABI/toolchain | Firma init inspeccionada; retorno0 del candidato funciona R204 | ABI/FPU/libc/tipos de APIs para Doom; argumento no usado, no inferir layout completo |
-| Símbolos | Ruta getter/lookup inspeccionada R206; tablaRW4 no verificada | Selección efectiva, exports/imports y puente Lua/nativo; no usar direcciones absolutasS3 |
+| Símbolos | Getter/lookup R206; symtab no verificada;3bindings de stdio candidatos R210 | Verificar lectura/direcciones/contexto del candidato; no usar S3 o nombres sin clasificar |
 | Lifecycle | Inicialización/registro/retirada efectivos R204, sin tareas ni callback uninit propio | Propiedad/cleanup de tareas/referencias/exports para payloads complejos |
 | Privilegios | Desconocidos | FLAT/PROTECTED/KERNEL y contexto de módulos; asumir acceso amplio mientras no se demuestre aislamiento |
 | Memoria | Especificación comercial, no heap libre | Presupuesto real y memoria pico; no diseñar sobre32MB libres |
