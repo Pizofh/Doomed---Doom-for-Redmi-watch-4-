@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R183:** [investigación de fuentes solo en PC](docs/lua-font-research-r183.md).
+**Actual R184/R185:** [imagen Lua validada en el emulador](docs/lua-image-r184.md)
+y [ensayo físico preparado](docs/lua-image-physical-plan-r185.md). LuaImage9328bytes,
+ID365219993, recurso propioPNG96×64: cuadrantes y cruz renderizados y verificados,
+panel stock/salida/cierreLua correctos enS3. Sin fuentes/timers/C/Doom propios.
+No nuevo envío al reloj; ambos gates cerrados, pendiente revisión explícita.
+
+**Historial R183:** [investigación de fuentes solo en PC](docs/lua-font-research-r183.md).
 Una muestra RW4 usa BUILTIN_FONT.MONTSERRAT_14; el emulador expone esa constante
 y crea montserrat14 desde CLI,pero MiSans24/32 falla en ese contexto. No se
 demuestra aún la causa del texto ausente ni la constante en2.2.86. Fuentes

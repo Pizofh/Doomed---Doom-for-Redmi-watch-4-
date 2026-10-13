@@ -1,6 +1,12 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R183:** [investigación de fuentes en PC/S3](lua-font-research-r183.md).
+**Actual R184/R185:** [LuaImage preparada/probada soloS3](lua-image-r184.md) y
+[plan físico concreto](lua-image-physical-plan-r185.md). ID365219993,9328bytes,
+ImagePNG propio96×64, sin fuentes/timers/C/Doom. Salida del guest y cierreLua
+comprobados; nada enviado físicamente. Perfil nuevo separado, ambos gates
+cerrados; siguiente único ensayo depende de revisión y observación del usuario.
+
+**Historial R183:** [investigación de fuentes en PC/S3](lua-font-research-r183.md).
 Sin operación nueva alreloj. builtinMONTSERRAT14 pistaRW4,expone/creaS3CLI,
 render2.2.86 sinprobar. Gatescerrados; no nuevopaquetefísico oloaderC autorizado.
 Texto no será requisito para estudiarImage/Doom; próxima preparación soloPC.

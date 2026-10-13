@@ -1,6 +1,17 @@
 # Matriz de evidencia
 
-**R183, 2026-10-12:** [fuentes upstream y CLI S3 contrastados](lua-font-research-r183.md).
+**R184/R185, 2026-10-12:** [imagen Lua en S3](lua-image-r184.md) y [plan bloqueado](lua-image-physical-plan-r185.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Muestra RW4 usa Image/SCRIPT_PATH/get_img_size para recurso empaquetado | Source comunitario5af6e14 | TouchEvents/image.lua, blob verificado | CONFIRMADO EN CÓDIGO DE MUESTRA | Alta documental | Lectura PC | No confirma versión2.2.86 |
+| Paquete propio contiene Lua y PNG exactos | BuildPC R184 | Compiler/readback SHA/source/PNG y byte5=0 | CONFIRMADO EN PC | Alta | Sí | ImagePNG194bytes; paquete9328bytes |
+| Lua Image muestra cuadrantes/cross96×64 sin Label/Font | GuestS3 | Captura y nueve píxeles/size verificados | CONFIRMADO EN EMULADOR | Alta | Sí | No frames dinámicos o bufferC |
+| Panel stock conserva imagen y cambio de esfera cierraLua | GuestS3 | PNGidéntico,logcloseLua,Storageactiva,27IDs anteriores | CONFIRMADO EN EMULADOR | Alta | Sí | Longpress OFF,no validado |
+| LuaImage renderiza PNG y permite salida en2.2.86 | M2315W1 | Aún no enviado; ejemplos/PC dan plausibilidad | SIN EVIDENCIA FÍSICA | Desconocida | No | Perfil fijo r184 cerrado, revisión pendiente |
+| Image estático demuestra ejecución C o portDoom físico | M2315W1 | No loader/ABI/privilegios físico demostrado | SIN EVIDENCIA | Desconocida | No | Son pasos separados |
+
+**Historial R183, 2026-10-12:** [fuentes upstream y CLI S3 contrastados](lua-font-research-r183.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

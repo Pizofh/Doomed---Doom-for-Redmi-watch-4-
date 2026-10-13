@@ -1,5 +1,11 @@
 # Ejecución y privilegios
 
+**R184/R185, 2026-10-12:** Lua propia y LVGL Object ya demostrados físicamente
+enR182. [ImagePNG](lua-image-r184.md) ahora validada soloS3 y preparada para
+ensayo físico bajo[plan cerrado](lua-image-physical-plan-r185.md). No shell,
+loader, C/ELF, ABI o privilegios probados en nuestra unidad. Datos históricos
+de la tabla inferior describen el emulador, no compatibilidadM2315W1.
+
 **R74, 2026-10-04:** [Viabilidad stock RW4](rw4-stock-feasibility.md) aporta indicio de primera mano Lua/shell, sin version/ABI/loader probado. NativeApps solo targets S3/MB10Pro. Gadgetbridge es candidato para transferir watchfaces, no demostracion de ejecucion C. R73 Doom persistente confirmado exclusivamente en S3 emulado.
 
 **Historial R68:** [Panel stock y STOP con FIRE down](doom-focus-emulator.md) pasan con el ELF R67 sin recompilar. NSH solo solicita STOP al driver propio; Lua/UI descarga tras worker retirado, sin kill ni unload host. No implica privilegios aislados, recovery física ni compatibilidad RW4. Cierre sin EXIT/reentrada con motor original queda como siguiente gate.
