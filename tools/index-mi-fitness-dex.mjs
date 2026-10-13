@@ -7,9 +7,12 @@ import {createHash} from 'node:crypto';
 import {inflateRawSync} from 'node:zlib';
 import {installedApkTargets} from './installed-apk-targets.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-if (process.argv.length > 3 || process.argv[2] && process.argv[2] !== '--core') throw Error('Use no arguments or --core');
+if (process.argv.length > 3 || process.argv[2] && !['--core','--firmware'].includes(process.argv[2])) throw Error('Use no arguments, --core or --firmware');
+const firmwareMode=process.argv[2]==='--firmware';
 const target = installedApkTargets[process.argv[2] === '--core' ? 'core' : 'fitness'];
 const out = path.join(root, 'artifacts/research', target.output);
+const outputFile=path.join(out,firmwareMode?'firmware-index-r193.json':'dex-index.json');
+if(firmwareMode&&fs.existsSync(outputFile))throw Error('ExistingFirmwareIndex');
 const review = JSON.parse(fs.readFileSync(path.join(out, 'review.json')));
 const apk = fs.readFileSync(path.join(root, 'tools/local', target.directory, target.file));
 if (!review.signatureVerified || !review.manifestVerified || review.apkSha256 !== target.sha256 ||
@@ -76,7 +79,7 @@ for (const entry of entries) {
     const owner = types[b.readUInt16LE(p)], name = strings[b.readUInt32LE(p + 4)];
     check(owner && name, 'Invalid DEX method index'); return {owner, name};
   });
-  const targets = new Set(methods.flatMap((m, i) =>
+  const targets = firmwareMode?new Set():new Set(methods.flatMap((m, i) =>
     m.owner === 'Landroid/bluetooth/BluetoothDevice;' && /^(create.*Rfcomm.*|connectGatt)$/.test(m.name) ||
     m.owner === 'Landroid/bluetooth/BluetoothSocket;' && m.name === 'connect' ||
     ['Lcom/xiaomi/wearable/spp/SystemClient;', 'Lcom/xiaomi/wearable/spp/b;'].includes(m.owner) && m.name === '<init>' ||
@@ -84,7 +87,8 @@ for (const entry of entries) {
     m.owner === 'Lcom/xiaomi/wearable/core/CoreExtKt;' && m.name === 'setLyraEnabled' ||
     /^Lcom\/xiaomi\/(fit\/device\/model|fitness\/device\/manager)\//.test(m.owner) &&
       ['disconnectDevice', 'setCurrentStatus'].includes(m.name) ? [i] : []));
-  const modelIds = new Set(strings.flatMap((s, i) => /^(?:Redmi Watch 4(?: .*)?|M2315W1)$/.test(s) ? [i] : []));
+  const firmwarePattern=/firmware|(?:^|[\/_.-])ota(?:[\/_.-]|$)|2\.2\.86|M2315W1|Redmi Watch 4/i;
+  const modelIds = new Set(strings.flatMap((s, i) => (firmwareMode?firmwarePattern.test(s):/^(?:Redmi Watch 4(?: .*)?|M2315W1)$/.test(s)) ? [i] : []));
   const candidates = [];
   for (let c = 0; c < ct.count; c++) {
     const cp = ct.offset + c * 32, cls = types[b.readUInt32LE(cp)];
@@ -107,7 +111,8 @@ for (const entry of entries) {
             candidates.push({class: cls, method: methods[mi].name, unit, target: methods[index]});
           } else if ((op === 0x1a && modelIds.has(index)) ||
             (op === 0x1b && unit + 2 < size && modelIds.has(b.readUInt32LE(p + 2)))) {
-            candidates.push({class: cls, method: methods[mi].name, unit, modelLiteralCandidate: true});
+            candidates.push({class: cls, method: methods[mi].name, unit,
+              ...(firmwareMode?{firmwareLiteralCandidate:true,stringIndex:op===0x1a?index:b.readUInt32LE(p+2)}:{modelLiteralCandidate:true})});
           }
         }
       }
@@ -116,11 +121,13 @@ for (const entry of entries) {
   check(candidates.length <= 10000, 'Too many candidates');
   const classNames = Array.from({length: ct.count}, (_, c) => types[b.readUInt32LE(ct.offset + c * 32)]);
   results.push({dex: entry.name, bytes: b.length, sha256: createHash('sha256').update(b).digest('hex'),
-    classCount: ct.count, modelLiteralsPresent: modelIds.size, candidates});
+    classCount: ct.count, modelLiteralsPresent: modelIds.size,
+    ...(firmwareMode?{firmwareLiterals:[...modelIds].map(index=>({index,value:strings[index]}))}:{}),candidates});
   // Names only in a separate ignored index, never all string constants.
-  fs.writeFileSync(path.join(out, entry.name + '-classes.txt'), classNames.join('\n') + '\n');
+  if(!firmwareMode)fs.writeFileSync(path.join(out, entry.name + '-classes.txt'), classNames.join('\n') + '\n');
 }
 const report = {apkSha256: review.apkSha256, apkExecuted: false,
   limitation: 'Candidate scan includes operands/payloads, not instruction boundaries. Confirm in SDK smali; no RW4 routing claim.', dex: results};
-fs.writeFileSync(path.join(out, 'dex-index.json'), JSON.stringify(report, null, 2) + '\n');
-console.log(JSON.stringify({dexCount: results.length, candidateCount: results.reduce((n, d) => n + d.candidates.length, 0), apkExecuted: false}));
+fs.writeFileSync(outputFile, JSON.stringify(report, null, 2) + '\n',firmwareMode?{flag:'wx'}:undefined);
+console.log(JSON.stringify({...(firmwareMode?{checkpoint:'R193',scope:'firmware-literal-candidates',rawStringsPrivate:true}:{}),
+  dexCount: results.length,candidateCount: results.reduce((n, d) => n + d.candidates.length, 0),apkExecuted:false}));
