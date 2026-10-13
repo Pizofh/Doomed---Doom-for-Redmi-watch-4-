@@ -2,7 +2,8 @@
 
 **Actualización R186:** usuario autorizó y se ejecutó un único envío;
 [registrada/inactiva con gates cerrados](lua-image-physical-result-r186.md).
-Observación de imagen y retorno pendientes. El texto inferior conserva la
+**R187:** el usuario confirma imagen y retorno normal en el mismo
+[resultado](lua-image-physical-result-r186.md). Sin nuevo envío. El texto inferior conserva la
 preparación previa; su autorización de envío ya se utilizó.
 
 2026-10-12. Preparación concreta, **sin autorización de envío todavía**.

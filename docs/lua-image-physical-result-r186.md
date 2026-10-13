@@ -1,4 +1,4 @@
-# R186 — LuaImage instalada; observación de pantalla pendiente
+# R186/R187 — LuaImage muestra su PNG en el RW4 físico
 
 2026-10-12. Usuario responde «Sí, autorizo el ensayo y puedo observar el reloj»
 al [plan R185](lua-image-physical-plan-r185.md). Alcance: un intento de instalación
@@ -51,13 +51,31 @@ StaticPhysicalReviewed=false. Build cerrado SHA256
 Prueba de entradas cerradas pasa sin llamadas de socket físico. No DELETE,
 reinicio, cambio de vínculo ni transferencia nueva de las pruebas anteriores.
 
-**Pendiente usuario:** seleccionar LuaImage una vez desde el selector stock,
-observar panel oscuro, amarillo, segundo verde/rojo y cuatro cuadrantes con
-cruz blanca; volver a habitual por Ajustes y comprobar navegación/pulsación
-larga. No contador ni texto esperados. Si falla, no repetir selección ni borrar
-a ciegas. Registro de instalación no demuestra Image/Lua/PNG físico funcional
-en este paquete, salida de VM, memoria libre o compatibilidad C/ELF/Doom.
-La propia inactiva describe el snapshot antes de selección manual.
+## R187 — observación física del usuario
 
-**Siguiente checkpoint único:** obtener observación visual y retorno normal
-de este paquete ya instalado. No nuevo envío mientras queda pendiente.
+El usuario responde a la comprobación visual y de retorno:
+«si,la imagen que dijiste, el marcador si es amarillo y verde, rojo no.
+de resto todo lo que dijiste». Confirma la imagen descrita con cuatro
+cuadrantes/cruz blanca, marcadores amarillo y verde, regreso a esfera habitual
+y funcionamiento de menús/pulsación larga. No se pidió reabrir para confirmar.
+
+**Recurso PNG mostrado mediante Lua/LVGL Image en M2315W1/2.2.86 confirmado
+por el usuario.** El gráfico no está en el preview de barra blanca; verlo
+demuestra ejecución del script y presentación del recurso propio. El verde
+aporta además evidencia de que la rama protegida terminó, incluyendo dimensiones
+reportadas96×64 y configuración del objeto. No hay log o captura física para
+caracterizar internals del decoder o medir píxeles/tamaño/FPS/memoria.
+
+El retorno normal demuestra navegación observable, no cierre de VM por log,
+sandbox ni aislamiento de memoria. La propia inactiva sigue describiendo el
+GET previo a selección manual; no se releyó catálogo después. No llamadas
+nuevas al reloj en R187, ni DELETE/reinicio/reinstalación. Paquete y registros
+se conservan; no se ha decidido retirada opcional.
+
+Image estático no demuestra actualización continua de frames, timer o touch
+programático. C/ELF/loader/ABI/privilegios y Doom siguen sin prueba física.
+El resultado no convierte el ELF/direcciones S3 en compatibles con RW4.
+
+**Siguiente checkpoint único:** preparar en PC una actualización de imagen
+con temporizador acotado, sin fuentes ni C. Cualquier nuevo paquete físico
+necesita su plan concreto y revisión; el ensayo r184 ya terminó.

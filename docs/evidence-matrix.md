@@ -1,6 +1,15 @@
 # Matriz de evidencia
 
-**R186, 2026-10-12:** [registro de LuaImage físico; pantalla pendiente](lua-image-physical-result-r186.md).
+**R187, 2026-10-12:** [imagen y retorno confirmados por usuario](lua-image-physical-result-r186.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Recurso PNG propio se muestra mediante Lua/LVGL Image | M2315W1/2.2.86 | Usuario ve cuatro cuadrantes/cruz del runtime, distintos de preview | CONFIRMADO EN RW4 | Alta como observación comunicada | Por usuario | Sin captura/log físico; no formato de framebuffer o bufferC probado |
+| Rama Image/dimensiones terminó sin excepción | Misma unidad | Marcador verde tras pcall con assert96×64 y configuración del objeto | CONFIRMADO EN RW4 | Alta para rama de código | Por usuario | No medición física de dimensiones o implementación exacta del decoder |
+| Retorno a habitual, menús y pulsación larga funcionan | Misma unidad | Respuesta afirmativa a comprobación agrupada | CONFIRMADO EN RW4 | Alta como dato comunicado | Por usuario | No cierreVM observado por log; no nueva selección solicitada |
+| Image estático demuestra frames dinámicos, timer, input o C/Doom físicos | Misma unidad | Esas funciones no forman parte del paquete | SIN EVIDENCIA | Desconocida | No | Preparación posterior solo PC; no extrapolar ABI S3 |
+
+**Historial R186, 2026-10-12:** [registro de LuaImage físico; pantalla entonces pendiente](lua-image-physical-result-r186.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

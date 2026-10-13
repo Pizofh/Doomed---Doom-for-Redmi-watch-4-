@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R186:** [LuaImage instalada tras autorización](docs/lua-image-physical-result-r186.md).
+**Actual R187:** [imagen propia mostrada desde Lua en el RW4 físico](docs/lua-image-physical-result-r186.md).
+Usuario confirma cuatro colores/cruz blanca, marcadores amarillo/verde y retorno
+normal a su esfera, menús y pulsación larga. Sin nuevo envío o retirada; gates
+cerrados. Esto valida Image con un recurso estático, todavía no frames dinámicos
+ni C/Doom físicos. Siguiente: preparar refresco acotado de imagen en PC.
+
+**Historial R186:** [LuaImage instalada tras autorización](docs/lua-image-physical-result-r186.md).
 Un envío de cinco partes; catálogo14→15 con IDs/flags/activa anteriores
 conservados y propia inactiva/eliminable. Gates cerrados otra vez. Pendiente
 observar cuadrantes/cruz y volver a habitual; Image físico aún no confirmado.

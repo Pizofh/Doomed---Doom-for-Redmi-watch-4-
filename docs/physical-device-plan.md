@@ -1,6 +1,11 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R186:** [único ensayo LuaImage instalado tras revisión](lua-image-physical-result-r186.md).
+**Actual R187:** [Image estático y retorno normal confirmados físicamente](lua-image-physical-result-r186.md).
+Usuario ve cuadrantes/cruz y amarillo/verde; vuelve a habitual y confirma menús
+y pulsación larga. Sin nueva conexión, envío o retirada. Gates cerrados;
+timer/frames dinámicos/C/ELF/Doom no demostrados. Siguiente preparación solo PC.
+
+**Historial R186:** [único ensayo LuaImage instalado tras revisión](lua-image-physical-result-r186.md).
 Cinco partes, catálogo14→15,anterioresconservadas y propia inactiva/eliminable;
 gates cerrados y socket/workers terminados. Falta observación/retorno del usuario.
 No envíos adicionales,DELETE,firmware oC/ELF/Doom físicos.

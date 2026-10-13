@@ -1,5 +1,11 @@
 # Ejecución y privilegios
 
+**R187, 2026-10-12:** [Lua/LVGL Image con PNG propio funciona en M2315W1/2.2.86](lua-image-physical-result-r186.md),
+según imagen y retorno normal confirmados por el usuario. No es ejecución C
+propia: runtime/bindings nativos stock presentan el recurso estático. Shell,
+loader, ABI, modelo de privilegios y C/ELF/Doom físico siguen sin probar.
+No cargar payloads/direcciones del emulador por este resultado.
+
 **R184/R185, 2026-10-12:** Lua propia y LVGL Object ya demostrados físicamente
 enR182. [ImagePNG](lua-image-r184.md) ahora validada soloS3 y preparada para
 ensayo físico bajo[plan cerrado](lua-image-physical-plan-r185.md). No shell,

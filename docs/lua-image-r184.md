@@ -1,5 +1,9 @@
 # R184 — imagen empaquetada desde Lua, validada solo en emulador
 
+**Actualización R187:** el mismo paquete fue instalado una vez tras revisión;
+[usuario confirma imagen y retorno normal en el RW4](lua-image-physical-result-r186.md).
+Los datos inferiores conservan la preparación/prueba inicial de PC/S3.
+
 2026-10-12. No conexión nueva al reloj, teléfono, USB o Bluetooth. El usuario
 confirmó previamente LuaDiag y navegación normal en M2315W1/2.2.86. Esta
 prueba nueva no se ha enviado físicamente.
