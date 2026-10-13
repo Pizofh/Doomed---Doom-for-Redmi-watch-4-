@@ -1,5 +1,10 @@
 # R185 — ensayo propuesto de LuaImage; gate físico cerrado
 
+**Actualización R186:** usuario autorizó y se ejecutó un único envío;
+[registrada/inactiva con gates cerrados](lua-image-physical-result-r186.md).
+Observación de imagen y retorno pendientes. El texto inferior conserva la
+preparación previa; su autorización de envío ya se utilizó.
+
 2026-10-12. Preparación concreta, **sin autorización de envío todavía**.
 [PC/emulador R184](lua-image-r184.md) pasó; esto no valida firmware RW4.
 Node `PHYSICAL_WRITES_REVIEWED=false`, `REVIEWED_VARIANT=r167`; nativo

@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R184/R185:** [imagen Lua validada en el emulador](docs/lua-image-r184.md)
+**Actual R186:** [LuaImage instalada tras autorización](docs/lua-image-physical-result-r186.md).
+Un envío de cinco partes; catálogo14→15 con IDs/flags/activa anteriores
+conservados y propia inactiva/eliminable. Gates cerrados otra vez. Pendiente
+observar cuadrantes/cruz y volver a habitual; Image físico aún no confirmado.
+Sin C/ELF/Doom o modificación de firmware.
+
+**Historial R184/R185:** [imagen Lua validada en el emulador](docs/lua-image-r184.md)
 y [ensayo físico preparado](docs/lua-image-physical-plan-r185.md). LuaImage9328bytes,
 ID365219993, recurso propioPNG96×64: cuadrantes y cruz renderizados y verificados,
 panel stock/salida/cierreLua correctos enS3. Sin fuentes/timers/C/Doom propios.

@@ -1,6 +1,15 @@
 # Matriz de evidencia
 
-**R184/R185, 2026-10-12:** [imagen Lua en S3](lua-image-r184.md) y [plan bloqueado](lua-image-physical-plan-r185.md).
+**R186, 2026-10-12:** [registro de LuaImage físico; pantalla pendiente](lua-image-physical-result-r186.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Paquete r184 registrado sin autoactivar | M2315W1/2.2.86 | Un install y GET independiente:15esferas,propia inactiva/eliminable | CONFIRMADO EN RW4 | Alta para catálogo | Sí, ensayo autorizado | No ACK final explícito ni render demostrado |
+| Las14 entradas/flags/activa anteriores se conservan | Misma unidad | Before journal frente a GET independiente | CONFIRMADO EN RW4 | Alta para snapshot | Sí | No selección manual por agente |
+| Gates cerrados tras ensayo y socket/workers terminados | PC/transporteRW4 | Ambosreportesclose/exit0; prueba gates/build cerrado | CONFIRMADO EN PC/TRANSPORTE | Alta | Sí | No demuestra UI o cierreVM física |
+| LuaImage muestra los cuatro colores y permite salir | M2315W1/2.2.86 | Observación del usuario pendiente | SIN EVIDENCIA | Desconocida | No todavía | No extrapolar renderS3 al reloj |
+
+**Historial R184/R185, 2026-10-12:** [imagen Lua en S3](lua-image-r184.md) y [plan bloqueado](lua-image-physical-plan-r185.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|
