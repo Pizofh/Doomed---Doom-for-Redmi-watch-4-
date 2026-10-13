@@ -1,6 +1,11 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R188/R189:** [NativeInfo preparado soloPC/S3](native-route-r188.md) y
+**Actual R190:** [NativeInfo instalada una vez tras revisión](native-info-physical-result-r190.md).
+Catálogo15→16,anteriores conservadas,propia inactiva; gates cerrados y sockets
+terminados. Pendiente diagnóstico visual/retorno del usuario. No C/loaders/ELF
+o firmware autorizado por este ensayo. No nuevos envíos mientras queda pendiente.
+
+**Historial R188/R189:** [NativeInfo preparado soloPC/S3](native-route-r188.md) y
 [plan físico revisable](native-info-physical-plan-r189.md). Dosconsultashelp/uname
 con captura propia temporal en almacenamiento, sininsmod/C/Doom. Gatescerrados;
 sin nuevo envío o activación. Noequivale auna operación completamenteread-only.

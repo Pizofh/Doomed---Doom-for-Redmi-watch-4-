@@ -1,5 +1,9 @@
 # Ejecución y privilegios
 
+**R190:** [NativeInfo registrada en el RW4 tras revisión](native-info-physical-result-r190.md),
+sin activación por PC. Gates cerrados; consultas de shell/io/loader anunciado
+siguen pendientes de observación manual. Nada de C/ELF/insmod físico ejecutado.
+
 **R188/R189:** [NativeInfo preparado](native-route-r188.md) consulta comandos sin
 ejecutar loaders. Pasó S3; [nuevo ensayo físico aún cerrado](native-info-physical-plan-r189.md).
 Función expuesta no equivale a implementación; listadoinsmod no prueba ABI o

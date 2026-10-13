@@ -1,6 +1,15 @@
 # Matriz de evidencia
 
-**R188/R189:** [diagnóstico nativo solo PC](native-route-r188.md), [gate físico cerrado](native-info-physical-plan-r189.md).
+**R190:** [NativeInfo registrada físicamente; inventario visual pendiente](native-info-physical-result-r190.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Paquete r188 registrado sin autoactivar | M2315W1/2.2.86 | Un install y GET independiente:16esferas,propia inactiva/eliminable | CONFIRMADO EN RW4 | Alta para catálogo | Sí, ensayo autorizado | No prueba shell o render de esta variante |
+| Las15 entradas/flags/activa anteriores se conservan | Misma unidad | Beforejournal frente a GET independiente | CONFIRMADO EN RW4 | Alta para snapshot | Sí | Activa actual LuaImage; cliente no cambia selección |
+| Shell/io/loader anunciado funcionan enunidad | Misma unidad | Observación del nuevo diagnóstico pendiente | SIN EVIDENCIA | Desconocida | No todavía | No módulo ejecutado ni autorización de C |
+| Gates cerrados y sockets/workers terminados tras envío | PC/transporte | Cierre/exit0 en dos reportes y testgates | CONFIRMADO EN PC/TRANSPORTE | Alta | Sí | No verifica UI física |
+
+**Historial R188/R189:** [diagnóstico nativo solo PC](native-route-r188.md), [gate físico cerrado](native-info-physical-plan-r189.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

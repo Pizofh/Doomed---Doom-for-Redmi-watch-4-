@@ -1,6 +1,11 @@
 # DOOM en Redmi Watch 4
 
-**Actual R188/R189:** [ruta nativa investigada y diagnóstico único preparado](docs/native-route-r188.md),
+**Actual R190:** [NativeInfo instalada tras autorización](docs/native-info-physical-result-r190.md).
+Un envío de siete partes; GET15→16 con entradas/flags/selección anteriores
+conservados y propia inactiva/eliminable. Gates cerrados. Falta selección manual,
+lectura de indicadores y retorno habitual; shell/C físico todavía no demostrado.
+
+**Historial R188/R189:** [ruta nativa investigada y diagnóstico único preparado](docs/native-route-r188.md),
 [plan físico cerrado](docs/native-info-physical-plan-r189.md). NativeInfo reúne
 shell/comandos/funciones en una pantalla; dos consultas máximas help/uname,
 sin cargar C. Pasó S3 con retorno y captura propia retirada. Próximo ensayo

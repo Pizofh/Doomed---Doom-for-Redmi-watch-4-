@@ -1,5 +1,10 @@
 # R189 — NativeInfo preparado, envío físico aún sin autorizar
 
+**Actualización R190:** usuario autorizó y se realizó un único envío;
+[registrada/inactiva con gates cerrados](native-info-physical-result-r190.md).
+Selección/inventario visual/retorno pendientes. Texto inferior conserva la
+preparación previa; su autorización de envío ya se utilizó.
+
 2026-10-12. [Investigación, fuente y prueba PC R188](native-route-r188.md).
 Unidad M2315W1/2.2.86, región no establecida. Lua/Image y retorno habitual
 probados físicamente; os.execute/io.open/remove/shell no probados en esta unidad.
