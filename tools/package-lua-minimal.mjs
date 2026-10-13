@@ -5,12 +5,13 @@ import {createHash} from 'node:crypto';
 import {deflateSync} from 'node:zlib';
 import {spawnSync} from 'node:child_process';
 import {projectRoot as root} from './verify-emulator.mjs';
-const mode=process.argv[2]??'minimal',diagnostic=mode==='diagnostic',imageMode=mode==='image';
-if(!['minimal','diagnostic','image'].includes(mode)||process.argv.length!==(process.argv[2]?3:2))throw Error('OnlyFixedLuaModesAccepted');
-const id=imageMode?'365219993':diagnostic?'365219992':'365219991';
-const name=imageMode?'LuaImage':diagnostic?'LuaDiag':'LuaProbe';
-const experiment=imageMode?'lua-image':diagnostic?'lua-diagnostic':'lua-minimal';
-const work=path.join(root,imageMode?'artifacts/lua-image-r184':diagnostic?'artifacts/lua-diagnostic-r180':'artifacts/lua-minimal-r177');
+import {nativeInfoPixel} from './native-info-legend.mjs';
+const mode=process.argv[2]??'minimal',diagnostic=mode==='diagnostic',imageMode=mode==='image',nativeMode=mode==='native-info';
+if(!['minimal','diagnostic','image','native-info'].includes(mode)||process.argv.length!==(process.argv[2]?3:2))throw Error('OnlyFixedLuaModesAccepted');
+const id=nativeMode?'365219994':imageMode?'365219993':diagnostic?'365219992':'365219991';
+const name=nativeMode?'NativeInfo':imageMode?'LuaImage':diagnostic?'LuaDiag':'LuaProbe';
+const experiment=nativeMode?'lua-native-info':imageMode?'lua-image':diagnostic?'lua-diagnostic':'lua-minimal';
+const work=path.join(root,nativeMode?'artifacts/lua-native-info-r188':imageMode?'artifacts/lua-image-r184':diagnostic?'artifacts/lua-diagnostic-r180':'artifacts/lua-minimal-r177');
 const compilerRoot=path.join(root,'tools/local/easyface-v4.23-review');
 const compiler=path.join(compilerRoot,'Compiler.exe');
 const hash=b=>createHash('sha256').update(b).digest('hex');
@@ -35,21 +36,22 @@ fs.mkdirSync(path.join(work,'app/lua'),{recursive:true});fs.mkdirSync(path.join(
 fs.writeFileSync(path.join(work,'app/lua/main.lua'),source);
 fs.writeFileSync(path.join(work,name+'.fprj'),project);
 // Original procedural asset, not copied from any upstream example or Doom WAD.
-const asset=imageMode?png(96,64,(x,y)=>{
+const asset=nativeMode?png(180,242,nativeInfoPixel):imageMode?png(96,64,(x,y)=>{
   if(x>=44&&x<52||y>=28&&y<36)return[255,255,255];
   return y<32?(x<48?[255,0,0]:[0,255,0]):(x<48?[0,0,255]:[255,128,0]);
 }):null;
-if(asset)fs.writeFileSync(path.join(work,'app/lua/pattern.png'),asset);
+const assetFilename=nativeMode?'legend.png':'pattern.png';
+if(asset)fs.writeFileSync(path.join(work,'app/lua',assetFilename),asset);
 // Procedural preview with a cyan field and ten white steps, no external assets.
 const rows=Buffer.alloc((390*3+1)*450);
 for(let y=0;y<450;y++)for(let x=0;x<390;x++){
   const at=y*(390*3+1)+1+x*3;
   // Diagnostic preview is black with a small white X, never Lua's magenta
   // rectangle/yellow/green markers. Keep it inset from the full display edges.
-  const bar=imageMode ? x>=175&&x<215&&y>=190&&y<260 : diagnostic ? x>=125&&x<265&&y>=155&&y<295&&
+  const bar=nativeMode ? x>=140&&x<250&&((y>=190&&y<205)||(y>=235&&y<250)) : imageMode ? x>=175&&x<215&&y>=190&&y<260 : diagnostic ? x>=125&&x<265&&y>=155&&y<295&&
     (Math.abs(x-125-(y-155))<6||Math.abs(x-125+(y-155)-139)<6) :
     y>=160&&y<290&&x>=40&&x<350&&((x-40)%31)<24;
-  rows[at]=bar?240:diagnostic||imageMode?0:8;rows[at+1]=bar?240:diagnostic||imageMode?0:48;rows[at+2]=bar?240:diagnostic||imageMode?0:64;
+  rows[at]=bar?240:diagnostic||imageMode||nativeMode?0:8;rows[at+1]=bar?240:diagnostic||imageMode||nativeMode?0:48;rows[at+2]=bar?240:diagnostic||imageMode||nativeMode?0:64;
 }
 const hdr=Buffer.alloc(13);hdr.writeUInt32BE(390);hdr.writeUInt32BE(450,4);hdr[8]=8;hdr[9]=2;
 fs.writeFileSync(path.join(work,'images/preview.png'),Buffer.concat([Buffer.from([137,80,78,71,13,10,26,10]),chunk('IHDR',hdr),chunk('IDAT',deflateSync(rows)),chunk('IEND',Buffer.alloc(0))]));
@@ -60,11 +62,11 @@ fs.writeFileSync(path.join(work,'compiler-result.json'),JSON.stringify({status:r
 if(run.error||run.status!==0||!/No Errors/.test(run.stdout)||!/Watch:\s*RedmiWatch4/.test(run.stdout)||!/adb util is missing, skipping to upload/.test(run.stdout))throw Error('CompilerFailed');
 const original=read(path.join(work,'output',name+'.face'));
 if(original.length<168||original.length>32768||original.subarray(0,4).toString('hex')!=='5aa53412'||original[5]!==0||original[49]!==0||!/^\d{9}$/.test(original.subarray(40,49).toString('ascii'))||!original.includes(Buffer.from('lua/main.lua'))||!original.includes(source))throw Error('UnexpectedPackage');
-if(asset&&(!original.includes(Buffer.from('lua/pattern.png'))||!original.includes(asset)))throw Error('PackagedImageChanged');
+if(asset&&(!original.includes(Buffer.from('lua/'+assetFilename))||!original.includes(asset)))throw Error('PackagedImageChanged');
 const candidate=Buffer.from(original);candidate.write(id,40,9,'ascii');
 fs.writeFileSync(path.join(work,name+'-id-only.face'),candidate,{flag:'wx'});
-const report={checkpoint:imageMode?'R184':diagnostic?'R180':'R177',id,size:candidate.length,sha256:hash(candidate),sourceSha256:hash(source),projectSha256:hash(project),
-  ...(asset?{imageFilename:'pattern.png',imageSize:asset.length,imageSha256:hash(asset),embeddedImageExact:true}:{}),
+const report={checkpoint:nativeMode?'R188':imageMode?'R184':diagnostic?'R180':'R177',id,size:candidate.length,sha256:hash(candidate),sourceSha256:hash(source),projectSha256:hash(project),
+  ...(asset?{imageFilename:assetFilename,imageSize:asset.length,imageSha256:hash(asset),embeddedImageExact:true}:{}),
   originalSha256:hash(original),originalId:original.subarray(40,49).toString('ascii'),headerByte5:0,
   embeddedSourceExact:true,compilerAdbAvailable:false,nativeCodeIncluded:false,emulatorValidated:false,physicalValidated:false,
   physicalTransferEnabled:false,bluetoothOperationRequested:false};
