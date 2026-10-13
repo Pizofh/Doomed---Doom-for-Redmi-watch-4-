@@ -1,6 +1,11 @@
 # Ejecución y privilegios
 
-**Actual R197/R198:** [FirstC preparado con activación manual](first-c-adapter-r197.md).
+**Actual R198:** [FirstC instalada inactiva tras revisión](first-c-physical-result-r198.md).
+ELF almacenado como dato, sin carga automática. La selección/click y los cinco
+resultados visuales siguen pendientes: no afirmar C ejecutado o rmmod físico
+por instalación satisfactoria. Gates cerrados; no reintentos o unload remoto.
+
+**Historial R197/R198:** [FirstC preparado con activación manual](first-c-adapter-r197.md).
 Archivos/marca/parser y secuencia verificados con executor simulado; no C propio
 ejecutado en RW4. El [primer ensayo físico](first-c-physical-plan-r198.md) propone
 un inicializador de dos instrucciones, registro observado y retirada confirmada.

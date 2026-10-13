@@ -1,6 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R197/R198:** [FirstC preparado y comprobado en PC/emulador](docs/first-c-adapter-r197.md).
+**Actual R198:** [FirstC instalada tras autorización](docs/first-c-physical-result-r198.md).
+Un envío, doce partes; catálogo16→17 con entradas/flags/selección anteriores
+conservados y FirstC inactiva/eliminable. Gates cerrados otra vez. Pendiente
+selección manual, RUN C único y observación del retorno. **Carga y retirada
+de C propio en RW4 todavía no demostradas.**
+
+**Historial R197/R198:** [FirstC preparado y comprobado en PC/emulador](docs/first-c-adapter-r197.md).
 Paquete de22.500bytes, ID365219996; botón manual RUN C, un intento con marca
 previa, comprobación del registro y retirada.29 escenarios del adaptador con
 archivos reales y executor/widgets simulados; transferencia/sesión offline

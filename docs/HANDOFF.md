@@ -1,6 +1,26 @@
 # Retomar el proyecto
 
-**Actual R197/R198, 2026-10-13:** [adaptador, UI manual y paquete final preparados](first-c-adapter-r197.md).
+**Actual R198, 2026-10-13:** [FirstC instalada una vez tras autorización](first-c-physical-result-r198.md).
+Usuario «si» al plan concreto y presencia/batería≥50% solicitadas. Instalada
+ID365219996/22.500bytes/SHA bf3bfbd4147ed27527fc7659aac0098472252016725af6ef2750e86cd2f5cbf9.
+Helper habilitado SHAa6404d9d00c6c5377cef4a7fa8ac9a8389b61c75a911e4d8eedd0a16d922f924
+archivado con build/CLI/Probe en artifacts/first-c-r198-reviewed; no reejecutar.
+RegisteredInactive,12partes,22574bytesstream,23071TX,21TX/16RXframes,close/exit0.
+Gates restaurados/rebuild ANTES del GET independiente: helper cerrado ahora
+SHAf64ead8b42f5872198ac0aaa52cafba5bf2cd22e75bbc0fd95a347af0b8fec44.
+GET Complete:16→17,anteriores IDs/flags idénticos,propia inactiva/eliminable,
+activa365210175; socket/worker cerrados. Gates test pasa, ninguna radio en test.
+Journal first-c-r198.json Registered12partes,sin lock; autorización envío usada.
+
+Pendiente respuesta a pregunta async: seleccionar FirstC (5barraspreview),
+cinco filas grises y RUN C, un click si UIcorrecta, colores FILE/MARK/LOAD/UNLOAD/END,
+volver por Ajustes a habitual y confirmar menús/longpress. ENDrojo/amarillo antes
+delclick/falloUI: no pulsar/repetir. Todavía NO C/retirada físicos observados.
+No nueva transferencia/DELETE/insmod/rmmod/lectura remota de archivos ni borrar
+marca. Si llega resultado, registrar literalmente y sus límites; no asumir
+Complete por paquete registrado. Privilegios/recovery integral sin resolver.
+
+**Historial R197/R198, 2026-10-13:** [adaptador, UI manual y paquete final preparados](first-c-adapter-r197.md).
 Siguiente acción: pedir revisión expresa del [plan físico R198](first-c-physical-plan-r198.md)
 y presencia del usuario antes de habilitar gates o enviar nada. El «go» actual
 autoriza preparación PC; no el primer C potencialmente privilegiado en hardware.

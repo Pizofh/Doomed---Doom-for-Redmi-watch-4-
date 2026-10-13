@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R198:** [FirstC instalada, activación pendiente](first-c-physical-result-r198.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| FirstC está registrada e inactiva | M2315W1/FW2.2.86 | Envío autorizado12partes, GET independiente y journal | CONFIRMADO EN RW4 | Alta | Sí, transporte real |16→17; otras entradas/flags conservados |
+| Carga C/retirada propia funcionaron | Mismo reloj | Observación del botón/indicadores pendiente | SIN EVIDENCIA TODAVÍA | Desconocida | No | Instalación no demuestra ejecución |
+| Gates de escritura volvieron a cerrarse | PC | Source restaurado/rebuild/test de entradas cerradas | CONFIRMADO EN PC | Alta | Sí | Socket/worker del envío y GET cerrados |
+
 **R197/R198:** [adaptador real y paquete FirstC preparados](first-c-adapter-r197.md),
 [plan físico pendiente de revisión](first-c-physical-plan-r198.md).
 

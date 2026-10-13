@@ -1,6 +1,11 @@
 # M2315W1 — esfera estática instalada; nuevos envíos/nativo CERRADOS
 
-**Actual R197/R198:** [plan concreto del primer C preparado para revisión](first-c-physical-plan-r198.md).
+**Actual R198:** [FirstC instalada tras revisión expresa](first-c-physical-result-r198.md).
+Autorización del único envío utilizada; gates cerrados y catálogo independiente
+conserva esferas previas. Pendiente activación/click manual observado, resultado
+y retorno. No instalar/repetir/borrar mientras falta esa observación.
+
+**Historial R197/R198:** [plan concreto del primer C preparado para revisión](first-c-physical-plan-r198.md).
 FirstC ID365219996/22.500bytes, hash y comandos fijos; instalar inactiva,
 selección manual y un RUN C para cargar/retirar candidato mínimo. Controller y
 adaptador pasan pruebas con ejecución nativa simulada. Gates físicos siguen

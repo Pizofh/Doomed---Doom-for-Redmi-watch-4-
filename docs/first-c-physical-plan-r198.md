@@ -1,4 +1,8 @@
-# R198 — primer ensayo C físico pendiente de revisión
+# R198 — plan revisado del primer ensayo C físico
+
+**Estado posterior:** usuario autorizó el ensayo; único envío completado y gates
+cerrados. [Instalación y observación pendiente](first-c-physical-result-r198.md).
+La especificación siguiente conserva el plan revisado; no autoriza repetirlo.
 
 2026-10-13. **NO EJECUTADO; gates cerrados.** Este documento fija el paquete
 FirstC y la secuencia propuesta. No reutiliza autorizaciones de NativeInfo/Lua.

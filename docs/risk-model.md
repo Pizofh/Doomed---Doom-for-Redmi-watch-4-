@@ -1,6 +1,11 @@
 # Modelo de riesgo
 
-**Actual R197/R198:** [plan concreto FirstC aún sin ejecutar](first-c-physical-plan-r198.md).
+**Actual R198:** [FirstC instalada inactiva tras autorización](first-c-physical-result-r198.md).
+Paquete persistente; selección/click aún pendientes. Gates cerrados y otros
+registros/selección conservados. No ejecución C o retirada observadas todavía;
+no carga automática al abrir. Riesgo/privilegios/recovery del plan no cambian.
+
+**Historial R197/R198:** [plan concreto FirstC aún sin ejecutar](first-c-physical-plan-r198.md).
 Botón manual; la selección/reinicio no carga C. Marca previa y estado por
 instancia limitan repetición; no prueban fsync, exclusión entre VMs o sandbox.
 Inventario estricto impide tocar un módulo previo/descargar con atribución
