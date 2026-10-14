@@ -1,5 +1,19 @@
 # Retomar el proyecto
 
+**Actual R253: fallo R252 localizado; StateRead2 preparada, NO autorizada/enviada.**
+UsuarioPreCheck00420000, MARK/REG OPEN/READ/EOF/CLOSE/SHAPE verdes, OLD OPEN/FINALrojo,
+OLD READ/CLOSE/MATCHgris; habitual/cambio/menúnormal. Propio registro66bytes identificado;
+fallóapertura marca viejasinerrno, no C. CatálogosguardadosR250StepC977sí/R252no.
+Retiradaesfera/archivosmientrasCresidente explicacióncoherente, no atribuirR250fallo anterior.
+NuevaStateRead2 ID365219970,20364B,4barrasCIAN, source0878f66374d1f0026a56464ab00699e93e28d6e3733fb04b370d164b26353f0f,
+SHAba0ecb35a5a868048f52a7c1290bf2d9be8aec01431fdca32e5ecf8831849348.
+Soloquitaroldmarkprereq; mismosregistry/one-shot/read32EOFclose/postregframe, nooldpaths.
+47casosS3/tmpreal/noderegwidgetssimulados pasan, incluyeoldfaults sinaccesoold/harnessreject.
+Reportartifacts/emulator/state-read-r253-final, paqueteartifacts/state-read-r253/StateRead2-id-only.face.
+Plan [R254](state-read-physical-plan-r254.md), journalstate-read-r254.json aúnno usado.
+Emulador8216yaausente; recordarchivado yrelanzadoescaladoSteveregistration, PID6816/sesión64013.
+NoPTkillhardware/reboot. Gatescerrados. Next revisiónUNensayo/presencia≥50%.
+
 **Actual R252: PreCheck instalada inactiva; CHECK manual pendiente.**
 Usuario«ok go» autorizaUNensayo/presencia>=50%; runnerprecheck-r252-authorized consumido.
 InstallRegisteredInactive10partes/stream19194/TX19661/19TX16RX, sockets/worker/exit0.

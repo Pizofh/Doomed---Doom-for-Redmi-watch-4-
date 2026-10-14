@@ -101,4 +101,21 @@ desde PC. Journalprecheck-r252.json Registered10/sinlock. Runner privado
 Finally restauró fuentes/gates y reconstruyó helper cerrado; testgates0sockets
 exitoso. Hash autorizado50f7bdf3c70212793420381688393b022169ce3fc527014a4afe46b29f25978c.
 Logs/hash cerrado/comparación privados en artifacts/precheck-r252-authorized.
-No repetir instalación. Lectura manual CHECK una vez aún pendiente.
+No repetir instalación. CHECK manual completado; ensayo consumido.
+
+## Observación física
+
+Usuario: `00420000`; MARK/REG OPEN/REG READ/REG EOF/REG CLOSE/REG SHAPE verdes,
+OLD OPEN y FINAL rojos; OLD READ/CLOSE/MATCH grises. Retorno a habitual y menú
+normales confirmados. Registro leído66bytes, EOF/cierre reconocidos, formato
+propio observado (código00); longitud de marca00 significa sin bytes obtenidos,
+no demuestra archivo de longitud cero. Falló apertura de marca antigua, no su
+lectura o contenido. No errno registrado: ausencia, permiso u otro fallo no
+se distinguen. No acceso al nodo C en PreCheck.
+
+Catálogos ya guardados: R250 tenía StepC365219977; R252 ya no. Esto es coherente
+con retirar la esfera y sus archivos mientras el módulo permanece en RAM;
+no se observó directamente el borrado ni se atribuye el fallo anterior R250
+a ese cambio posterior. Registrar residencia mediante metadata no prueba
+estado interno/callbacks. Siguiente: lector del módulo independiente de la marca
+de otra esfera, con comprobación del registro mantenida; [plan R254](state-read-physical-plan-r254.md).

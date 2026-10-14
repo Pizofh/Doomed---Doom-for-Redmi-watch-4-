@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R252/R253:** [Marca vieja inaccesible, registro reconocido](precheck-physical-plan-r252.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Registro propio66bytes, EOF/cierre/formato reconocidos; falla apertura de marca antigua | RW4/M2315W1/FW2.2.86 | Usuario00420000 y seis primeras filas verdes, OLD OPEN rojo | CONFIRMADO EN RW4 | Alta para indicadores | Sí, usuario | Sin errno; no demostrar ausencia física del archivo ni abrir C |
+| StepC ya no figura instalada aunque módulo sigue registrado | Misma unidad | Catálogos guardados R250/R252 y REG SHAPE verde | CONFIRMADO EN RW4 | Alta para catálogo/registro | Sí | Borrado de sus archivos es explicación razonable, no observado directamente |
+| StateRead2 funciona sin acceder a marca antigua | Lua S3/tmpfs real, nodo/registro/UI simulados |47casos R253, harness prohíbe apertura vieja | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para casos | Sí | No callbacks C propios físicos probados ni nuevo envío |
+
 **Actual R250:** [StateRead detenida en comprobaciones previas, retorno normal](state-read-physical-result-r250.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -46,7 +46,7 @@ try {
   if (afterSpace && spec.variant !== 'r173') throw Error();
   const operation = action.startsWith('install') ? 'install' : 'remove';
   const enabled = PHYSICAL_WRITES_REVIEWED && spec.variant === REVIEWED_VARIANT;
-  const checkpoint = spec.variant === 'r251' ? 'R252' : spec.variant === 'r249' ? 'R250' : spec.variant === 'r246' ? 'R247' : spec.variant === 'r243' ? 'R244' : spec.variant === 'r241' ? 'R242' : spec.variant === 'r238' ? 'R239' : spec.variant === 'r236' ? 'R237' : spec.variant === 'r224' ? 'R225' : spec.variant === 'r220' ? 'R221' : spec.variant === 'r215' ? 'R216' : spec.variant === 'r202' ? 'R203' : spec.variant === 'r197' ? 'R198' : spec.variant === 'r188' ? 'R189' : spec.variant === 'r184' ? 'R185' : spec.variant === 'r180' ? 'R181' : spec.variant === 'r177' ? 'R178' : spec.variant === 'r173' ? 'R174' : 'R169';
+  const checkpoint = spec.variant === 'r253' ? 'R254' : spec.variant === 'r251' ? 'R252' : spec.variant === 'r249' ? 'R250' : spec.variant === 'r246' ? 'R247' : spec.variant === 'r243' ? 'R244' : spec.variant === 'r241' ? 'R242' : spec.variant === 'r238' ? 'R239' : spec.variant === 'r236' ? 'R237' : spec.variant === 'r224' ? 'R225' : spec.variant === 'r220' ? 'R221' : spec.variant === 'r215' ? 'R216' : spec.variant === 'r202' ? 'R203' : spec.variant === 'r197' ? 'R198' : spec.variant === 'r188' ? 'R189' : spec.variant === 'r184' ? 'R185' : spec.variant === 'r180' ? 'R181' : spec.variant === 'r177' ? 'R178' : spec.variant === 'r173' ? 'R174' : 'R169';
   if (['install','remove','install-after-space','remove-after-space'].includes(action)) {
     if (!enabled) {
       console.log(JSON.stringify({checkpoint,variant:spec.variant,contentKind:spec.contentKind,status:'PhysicalGateClosed',
