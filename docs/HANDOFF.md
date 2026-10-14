@@ -1,5 +1,25 @@
 # Retomar el proyecto
 
+**Actual R265 PC completo; R266 pendiente de autorización física.**
+[Plan concreto](native-exit-physical-plan-r266.md). ExitC ID365219964,24348bytes,
+SHA8c69e4003c1caef9eed58902cfc5d45112d5b9cf21f7ccdab8c1b379284da3e8;
+source3617fd532ac64b36112c8328b7a579d67446b815460f52aa29c231beefec81d5.
+68casos +retiradaC realS3 trasSTOP13. Nodo/registroRW4/widgets mapeados/simulados;
+soloprintfsuccessS3normalizado; no prueba físicauninit234. Modelo/callbackschar
+rastreadoencandidata; usarls/dev sinflags lista nombres sinstatdelhijo.
+Noio.open delnodo después de rmmod: bloqueo enforced en tests. Backend revalida
+key64+snapshotexactSTOPPED+close+listadoprevio+key64; un rmmod; salida vacía+
+procfs vacío+listadosinnodo. Retornoshellsolo no pruebaéxito. Capturaspropias
+persisten, marker14bytes anti-reentrada, sinload/nodowrite/Timer/worker/remove.
+Paquete24recursosreadback,12casostransferencia/gates0sockets/preparepasan.
+Helper cerradoactual10d248e0ef9458892db90d60c59f5258307427b80fd3f9a7546932dff3e6cd24.
+NoBluetooth/instalación/lectura/rmmodRW4 nueva. UseroksoloautorizóPC; pedirrevisión
+R266 conpresencia≥50% antes deUNinstallr265/selecciónmanualEXIT C.
+Journalnative-exit-r266.jsonfresh;runnerfijonuevo, finallygatescerrados+GET.
+FilasMARK/REG INFO/STOPPED/CLOSE C/REG SAME/PATH PRE/RMMOD/REG GONE/PATH GONE/FINAL;
+preview4barrasBLANCAS. EXIT CODEauto64hex ante fallo; nootraesfera debuginnecesaria.
+No repetirrearmarreloadreboot. C234 aún residenteSTOPPED desde R264.
+
 **Actual R264 COMPLETO: diez verdes, menú y watchfaces normales.**
 Usuario «todo verde, menu y watchfaces sin problema». Validación por indicadores
 de13ACKs/control/STEP/PAUSE/RESUME/STOP/close/postkey64. Final esperado

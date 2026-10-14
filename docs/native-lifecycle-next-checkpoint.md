@@ -1,5 +1,9 @@
 # Siguiente checkpoint: cerrar el ciclo del módulo residente
 
+Preparación PC R265 completada: [ExitC y plan R266](native-exit-physical-plan-r266.md).
+68casos y retiradaS3 pasan; sin autorización o ejecución física nueva.
+Se eligió listado del directorio padre, sin abrir/stat el hijo tras descarga.
+
 R264 completado físicamente: diez indicadores verdes, menú y cambio de esferas
 normales. El cliente confirmó13ACKs, estado STOPPED/held0 y todos sus cierres;
 el registro definido key64 permaneció igual. No hay captura raw nueva: valores

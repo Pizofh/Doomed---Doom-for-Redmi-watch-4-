@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R265 preparado:** [ExitC: retirar el módulo C detenido](docs/native-exit-physical-plan-r266.md).
+68casos y retirada real S3 pasan; paquete24.348bytes/gates cerrados. Pendiente
+revisión física nueva; no rmmod/instalación en RW4 todavía.
+
 **Actual R264 completo:** [Los13comandos al C residente pasan físicamente](docs/native-control-physical-plan-r264.md).
 Diez verdes, menú y otras esferas normales. C queda cargado y detenido;
 [siguiente checkpoint: ciclo de vida del módulo](docs/native-lifecycle-next-checkpoint.md).

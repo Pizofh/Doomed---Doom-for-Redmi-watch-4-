@@ -116,7 +116,12 @@ const specs = Object.freeze({
     sha256:'a2f0b5ed36b0eb524c23a97cee6ea83e87436d7260ec44dad8a4b5ccb67b1648',
     sourceSha256:'2b9f4c8567c7970486aca4ecdd71ed2c9af2ba7d072ed5f2c6aa26944858e667',
     sourceArtifact:'artifacts/control-r263/app/lua/main.lua',nativeCodeIncluded:false,
-    artifact:'artifacts/control-r263/CtrlProbe-id-only.face',journal:'native-control-r264.json'})
+    artifact:'artifacts/control-r263/CtrlProbe-id-only.face',journal:'native-control-r264.json'}),
+  r265:Object.freeze({variant:'r265',contentKind:'lua-stopped-resident-module-removal',id:'365219964',size:24348,
+    sha256:'8c69e4003c1caef9eed58902cfc5d45112d5b9cf21f7ccdab8c1b379284da3e8',
+    sourceSha256:'3617fd532ac64b36112c8328b7a579d67446b815460f52aa29c231beefec81d5',
+    sourceArtifact:'artifacts/exit-r265/app/lua/main.lua',nativeCodeIncluded:false,
+    artifact:'artifacts/exit-r265/ExitC-id-only.face',journal:'native-exit-r266.json'})
 });
 export function staticSpec(variant = 'r167') {
   if (typeof variant !== 'string' || !Object.hasOwn(specs,variant)) throw Error('StaticSpecRefused');

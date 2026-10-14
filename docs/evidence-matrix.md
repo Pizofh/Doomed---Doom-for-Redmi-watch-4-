@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R265 preparado:** [Retirada del módulo detenido](native-exit-physical-plan-r266.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Cliente no reabre nodo después de rmmod, exige registro vacío y listado sin nombre | Lua real S3, widgets/registro RW4 simulados |68casos ExitC | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para casos | Sí | No timeout duro para uninit/shell |
+| ExitC retira C detenido y confirma procfs/ruta ausentes | C real S3 revisado, nombre/ruta/metadata adaptados | test-exit-r265; scratch y módulos restaurados | CONFIRMADO EN EMULADOR | Alta para fixture | Sí | Uninit/ABI S3 distintos a234 |
+| `ls /dev` sin opciones omite stat por entrada char | Imagen candidata2.2.86 | TablaLS/cmd/handler0x21c304→0x21c402 + sourceNSH primario | INFERENCIA RAZONABLE PARA RW4 | Fuerte para candidata | Estática PC | Identidad firmware real completa no demostrada |
+| rmmod234/uninit/unregister libera correctamente este puente en RW4 | Unidad física | No ejecutado aún | SIN EVIDENCIA | Pendiente | No | Retirada de otros módulos no demuestra esta callback |
+
 **Actual R264 completo:** [Controles C confirmados en la unidad](native-control-physical-plan-r264.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

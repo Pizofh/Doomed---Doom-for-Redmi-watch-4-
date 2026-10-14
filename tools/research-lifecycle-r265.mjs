@@ -1,0 +1,10 @@
+// Exact private candidate as data. No firmware execution or hardware access.
+import fs from 'node:fs';import path from 'node:path';import {spawnSync} from 'node:child_process';import {root,sha256} from './control-source-r263.mjs';
+if(process.argv.length!==2)throw Error('FixedResearchOnly');
+const file=path.join(root,'tools/local/firmware-research/rw4-stock-candidate-r193/vela-ap-inspection-only.bin'),exe=path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-objdump.exe'),out=path.join(root,'artifacts/research/lifecycle-r265');
+const b=fs.readFileSync(file);if(fs.existsSync(out)||sha256(b)!=='2c486395a01fb4e1d4a0f8b9b749fd6b1c3d522edc3c2f3813deaea9ab7388db'||sha256(fs.readFileSync(exe))!=='ff61beda5538d78c2ff41d05ff6f694dc96f02ddb75f8db0a5936d995437cda1')throw Error('InputChanged');
+const cmds=[['ls',0x77da0,0x81d08,0x21cbc1],['rmmod',0x77ed0,0x77a48,0x220955]];
+for(const [name,at,str,fn]of cmds)if(b.readUInt32LE(at)!==0x3bff187c+str||b.readUInt32LE(at+4)!==0xc100000+fn||b.subarray(str,str+name.length+1).toString('ascii')!==name+'\0')throw Error('CommandAnchorChanged');
+fs.mkdirSync(out,{recursive:true});
+for(const [name,start,end]of [['ls-command',0x21cbc0,0x21cd48],['rmmod-command',0x220954,0x2209b8],['ls-single-path',0x21c2f4,0x21c52c],['path-stat',0x4968a8,0x496a50],['inode-stat',0x49661c,0x496774]]){const r=spawnSync(exe,['-D','-b','binary','-m','arm','-EL','-M','force-thumb','--start-address='+start,'--stop-address='+end,file],{shell:false,windowsHide:true,encoding:'utf8',timeout:10000,maxBuffer:262144});if(r.error||r.status!==0)throw Error('DisassemblyFailed');fs.writeFileSync(path.join(out,name+'.txt'),r.stdout,{flag:'wx'});}
+const report={checkpoint:'R265',imageSha256:sha256(b),commandAnchors:cmds.map(([name,at,str,fn])=>({name,tableOffset:at,stringOffset:str,functionOffset:fn})),firmwareExecuted:false,physicalWatchUsed:false,bluetoothOperationRequested:false};fs.writeFileSync(path.join(out,'review.json'),JSON.stringify(report,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify(report));
