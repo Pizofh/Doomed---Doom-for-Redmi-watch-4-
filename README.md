@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R264 instalada:** [CtrlProbe inactiva; RUN C manual pendiente](docs/native-control-physical-plan-r264.md).
+Un envío, catálogo previo conservado y gates cerrados. Falta probar los13comandos
+en el C residente del RW4; no se ejecutaron durante la instalación.
+
 **Actual R263 preparado:** [CtrlProbe: un lote de controles al C residente](docs/native-control-physical-plan-r264.md).
 169 escenarios y13comandos con ACKs pasan en el C del emulador S3; registro/UI
 simulados. Paquete de23.788bytes preparado, gates cerrados; pendiente aprobación

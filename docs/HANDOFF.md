@@ -1,5 +1,19 @@
 # Retomar el proyecto
 
+**Actual R264 instalada inactiva; RUN C manual pendiente.**
+Usuario autorizóUNensayo/presencia≥50%: «Sí, autorizo y puedo observar el reloj».
+Runner `artifacts/control-r264-authorized/run-install.mjs` consumido.
+RegisteredInactive12partes/stream23862/TX24359/21TX16RX. GET13→14, previosIDs/
+flags preservados y activa observada365219966 conservada; propia965inactiva/
+removible. Journalnative-control-r264.json Registered12/sinlock. Socket/worker
+cerrados/exit0. Finallygatescerrados/rebuild/test0sockets. Sinproc/nodo/CdesdePC.
+Helper autorizadoa0a83f287f67da579ae2af70a8d2eeaecba58b75ab86507768a78cf8a9b56647.
+Helper cerrado actual01794a3af30a4653892da0c2a9d7fd5620997ae5d267ca2d178ad54494406a55.
+[Plan/resultado](native-control-physical-plan-r264.md). Próximo seleccionar
+CtrlProbe5barrasVERDES;10grises/RUN C UNAvez; leer colores/fotoautomáticacode si
+falla; volverhabitual/menú/scroll/longpress. SiFINALrojoinicial/faltaUI noRUN.
+No repetir/rearmar/reset/reload/unload; STOPsoloestadoRAM, Cquedacargado.
+
 **Actual R263 PC completo; R264 físico pendiente de aprobación.**
 [Plan concreto](native-control-physical-plan-r264.md). CtrlProbe ID365219965,
 23.788bytes, SHA a2f0b5ed36b0eb524c23a97cee6ea83e87436d7260ec44dad8a4b5ccb67b1648.

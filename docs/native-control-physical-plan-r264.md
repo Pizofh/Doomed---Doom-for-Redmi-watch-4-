@@ -1,7 +1,7 @@
 # R263/R264 — un lote de controles al C residente
 
-Estado: preparado y probado en PC/emulador; **no autorizado, instalado ni
-ejecutado en el reloj**. Base física R262: StateMatch obtuvo diez verdes,
+Estado R264: usuario autorizó «Sí, autorizo y puedo observar el reloj»;
+**instalada inactiva, RUN C manual pendiente**. Base física R262: StateMatch obtuvo diez verdes,
 snapshot inicial, EOF/cierre y registro key64 igual; retorno, corona, menú y
 otras esferas normales. No volver a abrir pruebas consumidas.
 
@@ -42,7 +42,7 @@ node tools/pc-static-watchface.mjs prepare r263
 
 Los dos primeros rechazan carpetas de reportes/paquetes existentes para
 preservar evidencia; no borrar resultados para relanzarlos sin motivo.
-Helper cerrado actual SHA256
+Helper cerrado de preparación SHA256
 `a37683c2de8f4324fbcc7f847a98c02c31e3f0516f7438d700250205cdf42513`.
 Prepare/gates pasan sin sockets o comandos al reloj.
 
@@ -146,3 +146,21 @@ y ausencia de daño no están garantizadas. No flashear ni ejecutar recuperació
 automática; parar/revisar si el reloj no responde. Retorno a habitual es la
 recuperación parcial conocida cuando la UI sigue funcional. Firmware stock
 sin modificar. Retirada posterior de C/driver requiere otro plan específico.
+
+## Instalación R264 realizada
+
+Un intento RegisteredInactive:12partes, stream23.862bytes, TX24.359bytes,
+21TX/16RX. Registro confirmado; aceptación final de transferencia independiente
+no verificada. Sin activación automática, SET, DELETE o reintentos.
+GET independiente13→14, todos los IDs/flags previos conservados, activa
+observada365219966 conservada; propia365219965inactiva/removible.
+Journal `native-control-r264.json` Registered12/sin lock. Socket/worker
+cerrados/exit0; sin error nativo. Sin acceso a proc/nodo ni callbacks C desde PC.
+Gates restaurados, helper cerrado reconstruido y test de gates0sockets pasó.
+Helper cerrado posterior SHA256
+`01794a3af30a4653892da0c2a9d7fd5620997ae5d267ca2d178ad54494406a55`.
+Helper autorizado SHA256
+`a0a83f287f67da579ae2af70a8d2eeaecba58b75ab86507768a78cf8a9b56647`.
+Runner privado `artifacts/control-r264-authorized/run-install.mjs` consumido;
+autorización fijó el plan preinstalación del commit9de53cc. No volver a ejecutar.
+Pendiente observación física de los13ACKs/STOP y retorno a esfera habitual.

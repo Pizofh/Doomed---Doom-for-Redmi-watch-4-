@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**Actual R264:** [CtrlProbe instalada, ejecución manual pendiente](native-control-physical-plan-r264.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| CtrlProbe registrada inactiva, catálogo anterior conservado | RW4/M2315W1/FW2.2.86 | Install y GET independiente13→14, journalRegistered12 | CONFIRMADO EN RW4 | Alta para protocolo/catálogo | Sí, PC | No prueba de render, write C o13ACKs aún |
+| Instalador/restablecimiento de gates/cierres completados | PC Windows/bond RW4 | Runner R264, gates0sockets, close/workerexit0 | CONFIRMADO LOCALMENTE | Alta para ensayo | Sí | Un intento consumido; no reejecutar |
+
 **Actual R263:** [Cliente de control preparado, hardware pendiente](native-control-physical-plan-r264.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
