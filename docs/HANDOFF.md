@@ -1,5 +1,24 @@
 # Retomar el proyecto
 
+**Actual R241,2026-10-14: ModInfo empaquetada, NO autorizado/enviado.**
+[UI/validación](module-registry-ui-r241.md), [plan físico R242](module-registry-physical-plan-r242.md).
+ID365219975,15792B, artifacts/registry-r241/ModInfo-id-only.face,
+SHAdf32945c91dfa484ce573164ee38daf1bdfe6a05aa9a873a7b172fa0e2b56f99.
+Main5984B SHA0abc68497640495a6189fcb50dae35fcefeb5a6a5c55a3b31b2945f1745f462a.
+Preview2barrasNARANJAS, MOD INFO,15indicadores/CHECK; consulta solo alclick.
+Marca17B propia registry-attempt-r241.txt bajo365219975/lua; persiste/no rearmar.
+LectorR240derivado solo2flags open/read antes close. /proc/modules rb fijo;
+sin shell/captura/dev/ELF/C/GCIO.38lector+17UI pasan S3tmpfsreal, proc/widgets/fallos
+simulados; inventarioS3igual y tmpretirado. Error ensambladoJS $' detectadoPC,
+corregido callbackliteral; logfallido registry-r241 preservado, final-pasa registry-r241-final.
+Compiler noADB/readback4recursos. Transfer12/sesión36/gates0sockets; prepare8partes.
+Nodefalse/r167/C#false; helpercerrado fedc4b769c986b31f8d7f45a023af5493ba7ed388c289a0db3150666d448903e.
+NoBT/USB/hardware nuevo. Journal module-registry-r242.json todavía no creado.
+StepCresidencia DESCONOCIDA. Next: aprobación UN ensayo/presencia>=50%; no ejecutar
+instalación hasta respuesta. No repetir C ni consumir autorización previa.
+Rows MARK/OPEN/READ/CLOSE/ASCII/END LINE/ROWS/FIELDS/NAMES/POINTERS/NUMERIC/C MODULE/
+NO MOD/NAME HINT/FINAL. Hintamarillo no safeunload; modverde+nomodrojo válido.
+
 **Actual R240, 2026-10-14: StepDiag completada y retorno normal confirmado.**
 Resultado R239: PACK/UNPACK/IO MODE/STEP ELF/STEP MARK/OLD CAP/CLOSE verdes;
 LSMOD rojo; C MODULE/NO MOD grises. Usuario confirma habitual, menús,

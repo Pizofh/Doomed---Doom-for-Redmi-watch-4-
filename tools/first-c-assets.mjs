@@ -57,3 +57,10 @@ export function stepDiagnosticAssets(){
   check:png(96,20,(x,y)=>ownTextPixel('CHECK',x,y,[36,92,128])),
   preview:png(390,450,(x,y)=>x>=150&&x<240&&y>=160&&y<238&&(y-160)%26<16?[255,255,0]:[0,0,0])};
 }
+export function registryAssets(){
+ const names=['MARK','OPEN','READ','CLOSE','ASCII','END LINE','ROWS','FIELDS','NAMES','POINTERS','NUMERIC','C MODULE','NO MOD','NAME HINT','FINAL'];
+ return {legend:png(180,330,(x,y)=>ownTextPixel(names[Math.floor(y/22)]??'',x,y%22)),
+  title:png(120,20,(x,y)=>ownTextPixel('MOD INFO',x,y)),
+  check:png(96,20,(x,y)=>ownTextPixel('CHECK',x,y,[36,92,128])),
+  preview:png(390,450,(x,y)=>x>=150&&x<240&&y>=160&&y<212&&(y-160)%26<16?[255,128,0]:[0,0,0])};
+}

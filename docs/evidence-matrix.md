@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R241, solo PC:** [ModInfo preparada](module-registry-ui-r241.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| UI separa acceso/formato/inventario y bloquea reintentos | Lua S3, tmpfs real; proc/widgets simulados |38lector+17UI casos R241 | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para casos | Sí | No lectura física nueva |
+| ModInfo contiene el source probado y cuatro recursos exactos | PC/Compiler revisado sin ADB | Readback15792bytes/hash | CONFIRMADO EN PC | Alta | Sí | No instalado/autorizado |
+| Transferencia nueva preparada con gates cerrados | PC/sesión sintética |12transfer/36sesión/gates0sockets/prepare8partes | CONFIRMADO EN PC | Alta | Sí | Sin Bluetooth/RW4 |
+
 **Actual R240:** [StepDiag completada; retorno normal](step-diagnostic-physical-result-r239.md).
 [Investigación estática del registro](module-registry-r240.md); causa exacta desconocida.
 
