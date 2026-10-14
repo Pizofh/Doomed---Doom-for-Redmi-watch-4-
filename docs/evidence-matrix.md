@@ -1,5 +1,17 @@
 # Matriz de evidencia
 
+**Actual R248:** [Registro reconstruido; StepC observado residente](proc-observation-r248.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| ProcView muestra TEXT/HEX y snapshot66bytes con cuatro verdes | RW4/M2315W1/FW2.2.86 | Dos fotos, HEAD64/TAIL16 overlap14 exacto | CONFIRMADO EN RW4 | Alta para bytes transcritos | Sí, usuario | No captura digital directa; transcripción manual verificada |
+| rw4step234 está registrado/residente, metadata de código coincide | Misma unidad | Nombre, text972, INIT+1/UNINIT+0x141/ARG0/NEXPORTS0 | CONFIRMADO EN RW4 | Alta para registro | Sí | Estado/handles/callbacks no leídos; DATA SIZE truncado |
+| Init propio pasó register_driver antes de guardar uninit | Misma unidad + C aprobado R234 | Metadata coherente y orden del código | INFERENCIA RAZONABLE | Fuerte | No callback inspeccionado directamente | No prueba de retiro o nodo funcionando |
+| Salida completa tiene campo DATA SIZE y LF | Misma unidad |63ASCII hasta coma +3NUL en66bytes | REFUTADO PARA ESTA SALIDA | Alta | Sí | El campo falta, no sustituir por36del build |
+| Formateador64 explica el recorte observado | Imagen candidata + foto RW4 | Formato esperado66, prefijo63 y NUL coherentes | INFERENCIA RAZONABLE | Fuerte | PC/imagen/foto | No printf stock aislado ni identidad binaria completa probados |
+| Retorno habitual/menús/scroll/pulsación larga normales tras ProcView | Misma unidad | Usuario «si, todo nice» | CONFIRMADO EN RW4 | Alta para ciclo observado | Sí | No recuperación integral demostrada |
+| Clasificador reconoce esta representación sin inventar tamaño o autorizar unload | Lua S3, fixture privada/sintéticas |24casos R248 | CONFIRMADO EN EMULADOR | Alta para casos | Sí | No operaciones nativas nuevas ni integración física |
+
 **Actual R247:** [ProcView instalada; lectura/vistas pendientes](proc-view-physical-result-r247.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

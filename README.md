@@ -1,8 +1,10 @@
 # DOOM en Redmi Watch 4
 
-**Actual R247:** [ProcView instalada e inactiva](docs/proc-view-physical-result-r247.md).
-Catálogo15→16, entradas y selección anteriores conservadas, envío cerrado.
-CHECK manual y vistas texto/hex pendientes; residencia de StepC desconocida.
+**Actual R248:** [Registro físico reconstruido](docs/proc-observation-r248.md):
+StepC sigue registrado; su salida quedó truncada y el parser la rechazó.
+ProcView TEXT/HEX y retorno habitual normales confirmados. Clasificador de esa
+representación pasó24casos en PC/S3; sin nueva operación física. Siguiente:
+snapshot del módulo existente antes de considerar retirarlo, sin recargar C.
 
 **Actual R246, PC:** [ProcView preparada](docs/proc-view-r246.md): longitud,
 inicio64bytes y final16bytes; texto/hex sobre una sola lectura. 22casos con

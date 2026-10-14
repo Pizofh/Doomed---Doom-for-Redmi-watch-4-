@@ -1,9 +1,9 @@
-# R247 — ProcView instalada; lectura manual pendiente
+# R247 — ProcView observada; módulo propio visible y retorno normal
 
 2026-10-14. Usuario autorizó un ensayo y presencia: «Sí, autorizo y puedo observar
 el reloj». Pregunta incluía batería≥50%; afirmación registrada, sin consulta
 extra. [Plan aprobado](proc-view-physical-plan-r247.md). Un envío consumido,
-CHECK único/MODE sobre snapshot/retorno pendientes. No permiso para repetir
+CHECK único/MODE sobre snapshot/retorno completados. No permiso para repetir
 instalación, borrar paquetes/marcas, reiniciar o actuar sobre StepC.
 
 Paquete ProcView365219973,21836bytes, SHA
@@ -31,15 +31,15 @@ Evidencia privada artifacts/proc-view-r247-authorized: aprobación/pins/helpers,
 prepare/install/cierre/gates/GET/comparación; no claves/direcciones de unidad/
 seriales o logs crudos publicados.
 
-## Manual pendiente
+## Observación completada
 
-Seleccionar ProcView, **tres barras azules**. PROC DATA, cuatro filas
-MARK/OPEN/READ/CLOSE grises, campos vacíos y CHECK/MODE. Rojo inicial/faltaUI/
-fallo: no pulsar ni repetir; volver a habitual si responde y describir.
+Dos fotos aportadas por el usuario muestran TEXT/HEX, cuatro verdes y LEN HEX0042
+(66bytes). Vista con164celdas de imagen funciona en este contexto físico, y
+ambos modos muestran la misma longitud. Nombre rw4step234 visible; registro
+termina truncado y con NUL, no un CSV íntegro. Reconstrucción/interpretación:
+[R248](proc-observation-r248.md), sin publicar direcciones o extracto real.
 
-CHECK una vez. Si cuatro verdes y datos visibles, conservar imagen de
-LEN HEX/HEAD TEXT/TAIL HEX; MODE una vez y conservar HEAD HEX. Son dos vistas
-de una lectura, no un nuevo comando. Solo pantalla del ensayo; no logs generales,
-claves o publicación de extractos reales. Después habitual y confirmar menús,
-desplazamiento/pulsación larga. Ante error detener; no reabrir CHECK/StepC,
-rearmar, eliminar o reiniciar automáticamente.
+Usuario confirmó retorno a habitual, menús, desplazamiento y pulsación larga:
+«si, todo nice». Ensayo consumido. No reabrir/rearmar ProcView o StepC, borrar
+marca/paquete, reiniciar o cargar/retirar C automáticamente. El módulo propio
+se observa residente; su estado interno y callbacks aún no probados físicamente.

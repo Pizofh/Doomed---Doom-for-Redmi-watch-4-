@@ -1,6 +1,24 @@
 # Retomar el proyecto
 
-**Actual R247,2026-10-14: ProcView instalada; CHECK/vistas/retorno pendientes.**
+**Actual R248,2026-10-14: registro físico reconstruido, StepC residente.**
+Usuario2fotosProcViewTEXT/HEX,4verdes/LEN0042=66. Head64/tail16 overlap14 exacto,
+reconstrucciónprivada artifacts/proc-photo-r248;63ASCIIacabacomaDATA SIZE+3NUL/sinLF.
+Nombre rw4step234; entrybase+1/uninitbase+0x141/text972/arg0/export0 coincidenR234;
+DATAptrnonnull privado, tamañoDATAAUSENTE(no inventar36). Registropropioobservado,
+init/registeréxitoinferenciafuerte; estado/handles/callbacksno probados.
+Ruta de fallo probable RegistryUncertainAfterLoad antes snapshot/START; no log237certificando.
+Retornohabitual/menús/scroll/longpressconfirmado «si, todo nice». R247consumido.
+Classifierpuro proc-own-record-r248.lua sourceSHA19d01972e4da124c634569c71c36f75d8034ce7f550865428449abb5111403b5,
+24casosLuaS3/fixtureprivadas pasan, modulesigual/tmpretirado; metadata/inventoryCompletefalse,
+dataSizeKnownfalse, NO readyToUnload, NO files/shell/C ni integradohardware.
+Toolsreconstruct-proc-snapshot-r248.mjs/test-proc-own-record-r248.mjs guardexisting.
+Nextsnapshot32delMISMOmoduloresidente, NOrecargarELF. Prepararcarrier/validación/plan
+antesautorizar open/read/close callbacksC nuevos. Luego solo considerar unloadcontrolado.
+No RMMOD/StepC/ProcView/rearmar/delete/reboot automático; privilegios/recoveryunknown.
+Gatesfalse/r167/C#false; helper fdb70ddc1963e8c0da7e7185bd867751369613e7405fd077a827721768ef052b.
+[Análisis](proc-observation-r248.md); direccionesextractoprivados,no publicar.
+
+**Historial R247,2026-10-14: instalación previa a vistas/retorno ya completados.**
 [Resultado](proc-view-physical-result-r247.md). Usuario1ensayo/presenciaafirmados,
 pregunta>=50%batería; autorregistrada. Runnerprivadoproc-view-r247-authorizedconsumido.
 UNinstallRegisteredInactive11partes/stream21906/TX22388/20TX16RX, modelFWgate,

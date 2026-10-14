@@ -1,5 +1,11 @@
 # Ejecución y privilegios
 
+**Actual R248:** [StepC observado registrado; salida truncada reconstruida](proc-observation-r248.md).
+ProcView física TEXT/HEX:66bytes, nombre rw4step234, text972 y offsets de entry/uninit
+coincidentes; DATA SIZE ausente. Retorno habitual/menús/scroll/pulsación larga normal.
+No nueva carga/retirada: siguiente snapshot del módulo existente con plan/revisión
+para callbacks open/read/close. Estado/handles, privilegios/recovery integral pendientes.
+
 **Actual R222:** [NativeFrames C→archivos→Lua/LVGL animación/salida físicas](native-frames-physical-result-r221.md).
 Usuario observa cinco verdes, animación y navegación/cambio normales. C se retira
 antes de animar cuatro PNG, y EXIT exige detach/limpieza; no tareas C residentes.

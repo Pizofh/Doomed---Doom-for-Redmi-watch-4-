@@ -1,5 +1,11 @@
 # Investigación inicial
 
+**Actual R248:** [Dos fotos físicas permiten reconstruir un registro propio truncado](proc-observation-r248.md).
+Head64/tail16 y overlap14 dan66bytes completos: rw4step234, metadata de código
+coincidente con R234; campo final perdido y3NUL. Formateador64 de imagen candidata
+es explicación fuerte, sin copiar/flashear firmware. Registro observado, estado nativo
+todavía no leído. Clasificación pura24casos S3 pasa; sin nueva operación física.
+
 **Actual R215/R216:** [captura stdout probada S3 y carrier de archivo C preparado](native-log-r215.md).
 31casos con I/O real/backend simulado, paquete/hash cerrados; no nuevo C físico.
 [Revisión única pendiente](native-log-physical-plan-r216.md), sin nuevos permisos implícitos.

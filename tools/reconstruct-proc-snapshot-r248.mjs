@@ -1,0 +1,25 @@
+// Read a private photo transcription, never a device, firmware, keys or network.
+import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
+import {firstCRoot as root,sha256} from './first-c-source.mjs';
+if(process.argv.length!==2)throw Error('FixedPhotoReconstructionOnly');
+const folder=path.join(root,'artifacts/proc-photo-r248'),input=path.join(folder,'transcription.json');
+if(fs.existsSync(path.join(folder,'reconstruction.json')))throw Error('ExistingReconstruction');
+const transcription=fs.readFileSync(input),p=JSON.parse(transcription.toString('utf8'));
+for(const key of ['headHex','tailHex'])assert.match(p[key],/^(?:[0-9A-F]{2})+$/);
+const size=parseInt(p.lengthHex,16),head=Buffer.from(p.headHex,'hex'),tail=Buffer.from(p.tailHex,'hex');
+assert.equal(size,66);assert.equal(head.length,64);assert.equal(tail.length,16);
+const overlap=head.length+tail.length-size;assert.equal(overlap,14);
+assert.ok(head.subarray(-overlap).equals(tail.subarray(0,overlap)));
+const bytes=Buffer.concat([head,tail.subarray(overlap)]);assert.equal(bytes.length,size);
+assert.ok(bytes.subarray(63).equals(Buffer.alloc(3)));
+const body=bytes.subarray(0,63).toString('ascii'),fields=body.split(',');assert.equal(fields.length,9);assert.equal(fields[8],'');
+assert.equal(fields[0],'rw4step234');assert.equal(fields[3],'0');assert.equal(fields[4],'0');assert.equal(fields[6],'972');
+const pointer=i=>{assert.match(fields[i],/^0x[0-9a-f]{1,8}$/);return parseInt(fields[i].slice(2),16);};
+const base=pointer(5);assert.equal(pointer(1)-base,1);assert.equal(pointer(2)-base,0x141);assert.ok(pointer(7)>0);
+const elf=fs.readFileSync(path.join(root,'build/native-step-rw4-r234/step.elf'));
+assert.equal(sha256(elf),'713fe535880f2cbae928efe5199d15b0c39a01bc455aab819f8a534cbab4d424');
+const privateReport={...p,transcriptionSha256:sha256(transcription),overlapBytes:overlap,wholeHex:bytes.toString('hex'),fields,missingField:'DATA SIZE',noFinalNewline:true};
+fs.writeFileSync(path.join(folder,'reconstruction.json'),JSON.stringify(privateReport,null,2)+'\n',{flag:'wx'});
+fs.writeFileSync(path.join(folder,'observed.bin'),bytes,{flag:'wx'});
+const report={checkpoint:'R248',photoTranscription:true,headTailOverlapVerified:true,lengthBytes:size,printablePrefixBytes:63,trailingZeroBytes:3,ownModuleNameObserved:true,textBytes:972,entryOffset:1,uninitializerOffset:321,dataSizeObserved:false,moduleStateRead:false,physicalOperationRequested:false};
+fs.writeFileSync(path.join(folder,'summary.json'),JSON.stringify(report,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify(report));
