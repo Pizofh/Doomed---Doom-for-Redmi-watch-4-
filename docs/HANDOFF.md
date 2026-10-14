@@ -1,10 +1,20 @@
 # Retomar el proyecto
 
-**Actual R215/R216, 2026-10-13:** [NativeLog lista PC](native-log-r215.md),
-[plan físico pendiente de autorización](native-log-physical-plan-r216.md).
-Siguiente: pedir autorización concreta para un envío/selección/RUN C único y
-usuario presente. NO ejecutar/habilitar gates por el «ok/sigamos» de investigación.
-Sin nuevo permiso físico, no nuevo GET/BT/reloj/teléfono. FirstC2/marca intactas.
+**Actual R216, 2026-10-13:** [NativeLog instalada](native-log-physical-result-r216.md).
+Usuario autorizó único ensayo y presencia; un install r215 RegisteredInactive,
+14partes, GET independiente14→15 con anteriores IDs/flags y activa365210175
+conservados. Propia365219999 inactiva/eliminable. Socket/workers cerrados.
+Gates Nodefalse/r167 y C#false restaurados/rebuild; test0sockets pasó.
+Helper cerrado d5e433352308720472131885fbeca97e8b942738082ffb9a87f382eaf4f643c4.
+Journal native-log-r216.json Registered/14partes/sin lock. Archivo privado de
+revisión artifacts/native-log-r216-authorized (no ejecutar helper habilitado).
+Pendiente respuesta del usuario a selección NativeLog/cinco grises/RUN C UNA vez,
+colores FILE/MARK/C TEXT/UNLOAD/END y retorno normal desde Ajustes.
+NO repetir envío/click, rearmar marca, DELETE o nuevos comandos físicos.
+Instalación NO demuestra ejecución de este C/5APIs; FirstC2/marca intactas.
+
+**Historial de preparación R215/R216:** [NativeLog lista PC](native-log-r215.md),
+[plan físico ahora aprobado](native-log-physical-plan-r216.md).
 
 R211 test nativo S3 antiguo hello-bound1020B/SHA125cc7167fb0ae27c6c598504e0604c679e838ea5c8eb781e8c56b4f34559008
 desdeLua os.execute insmod >tmpfile: native capture0bytes, mensaje sale alcaller.
@@ -36,9 +46,9 @@ no rmmod. Complete requieremsg/carga/retiro/cleanup; repaintrojo conunloadverde.
 NativeLog ID365219999,28348B,SHA1e88ce20dcbb28f6680be89f1625c22682890fb8efc8f2a605b0d34bde6579eb,
 artifacts/native-log-r215/NativeLog-id-only.face. Lua18156B
 SHAdf5c6cc3171d3441839d3dd9bd00e4aae98aaa24876be380f12e0627b9a28477.
-Compiler sinADB/4records exactos. Perfilr215CERRADO,prepare14parts; native-log-r216.json
-y.lock ausentes. Transfer12/sesión31offline pasan; gates test0sockets.
-Helperclosed nuevo b8d7a688d0d3a6765a21ad3dadac34cda2a46a877ad0c1853fc583aa068ebc85.
+Compiler sinADB/4records exactos. Perfilr215CERRADO,prepare14parts; journal/lock
+ausentes antes del envío (estado actual arriba). Transfer12/sesión31offline pasan.
+Helper previo b8d7a688d0d3a6765a21ad3dadac34cda2a46a877ad0c1853fc583aa068ebc85.
 Reportes build/test/package existentes rechazan overwrite; no repetir/borrar.
 Usuario comentó aviso OpenAI desconocido: no vimos texto y no lo atribuimos;
 continuó alcancePC. No datos privados crudos publicados ni firmware/toolsflash.

@@ -1,10 +1,13 @@
-# R216 — revisión pendiente: NativeLog, mensaje C en archivo propio
+# R216 — plan aprobado: NativeLog, mensaje C en archivo propio
 
-2026-10-13. **NO AUTORIZADO NI EJECUTADO. Gates Node/C# cerrados.**
+2026-10-13. **Ensayo autorizado e instalación completada. Gates Node/C# cerrados
+de nuevo; selección/RUN C/retorno manuales pendientes.**
+[Resultado de instalación](native-log-physical-result-r216.md).
 [Preparación, fuentes y31escenarios R215](native-log-r215.md).
 La autorización FirstC2 fue de un solo ensayo, ya completado. Este paquete
-cambia código, ID/hash, bindings y writes; la regla física inicial del usuario
-exige nueva revisión. No habilitar/enviar por un «sigamos» de investigación.
+cambia código, ID/hash, bindings y writes; se pidió nueva revisión y el usuario
+respondió «Sí, autorizo un ensayo y puedo observar el reloj». No habilitar otro
+envío, reintento o payload por un «sigamos» de investigación.
 
 ## Identificación y precondiciones
 
@@ -29,7 +32,8 @@ deben conservarse, especialmente FirstC2 y su marca; no abrirlos/rearmarlos.
 - Lua18.156bytes SHA256 `df5c6cc3171d3441839d3dd9bd00e4aae98aaa24876be380f12e0627b9a28477`.
 - ELF1500bytes SHA256 `9dff873fd6d41669de0d336528a35c7c281fa1e03ee1eb5ebcddd6d6907ca652`.
 - Módulo único rw4logr211; journal tools/local/pc-rfcomm/native-log-r216.json,
-  aún ausente. Helper cerrado SHA b8d7a688d0d3a6765a21ad3dadac34cda2a46a877ad0c1853fc583aa068ebc85.
+  inicialmente ausente, ahora Registered/14partes/sin lock. Helper cerrado tras
+  el envío SHA d5e433352308720472131885fbeca97e8b942738082ffb9a87f382eaf4f643c4.
 - Raíz física requerida `P=/data/app/watchface/market/365219999/lua/`. Si la
   watchface entrega otro path normalizado, setup bloquea el botón antes de C.
 

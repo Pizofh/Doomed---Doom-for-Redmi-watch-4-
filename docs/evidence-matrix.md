@@ -1,6 +1,14 @@
 # Matriz de evidencia
 
-**Actual R215/R216:** [carrier preparado, sin envío](native-log-r215.md).
+**Actual R216:** [NativeLog instalada, observación manual pendiente](native-log-physical-result-r216.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| NativeLog registrada sin activar ni cambiar entradas anteriores | M2315W1/FW2.2.86 | Un envío autorizado y GET independiente comparado contra journal | CONFIRMADO EN RW4 | Alta | Sí, transporte real |14→15esferas; propia inactiva/eliminable |
+| Gates Node/C# cerrados después del envío | PC | Fuentes restauradas, rebuild y test de entradas cerradas | CONFIRMADO EN PC | Alta | Sí, cero sockets en test | Socket/worker de instalación y GET cerrados |
+| Nuevo C ejecuta APIs de archivo y se retira físicamente | M2315W1/FW2.2.86 | Selección/RUN C/colores aún pendientes | SIN EVIDENCIA TODAVÍA | Desconocida | No | Instalación no demuestra ejecución; FirstC2 solo init mínimo |
+
+**Preparación R215:** [carrier preparado antes del envío](native-log-r215.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|
@@ -9,7 +17,7 @@
 | Mode x solicita exclusión de archivo previo | Misma imagen + NuttX ref | Rama modeparser OR8/O_EXCL | INFERENCIA RAZONABLE | Alta para parser | Sí, PC | Sin atomicidad/FS físico demostrado; no fallback wb |
 | Carrier retira módulo confirmado aun si mensaje/captura falla | Lua5.4S3, I/O real +exec/widgets simulados |31casos/hash fuente R211 | CONFIRMADO EN SIMULACIÓN | Alta para casos | Sí | Exec/inventarioincierto no autoriza retiro ciego |
 | Paquete NativeLog/fuente/ELF exactos y perfil cerrado | PC |4records byte a byte, prepare14partes, transfer12/session31/gates | CONFIRMADO EN PC | Alta | Sí | ID365219999,28348bytes; sin envío |
-| Nuevo C escribe/lee archivos en RW4 físico | M2315W1/FW2.2.86 | Nuevo payload no ejecutado | SIN EVIDENCIA | Desconocida | No | FirstC2 no probó FS desde C; revisión R216 pendiente |
+| Nuevo C escribe/lee archivos en RW4 físico | M2315W1/FW2.2.86 | En preparación, nuevo payload no ejecutado | SIN EVIDENCIA EN ESE CHECKPOINT | Desconocida | No | FirstC2 no probó FS desde C; estado posterior R216 arriba |
 
 **Historial R210:** [ruta Lua/stdio inspeccionada](rw4-lua-bridge-r209.md), [C logging compilado soloPC](rw4-log-candidate-r210.md).
 
