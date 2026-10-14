@@ -1,12 +1,20 @@
 # Matriz de evidencia
 
-**Actual R239:** [StepDiag instalada; CHECK pendiente](step-diagnostic-physical-result-r239.md).
+**Actual R240:** [StepDiag completada; retorno normal](step-diagnostic-physical-result-r239.md).
+[Investigación estática del registro](module-registry-r240.md); causa exacta desconocida.
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|
 | Stock registró StepDiag nueva/inactiva | RW4/M2315W1/FW2.2.86 | Install + GET independiente13→14 | CONFIRMADO EN RW4 | Alta para catálogo | Sí | No runtime/ACK final explícito |
 | Entradas/selección previas al envío preservadas | Misma unidad | Comparación contra preflight13, activa365210175 | CONFIRMADO EN RW4 | Alta para catálogo | Sí | Cambio previo17→13 no atribuido |
-| C de StepC sigue registrado o ausente | Misma unidad | CHECK aún pendiente | SIN EVIDENCIA | Desconocida | No | No intervenir a ciegas |
+| PACK24/UNPACK32 y IO sin buffering funcionan en este contexto | RW4/FW2.2.86, marca regular propia | Indicadores verdes de StepDiag | CONFIRMADO EN RW4 | Alta para fixtures | Sí, usuario | No demuestra I/O del nodo nativo |
+| ELF y marca de StepC coinciden con el ensayo aprobado | Misma unidad | STEP ELF/STEP MARK verdes, comparación exacta | CONFIRMADO EN RW4 | Alta para comprobaciones | Sí, usuario | Marca posterior al preflight; no prueba carga o retirada |
+| Registro de módulos completamente reconocido | Misma unidad | LSMOD rojo, C MODULE/NO MOD grises | REFUTADO PARA ESTE ENSAYO | Alta para resultado | Sí, usuario | No distingue shell/lectura/parser |
+| C de StepC sigue registrado o ausente | Misma unidad | Inventario no reconocido | SIN EVIDENCIA | Desconocida | No | No intervenir a ciegas |
+| Retorno habitual/menús/scroll/pulsación larga normales tras StepDiag | Misma unidad | Usuario «si, todo normal» | CONFIRMADO EN RW4 | Alta para ciclo observado | Sí | No prueba ausencia de corrupción latente |
+| lsmod lee /proc/modules y presenta columnas | Imagen candidata 2.2.86 fijada, análisis PC | Literales referenciados y llamadas rastreadas R240 | CONFIRMADO EN IMAGEN CANDIDATA | Alta para análisis estático | Sí, PC | Lectura directa desde Lua aún no probada físicamente |
+| Formateador del registro usa tamaño64 | Misma imagen candidata | Argumento r1 en0x1bb8c2 y formato referenciado | CONFIRMADO EN IMAGEN CANDIDATA | Alta para parámetro | Sí, PC | Truncamiento como causa de R239 es hipótesis |
+| Lector nuevo distingue metadata inválida de registro vacío | Lua S3, tmpfs y fixtures/fallos simulados |38casos R240 | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para casos | Sí | Sin UI/paquete/envío físico nuevo |
 
 **Actual R238:** [StepC falló, retorno normal](step-physical-result-r237.md);
 [diagnóstico solo preparado](step-diagnostic-r238.md).
@@ -16,7 +24,7 @@
 | START de este ensayo StepC completa inicio y controles | RW4/FW2.2.86 | Usuario cinco grises, EXIT rojo inmediato tras START | REFUTADO PARA ESTE ENSAYO | Alta para observación | Sí, usuario | No distingue etapa ni refuta ejecución C en general |
 | UI normal y vuelta habitual conservadas tras fallo | Misma unidad | Usuario «si, todo normal» tras instrucción de retorno | CONFIRMADO EN RW4 | Alta para ciclo observado | Sí | Sin diagnóstico de corrupción latente/recovery |
 | Módulo nuevo ausente/retirado tras EXIT rojo | Misma unidad | Sin registro runtime | SIN EVIDENCIA | Desconocida | No | No descargar/repetir a ciegas |
-| Diagnóstico conserva archivos anteriores y no abre nodo/carga C | Lua S3, tmpfs real, shell/UI simulados |19casos y guard de scope | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para casos | Sí | Sin envío R239 autorizado todavía |
+| Diagnóstico conserva archivos anteriores y no abre nodo/carga C | Lua S3, tmpfs real, shell/UI simulados |19casos y guard de scope | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para casos | Sí | R239 instalado y observado después |
 
 **Actual R237:** [StepC instalada; UI/C manual pendientes](step-physical-result-r237.md).
 

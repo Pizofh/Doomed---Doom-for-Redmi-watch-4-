@@ -1,6 +1,27 @@
 # Retomar el proyecto
 
-**Actual R239,2026-10-14: StepDiag instalada, CHECK manual pendiente.**
+**Actual R240, 2026-10-14: StepDiag completada y retorno normal confirmado.**
+Resultado R239: PACK/UNPACK/IO MODE/STEP ELF/STEP MARK/OLD CAP/CLOSE verdes;
+LSMOD rojo; C MODULE/NO MOD grises. Usuario confirma habitual, menús,
+desplazamiento y pulsación larga normales. Una autorización consumida, no retry.
+La marca exacta demuestra que el preflight inicial precedió a su escritura
+según el código; no prueba carga, nodo o retirada C. Inventario DESCONOCIDO.
+No abrir /dev/rw4step234, cargar/descargar C, rearmar o repetir los ensayos.
+[Investigación y siguiente lectura](module-registry-r240.md): formateador de
+lsmod encontrado en imagen candidata fijada; lee /proc/modules y formatea CSV.
+La causa del rojo no está identificada. Gates Node=false/r167 y C#=false.
+No nuevo Bluetooth, USB ni operación física en R240.
+Lector registry-r240.lua preparado: /proc/modules rb fijo, <=8193+1 EOF,
+<=8192/64filas, CSV9campos; decimalu32 separado de pointerhex; errores por etapa,
+partial ownNameHint no inventario válido.38tests pasan LuaS3/tmpfsreal,
+proccontenido/fallos simulados; inventarioS3igual y tmpretirado.
+SourceSHA dce2b453b8eda83d1a648bc31a5dcce8858655ad00da3d2f45823472efecdc4d.
+No UI/paquete/perfil físico nuevo. Next: UI integral para esta lectura,
+paquete/tests/plan/pins antes de autorización; no reintentar C.
+Researchfinal artifacts/research/rw4-lsmod-r240-final; r1=64 en1bb8c2.
+Posible truncamiento, no causa física demostrada; imagen candidata no hardware.
+
+**Historial R239: instalación previa al CHECK (observación ya completada arriba).**
 [Resultado](step-diagnostic-physical-result-r239.md). Usuario autoriza1ensayo/presencia,
 pregunta incluía>=50%batería, afirmaciónregistrada. Perfilr238 aprobado intacto.
 Artefactoprivado artifacts/step-diag-r239-authorized, script un intento confinally.
@@ -13,13 +34,10 @@ GETindepComplete:13→14previos IDs/active/canDelete intactos, activa365210175;
 StepDiag365219976inactive/removable, StepC365219977 presente. Cambio17→13 sucedió
 ANTES de esteenvío; causanoatribuida, noDELETE nuestro. JournalRegistered11/sinlock.
 NoSET/shell/lecturaFS/operacióndeC desdePC. El estadoC237 continúaDESCONOCIDO.
-Ahorausuario: seleccionarStepDiag3barrasAMARILLAS, STEP DIAG,10grises/CHECK;
-rojoinicial/faltaUI NO CHECK. CHECKuna vez y reportar10colores PACK/UNPACK/IO MODE/
-STEP ELF/STEP MARK/OLD CAP/LSMOD/C MODULE/NO MOD/CLOSE; NO exigirallgreen.
-Luegohabitual+Ajustes/selector y menús/scroll/longpressnormales. Awaitrespuesta.
+CHECK y retorno ya observados: véase el estado actual arriba.
 Sinrepetir/reabrir/DELETE/rearmar/reboot/RMMOD/otraC carga automática.
 
-**Actual R238,2026-10-14:** usuario StepC5grises→START→EXITrojo inmediato,
+**Historial R238,2026-10-14:** usuario StepC5grises→START→EXITrojo inmediato,
 prueba bloqueada; luego confirmahabitual/menus/scroll/longpressnormal «si,todo normal».
 EnsayoR237 CONSUMIDO; no reabrir/rearmar/repetir/DELETE/reboot/RMMOD automático.
 Carga/nodo/módulo/retirada DESCONOCIDOS, ningúnruntime log/razón capturado.
@@ -32,13 +50,13 @@ builder tools/step-diagnostic-source-r238.mjs pinELF234 comoDATOS comparación, 
 módulosrealesiguales/tmpausente. Package20780B ID365219976 StepDiag3barrasAMARILLAS,
 artifacts/step-diag-r238/StepDiag-id-only.face SHAe4d30fa6da8a08164bea262a1d54616447fc81d71ebe4fedfda42aad4914447c.
 main11204B SHA16f37c1c206e374e7f8fb73fa1bd6bd5ba5563921805f62e7ba044ccc093496b.
-Perfilr238/plan [R239](step-diagnostic-physical-plan-r239.md) NO autorizado/enviado;
-journalstep-diagnostic-r239.json ausente. Prepare11partes/transfer12/session35/gates0sockets.
+Perfilr238/plan [R239](step-diagnostic-physical-plan-r239.md), posteriormente autorizado,
+instalado y observado; journal Registered11. Prepare11partes/transfer12/session35/gates0sockets.
 Helperclosedactuale4f5ea512bb55da612a0aedc14cb556a6091d63c96c8372f2f8d7cd044b99973;
 Nodefalse/r167/C#false. Sin nuevoBT/USB/hardware enesta preparación.
 FilaUI PACK/UNPACK/IO MODE/STEP ELF/STEP MARK/OLD CAP/LSMOD/C MODULE/NO MOD/CLOSE.
 GreenMODULE+redNOMOD válido; NO exigirallgreen. InventarioAHORA no retrocausa exacta.
-Next: UN diagnóstico observado/autorizarplanR239; NOrecargarCpara averiguarlo.
+Este checkpoint fue completado por R239; NOrecargarCpara averiguarlo.
 
 **Actual R237, 2026-10-14: StepC instalada, manual pendiente.**
 [Resultado/plan](step-physical-result-r237.md). Usuario autoriza UN ensayo/presencia,

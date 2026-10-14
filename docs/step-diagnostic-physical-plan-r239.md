@@ -1,7 +1,7 @@
 # R239 — ensayo autorizado: StepDiag sin carga de C
 
-2026-10-14. **Autorizado e instalado sin activación; gates cerrados de nuevo.
-CHECK manual pendiente.** [Resultado](step-diagnostic-physical-result-r239.md). Usuario:
+2026-10-14. **Ensayo completado; CHECK observado y retorno normal confirmado.
+Autorización consumida; gates cerrados.** [Resultado](step-diagnostic-physical-result-r239.md). Usuario:
 «Sí, autorizo y puedo observar el reloj». Solicitud incluía batería≥50%;
 afirmación registrada, sin lectura adicional. Un ensayo, sin reintentos.
 Ensayo StepC anterior

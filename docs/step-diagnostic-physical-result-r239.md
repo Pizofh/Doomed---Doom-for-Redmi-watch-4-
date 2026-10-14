@@ -1,4 +1,4 @@
-# R239 — StepDiag instalada, CHECK manual pendiente
+# R239 — StepDiag observada; inventario de módulos sin determinar
 
 2026-10-14. Usuario autorizó [el ensayo fijo](step-diagnostic-physical-plan-r239.md):
 «Sí, autorizo y puedo observar el reloj». Solicitud incluía batería≥50%; se
@@ -39,21 +39,32 @@ pins/helpers, prepare/install, cierre/gates, inventario y comparación. Ninguna
 clave/dirección/serial/log crudo publicado. Sin shell/lectura de archivos del
 reloj o carga/retirada C desde PC en este envío. Estado de C de R237 aún desconocido.
 
-## Observación pendiente
+## Observación completada
 
-Seleccionar StepDiag, preview tres barras amarillas. Debe mostrar STEP DIAG,
-CHECK y diez indicadores grises. Si rojo inicial/falta UI, no CHECK ni repetir;
-volver a habitual y describir. No abrir StepC ni ensayos C anteriores.
+Usuario: «todas verdes menos ls mod que quedó rojo. no mod y c module quedaron
+grises, de resto todos verdes». Después confirmó retorno a la esfera habitual,
+menús, desplazamiento y pulsación larga normales: «si, todo normal».
 
-CHECK una vez; esperar unos segundos y comunicar los colores de PACK, UNPACK,
-IO MODE, STEP ELF, STEP MARK, OLD CAP, LSMOD, C MODULE, NO MOD y CLOSE. No se
-espera todo verde: C MODULE verde/NO MOD rojo significa un módulo presente,
-sin validación de sus callbacks ni autorización para descargarlo.
+| Fila | Observado | Alcance de la comprobación |
+|---|---|---|
+| PACK | Verde | Fixture Lua de solicitud de 24 bytes |
+| UNPACK | Verde | Fixture de respuesta de 32 bytes, incluido entero negativo |
+| IO MODE | Verde | Lectura sin buffering de la marca regular propia |
+| STEP ELF | Verde | Archivo anterior coincide exactamente con ELF aprobado de 2620 bytes |
+| STEP MARK | Verde | Existe la marca exacta de 14 bytes del intento StepC |
+| OLD CAP | Verde | Captura anterior ausente según la lectura |
+| LSMOD | Rojo | Consulta/captura/formato completo no reconocido; no distingue el motivo |
+| C MODULE | Gris | Presencia del módulo propio desconocida |
+| NO MOD | Gris | Registro vacío no demostrado |
+| CLOSE | Verde | Cierres y retirada/ausencia de captura propia confirmados por el script |
 
-Volver a habitual desde Ajustes→Esferas o selector; confirmar menús/scroll/
-pulsación larga normales. No reabrir/repetir CHECK, borrar marcas/paquetes,
-reiniciar o intervenir sobre módulos automáticamente.
+La marca se escribe después del preflight inicial de StepC. Por el orden del
+código aprobado, es una **inferencia** que START avanzó más allá de ese preflight;
+no demuestra que la inicialización C, el nodo o la retirada funcionaran.
+El resultado rojo combina errores de shell, lectura, límites y parser: no
+permite atribuir el fallo a ninguno de ellos. Un módulo puede seguir residente.
 
-Instalación no prueba funciones Lua, contenidos de archivos anteriores o
-registro de C: CHECK aún no observado. No nuevo diagnóstico de causa exacta,
-watchdog, sandbox o recovery integral demostrado.
+Ensayo consumido. No reabrir/rearmar StepDiag o StepC, cargar otro C, abrir su
+nodo o descargar módulos automáticamente. El siguiente trabajo es en PC:
+[examinar el formateador y preparar una lectura del registro](module-registry-r240.md).
+No causa exacta, sandbox, watchdog o recuperación integral nuevos demostrados.
