@@ -1,5 +1,15 @@
 # Retomar el proyecto
 
+**Actual R254: snapshot32bytes C válido/IDLE/cierre confirmados en foto; REG LAST rojo.**
+[Resultado](state-read-physical-result-r254.md). Foto: primeras8filasverdes, REG LAST/FINALrojos.
+Hex4134575201000000+24bytes00: magic0x52573441/version1/state/status0,32bytes.
+Privatephoto-observation.json enstate-read2-r254-authorized, manual no digitalcapture.
+OPEN/read32/EOF/fclose propios probados físicamente por indicadores/frame; no STEP/START/STOP/uninit.
+REG LAST combina postreadEOFclose/inspect/byteigualdad; subcausa desconocida. No afirmarpadding/corrupción/unload.
+Retornohabitual/menúscrolllongpress preguntado víaasync, aúnpendiente. No nuevo hardware.
+Next metadataONLY para verificarregistroactual/estabilidad/prefix-tail-len, después normalreturn.
+No repetirStateRead2/rearmar/recargar/rmmod/STOP/driverfísico. Privilegios/recoveryintegraldesconocidos.
+
 **Actual R254: StateRead2 instalada inactiva; READ C manual pendiente.**
 Usuario«si»autorizaUNensayo/presencia>=50%. Runnerstate-read2-r254-authorized consumido.
 InstallRegisteredInactive10partes/stream20430/TX20897/19TX16RX, cierresworker/socket/exit0.

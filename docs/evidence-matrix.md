@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R254:** [Snapshot propio C/EOF/cierre, comprobación posterior fallida](state-read-physical-result-r254.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Nodo C devuelve frame32bytes válido/inicial, EOF y cierre exitoso a Lua | RW4/M2315W1/FW2.2.86 | Foto OPEN/READ/EOF/FRAME/IDLE/CLOSE verdes, magic/version/zeros coherentes | CONFIRMADO EN RW4 | Alta para intercambio observado | Sí, usuario | No write/STEP/START/STOP/uninit ni refs globales inspeccionados |
+| Registro posterior idéntico/reconocido tras read C | Misma unidad | REG LAST/FINAL rojos | REFUTADO PARA ESTE ENSAYO | Alta para resultado | Sí, usuario | No subcausa ni bytes posteriores disponibles; no inferir corrupción o ausencia |
+| Retorno normal tras StateRead2 | Misma unidad | Confirmación solicitada | SIN EVIDENCIA AÚN | Pendiente | No | No nuevo ensayo físico mientras pendiente |
+
 **Actual R252/R253:** [Marca vieja inaccesible, registro reconocido](precheck-physical-plan-r252.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
