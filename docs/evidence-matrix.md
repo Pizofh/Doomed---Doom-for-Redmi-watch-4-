@@ -1,6 +1,14 @@
 # Matriz de evidencia
 
-**Actual R249, PC:** [StateRead preparada; sin callback físico nuevo](state-read-r249.md).
+**Actual R250:** [StateRead instalada; lectura manual pendiente](state-read-physical-result-r250.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| StateRead registrada inactiva, previas esferas y selección conservadas | RW4/M2315W1/FW2.2.86 | Install + GET independiente16→17, ID365219972 | CONFIRMADO EN RW4 | Alta para catálogo | Sí | No render ni lectura nativa probados todavía |
+| Gates/socket/worker cerrados tras envío | PC/cliente | Finally, gates0sockets, cierres y exit0 | CONFIRMADO EN PC | Alta | Sí | Autorización de un envío consumida |
+| Snapshot32bytes y callbacks open/read/close propios funcionan físicamente | Misma unidad | READ C manual pendiente | SIN EVIDENCIA | Desconocida | No | Sin nuevo ELF o retirada; no ejecutar automáticamente |
+
+**Historial R249, PC:** [StateRead preparada; sin callback físico nuevo](state-read-r249.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

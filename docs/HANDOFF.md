@@ -1,6 +1,22 @@
 # Retomar el proyecto
 
-**Actual R249,2026-10-14: StateRead preparada, NO autorizada/enviada.**
+**Actual R250,2026-10-14: StateRead instalada inactiva; READ C manual pendiente.**
+[Resultado](state-read-physical-result-r250.md). Usuario autorizó UN ensayo/presencia,
+pregunta con batería≥50%. Runner privado artifacts/state-read-r250-authorized consumido.
+ID365219972,20536bytes, paquete SHAde20e2c8a68d7148cecbb756a0245d6c357eb792cf220e198a276af455db80e9.
+RegisteredInactive,11partes/stream20606/TX21088/20TX16RX. Sin SET/DELETE/retry.
+GET independiente16→17, previos IDs/flags intactos, activa365210175; propia inactiva/removable.
+Journalstate-read-r250.json Registered11/sinlock. Socket/worker/exit0 confirmados.
+Finally Nodefalse/r167/C#false, gates0sockets; helpercerrado
+49d593a7efa36fc2739e97fa2a47d55d9eda330bd441f18197f4cd3c879cd78c.
+Durante instalación NO callbacksC/node/proc; rw4step234 sigue sin snapshot comprobado.
+Next usuario StateRead4barrasAMARILLAS/C STATE/10grises/FRAME HEX vacío/READ C UNA vez;
+si FINALrojo inicial/faltaUI NO pulsar. Reportar colores/frame y retornohabitual/menús/scroll/longpress.
+Rows MARK/REG INFO/OPEN C/READ C/EOF C/FRAME/IDLE/CLOSE C/REG LAST/FINAL.
+IDLEamarillo no acción; FINALverde no permiso de unload. No reabrir/rearmar/repetir,
+recargar/retirarC/STEP/STOP/reset/reboot automático. Privilegios/recovery integral desconocidos.
+
+**Historial R249,2026-10-14: preparación PC anterior a autorización/envío R250.**
 [Carrier](state-read-r249.md), [planR250](state-read-physical-plan-r250.md).
 ID365219972,20536B, artifacts/state-read-r249/StateRead-id-only.face,
 SHAde20e2c8a68d7148cecbb756a0245d6c357eb792cf220e198a276af455db80e9,

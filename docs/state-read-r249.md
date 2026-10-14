@@ -1,7 +1,8 @@
 # R249 — StateRead preparada para el módulo existente
 
 2026-10-14. [StepC observado residente R248](proc-observation-r248.md); usuario
-confirmó retorno normal. StateRead **no autorizada ni enviada**. No ELF nuevo,
+confirmó retorno normal. Preparación PC R249; después [autorizada e instalada
+inactiva en R250](state-read-physical-result-r250.md), con lectura manual pendiente. No ELF nuevo,
 carga/retirada, comandos STEP/START/STOP o escrituras al nodo nativo.
 Aunque contiene Lua/PNG, **sí invocaría C residente** mediante VFS al leerlo.
 

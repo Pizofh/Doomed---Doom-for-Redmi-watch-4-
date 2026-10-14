@@ -1,9 +1,14 @@
 # DOOM en Redmi Watch 4
 
-**Actual R249, PC:** [StateRead preparada](docs/state-read-r249.md): snapshot32bytes
+**Actual R250:** [StateRead instalada sin activación](docs/state-read-physical-result-r250.md).
+Un envío autorizado; catálogo16→17, esferas y selección anteriores conservadas.
+Socket, worker y permisos de envío cerrados. Pendiente READ C manual una vez
+y retorno a la esfera habitual; aún no se han probado estos callbacks físicos.
+
+**Historial R249, PC:** [StateRead preparada](docs/state-read-r249.md): snapshot32bytes
 del módulo existente, sin carga/retirada o comandos de control. 47casos con
 nodo/UI simulados pasan, paquete20536bytes; gates cerrados y sin nuevo envío.
-[Plan R250 pendiente de autorización](docs/state-read-physical-plan-r250.md).
+[Plan R250 autorizado](docs/state-read-physical-plan-r250.md).
 
 **Actual R248:** [Registro físico reconstruido](docs/proc-observation-r248.md):
 StepC sigue registrado; su salida quedó truncada y el parser la rechazó.
