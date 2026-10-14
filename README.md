@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R261:** [El rechazo venía de dos bytes posteriores al terminador](docs/state-match-physical-plan-r262.md).
+C y lectura/cierre del registro pasaron; primeros64bytes idénticos, retorno normal.
+StateMatch compara solo el registro definido;51casos pasan con simulaciones. Sin nuevo envío.
+
 **Actual R260:** [Reintento solicitado instalado como StateTrace2](docs/state-trace-repeat-physical-plan-r260.md).
 Misma lectura del C residente; muestra el diagnóstico primero si falla. Inactiva,
 pendiente READ C manual; no reinicio, borrado o recarga del módulo.

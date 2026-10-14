@@ -74,5 +74,14 @@ Finally fuentes/gates restaurados, helper cerrado reconstruido, gates0sockets
 exitosos. Helper autorizado
 `05c354fa1dc8b78c47c39c4664b47a09bef981b63e6865159bbbcf3399afc494`.
 Evidencia privada `artifacts/state-trace2-r260-authorized/`, runner consumido.
-READ C manual del reintento solicitado todavía pendiente; mostrar diagnóstico
-primero si falla, foto antes de salir y volver habitual. No reinstalar/repetir de nuevo.
+READ C completado; foto y «menu y esferas ok» recibidos. Ensayo consumido.
+
+## Diagnóstico R260
+
+Foto REG CODE `004200420F03000600410000`: longitudes66/66, flags0F (apertura,
+read,EOF,close exitosos), formato03 (final3NUL rechazado), máscaras00/06,
+primera diferencia65, errno00. Los primeros64bytes son idénticos, incluyendo
+NUL64;65/66pasaron de cero a no cero. FRAME/IDLE/close C verdes, menús/esferas
+normales. Esto identifica el rechazo de nuestra comparación de bytes posteriores
+al terminador; no cambio de los campos visibles del módulo. No certificar toda
+RAM o ausencia de otros fallos. [Corrección/plan R262](state-match-physical-plan-r262.md).

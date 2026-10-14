@@ -106,7 +106,12 @@ const specs = Object.freeze({
     sha256:'64e3ba292a2230b051c0d88dbbd4df5457278bae9aceca6bf980f8e352ac1eef',
     sourceSha256:'00a72b041a95b488929cd5f61375e247edb2f278f5a5cc87dd1139aabb782b40',
     sourceArtifact:'artifacts/state-trace-r259/app/lua/main.lua',nativeCodeIncluded:false,
-    artifact:'artifacts/state-trace-r259/StateTrace2-id-only.face',journal:'state-trace-r260.json'})
+    artifact:'artifacts/state-trace-r259/StateTrace2-id-only.face',journal:'state-trace-r260.json'}),
+  r261:Object.freeze({variant:'r261',contentKind:'lua-resident-state-read-canonical-record',id:'365219966',size:24276,
+    sha256:'710562ea9139bcc346332318545b64b569317248144ff172c7592431fe19395c',
+    sourceSha256:'15b6fd25b3114fc5d9a49100dc87bb3f1388de7ae26d2c6ed1b54fefa8be832b',
+    sourceArtifact:'artifacts/state-match-r261/app/lua/main.lua',nativeCodeIncluded:false,
+    artifact:'artifacts/state-match-r261/StateMatch-id-only.face',journal:'state-match-r262.json'})
 });
 export function staticSpec(variant = 'r167') {
   if (typeof variant !== 'string' || !Object.hasOwn(specs,variant)) throw Error('StaticSpecRefused');

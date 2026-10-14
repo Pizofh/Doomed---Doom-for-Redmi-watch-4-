@@ -1,5 +1,20 @@
 # Retomar el proyecto
 
+**Actual R261: rechazo de trailer localizado; StateMatch preparada NO autorizada/enviada.**
+R260fotoREG CODE004200420F03000600410000:66/66,0Fopen/read/EOF/close,shape03,
+mask00/06,diff65,errno0. Primeros64iguales/NUL64; solo65/66nonzero. CframeIDLE/closegreen;
+usuario«menu y esferas ok». Owncomparator exigía3NUL y raw66igual; ese es el rechazo.
+Formatter64/copyretvalestáticocandidataR240 explica2bytesfuera de texto; allocation/sourcebytesUNKNOWN.
+[PlanR262](state-match-physical-plan-r262.md). ID365219966,24276B,4barrasAZULES,
+SHA710562ea9139bcc346332318545b64b569317248144ff172c7592431fe19395c,
+source15b6fd25b3114fc5d9a49100dc87bb3f1388de7ae26d2c6ed1b54fefa8be832b.
+ClassifierR261 key64; len66/NUL64/ASCII63/camposptr/offsetsstrictosigual, trailer2solo diagnóstico.
+meta/inventoryComplete/dataSizeKnownfalse, NOreadyToUnload. Flags10canonical recognized,
+rawformat03puedeverse conFINALverde si solo65/66varían. Mismonativeopen/read32/EOF/close, no writes.
+51casosS3/tmpreal/noderegwidgetssimulados incluyendo256trailerpatterns/rejectterminator/body pasan;
+reportartifacts/emulator/state-match-r261-verified; 24readbacknoADB. PrimerSyntaxFail0theadbackendsinexec preservado.
+Gatescerrados/journalstate-match-r262.json no usado. Next autorizaciónUNensayo/presencia>=50%.
+
 **Actual R260: repetición solicitada instalada como StateTrace2; READ C pendiente.**
 R258foto mismo8verdes/postregrojo/frameválidoIDLEx0; usuariocambió antesMODE, diagno capturado.
 Pedido«si quieres vuelve a hacer la instalacion o reinicialo o algo y lo vuelvo a inentar»

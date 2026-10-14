@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R260/R261:** [Rechazo de bytes tras NUL localizado](state-match-physical-plan-r262.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Post-procfs abre/lee/EOF/cierra, primeros64iguales; cambian65/66trasNUL | RW4/M2315W1/FW2.2.86 | Foto004200420F03000600410000 y ocho primeros verdes | CONFIRMADO EN RW4 | Alta para código | Sí, usuario | Nuestra comparación raw66/3NUL provocó rechazo |
+| Formateador64/copia de retorno66 explica bytes adicionales | Candidata2.2.86 + unidad física | Estática R240, fotos R248/R260 | INFERENCIA RAZONABLE | Fuerte | PC/foto | No identidad FW completa, asignación o procedencia de trailer certificadas |
+| Key64 rechaza cambios reales y acepta256trailers distintos sin inventar DATA SIZE | Lua S3/tmpfs real, nodo/registro/UI simulados |51casos R261 | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para casos | Sí | Sin nuevo callback físico; no permiso de unload |
+| Retorno normal tras StateTrace2 | Misma unidad | Usuario«menu y esferas ok» | CONFIRMADO EN RW4 | Alta para ciclo | Sí | No recovery integral demostrado |
+
 **Actual R256/R257:** [Dos registros estables y retorno normal](registry-check-physical-plan-r256.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
