@@ -3,8 +3,8 @@
 2026-10-14. Usuario aportó foto de StateRead2 tras READ C. En ella:
 MARK/REG INFO/OPEN C/READ C/EOF C/FRAME/IDLE/CLOSE C verdes;
 REG LAST/FINAL rojos. [Instalación y plan](state-read-physical-plan-r254.md).
-Retorno a esfera habitual/menús/desplazamiento/pulsación larga aún pendiente:
-se solicitó confirmación, sin reapertura o repetición.
+Usuario confirmó retorno a esfera habitual/menús/desplazamiento/pulsación larga:
+«todo ok», sin solicitud de reapertura o repetición.
 
 ## Evidencia física y límites
 

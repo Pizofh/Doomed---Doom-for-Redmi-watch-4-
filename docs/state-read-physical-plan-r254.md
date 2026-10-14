@@ -1,7 +1,7 @@
 # R253/R254 — StateRead2 sin dependencia de la esfera antigua
 
 2026-10-14. Usuario autorizó «si» al único ensayo con observación y batería≥50%.
-Instalación completada; READ C manual observado en foto, retorno pendiente.
+Instalación completada; READ C manual observado en foto, retorno «todo ok» confirmado.
 [Resultado](state-read-physical-result-r254.md): snapshot/EOF/cierre/IDLE verdes,
 registro posterior/FINAL rojos. Ensayo consumido, sin permiso de repetición o retiro.
 PreCheck R252 identifica
@@ -101,4 +101,4 @@ Finalmente fuentes originales/gates restaurados, helper cerrado reconstruido,
 testgates0sockets exitoso. Helper autorizado SHA256
 `0c140749ea3819763058e21c71cf6004c93fb26b56139987b14f2acb5fdd2f57`.
 Evidencia privada `artifacts/state-read2-r254-authorized/`, runner consumido.
-Instalación y READ C consumidos. Retorno normal aún por confirmar; no repetir.
+Instalación y READ C consumidos. Retorno normal confirmado; no repetir.

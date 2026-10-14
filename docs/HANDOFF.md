@@ -1,5 +1,18 @@
 # Retomar el proyecto
 
+**Actual R255: retorno R254 normal confirmado; RegCheck preparada NO autorizada/enviada.**
+Usuario«todo ok» habitual/menúscrolllongpress. R254frame/CreadEOFclose probados, postregrojo desconocido.
+[PlanR256](registry-check-physical-plan-r256.md). ID365219969,20168B,preview4VERDELIMA,
+SHAcb0cd4325d698b976e998e22e762071852703221e2054dcf015286c5beb57487,
+sourceeedac3f0cb5f3012ddc73229a7feac7e318c1818946f3d04121c0be1306f46b9.
+RegCheck/CHECK/15grises, dosprocRB67+EOF+close, segundoopenNOtrascloseincierto.
+ShapeR251estricto, LEN/HEAD/Tailsame + resumen24hex lens/codes/nonzero-mask/firstdiff/errno.
+No C/node/shell/load/unload/oldfiles/Timer. Ownmark14bytespersiste.
+19casosS3/tmpreal/procwidgetssimulados pasan sinfixturefail; compiler22readback/noADB.
+Reporteartifacts/emulator/registry-check-r255-verified; paqueteartifacts/registry-check-r255/RegCheck-id-only.face.
+No nuevaoperaciónfísica. Gatescerrados, journalregistry-check-r256.json no usado.
+Next revisiónUNensayo/presencia>=50%, no autorrepetirC/relajarparser/unload.
+
 **Actual R254: snapshot32bytes C válido/IDLE/cierre confirmados en foto; REG LAST rojo.**
 [Resultado](state-read-physical-result-r254.md). Foto: primeras8filasverdes, REG LAST/FINALrojos.
 Hex4134575201000000+24bytes00: magic0x52573441/version1/state/status0,32bytes.

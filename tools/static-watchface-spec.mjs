@@ -91,7 +91,12 @@ const specs = Object.freeze({
     sha256:'ba0ecb35a5a868048f52a7c1290bf2d9be8aec01431fdca32e5ecf8831849348',
     sourceSha256:'0878f66374d1f0026a56464ab00699e93e28d6e3733fb04b370d164b26353f0f',
     sourceArtifact:'artifacts/state-read-r253/app/lua/main.lua',nativeCodeIncluded:false,
-    artifact:'artifacts/state-read-r253/StateRead2-id-only.face',journal:'state-read-r254.json'})
+    artifact:'artifacts/state-read-r253/StateRead2-id-only.face',journal:'state-read-r254.json'}),
+  r255:Object.freeze({variant:'r255',contentKind:'lua-registry-stability-diagnostic',id:'365219969',size:20168,
+    sha256:'cb0cd4325d698b976e998e22e762071852703221e2054dcf015286c5beb57487',
+    sourceSha256:'eedac3f0cb5f3012ddc73229a7feac7e318c1818946f3d04121c0be1306f46b9',
+    sourceArtifact:'artifacts/registry-check-r255/app/lua/main.lua',nativeCodeIncluded:false,
+    artifact:'artifacts/registry-check-r255/RegCheck-id-only.face',journal:'registry-check-r256.json'})
 });
 export function staticSpec(variant = 'r167') {
   if (typeof variant !== 'string' || !Object.hasOwn(specs,variant)) throw Error('StaticSpecRefused');

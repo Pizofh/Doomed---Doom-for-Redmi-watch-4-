@@ -1,8 +1,9 @@
 # DOOM en Redmi Watch 4
 
 **Actual R254:** [Lua recibió y cerró un snapshot del C residente](docs/state-read-physical-result-r254.md).
-Frame32bytes válido y estado inicial en foto. La comprobación posterior del registro
-falló; causa y retorno normal pendientes. No repetir, recargar o retirar el módulo.
+Frame32bytes válido y estado inicial en foto; retorno normal confirmado. La comprobación
+posterior del registro falló; [RegCheck preparada](docs/registry-check-physical-plan-r256.md)
+para comparar metadata sin abrir C. No repetir, recargar o retirar el módulo.
 
 **Actual R253:** [PreCheck localizó el fallo al abrir la marca antigua](docs/precheck-physical-plan-r252.md).
 Registro C reconocido y retorno normal. [StateRead2 preparada](docs/state-read-physical-plan-r254.md)
