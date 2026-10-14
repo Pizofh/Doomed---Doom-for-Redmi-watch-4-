@@ -1,6 +1,16 @@
 # Matriz de evidencia
 
-**Actual R231, PC/S3:** [Puente con UI real](step-bridge-emulator-r231.md).
+**Actual R234, PC:** [Contrato parcial/candidato específico](rw4-step-candidate-r234.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Slots open/close/read/write0/4/8/12 se usan por dispatch stock | Imagen candidata2.2.86 | Callersstdio→VFS e indirectcalls; anchorsR234 | INFERENCIA RAZONABLE | Alta estática | Sí, análisis | No callback propio físico probado |
+| Uninit negativo evita liberar módulo | Misma imagen | Loader0x1bb7ba/c0/c4 antesfree | INFERENCIA RAZONABLE | Alta estática | Sí | No busy/uninitpropio físico probado |
+| Busy de unregister garantiza path aún registrado | Misma imagen | InodeRemove desvincula antescheckrefs | REFUTADO EN ESTA IMPLEMENTACIÓN | Alta estática | Sí | No experimentarbusy físico; cliente/control de refs requerido |
+| Candidato compileARMv8Msoft/ET_REL/BSS36 con entry1 | Fuente propiaR234/PC | Elf2620B/17ABS32/undefined0/stackaudit | CONFIRMADO EN PC | Alta | Sí, build | No ejecución/compatibilidad general RW4 |
+| REGISTER/UNREGISTER/BSS/callbacks propios funcionan en RW4 | M2315W1/FW2.2.86 | Candidato solo compilado | SIN EVIDENCIA | Desconocida | No | Nuevas APIs/layout/modinfo/BSS para revisar en carrier/plan |
+
+**Historial R231, PC/S3:** [Puente con UI real](step-bridge-emulator-r231.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

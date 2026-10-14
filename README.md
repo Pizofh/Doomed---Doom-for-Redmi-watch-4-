@@ -1,6 +1,11 @@
 # DOOM en Redmi Watch 4
 
-**Actual R231, PC/S3:** [UI conectada a C con controles y EXIT](docs/step-bridge-emulator-r231.md).
+**Actual R234, solo PC:** [Candidato de puente específico RW4 compilado](docs/rw4-step-candidate-r234.md).
+Dispatch de callbacks y gate de retirada rastreados en imagen2.2.86; ELF2620bytes,
+BSS36. Registro/retiro de nodo son dos APIs nuevas no ensayadas físicamente.
+Falta carrier/validación/paquete/plan; no nuevo envío al reloj.
+
+**R231, PC/S3:** [UI conectada a C con controles y EXIT](docs/step-bridge-emulator-r231.md).
 Cuatroholds reales,81ACK de STEP, barra de estado C y salida manual/automática
 con retiro del nodo/módulo. Esfera stock restaurada. No nuevo envío al reloj;
 el adapter usa ABI S3. Siguiente: contrato equivalente específico del RW4.

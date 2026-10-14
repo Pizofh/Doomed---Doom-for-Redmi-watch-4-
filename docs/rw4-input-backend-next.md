@@ -1,5 +1,9 @@
 # Siguiente checkpoint PC — backend C con UI atendiendo input
 
+**R234:** [Dispatch y candidatoRW4 compilados](rw4-step-candidate-r234.md).
+Antes de nuevo hardware falta carrier revisable para ELF/marca/registro/RPC/STOP/
+retiro y fallos de ACK/cierre. Las APIs nuevas y BSS aún no se ejecutaron en RW4.
+
 **R231 completado:** [UI real conectada a puente C en S3](step-bridge-emulator-r231.md).
 Cuatro controles/81STEP ACK/salida/retiro funcionan. Falta adapter equivalente
 RW4: siguiente inspección del dispatch/layout/cierre específico, sin nuevohardware.

@@ -1,6 +1,23 @@
 # Retomar el proyecto
 
-**Actual R231, completado2026-10-14, PC/S3:** [UI→C→estado visible/EXIT](step-bridge-emulator-r231.md).
+**Actual R234,2026-10-14, soloPC:** [Contrato/candidatoRW4](rw4-step-candidate-r234.md).
+Scripts232stdlib→VFS,233dispatch,234anchors/candidatebuild. fops0/4/8/12 verificados
+porcallersRW4; tabla32bytesvs40S3, fileopaco. Modinfoinitmodule+24,uninit0/arg4;
+retornonegativoevitaFree. InodeRemove desvinculaANTESbusy: exigirhandles0/STOP,
+no asumirpath sigue siError, nunca retirara ciegas. No config/priv completos.
+Ccandidate bridge-rw4-r234.c (misma lógicacoreR229) node/dev/rw4step234, marca14B
+RW4-STEP-R234newline rootfutura365219977/lua/step-attempt-r234.txt. NOcarriercreado.
+5bindings/FNP64: OPEN/READ/CLOSE físicasanteriores; REGISTER497624/UNREGISTER497670
+NUEVASsoloestática. FPnuevospuedenfault. BSSzeroguard, refscliente único noatomic.
+ELF2620B SHA713fe535880f2cbae928efe5199d15b0c39a01bc455aab819f8a534cbab4d424,
+v8Mmain/Thumb/soft, entry1,text972align8,BSS36,17ABS32/imports0; stackinit40/read88/
+write24/uninit8 sincallees. NOejecutadoS3/RW4, noBSSfísicovalidada. Gates cerrados,
+sin otrohardware ni perfil físico para candidato. NextPCcarrier específico RPC/
+STOP/retiro/error/ACK/cierre conregistro/ELF/marca; luego empaquetar/plan/revisión.
+Emu actualizadoTTY62822/pid8216 (guard antesusar), stockNeat activa/S3StepPadinactiva.
+Último resultado físico sigueHoldPadR226. No confundir binarioS3 y candidatoRW4.
+
+**Historial R231, completado2026-10-14, PC/S3:** [UI→C→estado visible/EXIT](step-bridge-emulator-r231.md).
 No hardware/BT/USB nuevo; gatesNodefalse/r167,C#false intactos. BridgeS3 node
 /dev/rw4step230/modulerw4step230/ELF2604B SHA89863182dabd4c8ce63c398c8734b98c4d1079c5dc68019bc68acecdc69f253c,
 3imports register/unregister/printf,18ABS32, sinworker/flash. CLI34assertions realLuaC
