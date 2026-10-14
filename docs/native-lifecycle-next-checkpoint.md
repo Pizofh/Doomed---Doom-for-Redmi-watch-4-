@@ -1,5 +1,11 @@
 # Siguiente checkpoint: cerrar el ciclo del módulo residente
 
+**Completado físicamente en R270:** ExitC terminó con diez verdes y el usuario
+confirmó menús/esferas normales. El módulo234 fue retirado; no se considera
+residente ni se deben repetir los ensayos antiguos. El resto del documento
+conserva la preparación histórica. El [siguiente checkpoint actual](doom-rw4-runtime-next-checkpoint.md)
+es adaptar el runtime de DOOM al RW4 en PC.
+
 Preparación PC R265 completada: [ExitC y plan R266](native-exit-physical-plan-r266.md).
 68casos y retiradaS3 pasan; sin autorización o ejecución física nueva.
 Se eligió listado del directorio padre, sin abrir/stat el hijo tras descarga.

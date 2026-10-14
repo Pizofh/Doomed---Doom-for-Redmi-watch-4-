@@ -1,9 +1,9 @@
 # DOOM en Redmi Watch 4
 
-**Actual R270 instalada:** [La reanudación de ExitC funcionó](docs/native-exit-resume-physical-plan-r270.md).
-Una parte, catálogo12→13, esfera propia inactiva y previas conservadas.
-Conexión cerrada y envíos bloqueados. Pendiente ensayo manual EXIT C para
-comprobar la retirada del módulo detenido; DOOM físico todavía pendiente.
+**Actual R270 completo:** [C residente se descarga limpiamente](docs/native-exit-resume-physical-plan-r270.md).
+ExitC terminó con diez indicadores verdes y el reloj mantiene menús y esferas
+normales. Ya probamos carga C, controles y retirada del puente; DOOM físico
+todavía pendiente. Siguiente: [adaptar el runtime real de Doom al RW4](docs/doom-rw4-runtime-next-checkpoint.md).
 
 Los checkpoints anteriores se conservan como historial:
 

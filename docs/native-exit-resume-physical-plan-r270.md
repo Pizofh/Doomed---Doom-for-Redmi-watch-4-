@@ -1,6 +1,6 @@
 # R269/R270 — completar el único tramo pendiente de ExitC
 
-**R270 autorizado y ejecutado: ExitC registrada e inactiva. Ensayo manual pendiente.** R268 recibió
+**R270 autorizado y ejecutado: ExitC registrada e inactiva. Ensayo manual completado: diez verdes y retorno normal.** R268 recibió
 resumePosition22462/chunk2048/MD5matching del propio RW4. Nuestro guard resume0
 detuvo la operación antes de enviar datos. No es evidencia de un nuevo error
 del paquete o de que las pausas fallaron: no se llegaron a usar.
@@ -101,7 +101,7 @@ autoriza esta continuación**; requiere revisión del nuevo mecanismo concreto.
 
 ## Resultado de la reanudación
 
-**Actual R270: ExitC instalada e inactiva; ensayo manual pendiente.**
+**Transferencia R270: ExitC instalada sin activación automática.**
 El usuario autorizó completar el tramo y el ensayo. Se envió una sola parte
 de1916bytes (1886bytes útiles desde offset22462), con el mismo paquete/MD5.
 Catálogo independiente12→13: ID365219964 inactiva/removible, las12entradas y
@@ -113,6 +113,18 @@ Helper autorizado dbd472d0c08816e92f047d47c9eb5ed41512c9c6352ca66c26d83e2f3961e3
 helper cerrado ce36f0936e75bd758b4eb206f21af4f04a3baf45298355ec7949f8309ec530d5.
 Runner artifacts/exit-r270-authorized/run-install.mjs consumido: no repetir.
 Evidencia privada: install-report.json, comparison.json, prior-journal-preservation.json.
-Solo falta EXIT C manual una vez, ya autorizado; esperar indicadores y retorno
-normal. Hasta entonces el módulo234 sigue presumiblemente STOPPED, no retirado.
+El ensayo manual posterior pasó: diez verdes y retorno normal; módulo234 retirado.
 No rearmar marcas, recargar C, reiniciar, borrar paquetes ni repetir transferencias.
+
+## Resultado manual R270: retirada confirmada
+
+El usuario informó «todos verdes. puedo usar todo con normalidad, watchfaces y menu».
+Los diez indicadores del paquete fijado confirman precondiciones STOPPED/cierre,
+identidad canónica estable, nodo presente antes, un rmmod sin diagnóstico de error,
+registro vacío y listado sin el nodo después. No se volvió a abrir el nodo retirado.
+Se considera validada la retirada de rw4step234 en esta unidad/FW2.2.86 y este estado.
+Evidencia: observación de UI propia y contrato de fuente fijado; no captura digital
+independiente del registro después ni prueba de ausencia de fallos latentes.
+El módulo ya no se considera residente. No volver a pulsar EXIT C ni rearmar su marca.
+Retorno a esfera/menús normal, firmware stock; no hubo reboot o nueva carga C.
+La recuperación integral y el aislamiento de privilegios siguen sin validar.

@@ -1,5 +1,8 @@
 # R265/R266 — retirar el puente C detenido
 
+**Resultado posterior R270: retirada física confirmada, diez verdes y retorno normal.**
+El estado R266 que sigue es histórico; ver [resultado R270](native-exit-resume-physical-plan-r270.md).
+
 Estado R266: usuario autorizó «Sí, autorizo y puedo observar el reloj».
 **Un intento de instalación terminó en timeout; ExitC no figura en el catálogo
 posterior. No seleccionar ni ejecutar EXIT C.** Usuario confirmó esfera/menús normales.
@@ -166,3 +169,16 @@ Evidencia privada install-report.json y inventory-followup.json.
 Usuario confirmó «si, todo ok» tras consultar esfera/menús. No se solicitó
 ejecución de ExitC ni retirada del módulo. Intento consumido, journal original
 se conserva. [Preparación de reintento pausado R268](native-exit-retry-physical-plan-r268.md).
+
+## Resultado manual R270: retirada confirmada
+
+El usuario informó «todos verdes. puedo usar todo con normalidad, watchfaces y menu».
+Los diez indicadores del paquete fijado confirman precondiciones STOPPED/cierre,
+identidad canónica estable, nodo presente antes, un rmmod sin diagnóstico de error,
+registro vacío y listado sin el nodo después. No se volvió a abrir el nodo retirado.
+Se considera validada la retirada de rw4step234 en esta unidad/FW2.2.86 y este estado.
+Evidencia: observación de UI propia y contrato de fuente fijado; no captura digital
+independiente del registro después ni prueba de ausencia de fallos latentes.
+El módulo ya no se considera residente. No volver a pulsar EXIT C ni rearmar su marca.
+Retorno a esfera/menús normal, firmware stock; no hubo reboot o nueva carga C.
+La recuperación integral y el aislamiento de privilegios siguen sin validar.

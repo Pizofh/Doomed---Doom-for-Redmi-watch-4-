@@ -1,6 +1,6 @@
 # Retomar el proyecto
 
-**Actual R270: ExitC instalada e inactiva; ensayo manual pendiente.**
+**Actual R270 COMPLETO: módulo rw4step234 retirado; reloj normal.**
 El usuario autorizó completar el tramo y el ensayo. Se envió una sola parte
 de1916bytes (1886bytes útiles desde offset22462), con el mismo paquete/MD5.
 Catálogo independiente12→13: ID365219964 inactiva/removible, las12entradas y
@@ -12,8 +12,11 @@ Helper autorizado dbd472d0c08816e92f047d47c9eb5ed41512c9c6352ca66c26d83e2f3961e3
 helper cerrado ce36f0936e75bd758b4eb206f21af4f04a3baf45298355ec7949f8309ec530d5.
 Runner artifacts/exit-r270-authorized/run-install.mjs consumido: no repetir.
 Evidencia privada: install-report.json, comparison.json, prior-journal-preservation.json.
-Solo falta EXIT C manual una vez, ya autorizado; esperar indicadores y retorno
-normal. Hasta entonces el módulo234 sigue presumiblemente STOPPED, no retirado.
+Usuario informó diez verdes y menús/esferas normales. El paquete fijado comprobó
+STOPPED/cierre/identidad, rmmod y registro/nodo ausentes. Módulo234 retirado.
+No reabrir ExitC ni pruebas antiguas, rearmar marcas o recargar234.
+Siguiente trabajo solo PC: adaptar los contratos de runtime del Doom S3 al RW4;
+memoria/temporización/lectura WAD y ejecución fuera de UI siguen pendientes.
 No rearmar marcas, recargar C, reiniciar, borrar paquetes ni repetir transferencias.
 
 **Actual R267 PC completo; R268 requiere aprobación del único reintento.**
