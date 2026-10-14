@@ -1,5 +1,15 @@
 # Retomar el proyecto
 
+**Actual R262 COMPLETADO: diez verdes y retorno/corona/menú/esferas normales.**
+Usuario«todos verdes. , otras watchfaces ok, corona ok,menu ok». No necesitaMODE/REGCODE,
+no reabrirparaobtenernúmero. Nativeopen/read32/EOF/frameIDLEx0/close/postkey64/FINAL pasan.
+Sinrawsnapshot/trailerestaejecución, no inventar captura. CorrecciónR261validada físicamente.
+Marca persiste, ensayo consumido. NoCwrite/STEP/STOP/uninit/unregister/reload nuevo.
+[ResultadoR262](state-match-physical-plan-r262.md), [checkpointcontrol](native-control-next-checkpoint.md).
+NextPC cliente residente/comandos13acotados/ACK exacto yplanSTOP, no más diagnóstico registro.
+No automáticaescrituraC ni unload/reset; requiere implementar/probar/plan/aprobación nueva.
+Gatescerrados; helperúltimocerrado9dab80136bd06cf732d1b15e55a53702d75aec73b7c9e0982a1393d45c8afff8.
+
 **Actual R262: StateMatch instalada inactiva; READ C manual pendiente.**
 Usuario«ok»autorizaUNensayo/presencia>=50%; runnerstate-match-r262-authorized consumido.
 InstallRegisteredInactive12partes/stream24350/TX24847/21TX16RX, cierresworker/socket/exit0.

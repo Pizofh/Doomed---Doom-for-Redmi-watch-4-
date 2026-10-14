@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R262:** [Lectura nativa y comprobación canónica completadas](state-match-physical-plan-r262.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Snapshot C válido/inicial, EOF/close y registro definido igual después | RW4/M2315W1/FW2.2.86 | Usuario diez verdes en StateMatch | CONFIRMADO EN RW4 | Alta para indicadores/ciclo | Sí, usuario | Sin raw frame/trailer nuevo; key64, no inventario completo |
+| Retorno, corona, menú y otras esferas funcionan tras StateMatch | Misma unidad | Usuario confirma explícitamente | CONFIRMADO EN RW4 | Alta para ciclo | Sí | No integridad latente/recovery integral probados |
+| Callback write/comandos de control y retiro del driver funcionan | Misma unidad | No se ejecutaron en R262 | SIN EVIDENCIA | Pendiente | No | Read-only no autoriza estos próximos pasos |
+
 **Actual R260/R261:** [Rechazo de bytes tras NUL localizado](state-match-physical-plan-r262.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

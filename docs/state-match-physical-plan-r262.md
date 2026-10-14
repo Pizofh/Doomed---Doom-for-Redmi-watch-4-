@@ -1,7 +1,7 @@
 # R261/R262 — comparar el registro definido, no bytes tras su terminador
 
 2026-10-14. Usuario autorizó «ok» al único ensayo con presencia/batería≥50%.
-Instalada inactiva; READ C y retorno manual pendientes.
+Instalación/READ C completos; diez verdes y retorno normal confirmados.
 R260 demuestra registro66bytes antes/
 después, primeros64iguales y NUL64; únicamente65/66cambiaron. Apertura/read/EOF/
 close C y post-procfs pasaron; parser exigía tresNUL y rechazó esos dos bytes.
@@ -96,4 +96,15 @@ Finally fuentes/gates restaurados, helper cerrado reconstruido, gates0sockets
 exitosos. Helper autorizado SHA256
 `3575ebe50f978aa99ff3084afa3046c8c299f6bc2d6548568c4a496de3e4e81a`.
 Evidencia privada `artifacts/state-match-r262-authorized/`, runner consumido.
-No repetir instalación. READ C una vez manual todavía pendiente.
+No repetir instalación/READ C: ensayo consumido.
+
+## Resultado físico confirmado
+
+Usuario: «todos verdes. , otras watchfaces ok, corona ok,menu ok». Los diez
+indicadores confirman marca/preflight, apertura/read32/EOF, frame/estado inicial,
+close C, registro posterior canónico y FINAL. No se necesita REG CODE para
+aceptar este resultado; no pedir reapertura para obtenerlo. No captura raw del
+frame/trailer de esta ejecución: inferir estado inicial de IDLE verde, no inventar
+una lectura digital. Corrección key64 validada en esta unidad/FW, sin reload/unload.
+Retorno/corona/menú/cambio de esferas normales. No write C/STEP/STOP/unregister
+probados aquí ni permiso de retirada. Checkpoint de lectura nativa completado.

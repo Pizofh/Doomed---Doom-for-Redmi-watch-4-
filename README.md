@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R262 completado:** [Lectura C, cierre y registro posterior pasan físicamente](docs/state-match-physical-plan-r262.md).
+Diez verdes; corona, menú y cambio de esferas normales. Siguiente checkpoint:
+[comandos acotados al puente residente](docs/native-control-next-checkpoint.md), sin nuevo envío todavía.
+
 **Actual R261:** [El rechazo venía de dos bytes posteriores al terminador](docs/state-match-physical-plan-r262.md).
 C y lectura/cierre del registro pasaron; primeros64bytes idénticos, retorno normal.
 StateMatch compara solo el registro definido;51casos pasan con simulaciones. Sin nuevo envío.
