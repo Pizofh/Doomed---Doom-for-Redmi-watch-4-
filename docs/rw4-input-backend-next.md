@@ -1,5 +1,10 @@
 # Siguiente checkpoint PC — backend C con UI atendiendo input
 
+**R236 preparado:** [StepC UI/paquete](step-ui-r236.md),
+[plan R237 pendiente de revisión](step-physical-plan-r237.md).
+31UI+37carrier con simulaciones y transferencia offline pasan. No ejecución
+del nuevo ELF RW4. Siguiente: un ensayo físico observado y autorizado.
+
 **R235:** [Cliente Lua validado con 37 escenarios](step-carrier-r235.md).
 Archivos tmpfs reales, shell/nodo simulados; candidato C RW4 no ejecutado.
 Siguiente: conectar UI/Timer/EXIT/pageOnPause y preparar paquete/plan revisables.

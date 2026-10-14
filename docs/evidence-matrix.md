@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R236, PC:** [StepC UI/paquete preparados](step-ui-r236.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| UI de producción enlaza hold/release/STEP/EXIT con el cliente | Lua S3; widgets/shell/nodo simulados, tmpfs real | 31 casos UI +37 carrier | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para casos | Sí | No ejecuta ELF RW4 ni prueba selector stock nuevo |
+| Paquete fijo y recursos corresponden a lo probado | PC/Compiler revisado | Readback9recursos/31808B/source hash | CONFIRMADO EN PC | Alta | Sí | No instalado |
+| Fragmentos512 de StepC caben en el presupuesto32768 | Sesión sintética PC | Framing/cifrado excede; rechazo previo a MASS | REFUTADO PARA ESTE PAQUETE | Alta | Sí | 2048/4080 pasan, no se amplió presupuesto |
+| Insmod nuevo/callbacks/retirada funcionan en firmware2.2.86 | RW4 | Sin ensayo R237 autorizado | SIN EVIDENCIA | Desconocida | No | Plan concreto pendiente de revisión |
+
 **Actual R235, PC:** [Cliente Lua y decisiones de retirada](step-carrier-r235.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -83,7 +83,7 @@ function files.open(p,mode)
   position=position+n;return fault.short_reply and bytes:sub(1,31) or bytes
  end
  function f:write(bytes)
-  assert(mode=="wb" and not closed);writes=writes+1;apply(bytes)
+  assert((mode=="wb" or mode=="r+b") and not closed);writes=writes+1;apply(bytes)
   if fault.write_failed then return nil,"write failure"end
   return self
  end

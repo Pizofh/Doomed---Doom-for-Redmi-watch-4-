@@ -1,5 +1,33 @@
 # Retomar el proyecto
 
+**Actual R236, 2026-10-14, PC completo; R237 pendiente:** [StepC](step-ui-r236.md),
+[plan físico](step-physical-plan-r237.md). NO aprobación/envío nuevo aún.
+ui-r236.lua +main template+materialize-r236.lua, builder step-ui-source-r236:
+R235 fábricas originales pin/evidencia intactos; deriva check_file para escribir
+ELF ausente2620B y readback exacto, NO overwrite; nodo modo r+b evita creación.
+31UI+37carrier pasan con Lua producción/tmpfs real, widgets/Timer/input/shell/C
+SIMULADOS. Report artifacts/emulator/step-ui-r236-final (anteriores preservados).
+UI hold ACK antesverde, STEP muevebarra, STOP activefalse/Timerpausa primero;
+EXITverde solo retired y UIgood, erroresrojo aunque cleanup; pagePause hook previo.
+GC flags solo, NO I/O/retirada; puede quedar C residente sin STEP. Presupuesto300.
+StepC365219977 preview5barrasVERDES, tituloC STEP; package31808B en
+artifacts/step-r236-final/StepC-id-only.face SHA5c117cce07ccb5388f0bf0c2345f829827e810daae0db2c32886d9d75a14ed40.
+main21842B SHA63b1dee6d625f0908e6b8952c4deb115bfd0973125195154a1702f6308c92053.
+ELF234 sin cambios SHA713fe535880f2cbae928efe5199d15b0c39a01bc455aab819f8a534cbab4d424,
+solo incrustado en main, generado manualSTART; no ELF recurso duplicado.
+Perfil r236 nuevo/spec, journal native-step-r237.json AUSENTE según instalación
+no realizada (comprobar antes futuroenvío). prepareoffline16partes pasó.
+Transfer12/session34 r236 +regresión session34 r220; gateCLI/native0sockets.
+Primer sessiontest falló512 por framingbudget; guard reserva MASS+6queries
+antesprimerMASS,512 rechaza sin datos,2048/4080pasan. Budget32KiB intacto.
+Helperrebuild cerrado SHA292fa4a4b9b79c48c93f14ac11ea429ba2f129083bae37e33bb6971859487c6f.
+Gates Nodefalse/r167/C#false sin cambios. NoBT/USB/hardware, stock guest intacto.
+Siguiente: pedir UNA aprobación/presencia/batería>=50% para ensayo fijo R237;
+no ejecutar por «ok». NoDELETE, no rearmar marcas, no C234 en S3.
+Si autoriza: activar solo r236/C# temporalmente, build/pins/prepare/installUNA,
+finally gatesoff/rebuild/tests, GETindependiente, instrucciones manualesplan.
+Antefallo incompleto/busy/EOFunknown detener sin fallback/unload a ciegas.
+
 **Actual R235, 2026-10-14, solo PC:** [Cliente del candidato RW4](step-carrier-r235.md).
 Commit R234 7f7b92b. Nuevo client-rw4-r235.lua puro + adapter-rw4-r235.lua;
 fábricas ensambladas por step-carrier-source-r235.mjs, ELF234 mismo hash/2620B.

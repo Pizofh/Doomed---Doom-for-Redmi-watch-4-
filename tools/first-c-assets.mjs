@@ -43,3 +43,10 @@ export function heldAssets(){
  for(const name of ['START','EXIT','UP','LEFT','RIGHT','FIRE'])assets[name.toLowerCase()]=png(96,20,(x,y)=>ownTextPixel(name,x,y,[36,92,128]));
  return assets;
 }
+// Separate native step preview/title; prior physically tested assets stay intact.
+export function stepAssets(){
+ const assets=heldAssets();
+ assets.title=png(120,20,(x,y)=>ownTextPixel('C STEP',x,y));
+ assets.preview=png(390,450,(x,y)=>x>=150&&x<240&&y>=160&&y<290&&(y-160)%26<16?[64,255,64]:[0,0,0]);
+ return assets;
+}

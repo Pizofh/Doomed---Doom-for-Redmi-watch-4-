@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R236, PC:** [StepC preparada](docs/step-ui-r236.md): UI/controles conectados
+al cliente, 31 casos de UI y 37 del carrier con simulaciones, paquete fijo31808bytes.
+Instalador offline verificado; gates cerrados. [Ensayo físico R237 pendiente de revisión](docs/step-physical-plan-r237.md).
+El nuevo candidato C todavía no se ha ejecutado en el RW4.
+
 **Actual R235, solo PC:** [Cliente Lua del candidato RW4 validado](docs/step-carrier-r235.md).
 37 escenarios con archivos reales en tmpfs y shell/nodo simulados pasan;
 errores de comunicación o cierre impiden retirada incierta. No se ejecutó el
