@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R260:** [Reintento solicitado instalado como StateTrace2](docs/state-trace-repeat-physical-plan-r260.md).
+Misma lectura del C residente; muestra el diagnóstico primero si falla. Inactiva,
+pendiente READ C manual; no reinicio, borrado o recarga del módulo.
+
 **Actual R257:** [RegCheck obtuvo dos registros válidos e idénticos](docs/registry-check-physical-plan-r256.md),
 retorno normal. [StateTrace preparada](docs/state-trace-physical-plan-r258.md) conserva el
 diagnóstico posterior junto al frame C;48casos con simulaciones pasan. Sin nuevo envío.

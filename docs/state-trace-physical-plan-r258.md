@@ -1,7 +1,9 @@
 # R257/R258 — StateTrace, frame y diagnóstico posterior
 
 2026-10-14. Usuario autorizó «ok» al único ensayo con presencia/batería≥50%.
-Instalada inactiva; READ C/MODE y retorno manual pendientes.
+Instalación/READ C completados. Foto confirma ocho primeros verdes y REG LAST/
+FINALrojos, frame válido/inicial. Usuario cambió esfera antes de MODE: REG CODE
+no capturado. No reabrir/rearmar R258; [repetición solicitada R260](state-trace-repeat-physical-plan-r260.md).
 R254 snapshot/EOF/IDLE/close C
 verdes y post-registro rojo; R256 dos registros66bytes idénticos,15verdes y
 retorno «ok». Causa del rojo R254 desconocida; no relajar parser o retirar C.
@@ -87,4 +89,4 @@ helper cerrado reconstruido, testgates0sockets exitoso.
 Helper autorizado SHA256
 `3e3b2c9ef33077f1a3fca39a51fd0c5ed81670c8c493202b763c709435ace9f2`.
 Evidencia privada `artifacts/state-trace-r258-authorized/`, runner consumido.
-No repetir instalación; READ C una vez y MODE manual todavía pendientes.
+Instalación y READ C consumidos; MODE omitido por el usuario antes de cambiar.

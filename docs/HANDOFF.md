@@ -1,5 +1,20 @@
 # Retomar el proyecto
 
+**Actual R260: repetición solicitada instalada como StateTrace2; READ C pendiente.**
+R258foto mismo8verdes/postregrojo/frameválidoIDLEx0; usuariocambió antesMODE, diagno capturado.
+Pedido«si quieres vuelve a hacer la instalacion o reinicialo o algo y lo vuelvo a inentar»
+autoriza repetición equivalente; se eligiócopiafreshID, no rearmado/borrado/reboot/Cload.
+[Plan/resultadosR260](state-trace-repeat-physical-plan-r260.md). StateTrace2ID365219967,24052B,
+SHA64e3ba292a2230b051c0d88dbbd4df5457278bae9aceca6bf980f8e352ac1eef,
+source00a72b041a95b488929cd5f61375e247edb2f278f5a5cc87dd1139aabb782b40.
+SoloIDruta marca/vistainicial cambia: postregrojo muestraREG CODEsinMODE, todoverdeFRAMEHEX;
+MODE opcionalmismoRAM.48casosS3/tmpreal/noderegwidgetssimulados pasan,24readbacknoADB.
+InstallRegisteredInactive12partes/24126stream/24623TX/21TX16RX, GET15→16 previosIDsflagsintactos,
+activa968conservada; propia967inactiva/removible. JournalRegistered12/sinlock; cierresexit0.
+Finallygatescerrados/rebuild/test0sockets. Runnerstate-trace2-r260-authorized consumido.
+Next StateTrace2(nootra),4barrasMORADAS/10grises/READCUNAvez→FOTO INMEDIATAREGCODE→habitual/menúscrolllongpress.
+Rojoinicial/faltaUI NOREAD. No repetir/rearmar/retirar/recargarC/STEPSTOP/reboot.
+
 **Actual R258: StateTrace instalada inactiva; READ C/MODE manual pendientes.**
 Usuario«ok»autorizaUNensayo/presencia>=50%; runnerstate-trace-r258-authorized consumido.
 InstallRegisteredInactive12partes/stream24070/TX24567/21TX16RX, socketworkerclosed/exit0.
