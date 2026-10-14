@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R249, PC:** [StateRead preparada; sin callback físico nuevo](state-read-r249.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Carrier limita acceso a un snapshot y cierre, sin escribir nodo/cargar/retirar | Lua S3, tmpfs real; nodo/registro/widgets simulados |47casos R249 | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para casos | Sí | No callbacks C reales en este run |
+| Paquete contiene source probado y22recursos exactos | PC/Compiler revisado sinADB | Readback20536bytes/hash | CONFIRMADO EN PC | Alta | Sí | Lua puede invocar C residente, aunque no incluya ELF |
+| Transferencia/prepare/gates de StateRead cerrados | PC/sintético |12casos/prepare11partes/gates0sockets | CONFIRMADO EN PC | Alta | Sí | Sin Bluetooth o envío |
+
 **Actual R248:** [Registro reconstruido; StepC observado residente](proc-observation-r248.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

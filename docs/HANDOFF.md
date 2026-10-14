@@ -1,5 +1,27 @@
 # Retomar el proyecto
 
+**Actual R249,2026-10-14: StateRead preparada, NO autorizada/enviada.**
+[Carrier](state-read-r249.md), [planR250](state-read-physical-plan-r250.md).
+ID365219972,20536B, artifacts/state-read-r249/StateRead-id-only.face,
+SHAde20e2c8a68d7148cecbb756a0245d6c357eb792cf220e198a276af455db80e9,
+sourceSHA73e65d7a693d6449239077da14694a68e10b284845021607e85111b406e0e1e2.
+Preview4barrasAMARILLAS, C STATE/READ C/10grises/FRAME HEX vacío. No C alseleccionar.
+Ownmarca15B state-read-attempt-r249.txt(RW4-STATE-R249\n), persiste; beforeMETA67+EOF
+classifierR248pinned/oldmark14exact(closesknown)→nodeRB/setvbufno/read32/EOF1/close1explícito
+→decode/idlecheck/postMETAigual→framehex64chars. Sin nuevoELF/load/unload/shell/nodewrite/
+STEP/STOP/Timer/hilo/GCcódigo. SÍ invocaCresidente; flags nativeExecutablefalse no significan
+noNativeCallbacks. Open/read/close modificanRAMrefs/cursor. Cierre incierto no postMETA.
+Rows MARK/REG INFO/OPEN C/READ C/EOF C/FRAME/IDLE/CLOSE C/REG LAST/FINAL.
+IDLEamarillo frameválido no inicial, NOacción; FINALverde no safeunload.
+47casosLuaS3/tmpfsreal/nodo-registry-widgetsSIMULADOS pasan, módulosigual/tmpretirado.
+Primerconteo48harnessincorrecto→47, sourceproducciónigual; logsoriginalesconservados.
+Finalartifacts/emulator/state-read-r249-final. NO C RW4 o callbacks realesS3 ejecutados.
+Compiler noADB/readback22recursos;64celdasg17yaProcView; transfer12/gates0sockets/prepare11partes.
+Nodefalse/r167/C#false, helpercerradof8ec0ebda8392d3c7f96d81e333ac04f5ed36cf8c7a1367a3c639d857ffbd62c.
+NoBT/USB/hardware nuevo; journalstate-read-r250.json ausente. NextaprobaciónUNensayo/presencia>=50%.
+No reutilizarR247/autorecargar/retirarStepC/driverfísico/firmware; codepotencialmenteprivilegiado
+callbacksABI aúnno probadafísicamente. EstadoInterno/residenteshandlesUNKNOWN.
+
 **Actual R248,2026-10-14: registro físico reconstruido, StepC residente.**
 Usuario2fotosProcViewTEXT/HEX,4verdes/LEN0042=66. Head64/tail16 overlap14 exacto,
 reconstrucciónprivada artifacts/proc-photo-r248;63ASCIIacabacomaDATA SIZE+3NUL/sinLF.
