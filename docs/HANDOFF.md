@@ -1,31 +1,20 @@
 # Retomar el proyecto
 
-**Actual R268 ejecutado y detenido sin MASS; R269/R270 resume preparado NO autorizado.**
-Usuario autorizó «Sí, autorizo el reintento y ensayo». Runnerexit-r268-authorized
-consumido: INSTALL0,uploadunknown0/resume22462/chunk2048/MD5presentmatching.
-Guardesperaba0, abortóUploadRequested/StaticSessionRefused.0partes/fileDatafalse,
-TX275/7TX13RX. No probópausas; noC/rmmod. C234últimoestadoSTOPPEDR264.
-Preflight12,activa365210175. JournalR268Uncertain/previousInstallAck/parts0/
-registeredfalse/sinlock. R266 originalsha idéntico/sinlock (private preservation).
-Cierresworker/socketexit0/sinerror, gatescerradostest0. Helperautorizado
-e5e52be841ae67c898c84dacd0731acf8b0cd61db4bdd5b784787a67cab6cf88;
-cerradotrasintento75bf8bc91ae1b49ef0bd7e89ec0f59e19f443095ac9c846b0a2a625313e5f542.
-[ResultadoR268](native-exit-retry-physical-plan-r268.md).
-22462=(2048-4)*11-22, compatiblecon11partesguardadas; nointegridadprefijo/causaprobad.
-[PlanR270](native-exit-resume-physical-plan-r270.md). Mismoarchivo8c69e400.../ID964/
-24348B. Perfil exit-resume-r270 soloACKexact22462/MD5presenteigual/chunk2048.
-SourceGB253primario doUpload pruebaheaderMD5/tamañoCOMPLETO+suffix+CRCnuevo,
-partesrenumeradas1/1.1886datos+22header+4CRC+4contadores=1916parte;1931frame.
-23client/IPCtests+15pace+47protocol pasaron, Lua68NOrepetido, radio0.
-NuevoCLIinstall-resume-oncer265, gate REVIEWED_EXIT_RESUME=false; legacy
-default/pace siguenbloqueandoresume. Ambosjournalsanterioresvalidados/intactos;
-nuevo native-exit-r270-resume.json fresh. SiACKcambia(incluido0), abortasinMASS.
-Helper cerradoactual f4ab999dae9c4d781fd917c259591aaee58597942ee1dbc25c675c7b22ba0fd6.
-No enviar automáticamente: R268aprobóabortar nonzero. PedirrevisiónR270,
-presencia≥50%/normalidad antesdeUNcontinuación. Siaprueba, runnerfijonuevo
-PHYS/VARIANTr265/EXIT_RESUME/C# habilitados; PACED_RETRYfalse; finallyrestoreall/
-rebuild/gates+oldjournalsSHA+GETindependiente. Solo trasregistromismoEXIT Cmanual.
-No oldrunnerretry/delete/reboot/reload/nodowrite/otrooffset/nuevoID.
+**Actual R270: ExitC instalada e inactiva; ensayo manual pendiente.**
+El usuario autorizó completar el tramo y el ensayo. Se envió una sola parte
+de1916bytes (1886bytes útiles desde offset22462), con el mismo paquete/MD5.
+Catálogo independiente12→13: ID365219964 inactiva/removible, las12entradas y
+flags anteriores conservados; activa365210175 sin cambios.
+Socket y worker cerrados, sin error nativo; gates restaurados y comprobados.
+Journals R266/R268 intactos byte a byte, sin locks; journal R270 Registered1.
+No se activó ExitC ni se ejecutó rmmod/C durante la transferencia.
+Helper autorizado dbd472d0c08816e92f047d47c9eb5ed41512c9c6352ca66c26d83e2f3961e3bd;
+helper cerrado ce36f0936e75bd758b4eb206f21af4f04a3baf45298355ec7949f8309ec530d5.
+Runner artifacts/exit-r270-authorized/run-install.mjs consumido: no repetir.
+Evidencia privada: install-report.json, comparison.json, prior-journal-preservation.json.
+Solo falta EXIT C manual una vez, ya autorizado; esperar indicadores y retorno
+normal. Hasta entonces el módulo234 sigue presumiblemente STOPPED, no retirado.
+No rearmar marcas, recargar C, reiniciar, borrar paquetes ni repetir transferencias.
 
 **Actual R267 PC completo; R268 requiere aprobación del único reintento.**
 Usuario confirmóesfera/menúsnormales tras R266. Registro privado user-observation.json.

@@ -1,8 +1,11 @@
 # DOOM en Redmi Watch 4
 
-**Actual R269 preparado:** [El reloj pide reanudar ExitC en22462; queda un tramo1886bytes](docs/native-exit-resume-physical-plan-r270.md).
-R268 se detuvo antes de MASS. Reanudación stock limitada al offset/MD5 exactos,
-una parte,23tests nuevos+regresiones pasan; no autorizada ni enviada aún.
+**Actual R270 instalada:** [La reanudación de ExitC funcionó](docs/native-exit-resume-physical-plan-r270.md).
+Una parte, catálogo12→13, esfera propia inactiva y previas conservadas.
+Conexión cerrada y envíos bloqueados. Pendiente ensayo manual EXIT C para
+comprobar la retirada del módulo detenido; DOOM físico todavía pendiente.
+
+Los checkpoints anteriores se conservan como historial:
 
 **Actual R267 preparado:** [Reintento pausado del mismo ExitC](docs/native-exit-retry-physical-plan-r268.md).
 Reloj normal tras R266. Audit no encontró defecto en los checks del paquete;

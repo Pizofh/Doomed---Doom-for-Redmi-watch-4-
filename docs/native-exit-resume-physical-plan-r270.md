@@ -1,6 +1,6 @@
 # R269/R270 — completar el único tramo pendiente de ExitC
 
-**PC preparado, sin aprobación ni envío de reanudación.** R268 recibió
+**R270 autorizado y ejecutado: ExitC registrada e inactiva. Ensayo manual pendiente.** R268 recibió
 resumePosition22462/chunk2048/MD5matching del propio RW4. Nuestro guard resume0
 detuvo la operación antes de enviar datos. No es evidencia de un nuevo error
 del paquete o de que las pausas fallaron: no se llegaron a usar.
@@ -98,3 +98,21 @@ Recuperación parcial conocida: Ajustes→Esferas si responde; integral no valid
 No reiniciar, flashear, modificar boot/particiones/verificación o usar otro modelo
 como recuperación automática. R268 autorizaba abortar ante resume≠0: **no
 autoriza esta continuación**; requiere revisión del nuevo mecanismo concreto.
+
+## Resultado de la reanudación
+
+**Actual R270: ExitC instalada e inactiva; ensayo manual pendiente.**
+El usuario autorizó completar el tramo y el ensayo. Se envió una sola parte
+de1916bytes (1886bytes útiles desde offset22462), con el mismo paquete/MD5.
+Catálogo independiente12→13: ID365219964 inactiva/removible, las12entradas y
+flags anteriores conservados; activa365210175 sin cambios.
+Socket y worker cerrados, sin error nativo; gates restaurados y comprobados.
+Journals R266/R268 intactos byte a byte, sin locks; journal R270 Registered1.
+No se activó ExitC ni se ejecutó rmmod/C durante la transferencia.
+Helper autorizado dbd472d0c08816e92f047d47c9eb5ed41512c9c6352ca66c26d83e2f3961e3bd;
+helper cerrado ce36f0936e75bd758b4eb206f21af4f04a3baf45298355ec7949f8309ec530d5.
+Runner artifacts/exit-r270-authorized/run-install.mjs consumido: no repetir.
+Evidencia privada: install-report.json, comparison.json, prior-journal-preservation.json.
+Solo falta EXIT C manual una vez, ya autorizado; esperar indicadores y retorno
+normal. Hasta entonces el módulo234 sigue presumiblemente STOPPED, no retirado.
+No rearmar marcas, recargar C, reiniciar, borrar paquetes ni repetir transferencias.

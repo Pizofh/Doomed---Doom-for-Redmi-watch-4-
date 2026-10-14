@@ -1,6 +1,15 @@
 # Matriz de evidencia
 
-**Actual R268/R269:** [Offset de reanudación observado y continuación preparada](native-exit-resume-physical-plan-r270.md).
+**Actual R270:** [Reanudación registrada en el RW4](native-exit-resume-physical-plan-r270.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| ExitC se registra tras completar el tramo desde22462 | RW4/M2315W1/FW2.2.86 | Install RegisteredInactive + GET independiente12→13 | CONFIRMADO EN RW4 | Alta para registro | Sí | Una parte; no prueba de ejecución del paquete ni integridad total independiente |
+| Catálogo previo, flags y selección se conservan | Misma unidad | comparison.json R270 | CONFIRMADO EN RW4 | Alta | Sí | ID365219964 inactiva/removible; activa365210175 |
+| Journals anteriores intactos y gates cerrados | PC | Preservación SHA + closed-gates | CONFIRMADO LOCALMENTE | Alta | Sí | Socket/worker cerrados; sin operación C durante instalación |
+| Módulo234 retirado por ExitC | RW4 | Ensayo manual pendiente | SIN EVIDENCIA | Pendiente | No | No inferir retirada por instalar la esfera |
+
+**Historial R268/R269:** [Offset de reanudación observado y continuación preparada](native-exit-resume-physical-plan-r270.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|
