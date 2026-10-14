@@ -1,5 +1,14 @@
 # Retomar el proyecto
 
+**Actual R252: PreCheck instalada inactiva; CHECK manual pendiente.**
+Usuario«ok go» autorizaUNensayo/presencia>=50%; runnerprecheck-r252-authorized consumido.
+InstallRegisteredInactive10partes/stream19194/TX19661/19TX16RX, sockets/worker/exit0.
+GETindependiente15→16, previosIDsflagsconservados, activa365210175; propia365219971inactiva/removible.
+NoSET/DELETE/retry/C/proc desdePC. JournalRegistered10/sinlock. Finallygatescerrados/rebuild/test0sockets.
+Plan/resultados [R252](precheck-physical-plan-r252.md). Next usuarioPreCheck4barrasNARANJAS,
+11grises/CHECKuna vez→colores+LEN CODE8hex→habitual/menúscrolllongpress.
+Rojo inicial/faltaUI NO CHECK; no reabrir/rearmar/repetir/load/unload/STEP/STOP/reboot.
+
 **Actual R251: PreCheck preparada, NO autorizada/enviada.**
 [Paquete/pruebas/planR252](precheck-physical-plan-r252.md). ID365219971,19128bytes,
 SHA3f0bc2fcd0303df735a02fa203e1967b9f1bfff233dc7c8d5f3bc87192121c9e;

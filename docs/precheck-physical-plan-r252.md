@@ -1,6 +1,8 @@
 # R251/R252 — PreCheck: diagnóstico completo antes del acceso C
 
-2026-10-14. Preparada en PC, pendiente de revisión física. StateRead R250 se
+2026-10-14. Autorización del usuario: «ok go», al ensayo propuesto con observación
+y batería≥50%. Instalación única completada; CHECK y retorno manual pendientes.
+StateRead R250 se
 detuvo en REG INFO y usuario confirmó retorno normal. No repetir/rearmar esa
 prueba ni interpretar el fallo como ausencia de módulo o fallo de C.
 
@@ -83,3 +85,20 @@ sin garantía integral ante bugs. No sandbox o timeout duro demostrados.
 Recovery parcial conocido: cambio de esfera por Ajustes si UI responde;
 recovery integral no validado. Ante fallo parar/revisar, no improvisar flash,
 firmware de otro modelo, SWD/JTAG, exploits o reinicio automático.
+
+## Instalación R252 realizada
+
+Un install RegisteredInactive,10partes/stream19194bytes/TX19661bytes,
+19frames enviados/16recibidos; propia registrada sin activación por cliente.
+Aceptación final de transferencia no verificada como ACK independiente;
+registro confirmado por catálogo. Cierre socket/worker/exit0 y ausencia de
+error nativo confirmados. GET independiente: catálogo actual15→16, todos los
+IDs/flags del preflight preservados, activa365210175, propia971inactiva/removible.
+No eliminación, activación, reintento, shell, lectura proc o callbacks propios
+desde PC. Journalprecheck-r252.json Registered10/sinlock. Runner privado
+`artifacts/precheck-r252-authorized/run-install.mjs` consumido.
+
+Finally restauró fuentes/gates y reconstruyó helper cerrado; testgates0sockets
+exitoso. Hash autorizado50f7bdf3c70212793420381688393b022169ce3fc527014a4afe46b29f25978c.
+Logs/hash cerrado/comparación privados en artifacts/precheck-r252-authorized.
+No repetir instalación. Lectura manual CHECK una vez aún pendiente.
