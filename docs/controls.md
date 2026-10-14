@@ -1,5 +1,10 @@
 # Controles táctiles propuestos
 
+**R224:** [S3 pasó holds con longpress stock ON y selector tras EXIT](held-input-r224.md).
+Cuatro contactos de3,3s, releases y EXIT reales; script solo toca sus objetos.
+RW4 pendiente de [ensayo R225](held-input-physical-plan-r225.md), gates cerrados.
+HoldPad es una prueba diagnóstica, no reemplaza el layout final ni prueba comodidad.
+
 **Criterio de entrada/navegación, 2026-10-13:** el usuario acepta una watchface
 como contenedor solo si mantener los controles del juego no abre el selector
 de esferas. Si no se resuelve con mecanismos stock y una salida fiable, buscar
@@ -18,7 +23,7 @@ Ensayos visuales anteriores con el toggle de longpress del emulador en OFF no
 cuentan como prueba de supresión en juego. Hace falta contacto sostenido con
 la función stock habilitada y retorno normal, primero PC y después bajo plan
 físico revisado. NativeFrames R220 comprueba imágenes/animación/EXIT, no este
-criterio de input; su paquete/plan pendientes permanecen sin cambios.
+criterio de input; su ensayo físico R222 ya completado permanece sin cambios.
 
 **R68:** [Panel stock y STOP manteniendo FIRE](doom-focus-emulator.md) probados con Doom. Panel desde y440 pausa motor, regreso exige RESUME; STOP retira todo antes de soltar FIRE. Abrir panel con acción aún mantenida y ergonomía física no probados. No confundir la salida cooperativa desde consola del emulador con un control disponible en el reloj físico.
 

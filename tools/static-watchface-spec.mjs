@@ -46,7 +46,12 @@ const specs = Object.freeze({
     sha256:'94b65fb94b7b299496ca672348f1a5281fe123e5ee7991044f59e90e1705481e',
     sourceSha256:'7b554c6d6e0012e1425efbfc0123ea56fb6cfac9c55508e35b46bbc19e8b31e1',
     sourceArtifact:'artifacts/frames-r220-rw4/app/lua/main.lua',nativeCodeIncluded:true,
-    artifact:'artifacts/frames-r220-rw4/NativeFrames-id-only.face',journal:'native-frames-r221.json'})
+    artifact:'artifacts/frames-r220-rw4/NativeFrames-id-only.face',journal:'native-frames-r221.json'}),
+  r224:Object.freeze({variant:'r224',contentKind:'lua-held-input',id:'365219979',size:15552,
+    sha256:'296868366da0f29a010777d031559ddf08a1c52d73f45021b9f3f034fbabff16',
+    sourceSha256:'1ee9ff3db8c572c1737ff27f764144c5869e810eb1280ef84f1393c234a90f59',
+    sourceArtifact:'experiments/lua-held/main-r223.lua',nativeCodeIncluded:false,
+    artifact:'artifacts/held-r224/HoldPad-id-only.face',journal:'held-input-r225.json'})
 });
 export function staticSpec(variant = 'r167') {
   if (typeof variant !== 'string' || !Object.hasOwn(specs,variant)) throw Error('StaticSpecRefused');

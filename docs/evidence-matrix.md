@@ -1,6 +1,17 @@
 # Matriz de evidencia
 
-**Actual R222:** [NativeFrames generación/display/salida confirmadas por usuario](native-frames-physical-result-r221.md).
+**Actual R224:** [Input mantenido y selector, S3](held-input-r224.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Cuatro controles mantenidos no abren selector mientras juego activo | S3 emulado | Cuatro holds3300ms; UI/acción verde en capturas; stock longpress ON | CONFIRMADO EN EMULADOR | Alta para este ciclo | Sí | No RW4 ni touch físico |
+| Soltar libera acciones y EXIT devuelve launcher | S3 emulado | Cuatro releases grises, log ordenado, cinco verdes tras EXIT | CONFIRMADO EN EMULADOR | Alta | Sí | Máscara Lua, no consumidor C |
+| Selector funciona tras EXIT sin modificar ajuste global desde script | S3 emulado | Selector antesSTART/despuésEXIT; switch permaneceON; fuente solo objetos propios | CONFIRMADO EN EMULADOR | Alta | Sí | Operador restauró OFF inicial al terminar |
+| Setup/pausa/fuera del área/error/budget neutralizan estado | Lua5.4 S3 + UI/input/Timer mocks | 14 casos producción | CONFIRMADO EN SIMULACIÓN | Alta para casos | Sí | No pérdida de foco físico ni timeout duro |
+| HoldPad resuelve input/watchface en RW4 | M2315W1/FW2.2.86 | No autorizado/enviado este paquete | SIN EVIDENCIA | Desconocida | No | Próximo ensayo R225; no extrapolar S3 |
+| Layout HoldPad es cómodo o permite movimiento+disparo simultáneos | RW4 | Solo cuatro zonas diagnósticas | SIN EVIDENCIA | Desconocida | No | Comodidad y controles finales pendientes |
+
+**Historial R222:** [NativeFrames generación/display/salida confirmadas por usuario](native-frames-physical-result-r221.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

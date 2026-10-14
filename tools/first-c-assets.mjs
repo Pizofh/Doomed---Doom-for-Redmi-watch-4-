@@ -35,3 +35,11 @@ export function framesAssets(){
   exit:png(96,20,(x,y)=>ownTextPixel('EXIT',x,y,[36,92,128])),
   preview:png(390,450,(x,y)=>x>=150&&x<240&&y>=160&&y<264&&(y-160)%26<16?[0,255,255]:[0,0,0])};
 }
+export function heldAssets(){
+ const names=['UP','LEFT','RIGHT','FIRE','EXIT'];
+ const assets={legend:png(180,160,(x,y)=>ownTextPixel(names[Math.floor(y/32)]??'',x,y%32)),
+  title:png(120,20,(x,y)=>ownTextPixel('HOLD TEST',x,y)),
+  preview:png(390,450,(x,y)=>x>=150&&x<240&&y>=160&&y<290&&(y-160)%26<16?[255,128,0]:[0,0,0])};
+ for(const name of ['START','EXIT','UP','LEFT','RIGHT','FIRE'])assets[name.toLowerCase()]=png(96,20,(x,y)=>ownTextPixel(name,x,y,[36,92,128]));
+ return assets;
+}

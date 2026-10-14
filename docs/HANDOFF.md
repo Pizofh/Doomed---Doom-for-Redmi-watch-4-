@@ -1,6 +1,24 @@
 # Retomar el proyecto
 
-**Actual R222, 2026-10-13:** [NativeFrames cinco verdes/animación/retorno normales](native-frames-physical-result-r221.md).
+**Actual R224, 2026-10-13:** [HoldPad lista; input mantenido/EXIT/selector pasan S3](held-input-r224.md).
+Usuario autorizó preparación PC, NO envío nuevo. [Plan R225](held-input-physical-plan-r225.md)
+pendiente de una aprobación/presencia antes de tocar reloj. No BT/USB físico en
+este checkpoint. 14 casos Lua mocks; cuatroholds reales3300ms/release/EXIT;
+longpress stockON verificado antes/durante/después, selector abre antesSTART y
+trasEXIT, Neat362130003 activa/closeLua/módulosvacíos al final. ToggleOFF inicial
+restaurado por operador. S3 NO M2315W1; layoutdiagnóstico, noergonomía/inputC.
+Paquete15552B ID365219979 SHA296868366da0f29a010777d031559ddf08a1c52d73f45021b9f3f034fbabff16,
+Lua1ee9ff3db8c572c1737ff27f764144c5869e810eb1280ef84f1393c234a90f59.
+Perfilr224, journalheld-input-r225.json/lock AUSENTES. GatesNodefalse/r167,C#false;
+helperclosed675fac96664454694f9309be2515132071e37a3c17e818eaf1087adc09ad5249.
+prepare8partes/transfer12/session33/helper258/gates0sockets pasan. No repetir
+tests que rechazan artifacts existentes; UI queda enstock. EmuTTY33175/pid15168
+arrancadofueraSandbox con perfilsteve; comprobar proceso/guard antes de usar.
+Catálogorebuild Spectrum→Neat y cierreADBtransitorio registrados, no replayinstall.
+Siguiente: un ensayo HoldPad, cuatroholds4s+EXIT+holdneutroselector+habitual,
+sinC/shell/io/os/globalsettings/ancestros. No rearmar/reabrir pruebasC previas.
+
+**Historial R222, 2026-10-13:** [NativeFrames cinco verdes/animación/retorno normales](native-frames-physical-result-r221.md).
 Usuario: FILE/MARK/FRAMES/UNLOAD/EXIT green, animación cambiando líneas, salida y
 cambio de esfera normales. Reabrió por iniciativa propia, rojo/inicio bloqueado:
 coherente con marca, no prueba causa exacta/reboot/segunda carga. No repetir.
