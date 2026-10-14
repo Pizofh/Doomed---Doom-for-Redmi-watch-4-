@@ -1,5 +1,12 @@
 # Arquitectura
 
+R222: [C genera PNG, Lua/LVGL anima y termina en RW4 físico](native-frames-physical-result-r221.md).
+Ruta probada: marcador→init C genera cuatro archivos→Lua valida/retira C→Image/
+Timer alterna frames inmutables→salida/detach/unlink. Usuario confirma cinco verdes,
+animación y navegación/cambio normales. No streaming/renderer Doom físico, input
+sostenido, memoria/heap suficiente o aislamiento demostrados. El contenedor final
+depende de impedir selector de esferas al sostener controles, sin perder salida.
+
 R217: [NativeLog usa cinco APIs de archivo desde C y se retira](native-log-physical-result-r216.md).
 Lua escribe marca→insmod→C lee marca/escribe mensaje propio→Lua comprueba mensaje
 y registro→rmmod→ausencia/limpieza. Usuario confirma cinco verdes y navegación/

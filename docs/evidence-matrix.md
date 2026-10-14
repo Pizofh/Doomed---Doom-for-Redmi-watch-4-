@@ -1,6 +1,16 @@
 # Matriz de evidencia
 
-**Actual R221:** [NativeFrames instalada; observación pendiente](native-frames-physical-result-r221.md).
+**Actual R222:** [NativeFrames generación/display/salida confirmadas por usuario](native-frames-physical-result-r221.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| C produce cuatro imágenes propias que Lua/LVGL presenta | M2315W1/FW2.2.86, payload R218 | FRAMES/UNLOAD verdes con checksums/registro; usuario describe líneas que cambian | CONFIRMADO EN RW4 | Alta para este payload | Sí, físico/visual | Cuatro PNG precalculados, no streaming/Doom/FPS |
+| Módulo retirado antes de animación y PNG retirados al terminar | Misma unidad/contexto | UNLOAD/EXIT verdes condicionados por inventario/pausa/detach/unlink/ausencia | CONFIRMADO EN RW4 | Alta según instrumentación | Sí | Marca/ELF/paquete permanecen; no heap/cache medidos |
+| Navegación/cambio de esfera conservados después del ensayo | Misma unidad | Usuario confirma salida/cambios/todo bien | CONFIRMADO EN RW4 | Alta para observación | Sí | No identificar inequívocamente ruta de cierre o esfera activa final |
+| Rojo al reabrir corresponde al bloqueo por marca | Misma unidad | Reapertura espontánea y guard marker_state en fuente | INFERENCIA RAZONABLE | Media | Sí, visual | Rojo admite otros fallos; no segunda carga o reboot probado |
+| Sostener controles no abre selector de esferas | M2315W1/FW2.2.86 | NativeFrames no implementa controles mantenidos | SIN EVIDENCIA | Desconocida | No | Criterio obligatorio antes de elegir contenedor final |
+
+**Historial R221:** [NativeFrames instalada, observación entonces pendiente](native-frames-physical-result-r221.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

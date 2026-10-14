@@ -1,6 +1,13 @@
 # Ejecución y privilegios
 
-**Actual R220/R221:** [NativeFrames lista PC/emulador](native-frames-r220.md).
+**Actual R222:** [NativeFrames C→archivos→Lua/LVGL animación/salida físicas](native-frames-physical-result-r221.md).
+Usuario observa cinco verdes, animación y navegación/cambio normales. C se retira
+antes de animar cuatro PNG, y EXIT exige detach/limpieza; no tareas C residentes.
+Timer es stock Lua, no temporización nativa de Doom. Privilegios, memoria libre,
+ABI general/recovery pendientes. Gates cerrados; siguiente PC: control mantenido
+y separación de navegación del juego/selector stock, requisito de contenedor.
+
+**Preparación R220/R221:** [NativeFrames lista PC/emulador](native-frames-r220.md).
 Mismas cinco APIs de archivo; candidato C genera cuatro PNG/74KB, se retira antes
 de Timer/Images Lua, sin tareas/callbacks C retenidos. S3 C/PNG y UI/EXIT probados
 con builds/backend separados, no RW4. Paquete29704B, gates cerrados y

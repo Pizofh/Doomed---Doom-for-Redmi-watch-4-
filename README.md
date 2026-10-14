@@ -1,6 +1,13 @@
 # DOOM en Redmi Watch 4
 
-**Actual R221:** [NativeFrames instalada tras autorización](docs/native-frames-physical-result-r221.md).
+**Actual R222:** [C genera imágenes, Lua las anima y la prueba termina en RW4](docs/native-frames-physical-result-r221.md).
+Usuario comunica cinco indicadores verdes, animación de líneas y navegación/cambio
+de esfera normales. Reapertura bloqueada concuerda con la protección de un intento.
+Gates cerrados; no repetir/rearmar. Son cuatro frames precalculados, no Doom/FPS.
+Siguiente PC: controles sostenidos sin abrir el selector de esferas durante juego,
+con salida y navegación normal restaurada. Todavía no probado físicamente.
+
+**Historial R221:** [NativeFrames instalada tras autorización](docs/native-frames-physical-result-r221.md).
 Un envío,15partes; propia inactiva, las14entradas anteriores y selección conservadas.
 Gates cerrados de nuevo. Pendientes RUN C manual, imagen/animación/EXIT y retorno:
 instalar no demuestra ejecución. Pulsación larga durante controles de Doom aún

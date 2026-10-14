@@ -1,6 +1,21 @@
 # Retomar el proyecto
 
-**Actual R221, 2026-10-13:** [NativeFrames instalada](native-frames-physical-result-r221.md).
+**Actual R222, 2026-10-13:** [NativeFrames cinco verdes/animación/retorno normales](native-frames-physical-result-r221.md).
+Usuario: FILE/MARK/FRAMES/UNLOAD/EXIT green, animación cambiando líneas, salida y
+cambio de esfera normales. Reabrió por iniciativa propia, rojo/inicio bloqueado:
+coherente con marca, no prueba causa exacta/reboot/segunda carga. No repetir.
+No distinguir EXITmanual/autostop/pageOnPause; respuesta no lo identifica.
+«Coronas» en contexto cambioesferas, NO APIrotación física. UNLOAD antes de
+animación, EXIT verde exige pausa/detach/unlink4PNG; C no residenteenanimación.
+Cuatro framesprecalculados porC2780B/5APIs, consumidosLua/LVGL, noDoom/FPS.
+Guardinventario bloquea197/202/211 y exige propiaausentealretirar; FSmarca/paquete
+persisten, PNG/capturaslimpias segúnboolinstrumentación. No heap/priv/recovery/ABI
+general/input/timersnativos/RAMDoom confirmados. Gatescerrados, sin nuevosBT/USB.
+Ensayo completado. SiguientePC: contacto sostenido con selectorlongpress stock
+habilitado, salida/restauraciónnormal; contenedorwatchface condicionado a esto.
+NOrearmar/enviar/DELETE/activar otro paquete por permiso previo.
+
+**Historial R221:** [NativeFrames instalada](native-frames-physical-result-r221.md).
 Usuario autorizó UN ensayo y presencia. Install r220 RegisteredInactive,
 15partes, TX30332/24framesTX/16RX; GET independiente14→15 con anteriores IDs/
 flags y activa365210175 conservados. Own365219980 inactive/removable. Socket y
@@ -9,11 +24,11 @@ Gates Nodefalse/r167,C#false restauradosenfinally/rebuild/test0sockets.
 Helperclosed b3a53acdcfb081758f381a16a50d12fa8eba1ef73a42a9536e5342a17f978466.
 Journalnative-frames-r221.json Registered/15parts/sinlock; archiveprivado
 artifacts/native-frames-r221-authorized. NOejecutarhelpertemporalarchivado.
-Pendiente respuesta a NativeFrames/4barrascian/cincogris/RUN C UNavez, observar
+Entonces pendiente respuesta a NativeFrames/4barrascian/cincogris/RUN C UNavez, observar
 animacióncolores/barra, EXIT trasvarioscambios oauto-stop~10s, cincoindicadores
 finales yvolvera habitualconmenus/scroll/longpressnormales. EXITrojodeinicio/
 etiquetasausentes/fallo NOclick/retry. No másBT/envío/DELETE/reset/otraactivación.
-Instalar NOpruebaC/display/Timer/retiroFS. LongpressencontrolesDoom NOprobado,
+Instalar solo NOpruebaC/display/Timer/retiroFS; resultadoR222 arriba. LongpressencontrolesDoom NOprobado,
 [criterioobligatorio](controls.md) registradoe9fa80c; noensayarloenestaDemo.
 
 **Historial de preparación R220:** [NativeFrames PC/emulador lista](native-frames-r220.md).

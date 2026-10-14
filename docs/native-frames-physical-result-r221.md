@@ -1,4 +1,9 @@
-# R221 — NativeFrames instalada; ejecución y observación pendientes
+# R221/R222 — frames generados en C, animación y salida confirmados en RW4
+
+**Resultado R222:** usuario comunica FILE/MARK/FRAMES/UNLOAD/EXIT verdes,
+animación visible y navegación/cambio de esfera normales. Reabrió por iniciativa
+propia y observó bloqueo rojo sin poder iniciar; coherente con la marca de un
+intento. La sección de observación pendiente inferior conserva el estado previo.
 
 2026-10-13, Bogotá. El usuario autorizó el [plan fijo R221](native-frames-physical-plan-r221.md)
 con «Sí, autorizo el ensayo y puedo observar el reloj». La solicitud incluía
@@ -44,7 +49,7 @@ Reportes sanitizados privados en artifacts/native-frames-r221-authorized:
 install-report.json, inventory-report.json, comparison.json. GET transcrito desde
 su único resultado, sin segunda consulta. Sin claves/MAC/serial/dumps publicados.
 
-## Observación manual pendiente
+## Historial: observación manual pendiente después de instalar
 
 Se pidió seleccionar NativeFrames (cuatro barras cian), comprobar cinco grises
 FILE/MARK/FRAMES/UNLOAD/EXIT, RUN C UNA vez, observar colores/barra que cambian,
@@ -59,3 +64,60 @@ de antecedentes; no sustituyen la observación pendiente. Códigos, IDs y hashes
 siguen fijos. El criterio [de contacto sostenido sin selector](controls.md) queda
 pendiente; no se pidió ensayarlo con este paquete, que no implementa controles Doom.
 Privilegios, RAM/stack libres y recuperación integral siguen sin determinar.
+
+## R222 — ejecución, animación y cierre comunicados por el usuario
+
+Respuesta: «file, mark, frames, unload, exit green, la animación estuvo bien,
+cuadritos queu van cambiando la ubicación de las lineas. luego salí, volví a
+entrar y todo esta bien. cambié coronas y ien, todo bien. cuando volvi a entrar
+ya aparecia solo rojo, no se podía iniciar de nuevo. super...».
+
+El usuario describe animación y cambios de líneas, salida/navegación/cambio de
+esfera normales, y reapertura con inicio bloqueado. «Coronas» se interpreta por
+el contexto como cambio de esferas, no evidencia de giro/API de la corona física.
+No se distingue inequívocamente si el cierre usó EXIT, autoparada o pageOnPause;
+no atribuir un mecanismo concreto ni duración24callbacks a esta respuesta.
+
+| Indicador verde | Condición de la fuente fijada |
+|---|---|
+| FILE | ELF2780bytes comparado completamente con el candidato embebido, decodificado de base64 |
+| MARK | Marca15bytes escrita/flush/cerrada, readback exacto y presencia independiente |
+| FRAMES | Registro rw4framesr218 observado tras ausencia previa y cuatro PNG18564bytes, firma y Adler de archivo completo coincidentes |
+| UNLOAD | rmmod propio retornó y lsmod reconocido confirmó ausencia ANTES de presentar imágenes/Timer |
+| EXIT | finish(false): pausa de timer/deshabilitación de EXIT, eliminación de objetos Image y retirada/ausencia de cuatro PNG confirmadas |
+
+Los cuatro indicadores de preparación solo se pintan al devolver el controller.
+La animación se inicia únicamente tras Complete/retirada confirmada; EXIT verde
+exige que termine la fase visual y cleanup atribuido. El adapter Lua no crea los
+PNG; frames-r218.c los genera en el inicializador con las cinco APIs stock de
+archivo ya probadas,18ABS32 y stack propio GCC400bytes. Es evidencia instrumental
+de **C propio que produce imágenes consumidas por Lua/LVGL y luego sale**, en
+M2315W1/FW2.2.86 sin reemplazar firmware. Los colores/posiciones observados confirman
+presentación dinámica, más que solo construcción de Image o indicadores verdes.
+
+Según guards e inventarios reconocidos, rw4framesr218/rw4minr197/rw4minr202/rw4logr211
+estaban ausentes en la comprobación final previa a la animación. No se retiraron
+módulos anteriores/ajenos. El C no permanece cargado durante la animación ni
+retiene tareas/callbacks; esta usa cuatro imágenes precalculadas, no streaming
+continuo desde C. No es Doom ni evidencia de FPS/latencia del motor.
+
+Marca/package/ELF permanecen almacenados; los cuatro PNG y capturas propias se
+retiraron según indicadores. No se mide heap, cache, stack libre, corrupción
+latente o durabilidad por reboot/powerloss. Evidencia mediante observación del
+usuario y código fijado; sin dump/foto/trazaCPU físicos. Aislamiento, ABI general,
+recovery integral, memoria suficiente y timers/input nativos siguen pendientes.
+
+## Reapertura observada y siguiente checkpoint
+
+El usuario reabrió por iniciativa propia, sin que se le pidiera repetir. Rojo
+inicial/inicio bloqueado concuerda con frames-main-r219.lua: si marker_state()
+no es absent, ui.stop() deshabilita RUN C. El mismo rojo también cubre setup
+incierto; no identifica por sí solo causa exacta, ni demuestra lectura de marca
+por reboot o una segunda carga. No se comunicó otra ejecución exitosa.
+
+Ensayo autorizado completado. No reabrir/rearmar/borrar marca, nuevos envíos,
+DELETE o rmmod remoto. Al registrar esta respuesta solo se editaron documentos
+en PC; ninguna nueva operación Bluetooth/USB/reloj. Gates siguen cerrados.
+Siguiente checkpoint PC: controles sostenidos con cambio de esferas por pulsación
+larga habilitado, salida y restauración de navegación. Ese requisito es condición
+para elegir la watchface como contenedor final; no está probado por NativeFrames.

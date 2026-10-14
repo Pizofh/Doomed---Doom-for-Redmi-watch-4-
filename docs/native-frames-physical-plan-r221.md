@@ -1,7 +1,8 @@
 # R221 — plan aprobado: NativeFrames, generación/display/salida juntos
 
 2026-10-13. **Autorizado e instalado sin activación. Gates cerrados de nuevo;
-selección/RUN C/animación/EXIT/retorno manuales pendientes.**
+R222: usuario comunica cinco verdes, animación y navegación/cambio normales;
+ensayo único completado, no permiso para repetirlo.**
 Usuario: «Sí, autorizo el ensayo y puedo observar el reloj».
 [Resultado de instalación](native-frames-physical-result-r221.md).
 La autorización cubre este ensayo único, sin reintentos o nuevos payloads.
