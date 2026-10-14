@@ -1,6 +1,9 @@
-# R225 — plan pendiente de autorización: HoldPad
+# R225 — plan autorizado: HoldPad
 
-2026-10-13. **No autorizado, no instalado; gates Node/C# cerrados.**
+2026-10-13. **Autorizado e instalado sin activación; gates cerrados de nuevo.
+Observación manual pendiente.** Usuario: «Sí, autorizo y puedo observar el reloj».
+[Resultado de instalación](held-input-physical-result-r225.md).
+La autorización cubre este ensayo único, no reintentos o nuevos payloads.
 [Resultados PC/S3](held-input-r224.md). La revisión cubre un payload nuevo,
 conforme al gate físico de la instrucción inicial del usuario.
 
@@ -80,6 +83,6 @@ se recuperó en ensayos anteriores. Si UI se bloquea, detener pruebas y revisar
 antes de nuevas acciones. Reinicio no borra paquete ni restaura flash. Ningún
 flasheo/firmware ajeno/retirada de módulo a ciegas como recuperación automática.
 
-Permiso solicitado: un envío sin autoactivación y un ciclo manual de cuatro
+Permiso otorgado: un envío sin autoactivación y un ciclo manual de cuatro
 holds, EXIT y retorno stock, con presencia. No Doom/C/reintentos/nuevas APIs
 nativas ni cambiar ajustes globales para esconder la pulsación larga.

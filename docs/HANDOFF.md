@@ -1,6 +1,20 @@
 # Retomar el proyecto
 
-**Actual R224, 2026-10-13:** [HoldPad lista; input mantenido/EXIT/selector pasan S3](held-input-r224.md).
+**Actual R225, 2026-10-13:** [HoldPad instalada sin activación; manual pendiente](held-input-physical-result-r225.md).
+Usuario autorizó ensayo/presencia/batería≥50%. Un installr224 RegisteredInactive,
+8partes/TX16045/17TX/16RX; GET independiente15→16, anteriores IDs/active/canDelete
+y activa365210175 conservados, propia365219979 inactive/removable. Ambos sockets/
+workers cerrados/exit0. GateNodefalse/r167,C#false restauradosfinally/rebuild/test
+0sockets. Helperclosed4d4fd3a822d5d5bb6e494c77e7578bcb4aaff8572254ae2b2568f01a185e88f0.
+Journalheld-input-r225.json Registered/8parts/sinlock; archiveprivado
+artifacts/held-r225-authorized, NO ejecutar helpertemporal archivado.
+Pendiente usuario: seleccionarHoldPad CINCO barrasNARANJAS, cinco grises/START;
+STARTuna vez, holdUP/LEFT/RIGHT/FIRE4s cadauno+release, EXIT, holdneutro275sobreSTART
+→selector→habitual ymenús/scroll/longpressnormal. Rojoinicial/fallo NO START/retry;
+si selectorabredurantejuego volverhabitual/parar. No reabrirHoldPad/Cpruebas ni
+másBT/USB/envío/DELETE/reset. Instalar NO prueba input/EXIT físico, awaitrespuesta.
+
+**Historial R224, 2026-10-13:** [HoldPad lista; input mantenido/EXIT/selector pasan S3](held-input-r224.md).
 Usuario autorizó preparación PC, NO envío nuevo. [Plan R225](held-input-physical-plan-r225.md)
 pendiente de una aprobación/presencia antes de tocar reloj. No BT/USB físico en
 este checkpoint. 14 casos Lua mocks; cuatroholds reales3300ms/release/EXIT;

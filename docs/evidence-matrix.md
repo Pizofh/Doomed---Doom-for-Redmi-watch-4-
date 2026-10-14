@@ -1,6 +1,14 @@
 # Matriz de evidencia
 
-**Actual R224:** [Input mantenido y selector, S3](held-input-r224.md).
+**Actual R225:** [HoldPad instalada, UI pendiente](held-input-physical-result-r225.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| HoldPad registrada inactiva conservando entradas/selección anteriores | M2315W1/FW2.2.86 | Install único8partes y GET independiente15→16 contrastado contra journal | CONFIRMADO EN RW4 | Alta para transporte | Sí | Sin autoactivación; no prueba ejecución Lua |
+| Gates Node/C# cerrados después del envío | PC | Restauraciónfinally/build/test sin sockets | CONFIRMADO EN PC | Alta | Sí | Dos sesiones cerradas; no retry/DELETE |
+| Holds/EXIT/selector funcionan en RW4 con HoldPad | Misma unidad | Selección/observación manual pendientes | SIN EVIDENCIA TODAVÍA | Desconocida | No | S3 no confirma esta UI física |
+
+**Historial R224:** [Input mantenido y selector, S3](held-input-r224.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

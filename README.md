@@ -1,10 +1,15 @@
 # DOOM en Redmi Watch 4
 
-**Actual R224:** [Controles sostenidos y selector stock probados en S3](docs/held-input-r224.md).
+**Actual R225:** [HoldPad instalada en RW4 sin activación](docs/held-input-physical-result-r225.md).
+Un envío autorizado, ocho partes; las15esferas anteriores y selección conservadas.
+Gates cerrados. Pendiente selección manual, cuatro contactos sostenidos, EXIT
+y retorno habitual: la instalación no demuestra ese comportamiento.
+
+**Historial R224:** [Controles sostenidos y selector stock probados en S3](docs/held-input-r224.md).
 UP/LEFT/RIGHT/FIRE mantenidos 3,3 s conservan el juego; soltar libera acciones.
 Tras EXIT, la pulsación larga vuelve a abrir el selector. Sin desactivar el
 ajuste global desde Lua. HoldPad preparada, solo Lua/imágenes; gates cerrados.
-Siguiente: [un ensayo agrupado en RW4, pendiente de aprobación](docs/held-input-physical-plan-r225.md).
+Ensayo agrupado RW4 [autorizado R225](docs/held-input-physical-plan-r225.md); instalación arriba.
 
 **Historial R222:** [C genera imágenes, Lua las anima y la prueba termina en RW4](docs/native-frames-physical-result-r221.md).
 Usuario comunica cinco indicadores verdes, animación de líneas y navegación/cambio
