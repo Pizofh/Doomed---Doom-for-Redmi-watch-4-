@@ -1,5 +1,24 @@
 # Retomar el proyecto
 
+**Actual R246,2026-10-14: ProcView preparada, NO autorizada/enviada.**
+[Vista](proc-view-r246.md), [planR247](proc-view-physical-plan-r247.md).
+ID365219973,21836B, artifacts/proc-view-r246/ProcView-id-only.face,
+SHA07527d9a79a8d24d7e761db65c73198f93f3265da2304963b95bbc916d85b75a;
+sourceSHA5db8d5670f96ef1940c7d60f011a8015d0eb7a6182731b98dcb786f467c6b209.
+Preview3barrasAZULES/PROC DATA,4filasMARKOPENREADCLOSE, LEN HEX/HEAD TEXT/TAIL HEX,
+CHECKmanual1lectura+MODE alternaHEAD TEXT/HEX enmismaRAM sinIO. Ownmarca17B
+proc-view-attempt-r246.txt(RW4-PROC-VIEW246\n), persiste, rootnormalizadopinned973.
+Proc read8193+1EOF <=8192, cierre; soloRAMlen/head64/tail16; no tabla/capturaPNGsaved,
+no shell/dev/C/ELF/Timer/GCIO.164celdasImage+leyendas/botones, RW4capacidadnoensayada.
+22casosS3/tmpreal+mockproc/widgets pasaninclbinario0..255/hexexacto/dobleclick/reentrada,
+20MODEsinIO/errores/paths. Finalartifacts/emulator/proc-view-r246-final; primerendextra
+Lua corregidoantespack, logpreservado. ModulosS3igual ytmpretirado.
+Compiler noADB/readback51recursos. PreviewsPNGcompuestossintéticosrevisados, NO LVGLreal.
+Transfer12/gates0sockets/prepare11partes32768; protocoloigual no repetir36sesión.
+Nodefalse/r167/C#false; helperclosed3e1d6e4a9105d916c630557d08d4954e61203163450e2a3e667ab43c705f518f.
+No nuevoBT/USB/hardware; journalproc-view-r247.json no creado. NextaprobaciónUNensayo/presencia>=50%.
+No autoenviar, consumircorrecciónprevia, rearmar/retirarStepC. ResidenciaUNKNOWN.
+
 **Actual R245,2026-10-14: ModInfo2 CHECK observado, retorno normal.**
 Inicial15grises; usuario MARK/OPEN/READ/CLOSE verdes, END LINE/FINAL rojos,
 restogris; confirma menú/cambio de esfera sin problema. Fuente implica ASCIIverde

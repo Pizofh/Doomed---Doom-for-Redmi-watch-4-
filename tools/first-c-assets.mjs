@@ -1,5 +1,6 @@
 import {deflateSync} from 'node:zlib';
 import {ownTextPixel} from './native-info-legend.mjs';
+export {png};
 function crc(b){let n=0xffffffff;for(const c of b){n^=c;for(let i=0;i<8;i++)n=(n&1)?(n>>>1)^0xedb88320:n>>>1;}return (n^0xffffffff)>>>0;}
 function chunk(type,data){const t=Buffer.from(type),length=Buffer.alloc(4),sum=Buffer.alloc(4);length.writeUInt32BE(data.length);sum.writeUInt32BE(crc(Buffer.concat([t,data])));return Buffer.concat([length,t,data,sum]);}
 function png(width,height,pixel){

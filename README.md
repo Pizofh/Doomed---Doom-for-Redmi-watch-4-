@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R246, PC:** [ProcView preparada](docs/proc-view-r246.md): longitud,
+inicio64bytes y final16bytes; texto/hex sobre una sola lectura. 22casos con
+simulaciones pasan, paquete21836bytes; gates cerrados, sin nuevo envío al reloj.
+[Plan R247 pendiente de autorización](docs/proc-view-physical-plan-r247.md).
+
 **Actual R245:** [ModInfo2 abrió, leyó y cerró el registro](docs/module-registry-physical-result-r244.md);
 END LINE/FINAL rojos, retorno/cambio de esfera y menú confirmados. Residencia
 StepC desconocida. [Siguiente: contenido y longitud acotados](docs/module-registry-result-r245.md).

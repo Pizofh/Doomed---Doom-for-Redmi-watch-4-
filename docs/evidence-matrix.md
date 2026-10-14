@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R246, PC:** [ProcView preparada; sin envío nuevo](proc-view-r246.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Vista reproduce head/tail/longitud y MODE no relee | Lua S3, tmpfs real; proc/widgets simulados |22casos, incluido binary0..255 y20MODE | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para casos | Sí | Nueva capacidad gráfica RW4 no probada |
+| Paquete contiene51recursos correspondientes al source probado | PC/Compiler revisado sin ADB | Readback21836bytes/hash | CONFIRMADO EN PC | Alta | Sí | No instalado/autorizado |
+| Envío ProcView preparado con gates cerrados | PC/sintético |12transfer/gates0sockets/prepare11partes | CONFIRMADO EN PC | Alta | Sí | No nuevo Bluetooth o hardware |
+
 **Actual R245:** [Lectura/cierre pasó; END LINE rojo, retorno normal](module-registry-result-r245.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
