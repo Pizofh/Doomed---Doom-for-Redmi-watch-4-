@@ -1,5 +1,26 @@
 # Retomar el proyecto
 
+**Actual R267 PC completo; R268 requiere aprobación del único reintento.**
+Usuario confirmóesfera/menúsnormales tras R266. Registro privado user-observation.json.
+Audit finalpaquetesStateMatch/CtrlProbe/ExitC24recursos/12partes/CRC/MD5readback:
+sin defecto porchecks, causa R266desconocida. Noatribuir aLua/espacio/overrun.
+[PlanR268](native-exit-retry-physical-plan-r268.md): mismopaqueteID365219964/hash
+8c69e4003c1caef9eed58902cfc5d45112d5b9cf21f7ccdab8c1b379284da3e8;
+CLIinstall-paced-retryr265, perfil exit-r268.11pausas100ms+1000msantesGET,
+2,1snominales. Sin cambio deLua/C/bytescifrados/chunk2048/timeout/límites.
+15tests nuevos+47IPCjournal pasan sinradio; fixtures incompletos catálogo/nonce
+corregidos, fallos preservados.68Lua anteriores NOrepetidos. NoMASSretries.
+Originalnative-exit-r266.jsonUncertain se preserva/validacon targethashmismosdatos;
+nuevonative-exit-r268-paced.json debeestar fresh/sinlock. Gateextra
+REVIEWED_PACED_RETRY=false ademásPHYSfalse/VARIANTr167/C#false.
+Helper cerradoactual898ec2cb6522cbde1544faed041e4c371734322ee98edc01fccd057b6f5fed35.
+Prepare-paced-retry/gates0sockets pasan; nohardware nuevo. R266 autorización
+UNinstallconsumida; normalidad NOautoriza segundo envío. Si aprueba, runner
+fijonuevohabilita3gates yC#, UN install-paced-retryr265; finallyrestore/rebuild/
+gates+GETindependiente, oldjournalhashintacto. Solo trasregistro propioinactivo
+proceder ensayoEXIT C ya revisado (nueva revisión incluye ese ensayo).
+Nocleanup/delete/SET/rearm/reboot/reload; no invocar ExitC si registroincierto.
+
 **Actual R266: intento único con timeout, ExitC ausente del catálogo.**
 Usuario autorizópresencia≥50%; runnerexit-r266-authorized consumido.
 INSTALLstatus0/upload0resume0chunk2048MD5matching.12parteslocales/TX24898/

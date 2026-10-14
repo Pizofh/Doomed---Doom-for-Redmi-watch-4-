@@ -54,8 +54,9 @@ function faces(value){
   }
   return value.entries;
 }
-export async function installStatic(api,plan,{journal = null,initialCountBelow = null} = {}){
+export async function installStatic(api,plan,{journal = null,initialCountBelow = null,pacingProfile = 'default'} = {}){
   preflight(api,plan);
+  if(!['default','exit-r268'].includes(pacingProfile)||(pacingProfile==='exit-r268'&&plan.variant!=='r265'))refused();
   const info=await api.info();if(info.modelRecognized!==true||info.firmware!=='2.2.86')refused();
   const before=faces(await api.faces());if(before.some(f=>f.id===plan.id))refused();
   if(before.filter(f=>f.active).length!==1)refused();
@@ -75,7 +76,9 @@ export async function installStatic(api,plan,{journal = null,initialCountBelow =
     journal?.advance('Sending',{part:index+1});
     await api.mass(part);result.bytesSent+=part.length;
     journal?.advance('PartWritten');
+    if(pacingProfile==='exit-r268'&&index+1<parts.length)await api.wait(100);
   }
+  if(pacingProfile==='exit-r268')await api.wait(1000);
   // A local write/queue callback is NOT confirmation that the watch installed it.
   for(let attempt=0;attempt<6;attempt++){
     const after=faces(await api.faces());

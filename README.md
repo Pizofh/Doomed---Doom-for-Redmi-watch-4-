@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R267 preparado:** [Reintento pausado del mismo ExitC](docs/native-exit-retry-physical-plan-r268.md).
+Reloj normal tras R266. Audit no encontró defecto en los checks del paquete;
+15pruebas nuevas/47protocolo pasan. Mismo archivo, esperas2,1s nominales,
+journal nuevo y gates cerrados; aún sin segundo envío.
+
 **Actual R266 detenido:** [Timeout al confirmar ExitC](docs/native-exit-physical-plan-r266.md).
 Un envío; catálogo posterior conserva las12esferas previas y ExitC no aparece.
 Gates cerrados, sin rmmod/reintento. Pendiente comprobar normalidad visual.

@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R267:** [Auditoría y reintento pausado preparado](native-exit-retry-physical-plan-r268.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Esfera y menús normales tras timeout R266 | RW4/M2315W1/FW2.2.86 | Usuario«si, todo ok» | CONFIRMADO EN RW4 | Alta para observado | Sí | No ejecución de ExitC solicitada |
+| ExitC conserva recursos/MD5/CRC y12partes compatibles con constructor usado en éxitos | Archivos locales | review-exit-transfer-r267-final | CONFIRMADO LOCALMENTE | Alta para checks | Sí | No causa del rechazo/timeout ni aceptación física |
+| Pausas100ms y1000ms conservan frames y resuelven peer lento sintético | Link/reloj/peer PC simulados |15tests +47regresiones IPC | CONFIRMADO CON SIMULACIONES | Alta para modelo | Sí | No overrun o solución R266 demostrados |
+| Reintento pausado registra ExitC en RW4 | Misma unidad | No autorizado/ejecutado todavía | SIN EVIDENCIA | Pendiente | No | Nuevo journal, no replay del original |
+
 **Actual R266:** [Registro de ExitC sin confirmar tras timeout](native-exit-physical-plan-r266.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

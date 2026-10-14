@@ -2,7 +2,7 @@
 
 Estado R266: usuario autorizó «Sí, autorizo y puedo observar el reloj».
 **Un intento de instalación terminó en timeout; ExitC no figura en el catálogo
-posterior. No seleccionar ni ejecutar EXIT C.** Retorno visual pendiente.
+posterior. No seleccionar ni ejecutar EXIT C.** Usuario confirmó esfera/menús normales.
 R264 terminó con diez verdes y menú/esferas normales. El módulo234 quedó
 STOPPED, no descargado; no repetir CtrlProbe ni rearmar marcas.
 
@@ -163,4 +163,6 @@ checkpoint anterior a esta instalación. Registro propio no confirmado; restos
 del paquete en storage no inspeccionados. La consulta cerró socket/worker;
 sin nueva transferencia, SET/DELETE o C/uninit/rmmod desde PC.
 Evidencia privada install-report.json y inventory-followup.json.
-Falta confirmación visual del usuario; no nueva prueba física automática.
+Usuario confirmó «si, todo ok» tras consultar esfera/menús. No se solicitó
+ejecución de ExitC ni retirada del módulo. Intento consumido, journal original
+se conserva. [Preparación de reintento pausado R268](native-exit-retry-physical-plan-r268.md).

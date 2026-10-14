@@ -22,6 +22,9 @@ for(const action of ['install-after-space','remove-after-space']) {
     {cwd:root,shell:false,windowsHide:true,encoding:'utf8',timeout:3000,maxBuffer:4096});
   assert.equal(result.status,2);assert.equal(JSON.parse(result.stdout).status,'PhysicalGateClosed');
 }
+const paced=spawnSync(process.execPath,[path.join(root,'tools/pc-static-watchface.mjs'),'install-paced-retry','r265'],{cwd:root,shell:false,windowsHide:true,encoding:'utf8',timeout:3000,maxBuffer:4096});
+assert.equal(paced.status,2);assert.equal(paced.stderr,'');
+const pacedReport=JSON.parse(paced.stdout);assert.equal(pacedReport.status,'PhysicalGateClosed');assert.equal(pacedReport.checkpoint,'R268');assert.equal(pacedReport.bluetoothOperationRequested,false);assert.equal(pacedReport.watchCommandRequested,false);assert.equal(pacedReport.filesTransferred,false);
 const exe = path.join(root,'artifacts/pc-rfcomm/Rw4PcRfcomm.exe');
 const metadata = JSON.parse(fs.readFileSync(path.join(root,'artifacts/pc-rfcomm/build.json'),'utf8'));
 const stat = fs.lstatSync(exe);assert(stat.isFile() && !stat.isSymbolicLink());

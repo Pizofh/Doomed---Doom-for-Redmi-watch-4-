@@ -7,12 +7,14 @@ import {isOwnedJournal} from './static-watchface-journal.mjs';
 
 const fail = () => { throw Error('StaticSessionRefused'); };
 export class StaticWatchfaceSession extends XiaomiSession {
-  constructor(link,plan,{action = 'install',...options} = {}) {
-    if (!['install','remove'].includes(action)) fail();
+  constructor(link,plan,{action = 'install',pacingProfile = 'default',...options} = {}) {
+    if (!['install','remove'].includes(action)||!['default','exit-r268'].includes(pacingProfile)||
+        (pacingProfile==='exit-r268'&&(action!=='install'||plan.variant!=='r265'))) fail();
     super(link,options);
     // These builders reject forged/unpinned plans before any connection.
     this.start = installStart(plan); this.upload = uploadStart(plan);
     this.plan = plan; this.action = action; this.scope = 'static-watchface-only';
+    this.pacingProfile=pacingProfile;
     this.protocolVersion = null; this.txBudgetBytes = 32768; this.txBytes = 0;
     this.phase = 'New'; this.expectedParts = null; this.nextPart = 0;
     this.massAttempts = 0;
@@ -98,7 +100,7 @@ export class StaticWatchfaceSession extends XiaomiSession {
     this.massAttempts++; await this.send(frame); this.nextPart++;
     if (this.nextPart === this.expectedParts.length) this.phase = 'Sent';
   }
-  async wait(ms) { if (ms !== 500) fail(); await this.sleep(ms); }
+  async wait(ms) { if (ms !== 500 && !(this.pacingProfile==='exit-r268'&&[100,1000].includes(ms))) fail(); await this.sleep(ms); }
   dispose() {
     if (this.keys) for (const value of Object.values(this.keys)) value.fill(0);
     this.authenticated = false;
@@ -117,14 +119,14 @@ export async function runStaticSession(createLink,plan,secret,journal,options = 
     link = await createLink(); client.link = link;
     await link.opened(); await client.initialize(secret);
     const result = receipt ? await removeStatic(client,receipt,{journal}) :
-      await installStatic(client,plan,{journal,initialCountBelow:options.initialCountBelow ?? null});
+      await installStatic(client,plan,{journal,initialCountBelow:options.initialCountBelow ?? null,pacingProfile:client.pacingProfile});
     if (result.status === 'SentNotVerified') journal.uncertain();
     // Never export receipt, inventory, device address, key or wire payload.
     const {receipt:_,...report} = result;
     const closed = await link.close();
     if (!closed.closeConfirmed || !closed.workerExitConfirmed || closed.nativeError || closed.workerExitCode !== 0)
       report.status = 'StoppedNeedsReview';
-    return {...report,...closed,txBytes:client.txBytes,
+    return {...report,...closed,pacingProfile:client.pacingProfile,txBytes:client.txBytes,
       sentFrames:client.sentFrames,receivedFrames:client.receivedFrames,
       transferPartsWritten:client.nextPart,fileDataSendRequested:client.massAttempts > 0,
       watchCommandRequested:client.sentFrames > 0,bluetoothOperationRequested:closed.connectionRequested ?? null};
@@ -143,6 +145,7 @@ export async function runStaticSession(createLink,plan,secret,journal,options = 
       txBytes:client?.txBytes ?? 0,sentFrames:client?.sentFrames ?? 0,receivedFrames:client?.receivedFrames ?? 0,
       transferPartsWritten:client?.nextPart ?? 0,fileDataSendRequested:(client?.massAttempts ?? 0) > 0,
       transferAcceptanceVerified:false,watchCommandRequested:(client?.sentFrames ?? 0) > 0,
+      pacingProfile:client?.pacingProfile ?? null,
       bluetoothOperationRequested:closed.connectionRequested ?? null};
   } finally { if (Buffer.isBuffer(secret)) secret.fill(0);client?.dispose(); }
 }
