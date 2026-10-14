@@ -1,5 +1,14 @@
 # Retomar el proyecto
 
+**Actual R262: StateMatch instalada inactiva; READ C manual pendiente.**
+Usuario«ok»autorizaUNensayo/presencia>=50%; runnerstate-match-r262-authorized consumido.
+InstallRegisteredInactive12partes/stream24350/TX24847/21TX16RX, cierresworker/socket/exit0.
+GET12→13 IDsflagsintactos, activa365210175conservada; propia365219966inactiva/removible.
+JournalRegistered12/sinlock. Finallygatescerrados/rebuild/test0sockets. NoSETDELETEretry/proc/CdesdePC.
+[Plan/resultadosR262](state-match-physical-plan-r262.md). NextStateMatch4barrasAZULES,
+10grises/READCUNAvez→foto o todasverdes→habitual/menúscrolllongpress. Rojoinicial/faltaUI NO READ.
+MismoCresidente sinreload/unload; comparaciónkey64, trailer65/66solo diagnóstico. NoSTEPSTOP/rearmado/reboot.
+
 **Actual R261: rechazo de trailer localizado; StateMatch preparada NO autorizada/enviada.**
 R260fotoREG CODE004200420F03000600410000:66/66,0Fopen/read/EOF/close,shape03,
 mask00/06,diff65,errno0. Primeros64iguales/NUL64; solo65/66nonzero. CframeIDLE/closegreen;

@@ -1,6 +1,8 @@
 # R261/R262 — comparar el registro definido, no bytes tras su terminador
 
-2026-10-14. PC listo, NO autorizado/enviado. R260 demuestra registro66bytes antes/
+2026-10-14. Usuario autorizó «ok» al único ensayo con presencia/batería≥50%.
+Instalada inactiva; READ C y retorno manual pendientes.
+R260 demuestra registro66bytes antes/
 después, primeros64iguales y NUL64; únicamente65/66cambiaron. Apertura/read/EOF/
 close C y post-procfs pasaron; parser exigía tresNUL y rechazó esos dos bytes.
 Usuario «menu y esferas ok». No repetir/rearmar R260.
@@ -81,3 +83,17 @@ deba hard-brickear, sin garantía integral. Firmware stock sin modificar. Kernel
 fault puede impedir close. Recovery parcial Ajustes→Esferas si responde;
 integral no validada. Parar ante fallo; no flash/boot/firmware ajeno/exploits/
 SWD/JTAG/reboot automático. [Base R260](state-trace-repeat-physical-plan-r260.md).
+
+## Instalación R262 realizada
+
+Un install RegisteredInactive,12partes/stream24350bytes/TX24847bytes,
+21TX/16RX. Registro confirmado, no selección automática; ACK final independiente
+de aceptación de transferencia no verificado. GET12→13, todos los IDs/flags
+anteriores preservados, activa365210175 conservada, propia365219966inactiva/
+removible. Journalstate-match-r262.json Registered12/sinlock. Socket/worker
+cerrados/exit0, sin error nativo. Sin SET/DELETE/retry/proc/nodo/CdesdePC.
+Finally fuentes/gates restaurados, helper cerrado reconstruido, gates0sockets
+exitosos. Helper autorizado SHA256
+`3575ebe50f978aa99ff3084afa3046c8c299f6bc2d6548568c4a496de3e4e81a`.
+Evidencia privada `artifacts/state-match-r262-authorized/`, runner consumido.
+No repetir instalación. READ C una vez manual todavía pendiente.
