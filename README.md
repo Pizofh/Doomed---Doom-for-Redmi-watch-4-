@@ -1,8 +1,10 @@
 # DOOM en Redmi Watch 4
 
-**Actual R242:** [ModInfo instalada e inactiva](docs/module-registry-physical-result-r242.md),
-catálogo14→15 y selección anterior conservada. Envío cerrado; CHECK manual pendiente.
-Todavía no hay resultado sobre el registro o la residencia de StepC.
+**Actual R244:** [ModInfo2 instalada e inactiva](docs/module-registry-physical-result-r244.md).
+[Corregida ruta con separadores repetidos](docs/module-registry-corrected-r243.md),
+38casos lector y32UI con simulaciones pasan. Gates cerrados; CHECK manual pendiente.
+ModInfo anterior quedó negra; retorno/cambio de esfera y menú confirmados.
+Residencia de StepC todavía desconocida.
 
 **Actual R241, PC:** [ModInfo empaquetada y validada](docs/module-registry-ui-r241.md):
 lectura de registro sin shell/C, 38 casos del lector y17 de UI con simulaciones.

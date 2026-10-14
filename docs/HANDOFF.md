@@ -1,6 +1,26 @@
 # Retomar el proyecto
 
-**Actual R242,2026-10-14: ModInfo instalada, CHECK manual pendiente.**
+**Actual R244,2026-10-14: ModInfo2 instalada, CHECK pendiente.**
+Usuario pidió «pues corrige eso concreto y mandalo al reloj de una, te estas demorando mucho»;
+autorización directa, sin re-pregunta. R242negra, pudo volver/cambiar esfera/abrirmenú,
+sin resultadoCHECK/proc/mark. Defecto assertSCRIPT_PATH==own reproducido con //lua/,
+normalizadorR201 incorporado+fullrootpinned, imágenescanónicas; causa física no probada.
+R243ID365219974,16512B, artifacts/registry-r243/ModInfo2-id-only.face,
+SHA7c9d38eb641db97c96db35ccd495d1f8b8505db2b4158b91aeddac1ec11dfb25.
+Main6703B SHA44d0906a031b1a1f8fb927efcb002bdcbddeb1605aaab7896b52272bb835043c.
+Reader/PNGidénticos; ownmarkregistry-attempt-r243.txt17B.38lector+32UI pasanS3/mockproc,
+incluye2formas//+12rutasrechazadas+legacyfail; tmpretirado/modulesigual.
+PlanR244registradoantes. UN installRegisteredInactive9partes/stream16574/TX17026/18TX16RX;
+modeloFWgate; noSET/DELETE/retry. GETindep14→15previosIDs/flagsintactos,
+activa365219975(ModInfo)segúncatálogo, propia974inactive/removable. Catalogpre14vsR242post15
+causadesconocida; usuariohabíadichohabitual, noinferirvisualdesdecatálogo, nomodificarauto.
+Journalmodule-registry-r244.jsonRegistered9/sinlock, doscierres/exit0.
+FinallyNodefalse/r167/C#false; helperclosed6ba6f357d42859c7c1713fc092df9e42fdc42e2d05ee5eb06ca2c12ec24032d9/gates0sockets.
+Nextusuario seleccionarModInfo2(NO ModInfo),2barrasNARANJAS/MODINFO15grises/CHECKuna vez;
+reportarrojos/grises/amarillos y retornarhabitual/menus/scroll/longpress. No reabrir/rearmar
+o intervenirStepC, residenciaUNKNOWN. [Resultado](module-registry-physical-result-r244.md).
+
+**Historial R242,2026-10-14: ModInfo instalada, posteriormente observada negra.**
 [Resultado](module-registry-physical-result-r242.md). Usuario autoriza1ensayo y presencia;
 pregunta>=50% batería, afirmaciónregistrada. UN installRegisteredInactive8partes,
 stream15850/TX16285/17TX16RX, preflightmodeloFW2.2.86, sinSET/DELETE/retry.

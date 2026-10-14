@@ -1,8 +1,8 @@
 # R242 — ensayo ModInfo autorizado; instalación completada
 
-2026-10-14. **Autorizado e instalado inactivo; CHECK manual pendiente.** Usuario:
+2026-10-14. **Ensayo consumido: pantalla negra; cambio de esfera y menús normales.** Usuario:
 «Sí, autorizo y puedo observar el reloj». [Resultado](module-registry-physical-result-r242.md).
-Un envío consumido, sin permiso para repetirlo; CHECK único y retorno pendientes.
+Sin permiso para repetirlo; CHECK y registro no observados, retorno confirmado.
 La regla inicial
 del usuario exige plan explícito y revisión antes de otro payload físico.
 El ensayo StepDiag R239 está consumido; retorno habitual/menús/scroll/pulsación

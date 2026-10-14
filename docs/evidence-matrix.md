@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R244:** [ModInfo2 corregida e instalada; CHECK pendiente](module-registry-physical-result-r244.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| UI ModInfo R241 aparece en RW4 | M2315W1/FW2.2.86 | Usuario pantalla negra, retorno/cambio de esfera y menú posible | REFUTADO PARA ESTE ENSAYO | Alta para observación | Sí | No resultado procfs/StepC |
+| Igualdad exacta de ruta falla con separador repetido | Lua S3, path observado previamente en runtime S3 | Regresión R243 reprodujo assert antes de UI; versión normalizada pasa | CONFIRMADO EN EMULADOR | Alta para defecto | Sí | Causa RW4 probable, sin path físico capturado |
+| Corrección conserva reader/PNG y valida rutas propias | Lua S3, tmpfs real, proc/widgets simulados |38lector+32UI/source hash R243 | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para casos | Sí | No nuevo C |
+| Stock registra ModInfo2 inactiva, previos IDs/flags intactos | RW4/FW2.2.86 | Install + GET14→15 | CONFIRMADO EN RW4 | Alta para catálogo | Sí | CHECK pendiente; activa previa del catálogo ModInfo975 |
+
 **Actual R242:** [ModInfo instalada; CHECK pendiente](module-registry-physical-result-r242.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -1,9 +1,9 @@
-# R242 — ModInfo instalada; CHECK manual pendiente
+# R242 — ModInfo negra; retorno a esfera y menús confirmado
 
 2026-10-14. Usuario autorizó el paquete fijo y presencia: «Sí, autorizo y puedo
 observar el reloj». Pregunta incluía batería≥50%; afirmación registrada, sin
 otra consulta. [Plan aprobado](module-registry-physical-plan-r242.md).
-Un envío consumido; CHECK manual único y retorno siguen pendientes. No repetir
+Un envío y selección consumidos; UI esperada no apareció. No repetir
 instalación, retirar paquetes, rearmar marcas o intervenir sobre StepC.
 
 ## Instalación y verificación
@@ -38,20 +38,21 @@ Evidencia privada `artifacts/module-registry-r242-authorized/`: aprobación/pins
 prepare/install, helpers/fuentes, cierre/gates, GET/comparación. No claves,
 direcciones de dispositivo, seriales o logs crudos publicados.
 
-## Observación pendiente
+## Observación completada con fallo de UI
 
-Seleccionar ModInfo, **dos barras naranjas**. Debe mostrar MOD INFO, CHECK y15
-indicadores grises. FINAL rojo inicial/falta UI/fallo: no pulsar ni repetir;
-volver a habitual si responde y describir.
+Usuario: «no se ve nada :( se ve negro pero pues si puedo volver a mi otra
+corona y abrir menu». Cambio a otra esfera y apertura de menú confirmados;
+desplazamiento/pulsación larga no se preguntaron de nuevo. No hay indicadores,
+confirmación de CHECK, marca o lectura procfs. Residencia de StepC desconocida.
+Pantalla negra no es prueba de que C falló o que el registro está vacío.
 
-CHECK una vez, esperar unos segundos. Reportar filas rojas/grises/amarillas;
-si todas las demás son verdes, basta indicarlo así. Filas:
-MARK/OPEN/READ/CLOSE/ASCII/END LINE/ROWS/FIELDS/NAMES/POINTERS/NUMERIC/
-C MODULE/NO MOD/NAME HINT/FINAL. C MODULE verde con NO MOD rojo puede ser normal.
-NAME HINT amarillo es pista, no validación de registro o retirada segura.
+Revisión en PC encontró `assert(SCRIPT_PATH==own)` antes de crear la UI. La
+[observación S3 R201](first-c-path-r201.md) ya mostraba `ID//lua/`; el nuevo
+test UI R241 solo suministraba la forma canónica. La igualdad exacta rechaza
+esa variante admitida por el runtime y puede abortar sin dibujar. La ruta
+real de esta selección RW4 no se capturó, así que es un defecto reproducible
+y una explicación probable, no causa física demostrada.
 
-Después volver a habitual desde Ajustes→Esferas/selector y confirmar menús,
-desplazamiento y pulsación larga. No reabrir CHECK/StepC, borrar marcas,
-reiniciar o actuar sobre módulos automáticamente. Estado StepC desconocido
-hasta observar resultado; ni siquiera un registro válido demuestra callbacks
-sanos, privilegios aislados o safe-unload.
+No reabrir/repetir ModInfo o StepC, borrar marcas, reiniciar o actuar sobre
+módulos automáticamente. Ensayo consumido; corrección requiere paquete/plan
+distintos y nueva revisión. No hay diagnóstico nuevo de sandbox o safe-unload.
