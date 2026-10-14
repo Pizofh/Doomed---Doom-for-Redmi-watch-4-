@@ -1,5 +1,14 @@
 # Retomar el proyecto
 
+**Actual R256: RegCheck instalada inactiva; CHECK manual pendiente.**
+Usuario«ok»autorizaUNensayo/presencia>=50%; runnerregistry-check-r256-authorized consumido.
+InstallRegisteredInactive10partes/stream20234/TX20701/19TX16RX, socketworkerclosed/exit0.
+GET16→17 IDsflagsintactos, activa365210175; propia365219969inactiva/removible.
+JournalRegistered10/sinlock. Finallygatescerrados/rebuild/test0sockets. NoSETDELETEretry/proc/CdesdePC.
+[Plan/resultadosR256](registry-check-physical-plan-r256.md). NextRegCheck4barrasVERDELIMA,
+REG CHECK/15grises/CHECKuna vez→colores/LEN CODE24hex→habitual/menúscrolllongpress.
+Rojoinicial/faltaUI NO CHECK. No repetir/rearmar/Cloadunload/STEPSTOP/reboot.
+
 **Actual R255: retorno R254 normal confirmado; RegCheck preparada NO autorizada/enviada.**
 Usuario«todo ok» habitual/menúscrolllongpress. R254frame/CreadEOFclose probados, postregrojo desconocido.
 [PlanR256](registry-check-physical-plan-r256.md). ID365219969,20168B,preview4VERDELIMA,

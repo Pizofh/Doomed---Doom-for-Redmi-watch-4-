@@ -1,6 +1,8 @@
 # R255/R256 — RegCheck, dos lecturas de metadata sin C
 
-2026-10-14. PC listo, NO autorizado/enviado. R254 snapshot/EOF/IDLE/cierre verdes,
+2026-10-14. Usuario autorizó «ok» al único ensayo propuesto con observación y
+batería≥50%. Instalada inactiva; CHECK y retorno manual pendientes.
+R254 snapshot/EOF/IDLE/cierre verdes,
 REG LAST/FINAL rojos; retorno habitual/menú/scroll/pulsación larga «todo ok»
 confirmado. No nueva operación física durante esta preparación.
 
@@ -80,3 +82,18 @@ ante bugs. No sandbox o timeout duro demostrado. Firmware stock sin modificar.
 Recuperación parcial conocida: Ajustes→Esferas si responde; integral no validada.
 Ante fallo parar/revisar, no firmware ajeno/flash/boot/exploits/SWD/JTAG o reboot
 automático. No nuevo C leído ni descargado bajo este plan.
+
+## Instalación R256 realizada
+
+Un install RegisteredInactive,10partes/stream20234bytes/TX20701bytes,
+19frames enviados/16recibidos. Propia registrada/inactiva, no selección por
+cliente; aceptación final de transferencia sin ACK independiente verificado.
+GET independiente16→17, todos los IDs/flags previos conservados, activa365210175,
+propia365219969inactiva/removible. Journalregistry-check-r256.json Registered10,
+sinlock. Socket/worker cerrados, exit0, sin error nativo. Sin SET/DELETE/retry/
+lectura proc o C desde PC. Finally fuentes/gates originales restaurados,
+helper cerrado reconstruido, testgates0sockets exitoso.
+Helper autorizado SHA256
+`7ac88b5a32a6bd70db879b62cc716470986f73e7b2a714271545f8bab1404493`.
+Evidencia privada `artifacts/registry-check-r256-authorized/`, runner consumido.
+No repetir instalación; CHECK una vez todavía pendiente.
