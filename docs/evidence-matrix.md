@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R235, PC:** [Cliente Lua y decisiones de retirada](step-carrier-r235.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Cliente valida ELF/marca/registro y ACK antes de confirmar acciones | Lua de producción en S3; nodo/shell simulados | 37 escenarios, tmpfs propio real | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para escenarios | Sí | No ejecución del candidato C RW4 |
+| Cierre incierto o retirada busy provoca descarga automática/reintento | Mismo harness | Fallos simulados conservan módulo; un solo STOP/rmmod | REFUTADO PARA ESTE CLIENTE | Alta | Sí | No garantiza retirada o recovery en hardware |
+| Registro/callbacks/BSS nuevos funcionan físicamente | RW4/FW2.2.86 | ELF sigue sin ejecutar | SIN EVIDENCIA | Desconocida | No | Falta UI/paquete/plan y revisión física |
+
 **Actual R234, PC:** [Contrato parcial/candidato específico](rw4-step-candidate-r234.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

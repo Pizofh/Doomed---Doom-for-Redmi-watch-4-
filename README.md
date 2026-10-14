@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R235, solo PC:** [Cliente Lua del candidato RW4 validado](docs/step-carrier-r235.md).
+37 escenarios con archivos reales en tmpfs y shell/nodo simulados pasan;
+errores de comunicación o cierre impiden retirada incierta. No se ejecutó el
+candidato RW4 ni se creó un paquete nuevo. Siguiente: UI, paquete y plan revisables.
+
 **Actual R234, solo PC:** [Candidato de puente específico RW4 compilado](docs/rw4-step-candidate-r234.md).
 Dispatch de callbacks y gate de retirada rastreados en imagen2.2.86; ELF2620bytes,
 BSS36. Registro/retiro de nodo son dos APIs nuevas no ensayadas físicamente.

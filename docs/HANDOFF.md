@@ -1,5 +1,23 @@
 # Retomar el proyecto
 
+**Actual R235, 2026-10-14, solo PC:** [Cliente del candidato RW4](step-carrier-r235.md).
+Commit R234 7f7b92b. Nuevo client-rw4-r235.lua puro + adapter-rw4-r235.lua;
+fábricas ensambladas por step-carrier-source-r235.mjs, ELF234 mismo hash/2620B.
+Nodo /dev/rw4step234, módulo rw4step234, raíz365219977/lua, marca234 persistente.
+Single START/STOP/rmmod; 300STEP/2048mensajes; ACK secuencia/fase/mask/counters,
+EOF32, cierres auditados. No GC I/O. Desconocido/cierre fallido => conservar C;
+STOP recupera solo low/high del propio envío; ACK de STOP perdido => no retry.
+Habilitación false falla antes de escribir marca. Inventario inicial vacío y
+propio exclusivo; snapshot inicial cero antes de atribuir nodo; no unload a ciegas.
+37 escenarios pasan con Lua producción y tmpfs real; shell/node SIMULADOS,
+NO ELF ejecutado, NO widgets/Timer/privilegios/timeout duro probados.
+Informe artifacts/emulator/step-carrier-r235-reviewed, anterior35 conservado.
+Tmpfs propio retirado/inventario real sin cambios; emu guard/connect pasó.
+Node gates false/r167, C# false verificados; sin nuevo BT/USB/hardware.
+Next: integrar cliente en UI HoldPad/Timer/EXIT/pageOnPause; pruebas fallos UI,
+paquete fijo/plan para revisión. NO paquete, perfil físico ni autorización nueva.
+Fuentes/hashes/limitaciones en doc235; no repetir test con informe ya existente.
+
 **Actual R234,2026-10-14, soloPC:** [Contrato/candidatoRW4](rw4-step-candidate-r234.md).
 Scripts232stdlib→VFS,233dispatch,234anchors/candidatebuild. fops0/4/8/12 verificados
 porcallersRW4; tabla32bytesvs40S3, fileopaco. Modinfoinitmodule+24,uninit0/arg4;

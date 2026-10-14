@@ -1,5 +1,9 @@
 # Siguiente checkpoint PC — backend C con UI atendiendo input
 
+**R235:** [Cliente Lua validado con 37 escenarios](step-carrier-r235.md).
+Archivos tmpfs reales, shell/nodo simulados; candidato C RW4 no ejecutado.
+Siguiente: conectar UI/Timer/EXIT/pageOnPause y preparar paquete/plan revisables.
+
 **R234:** [Dispatch y candidatoRW4 compilados](rw4-step-candidate-r234.md).
 Antes de nuevo hardware falta carrier revisable para ELF/marca/registro/RPC/STOP/
 retiro y fallos de ACK/cierre. Las APIs nuevas y BSS aún no se ejecutaron en RW4.
