@@ -1,5 +1,28 @@
 # Retomar el proyecto
 
+**Actual R237, 2026-10-14: StepC instalada, manual pendiente.**
+[Resultado/plan](step-physical-result-r237.md). Usuario autoriza UN ensayo/presencia,
+pregunta incluía batería>=50%; afirmación registrada, no consultaextra.
+Perfilr236/paquete aprobado intacto. Primera preparaciónPC fallóCOPYFILE_EXCL
+nombreauthorized-build duplicado ANTES install/BT; finally gatesoff/build/test0sockets,
+sinjournal/install-report. Continuación verificaausencia/intención y mismoSHA,
+preservaoriginalartifact, corrige metadatafilename; UN envío físico total.
+Archivosprivados artifacts/step-r237-authorized-final (originalpreparaciónconservado).
+Helperautorizado9e726818b32e0ae85b433937cba8eab60b24e80ef9baf583df89a70bd58976c2.
+Installr236 RegisteredInactive,16partes,stream31898/TX32455/25TX/16RX, modeloFWgate,
+selectedByClientfalse/transferAcceptanceVerifiedfalse; socket/workerclose/exit0.
+Finally fuentesoriginales Nodefalse/r167,C#false; helperclosed
+982519961fcc293799d9b83771bec38cc898e2ef53a4d95dc1f90711c577bde0/gates0sockets.
+GETindependienteComplete:16→17, IDs/active/canDelete anteriores intactos,
+activa365219979(HoldPad), propia365219977inactive/removable. JournalRegistered16partes,
+sinlock. NoSET/DELETE/cargaC desdePC/cambioBT/firmware/particiones.
+AHORA usuario: seleccionarStepC5barrasVERDES, C STEP y cinco grises/START;
+rojoinicial/faltaUI NO START. STARTuna vez, barra, UP/LEFT/RIGHT/FIRE hold4s+release,
+verdehold/grisrelease y sinselector; EXITuna vez, leer5indicadores; volverhabitual
+selectorneutro oAjustes y menús/scroll/longpressnormales. Faltaobservaciónruntime.
+Norepetir/reabrir/rearmar/reinstalar/DELETE/rebootautomático. Autorizaciónsolo1ciclo.
+SinpruebaCcallbacks/BSS/driver/retiradaRW4 nueva aún; awaitrespuesta manual.
+
 **Actual R236, 2026-10-14, PC completo; R237 pendiente:** [StepC](step-ui-r236.md),
 [plan físico](step-physical-plan-r237.md). NO aprobación/envío nuevo aún.
 ui-r236.lua +main template+materialize-r236.lua, builder step-ui-source-r236:

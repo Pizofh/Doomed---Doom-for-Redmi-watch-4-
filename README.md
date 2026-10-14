@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R237:** [StepC instalada en RW4 sin activación](docs/step-physical-result-r237.md).
+Un envío autorizado; catálogo16→17, esferas/selección anteriores conservadas,
+sockets y permisos de envío cerrados. START/controles/EXIT manuales pendientes:
+todavía no demuestra ejecución del nuevo módulo C.
+
 **Actual R236, PC:** [StepC preparada](docs/step-ui-r236.md): UI/controles conectados
 al cliente, 31 casos de UI y 37 del carrier con simulaciones, paquete fijo31808bytes.
 Instalador offline verificado; gates cerrados. [Ensayo físico R237 pendiente de revisión](docs/step-physical-plan-r237.md).

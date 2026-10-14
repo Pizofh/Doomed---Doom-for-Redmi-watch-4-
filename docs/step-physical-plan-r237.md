@@ -1,7 +1,11 @@
-# R237 — revisión pendiente: StepC
+# R237 — ensayo autorizado: StepC
 
-2026-10-14. **No autorizado ni enviado. Gates cerrados.** Este plan cubre un
-único payload nuevo. Un «ok» de preparación PC no autoriza cargarlo en hardware.
+2026-10-14. **Autorizado e instalado sin activación; gates cerrados de nuevo.
+Prueba manual de C/controles/EXIT pendiente.** [Instalación](step-physical-result-r237.md). Usuario:
+«Sí, autorizo y puedo observar el reloj». La solicitud incluía batería≥50%;
+se registra su afirmación, sin lectura adicional. Cubre este ensayo único,
+sin reintentos, autoactivación ni retirada del paquete.
+Un «ok» de preparación PC no autoriza otros payloads.
 Lo exige la regla inicial del usuario: «Si eventualmente llegamos al reloj
 físico, antes debes generar un plan explícito» y «No ejecutar automáticamente
 ese paso». [Resultados y hashes PC](step-ui-r236.md).
@@ -128,6 +132,6 @@ ajeno, bootloader/recovery, desactivación criptográfica, exploit, SWD/JTAG o
 apertura del reloj. Retirada del paquete no está autorizada automáticamente:
 se decidiría aparte, solo inactivo y con módulo retirado confirmado.
 
-La aprobación solicitada cubriría un único envío, selección manual, START,
+La aprobación concedida cubre un único envío, selección manual, START,
 cuatro holds/liberaciones, EXIT y retorno habitual con observación. No Doom,
 reintentos, nuevos hashes/APIs, retirada automática o pruebas sin presencia.

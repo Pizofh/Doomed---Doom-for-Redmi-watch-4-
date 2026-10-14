@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R237:** [StepC instalada; UI/C manual pendientes](step-physical-result-r237.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Stock registró StepC como entrada nueva/inactiva | RW4/M2315W1/FW2.2.86 | InstallRegisteredInactive + GET independiente16→17 | CONFIRMADO EN RW4 | Alta para registro | Sí | No ACK final explícito ni runtime probado |
+| Entradas anteriores y selección se conservaron | Misma unidad | Comparación de journal con GET; active365219979 | CONFIRMADO EN RW4 | Alta para catálogo | Sí | No inferir esfera habitual o navegación visual |
+| Se cargó y retiró el nuevo C/callbacks/BSS/registro propio | Misma unidad | START todavía no observado | SIN EVIDENCIA | Desconocida | No | Paquete instalado no equivale a ejecución |
+| Gates y sockets quedaron cerrados tras instalar | PC/cliente | Finally, pruebasgates0sockets, doscierres/exit0 | CONFIRMADO EN PC | Alta | Sí | No nueva acción automática autorizada |
+
 **Actual R236, PC:** [StepC UI/paquete preparados](step-ui-r236.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
