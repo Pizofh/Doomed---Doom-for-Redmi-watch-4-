@@ -1,6 +1,18 @@
 # Matriz de evidencia
 
-**Actual R229, PC/S3:** [APIs candidatas y core de input](rw4-step-backend-r229.md).
+**Actual R231, PC/S3:** [Puente con UI real](step-bridge-emulator-r231.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Lua/io comunica acciones y STEP con C residente | S3 exacto | CLI34assertions y UI81ACK/masks0/1/2/4/8 | CONFIRMADO EN EMULADOR | Alta para ciclos | Sí | Cooperativo, sin worker/threads |
+| Holds de UI llegan a C y releases neutralizan | S3/LVGL real | Cuatroholds3300ms, ACKvalidado antesverde, maskcoincidente enSTEP | CONFIRMADO EN EMULADOR | Alta | Sí | Sin Doom/ergonomía/RW4 |
+| EXIT manual y automático retiran nodo y módulo | S3 | CUnregister0/refs0/held0 y clientStopped, cincoverdes manual | CONFIRMADO EN EMULADOR | Alta por instrumentación | Sí, antescortehost | Auto300callbacks; no watchdogduro |
+| Selector se restaura sin cambio global por Lua | S3 | LongpressONantes/después, selectortrasEXIT | CONFIRMADO EN EMULADOR | Alta | Sí | OperadorrestauróOFFinicial |
+| C se descargó simplemente porque reiniciar deja lsmod vacío | S3 | Inventariofinal despuésdelrestart | SIN EVIDENCIA POR ESTE DATO | Alta para límite | Sí | Cleanup previo se demuestra separadamente por ACK/registry/Unregister |
+| Cortehost se debió al agotamiento de tokens | PC | Usuario informa conversacióncancelada, PIDhostno presente | INFERENCIA RAZONABLE | Media | Sinexitcode | No evidence de crash C |
+| PuenteS3 sirve sin adaptar en RW4 | M2315W1/FW2.2.86 | BuildCortexA7/hard y fopsS3 | SIN EVIDENCIA | Desconocida | No | No enviarELF/StepPadS3 alreloj |
+
+**Historial R229, PC/S3:** [APIs candidatas y core de input](rw4-step-backend-r229.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

@@ -1,6 +1,11 @@
 # DOOM en Redmi Watch 4
 
-**Actual R229, PC:** [Backend cooperativo investigado y núcleo C probado](docs/rw4-step-backend-r229.md).
+**Actual R231, PC/S3:** [UI conectada a C con controles y EXIT](docs/step-bridge-emulator-r231.md).
+Cuatroholds reales,81ACK de STEP, barra de estado C y salida manual/automática
+con retiro del nodo/módulo. Esfera stock restaurada. No nuevo envío al reloj;
+el adapter usa ABI S3. Siguiente: contrato equivalente específico del RW4.
+
+**Historial R229, PC:** [Backend cooperativo investigado y núcleo C probado](docs/rw4-step-backend-r229.md).
 41assertions pasan en S3 para acciones/pausa/STEP/STOP y mensajes inválidos;
 módulo de test retirado. Candidato de nodo en RAM para comunicar Lua↔C, aún sin
 adapter/UI conectado ni módulo RW4 nuevo. Hardware no tocado en este checkpoint.

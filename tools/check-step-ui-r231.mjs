@@ -1,0 +1,27 @@
+// Frozen UI/log evidence plus final owned-guest read-only inventory. No hardware.
+import fs from 'node:fs';import path from 'node:path';import {spawnSync} from 'node:child_process';
+import {projectRoot as root,packageRoot} from './verify-emulator.mjs';import {guardEmulator} from './emulator-ui.mjs';import {readScreenshot} from './assert-ui-probe.mjs';import {sha256} from './first-c-source.mjs';import {stepUiSource} from './step-ui-source-r231.mjs';
+if(process.argv.length!==2)throw Error('FixedEvidenceCheckOnly');
+const out=path.join(root,'artifacts/emulator/step-ui-r231');if(fs.existsSync(path.join(out,'validation.json')))throw Error('ExistingValidation');
+const json=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8')),contacts=json('artifacts/emulator/step-ui-r231/contact-test.json'),pkg=json('artifacts/step-ui-r231/review.json'),install=json('artifacts/emulator/step-ui-r231/install.json');
+if(pkg.uiSha256!==sha256(Buffer.from(stepUiSource().ui))||pkg.sha256!==sha256(fs.readFileSync(path.join(root,'artifacts/step-ui-r231/StepPad-id-only.face')))||contacts.holds.length!==4||!contacts.manualExitGreen||!contacts.allReleasesVerified||new Set(contacts.barPositions).size<2)throw Error('EvidenceMismatch');
+function color(n,x,y,rgb){const im=readScreenshot(path.join(root,'artifacts/emulator/screenshots',n+'.png')),p=(y*390+x)*im.bpp;return rgb.every((v,i)=>Math.abs(im.pixels[p+i]-v)<=8);}
+for(const n of ['step-r231-longpress-on','step-r231-on-after-test'])if(!color(n,350,166,[35,120,247]))throw Error('LongpressSettingChanged');
+for(const n of ['step-r231-toggle-before','step-r231-toggle-restored','step-r231-cleanup-toggle'])if(!color(n,340,166,[66,65,66]))throw Error('SettingNotRestored');
+if(!color('step-r231-after-exit-selector',108,233,[8,130,255])||!color('step-r231-after-exit-selector',220,202,[255,130,0]))throw Error('SelectorAfterExitMissing');
+const old=fs.readFileSync(path.join(out,'prior-host/host-stdout.txt'),'utf8'),start=old.lastIndexOf('RW4_STEP_UI: Start'),ready=old.lastIndexOf('RW4_STEP_UI: Ready',start),stop=old.indexOf('RW4_STEP_UI: Exit Button held=0',start);
+if(start<0||ready<0||stop<0)throw Error('ManualLifecycleMissing');
+const section=old.slice(ready,stop+'RW4_STEP_UI: Exit Button held=0'.length),native=[...section.matchAll(/RW4_STEP_UI: Native (\d+) (\d+) (\d+)/g)].map(m=>({seq:+m[1],steps:+m[2],held:+m[3]}));
+if(native.length<60||native.some((a,i)=>i&&(a.seq<=native[i-1].seq||a.steps!==native[i-1].steps+1))||![0,1,2,4,8].every(mask=>native.some(a=>a.held===mask))||!section.includes('RW4_STEP_BRIDGE: Unregister 0 refs=0 held=0')||!section.includes('RW4_STEP_CLIENT: Stopped Button'))throw Error('NativeAckSequenceMissing');
+if(!old.includes('RW4_STEP_CLIENT: Stopped Auto')||!old.includes('RW4_STEP_UI: Exit Auto held=0'))throw Error('AutomaticExitMissing');
+// Normal Lua close after manual EXIT is in the preserved log; final close after
+// host relaunch is separate evidence and must not hide the intervening restart.
+const luaCloseBeforeHostLoss=old.slice(stop).includes('close lua now.');
+const exe=path.join(packageRoot,'platform-tools/adb.exe');if(sha256(fs.readFileSync(exe))!=='0e606318957baac81b997ccd8ee4bcdff79964a9921da07c716aea3e8d856af7')throw Error('AdbChanged');guardEmulator();const logs=[];
+function adb(args){const r=spawnSync(exe,['-H','127.0.0.1','-P','5039','-s','emulator-5554',...args],{shell:false,windowsHide:true,encoding:'utf8',timeout:15000,maxBuffer:65536});logs.push({args,status:r.status,stdout:r.stdout,stderr:r.stderr});fs.writeFileSync(path.join(out,'final-commands.json'),JSON.stringify(logs,null,2)+'\n');if(r.error||r.status!==0)throw Error('FinalInventoryFailed');return r.stdout+r.stderr;}
+const modules=adb(['shell','lsmod']);if(modules!==install.moduleInventoryBefore)throw Error('RegistryNotEmpty');
+for(const p of ['/dev/rw4step230','/tmp/rw4step230.elf','/tmp/rw4step230-inspect.txt'])if(!/^nsh: ls: stat failed: 2\r?$/m.test(adb(['shell','ls',p])))throw Error('OwnedRuntimeStillPresent');
+adb(['pull','/data/app/watchface/watchface_list.json',path.join(out,'list-final.json')]);const rows=json('artifacts/emulator/step-ui-r231/list-final.json').watchface_list,before=json('artifacts/emulator/step-ui-r231/list-before.json').watchface_list;
+if(rows.length!==before.length+1||before.some(b=>!rows.some(a=>a.id===b.id))||!rows.some(a=>a.id==='365219978'&&String(a.in_use)==='0')||!rows.some(a=>a.id==='362130003'&&String(a.in_use)==='1'))throw Error('FinalSelectionUnexpected');
+fs.writeFileSync(path.join(out,'manual-lifecycle.txt'),section,{flag:'wx'});
+const report={checkpoint:'R231',scope:'S3 real UI/Lua/C only',uiSha256:pkg.uiSha256,elfSha256:'89863182dabd4c8ce63c398c8734b98c4d1079c5dc68019bc68acecdc69f253c',nativeStepAcks:native.length,nativeMasksObserved:[...new Set(native.map(a=>a.held))],fourHeldActionsAndReleases:true,manualExitUnregisteredBeforeHostLoss:true,automaticExitAlsoUnregistered:true,selectorRestoredWithGlobalSettingOn:true,longpressInitialOffRestored:true,luaCloseBeforeHostLoss,stockFaceFinallyActive:'362130003',ownUiInactive:true,priorIdsPreserved:true,independentFinalInventoryAfterGuestRestart:true,hostExitCauseKnown:false,ownedRuntimeAbsentAfterRestart:true,nativeThreadsUsed:false,physicalWatchUsed:false,bluetoothOperationRequested:false};fs.writeFileSync(path.join(out,'validation.json'),JSON.stringify(report,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify(report));

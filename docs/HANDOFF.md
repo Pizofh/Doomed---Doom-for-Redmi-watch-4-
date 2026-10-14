@@ -1,6 +1,25 @@
 # Retomar el proyecto
 
-**Actual R229, 2026-10-13, PC/S3:** [Core y APIs candidatas](rw4-step-backend-r229.md).
+**Actual R231, completado2026-10-14, PC/S3:** [UI→C→estado visible/EXIT](step-bridge-emulator-r231.md).
+No hardware/BT/USB nuevo; gatesNodefalse/r167,C#false intactos. BridgeS3 node
+/dev/rw4step230/modulerw4step230/ELF2604B SHA89863182dabd4c8ce63c398c8734b98c4d1079c5dc68019bc68acecdc69f253c,
+3imports register/unregister/printf,18ABS32, sinworker/flash. CLI34assertions realLuaC
+passed/retiroNodo+module+ownfiles. StepPad365219978/20468B S3ONLY noELFembebido,
+SHAf42cfcc39f25650ae86313e28c43d2f99eb24345e3a26a59e49400738f121fa5.
+UIcuatroholds3300ms/ACK/STEP81 ordenados,masks0/1/2/4/8,barraCposicionesvariables,
+manualEXIT5green/StoppedButton/Unregister0/refs0/held0 ANTEScorte. Auto300tambiénretiróC.
+LongpressONdurantetests,selectortrasEXIT; OFFinicialrestaurado. No nativeframe/Doom.
+Guardsfallos:buildWerrorindent;catálogoJSONvacío(iniciarresumeNOreenvío);píxelbarra
+18porredondeo(nativoandabien,primerbudgetAuto). SegundoVMcompletóholds+manual.
+Host15168 desapareció entre mensajes; usuario dicecancelaciónporcréditos causa
+PROBABLE,no crashevidenced. Logs archivadosstep-ui-r231/prior-host antesrestart.
+RestartguardadoemuTTY62822/pid8216,revisarantesusar. Final Neat362130003activa,
+StepPadinactiva/IDsconservados/modulenodoTmpausentes. Inventario independiente
+DESPUÉSrestart; LuaCloseANTEScorte=false. No atribuir ausenciafinalreboot a cleanup.
+Reportesstep-bridge-r230/summary,step-ui-r231/{contact-test,validation}; no repetir.
+SiguientePC: ABI/dispatch fops+unregister RW4 específico; no físicaadapter/plannuevo.
+
+**Historial R229, 2026-10-13, PC/S3:** [Core y APIs candidatas](rw4-step-backend-r229.md).
 No hardware/BT/USB nuevo. Gate Nodefalse/r167,C#false intactos. FW tratado datos.
 Scripts research227→contract228→review229: pthread_create1e8aac, join1bbca0;
 0x1bc310 esCANCEL nojoin, refutado tras verpthread_cancel.c. register_driver497624/

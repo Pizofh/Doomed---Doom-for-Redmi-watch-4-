@@ -1,5 +1,9 @@
 # Siguiente checkpoint PC — backend C con UI atendiendo input
 
+**R231 completado:** [UI real conectada a puente C en S3](step-bridge-emulator-r231.md).
+Cuatro controles/81STEP ACK/salida/retiro funcionan. Falta adapter equivalente
+RW4: siguiente inspección del dispatch/layout/cierre específico, sin nuevohardware.
+
 **R229:** [Investigación y core C probados en S3](rw4-step-backend-r229.md).
 Se prefiere un primer adapter cooperativo mediante nodo propio en RAM: C devuelve
 el control tras cada STEP. Core41assertions pasa, sin UI/driver conectado todavía.
