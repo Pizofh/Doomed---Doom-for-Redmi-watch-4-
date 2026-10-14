@@ -1,5 +1,22 @@
 # Retomar el proyecto
 
+**Actual R251: PreCheck preparada, NO autorizada/enviada.**
+[Paquete/pruebas/planR252](precheck-physical-plan-r252.md). ID365219971,19128bytes,
+SHA3f0bc2fcd0303df735a02fa203e1967b9f1bfff233dc7c8d5f3bc87192121c9e;
+sourceSHA0d1e5ede95dd0dc318ac4bbef031c030aef4f707bd5163f6032835333bee3c70.
+25casos focalizados pasan S3/tmpfsreal/registrywidgetssimulados; reportprecheck-r251-verified.
+Main reutilizaUI R249 con11dots/8glifos, preview4NARANJAS/PRECHECK/CHECK/LEN CODE.
+Filas MARK/REG OPEN/REG READ/REG EOF/REG CLOSE/REG SHAPE/OLD OPEN/OLD READ/OLD CLOSE/OLD MATCH/FINAL.
+Una marcaown16bytes persiste; leeproc67+EOF+close, oldmark15+close independiente;
+cierreincierto nooldcheck. No /dev/C/shell/load/unload/STEP/STOP. Hexlensreg4/old2/code2;
+referencia00420E00; códigosdoc. No direcciones. Oldmarker soloRB.
+Compiler noADB22resourcesreadback, perfilr251/journalprecheck-r252.json aúnno usado.
+Prepareclosed10partes/TXbudget32768 confirmado; helpercerrado
+f80f5f7ccf658e9682e267f0bafff2c9dc0d6bebb6e30e1384d9bdc62add8e3d.
+Se omitieron suites completas protocolo/transferencia ya aprobadas; helpergatescerrados.
+Rework para evitar dos rebuilds de habilitación aúnpendiente, no afirmar completado.
+Next revisiónUNensayo/presencia≥50% antes de enviar; no reutilizarR250.
+
 **Actual R250,2026-10-14: StateRead preflight falló; retorno normal confirmado.**
 Usuario inicialgrises/FRAME HEXsinpunto; MARKverde,REG INFOrojo,«frame final rojo»,restogris.
 REG INFO combina lectura/EOF/cierre/clasificación deproc y marcaantigua exacta/cierre.

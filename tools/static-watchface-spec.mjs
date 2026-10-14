@@ -81,7 +81,12 @@ const specs = Object.freeze({
     sha256:'de20e2c8a68d7148cecbb756a0245d6c357eb792cf220e198a276af455db80e9',
     sourceSha256:'73e65d7a693d6449239077da14694a68e10b284845021607e85111b406e0e1e2',
     sourceArtifact:'artifacts/state-read-r249/app/lua/main.lua',nativeCodeIncluded:false,
-    artifact:'artifacts/state-read-r249/StateRead-id-only.face',journal:'state-read-r250.json'})
+    artifact:'artifacts/state-read-r249/StateRead-id-only.face',journal:'state-read-r250.json'}),
+  r251:Object.freeze({variant:'r251',contentKind:'lua-preflight-diagnostic',id:'365219971',size:19128,
+    sha256:'3f0bc2fcd0303df735a02fa203e1967b9f1bfff233dc7c8d5f3bc87192121c9e',
+    sourceSha256:'0d1e5ede95dd0dc318ac4bbef031c030aef4f707bd5163f6032835333bee3c70',
+    sourceArtifact:'artifacts/precheck-r251/app/lua/main.lua',nativeCodeIncluded:false,
+    artifact:'artifacts/precheck-r251/PreCheck-id-only.face',journal:'precheck-r252.json'})
 });
 export function staticSpec(variant = 'r167') {
   if (typeof variant !== 'string' || !Object.hasOwn(specs,variant)) throw Error('StaticSpecRefused');

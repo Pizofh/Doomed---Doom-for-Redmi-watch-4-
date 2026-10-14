@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R251, PC:** [PreCheck lista para distinguir el fallo previo](docs/precheck-physical-plan-r252.md).
+25casos focalizados pasan; paquete19128bytes, sin acceso al nodo C.
+Pendiente de revisión física; no envío nuevo.
+
 **Actual R250:** [StateRead se detuvo antes de abrir C](docs/state-read-physical-result-r250.md).
 MARK verde, REG INFO/FINAL rojos; acceso nativo no demostrado. Usuario confirmó
 retorno, cambio de esfera y menú normales. Falta distinguir qué comprobación previa falló.
