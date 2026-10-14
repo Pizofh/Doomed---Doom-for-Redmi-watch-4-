@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**Actual R238:** [StepC falló, retorno normal](step-physical-result-r237.md);
+[diagnóstico solo preparado](step-diagnostic-r238.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| START de este ensayo StepC completa inicio y controles | RW4/FW2.2.86 | Usuario cinco grises, EXIT rojo inmediato tras START | REFUTADO PARA ESTE ENSAYO | Alta para observación | Sí, usuario | No distingue etapa ni refuta ejecución C en general |
+| UI normal y vuelta habitual conservadas tras fallo | Misma unidad | Usuario «si, todo normal» tras instrucción de retorno | CONFIRMADO EN RW4 | Alta para ciclo observado | Sí | Sin diagnóstico de corrupción latente/recovery |
+| Módulo nuevo ausente/retirado tras EXIT rojo | Misma unidad | Sin registro runtime | SIN EVIDENCIA | Desconocida | No | No descargar/repetir a ciegas |
+| Diagnóstico conserva archivos anteriores y no abre nodo/carga C | Lua S3, tmpfs real, shell/UI simulados |19casos y guard de scope | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para casos | Sí | Sin envío R239 autorizado todavía |
+
 **Actual R237:** [StepC instalada; UI/C manual pendientes](step-physical-result-r237.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

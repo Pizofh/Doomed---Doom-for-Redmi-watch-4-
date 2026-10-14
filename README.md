@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R238:** [StepC falló al pulsar START](docs/step-physical-result-r237.md),
+retorno habitual/menús confirmados; carga/retirada del nuevo C desconocidas.
+[StepDiag preparada en PC](docs/step-diagnostic-r238.md), sin abrir nodo o cargar/
+descargar C. [Plan R239 pendiente de revisión](docs/step-diagnostic-physical-plan-r239.md).
+
 **Actual R237:** [StepC instalada en RW4 sin activación](docs/step-physical-result-r237.md).
 Un envío autorizado; catálogo16→17, esferas/selección anteriores conservadas,
 sockets y permisos de envío cerrados. START/controles/EXIT manuales pendientes:

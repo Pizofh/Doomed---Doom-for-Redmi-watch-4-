@@ -1,5 +1,26 @@
 # Retomar el proyecto
 
+**Actual R238,2026-10-14:** usuario StepC5grises→START→EXITrojo inmediato,
+prueba bloqueada; luego confirmahabitual/menus/scroll/longpressnormal «si,todo normal».
+EnsayoR237 CONSUMIDO; no reabrir/rearmar/repetir/DELETE/reboot/RMMOD automático.
+Carga/nodo/módulo/retirada DESCONOCIDOS, ningúnruntime log/razón capturado.
+NoinferirCfalló/nuncaentró/ya salió. [Resultado](step-physical-result-r237.md).
+PreparadoStepDiagR238 Lua+PNG, leeold3archivos SOLO rb; pack24/unpack32 puros,
+setvbuf enmarcaREGULAR propia, un lsmod a captura propia; NO /dev ni C load/unload.
+Códigoen experiments/native-step/diagnostic{-main,-tests}-r238.lua ydiagnostic-r238.lua;
+builder tools/step-diagnostic-source-r238.mjs pinELF234 comoDATOS comparación, no materializa.
+19 casosLua/tmpfsreal/UI/shellSIMULADOS pasan, scope rejects oldwrites/cmdextra,
+módulosrealesiguales/tmpausente. Package20780B ID365219976 StepDiag3barrasAMARILLAS,
+artifacts/step-diag-r238/StepDiag-id-only.face SHAe4d30fa6da8a08164bea262a1d54616447fc81d71ebe4fedfda42aad4914447c.
+main11204B SHA16f37c1c206e374e7f8fb73fa1bd6bd5ba5563921805f62e7ba044ccc093496b.
+Perfilr238/plan [R239](step-diagnostic-physical-plan-r239.md) NO autorizado/enviado;
+journalstep-diagnostic-r239.json ausente. Prepare11partes/transfer12/session35/gates0sockets.
+Helperclosedactuale4f5ea512bb55da612a0aedc14cb556a6091d63c96c8372f2f8d7cd044b99973;
+Nodefalse/r167/C#false. Sin nuevoBT/USB/hardware enesta preparación.
+FilaUI PACK/UNPACK/IO MODE/STEP ELF/STEP MARK/OLD CAP/LSMOD/C MODULE/NO MOD/CLOSE.
+GreenMODULE+redNOMOD válido; NO exigirallgreen. InventarioAHORA no retrocausa exacta.
+Next: UN diagnóstico observado/autorizarplanR239; NOrecargarCpara averiguarlo.
+
 **Actual R237, 2026-10-14: StepC instalada, manual pendiente.**
 [Resultado/plan](step-physical-result-r237.md). Usuario autoriza UN ensayo/presencia,
 pregunta incluía batería>=50%; afirmación registrada, no consultaextra.

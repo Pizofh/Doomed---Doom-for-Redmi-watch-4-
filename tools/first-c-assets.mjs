@@ -50,3 +50,10 @@ export function stepAssets(){
  assets.preview=png(390,450,(x,y)=>x>=150&&x<240&&y>=160&&y<290&&(y-160)%26<16?[64,255,64]:[0,0,0]);
  return assets;
 }
+export function stepDiagnosticAssets(){
+ const names=['PACK','UNPACK','IO MODE','STEP ELF','STEP MARK','OLD CAP','LSMOD','C MODULE','NO MOD','CLOSE'];
+ return {legend:png(180,320,(x,y)=>ownTextPixel(names[Math.floor(y/32)]??'',x,y%32)),
+  title:png(120,20,(x,y)=>ownTextPixel('STEP DIAG',x,y)),
+  check:png(96,20,(x,y)=>ownTextPixel('CHECK',x,y,[36,92,128])),
+  preview:png(390,450,(x,y)=>x>=150&&x<240&&y>=160&&y<238&&(y-160)%26<16?[255,255,0]:[0,0,0])};
+}

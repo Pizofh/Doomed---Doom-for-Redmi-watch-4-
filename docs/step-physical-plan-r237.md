@@ -1,7 +1,7 @@
 # R237 — ensayo autorizado: StepC
 
-2026-10-14. **Autorizado e instalado sin activación; gates cerrados de nuevo.
-Prueba manual de C/controles/EXIT pendiente.** [Instalación](step-physical-result-r237.md). Usuario:
+2026-10-14. **Ensayo único completado con fallo de START y retorno normal;
+gates cerrados. Sin permiso para repetir.** [Resultado](step-physical-result-r237.md). Usuario:
 «Sí, autorizo y puedo observar el reloj». La solicitud incluía batería≥50%;
 se registra su afirmación, sin lectura adicional. Cubre este ensayo único,
 sin reintentos, autoactivación ni retirada del paquete.

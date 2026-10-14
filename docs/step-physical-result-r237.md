@@ -1,4 +1,14 @@
-# R237 — StepC instalada, ejecución manual pendiente
+# R237 — StepC falla al iniciar; retorno normal confirmado
+
+**Resultado manual:** usuario vio los cinco indicadores grises y pulsó START.
+EXIT se puso rojo inmediatamente y la prueba dejó de responder a nuevos
+intentos. Menús y cambio de esfera siguieron funcionando; después confirmó
+retorno a la habitual y navegación/pulsación larga normales: «si, todo normal».
+No se confirmaron barra, acciones, carga o retirada de C. El fallo podría estar
+antes o después de cargarlo; el indicador común no distingue etapa. **Estado
+del módulo/nodo desconocido**, no afirmar que se retiró o nunca se cargó.
+Ensayo único consumido: no repetir/reabrir/rearmar/reinstalar ni retirar a ciegas.
+Siguiente preparación PC: [diagnóstico sin operación de módulos](step-diagnostic-r238.md).
 
 2026-10-14. Usuario autorizó [el plan fijo](step-physical-plan-r237.md):
 «Sí, autorizo y puedo observar el reloj». La solicitud incluía batería≥50%;
@@ -50,7 +60,7 @@ y el mismo paquete autorizado, en un directorio nuevo. Evidencia inicial
 preservada en `artifacts/step-r237-authorized/`. Hubo un único envío físico;
 no fue un reintento de transporte ni una modificación del payload.
 
-## Observación pendiente del usuario
+## Historial: observación solicitada al usuario
 
 Seleccionar StepC, preview cinco barras verdes. Debe aparecer C STEP,
 UP/LEFT/RIGHT/FIRE/EXIT, cinco indicadores grises y START. Si no se ve así,
@@ -66,7 +76,7 @@ Volver a esfera habitual desde zona neutra del launcher o Ajustes→Esferas y
 confirmar menús/scroll/pulsación larga. No rearmar marca, borrar/reabrir StepC,
 reiniciar o repetir START automáticamente.
 
-Todavía no se observó el runtime: **registro/callbacks/BSS/retirada del módulo
-RW4 nuevos y entrada a C no están confirmados**. La instalación no implica que
-se haya cargado C; el entry solo prepara UI hasta START manual. Sin métricas,
-Doom, sandbox o recovery integral nuevos. Ensayo manual aún pendiente.
+La observación posterior de fallo está registrada al inicio. **Registro/
+callbacks/BSS/retirada y entrada a C del nuevo candidato no quedaron confirmados**.
+No se recogió el motivo interno ni logs de runtime del reloj. Sin métricas,
+Doom, sandbox o recovery integral nuevos. El ensayo manual no debe repetirse.
