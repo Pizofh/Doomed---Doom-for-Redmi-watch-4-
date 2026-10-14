@@ -1,6 +1,8 @@
 # R253/R254 — StateRead2 sin dependencia de la esfera antigua
 
-2026-10-14. PC listo, pendiente de autorización física. PreCheck R252 identifica
+2026-10-14. Usuario autorizó «si» al único ensayo con observación y batería≥50%.
+Instalación inactiva completada; READ C manual y retorno pendientes.
+PreCheck R252 identifica
 el fallo de apertura de la marca antigua, con registro propio66bytes/EOF/cierre/
 formato reconocidos y retorno normal. Catálogo actual ya no incluye StepC;
 su módulo sigue registrado. No atribuir eliminación de esfera a nuestro código
@@ -82,3 +84,19 @@ sin validar. No improvisar flash/boot/firmware de otro modelo/exploits/SWD/JTAG.
 Lección de persistencia: retirar una esfera/archivo no implica descargar su
 módulo RAM. Para el producto final no depender de archivos de una prueba borrable;
 almacenamiento y ciclo de vida nativo necesitan gestión explícita.
+
+## Instalación R254 realizada
+
+Un install RegisteredInactive,10partes/stream20430bytes/TX20897bytes,
+19frames enviados/16recibidos. Registro confirmado, no selección automática;
+transferAcceptanceVerified=false (sin ACK final independiente de aceptación).
+GET independiente15→16, IDs/flags anteriores preservados, activa365210175,
+StateRead2 propia970inactiva/removible. Journalstate-read-r254.json Registered10,
+sinlock. Cierres socket/worker/exit0, sin error nativo. No SET/DELETE/retry,
+proc/nodo/callbacksC durante la instalación.
+
+Finalmente fuentes originales/gates restaurados, helper cerrado reconstruido,
+testgates0sockets exitoso. Helper autorizado SHA256
+`0c140749ea3819763058e21c71cf6004c93fb26b56139987b14f2acb5fdd2f57`.
+Evidencia privada `artifacts/state-read2-r254-authorized/`, runner consumido.
+Autorización de instalación consumida; READ C una vez y observación aún pendientes.

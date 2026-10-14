@@ -1,5 +1,15 @@
 # Retomar el proyecto
 
+**Actual R254: StateRead2 instalada inactiva; READ C manual pendiente.**
+Usuario«si»autorizaUNensayo/presencia>=50%. Runnerstate-read2-r254-authorized consumido.
+InstallRegisteredInactive10partes/stream20430/TX20897/19TX16RX, cierresworker/socket/exit0.
+GET15→16 previosIDsflagsintactos, activa365210175; propia365219970inactiva/removible.
+Journalstate-read-r254.json Registered10/sinlock. Finallygatescerrados/rebuild/test0sockets.
+SinSET/DELETE/retry/C/proc/node desdePC. [Plan/resultadosR254](state-read-physical-plan-r254.md).
+NextusuarioStateRead2(noStateRead),4barrasCIAN,C STATE/10grises/READ C una vez→colores/framehex→
+habitual/menúscrolllongpress. Rojoinicial/faltaUI NO READ. No repetir/rearmar/load/unload/STEP/STOP.
+C sigue residente sin lectura física propia confirmada. PreviewtítuloC STATE deliberado.
+
 **Actual R253: fallo R252 localizado; StateRead2 preparada, NO autorizada/enviada.**
 UsuarioPreCheck00420000, MARK/REG OPEN/READ/EOF/CLOSE/SHAPE verdes, OLD OPEN/FINALrojo,
 OLD READ/CLOSE/MATCHgris; habitual/cambio/menúnormal. Propio registro66bytes identificado;
