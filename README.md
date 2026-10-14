@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R264 completo:** [Los13comandos al C residente pasan físicamente](docs/native-control-physical-plan-r264.md).
+Diez verdes, menú y otras esferas normales. C queda cargado y detenido;
+[siguiente checkpoint: ciclo de vida del módulo](docs/native-lifecycle-next-checkpoint.md).
+DOOM físico todavía pendiente.
+
 **Actual R264 instalada:** [CtrlProbe inactiva; RUN C manual pendiente](docs/native-control-physical-plan-r264.md).
 Un envío, catálogo previo conservado y gates cerrados. Falta probar los13comandos
 en el C residente del RW4; no se ejecutaron durante la instalación.

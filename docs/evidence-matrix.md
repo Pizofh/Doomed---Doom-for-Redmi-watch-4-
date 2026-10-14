@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R264 completo:** [Controles C confirmados en la unidad](native-control-physical-plan-r264.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| C responde START/INPUT1,2,4,8,0/STEP/PAUSE/RESUME/STOP con ACKs exactos | RW4/M2315W1/FW2.2.86 | CtrlProbe fuente fijada y usuario diez verdes | CONFIRMADO EN RW4 | Alta para13requests | Sí, usuario | Valores validados por indicadores; sin rawframe nuevo |
+| STOPPED/held0, cierres y registro definido igual al terminar | Misma unidad/módulo234 | STOP/FINAL verdes y checks del cliente | CONFIRMADO EN RW4 | Alta para ensayo | Sí | No ausencia de todas las refs del sistema ni descarga probadas |
+| Menú y otras esferas normales tras el lote | Misma unidad | Usuario«menu y watchfaces sin problema» | CONFIRMADO EN RW4 | Alta para observado | Sí | No integridad latente/recovery integral certificadas |
+| Retirada del driver/módulo234 y siguiente START seguro | Misma unidad | No se solicitó rmmod en R264 | SIN EVIDENCIA | Pendiente | No | STOP no es unload; siguiente checkpoint separado |
+
 **Actual R264:** [CtrlProbe instalada, ejecución manual pendiente](native-control-physical-plan-r264.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

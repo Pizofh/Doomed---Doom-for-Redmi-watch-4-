@@ -1,5 +1,20 @@
 # Retomar el proyecto
 
+**Actual R264 COMPLETO: diez verdes, menú y watchfaces normales.**
+Usuario «todo verde, menu y watchfaces sin problema». Validación por indicadores
+de13ACKs/control/STEP/PAUSE/RESUME/STOP/close/postkey64. Final esperado
+seq13phase3held0steps4edges5status0, sin rawframe/code nuevo capturado.
+No métricas inventadas. Reporte privado control-r264-authorized/user-observation.json.
+Marca consumida; no reabrir CtrlProbe/RUN/rearmar/STOP/reload/reboot automáticamente.
+C234 sigue residente, detenido; uninit/unregister de este módulo no probados
+físicamente. No DOOM físico aún. [Checkpoint siguiente](native-lifecycle-next-checkpoint.md):
+PC preparar retirada atribuida del módulo detenido/cierres, con resultado shell
+y metadata/path sin abrir nodo tras unload. Unregister puede desvincular path
+antes de rechazar; nodo ausente solo no certifica nada. No readyToUnload/key64
+como inventario completo. Nueva operación física exige plan/revisión; ninguna
+retirada autorizada por R264. Helper/gates cerrados actuales siguen
+01794a3af30a4653892da0c2a9d7fd5620997ae5d267ca2d178ad54494406a55.
+
 **Actual R264 instalada inactiva; RUN C manual pendiente.**
 Usuario autorizóUNensayo/presencia≥50%: «Sí, autorizo y puedo observar el reloj».
 Runner `artifacts/control-r264-authorized/run-install.mjs` consumido.

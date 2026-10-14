@@ -1,5 +1,9 @@
 # Siguiente checkpoint: comandos al puente C residente
 
+**Completado R264:** diez verdes y menú/esferas normales. El lote13comandos
+funcionó físicamente. Este documento conserva la propuesta anterior como
+historia; el siguiente trabajo es [ciclo de vida](native-lifecycle-next-checkpoint.md).
+
 PC R263 completo: [CtrlProbe y plan R264](native-control-physical-plan-r264.md).
 169casos con simulaciones y13ACKs en C real S3; paquete preparado, no enviado.
 La revisión física pendiente cubre write por primera vez en el puenteRW4.

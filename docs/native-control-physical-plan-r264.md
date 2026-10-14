@@ -1,7 +1,7 @@
 # R263/R264 — un lote de controles al C residente
 
 Estado R264: usuario autorizó «Sí, autorizo y puedo observar el reloj»;
-**instalada inactiva, RUN C manual pendiente**. Base física R262: StateMatch obtuvo diez verdes,
+**ensayo físico completo: diez verdes y retorno normal reportado**. Base física R262: StateMatch obtuvo diez verdes,
 snapshot inicial, EOF/cierre y registro key64 igual; retorno, corona, menú y
 otras esferas normales. No volver a abrir pruebas consumidas.
 
@@ -164,3 +164,16 @@ Helper autorizado SHA256
 Runner privado `artifacts/control-r264-authorized/run-install.mjs` consumido;
 autorización fijó el plan preinstalación del commit9de53cc. No volver a ejecutar.
 Pendiente observación física de los13ACKs/STOP y retorno a esfera habitual.
+
+## Resultado físico R264
+
+Usuario: «todo verde, menu y watchfaces sin problema». Diez verdes validan la
+marca, registro preflight, snapshot inicial cero,13ACKs exactos, STOP final,
+cierres y registro key64 posterior igual. Estado final esperado validado por
+estos indicadores: seq13/phase3/held0/steps4/edges5/status0. No raw frame o
+CTRL CODE nuevo capturado; no inventar dump o métrica de latencia.
+Menú y cambio de esferas normales reportados. La callback write del C residente
+funciona en este ensayo; no equivale a ejecución física de DOOM.
+Marca persiste; ensayo consumido. No repetir RUN C ni rearmar. C permanece
+cargado, detenido; uninit/unregister/retirada física aún no probados para él.
+[Siguiente checkpoint: ciclo de vida](native-lifecycle-next-checkpoint.md).
