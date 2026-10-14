@@ -1,6 +1,44 @@
 # Retomar el proyecto
 
-**Actual R217, 2026-10-13:** [NativeLog C/archivo/retirada confirmados](native-log-physical-result-r216.md).
+**Actual R220/R221, 2026-10-13:** [NativeFrames PC/emulador lista](native-frames-r220.md).
+Usuario pidió acelerar agrupando pruebas; autorizó preparar PC, NO nuevo envío.
+[Plan fijo pendiente de revisión](native-frames-physical-plan-r221.md).
+Siguiente: pedir UN ensayo con presencia, paquete fijo, RUN C una vez/observar
+rotación de colores/barra/EXIT y retorno stock. NO instalar por «sigamos».
+Gates Nodefalse/r167, C#false. Helpercerrado95abb76e35633ea30cffd2fda57f7d354a92c15d91e1f749e5963ffb1321f7bf.
+Perfilr220 NativeFrames365219980,29704B,SHA94b65fb94b7b299496ca672348f1a5281fe123e5ee7991044f59e90e1705481e.
+Lua18035B,SHA7b554c6d6e0012e1425efbfc0123ea56fb6cfac9c55508e35b46bbc19e8b31e1.
+ELF RW42780B,SHA80b75ebe516a80a931ac30e93a4d30cc76eb137e8bc7d57195091a680ad5f636,
+18ABS32,text1497,stackGCC400B sincallees; mismas5APIs físicas R217. Cuatro PNG
+18564B cadauno/74256B; marca15B, rw4framesr218, raíz exacta365219980/lua.
+C NOtareas/loopsruntime/callbacks/display nativo; genera4frames y se retira ANTES
+deanimar. Lua validaAdler/tamaño,4Image inmutables,Timer400ms24callbacks,EXIT/pause
+detachaantesunlink. GCsolo closing, puedequedarFS siVMcierra; marcaNOrearmar.
+Bloquea módulos197/202/211; cleanup solo retiradaconfirmada o initrechazado/ausente.
+UI FILE/MARK/FRAMES/UNLOAD/EXIT; EXITgris mientrasanima, verde solofinishcorrecto.
+Preview4barras cian; no autoC/alreabrir. No Doom/streaming ni FPS demostrado.
+
+Build separado S3 CortexA7/hard2680B SHA8a0947684397194d670d55d716d86f61e7012aef15bd91beca80e10c6de5d179:
+solo este se ejecutó en tmpfsS3 y produjo cuatroPNG byte/píxel/CRC/zlib exactos;
+retirado/fixtureborrada/inventarioigual. Artefactosframes-c-r218.
+24casos Lua producción+I/Otmpreal+exec/widgets/TimerSIMULADOS pasaron,
+frames-lua-r219/summary.json; fixtureslimpias. Error inicial de sintaxis harness
+conservado aparte. Paquetes35320/32028B fallaron presupuesto/sesión fragment512;
+sin ampliar TX: comments/indentación fuera, base64ELF compara bytes, previewmenor.
+Final passes transfer12/session32/gates0sockets, prepare15partes.
+
+UIreal S3 FramesUI365219981 NOELF/NSH, mismoUIhash5b5843... con frames C copiados:
+capturas[1,2,3,1,2,3] todoslos píxeles verificados,4callbacks faseobservados,
+EXITmanualdetacha, closeLua y stock Spectrum362130009 activa. Cleanup/nativobackend
+simulados enestaUI; noasegurarFS físico/auto-stop real. Reportframes-ui-r220/validation.json.
+CatálogoS3: ownafterAODnoseveía; reordenarown antesNeat permitióselecciónGUI.
+Fixture89KB reducida14KB +4PNG separados; noatribuircausaúnica. UiOnly propio
+fue movidotemporalmente a /data/app/watchface/r220-hold-365219997 y YA RESTAURADO
+byteexacto/confilacatálogo. Final31IDs/prior30preservados, owninactive; selección
+originalStorage NOrestaurada, normalSpectrum sí. Módulosvacíoigual. No nuevoBT,
+teléfono,hardware,firmware. No repetir los scripts de build/test que rechazan outputs.
+
+**Historial R217:** [NativeLog C/archivo/retirada confirmados](native-log-physical-result-r216.md).
 Usuario: «file, mark, ctext, unload, end todo en verde. se conserva movimiento
 y pueduo cambiar de esfera». Tercera verde exige load_observed y message_verified;
 C escribe RW4_C_FILE_R214 newline16bytes tras leer marca19bytes, cinco bindings

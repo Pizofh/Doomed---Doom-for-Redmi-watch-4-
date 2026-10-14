@@ -1,6 +1,13 @@
 # DOOM en Redmi Watch 4
 
-**Actual R217:** [C lee/escribe un archivo y se retira en el RW4 físico](docs/native-log-physical-result-r216.md).
+**Actual R220/R221:** [NativeFrames lista en PC/emulador](docs/native-frames-r220.md).
+Una prueba reúne generación de cuatro imágenes en C, animación Lua/LVGL y salida.
+C específico S3 generó PNG válidos; UI real mostró animación/EXIT y retorno stock.
+24casos de carrier y transferencia offline pasan. Paquete29.704bytes,
+ID365219980; [ensayo físico pendiente de revisión](docs/native-frames-physical-plan-r221.md).
+Gates cerrados, ningún nuevo envío al reloj. Son frames precalculados, no Doom/FPS.
+
+**Historial R217:** [C lee/escribe un archivo y se retira en el RW4 físico](docs/native-log-physical-result-r216.md).
 Usuario comunica FILE/MARK/C TEXT/UNLOAD/END verdes y navegación/cambio de
 esfera conservados. Cinco APIs de archivo específicas de2.2.86 funcionaron para
 este payload. Gates cerrados; no repetir el ensayo. Siguiente checkpoint PC:

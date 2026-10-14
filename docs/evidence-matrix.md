@@ -1,6 +1,16 @@
 # Matriz de evidencia
 
-**Actual R217:** [NativeLog cinco verdes y navegación/cambio conservados](native-log-physical-result-r216.md).
+**Actual R220/R221:** [NativeFrames preparada; sin envío físico](native-frames-r220.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| C genera cuatro PNG válidos y se retira | S3 emulado, binario propio específico | ELF S3 ejecutado; bytes/píxeles/CRC/zlib verificados; inventario restaurado | CONFIRMADO EN EMULADOR | Alta | Sí, C real S3 | ELF RW4 separado NO ejecutado |
+| LVGL/Timer muestran y detienen esos frames | S3, UI real/backend nativo simulado | Capturas fases1/2/3, todos sus píxeles; callbacks0/1/2/3; EXIT/closeLua/retorno stock | CONFIRMADO EN EMULADOR | Alta para observación | Sí | Fase0 no capturada; cleanup de UI simulado, casos I/O real separados |
+| Carrier impide repetir y retira antes de animación/unlink después de detach | Lua5.4 S3, I/O real+exec/widgets/timer simulados |24casos de producción | CONFIRMADO EN SIMULACIÓN | Alta para casos | Sí | No prueba driver/heap/ABI general RW4 |
+| NativeFrames se puede preparar con límites TX actuales y gates cerrados | PC | prepare15partes, transfer12/session32/gates0sockets | CONFIRMADO EN PC | Alta | Sí | Paquete29704B, nuevoID365219980; sin nuevo hardware |
+| Generación/animación/salida NativeFrames funciona en RW4 | M2315W1/2.2.86 | Ensayo nuevo todavía no autorizado/realizado | SIN EVIDENCIA | Desconocida | No | NativeLog solo validó archivo16B y5APIs;74KB/Timer/decoder/stack nuevos |
+
+**Historial R217:** [NativeLog cinco verdes y navegación/cambio conservados](native-log-physical-result-r216.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

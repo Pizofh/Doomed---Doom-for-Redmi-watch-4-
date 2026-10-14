@@ -1,6 +1,13 @@
 # Ejecución y privilegios
 
-**Actual R217:** [NativeLog C/archivo/retirada confirmados físicamente](native-log-physical-result-r216.md).
+**Actual R220/R221:** [NativeFrames lista PC/emulador](native-frames-r220.md).
+Mismas cinco APIs de archivo; candidato C genera cuatro PNG/74KB, se retira antes
+de Timer/Images Lua, sin tareas/callbacks C retenidos. S3 C/PNG y UI/EXIT probados
+con builds/backend separados, no RW4. Paquete29704B, gates cerrados y
+[revisión física nueva pendiente](native-frames-physical-plan-r221.md).
+Más stack/trabajo/decoder que NativeLog: privilegios/recovery/RAM pendientes.
+
+**Historial R217:** [NativeLog C/archivo/retirada confirmados físicamente](native-log-physical-result-r216.md).
 Usuario comunica cinco verdes y navegación/cambio conservados. C lee su marca,
 escribe un mensaje exacto y Lua verifica registro/retirada/limpieza. Cinco bindings
 de archivo de esta imagen funcionaron en este payload. No userspace aislado,
