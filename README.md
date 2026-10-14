@@ -1,8 +1,12 @@
 # DOOM en Redmi Watch 4
 
-**Actual R244:** [ModInfo2 instalada e inactiva](docs/module-registry-physical-result-r244.md).
+**Actual R245:** [ModInfo2 abrió, leyó y cerró el registro](docs/module-registry-physical-result-r244.md);
+END LINE/FINAL rojos, retorno/cambio de esfera y menú confirmados. Residencia
+StepC desconocida. [Siguiente: contenido y longitud acotados](docs/module-registry-result-r245.md).
+
+**R244:** [ModInfo2 instalada e inactiva](docs/module-registry-physical-result-r244.md).
 [Corregida ruta con separadores repetidos](docs/module-registry-corrected-r243.md),
-38casos lector y32UI con simulaciones pasan. Gates cerrados; CHECK manual pendiente.
+38casos lector y32UI con simulaciones pasan. Gates cerrados; CHECK ya observado.
 ModInfo anterior quedó negra; retorno/cambio de esfera y menú confirmados.
 Residencia de StepC todavía desconocida.
 

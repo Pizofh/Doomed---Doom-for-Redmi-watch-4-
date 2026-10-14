@@ -1,4 +1,4 @@
-# R244 — ModInfo2 instalada, CHECK pendiente
+# R244 — ModInfo2 leída; END LINE rojo, retorno normal
 
 2026-10-14. Usuario ordenó corregir la ruta y enviar directamente al reloj.
 [Plan registrado antes del envío](module-registry-physical-plan-r244.md).
@@ -28,8 +28,25 @@ Evidencia privada artifacts/module-registry-r244-authorized: aprobación/pins,
 helpers/prepare/install/cierre/gates/GET/comparación; runner consumido, no reejecutar.
 Sin claves/direcciones de unidad/seriales/logs crudos publicados.
 
-Pendiente: seleccionar **ModInfo2**, no ModInfo (dos barras naranjas ambas),
-MOD INFO/15grises/CHECK. FINAL rojo inicial/faltaUI: no pulsar ni repetir.
-CHECK una vez; reportar filas rojas/grises/amarillas, luego habitual y comprobar
-menús/scroll/pulsación larga. No reabrir/rearmar/reboot o retirar módulo.
-Residencia StepC desconocida; aun registro válido no demuestra safe-unload.
+## Resultado manual
+
+Usuario vio las quince filas inicialmente grises. Después de CHECK informó:
+MARK/OPEN/READ/CLOSE verdes; END LINE/FINAL rojos; las demás grises. Añadió:
+«pude entrar a menus y cambiar corona sin problema». Retorno/cambio de esfera y
+menú confirmados; no se pidió otra reapertura para comprobar colores.
+
+Marca, apertura, lectura acotada/EOF y cierre pasaron según esos indicadores.
+END LINE rojo es compatible con texto no vacío sin LF final: esa condición
+detiene el parser antes de reconocer el registro. No es error de Bluetooth o
+de apertura/cierre, ni prueba de que StepC esté ausente o que sea seguro retirarlo.
+El truncamiento del formateador64bytes sigue siendo hipótesis, no causa probada.
+
+**Discrepancia conservada:** en la fuente aprobada, END LINE rojo implica que
+ASCII ya quedó verde. El usuario incluyó ASCII entre «el resto en gris». No
+convertimos esa fila en un verde observado ni inventamos bytes; detalle no
+resuelto. La siguiente observación debe mostrar contenido/longitud, en lugar
+de volver a depender solo de una cadena de indicadores.
+
+Ensayo consumido. No reabrir/rearmar ModInfo2/StepC, borrar marca, reiniciar o
+retirar/cargar C automáticamente. Residencia de StepC desconocida. [R245](module-registry-result-r245.md)
+registra el análisis posterior, sin nuevo envío.

@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R245:** [Lectura/cierre pasó; END LINE rojo, retorno normal](module-registry-result-r245.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| ModInfo2 ejecuta UI, marca y lectura/cierre de /proc/modules | M2315W1/FW2.2.86 | Inicial15grises, CHECK→MARK/OPEN/READ/CLOSE verdes | CONFIRMADO EN RW4 | Alta para indicadores | Sí, usuario | No texto real disponible |
+| Registro íntegro reconocido por ModInfo2 | Misma unidad | END LINE/FINAL rojos, presencia/ausencia grises | REFUTADO PARA ESTE ENSAYO | Alta para resultado | Sí, usuario | Discrepancia ASCII reportado gris; no causa exacta demostrada |
+| Retorno/cambio de esfera y apertura de menú siguen disponibles | Misma unidad | Usuario «pude entrar a menus y cambiar corona sin problema» | CONFIRMADO EN RW4 | Alta para observación | Sí | No prueba integridad latente o retirada segura |
+| Ignorar LF garantiza una fila íntegra | Ejemplo sintético PC | Prefijo63 conserva9campos pero transforma tamaño36→3 | REFUTADO COMO GARANTÍA | Alta para contraejemplo | Sí | No bytes físicos ni ejecución printf stock |
+
 **Actual R244:** [ModInfo2 corregida e instalada; CHECK pendiente](module-registry-physical-result-r244.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -1,6 +1,19 @@
 # Retomar el proyecto
 
-**Actual R244,2026-10-14: ModInfo2 instalada, CHECK pendiente.**
+**Actual R245,2026-10-14: ModInfo2 CHECK observado, retorno normal.**
+Inicial15grises; usuario MARK/OPEN/READ/CLOSE verdes, END LINE/FINAL rojos,
+restogris; confirma menú/cambio de esfera sin problema. Fuente implica ASCIIverde
+siENDLINErojo, pero reportado dentrorestogris: conservar discrepancia, no inventar
+observación/bytes. Lectura/cierre pasó; condiciónLF apunta faltaLFfinal de textono vacío,
+truncamiento64hipótesis. Inventario/residenciaCStepC UNKNOWN, NO cargar/retirar/reabrir.
+EnsayoR244consumido. Gatesfalse/r167/C#false, helper6ba6f357d42859c7c1713fc092df9e42fdc42e2d05ee5eb06ca2c12ec24032d9.
+PruebaPC sintética explain-registry-boundary-r245.mjs: fila65→payload63 con nuevecampos
+y size36→3todavíadecimalválido; ignorarLF no soluciona integridad. NoHWnuevo.
+Next: preparar vista acotada de longitud/head/tail reales, sinC/tabla cruda guardada;
+paquete/validación/plan y revisión antes enviar. Nootrogrupo deindicadores ambiguos.
+[Análisis](module-registry-result-r245.md), [resultado](module-registry-physical-result-r244.md).
+
+**Historial R244,2026-10-14: ModInfo2 instalada, CHECK posteriormente observado.**
 Usuario pidió «pues corrige eso concreto y mandalo al reloj de una, te estas demorando mucho»;
 autorización directa, sin re-pregunta. R242negra, pudo volver/cambiar esfera/abrirmenú,
 sin resultadoCHECK/proc/mark. Defecto assertSCRIPT_PATH==own reproducido con //lua/,

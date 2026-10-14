@@ -1,7 +1,7 @@
 # R244 — ModInfo2: plan del ensayo corregido autorizado
 
-**Instalación completada:** [RegisteredInactive y GET independiente](module-registry-physical-result-r244.md).
-Envío consumido, gates cerrados; CHECK único y retorno pendientes.
+**Ensayo completado:** [CHECK observado, END LINE rojo y retorno normal](module-registry-physical-result-r244.md).
+Autorización consumida, gates cerrados; no repetir.
 
 2026-10-14. Usuario ordenó corregir la ruta y enviar al reloj directamente;
 autorización concreta registrada en [R243](module-registry-corrected-r243.md).
