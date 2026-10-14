@@ -1,6 +1,17 @@
 # Retomar el proyecto
 
-**Actual R216, 2026-10-13:** [NativeLog instalada](native-log-physical-result-r216.md).
+**Actual R217, 2026-10-13:** [NativeLog C/archivo/retirada confirmados](native-log-physical-result-r216.md).
+Usuario: «file, mark, ctext, unload, end todo en verde. se conserva movimiento
+y pueduo cambiar de esfera». Tercera verde exige load_observed y message_verified;
+C escribe RW4_C_FILE_R214 newline16bytes tras leer marca19bytes, cinco bindings
+fopen/fclose/fread/fwrite/fflush y7ABS32 efectivos para este payload2.2.86.
+ENDverde exige limpieza/registro/retirada; marca permanece, no repetir/rearmar.
+Navegación/cambio confirmados; esfera activa final no identificada explícitamente.
+No heap/RAM/recovery/ABI general/display nativo/timers probados. Gates cerrados.
+Siguiente PC: patrón de imagen C mostrado por Lua/LVGL stock, plan nuevo antes
+de cualquier hardware. Al registrar esta observación, cero BT/comandos físicos.
+
+**Historial de instalación R216:** [NativeLog instalada](native-log-physical-result-r216.md).
 Usuario autorizó único ensayo y presencia; un install r215 RegisteredInactive,
 14partes, GET independiente14→15 con anteriores IDs/flags y activa365210175
 conservados. Propia365219999 inactiva/eliminable. Socket/workers cerrados.
@@ -8,10 +19,10 @@ Gates Nodefalse/r167 y C#false restaurados/rebuild; test0sockets pasó.
 Helper cerrado d5e433352308720472131885fbeca97e8b942738082ffb9a87f382eaf4f643c4.
 Journal native-log-r216.json Registered/14partes/sin lock. Archivo privado de
 revisión artifacts/native-log-r216-authorized (no ejecutar helper habilitado).
-Pendiente respuesta del usuario a selección NativeLog/cinco grises/RUN C UNA vez,
-colores FILE/MARK/C TEXT/UNLOAD/END y retorno normal desde Ajustes.
+Observación solicitada entonces: NativeLog/cinco grises/RUN C UNA vez,
+colores FILE/MARK/C TEXT/UNLOAD/END y retorno desde Ajustes; respuesta R217 arriba.
 NO repetir envío/click, rearmar marca, DELETE o nuevos comandos físicos.
-Instalación NO demuestra ejecución de este C/5APIs; FirstC2/marca intactas.
+Instalación sola NO demuestra ejecución; resultado posterior arriba. FirstC2/marca intactas.
 
 **Historial de preparación R215/R216:** [NativeLog lista PC](native-log-r215.md),
 [plan físico ahora aprobado](native-log-physical-plan-r216.md).

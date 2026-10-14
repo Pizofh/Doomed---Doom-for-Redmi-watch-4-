@@ -1,6 +1,15 @@
 # Matriz de evidencia
 
-**Actual R216:** [NativeLog instalada, observación manual pendiente](native-log-physical-result-r216.md).
+**Actual R217:** [NativeLog cinco verdes y navegación/cambio conservados](native-log-physical-result-r216.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| C propio lee/escribe un archivo usando cinco APIs stock | M2315W1/FW2.2.86, payload R214 | Usuario comunica cinco verdes; C TEXT exige mensaje C exacto y registro propio | CONFIRMADO EN RW4 | Alta para este payload | Sí, ensayo físico | fopen/fread/fwrite/fflush/fclose específicos; no API general/SDK probado |
+| Módulo NativeLog retirado y archivos temporales limpiados | Misma unidad/contexto | UNLOAD/END verdes condicionados por inventario reconocido y limpieza | CONFIRMADO EN RW4 | Alta según instrumentación | Sí, visual | Marca permanece; no heap/fugas medidos ni dump CPU/RAM |
+| Navegación y cambio de esfera conservados | Misma unidad | Usuario confirma movimiento y puede cambiar de esfera | CONFIRMADO EN RW4 | Alta para observación | Sí | No identifica esfera activa final ni prueba recuperación de un fault |
+| Persistencia tras reboot y memoria suficiente para Doom | Misma unidad | No ensayo de reboot ni medición | SIN EVIDENCIA | Desconocida | No | Archivo almacenado no implica residencia RAM; NativeLog no es relanzable |
+
+**Historial R216:** [NativeLog instalada, observación entonces pendiente](native-log-physical-result-r216.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

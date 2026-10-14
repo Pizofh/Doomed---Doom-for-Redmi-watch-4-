@@ -1,5 +1,12 @@
 # Arquitectura
 
+R217: [NativeLog usa cinco APIs de archivo desde C y se retira](native-log-physical-result-r216.md).
+Lua escribe marca→insmod→C lee marca/escribe mensaje propio→Lua comprueba mensaje
+y registro→rmmod→ausencia/limpieza. Usuario confirma cinco verdes y navegación/
+cambio conservados. Contrato limitado a payload/contexto2.2.86; display, timers,
+memoria y aislamiento nativos siguen pendientes. Siguiente PC: imagen generada
+por C presentada desde Lua/LVGL; no framebuffer directo requerido por esa prueba.
+
 R204: [C mínimo físico cargado/retirado y retorno habitual confirmados](first-c-corrected-physical-result-r203.md).
 Ruta demostrada: paquete instalado→watchface Lua→NSH insmod→init C→lsmod→rmmod.
 El archivo se conserva con la esfera, el módulo deja de estar registrado. No
@@ -19,7 +26,7 @@ flowchart TD
     S --> L[Watchface Lua y objetos LVGL confirmados]
     S -. compatibilidad pendiente .-> A[App / QuickApp físico]
     L --> N[NSH insmod / lsmod / rmmod confirmados]
-    N --> C[Inicializador C minimo cargado y retirado]
+    N --> C[C con archivo propio cargado y retirado]
     C -. APIs y recursos fisicos pendientes .-> D[DOOM original / doomgeneric]
     D --> P[Adaptador display / input / tiempo / FS]
     P -. ABI y APIs fisicas pendientes .-> V[Xiaomi Vela / NuttX pertinente]

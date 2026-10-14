@@ -1,7 +1,8 @@
 # R216 — plan aprobado: NativeLog, mensaje C en archivo propio
 
 2026-10-13. **Ensayo autorizado e instalación completada. Gates Node/C# cerrados
-de nuevo; selección/RUN C/retorno manuales pendientes.**
+de nuevo. R217: usuario comunica cinco verdes y navegación/cambio conservados;
+ensayo único completado, sin permiso para repetirlo.**
 [Resultado de instalación](native-log-physical-result-r216.md).
 [Preparación, fuentes y31escenarios R215](native-log-r215.md).
 La autorización FirstC2 fue de un solo ensayo, ya completado. Este paquete
@@ -110,7 +111,8 @@ e intervenir; no reemplazar esa presencia por healthcheck remoto.
 
 31escenarios de carrier con I/O real/backend simulado, build/disassembly estáticos,
 cuatro records de paquete verificados y transferencia/sesión/gates offline pasan.
-**Nuevas APIs C y UI completa del paquete todavía no probadas en hardware.**
-Esta revisión solo cubriría un envío/selección/click/retorno; no Doom, reintentos,
+**En preparación, nuevas APIs C/UI todavía no probadas; resultado físico R217
+documentado por separado, cinco verdes comunicados.**
+Esta revisión solo cubre un envío/selección/click/retorno; no Doom, reintentos,
 otros IDs o nuevas llamadas. Ante cualquier requisito de flash/boot/particiones/
 exploit o recuperación no contemplada, volver a revisión y documentar alternativa.

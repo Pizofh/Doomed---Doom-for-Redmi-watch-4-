@@ -1,9 +1,10 @@
 # DOOM en Redmi Watch 4
 
-**Actual R216:** [NativeLog instalada tras autorización](docs/native-log-physical-result-r216.md).
-Un envío de28.348bytes/14partes, propia inactiva y las14esferas anteriores
-conservadas. Gates cerrados de nuevo. Pendientes selección, RUN C único y retorno
-manuales: las cinco nuevas APIs C todavía no están demostradas físicamente.
+**Actual R217:** [C lee/escribe un archivo y se retira en el RW4 físico](docs/native-log-physical-result-r216.md).
+Usuario comunica FILE/MARK/C TEXT/UNLOAD/END verdes y navegación/cambio de
+esfera conservados. Cinco APIs de archivo específicas de2.2.86 funcionaron para
+este payload. Gates cerrados; no repetir el ensayo. Siguiente checkpoint PC:
+patrón de imagen generado en C y mostrado mediante Lua/LVGL stock.
 [Preparación PC/emulador](docs/native-log-r215.md), [plan aprobado](docs/native-log-physical-plan-r216.md).
 
 **Historial R210:** [hello de logging C compilado solo PC](docs/rw4-log-candidate-r210.md).

@@ -1,9 +1,11 @@
 # Ejecución y privilegios
 
-**Actual R215/R216:** [NativeLog lista soloPC/emulador](native-log-r215.md),
-[nuevo plan pendiente de revisión](native-log-physical-plan-r216.md).
-Supuesto stdout capture refutado en S3; C candidato escribe archivo propio
-con5bindings de imagen. Payload físico aún no ejecutado; privilegios no aislados.
+**Actual R217:** [NativeLog C/archivo/retirada confirmados físicamente](native-log-physical-result-r216.md).
+Usuario comunica cinco verdes y navegación/cambio conservados. C lee su marca,
+escribe un mensaje exacto y Lua verifica registro/retirada/limpieza. Cinco bindings
+de archivo de esta imagen funcionaron en este payload. No userspace aislado,
+ABI general, memoria suficiente ni recovery integral demostrados. Gates cerrados;
+siguiente PC: patrón generado en C presentado por Lua/LVGL stock.
 
 **Historial R210:** [candidato logging C soloPC](rw4-log-candidate-r210.md).
 loadlib fallback deshabilitado en imagen; insmod ya demostrado sigue elegido.
