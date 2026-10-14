@@ -1,5 +1,14 @@
 # Retomar el proyecto
 
+**Actual R258: StateTrace instalada inactiva; READ C/MODE manual pendientes.**
+Usuario«ok»autorizaUNensayo/presencia>=50%; runnerstate-trace-r258-authorized consumido.
+InstallRegisteredInactive12partes/stream24070/TX24567/21TX16RX, socketworkerclosed/exit0.
+GET17→18 IDsflagsintactos, previaactiva365219969(RegCheck)conservada; propia968inactiva/removible.
+JournalRegistered12/sinlock. Finallygatescerrados/rebuild/test0sockets. NoSETDELETEretry/proc/CdesdePC.
+[Plan/resultadosR258](state-trace-physical-plan-r258.md). NextStateTrace4barrasMORADAS,
+C STATE/10grises/READ CUNAvez→FRAME HEX64foto→MODEuna vez→REG CODE24foto→habitual/menúscrolllongpress.
+Rojoinicial/faltaUI NO READ. No repetir/rearmar/loadunload/STEPSTOP/reboot automático.
+
 **Actual R257: RegCheck15verdes/retorno normal; StateTrace preparada NO autorizada/enviada.**
 FotoR256004200420000000000000000, dosregistros66Bidénticos/shape00/EOFcloseOK;
 usuario«ok»habitual/menu/cambio. RojoR254no reproducido, causaUNKNOWN.

@@ -1,6 +1,8 @@
 # R257/R258 — StateTrace, frame y diagnóstico posterior
 
-2026-10-14. Preparada en PC, NO autorizada/enviada. R254 snapshot/EOF/IDLE/close C
+2026-10-14. Usuario autorizó «ok» al único ensayo con presencia/batería≥50%.
+Instalada inactiva; READ C/MODE y retorno manual pendientes.
+R254 snapshot/EOF/IDLE/close C
 verdes y post-registro rojo; R256 dos registros66bytes idénticos,15verdes y
 retorno «ok». Causa del rojo R254 desconocida; no relajar parser o retirar C.
 
@@ -70,3 +72,19 @@ fclose exitoso no prueba todos los handles o retirada segura. Firmware stock
 sin modificar. Recovery parcial Ajustes→Esferas si responde; integral no validada.
 Ante fallo parar/revisar, no firmware ajeno/flash/boot/exploits/SWD/JTAG/reboot
 automático. [Base anterior R254](state-read-physical-plan-r254.md); ese ensayo consumido.
+
+## Instalación R258 realizada
+
+Un install RegisteredInactive,12partes/stream24070bytes/TX24567bytes,
+21frames enviados/16recibidos. Registro confirmado, no selección automática;
+sin ACK final independiente de aceptación de transferencia verificado.
+GET independiente17→18, todos los IDs/flags anteriores preservados, propia
+365219968inactiva/removible. Activa previa y posterior365219969 (RegCheck),
+no cambio desde el instalador. Journalstate-trace-r258.json Registered12/sinlock.
+Socket/worker cerrados, exit0, sin error nativo. Sin SET/DELETE/retry/lectura
+proc/nodo/callbacksC durante instalación. Finally fuentes/gates restaurados,
+helper cerrado reconstruido, testgates0sockets exitoso.
+Helper autorizado SHA256
+`3e3b2c9ef33077f1a3fca39a51fd0c5ed81670c8c493202b763c709435ace9f2`.
+Evidencia privada `artifacts/state-trace-r258-authorized/`, runner consumido.
+No repetir instalación; READ C una vez y MODE manual todavía pendientes.
