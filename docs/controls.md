@@ -1,5 +1,25 @@
 # Controles táctiles propuestos
 
+**Criterio de entrada/navegación, 2026-10-13:** el usuario acepta una watchface
+como contenedor solo si mantener los controles del juego no abre el selector
+de esferas. Si no se resuelve con mecanismos stock y una salida fiable, buscar
+otra entrada antes de considerar jugable el port. Es la ruta de ejecución
+demostrada, no una decisión final de interfaz. App/actividad separada requiere
+demostrar compatibilidad real; no asumir que está disponible en RW4.
+
+En juego, sostener avanzar/girar/disparar debe controlar Doom. Fuera del juego
+y después de EXIT, conservar navegación/cambio de esfera normales. MENU/EXIT
+propios y liberar teclas ante pérdida de foco siguen siendo obligatorios; no
+basta desactivar globalmente el cambio de esferas para ocultar el conflicto.
+
+PRESS_LOCK y flags de propagación del prototipo S3 afectan objetos propios;
+no demuestran interceptar el detector de pulsación larga del sistema RW4.
+Ensayos visuales anteriores con el toggle de longpress del emulador en OFF no
+cuentan como prueba de supresión en juego. Hace falta contacto sostenido con
+la función stock habilitada y retorno normal, primero PC y después bajo plan
+físico revisado. NativeFrames R220 comprueba imágenes/animación/EXIT, no este
+criterio de input; su paquete/plan pendientes permanecen sin cambios.
+
 **R68:** [Panel stock y STOP manteniendo FIRE](doom-focus-emulator.md) probados con Doom. Panel desde y440 pausa motor, regreso exige RESUME; STOP retira todo antes de soltar FIRE. Abrir panel con acción aún mantenida y ergonomía física no probados. No confundir la salida cooperativa desde consola del emulador con un control disponible en el reloj físico.
 
 **Actual R67:** [Controles de Doom original probados](doom-ui-emulator.md): MOVE permite avanzar/girar, FIRE consume munición real, MENU/RESUME/EXIT funcionan. Layout actual: imagen x35/y40/320×200, pad x20/y285/210×140, FIRE x245/y285/125×85, MENU x245/y385/125×40; margen y440 libre para navegación stock. Un dedo, sin corona/multitouch/MOVE+FIRE simultáneos. La tabla inferior y ensayos del patrón son históricos; comodidad física, USAR y foco con contacto mantenido siguen pendientes. El motor conserva su inercia/fricción original: KEYUP no equivale a anular su momentum inmediatamente.
