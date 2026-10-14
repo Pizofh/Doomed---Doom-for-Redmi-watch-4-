@@ -1,5 +1,11 @@
 # Siguiente checkpoint PC — backend C con UI atendiendo input
 
+**R229:** [Investigación y core C probados en S3](rw4-step-backend-r229.md).
+Se prefiere un primer adapter cooperativo mediante nodo propio en RAM: C devuelve
+el control tras cada STEP. Core41assertions pasa, sin UI/driver conectado todavía.
+Creación/join rastreados como alternativa; candidato inicial confundido con cancel
+descartado. No ejecución de API nueva en RW4 ni paquete físico preparado.
+
 Después de R226, el objetivo concreto es preparar una demo acotada en la que
 Lua conserva controles y EXIT mientras C recibe las acciones y devuelve un
 resultado visible. Sin Doom todavía; sin nuevos ensayos físicos por este documento.

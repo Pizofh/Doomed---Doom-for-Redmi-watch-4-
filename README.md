@@ -1,6 +1,11 @@
 # DOOM en Redmi Watch 4
 
-**Actual R226:** [HoldPad: controles sostenidos y retorno stock funcionan en RW4](docs/held-input-physical-result-r225.md).
+**Actual R229, PC:** [Backend cooperativo investigado y núcleo C probado](docs/rw4-step-backend-r229.md).
+41assertions pasan en S3 para acciones/pausa/STEP/STOP y mensajes inválidos;
+módulo de test retirado. Candidato de nodo en RAM para comunicar Lua↔C, aún sin
+adapter/UI conectado ni módulo RW4 nuevo. Hardware no tocado en este checkpoint.
+
+**Último resultado físico R226:** [HoldPad: controles sostenidos y retorno stock funcionan en RW4](docs/held-input-physical-result-r225.md).
 Usuario confirma el ciclo solicitado de UP/LEFT/RIGHT/FIRE, liberación, EXIT
 y retorno normal. Esto respalda la watchface como contenedor para continuar.
 Todavía no conecta input con C/Doom ni demuestra comodidad en muñeca.

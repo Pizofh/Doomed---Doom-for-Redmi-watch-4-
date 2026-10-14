@@ -1,6 +1,23 @@
 # Retomar el proyecto
 
-**Actual R226, 2026-10-13:** [HoldPad controles/EXIT/retorno confirmados](held-input-physical-result-r225.md).
+**Actual R229, 2026-10-13, PC/S3:** [Core y APIs candidatas](rw4-step-backend-r229.md).
+No hardware/BT/USB nuevo. Gate Nodefalse/r167,C#false intactos. FW tratado datos.
+Scripts research227→contract228→review229: pthread_create1e8aac, join1bbca0;
+0x1bc310 esCANCEL nojoin, refutado tras verpthread_cancel.c. register_driver497624/
+unregister497670 inferidos, opsRAMtable66444, atributoscopy12/defaultstack2048,
+NOABIheader completo ni llamadas físicas. Cinco fuentes NuttX10.3 descargadas
+oficiales con aprobación; pins enreport228, no misma fuente Xiaomi.
+Decisión primerpuente cooperativo: LuaTimer llamaSTEPbreve vía nodoRAM propio,
+no thread al inicio/no inputstock/no flashpercontact/noinsmodperframe.
+Core header+fixture enexperiments/native-step: 41assertions realesS3, puts único,
+ELF2600B SHAa902b5d417864a738332600f9f59963740fe4168838ce8aa6be2c9f9e4ee5f0f.
+Módulo rw4stepcore229 retirado/tmpELFausente/inventarioigual. Report válido
+artifacts/emulator/step-core-r229-reviewed; build-rejected original mantiene
+memset UND rechazado antesdecarga, solucionadostores propios. No driver/UI real
+conectado en229. PróximoPC: ABI/dispatch fops+modinfo y nodoACK/input/EXIT enS3.
+No paquete/plannuevoRW4: no autorización física pedida o derivada de «dale».
+
+**Último resultado físico R226, 2026-10-13:** [HoldPad controles/EXIT/retorno confirmados](held-input-physical-result-r225.md).
 Usuario tras instrucciones completas: «todo funciona al 100, super bien :D esto
 es muy bueno». Confirmación global del ciclo indicado; sin colores individuales,
 medición temporal/logs runtime. Watchface viable para continuar este recorrido;

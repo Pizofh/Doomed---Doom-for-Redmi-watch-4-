@@ -1,6 +1,16 @@
 # Matriz de evidencia
 
-**Actual R226:** [HoldPad ciclo confirmado por usuario](held-input-physical-result-r225.md).
+**Actual R229, PC/S3:** [APIs candidatas y core de input](rw4-step-backend-r229.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Create/join de hilos identificables en imagen2.2.86 | Imagen candidata específica | Caller0x3062a0/wrapper/internal y join.c/flujo; referencia upstream fijada | INFERENCIA RAZONABLE | Alta estática | Imagen solo como datos | No invocados ni compatibilidad física general |
+| Callee0x1bc310 del caller stock es join | Misma imagen | Diagnóstico pthread_cancel.c/flujo de cancelación | REFUTADO | Alta estática | Sí, disassembly | Candidato provisional R228 descartado, no llamada |
+| register_driver/unregister disponibles como cuerpos candidatos | Misma imagen | Caller stock/rutinas0x497624/0x497670 contrastadas | INFERENCIA RAZONABLE | Alta para registro; media para retiro | Estática | fops completo y llamadas físicas no validados |
+| Core C procesa acciones, pausa y STOP y rechaza mensajes inválidos | S3, código propio portable |41assertions, ELF2600B real, salidaOK, módulo/temp retirados | CONFIRMADO EN EMULADOR | Alta para fixture | Sí | Sin driver/thread/UI conectados |
+| Core/puente proporciona controles C reales RW4 | M2315W1/FW2.2.86 | Ningún paquete nuevo preparado/enviado | SIN EVIDENCIA | Desconocida | No | HoldPad confirmó solo máscaraLua |
+
+**Último resultado físico R226:** [HoldPad ciclo confirmado por usuario](held-input-physical-result-r225.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|
