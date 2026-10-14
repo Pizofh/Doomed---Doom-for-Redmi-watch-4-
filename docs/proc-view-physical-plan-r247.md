@@ -1,6 +1,8 @@
-# R247 — plan ProcView, pendiente de autorización
+# R247 — ensayo ProcView autorizado, instalación completada
 
-2026-10-14. Paquete nuevo, no autorizado ni enviado. La autorización de corrección
+2026-10-14. **Autorizado e instalado inactivo; CHECK manual pendiente.** Usuario:
+«Sí, autorizo y puedo observar el reloj». [Resultado](proc-view-physical-result-r247.md).
+Envío consumido, gates cerrados; no repetir. La autorización de corrección
 de ruta ModInfo2 ya fue consumida: este payload añade visualización de un
 extracto real y más imágenes. Regla inicial exige revisión antes del nuevo ensayo.
 No StepC/C, cambio de firmware o reinterpretación automática de metadata.

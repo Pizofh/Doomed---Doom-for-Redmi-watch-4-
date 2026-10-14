@@ -1,5 +1,9 @@
 # R246 — ProcView: vista acotada del registro, preparada en PC
 
+**Actualización R247:** paquete posteriormente autorizado e instalado inactivo;
+[lectura manual pendiente](proc-view-physical-result-r247.md). Lo siguiente
+documenta la preparación previa al envío.
+
 2026-10-14. ModInfo2 abrió/leyó/cerró; END LINE/FINAL rojos, retorno de esfera y
 menú confirmado. [R245](module-registry-result-r245.md). No interpretar el registro
 como vacío ni repetir StepC. ProcView todavía **no autorizado ni enviado**.

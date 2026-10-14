@@ -1,6 +1,22 @@
 # Retomar el proyecto
 
-**Actual R246,2026-10-14: ProcView preparada, NO autorizada/enviada.**
+**Actual R247,2026-10-14: ProcView instalada; CHECK/vistas/retorno pendientes.**
+[Resultado](proc-view-physical-result-r247.md). Usuario1ensayo/presenciaafirmados,
+pregunta>=50%batería; autorregistrada. Runnerprivadoproc-view-r247-authorizedconsumido.
+UNinstallRegisteredInactive11partes/stream21906/TX22388/20TX16RX, modelFWgate,
+selectedByClientfalse/transferAcceptanceVerifiedfalse, cierreworker/socket/exit0.
+GETindep15→16, previosIDs/flagsintactos, activa365210175; propia973inactive/removable.
+Journalproc-view-r247.jsonRegistered11/sinlock. NoSET/DELETE/retry/C/procdesdeelPC.
+Helperautorizado4a5e4c817a02047a8c364916bc8b8045dc309a15c8bb66a8d136270b45cbe0d5.
+FinallyNodefalse/r167/C#false, helpercerrado
+fdb70ddc1963e8c0da7e7185bd867751369613e7405fd077a827721768ef052b,gates0sockets.
+NextusuarioProcView3barrasAZULES/PROC DATA/4grises/camposvacíos/CHECK.
+Rojoinicial/faltaUI NO CHECK. CHECKuna vez; si4verde/datos, imagenTEXT conLENHEX/TAIL,
+MODEuna vez imagenHEXmismaRAM/noIO; luegohabitual/menús/scroll/longpress.
+No pedirZIP/log/claves, no publicarextractosreales. Sierror NOreabrir/rearmar/reboot/DELETE.
+StepCresidenciaUNKNOWN, ningunaretirada/Cautomáticaautorizada.
+
+**Historial R246,2026-10-14: ProcView preparada antes del envío R247.**
 [Vista](proc-view-r246.md), [planR247](proc-view-physical-plan-r247.md).
 ID365219973,21836B, artifacts/proc-view-r246/ProcView-id-only.face,
 SHA07527d9a79a8d24d7e761db65c73198f93f3265da2304963b95bbc916d85b75a;

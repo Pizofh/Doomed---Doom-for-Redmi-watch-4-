@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R247:** [ProcView instalada; lectura/vistas pendientes](proc-view-physical-result-r247.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Stock registra ProcView inactiva y conserva previos IDs/flags/selección | RW4/M2315W1/FW2.2.86 | Install+GET15→16 | CONFIRMADO EN RW4 | Alta para catálogo | Sí | No glifos/snapshot/ACK final explícito probado |
+| Se obtuvo snapshot/render texto/hex en ProcView física | Misma unidad | CHECK aún pendiente | SIN EVIDENCIA | Desconocida | No | Estado de StepC sigue desconocido |
+| Gates/socket/worker cerrados tras envío ProcView | PC/cliente | Finally/gates0sockets y dos cierres/exit0 | CONFIRMADO EN PC | Alta | Sí | Sin nueva acción automática autorizada |
+
 **Actual R246, PC:** [ProcView preparada; sin envío nuevo](proc-view-r246.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
