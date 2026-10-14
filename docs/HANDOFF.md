@@ -1,5 +1,24 @@
 # Retomar el proyecto
 
+**Actual R239,2026-10-14: StepDiag instalada, CHECK manual pendiente.**
+[Resultado](step-diagnostic-physical-result-r239.md). Usuario autoriza1ensayo/presencia,
+pregunta incluía>=50%batería, afirmaciónregistrada. Perfilr238 aprobado intacto.
+Artefactoprivado artifacts/step-diag-r239-authorized, script un intento confinally.
+Helperautorizado3f317f35b1981cbb399bf9e227db802ba36f8edc0427bc2231c4236ec6104726.
+UNinstallRegisteredInactive,11partes/stream20850/TX21332/20TX/16RX, modelFWgate,
+selectedByClientfalse/transferAcceptanceVerifiedfalse; socket/workerclose/exit0.
+Finally Nodefalse/r167/C#false, helperclosedactual
+9ec4971116e0bc8b1ca6ab21fb0f0edc0bab05050f25c73005aac0eb5bf61228; gates0sockets.
+GETindepComplete:13→14previos IDs/active/canDelete intactos, activa365210175;
+StepDiag365219976inactive/removable, StepC365219977 presente. Cambio17→13 sucedió
+ANTES de esteenvío; causanoatribuida, noDELETE nuestro. JournalRegistered11/sinlock.
+NoSET/shell/lecturaFS/operacióndeC desdePC. El estadoC237 continúaDESCONOCIDO.
+Ahorausuario: seleccionarStepDiag3barrasAMARILLAS, STEP DIAG,10grises/CHECK;
+rojoinicial/faltaUI NO CHECK. CHECKuna vez y reportar10colores PACK/UNPACK/IO MODE/
+STEP ELF/STEP MARK/OLD CAP/LSMOD/C MODULE/NO MOD/CLOSE; NO exigirallgreen.
+Luegohabitual+Ajustes/selector y menús/scroll/longpressnormales. Awaitrespuesta.
+Sinrepetir/reabrir/DELETE/rearmar/reboot/RMMOD/otraC carga automática.
+
 **Actual R238,2026-10-14:** usuario StepC5grises→START→EXITrojo inmediato,
 prueba bloqueada; luego confirmahabitual/menus/scroll/longpressnormal «si,todo normal».
 EnsayoR237 CONSUMIDO; no reabrir/rearmar/repetir/DELETE/reboot/RMMOD automático.

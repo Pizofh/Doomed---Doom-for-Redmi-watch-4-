@@ -1,6 +1,10 @@
-# R239 — revisión pendiente: StepDiag sin carga de C
+# R239 — ensayo autorizado: StepDiag sin carga de C
 
-2026-10-14. **No autorizado/enviado. Gates cerrados.** Ensayo StepC anterior
+2026-10-14. **Autorizado e instalado sin activación; gates cerrados de nuevo.
+CHECK manual pendiente.** [Resultado](step-diagnostic-physical-result-r239.md). Usuario:
+«Sí, autorizo y puedo observar el reloj». Solicitud incluía batería≥50%;
+afirmación registrada, sin lectura adicional. Un ensayo, sin reintentos.
+Ensayo StepC anterior
 consumido con fallo; unidad volvió a esfera habitual y UI normal. Estado de su
 módulo desconocido. No reabrirlo, eliminarlo, reiniciar o descargarlo a ciegas.
 La regla inicial del usuario exige plan/revisión para este payload distinto.
@@ -79,6 +83,6 @@ Ajustes→Esferas/selector cuando responde. Ante bloqueo/fallo detener y revisar
 antes de otras acciones; nada de flash/firmware ajeno/bootloader/recovery,
 particiones, exploit/SWD/JTAG/desactivación criptográfica o apertura física.
 
-La aprobación solicitada cubriría únicamente un envío, selección manual,
+La aprobación concedida cubre únicamente un envío, selección manual,
 CHECK una vez, lectura de resultados y vuelta habitual con observación.
 No repite StepC/C, rearma intentos, retira módulos/paquetes o cambia firmware.

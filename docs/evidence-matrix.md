@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R239:** [StepDiag instalada; CHECK pendiente](step-diagnostic-physical-result-r239.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Stock registró StepDiag nueva/inactiva | RW4/M2315W1/FW2.2.86 | Install + GET independiente13→14 | CONFIRMADO EN RW4 | Alta para catálogo | Sí | No runtime/ACK final explícito |
+| Entradas/selección previas al envío preservadas | Misma unidad | Comparación contra preflight13, activa365210175 | CONFIRMADO EN RW4 | Alta para catálogo | Sí | Cambio previo17→13 no atribuido |
+| C de StepC sigue registrado o ausente | Misma unidad | CHECK aún pendiente | SIN EVIDENCIA | Desconocida | No | No intervenir a ciegas |
+
 **Actual R238:** [StepC falló, retorno normal](step-physical-result-r237.md);
 [diagnóstico solo preparado](step-diagnostic-r238.md).
 
