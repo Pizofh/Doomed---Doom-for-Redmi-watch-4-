@@ -8,8 +8,8 @@ import {isOwnedJournal} from './static-watchface-journal.mjs';
 const fail = () => { throw Error('StaticSessionRefused'); };
 export class StaticWatchfaceSession extends XiaomiSession {
   constructor(link,plan,{action = 'install',pacingProfile = 'default',...options} = {}) {
-    if (!['install','remove'].includes(action)||!['default','exit-r268'].includes(pacingProfile)||
-        (pacingProfile==='exit-r268'&&(action!=='install'||plan.variant!=='r265'))) fail();
+    if (!['install','remove'].includes(action)||!['default','exit-r268','exit-resume-r270'].includes(pacingProfile)||
+        (pacingProfile!=='default'&&(action!=='install'||plan.variant!=='r265'))) fail();
     super(link,options);
     // These builders reject forged/unpinned plans before any connection.
     this.start = installStart(plan); this.upload = uploadStart(plan);
@@ -71,8 +71,10 @@ export class StaticWatchfaceSession extends XiaomiSession {
       const md5 = one(ack,1,2,false), chunkSize = one(ack,5,0,false) ?? 2048;
       this.uploadParameters = {unknown2,resumePosition,chunkSize,md5Present:md5 !== null,
         md5Matches:md5 === null ? null : md5.equals(this.plan.md5())};
-      if (unknown2 !== 0 || resumePosition !== 0 || (md5 !== null && !md5.equals(this.plan.md5()))) fail();
-      this.expectedParts = chunks(this.plan,chunkSize);
+      const expectedResume=this.pacingProfile==='exit-resume-r270'?22462:0;
+      if (unknown2 !== 0 || resumePosition !== expectedResume || (md5 !== null && !md5.equals(this.plan.md5()))||
+          (this.pacingProfile==='exit-resume-r270'&&(md5===null||chunkSize!==2048))) fail();
+      this.expectedParts = chunks(this.plan,chunkSize,expectedResume);
       // Reserve the entire encrypted upload plus all six verification queries
       // before sending any file bytes. MASS adds a 4-byte CCM tag + 11 header;
       // queries add that framing plus their 2-byte command counter.
@@ -100,7 +102,7 @@ export class StaticWatchfaceSession extends XiaomiSession {
     this.massAttempts++; await this.send(frame); this.nextPart++;
     if (this.nextPart === this.expectedParts.length) this.phase = 'Sent';
   }
-  async wait(ms) { if (ms !== 500 && !(this.pacingProfile==='exit-r268'&&[100,1000].includes(ms))) fail(); await this.sleep(ms); }
+  async wait(ms) { if (ms !== 500 && !(this.pacingProfile==='exit-r268'&&[100,1000].includes(ms))&&!(this.pacingProfile==='exit-resume-r270'&&ms===1000)) fail(); await this.sleep(ms); }
   dispose() {
     if (this.keys) for (const value of Object.values(this.keys)) value.fill(0);
     this.authenticated = false;

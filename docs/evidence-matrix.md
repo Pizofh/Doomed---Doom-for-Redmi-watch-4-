@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R268/R269:** [Offset de reanudación observado y continuación preparada](native-exit-resume-physical-plan-r270.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| UploadACK declara resume22462/chunk2048/MD5matching; no MASS nuevo | RW4/M2315W1/FW2.2.86 | R268install-report/guard/journal0partes | CONFIRMADO EN RW4 | Alta para respuesta | Sí | No rmmod/selección; no prueba de pausas |
+| Offset corresponde a datos del archivo tras11partes del primer stream | Modelo de framing + respuesta RW4 |22462=2044×11−22 | INFERENCIA RAZONABLE | Fuerte | Aritmética PC | No integridad del prefijo o causa del último tramo probadas |
+| Continuación usa MD5/tamaño completo, suffix y CRC del stream reanudado | Fuente primaria GB253 local | XiaomiDataUploadService/doUpload | CONFIRMADO EN FUENTE; COMPATIBILIDAD RW4 PENDIENTE | Alta para algoritmo | Inspección | No ejecutar Java ni inferir éxito físico |
+| Una parte reconstruye el archivo; offset/MD5/chunk distintos se rechazan | Cliente real/IPC y peer sintéticos |23tests R269 +15pace/47regresiones | CONFIRMADO CON SIMULACIONES | Alta para casos | Sí | No nuevos datos físicos enviados |
+
 **Actual R267:** [Auditoría y reintento pausado preparado](native-exit-retry-physical-plan-r268.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

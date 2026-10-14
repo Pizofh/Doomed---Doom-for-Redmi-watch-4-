@@ -27,10 +27,11 @@ const envelope=(type,subtype,field,body)=>Buffer.concat([uint(1,type),uint(2,sub
 export function installStart(plan){validated(plan);return envelope(4,4,6,bytes(6,Buffer.concat([bytes(1,Buffer.from(plan.id)),uint(2,plan.size)])));}
 export function uploadStart(plan){validated(plan);return envelope(22,0,24,bytes(1,Buffer.concat([uint(1,16),bytes(2,plan.md5()),uint(3,plan.size)])));}
 function deleteOwn(plan){validated(plan);return envelope(4,2,6,bytes(2,Buffer.from(plan.id)));}
-export function chunks(plan,chunkSize=2048){
+export function chunks(plan,chunkSize=2048,resumePosition=0){
   validated(plan);
   if(!Number.isInteger(chunkSize)||chunkSize<512||chunkSize>4080)refused();
-  const body=Buffer.alloc(22+plan.size);body[0]=0;body[1]=16;plan.md5().copy(body,2);body.writeUInt32LE(plan.size,18);plan.copy().copy(body,22);
+  if(resumePosition!==0&&(plan.variant!=='r265'||plan.size!==24348||resumePosition!==22462||chunkSize!==2048))refused();
+  const body=Buffer.alloc(22+plan.size-resumePosition);body[0]=0;body[1]=16;plan.md5().copy(body,2);body.writeUInt32LE(plan.size,18);plan.copy().subarray(resumePosition).copy(body,22);
   const tail=Buffer.alloc(4);tail.writeUInt32LE(crc32(body));const stream=Buffer.concat([body,tail]);
   const partSize=chunkSize-4,total=Math.ceil(stream.length/partSize),result=[];
   if(total>64)refused();
@@ -56,7 +57,7 @@ function faces(value){
 }
 export async function installStatic(api,plan,{journal = null,initialCountBelow = null,pacingProfile = 'default'} = {}){
   preflight(api,plan);
-  if(!['default','exit-r268'].includes(pacingProfile)||(pacingProfile==='exit-r268'&&plan.variant!=='r265'))refused();
+  if(!['default','exit-r268','exit-resume-r270'].includes(pacingProfile)||(pacingProfile!=='default'&&plan.variant!=='r265'))refused();
   const info=await api.info();if(info.modelRecognized!==true||info.firmware!=='2.2.86')refused();
   const before=faces(await api.faces());if(before.some(f=>f.id===plan.id))refused();
   if(before.filter(f=>f.active).length!==1)refused();
@@ -69,16 +70,18 @@ export async function installStatic(api,plan,{journal = null,initialCountBelow =
   const start=await api.request(installStart(plan));if(start.installStatus!==0)refused();
   journal?.advance('InstallAck');
   const ack=await api.request(uploadStart(plan));
-  if(ack.unknown2!==0||(ack.resumePosition??0)!==0||
+  const expectedResume=pacingProfile==='exit-resume-r270'?22462:0;
+  if(ack.unknown2!==0||(ack.resumePosition??0)!==expectedResume||
+    (pacingProfile==='exit-resume-r270'&&(!Buffer.isBuffer(ack.md5)||ack.chunkSize!==2048))||
     (ack.md5!==undefined&&(!Buffer.isBuffer(ack.md5)||!ack.md5.equals(plan.md5()))))refused();
-  const parts=chunks(plan,ack.chunkSize??2048);journal?.advance('UploadReady');
+  const parts=chunks(plan,ack.chunkSize??2048,expectedResume);journal?.advance('UploadReady');
   for(const [index,part] of parts.entries()){
     journal?.advance('Sending',{part:index+1});
     await api.mass(part);result.bytesSent+=part.length;
     journal?.advance('PartWritten');
     if(pacingProfile==='exit-r268'&&index+1<parts.length)await api.wait(100);
   }
-  if(pacingProfile==='exit-r268')await api.wait(1000);
+  if(pacingProfile==='exit-r268'||pacingProfile==='exit-resume-r270')await api.wait(1000);
   // A local write/queue callback is NOT confirmation that the watch installed it.
   for(let attempt=0;attempt<6;attempt++){
     const after=faces(await api.faces());

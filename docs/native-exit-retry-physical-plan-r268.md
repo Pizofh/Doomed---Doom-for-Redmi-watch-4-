@@ -1,6 +1,6 @@
 # R267/R268 — un reintento pausado del mismo ExitC
 
-**Preparado en PC; no autorizado ni enviado.** R266: INSTALL0/upload aceptado,
+**R268 autorizado y detenido antes de MASS por reanudación pendiente.** R266: INSTALL0/upload aceptado,
 12partes locales enviadas, timeout de la primera consulta de catálogo tras
 MASS. GET independiente12→12, IDs/flags/activa previos conservados; ExitC no
 figura. Usuario confirmó «si, todo ok», esfera/menús normales. La causa sigue
@@ -101,3 +101,28 @@ Ajustes→Esferas si UI responde; integral no validada. No flashear/reiniciar ni
 modificar boot/particiones/verificación, explotar memoria o aplicar otro modelo.
 La autorización R266 cubría un install y se consumió: este segundo envío requiere
 revisión expresa según la regla inicial; no inferirla de normalidad del reloj.
+
+## Resultado R268: offset recibido, ningún nuevo fragmento enviado
+
+Usuario autorizó «Sí, autorizo el reintento y ensayo». Un intento con journal
+nuevo y plan previo del commit7705ada. INSTALL0; upload respondió unknown2=0,
+**resumePosition22462**, chunk2048, MD5 presente/coincidente. El perfil aprobado
+exigía resume0: el cliente se detuvo en UploadRequested/StaticSessionRefused
+antes de MASS. No se llegaron a probar las pausas de datos.
+TX275bytes/7TX/13RX,0partes/fileDataSendRequestedfalse. Socket/worker cerrados/
+exit0, sin error nativo. No rmmod/C/nodo/selección desde PC.
+Preflight12esferas, activa observada365210175; no GET independiente adicional
+después de esta negociación sin datos. No atribuir cambios de selección manual
+entre checkpoints al instalador.
+
+Journalnative-exit-r268-paced.json Uncertain/previousPhaseInstallAck/parts0/
+registeredfalse/sinlock. R266 original permaneció idéntico byte a byte/sinlock;
+evidencia privada prior-journal-preservation.json. Gates restaurados/test0sockets.
+Helper autorizadoe5e52be841ae67c898c84dacd0731acf8b0cd61db4bdd5b784787a67cab6cf88;
+helper cerrado posterior75bf8bc91ae1b49ef0bd7e89ec0f59e19f443095ac9c846b0a2a625313e5f542.
+Runner privadoexit-r268-authorized consumido; no repetir.
+
+22462=(2048-4)×11-22: offset de datos del archivo compatible con11partes del
+primer stream, quitando encabezado22bytes. Quedarían1886bytes del archivo.
+**No prueba integridad del prefijo guardado ni por qué no se completó el final.**
+[Preparación de reanudación stock R270](native-exit-resume-physical-plan-r270.md).
