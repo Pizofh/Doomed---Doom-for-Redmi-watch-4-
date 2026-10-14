@@ -1,0 +1,26 @@
+import fs from 'node:fs';import path from 'node:path';import {spawnSync} from 'node:child_process';
+import {root,sha256,controlSource} from './control-source-r263.mjs';import {controlAssets} from './control-assets-r263.mjs';
+import {packageRoot} from './verify-emulator.mjs';import {guardEmulator} from './emulator-ui.mjs';
+if(process.argv.length!==2)throw Error('FixedTestOnly');
+const out=path.join(root,'artifacts/emulator/control-r263-verified'),top='/tmp/rw4control-r263';if(fs.existsSync(out))throw Error('ExistingReport');
+const {source}=controlSource();let harness=fs.readFileSync(path.join(root,'experiments/native-step/control-tests-r263.lua'),'utf8');
+const old=fs.readFileSync(path.join(root,'experiments/native-step/state-match-tests-r261.lua'),'utf8');
+const ui=old.slice(old.indexOf('    local F='),old.indexOf('    local env='));if(!ui.includes('local objects={}')||harness.split('__UI_FIXTURE__').length!==2)throw Error('FixtureChanged');harness=harness.replace('__UI_FIXTURE__',()=>ui);
+if(source.includes(']====]')||controlAssets().records.length!==23)throw Error('InputsChanged');
+const build=path.join(root,'build/native-step-bridge-r230-reviewed'),elf=fs.readFileSync(path.join(build,'bridge.elf')),review=JSON.parse(fs.readFileSync(path.join(build,'review.json'),'utf8'));
+if(sha256(elf)!=='89863182dabd4c8ce63c398c8734b98c4d1079c5dc68019bc68acecdc69f253c'||review.sourceSha256!==sha256(fs.readFileSync(path.join(root,'experiments/native-step/bridge-s3-r230.c')))||review.coreSha256!==sha256(fs.readFileSync(path.join(root,'experiments/native-step/core-r229.h'))))throw Error('FixtureBuildChanged');
+const exe=path.join(packageRoot,'platform-tools/adb.exe');if(sha256(fs.readFileSync(exe))!=='0e606318957baac81b997ccd8ee4bcdff79964a9921da07c716aea3e8d856af7')throw Error('AdbChanged');
+guardEmulator();fs.mkdirSync(out,{recursive:true});const records=[];
+function adb(args,label){const r=spawnSync(exe,['-H','127.0.0.1','-P','5039','-s','emulator-5554',...args],{shell:false,windowsHide:true,encoding:'utf8',timeout:20000,maxBuffer:65536,env:{...process.env,ADB_MDNS_AUTO_CONNECT:'0'}});records.push({label,args,status:r.status,stdout:r.stdout,stderr:r.stderr});fs.writeFileSync(path.join(out,'commands.json'),JSON.stringify(records,null,2)+'\n');if(r.error||r.status!==0)throw Error('EmulatorCommandFailed');return r.stdout+r.stderr;}
+const absent=t=>/^nsh: ls: stat failed: 2\r?$/m.test(t);
+if(!absent(adb(['shell','ls',top],'absence'))||!absent(adb(['shell','ls','/dev/rw4step230'],'node-absence')))throw Error('GuestCollision');
+const before=adb(['shell','lsmod'],'modules-before');if(!/^\s*NAME\s+INIT\s+UNINIT\s+ARG\s+NEXPORTS\s+TEXT\s+SIZE\s+DATA\s+SIZE\s*$/.test(before))throw Error('RegistryNotEmpty');
+for(const [n,b]of [['model.lua','CONTROL_SOURCE=[====[\n'+source+']====]\n'+harness],['native.lua','REAL_NATIVE=true\nCONTROL_SOURCE=[====[\n'+source+']====]\n'+harness],['bridge.elf',elf]])fs.writeFileSync(path.join(out,n),b,{flag:'wx'});
+adb(['shell','mkdir',top],'mkdir');for(const n of ['model.lua','native.lua','bridge.elf'])adb(['push',path.join(out,n),top+'/'+n],'push-'+n);
+adb(['pull',top+'/bridge.elf',path.join(out,'elf-readback.bin')],'elf-readback');if(!fs.readFileSync(path.join(out,'elf-readback.bin')).equals(elf))throw Error('ReadbackMismatch');
+const model=adb(['shell','lua',top+'/model.lua'],'model');if(!model.includes('RW4_CONTROL_MODEL_OK 169'))throw Error('ModelFailedInspectGuest');
+const native=adb(['shell','lua',top+'/native.lua'],'native');if(!native.includes('RW4_CONTROL_REAL_C_OK 13')||!native.includes('Unregister 0 refs=0 held=0'))throw Error('NativeFailedInspectGuest');
+if(adb(['shell','lsmod'],'modules-after')!==before||!absent(adb(['shell','ls','/dev/rw4step230'],'node-removed')))throw Error('GuestCleanupUnverified');
+for(const n of ['model.lua','native.lua','bridge.elf'])adb(['shell','rm',top+'/'+n],'remove-'+n);adb(['shell','rmdir',top],'rmdir');if(!absent(adb(['shell','ls',top],'absence-after')))throw Error('ScratchRemained');
+const report={checkpoint:'R263',scenariosPassed:169,realCCommandsAcknowledged:13,sourceSha256:sha256(Buffer.from(source)),harnessSha256:sha256(Buffer.from(harness)),s3ElfSha256:sha256(elf),boundedNativeNodeWrites:true,singleAttemptGuardTested:true,postRegistryCompared:true,modeSwitchWithoutIo:true,uncertainTransactionStopsWithoutRetry:true,actualS3NativeNode:true,rw4MetadataAndWidgetsSimulated:true,moduleInventoryUnchanged:true,ownGuestFilesRemoved:true,physicalWatchUsed:false,bluetoothOperationRequested:false};
+fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify(report,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify(report));

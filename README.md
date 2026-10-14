@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R263 preparado:** [CtrlProbe: un lote de controles al C residente](docs/native-control-physical-plan-r264.md).
+169 escenarios y13comandos con ACKs pasan en el C del emulador S3; registro/UI
+simulados. Paquete de23.788bytes preparado, gates cerrados; pendiente aprobación
+física de write. Sin instalar, recargar ni retirar C del RW4.
+
 **Actual R262 completado:** [Lectura C, cierre y registro posterior pasan físicamente](docs/state-match-physical-plan-r262.md).
 Diez verdes; corona, menú y cambio de esferas normales. Siguiente checkpoint:
 [comandos acotados al puente residente](docs/native-control-next-checkpoint.md), sin nuevo envío todavía.

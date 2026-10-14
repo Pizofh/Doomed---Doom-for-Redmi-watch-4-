@@ -1,5 +1,25 @@
 # Retomar el proyecto
 
+**Actual R263 PC completo; R264 físico pendiente de aprobación.**
+[Plan concreto](native-control-physical-plan-r264.md). CtrlProbe ID365219965,
+23.788bytes, SHA a2f0b5ed36b0eb524c23a97cee6ea83e87436d7260ec44dad8a4b5ccb67b1648.
+Source2b9f4c8567c7970486aca4ecdd71ed2c9af2ba7d072ed5f2c6aa26944858e667.
+169casos Lua/UI con nodo/registro simulados +13comandos reales al puenteS3;
+same core, ABI específicaS3, no prueba de writeRW4. Scratch retirado/módulos
+iguales. Reporte artifacts/emulator/control-r263-verified/summary.json.
+Primer fixture mark falló al habilitar RUN; corregido/reporte preservado, no C
+cargado en ese intento.24recursos paquete readback sinADB.
+Gates/prepare pasan sin socket; helper cerrado
+a37683c2de8f4324fbcc7f847a98c02c31e3f0516f7438d700250205cdf42513.
+No instalación, operación BT o nuevo nodoI/O físico en R263. No autorización
+R264 aún. Próximo: revisión/presencia≥50%, runner fijo nuevo para UNinstallr263,
+journalnative-control-r264.json fresco y finallygates cerrados; luego selección
+manual RUN C una vez. MARK/REG INFO/INIT/START/INPUT/STEP/PAUSE/RESUME/STOP/FINAL.
+13comandos acotados,ACKexactos; finalseq13STOPPEDheld0steps4edges5. Si falla,
+CTRL CODE automático, no otra write/STOP de recuperación/descarga/reintento.
+Sin nuevo ELF/shell/Timer/hilo. C residente234 queda cargado; STOP no rearma.
+Userok anterior solo autorizaba PC; no hardware nuevo. No reabrir pruebas viejas.
+
 **Actual R262 COMPLETADO: diez verdes y retorno/corona/menú/esferas normales.**
 Usuario«todos verdes. , otras watchfaces ok, corona ok,menu ok». No necesitaMODE/REGCODE,
 no reabrirparaobtenernúmero. Nativeopen/read32/EOF/frameIDLEx0/close/postkey64/FINAL pasan.

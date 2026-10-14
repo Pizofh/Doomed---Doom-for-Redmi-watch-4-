@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R263:** [Cliente de control preparado, hardware pendiente](native-control-physical-plan-r264.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+|13requests con ACK exacto terminan STOP, seq13/held0/steps4/edges5 | C real en S3 emulado, metadatos RW4/UI simulados | test-control-r263, ELF R230/core R229 | CONFIRMADO EN EMULADOR | Alta para este lote | Sí | No compatibilidad write RW4 demostrada |
+| Error/ACK incierto detiene lote sin reintento ni STOP a ciegas | Lua real, nodo/registro/widgets simulados |169escenarios R263 | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para casos | Sí | Sin timeout que interrumpa callback bloqueada |
+| Write/START/INPUT/STEP/PAUSE/RESUME/STOP funciona en C residente234 | RW4/M2315W1/FW2.2.86 | No ejecutado físicamente | SIN EVIDENCIA | Pendiente | No | Preparación no autoriza envío/ejecución |
+
 **Actual R262:** [Lectura nativa y comprobación canónica completadas](state-match-physical-plan-r262.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

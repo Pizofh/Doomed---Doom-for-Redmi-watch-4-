@@ -111,7 +111,12 @@ const specs = Object.freeze({
     sha256:'710562ea9139bcc346332318545b64b569317248144ff172c7592431fe19395c',
     sourceSha256:'15b6fd25b3114fc5d9a49100dc87bb3f1388de7ae26d2c6ed1b54fefa8be832b',
     sourceArtifact:'artifacts/state-match-r261/app/lua/main.lua',nativeCodeIncluded:false,
-    artifact:'artifacts/state-match-r261/StateMatch-id-only.face',journal:'state-match-r262.json'})
+    artifact:'artifacts/state-match-r261/StateMatch-id-only.face',journal:'state-match-r262.json'}),
+  r263:Object.freeze({variant:'r263',contentKind:'lua-resident-native-bounded-control',id:'365219965',size:23788,
+    sha256:'a2f0b5ed36b0eb524c23a97cee6ea83e87436d7260ec44dad8a4b5ccb67b1648',
+    sourceSha256:'2b9f4c8567c7970486aca4ecdd71ed2c9af2ba7d072ed5f2c6aa26944858e667',
+    sourceArtifact:'artifacts/control-r263/app/lua/main.lua',nativeCodeIncluded:false,
+    artifact:'artifacts/control-r263/CtrlProbe-id-only.face',journal:'native-control-r264.json'})
 });
 export function staticSpec(variant = 'r167') {
   if (typeof variant !== 'string' || !Object.hasOwn(specs,variant)) throw Error('StaticSpecRefused');
