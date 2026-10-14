@@ -70,7 +70,16 @@ export class StaticWatchfaceSession extends XiaomiSession {
       this.uploadParameters = {unknown2,resumePosition,chunkSize,md5Present:md5 !== null,
         md5Matches:md5 === null ? null : md5.equals(this.plan.md5())};
       if (unknown2 !== 0 || resumePosition !== 0 || (md5 !== null && !md5.equals(this.plan.md5()))) fail();
-      this.expectedParts = chunks(this.plan,chunkSize); this.phase = 'Uploading';
+      this.expectedParts = chunks(this.plan,chunkSize);
+      // Reserve the entire encrypted upload plus all six verification queries
+      // before sending any file bytes. MASS adds a 4-byte CCM tag + 11 header;
+      // queries add that framing plus their 2-byte command counter.
+      const uploadBytes = this.expectedParts.reduce((n,part) => n + part.length + 15,0);
+      const verificationBytes = 6 * (command(4,0).length + 17);
+      if (this.txBytes + uploadBytes + verificationBytes > this.txBudgetBytes) {
+        this.phase = 'UploadBudgetRejected'; fail();
+      }
+      this.phase = 'Uploading';
       return {unknown2,resumePosition,chunkSize,...(md5 !== null ? {md5} : {})};
     }
     const ack = one(fields(one(reply.parsed,6,2)),4,0);

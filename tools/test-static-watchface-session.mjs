@@ -7,7 +7,7 @@ import {EventEmitter} from 'node:events';
 import {PassThrough} from 'node:stream';
 import {hkdfSync,createHmac,createCipheriv,createDecipheriv,createHash,randomUUID} from 'node:crypto';
 import {fields,one,uint,bytes,decodeCommand,FrameReader,v1Frame,command} from './rw4-xiaomi-protocol.mjs';
-import {prepareStatic,crc32} from './static-watchface-transfer.mjs';
+import {prepareStatic,crc32,chunks} from './static-watchface-transfer.mjs';
 import {staticSpec,watchfaceVariants} from './static-watchface-spec.mjs';
 import {StaticJournal} from './static-watchface-journal.mjs';
 import {StaticWatchfaceSession,runStaticSession,createStaticPipe} from './static-watchface-session.mjs';
@@ -105,6 +105,7 @@ class Peer {
     }
     if (cmd.type === 4 && cmd.subtype === 4) { response(6,uint(5,this.scenario === 'install-reject' ? 2 : this.scenario === 'install-storage-reject' ? 3 : 0));return; }
     if (cmd.type === 22 && cmd.subtype === 0) {
+      this.uploadStartTxBytes = this.sentBytes;
       response(24,bytes(2,Buffer.concat([bytes(1,plan.md5()),uint(2,0),uint(4,this.scenario === 'resume' ? 5 : 0),uint(5,this.chunkSize)])));return;
     }
     assert.equal(cmd.type,4);assert.equal(cmd.subtype,2);
@@ -143,6 +144,13 @@ for (const chunkSize of [512,2048,4080]) {
   peer.journalFile = file;
   let journal = new StaticJournal(file,address,plan), key = Buffer.from(secret);
   const installed = await runStaticSession(pipe(peer),plan,key,journal);
+  const needed = peer.uploadStartTxBytes + chunks(plan,chunkSize).reduce((n,p)=>n+p.length+15,0) + 6*(command(4,0).length+17);
+  if (needed > 32768) {
+    assert.equal(installed.status,'StoppedNeedsReview');assert.equal(installed.protocolPhase,'UploadBudgetRejected');
+    assert.equal(installed.fileDataSendRequested,false);assert.equal(installed.transferPartsWritten,0);
+    assert.equal(peer.parts.length,0);assert(installed.closeConfirmed && installed.workerExitConfirmed);
+    assert(key.every(b=>b===0));journal.close();scenarios++;continue;
+  }
   assert.equal(installed.status,'RegisteredInactive');assert(installed.closeConfirmed && installed.workerExitConfirmed);
   assert.equal(installed.transferAcceptanceVerified,false);assert(key.every(b => b === 0));journal.close();
   // Another process-equivalent journal instance restores ownership, not a RAM receipt.
