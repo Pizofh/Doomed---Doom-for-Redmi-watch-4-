@@ -1,6 +1,15 @@
 # Retomar el proyecto
 
-**Actual R250,2026-10-14: StateRead instalada inactiva; READ C manual pendiente.**
+**Actual R250,2026-10-14: StateRead preflight falló; retorno normal confirmado.**
+Usuario inicialgrises/FRAME HEXsinpunto; MARKverde,REG INFOrojo,«frame final rojo»,restogris.
+REG INFO combina lectura/EOF/cierre/clasificación deproc y marcaantigua exacta/cierre.
+Código devuelve antesopenC conREG INFO/FINALrojo; OPENgris apoya no callbackspropios.
+No snapshot; causa/subfase desconocidos, no inferir ausencia de módulo o fallo de C.
+Si FRAME tambiénrojo, discrepanciaconrama que lo dejagris; conservarreporte.
+Usuario puedevolver/cambiar esfera/menúnormal. Marcaown persiste; ensayo consumido.
+Next separarchecks previos enPC, no repetir/rearmar/recargar/unload/STEP/STOP/reboot.
+
+**Instalación R250 anterior a la observación:**
 [Resultado](state-read-physical-result-r250.md). Usuario autorizó UN ensayo/presencia,
 pregunta con batería≥50%. Runner privado artifacts/state-read-r250-authorized consumido.
 ID365219972,20536bytes, paquete SHAde20e2c8a68d7148cecbb756a0245d6c357eb792cf220e198a276af455db80e9.

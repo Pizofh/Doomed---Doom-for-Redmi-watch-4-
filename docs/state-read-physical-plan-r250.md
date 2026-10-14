@@ -2,7 +2,8 @@
 
 2026-10-14. Usuario autorizó UN ensayo y presencia: «Sí, autorizo y puedo observar el reloj».
 Instalación inactiva completada; [resultado](state-read-physical-result-r250.md).
-READ C manual y retorno pendientes. La aprobación no permite repetir o retirar C.
+READ C manual se detuvo en REG INFO; usuario confirmó retorno normal.
+Ensayo consumido. La aprobación no permite repetir o retirar C.
 R247consumido con retorno normal;
 registro de rw4step234 reconstruido, estado interno no leído. Regla inicial exige
 revisión antes de callbacks C nuevos en hardware. No repetir StepC/ProcView,

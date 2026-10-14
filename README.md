@@ -1,9 +1,13 @@
 # DOOM en Redmi Watch 4
 
-**Actual R250:** [StateRead instalada sin activación](docs/state-read-physical-result-r250.md).
+**Actual R250:** [StateRead se detuvo antes de abrir C](docs/state-read-physical-result-r250.md).
+MARK verde, REG INFO/FINAL rojos; acceso nativo no demostrado. Usuario confirmó
+retorno, cambio de esfera y menú normales. Falta distinguir qué comprobación previa falló.
+
+Instalación previa sin activación:
 Un envío autorizado; catálogo16→17, esferas y selección anteriores conservadas.
-Socket, worker y permisos de envío cerrados. Pendiente READ C manual una vez
-y retorno a la esfera habitual; aún no se han probado estos callbacks físicos.
+Socket, worker y permisos de envío cerrados. Ensayo consumido;
+aún no se han probado estos callbacks físicos. No repetir StateRead.
 
 **Historial R249, PC:** [StateRead preparada](docs/state-read-r249.md): snapshot32bytes
 del módulo existente, sin carga/retirada o comandos de control. 47casos con
