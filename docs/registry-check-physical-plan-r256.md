@@ -1,7 +1,7 @@
 # R255/R256 — RegCheck, dos lecturas de metadata sin C
 
 2026-10-14. Usuario autorizó «ok» al único ensayo propuesto con observación y
-batería≥50%. Instalada inactiva; CHECK y retorno manual pendientes.
+batería≥50%. Instalación/CHECK completos y retorno normal confirmado.
 R254 snapshot/EOF/IDLE/cierre verdes,
 REG LAST/FINAL rojos; retorno habitual/menú/scroll/pulsación larga «todo ok»
 confirmado. No nueva operación física durante esta preparación.
@@ -96,4 +96,13 @@ helper cerrado reconstruido, testgates0sockets exitoso.
 Helper autorizado SHA256
 `7ac88b5a32a6bd70db879b62cc716470986f73e7b2a714271545f8bab1404493`.
 Evidencia privada `artifacts/registry-check-r256-authorized/`, runner consumido.
-No repetir instalación; CHECK una vez todavía pendiente.
+No repetir instalación/CHECK: ensayo consumido.
+
+## Observación física
+
+Foto:15verdes, LEN CODE004200420000000000000000 en dos líneas12dígitos. Ambas
+lecturas66bytes, formato00, bytes finales64..66cero, ninguna diferencia/errno;
+apertura/read/EOF/close reconocidos dos veces. Sin acceso C entre lecturas.
+Usuario confirma retorno/menu/cambio normal «ok». Rojo posterior a C de R254
+no reproducido; causa desconocida, no permiso de unload. [Siguiente R258](state-trace-physical-plan-r258.md)
+con detalle del post-registro en el mismo contexto de read C.

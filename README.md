@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R257:** [RegCheck obtuvo dos registros válidos e idénticos](docs/registry-check-physical-plan-r256.md),
+retorno normal. [StateTrace preparada](docs/state-trace-physical-plan-r258.md) conserva el
+diagnóstico posterior junto al frame C;48casos con simulaciones pasan. Sin nuevo envío.
+
 **Actual R254:** [Lua recibió y cerró un snapshot del C residente](docs/state-read-physical-result-r254.md).
 Frame32bytes válido y estado inicial en foto; retorno normal confirmado. La comprobación
 posterior del registro falló; [RegCheck preparada](docs/registry-check-physical-plan-r256.md)

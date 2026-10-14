@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R256/R257:** [Dos registros estables y retorno normal](registry-check-physical-plan-r256.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Dos lecturas procfs66bytes válidas/idénticas y cierre, sin C entre ellas | RW4/M2315W1/FW2.2.86 | Foto15verdes,004200420000000000000000 | CONFIRMADO EN RW4 | Alta para ensayo | Sí, usuario | No reprodujo causa del rojo R254 |
+| Retorno normal tras RegCheck | Misma unidad | Usuario«ok» | CONFIRMADO EN RW4 | Alta para ciclo | Sí | No unload/recovery integral probado |
+| StateTrace distingue post-registro y MODE no hace I/O | Lua S3/tmpfs real, nodo/registro/widgets simulados |48casos R257 | CONFIRMADO EN EMULADOR CON SIMULACIONES | Alta para casos | Sí | No nuevo envío físico |
+
 **Actual R254:** [Snapshot propio C/EOF/cierre, comprobación posterior fallida](state-read-physical-result-r254.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

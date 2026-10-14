@@ -1,5 +1,19 @@
 # Retomar el proyecto
 
+**Actual R257: RegCheck15verdes/retorno normal; StateTrace preparada NO autorizada/enviada.**
+FotoR256004200420000000000000000, dosregistros66Bidénticos/shape00/EOFcloseOK;
+usuario«ok»habitual/menu/cambio. RojoR254no reproducido, causaUNKNOWN.
+[PlanR258](state-trace-physical-plan-r258.md). StateTraceID365219968,23996B,4barrasMORADAS,
+SHA6f19fd203b8613fad9d9496e14115e0a0841522ac9e78fcc69cebc9d8349a9bf,
+source97423a164996f46a0a5a5d2fe4a958216f542c5dad0280121230fa10a93b9e76.
+MismoC snapshotread32EOFclose; postproc flags/code/lens/masks/diff/errno, sinrelajarparser.
+READCUNAvez; MODE alterna FRAME HEX64/REG CODE24 soloRAMsinIO; referencia004200421F00000000000000.
+Flags1F=open/read/EOF/close/shape.48casosS3/tmpfsreal/noderegwidgetssimulados pasan,
+inclnuevotail + MODEsinIO. Reportartifacts/emulator/state-trace-r257-final,
+paqueteartifacts/state-trace-r257/StateTrace-id-only.face,24resourcesnoADBreadback.
+Ownmarker15Bpersiste; no oldfiles/nodewrite/loadunload/shell/Timer. Gatescerrados;
+journalstate-trace-r258.json no usado. Next revisiónUNensayo/presencia>=50%.
+
 **Actual R256: RegCheck instalada inactiva; CHECK manual pendiente.**
 Usuario«ok»autorizaUNensayo/presencia>=50%; runnerregistry-check-r256-authorized consumido.
 InstallRegisteredInactive10partes/stream20234/TX20701/19TX16RX, socketworkerclosed/exit0.
