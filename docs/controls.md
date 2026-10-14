@@ -1,5 +1,11 @@
 # Controles táctiles propuestos
 
+**Actual R226:** [Usuario confirma holds/EXIT/retorno stock en RW4](held-input-physical-result-r225.md).
+HoldPad pasó el ciclo solicitado según respuesta global; la pulsación larga
+durante controles deja de ser un bloqueo observado para este contenedor.
+Solo acciones Lua, sin C/Doom. Layout final, foco durante hold, comodidad y
+movimiento+disparo simultáneos siguen pendientes. No reabrir el ensayo completado.
+
 **R224:** [S3 pasó holds con longpress stock ON y selector tras EXIT](held-input-r224.md).
 Cuatro contactos de3,3s, releases y EXIT reales; script solo toca sus objetos.
 RW4 pendiente de [ensayo R225](held-input-physical-plan-r225.md), gates cerrados.
@@ -17,8 +23,9 @@ y después de EXIT, conservar navegación/cambio de esfera normales. MENU/EXIT
 propios y liberar teclas ante pérdida de foco siguen siendo obligatorios; no
 basta desactivar globalmente el cambio de esferas para ocultar el conflicto.
 
-PRESS_LOCK y flags de propagación del prototipo S3 afectan objetos propios;
-no demuestran interceptar el detector de pulsación larga del sistema RW4.
+PRESS_LOCK y flags del prototipo S3 por sí solos no demostraban el comportamiento
+RW4. R226 añade confirmación física de este paquete; no aisla qué flag fue
+decisivo ni demuestra todos los gestos del sistema.
 Ensayos visuales anteriores con el toggle de longpress del emulador en OFF no
 cuentan como prueba de supresión en juego. Hace falta contacto sostenido con
 la función stock habilitada y retorno normal, primero PC y después bajo plan
@@ -27,7 +34,7 @@ criterio de input; su ensayo físico R222 ya completado permanece sin cambios.
 
 **R68:** [Panel stock y STOP manteniendo FIRE](doom-focus-emulator.md) probados con Doom. Panel desde y440 pausa motor, regreso exige RESUME; STOP retira todo antes de soltar FIRE. Abrir panel con acción aún mantenida y ergonomía física no probados. No confundir la salida cooperativa desde consola del emulador con un control disponible en el reloj físico.
 
-**Actual R67:** [Controles de Doom original probados](doom-ui-emulator.md): MOVE permite avanzar/girar, FIRE consume munición real, MENU/RESUME/EXIT funcionan. Layout actual: imagen x35/y40/320×200, pad x20/y285/210×140, FIRE x245/y285/125×85, MENU x245/y385/125×40; margen y440 libre para navegación stock. Un dedo, sin corona/multitouch/MOVE+FIRE simultáneos. La tabla inferior y ensayos del patrón son históricos; comodidad física, USAR y foco con contacto mantenido siguen pendientes. El motor conserva su inercia/fricción original: KEYUP no equivale a anular su momentum inmediatamente.
+**Historial R67:** [Controles de Doom original probados](doom-ui-emulator.md): MOVE permite avanzar/girar, FIRE consume munición real, MENU/RESUME/EXIT funcionan. Layout actual del port S3: imagen x35/y40/320×200, pad x20/y285/210×140, FIRE x245/y285/125×85, MENU x245/y385/125×40; margen y440 libre para navegación stock. Un dedo, sin corona/multitouch/MOVE+FIRE simultáneos. La tabla inferior y ensayos del patrón son históricos; comodidad física, USAR y foco con contacto mantenido siguen pendientes. El motor conserva su inercia/fricción original: KEYUP no equivale a anular su momentum inmediatamente.
 
 Estado: diseño con [prototipo mantenido validado en PC/emulador](native-controls-emulator.md). No implementado ni validado en el M2315W1. El usuario delega la elección y pide evitar controles incómodos; la comodidad es un criterio de aceptación, no un resultado demostrado.
 

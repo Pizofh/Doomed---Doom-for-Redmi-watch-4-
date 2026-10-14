@@ -1,4 +1,10 @@
-# R225 — HoldPad instalada, observación manual pendiente
+# R225/R226 — HoldPad y retorno normal confirmados en RW4
+
+**Resultado R226:** tras las instrucciones de cuatro contactos sostenidos,
+liberación, EXIT, selector y vuelta a la habitual, el usuario respondió:
+«todo funciona al 100, super bien :D esto es muy bueno».
+Se registra como confirmación del ciclo solicitado en M2315W1/FW2.2.86.
+Ensayo completado; no autorización para repetirlo o instalar otro payload.
 
 2026-10-13. Usuario autorizó [plan R225](held-input-physical-plan-r225.md):
 «Sí, autorizo y puedo observar el reloj». Solicitud incluía batería≥50%; se
@@ -35,7 +41,7 @@ install-report, inventory-report y comparison; sin claves/MAC/serial/logs crudos
 publicados. No SET/autoactivación, DELETE, firmware, reset, cambio de vínculo,
 shell o C desde PC. Solo almacenamiento del paquete stock y consultas previstas.
 
-## Pendiente de observación
+## Historial: observación solicitada tras instalar
 
 Seleccionar HoldPad (cinco barras naranjas) una vez, comprobar cinco grises y
 START. Si inicial rojo/pantalla fallida/etiquetas ausentes, no START ni repetir.
@@ -46,6 +52,26 @@ abrir selector; volver a habitual y confirmar menús/scroll/pulsación larga.
 Si selector no abre, Ajustes→Esferas como recuperación parcial conocida.
 No reabrir o repetir START ni pruebas C anteriores.
 
-**Todavía no probado físicamente:** controles sostenidos, liberación, EXIT y
-selector recuperado. S3 pasó ese ciclo; no equivale al RW4. No métricas de
-ergonomía/latencia/FPS ni native input, sandbox o recuperación integral nuevos.
+En ese momento no se habían observado controles/EXIT/selector físicos; el
+resultado R226 siguiente completa esa observación según respuesta del usuario.
+
+## R226 — alcance de la confirmación
+
+La respuesta global confirma la prueba indicada: sostener controles sin abrir
+el selector, liberar al soltar, salir y recuperar navegación/cambio normales.
+No constituye una transcripción individual de los cinco colores ni medición
+cronometrada de cada hold; no se recogieron logs de runtime del reloj. Tampoco
+demuestra pérdida de foco durante contacto, cancelación física fuera de zona,
+multitouch, comodidad en muñeca, corona o sesiones prolongadas.
+
+La máscara de acciones vive en Lua: no se enviaron teclas a C ni al motor.
+El script solo modifica objetos propios; no desactiva el ajuste stock global.
+Con R222 se tienen dos piezas físicas separadas: imágenes generadas en C y
+animadas por Lua, y ahora contacto sostenido/salida stock. Falta unirlas en un
+backend C que siga atendiendo input sin bloquear la UI. La carga anterior de
+C fue síncrona y finita; no implica un worker residente ya validado en RW4.
+
+La watchface es un contenedor viable para seguir desarrollando este recorrido;
+no significa Doom jugable, app separada, sandbox o recuperación integral nuevos.
+El paquete sigue almacenado; START solo se limita por VM, no por marca en flash.
+No reabrir para repetir ni retirar automáticamente. Gates siguen cerrados.

@@ -1,6 +1,14 @@
 # Matriz de evidencia
 
-**Actual R225:** [HoldPad instalada, UI pendiente](held-input-physical-result-r225.md).
+**Actual R226:** [HoldPad ciclo confirmado por usuario](held-input-physical-result-r225.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Controles sostenidos, liberación, EXIT y retorno stock funcionan en HoldPad | M2315W1/FW2.2.86 | Tras instrucciones del ciclo, usuario: «todo funciona al 100» | CONFIRMADO EN RW4 | Alta para observación global | Sí, usuario | Sin transcripción de colores/duraciones ni logs runtime |
+| Watchface propia permite continuar la integración del juego con este input | Misma unidad | HoldPad R226 y display Lua/C R222, ensayos separados | INFERENCIA RAZONABLE | Media | Componentes separados | No significa backend C concurrente o Doom físico demostrado |
+| C/Doom consume esas acciones físicas sin bloquear UI | Misma unidad | HoldPad no incluye C ni consumidor nativo | SIN EVIDENCIA | Desconocida | No | Siguiente checkpoint PC; no nuevo hardware autorizado |
+
+**Historial R225:** [HoldPad instalada, UI entonces pendiente](held-input-physical-result-r225.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

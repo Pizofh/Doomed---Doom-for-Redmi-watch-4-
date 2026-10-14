@@ -1,9 +1,10 @@
 # R225 — plan autorizado: HoldPad
 
 2026-10-13. **Autorizado e instalado sin activación; gates cerrados de nuevo.
-Observación manual pendiente.** Usuario: «Sí, autorizo y puedo observar el reloj».
+R226: usuario confirma el ciclo de controles/EXIT/retorno funcionando.**
+Usuario: «Sí, autorizo y puedo observar el reloj».
 [Resultado de instalación](held-input-physical-result-r225.md).
-La autorización cubre este ensayo único, no reintentos o nuevos payloads.
+La autorización cubrió este ensayo único completado, no reintentos o nuevos payloads.
 [Resultados PC/S3](held-input-r224.md). La revisión cubre un payload nuevo,
 conforme al gate físico de la instrucción inicial del usuario.
 

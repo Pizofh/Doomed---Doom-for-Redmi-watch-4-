@@ -1,6 +1,18 @@
 # Retomar el proyecto
 
-**Actual R225, 2026-10-13:** [HoldPad instalada sin activación; manual pendiente](held-input-physical-result-r225.md).
+**Actual R226, 2026-10-13:** [HoldPad controles/EXIT/retorno confirmados](held-input-physical-result-r225.md).
+Usuario tras instrucciones completas: «todo funciona al 100, super bien :D esto
+es muy bueno». Confirmación global del ciclo indicado; sin colores individuales,
+medición temporal/logs runtime. Watchface viable para continuar este recorrido;
+no Doom/inputC/ergonomía/multitouch/corona/workerRW4/sandbox/recovery probados.
+Ensayo único completado, NO repetir/reabrir/instalar nuevo por permiso previo.
+Gatescerrados Nodefalse/r167,C#false; helper4d4fd3a822d5d5bb6e494c77e7578bcb4aaff8572254ae2b2568f01a185e88f0.
+JournalRegistered/8parts/sinlock; fuente/paquete/ID anteriores intactos.
+SiguientePC [backend C con UI/input vivo](rw4-input-backend-next.md): auditar
+bridge y scheduling/lifecycle específicos2.2.86, sin reutilizar direcciones S3
+ni cargar C desde este feedback. No nuevoBT/USB/DELETE/reset.
+
+**Historial R225, 2026-10-13:** [HoldPad instalada sin activación; manual pendiente](held-input-physical-result-r225.md).
 Usuario autorizó ensayo/presencia/batería≥50%. Un installr224 RegisteredInactive,
 8partes/TX16045/17TX/16RX; GET independiente15→16, anteriores IDs/active/canDelete
 y activa365210175 conservados, propia365219979 inactive/removable. Ambos sockets/
