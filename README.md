@@ -1,11 +1,17 @@
 # DOOM en Redmi Watch 4
 
-**Actual R220/R221:** [NativeFrames lista en PC/emulador](docs/native-frames-r220.md).
+**Actual R221:** [NativeFrames instalada tras autorización](docs/native-frames-physical-result-r221.md).
+Un envío,15partes; propia inactiva, las14entradas anteriores y selección conservadas.
+Gates cerrados de nuevo. Pendientes RUN C manual, imagen/animación/EXIT y retorno:
+instalar no demuestra ejecución. Pulsación larga durante controles de Doom aún
+pendiente. [Plan aprobado](docs/native-frames-physical-plan-r221.md).
+
+**Preparación R220:** [NativeFrames lista en PC/emulador](docs/native-frames-r220.md).
 Una prueba reúne generación de cuatro imágenes en C, animación Lua/LVGL y salida.
 C específico S3 generó PNG válidos; UI real mostró animación/EXIT y retorno stock.
 24casos de carrier y transferencia offline pasan. Paquete29.704bytes,
-ID365219980; [ensayo físico pendiente de revisión](docs/native-frames-physical-plan-r221.md).
-Gates cerrados, ningún nuevo envío al reloj. Son frames precalculados, no Doom/FPS.
+ID365219980; estado posterior de instalación arriba.
+Son frames precalculados, no Doom/FPS.
 
 **Historial R217:** [C lee/escribe un archivo y se retira en el RW4 físico](docs/native-log-physical-result-r216.md).
 Usuario comunica FILE/MARK/C TEXT/UNLOAD/END verdes y navegación/cambio de

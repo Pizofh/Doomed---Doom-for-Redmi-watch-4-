@@ -1,6 +1,22 @@
 # Retomar el proyecto
 
-**Actual R220/R221, 2026-10-13:** [NativeFrames PC/emulador lista](native-frames-r220.md).
+**Actual R221, 2026-10-13:** [NativeFrames instalada](native-frames-physical-result-r221.md).
+Usuario autorizó UN ensayo y presencia. Install r220 RegisteredInactive,
+15partes, TX30332/24framesTX/16RX; GET independiente14→15 con anteriores IDs/
+flags y activa365210175 conservados. Own365219980 inactive/removable. Socket y
+workerscerrados. LuaImage993 yaausenteANTES de este envío; no nuestra retirada.
+Gates Nodefalse/r167,C#false restauradosenfinally/rebuild/test0sockets.
+Helperclosed b3a53acdcfb081758f381a16a50d12fa8eba1ef73a42a9536e5342a17f978466.
+Journalnative-frames-r221.json Registered/15parts/sinlock; archiveprivado
+artifacts/native-frames-r221-authorized. NOejecutarhelpertemporalarchivado.
+Pendiente respuesta a NativeFrames/4barrascian/cincogris/RUN C UNavez, observar
+animacióncolores/barra, EXIT trasvarioscambios oauto-stop~10s, cincoindicadores
+finales yvolvera habitualconmenus/scroll/longpressnormales. EXITrojodeinicio/
+etiquetasausentes/fallo NOclick/retry. No másBT/envío/DELETE/reset/otraactivación.
+Instalar NOpruebaC/display/Timer/retiroFS. LongpressencontrolesDoom NOprobado,
+[criterioobligatorio](controls.md) registradoe9fa80c; noensayarloenestaDemo.
+
+**Historial de preparación R220:** [NativeFrames PC/emulador lista](native-frames-r220.md).
 Usuario pidió acelerar agrupando pruebas; autorizó preparar PC, NO nuevo envío.
 [Plan fijo pendiente de revisión](native-frames-physical-plan-r221.md).
 Siguiente: pedir UN ensayo con presencia, paquete fijo, RUN C una vez/observar

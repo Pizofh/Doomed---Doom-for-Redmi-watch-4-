@@ -1,6 +1,14 @@
 # Matriz de evidencia
 
-**Actual R220/R221:** [NativeFrames preparada; sin envío físico](native-frames-r220.md).
+**Actual R221:** [NativeFrames instalada; observación pendiente](native-frames-physical-result-r221.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| NativeFrames registrada sin activar/con entradas previas conservadas | M2315W1/FW2.2.86 | Un envío autorizado15partes y GET independiente comparado contra journal | CONFIRMADO EN RW4 | Alta | Sí, transporte real |14→15; selección365210175 conservada |
+| Gates cerrados después del envío | PC | Restauración/rebuild/test entradas cerradas | CONFIRMADO EN PC | Alta | Sí, cero sockets en test | Socket/worker de install y GET cerrados |
+| Generación/animación/EXIT de NativeFrames funciona físicamente | M2315W1/FW2.2.86 | Selección/click/observación aún pendientes | SIN EVIDENCIA TODAVÍA | Desconocida | No | No deducir ejecución/cleanup del registro del paquete |
+
+**Preparación R220:** [NativeFrames preparada antes del envío físico](native-frames-r220.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
 |---|---|---|---|---|---|---|

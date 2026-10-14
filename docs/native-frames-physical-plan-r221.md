@@ -1,14 +1,16 @@
-# R221 — revisión pendiente: NativeFrames, generación/display/salida juntos
+# R221 — plan aprobado: NativeFrames, generación/display/salida juntos
 
-2026-10-13. **NO AUTORIZADO NI ENVIADO. Gates cerrados.** La autorización de
-NativeLog fue un ensayo ya completado. «Dale» autorizó preparar este nuevo
-paquete en PC; el acuerdo conserva revisión antes de enviarlo al reloj.
+2026-10-13. **Autorizado e instalado sin activación. Gates cerrados de nuevo;
+selección/RUN C/animación/EXIT/retorno manuales pendientes.**
+Usuario: «Sí, autorizo el ensayo y puedo observar el reloj».
+[Resultado de instalación](native-frames-physical-result-r221.md).
+La autorización cubre este ensayo único, sin reintentos o nuevos payloads.
 [Diseño y validaciones](native-frames-r220.md).
 
 Preparación completada: C real S3 genera PNG válidos/byte exactos y se retira;
 24casos de carrier con I/O real/backend simulado; UI stock S3 muestra cambios
 de frame y EXIT real, con backend nativo/cleanup simulado;32casos de sesión,
-12de transferencia y gates cerrados. No ejecución equivalente RW4 aún.
+12de transferencia y gates cerrados. Ejecución equivalente RW4 aún pendiente.
 
 ## Precondiciones y objetos fijos
 
@@ -22,7 +24,8 @@ NativeFrames ID365219980/nuevo,29.704bytes; SHA256
 ELF2780bytes SHA256
 `80b75ebe516a80a931ac30e93a4d30cc76eb137e8bc7d57195091a680ad5f636`.
 Módulo rw4framesr218, raíz P=/data/app/watchface/market/365219980/lua/.
-Journal nuevo tools/local/pc-rfcomm/native-frames-r221.json, sin previo/lock.
+Journal tools/local/pc-rfcomm/native-frames-r221.json, inicialmente sin previo/lock,
+ahora Registered/15partes/sin lock.
 Paquete anterior/FirstC2/NativeLog y sus marcas intactos; no reemplazo/autoactivación.
 
 Backup limitado: paquete/fuentes propios/journal y catálogo previo del instalador;
