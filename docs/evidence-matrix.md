@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R242:** [ModInfo instalada; CHECK pendiente](module-registry-physical-result-r242.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Stock registra ModInfo nueva/inactiva, selección anterior intacta | RW4/M2315W1/FW2.2.86 | Install + GET14→15/IDs y flags conservados | CONFIRMADO EN RW4 | Alta para catálogo | Sí | No ejecución del lector ni ACK final explícito |
+| Registro /proc/modules accesible/reconocido desde este Lua | Misma unidad | CHECK todavía pendiente | SIN EVIDENCIA | Desconocida | No | No inferir estado de C |
+| Envíos cerrados y sockets/worker terminados tras instalar | PC/cliente | Finally/build/gates0sockets y dos cierres/exit0 | CONFIRMADO EN PC | Alta | Sí | No nueva escritura automática |
+
 **Actual R241, solo PC:** [ModInfo preparada](module-registry-ui-r241.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

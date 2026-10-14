@@ -1,6 +1,9 @@
-# R242 — plan de ensayo ModInfo, pendiente de autorización
+# R242 — ensayo ModInfo autorizado; instalación completada
 
-2026-10-14. Paquete nuevo, todavía **no autorizado ni enviado**. La regla inicial
+2026-10-14. **Autorizado e instalado inactivo; CHECK manual pendiente.** Usuario:
+«Sí, autorizo y puedo observar el reloj». [Resultado](module-registry-physical-result-r242.md).
+Un envío consumido, sin permiso para repetirlo; CHECK único y retorno pendientes.
+La regla inicial
 del usuario exige plan explícito y revisión antes de otro payload físico.
 El ensayo StepDiag R239 está consumido; retorno habitual/menús/scroll/pulsación
 larga confirmado. StepC puede seguir residente. Nada de apertura de su nodo,

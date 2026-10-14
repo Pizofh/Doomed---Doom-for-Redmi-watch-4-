@@ -1,8 +1,12 @@
 # DOOM en Redmi Watch 4
 
+**Actual R242:** [ModInfo instalada e inactiva](docs/module-registry-physical-result-r242.md),
+catálogo14→15 y selección anterior conservada. Envío cerrado; CHECK manual pendiente.
+Todavía no hay resultado sobre el registro o la residencia de StepC.
+
 **Actual R241, PC:** [ModInfo empaquetada y validada](docs/module-registry-ui-r241.md):
 lectura de registro sin shell/C, 38 casos del lector y17 de UI con simulaciones.
-Paquete15792bytes; envío cerrado. [Plan R242 pendiente de autorización](docs/module-registry-physical-plan-r242.md).
+Paquete15792bytes; envío cerrado. [Plan R242 autorizado](docs/module-registry-physical-plan-r242.md).
 
 **R240:** [StepDiag completada, retorno normal](docs/step-diagnostic-physical-result-r239.md).
 PACK/UNPACK, archivos y marca propios pasaron; `lsmod` no se reconoció.

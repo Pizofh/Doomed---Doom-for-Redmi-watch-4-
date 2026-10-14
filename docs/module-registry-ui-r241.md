@@ -1,5 +1,9 @@
 # R241 — ModInfo preparada, solo PC/emulador
 
+**Actualización R242:** paquete posteriormente autorizado e instalado inactivo;
+[CHECK manual pendiente](module-registry-physical-result-r242.md). Lo siguiente
+documenta la preparación previa al envío, no el estado actual del ensayo.
+
 2026-10-14. [Investigación R240](module-registry-r240.md) integrada en un paquete
 Lua/PNG nuevo. **No instalado ni autorizado físicamente.** La causa del fallo
 de StepC y su residencia siguen desconocidas; no se abre su nodo o ejecuta C.

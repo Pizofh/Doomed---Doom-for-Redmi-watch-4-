@@ -1,6 +1,21 @@
 # Retomar el proyecto
 
-**Actual R241,2026-10-14: ModInfo empaquetada, NO autorizado/enviado.**
+**Actual R242,2026-10-14: ModInfo instalada, CHECK manual pendiente.**
+[Resultado](module-registry-physical-result-r242.md). Usuario autoriza1ensayo y presencia;
+pregunta>=50% batería, afirmaciónregistrada. UN installRegisteredInactive8partes,
+stream15850/TX16285/17TX16RX, preflightmodeloFW2.2.86, sinSET/DELETE/retry.
+Socket/workerclose/exit0, transferAcceptanceVerifiedfalse. GETindep14→15,
+previosIDs/flagsintactos, activa365210175 conservada, ModInfoinactive/removable.
+Journal module-registry-r242.json Registered8/sinlock.
+Artifacts privados module-registry-r242-authorized, runnerconsumido no reejecutar.
+Helper autorizado6c66b77a4461801963359042dca33d6905e8ea97cf164083cdcec5e37570e705.
+FinallyNodefalse/r167/C#false; helpercerrado actual
+c9af7995a379ebd80aae1699170f0bc134891b3de9ae23f348cc7deacab38657; gates0sockets.
+Nextusuario ModInfo2barrasNARANJAS, MOD INFO/15grises/CHECK. RojoFINALinicial/faltaUI
+no CHECK. CHECKuna vez/reportarrojosgrisesamarillos; luegohabitual/menus/scroll/longpress.
+EstadoCStepC DESCONOCIDO. Sinproc/shell/Cload/unload desdePC; no reabrir/rearmar/DELETE/reboot.
+
+**Historial R241,2026-10-14: preparación previa a autorización/envío R242.**
 [UI/validación](module-registry-ui-r241.md), [plan físico R242](module-registry-physical-plan-r242.md).
 ID365219975,15792B, artifacts/registry-r241/ModInfo-id-only.face,
 SHAdf32945c91dfa484ce573164ee38daf1bdfe6a05aa9a873a7b172fa0e2b56f99.
