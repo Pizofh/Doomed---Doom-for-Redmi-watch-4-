@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R266 detenido:** [Timeout al confirmar ExitC](docs/native-exit-physical-plan-r266.md).
+Un envío; catálogo posterior conserva las12esferas previas y ExitC no aparece.
+Gates cerrados, sin rmmod/reintento. Pendiente comprobar normalidad visual.
+
 **Actual R265 preparado:** [ExitC: retirar el módulo C detenido](docs/native-exit-physical-plan-r266.md).
 68casos y retirada real S3 pasan; paquete24.348bytes/gates cerrados. Pendiente
 revisión física nueva; no rmmod/instalación en RW4 todavía.

@@ -1,5 +1,23 @@
 # Retomar el proyecto
 
+**Actual R266: intento único con timeout, ExitC ausente del catálogo.**
+Usuario autorizópresencia≥50%; runnerexit-r266-authorized consumido.
+INSTALLstatus0/upload0resume0chunk2048MD5matching.12parteslocales/TX24898/
+20TX14RX/phaseSent; primera consultaGETdeesa sesiónTimeout. No asumircausa,
+archivo no escrito o instalación correcta. Journalnative-exit-r266.json
+Uncertain/previousPartWritten/12/registeredfalse/sinlock. Socket/workerexit0;
+finallygatescerradosrebuild/test0sockets. Ningúnrmmod/CdesdePC.
+GETindependiente Complete12→12 vsantesDEESTEintento: IDsflags/activa365219965
+preservados, ExitC365219964ausente. No eliminaciónporinstalador; antesya12.
+Evidence artifacts/exit-r266-authorized/install-report.json/inventory-followup.json.
+Helper cerradoactuala9af51d07515f1d592751702ab70123c0aa63ea8bb5a49ce8a1f7c08a5083195.
+Pregunta pendiente usuario: esfera/menús normales. No seleccionarExitC/pruebasC,
+reenviar, borrar/rearmar marca o journal, reiniciar o cambiarvínculo.
+No autorización para segundo envío (único intento consumido). Retirada234aún
+sin prueba física, móduloúltimoestado STOPPEDR264; no reabrir para confirmar.
+[Plan/resultadoR266](native-exit-physical-plan-r266.md). InvestigaciónPCposible;
+nueva acción física requiere revisión concreta, no inventar falloLua/espacio.
+
 **Actual R265 PC completo; R266 pendiente de autorización física.**
 [Plan concreto](native-exit-physical-plan-r266.md). ExitC ID365219964,24348bytes,
 SHA8c69e4003c1caef9eed58902cfc5d45112d5b9cf21f7ccdab8c1b379284da3e8;

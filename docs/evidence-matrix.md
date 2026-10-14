@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R266:** [Registro de ExitC sin confirmar tras timeout](native-exit-physical-plan-r266.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| INSTALL aceptado,12partes enviadas localmente; consulta posterior de la sesión timeout | RW4/M2315W1/FW2.2.86 | install-report R266, journalUncertain12 | CONFIRMADO EN RW4/TRANSPORTE LOCAL | Alta para mensajes | Sí | No aceptación final, causa o integridad del archivo probadas |
+| Catálogo independiente conserva12entradas/flags/activa previa, ExitC ausente | Misma unidad | GETComplete posterior y comparación con preflight | CONFIRMADO EN RW4 | Alta para consulta | Sí | No prueba de restos en storage ni salud visual |
+| Se ejecutó retirada/uninit234 durante R266 | Misma unidad | No hubo selección manual/solicitud rmmod | SIN EVIDENCIA; NO SOLICITADO | Pendiente | No | Instalación no confirmada impide continuar el ensayo |
+
 **Actual R265 preparado:** [Retirada del módulo detenido](native-exit-physical-plan-r266.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

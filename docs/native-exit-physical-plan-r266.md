@@ -1,6 +1,8 @@
 # R265/R266 — retirar el puente C detenido
 
-Estado: preparado en PC, **sin autorización ni envío físico nuevo**.
+Estado R266: usuario autorizó «Sí, autorizo y puedo observar el reloj».
+**Un intento de instalación terminó en timeout; ExitC no figura en el catálogo
+posterior. No seleccionar ni ejecutar EXIT C.** Retorno visual pendiente.
 R264 terminó con diez verdes y menú/esferas normales. El módulo234 quedó
 STOPPED, no descargado; no repetir CtrlProbe ni rearmar marcas.
 
@@ -67,7 +69,7 @@ node tools/pc-static-watchface.mjs prepare r265
 ```
 
 Herramientas rechazan reportes previos para no sobrescribir evidencia.
-Helper cerrado preparado10d248e0ef9458892db90d60c59f5258307427b80fd3f9a7546932dff3e6cd24;
+Helper cerrado de preparación10d248e0ef9458892db90d60c59f5258307427b80fd3f9a7546932dff3e6cd24;
 prepare,12escenarios transferencia y gates0sockets pasan. Sin operación física.
 
 ## Único ensayo propuesto, tras revisión del usuario
@@ -137,3 +139,28 @@ Recuperación parcial conocida: volver a habitual por Ajustes si responde.
 Retirada no se revierte automáticamente: no recrear marca/ELF originales ya
 desaparecidos o cargar otro modelo. Ante fallo revisar estado; no flash, boot,
 particiones, exploits, JTAG/SWD o reinicio automático. Firmware stock preservado.
+
+## Intento R266 y consulta posterior
+
+Runner fijo `artifacts/exit-r266-authorized/run-install.mjs` consumido. INSTALL
+aceptó código0; upload devolvió unknown2=0/resume0/chunk2048/MD5 coincidente con
+la solicitud. Se completaron12envíos locales de partes, TX24.898bytes,
+20TX/14RX; faseSent. La primera consulta de catálogo de esa sesión venció su
+espera: StoppedNeedsReview/Timeout, no confirmación de registro/aceptación final.
+Esto no prueba que el almacenamiento esté sin modificar ni explica la causa.
+No etiquetar como falta de espacio, paquete inválido o fallo de Lua sin evidencia.
+
+Socket/worker cerrados/exit0, sin error nativo. Finally gates cerrados y test
+0sockets pasó. Journalnative-exit-r266.json Uncertain/previousPhasePartWritten,
+parts12/registeredVerifiedfalse/sin lock; **no reusar ni reintentar**.
+Helper autorizado d36b6805fee1fd5ebdf1ad85064e27f7aee45c8cba9d50be9a0a0968cf33d1d7;
+helper cerrado posterior a9af51d07515f1d592751702ab70123c0aa63ea8bb5a49ce8a1f7c08a5083195.
+
+Un GET independiente posterior Complete:12→12 respecto del preflight de ESTE
+intento, IDs/flags/activa365219965 conservados, propia365219964ausente. Estos
+12ya eran el inventario previo al envío; no atribuir la diferencia con14del
+checkpoint anterior a esta instalación. Registro propio no confirmado; restos
+del paquete en storage no inspeccionados. La consulta cerró socket/worker;
+sin nueva transferencia, SET/DELETE o C/uninit/rmmod desde PC.
+Evidencia privada install-report.json y inventory-followup.json.
+Falta confirmación visual del usuario; no nueva prueba física automática.
