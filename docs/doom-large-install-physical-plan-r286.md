@@ -1,6 +1,10 @@
-# R286: propuesta de instalación grande, pendiente de autorización
+# R286: envío autorizado, detenido antes de enviar el archivo
 
-**No ejecutada.** Instalación de archivos, sin activación ni ejecución de C/Doom.
+**Autorización consumida.** INSTALL aceptado; parser falló en UploadIntent,
+cero partes MASS; conexión/worker cerrados, gates restaurados. Usuario confirma
+esfera/menús normales. [Resultado y siguiente propuesta](doom-large-install-result-r287.md).
+La secuencia de abajo documenta el intento, no autoriza repetirlo.
+Instalación de archivos, sin activación ni ejecución de C/Doom.
 No reutilizar aprobaciones de MemInfo, módulos o esferas anteriores. El usuario
 debe poder observar el reloj, batería≥50%, menús normales y sin OTA en curso.
 

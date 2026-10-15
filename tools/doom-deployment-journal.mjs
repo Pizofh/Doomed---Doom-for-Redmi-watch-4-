@@ -32,29 +32,35 @@ function upload(value,plan){
 const transitions={Created:['InstallIntent'],InstallIntent:['UploadIntent'],UploadIntent:['Uploading'],Uploading:['SentNotVerified'],SentNotVerified:['SentNotVerified','RegisteredInactive','UnexpectedActivation','UnexpectedSelection','RegisteredNotRemovable']};
 export class DoomDeploymentJournal{
  #fd=null;#lock=null;#token=randomUUID();#key;#tag;#plan;#record;#lastHash='0'.repeat(64);#file;#lockFile;#resume=null;
- constructor(plan,identity,{directory:where=defaultDirectory,resume=false}={}){
-  packageCopy(plan);const binding=identities.get(identity);if(!binding||typeof resume!=='boolean')fail();
+ constructor(plan,identity,{directory:where=defaultDirectory,resume=false,retryWithoutData=false}={}){
+  packageCopy(plan);const binding=identities.get(identity);if(!binding||typeof resume!=='boolean'||typeof retryWithoutData!=='boolean'||resume&&retryWithoutData)fail();
   const dir=directory(where);this.#file=path.join(dir,'transfer.jsonl');this.#lockFile=path.join(dir,'watch.lock');
   this.#key=Buffer.from(binding.key);this.#tag=binding.tag;this.#plan=plan;
   try{
    this.#lock=fs.openSync(this.#lockFile,'wx',0o600);
    fs.writeFileSync(this.#lock,JSON.stringify({token:this.#token,pid:process.pid})+'\n');fs.fsyncSync(this.#lock);
-   const exists=fs.existsSync(this.#file);if(exists&&!resume||!exists&&resume)fail();
+   const exists=fs.existsSync(this.#file);if(exists&&!resume&&!retryWithoutData||!exists&&(resume||retryWithoutData))fail();
    if(exists){
     regular(this.#file,2097152);const data=fs.readFileSync(this.#file,'utf8');if(!data.endsWith('\n'))fail();
-    let previous=null;
+    let previous=null;const history=[];
     for(const line of data.slice(0,-1).split('\n')){
      const entry=JSON.parse(line),r=entry.record,signature=Buffer.from(entry.mac??'','hex');
      if(!r||signature.length!==32||!timingSafeEqual(signature,mac(this.#key,JSON.stringify(r))))fail();
      this.#validate(r);
      if(r.seq!==(previous?.seq??0)+1||r.previous!==this.#lastHash)fail();
      if(previous&&r.attempt!==previous.attempt&&!(r.attempt===previous.attempt+1&&r.status==='Created'&&previous.status==='Uncertain'))fail();
-     previous=r;this.#lastHash=hash(line+'\n');
+     previous=r;history.push(r);this.#lastHash=hash(line+'\n');
     }
-    if(!previous||previous.status!=='Uncertain'||previous.upload?.status!=='Uncertain'||previous.upload.highestPossibleOffset<=previous.upload.offset||previous.before===null)fail();
+    if(!previous||previous.status!=='Uncertain'||previous.before===null)fail();
+    if(retryWithoutData){
+     // A single separately reviewed second attempt, only after a first control
+     // exchange with no persisted Uploading/Intent/MASS phase. Keep all history.
+     const attempt=history.filter(r=>r.attempt===previous.attempt);
+     if(previous.attempt!==1||attempt.map(r=>r.status).join(',')!=='Created,InstallIntent,UploadIntent,Uncertain'||attempt.some(r=>r.upload!==null))fail();
+    }else if(previous.upload?.status!=='Uncertain'||previous.upload.highestPossibleOffset<=previous.upload.offset)fail();
     this.#resume=clone(previous);this.#record=previous;
     this.#fd=fs.openSync(this.#file,'a');
-    this.#append({...previous,attempt:previous.attempt+1,status:'Created',upload:null,before:null});
+    this.#append({...previous,attempt:previous.attempt+1,status:'Created',upload:null,before:null,attemptKind:retryWithoutData?'retry-no-data':'resume'});
    }else{
     this.#fd=fs.openSync(this.#file,'wx',0o600);
     this.#append({schema:2,targetTag:this.#tag,model:'M2315W1',firmware:'2.2.86',id:plan.id,sha256:plan.sha256,size:plan.size,seq:0,attempt:1,status:'Created',before:null,upload:null,previous:this.#lastHash});

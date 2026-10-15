@@ -10,6 +10,7 @@ import {packageCopy,uploadLayout,uploadToPcAdapter,uploadToReviewedAdapter} from
 import {pcPeerAccess} from './doom-upload-pc-simulator.mjs';
 import {DoomDeploymentJournal,deploymentIdentity,disposeDeploymentIdentity} from './doom-deployment-journal.mjs';
 import {claimReviewedDoomEndpoint} from './doom-deployment-physical.mjs';
+import {parseDoomUploadAck} from './doom-upload-ack.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const directory=path.join(root,'artifacts/doom-upload-session-r280');
@@ -71,16 +72,16 @@ class PcLargeSession extends XiaomiSession{
 
 // The only accepted endpoint is minted by the in-process simulator. Passing
 // PrivatePipe, a link factory, a hostname or a copied scope string is refused.
-export async function runDoomUploadPc(endpoint,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false}={}){
- return runLargeUpload(()=>pcPeerAccess(endpoint),plan,secret,{resumeFrom,deploymentDirectory,deploymentResume});
+export async function runDoomUploadPc(endpoint,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false,deploymentRetryWithoutData=false}={}){
+ return runLargeUpload(()=>pcPeerAccess(endpoint),plan,secret,{resumeFrom,deploymentDirectory,deploymentResume,deploymentRetryWithoutData});
 }
-export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=false}={}){
+export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=false,retryWithoutData=false}={}){
  return runLargeUpload(()=>{
   if(plan?.kind!=='review-low-memory-native-disabled')refuse();
-  return claimReviewedDoomEndpoint(endpoint,{resume});
- },plan,secret,{deploymentResume:resume});
+  return claimReviewedDoomEndpoint(endpoint,{resume,retryWithoutData});
+ },plan,secret,{deploymentResume:resume,deploymentRetryWithoutData:retryWithoutData});
 }
-async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false}={}){
+async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false,deploymentRetryWithoutData=false}={}){
  let peer,client,journal,parent,identity,upload=null,report={checkpoint:'R280',simulated:true,physicalEnabled:false,status:'StoppedNeedsReview',registeredVerified:false,contentVerified:false,selectedByClient:false,bluetoothOperationRequested:false,watchCommandRequested:false};
  try{
   peer=acquire();const data=packageCopy(plan),md5=digest(data);
@@ -89,10 +90,10 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   if(deploymentDirectory!==null||peer.physical){
    if(resumeFrom!==null)refuse();
    identity=deploymentIdentity(peer.physical?peer.journalTarget:'pc:'+peer.targetTag,secret);
-   journal=new DoomDeploymentJournal(plan,identity,{...(deploymentDirectory!==null?{directory:deploymentDirectory}:{}),resume:deploymentResume});
+   journal=new DoomDeploymentJournal(plan,identity,{...(deploymentDirectory!==null?{directory:deploymentDirectory}:{}),resume:deploymentResume,retryWithoutData:deploymentRetryWithoutData});
    parent=journal.resumeRecord;
   }else{
-   if(deploymentResume)refuse();
+   if(deploymentResume||deploymentRetryWithoutData)refuse();
    if(resumeFrom)parent=parentRecord(resumeFrom,plan,peer.targetTag);
    journal=new PcJournal(plan,peer.targetTag,resumeFrom);
   }
@@ -114,8 +115,9 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   report.installStatus=installStatus;if(installStatus!==0)refuse();
   journal.save({status:'UploadIntent'});client.phase='UploadIntent';
   const request=envelope(22,0,24,bytes(1,Buffer.concat([uint(1,16),bytes(2,md5),uint(3,plan.size)])));
-  const reply=await client.exchange(request,22,0),ackFields=fields(one(fields(one(reply.parsed,24,2)),2,2));
-  const ack={status:one(ackFields,2,0),md5:one(ackFields,1,2),resumePosition:one(ackFields,4,0),chunkSize:one(ackFields,5,0)};
+  report.uploadAck={stage:'Waiting'};
+  const reply=await client.exchange(request,22,0);
+  const ack=parseDoomUploadAck(reply,md5,{resuming:!!parent?.upload,diagnostic:value=>{report.uploadAck=value;}});
   const layout=uploadLayout(plan,ack,parent?.upload??null);
   if(client.txBytes+layout.wireBytes+6*32>client.txLimit)refuse();
   journal.save({status:'Uploading'});client.phase='Uploading';client.massPhase=true;
@@ -144,7 +146,7 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   journal.save({status:report.status,upload});client.phase='Finished';
  }catch(error){
   report.status='StoppedNeedsReview';
-  report.failureReason=new Set(['LargeSessionRefused','DoomLargeUploadRefused','DoomJournalRefused','DoomPhysicalGateClosed','AuthHmacMismatch','UnsupportedProtocol','Timeout','MalformedProtocol','DecryptionFailed','AuthOrQueryRejected']).has(error?.message)?error.message:'LocalFailure';
+  report.failureReason=new Set(['LargeSessionRefused','DoomLargeUploadRefused','DoomJournalRefused','DoomPhysicalGateClosed','AuthHmacMismatch','UnsupportedProtocol','Timeout','MalformedProtocol','DecryptionFailed','AuthOrQueryRejected','UploadAckEnvelope','UploadAckFieldEncoding','UploadAckHashMismatch','UploadAckResumeIdentityMissing','UploadAckRejected','UploadAckChunkUnsupported','UploadAckOffsetInvalid']).has(error?.message)?error.message:'LocalFailure';
   if(journal){
    // No automatic retry. Preserve the last pre-write bound if delivery is
    // ambiguous, including failures after local MASS completion.

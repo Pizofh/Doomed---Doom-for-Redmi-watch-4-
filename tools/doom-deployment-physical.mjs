@@ -3,12 +3,14 @@ import {PrivatePipe} from './pc-rfcomm-session.mjs';
 import {reviewedLargeExecutable} from './doom-upload-pc-pipe.mjs';
 const PHYSICAL_DEPLOYMENT_REVIEWED=false;
 const PHYSICAL_RESUME_REVIEWED=false;
+const PHYSICAL_CONTROL_RETRY_REVIEWED=false;
 const endpoints=new WeakMap(),peers=new WeakSet(),fail=()=>{throw Error('DoomPhysicalGateClosed');};
 export function physicalDoomDeploymentEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED;}
 export function physicalDoomResumeEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_RESUME_REVIEWED;}
+export function physicalDoomControlRetryEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_CONTROL_RETRY_REVIEWED;}
 export function isReviewedDoomPeer(peer){return PHYSICAL_DEPLOYMENT_REVIEWED&&peers.has(peer);}
-export function createReviewedDoomEndpoint(address,{resume=false}={}){
- if(!PHYSICAL_DEPLOYMENT_REVIEWED||typeof resume!=='boolean'||resume&&!PHYSICAL_RESUME_REVIEWED)fail();
+export function createReviewedDoomEndpoint(address,{resume=false,retryWithoutData=false}={}){
+ if(!PHYSICAL_DEPLOYMENT_REVIEWED||typeof resume!=='boolean'||typeof retryWithoutData!=='boolean'||resume&&retryWithoutData||resume&&!PHYSICAL_RESUME_REVIEWED||retryWithoutData&&!PHYSICAL_CONTROL_RETRY_REVIEWED)fail();
  if(typeof address!=='string'||!/^[A-Fa-f0-9]{12}$/.test(address)||/^0{12}$/.test(address))fail();
  let pipe=null,busy=false,closing=false,closePromise=null;
  async function operation(fn,ms){
@@ -37,10 +39,10 @@ export function createReviewedDoomEndpoint(address,{resume=false}={}){
   }
  });
  const endpoint=Object.freeze({kind:'reviewed-doom-deployment'});
- const peer=Object.freeze({link,physical:true,resumeReviewed:resume,journalTarget:'rw4:'+address.toLowerCase(),clock:()=>performance.now(),wait:ms=>new Promise(resolve=>setTimeout(resolve,ms))});
+ const peer=Object.freeze({link,physical:true,resumeReviewed:resume,retryWithoutDataReviewed:retryWithoutData,journalTarget:'rw4:'+address.toLowerCase(),clock:()=>performance.now(),wait:ms=>new Promise(resolve=>setTimeout(resolve,ms))});
  peers.add(peer);endpoints.set(endpoint,peer);
  return endpoint;
 }
-export function claimReviewedDoomEndpoint(endpoint,{resume=false}={}){
- if(!PHYSICAL_DEPLOYMENT_REVIEWED)fail();const peer=endpoints.get(endpoint);if(!peer||peer.resumeReviewed!==resume)fail();endpoints.delete(endpoint);return peer;
+export function claimReviewedDoomEndpoint(endpoint,{resume=false,retryWithoutData=false}={}){
+ if(!PHYSICAL_DEPLOYMENT_REVIEWED)fail();const peer=endpoints.get(endpoint);if(!peer||peer.resumeReviewed!==resume||peer.retryWithoutDataReviewed!==retryWithoutData)fail();endpoints.delete(endpoint);return peer;
 }

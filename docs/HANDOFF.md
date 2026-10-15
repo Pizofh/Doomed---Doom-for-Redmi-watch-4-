@@ -1,5 +1,32 @@
 # Retomar el proyecto
 
+**Actual R287: primer intento grande AUTORIZADO falló antes de MASS. Reloj normal.**
+Usuario aprobó un envío y observar≥50%. EjecutadoinstallR286: INSTALL0aceptado,
+UploadIntent/MalformedProtocol,7frames/277tx,0MASS. close/workerexittrue exit0.
+Gates restoredfinally/rebuild/test cerrados. Usuario confirmó esfera/menús.
+Journal REAL tools/local/pc-rfcomm/doom-deployment/transfer.jsonl YA EXISTE,
+4entradasCreated/InstallIntent/UploadIntent/Uncertain uploadnull. NO borrar,
+renombrar ni freshinstall/resume. No instalación comprobada; INSTALL pudo reservar.
+DefectoPC encontrado: grande exigía camposopcionales protoAck; pequeño toleraba.
+Nuevo doom-upload-ack.mjs: envelope22/0 cifrado+ACK requerido, defaultsstock
+status0/offset0/chunk2048, MD5si presente16matching. Freshsolooffset0; resume
+requiereMD5+offsetexplícitos. Reporteetapa/presencia safe sin bytes ni hashMD5.
+NO sabemos qué faltó realmente: no captura de presencia en R286.39casos pasan
+incluidos16combinaciones y2sesionesPC completas ACKmínimo/defaults.
+retry-no-data nuevo y CERRADO: soloattempt1 patrónexacto4registros, ningún
+Uploading/batch; vínculo/paquete iguales, añadeattempt2 MISMOarchivo conhistoria.
+No resume ni bucle. PHYSICAL_CONTROL_RETRY_REVIEWED=false ademásDEPLOYfalse y
+RESUMEfalse; C#Largefalse. CLIopciones/claim capacidades distinguen modos.
+18casosretryPC pasan. Dryrun en COPIA deljournal real validó firma+elegibilidad,
+original hashidéntico, sinworker/radio; reporte offline-eligibility-r287.json
+enartifacts/doom-deployment-physical-r286/. Nunca usar copia como fallbackreal.
+Plan nuevo docs/doom-large-install-control-retry-plan-r287.md PENDIENTE usuario;
+mismo paqueteR285d0fc...4827044/nativefalse, no C/Doom/activar/borrar.
+Para futuro intento aprobado: habilitar DEPLOY+CONTROL_RETRY+C#Large, mantener
+RESUMEfalse; prepare y UN retry-no-data; finallyrestaurartodos/rebuild/gates.
+No ejecutar sin nueva autorización. Último hardwareR286; soloPC después.
+Commit local solamente; no push/CIremota. No repetir engine/UI/memoriatest.
+
 **Actual R286 PC: instalador grande/journal integrado; NO hardware nuevo.**
 docs/doom-deployment-journal-r286.md + doom-large-install-physical-plan-r286.md.
 Nuevo doom-deployment-journal.mjs: destino/key→tag+HMAC derivados, model/FW+hash

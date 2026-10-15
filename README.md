@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R287:** [Envío grande detenido antes del archivo; parser corregido](docs/doom-large-install-result-r287.md).
+Reloj normal; cero partes enviadas. Campos opcionales probados en39casos y
+reintento acotado en18casos PC. Segundo intento físico pendiente de aprobación.
+
 **Actual R286, solo PC:** [Instalador grande con journal privado integrado](docs/doom-deployment-journal-r286.md).
 33casos pasan con el paquete real y receptor simulado, incluido worker C#.
 Destino/clave/archivo vinculados, lock exclusivo y reanudación explícita.
