@@ -1,5 +1,24 @@
 # Retomar el proyecto
 
+**Actual R292: DoomRun instalado INACTIVO; ensayo MANUAL ya autorizado, pendiente respuesta.**
+docs/doom-first-run-install-r292.md. Usuario aprobó UN ensayoR291≥50%observando.
+UNinstallr291real: RegisteredInactive,16parts25frames32191tx,close/workerexittrue0.
+FinallyrestauróNodePHYSICAL_WRITESfalse/variantr167 y C#Staticfalse,rebuild/test
+packagegateclosedPASÓ. Largefalse intacto. HelpercerradoSHA
+90a6d6cad53988daa8b0a09e17d096f3473b276d3e45135f363348dd829d681b.
+Consultaindependiente13entradas,12previasIDs/flags/selecciónintactos,
+DoomRun365219961inactivo/eliminable y carrier365219963presente,1activa0unknown.
+NO reenviar/reintentar/activarporPC. Journalnuevo tools/local/pc-rfcomm/
+doom-first-run-r291.json YA existe, no borrar. Artifacts/doom-first-run-physical-r292/.
+Preguntaasync yaenviada: elegirDoomRun5barrasCIAN(noDoomLauncher),siREADY
+START1, CHECKING~1minmantenerdespierta con toquescortosvacío; E1M1/UPLEFTFIRE
+brevesEXITantes30s,CLOSED/ERROR,volverhabitualyreportarmenús.
+Si falla/duermechecking no repetir/reabrir. Esperarresultado: NO pedirotra
+aprobación para mismoensayo yaautorizado. No afirmar Doom ejecutado aún.
+GatesPCcerrados NO bloqueaninstalledDoomRun allow_native=true detrásSTART/checks.
+Si usuario reportafallo, documentar y diagnosticarPCsinreintentonativociego.
+Solo commitslocales, NO push ni CIREMOTA. Histórico debajo.
+
 **Actual R291: primer arranque Doom PREPARADO SOLOPC; pendiente autorización.**
 Plan docs/doom-first-run-physical-plan-r291.md. No hardware nuevo; R290normal.
 DoomRun ID365219961,31544B,SHA58f8a9b5d62cd1ac6851be1153029539771e2eaac13c0b5860d9c41e23b61698,

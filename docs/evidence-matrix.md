@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**Actual R292:** [DoomRun instalado inactivo](doom-first-run-install-r292.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Launcher31544B registrado inactivo,12entradas previas intactas | M2315W1/FW2.2.86 |16MASS,RegisteredInactive + catálogo independiente13entradas | CONFIRMADO EN RW4 | Alta para catálogo | Sí | Archivo extraído no autenticado por catálogo; PC gates cerrados |
+| Primer Doom nativo / salida / retorno habitual | Unidad física | Instrucciones enviadas, usuario aún no reportó resultado | SIN EVIDENCIA | Pendiente | No | Autorización R291 incluye UN START manual, no reintentos |
+
 **Actual R291, solo PC:** [DoomRun preparado](doom-first-run-physical-plan-r291.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

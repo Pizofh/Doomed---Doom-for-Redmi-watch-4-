@@ -1,5 +1,9 @@
 # R291: primer arranque físico de Doom, pendiente de aprobación
 
+**Actualización R292:** ensayo autorizado, launcher instalado inactivo;
+arranque manual y retorno pendientes de observar. [Registro](doom-first-run-install-r292.md).
+No repetir instalación; el texto siguiente conserva el plan aprobado.
+
 **Solo preparación PC. No instalado ni ejecutado en el reloj.** Se propone
 UN ensayo agrupado: instalar DoomRun inactivo, usuario selecciona y pulsa
 START una vez, verificación de archivos/RAM, E1M1, controles y salida/limpieza.
