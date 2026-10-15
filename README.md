@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R272, trabajo PC:** [Motor, libc propia y puente ya enlazan juntos](docs/doom-rw4-device-r272.md).
+Pruebas de biblioteca C y controles/frames pasan en el emulador, con alcance
+documentado. Faltan bindings finales, presentación LVGL y WAD persistente;
+el objeto aún no se puede instalar. Sin nuevas operaciones sobre el reloj.
+
 **Actual R271, trabajo PC:** [El motor original y el runtime compilan para RW4](docs/doom-rw4-build-r271.md).
 Salida propia probada en el emulador. Objeto intermedio sin instalar: faltan
 bindings finales, ejecución y adaptador DG. Se agrupa la preparación para

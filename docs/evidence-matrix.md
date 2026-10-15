@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R272 PC:** [Libc privada y adaptador completo de C](doom-rw4-device-r272.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Motor, runtime, libc y DG/puente enlazan; solo20imports de plataforma | PC ARMv8-M/Thumb soft-float | build-doom-rw4-device y hashes | CONFIRMADO LOCALMENTE | Alta para enlace | Sí | Unbound: no instalar ni ejecutar el objeto |
+| Libc propia y stdio opaco pasan salida normal y OOM con limpieza | S3 PC, mismo código glue/runtime y multilib v7-a | Dos módulos,18checks cada uno,6alloc/6free/streams0 | CONFIRMADO EN EMULADOR | Alta para fixture | Sí | No motor completo ni bindings RW4; solo un run por instancia |
+| Callbacks C cumplen control/secuencias/frames/EOF/gate/JOIN | S3 CPU con kernel y worker simulados | transport-probe;1037assertions de un fixture | CONFIRMADO CON SIMULACIONES EN EMULADOR | Alta para casos | Sí | No scheduling concurrente, pthread real o fops físico |
+| Nueva cadena produce imagen DOOM visible en RW4 | RW4 | No hay entrega LVGL validada ni payload instalado | SIN EVIDENCIA | Pendiente | No | RGB565 del protocolo propio no es un descriptor LVGL |
+
 **Actual R271 PC:** [Port del motor/runtime para la ISA RW4](doom-rw4-build-r271.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

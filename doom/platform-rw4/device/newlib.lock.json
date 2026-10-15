@@ -1,0 +1,12 @@
+{
+  "source": "Previously reviewed local Arm GNU Toolchain 14.3.rel1; thumb/v8-m.main/nofp libraries",
+  "libc.a": "58e546a5a246396d3a7924f039d276de64768e206fef6123fd4accdf5087044b",
+  "libm.a": "ed2e48144a0fcf889adaa78d8f1b3ad1f1027dd938d1ce8e77847efb06f67f26",
+  "libgcc.a": "4de693594a790a5f5004e6d5937a7ff9eec6df2c616b5d7a883a631bf3534dcd",
+  "emulator": {
+    "source": "Same reviewed toolchain; thumb/v7-a/nofp, for S3 test only",
+    "libc.a": "9155ac2658f7806a379966f0d9f1ecd2c06cfcbc74df0084f7b0f509a69314aa",
+    "libm.a": "6d8d57c766d6f7a44733f80ed4980f0707eeae0876e5de0e97c6932498a2597d",
+    "libgcc.a": "23a629fb8228a684d8f1e2de3cab52903575f5d66ded8611a2e878a999537047"
+  }
+}

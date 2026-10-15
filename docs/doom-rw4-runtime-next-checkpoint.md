@@ -30,6 +30,10 @@ Trabajo agrupado, sin repetir las pruebas físicas de registro o controles:
 R271 completó la [compilación motor/runtime y prueba de salida](doom-rw4-build-r271.md).
 Es un objeto intermedio, aún sin bindings, DG o worker; no está listo para el reloj.
 
+R272 añade [libc privada y adaptador/worker/frames compilados](doom-rw4-device-r272.md).
+Pruebas acotadas pasan en S3. Siguen pendientes bindings físicos, worker real y
+entrega de imagen LVGL; no hay nueva instalación física autorizada.
+
 La residencia temporal en RAM y la persistencia de los archivos siguen separadas.
 Salir debe cerrar lectores, detener ejecución, liberar reservas y retirar solo
 el módulo propio; abrir de nuevo debe cargar una instancia limpia desde archivos

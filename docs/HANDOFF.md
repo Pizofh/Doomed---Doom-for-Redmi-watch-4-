@@ -1,5 +1,36 @@
 # Retomar el proyecto
 
+**Actual R272 PC: C completo enlaza sin DG/libc pendientes;20rw4_host_* aún sin bind.**
+[Resultado/contratos/reproducción](doom-rw4-device-r272.md). No operación física.
+tools/build-doom-rw4-libc.mjs usa engine-port R271 y recompila solo runtime-host/
+glue; newlib/libm/libgcc privadas y fijadas en device/newlib.lock.json.
+No FILE/reent firmware interpretados, calloc/malloc/realloc/free internos→runtime
+contabilizado. Logs a tail256RAM; no libc privada después de cleanup; unload y
+reload de instancia nueva obligatorios. memcpy Thumb propio evita ARM state de
+newlib S3 rechazado por loader (dos insmod22 previos; no residuo de módulo).
+Linker device/module.ld ahora fija VMA0 por sección ET_REL; no atribuir el22
+solo a eso. MOVW/MOVT S3 handler65c83a revisado; finalRW4 soloABS32/THMCALL/JUMP24.
+Test libc S3 pasó2módulos:18checks cadauno,6alloc/6free/peak1248/streams0,
+fixture7B intacto; temporales retirados. Perfil v7-a/nofp distinto al RW4.
+PruebaC transport con kernel/worker simulados pasa1037checks (1000son reads de
+fragmentos del mismo frame, no escenarios). No pthread real ni Doom en ese test.
+device/adapter.c implementaDG6/warpE1M1/salida120scooperativa, reloj64/10inferido.
+device/transport.c fops32/fileopaco/refsgate, ctl16B/read128EOF y frameRGB565LE
+320x200/header32/FNV/dos slots; workerSTART→STOP→finished→JOIN antesunload,
+sin llamadasLVGL/escriturasFS. Interleaving real/ABIworker pendientes.
+Nuevo builder build-doom-rw4-device.mjs compilaambos y enlaza600012B/static897436;
+SHA2629256b9de4357da1c984a9f2c6371e9fa346770e37cbaa5badc5e0f8e9b1cb.
+Con zona6MiB/DG256K/stack32768 subtotal7477660B antesextras, RAMlibre desconocida.
+No fingerprint/initmarker/WADruta final/bindings/Luaimagefeed ni payloadaprobado.
+Frame propio NOdescriptor LVGL niPNG; no pasarlodirectoaImage:set_src.
+Seguir20bindings/workerreal y presentaciónRW4; integrar motor real nuevasfuentes
+en PC antesdeplanfísicoagrupado. No repetirprobesfísicos/libctestsyaiguales.
+Los dirs artifacts/emulator/doom-libc-r272-* y doom-transport-r272-* preservan
+fallos y éxitos; scripts ignorados cleanup/inspect soloPC ya consumidos.
+R270 sigueúltimopaso físico:234retirado, relojnormal; NO rearmarpruebasviejas.
+
+Historial inmediato:
+
 **Actual R271 PC: motor real y runtime compilados; ninguna operación física nueva.**
 Usuario aprobó acelerar a dos checkpoints: preparar el port completo en PC y,
 si los contratos lo permiten, un ensayo corto E1M1/controles/salida. No añadir
