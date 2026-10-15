@@ -1,5 +1,5 @@
 {
-  "checkpoint": "R274",
+  "checkpoint": "R275",
   "imageSha256": "2c486395a01fb4e1d4a0f8b9b749fd6b1c3d522edc3c2f3813deaea9ab7388db",
   "codeBase": 202375168,
   "fingerprintBytes": 64,
@@ -123,6 +123,13 @@
       "offset": 4814448,
       "sha256": "f6bab41a7a292510ebf3fb982634c4cee3c1f17d05771ddbd575a0ea1ad9e9df",
       "evidence": "ExitC physical removal plus static"
+    },
+    {
+      "name": "image_drop",
+      "offset": 149048,
+      "codeBase": 469702780,
+      "sha256": "a5d40064708f5f22cb6d4ed79fd418ec217c19f79fba9eee1f02b41d86518310",
+      "evidence": "static: image-cache invalidate dispatcher at +8 into configured manager; LRU path compares filenames and closes decoder"
     }
   ],
   "completeFirmwareIdentityVerified": false,

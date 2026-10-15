@@ -30,6 +30,7 @@ extern int rw4_host_thread_create(int32_t *,const struct rw4_device_attr *,void 
 extern int rw4_host_thread_join(int32_t,void **);
 extern int rw4_host_register(const char *,const struct rw4_device_fops *,unsigned,void *);
 extern int rw4_host_unregister(const char *);
+extern void rw4_host_image_drop(const char *); /* UI owner only; own path only. */
 #define RW4_FRAME_W 320u
 #define RW4_FRAME_H 200u
 #define RW4_CONTROL_MAGIC UINT32_C(0x32574452)
@@ -45,4 +46,5 @@ void rw4_game_ready(void);
 void rw4_game_pause_ack(void);
 void rw4_game_metrics(const uint32_t *);
 void rw4_game_frame(const uint32_t *,unsigned);
+int rw4_game_image_release(void); /* Internal only, after UI detach/cache close. */
 #endif

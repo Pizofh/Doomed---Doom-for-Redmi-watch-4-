@@ -1,5 +1,39 @@
 # Retomar el proyecto
 
+**Actual R275 PC: frames RAM visibles en LVGL S3; 2ciclos START/NEXT/EXIT pasan.**
+[Resultado/reproducción/límites](doom-ram-image-ui-r275.md). No hardware.
+UI fixture experiments/doom-runtime-rw4/image-ui.lua +image-ui-probe.c:
+worker sincrónico simulado publica2patrones, adaptador fops40 + header12/RGB565
+explícito con RW4_IMAGE_S3_TEST. RW4 default sigue header4/cf4/32bpp.
+tools/build-image-ui-r275.mjs y image-ui-emulator-r275.mjs stage|test|cleanup.
+Fixture ELF11336B/SHA bf67c59aeff5a46c173f9ffc19228887baa4376944917a31c611ab958916fe8c.
+WatchfaceUIProbe365799903 modo ramimage instalada por refresh; no se borró
+su directorio Doom persistente. TemporalfixtureELF/nodos/módulo retirados.
+VM queda en launcher RAMIMAGEClosed, para probarotra vezhacefaltastage.
+Primer test visual falló64000px: prefetch/info consumía fase0 al cerrarFD.
+Corrección: image_slot persisteentreopens/closes; rw4_game_image_release
+solo despuésdedetach/cacheclose (o fixtureVFS sinLVGL). JOIN/uninitbloquean
+tambiénleasepresentación sinFD. No volver a liberar slot en image_close.
+Op7 control: soloSTARTowner, invalidaúnicamentepathpropio yverificarefs0
+antesliberar. No llamadasLVGL desdeGC/worker/uninit; STOPenGCconservarecursos.
+Ownerno demuestraautomáticamentequeestáenUI; contratodelcaller.
+UIrealpasó4frames/256000píxeles tolerancia7/canal ydosunloads sinreset;
+result artifacts/emulator/ram-image-test-1792072718495/result.json.
+CPUfixture1124checks (op7wrongowner/FDheld/preSTART), VFS27checks,codec1060
+frameFNV1c083d2f pasan. No motor/hiloreal/GCinesperado niFW físico probado.
+UnresetprevioSINmódulos porSCREENOFF; noresetparaexit. ArranquePC requirió
+escalaciónparaencontrarperfil. Registroanteriorpreservadoresume-r275.
+CachebindingRW4 image_dropoffset24638 alias1bff187c→1c015eb5;21APIs+3contracts
+fijados. SoloS3 usaheadercachedrop; RW4headercache/FS/backendpendientes.
+NOusar25204comoheaderinvalidate: ventanaesassert, noentryaprobada.
+BuildsfullRW4 rehechos603692B/static899056/0imports, SHA
+45d3044d0139db84f4f8c7f74f67f1c196b76a7843a416e5520ca5a593c459d7.
+Siguenflagsloadablefalse/UIphysicalfalse. Comentariofuente corregidotras
+test; rebuildmismoELFconfirmaquesolocambióhashsource, no códigoejecutado.
+Siguiente: motororiginal+WAD+hilo realPC conbackendnuevo,controles/salida;
+cerrarcontratosRW4/RAM antesplanfísicoagrupado.No repetirprobesviejos.
+R270 siguelastphysical:234retirado/relojnormal; nada nuevoautorizado.
+
 **Actual R274 PC: formato RW4 identificado, vista RAM/read/seek y VFS S3 pasan.**
 [Resultado y límites](doom-rw4-image-r274.md). No se tocó hardware.
 Alias LVGL código offset+1bff187c, datos+3bff187c: set_src4c75c→1c03dfd9

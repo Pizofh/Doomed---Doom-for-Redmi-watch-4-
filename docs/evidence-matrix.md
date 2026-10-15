@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**Actual R275 PC:** [Presentación del nodo RAM, caché y EXIT](doom-ram-image-ui-r275.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Image muestra frames C desde el nodo RAM sin archivos de frames | S3 exacto, adaptador header12/RGB565 | Cuatro capturas,256000píxeles, dos ciclos | CONFIRMADO EN EMULADOR | Alta para fixture | Sí | No formato RW4 ni motor/hilo real |
+| Prefetch/get_img_size puede consumir un slot si close lo libera | S3 exacto | Primer test mostró fase1 en vez de fase0; corrección mantiene presentación entre opens | CONFIRMADO EN EMULADOR | Alta | Sí | Close del archivo no significa fin de presentación |
+| Detach/drop/STOP/JOIN/rmmod retiran recursos y permiten segundo START | S3 UI/VFS reales, worker sincrónico simulado | Dos EXIT, módulo y tres nodos ausentes | CONFIRMADO EN EMULADOR | Alta para salida explícita | Sí | GC/reentrada inesperada y concurrencia pendientes |
+| Cache drop por path es utilizable en el nuevo port RW4 | Imagen AP candidata RW4 | Dispatcher24638 y gestorLRU646c4 inspeccionados | INFERENCIA RAZONABLE | Estática | No físico | Binding21, fingerprint; header-cache/backend pendientes |
+| Owner de START demuestra automáticamente identidad del thread LVGL | Cualquier modelo | Solo comprueba misma identidad del caller | SIN EVIDENCIA | No demostrado | No | Launcher debe ejecutar op7 desde contexto UI; no sandbox |
+
 **Actual R274 PC:** [Vista de imagen en RAM y VFS](doom-rw4-image-r274.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

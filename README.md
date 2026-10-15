@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R275, solo PC:** [Frames desde RAM ya se ven en LVGL y salen limpiamente](docs/doom-ram-image-ui-r275.md).
+Dos ciclos visuales pasan en S3 con adaptador explícito: cuatro frames, sin archivos
+por frame y recursos retirados. Se corrigió el consumo anticipado por prefetch.
+Falta integrar motor/hilo real con este backend; no se ha enviado al reloj.
+
 **Actual R274, solo PC:** [Imagen virtual desde RAM y VFS real probado](docs/doom-rw4-image-r274.md).
 Se identificó el formato RW4 y se añadió read/seek/cierre con retención del frame.
 El candidato sigue enlazando sin imports. Falta integrar y validar el dibujo/caché

@@ -8,7 +8,14 @@ int rw4_image_read(const unsigned char *rgb565,unsigned position,char *dst,unsig
     if(position>RW4_IMAGE_BYTES||(!dst&&count))return -22;
     if(count>RW4_IMAGE_BYTES-position)count=RW4_IMAGE_BYTES-position;
     if(!count)return 0;
-    if(position+count>4u&&!rgb565)return -11;
+    if(position+count>RW4_IMAGE_HEADER_BYTES&&!rgb565)return -11;
+#ifdef RW4_IMAGE_S3_TEST
+    static const unsigned char header[12]={25,18,0,0,64,1,200,0,128,2,0,0};
+    for(unsigned n=0;n<count;n++){
+        unsigned at=position+n;
+        dst[n]=(char)(at<sizeof(header)?header[at]:rgb565[at-sizeof(header)]);
+    }
+#else
     const uint32_t header=4u|(RW4_IMAGE_WIDTH<<10)|(RW4_IMAGE_HEIGHT<<21);
     for(unsigned n=0;n<count;n++){
         unsigned at=position+n,value;
@@ -24,6 +31,7 @@ int rw4_image_read(const unsigned char *rgb565,unsigned position,char *dst,unsig
         }
         dst[n]=(char)value;
     }
+#endif
     return (int)count;
 }
 int64_t rw4_image_seek(unsigned *position,int64_t offset,int origin)

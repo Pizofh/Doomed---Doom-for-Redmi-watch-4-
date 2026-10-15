@@ -36,6 +36,7 @@ int rw4_host_register(const char *path,const struct rw4_device_fops *ops,unsigne
 }
 int rw4_host_unregister(const char *path){return host_unregister(path);}
 int rw4_host_validate(void){return 0;}
+void rw4_host_image_drop(const char *path){(void)path;}
 int rw4_host_owner_token(void){return 17;}
 int rw4_host_attr_init(struct rw4_device_attr *p){(void)p;return 22;}
 int rw4_host_attr_stack(struct rw4_device_attr *p,unsigned size){(void)p;(void)size;return 22;}
@@ -76,8 +77,10 @@ int rw4_image_vfs_probe_init(struct rw4_module_info *info)
     CHECK(host_ftell(file)==5);CHECK(host_fseek(file,-1,1)==0&&host_ftell(file)==4);
     CHECK(host_fread(bytes,1,4,file)==4&&bytes[2]==255);
     CHECK(host_fclose(file)==0);
+    CHECK(rw4_game_image_release()==0); /* No LVGL in this VFS-only fixture. */
     file=host_fopen("/dev/rw4doomimage.bin","rb");CHECK(file!=NULL);
     CHECK(host_fread(bytes,1,8,file)==8&&bytes[4]==255&&bytes[5]==0&&bytes[6]==0&&bytes[7]==255);
     CHECK(host_fclose(file)==0);
+    CHECK(rw4_game_image_release()==0);
     host_printf("RW4_IMAGE_VFS_R274: passed=1 checks=%u realVfs=1\n",checks);return 0;
 }

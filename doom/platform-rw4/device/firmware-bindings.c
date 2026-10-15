@@ -53,3 +53,5 @@ int rw4_host_register(const char *path,const struct rw4_device_fops *ops,unsigne
 {return ((int (*)(const char *,const struct rw4_device_fops *,unsigned,void *))RW4_ADDR_REGISTER)(path,ops,mode,arg);}
 int rw4_host_unregister(const char *path)
 {return ((int (*)(const char *))RW4_ADDR_UNREGISTER)(path);}
+void rw4_host_image_drop(const char *path)
+{((void (*)(const char *))RW4_ADDR_IMAGE_DROP)(path);}

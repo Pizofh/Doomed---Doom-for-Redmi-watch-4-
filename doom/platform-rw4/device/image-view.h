@@ -4,7 +4,15 @@
 #include <stdint.h>
 #define RW4_IMAGE_WIDTH 320u
 #define RW4_IMAGE_HEIGHT 200u
-#define RW4_IMAGE_BYTES (4u+RW4_IMAGE_WIDTH*RW4_IMAGE_HEIGHT*4u)
+#ifdef RW4_IMAGE_S3_TEST
+/* Explicit PC-only format adapter: S3 LVGL9 is not RW4 LVGL8. */
+#define RW4_IMAGE_HEADER_BYTES 12u
+#define RW4_IMAGE_PIXEL_BYTES 2u
+#else
+#define RW4_IMAGE_HEADER_BYTES 4u
+#define RW4_IMAGE_PIXEL_BYTES 4u
+#endif
+#define RW4_IMAGE_BYTES (RW4_IMAGE_HEADER_BYTES+RW4_IMAGE_WIDTH*RW4_IMAGE_HEIGHT*RW4_IMAGE_PIXEL_BYTES)
 /* Candidate RW4 built-in binary image, cf=4 (native 32-bit), header=4 bytes.
  * No pointer descriptor is exported. rgb565 must remain immutable/alive for
  * every read of one image. The owner must hold the frame lease until close.

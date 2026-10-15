@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later
  * Candidate RW4 bridge. Single UI producer, single engine worker.
- * No LVGL calls, filesystem writes or forced task kill. Image seek updates
- * only the candidate firmware file position field reviewed in R274.
+ * Image-cache retirement only on explicit UI-owner command. No filesystem
+ * writes or forced task kill. Image seek/cookie use the R274 file fields.
  */
 #include "platform.h"
 #include "runtime.h"
@@ -18,7 +18,8 @@ static atomic_uint produced,dropped,metrics[12];
 static unsigned owner,sequence,started,joined,registered_control,registered_frame,registered_image,error;
 static int32_t thread;
 static unsigned control_cursor,frame_cursor,frame_slot;
-static unsigned image_cursor,image_slot;
+static unsigned image_cursor;
+static unsigned image_slot=2; /* Presentation lease survives decoder reopen/prefetch. */
 static uint32_t control_snapshot[32];
 struct frame { atomic_uint state;unsigned generation;unsigned char bytes[FRAME_BYTES]; };
 static struct frame frames[2];
@@ -125,7 +126,7 @@ static int control_write(struct rw4_device_file *f,const char *b,unsigned n)
     (void)f;
     if(!atomic_load(&control_ref)||n!=16||get32(b)!=RW4_CONTROL_MAGIC||sequence==UINT32_MAX||get32(b+4)!=sequence+1)return -22;
     unsigned op=get32(b+8),value=get32(b+12);
-    if(op<1||op>6||(op!=2&&value))return -22;
+    if(op<1||op>7||(op!=2&&value))return -22;
     if(started&&owner!=(unsigned)rw4_host_owner_token())return -1;
     int rc=0;
     if(op==1)rc=start_game();
@@ -143,13 +144,19 @@ static int control_write(struct rw4_device_file *f,const char *b,unsigned n)
         if(op==3)atomic_store(&paused,1);else atomic_store(&stop,1);
         atomic_store(&requested,0);atomic_fetch_add(&epoch,1);
     }else if(op==5){
-        if(!started||joined||!atomic_load(&finished)||atomic_load(&frame_ref)||atomic_load(&image_ref))return -16;
+        if(!started||joined||!atomic_load(&finished)||atomic_load(&frame_ref)||atomic_load(&image_ref)||image_slot<2)return -16;
         void *value_out=NULL;rc=rw4_host_thread_join(thread,&value_out);
         if(rc||value_out){error=1;return -5;}joined=1;
         atomic_store(&head,atomic_load(&tail));atomic_store(&requested,0);atomic_store(&applied,0);
-    }else{
+    }else if(op==6){
         if(!started||joined||atomic_load(&stop)||atomic_load(&applied)||atomic_load(&requested)||atomic_load(&head)!=atomic_load(&tail)||atomic_load(&epoch)!=atomic_load(&ack))return -16;
         atomic_store(&paused,0);
+    }else{
+        /* Caller must delete/detach its Image before this synchronous write.
+         * Only the START owner may call LVGL; never worker/GC/uninit/CLI. */
+        if(!started||joined)return -16;
+        rw4_host_image_drop(image_path);
+        if(rw4_game_image_release())return -16;
     }
     if(rc)return rc;
     sequence++;control_cursor=0;return 16;
@@ -218,20 +225,27 @@ static int image_open(struct rw4_device_file *f)
     if(enter())return -16;
     unsigned expected=0;
     if(!atomic_compare_exchange_strong(&image_ref,&expected,1)){leave();return -16;}
-    image_cookie_set(f,IMAGE_COOKIE);image_cursor=0;image_slot=2;image_position(f,0);return 0;
+    image_cookie_set(f,IMAGE_COOKIE);image_cursor=0;image_position(f,0);return 0;
 }
 static int image_close(struct rw4_device_file *f)
 {
     if(!image_owned(f))return -22;
+    image_cookie_set(f,0);atomic_store(&image_ref,0);leave();return 0;
+}
+/* Internal post-cache retirement. File close alone does not end a presentation:
+ * info/prefetch/draw can reopen the source and must see the same generation. */
+int rw4_game_image_release(void)
+{
+    if(atomic_load(&image_ref))return -16;
     if(image_slot<2)atomic_store(&frames[image_slot].state,FREE);
-    image_cookie_set(f,0);image_slot=2;atomic_store(&image_ref,0);leave();return 0;
+    image_slot=2;return 0;
 }
 static int image_read(struct rw4_device_file *f,char *b,unsigned n)
 {
     if(!image_owned(f)||(!b&&n)||image_cursor>RW4_IMAGE_BYTES)return -22;
     unsigned left=RW4_IMAGE_BYTES-image_cursor;if(n>left)n=left;
     /* Reading only the fixed header must not consume a produced frame. */
-    if(n&&image_cursor+n>4&&image_slot==2){
+    if(n&&image_cursor+n>RW4_IMAGE_HEADER_BYTES&&image_slot==2){
         for(unsigned slot=0;slot<2;slot++){
             unsigned expected=READY;
             if(atomic_compare_exchange_strong(&frames[slot].state,&expected,READING)){image_slot=slot;break;}
@@ -255,7 +269,7 @@ static int uninit(void *unused)
     (void)unused;unsigned expected=0;
     if(!atomic_compare_exchange_strong(&gate,&expected,CLOSING))return -16;
     const struct rw4_runtime_stats *s=rw4_runtime_stats();
-    if(error||(started&&!joined)||(joined&&(s->blocks||s->streams||s->cleanup_error))){atomic_store(&gate,0);return -16;}
+    if(error||image_slot<2||(started&&!joined)||(joined&&(s->blocks||s->streams||s->cleanup_error))){atomic_store(&gate,0);return -16;}
     if(registered_image){if(rw4_host_unregister(image_path)){error=1;return -16;}registered_image=0;}
     if(registered_frame){if(rw4_host_unregister(frame_path)){error=1;return -16;}registered_frame=0;}
     if(registered_control){if(rw4_host_unregister(control_path)){error=1;return -16;}registered_control=0;}

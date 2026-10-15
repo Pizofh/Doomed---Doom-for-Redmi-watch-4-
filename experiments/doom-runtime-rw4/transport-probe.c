@@ -9,10 +9,12 @@ extern int host_printf(const char *,...);
 static const struct rw4_device_fops *ctl,*frame,*image;
 static void *(*saved_worker)(void *);
 static unsigned registrations,removals,joins,stack_size,validation_failure=1,registration_failure;
+static unsigned owner_token=17,cache_drops;
 _Alignas(8) static unsigned char image_cookie[32],other_cookie[32];
 static struct rw4_runtime_stats stats;
-int rw4_host_owner_token(void){return 17;}
+int rw4_host_owner_token(void){return (int)owner_token;}
 int rw4_host_validate(void){return (int)validation_failure;}
+void rw4_host_image_drop(const char *path){(void)path;cache_drops++;}
 int rw4_host_attr_init(struct rw4_device_attr *p){p->words[0]=0;return 0;}
 int rw4_host_attr_stack(struct rw4_device_attr *p,unsigned n){(void)p;stack_size=n;return 0;}
 int rw4_host_attr_destroy(struct rw4_device_attr *p){(void)p;return 0;}
@@ -52,6 +54,7 @@ int rw4_transport_probe_init(void *unused)
     CHECK(ctl->open(NULL)==0);CHECK(ctl->open(NULL)==-16);
     CHECK(ctl->read(NULL,(char *)buffer,128)==128&&read_word(0)==RW4_CONTROL_MAGIC);
     CHECK(ctl->read(NULL,(char *)buffer,1)==0);CHECK(info.uninit(NULL)==-16&&removals==0);
+    CHECK(command(1,7,0)==-16&&cache_drops==0); /* No UI owner before START. */
     CHECK(command(1,1,0)==16&&saved_worker&&stack_size==32768);
     CHECK(command(1,1,0)==-22);CHECK(command(2,1,0)==-16);
     rw4_game_ready();int down=0;unsigned char key=0;
@@ -86,9 +89,12 @@ int rw4_transport_probe_init(void *unused)
     CHECK(image->seek(img,INT64_MAX,1)==-22&&image_cookie[8]==8);
     CHECK(image->seek(img,INT64_MIN,1)==-22&&image_cookie[8]==8);
     CHECK(image->seek(other,4,0)==-22);
+    CHECK(rw4_game_image_release()==-16);
     CHECK(image->close(img)==0&&image->close(img)==-22);
+    CHECK(image->open(img)==0&&image->read(img,(char *)buffer,8)==8&&read_word(4)==0xffff0000u);
+    CHECK(image->close(img)==0);CHECK(rw4_game_image_release()==0);
     CHECK(image->open(img)==0&&image->read(img,(char *)buffer,8)==8&&read_word(4)==0xff0000ffu);
-    CHECK(frame->open(NULL)==-11);CHECK(image->close(img)==0);
+    CHECK(frame->open(NULL)==-11);CHECK(image->close(img)==0);CHECK(rw4_game_image_release()==0);
     CHECK(image->open(img)==0&&image->read(img,(char *)buffer,4)==4);
     CHECK(image->read(img,(char *)buffer,1)==-11); /* No ready pixels yet. */
     CHECK(image->seek(img,-1,2)==RW4_IMAGE_BYTES-1);
@@ -98,9 +104,12 @@ int rw4_transport_probe_init(void *unused)
     CHECK(image->read(img,(char *)buffer,1)==0);
     CHECK(image->seek(img,4,0)==4&&image->read(img,(char *)buffer,4)==4&&read_word(0)==0xff00ff00u);
     for(unsigned i=0;i<sizeof(image_cookie);i++)if(i<8||(i>=16&&i<20)||i>=24)CHECK(image_cookie[i]==0xa5);
+    owner_token=18;CHECK(command(7,7,0)==-1&&cache_drops==0);owner_token=17;
+    CHECK(command(7,7,0)==-16&&cache_drops==1); /* Still an open image reader. */
     CHECK(command(7,4,0)==16&&rw4_game_stopping());CHECK(command(8,5,0)==-16);
     CHECK(saved_worker(NULL)==NULL);CHECK(command(8,5,0)==-16&&joins==0);
-    CHECK(image->close(img)==0);CHECK(command(8,5,0)==16&&joins==1);
+    CHECK(image->close(img)==0);CHECK(command(8,5,0)==-16&&joins==0);
+    CHECK(command(8,7,0)==16&&cache_drops==2);CHECK(command(9,5,0)==16&&joins==1);
     CHECK(ctl->read(NULL,(char *)buffer,128)==128&&read_word(20)==1&&read_word(24)==1&&read_word(36)==4&&read_word(40)==1&&read_word(44)==0&&read_word(48)==0);
     CHECK(ctl->close(NULL)==0);CHECK(ctl->close(NULL)==-22);
     CHECK(image->open(img)==0);CHECK(info.uninit(NULL)==-16&&removals==0);CHECK(image->close(img)==0);
