@@ -1,0 +1,4 @@
+#!/bin/sh
+# Activated locally with core.hooksPath; never prints private input values.
+# Missing current private inputs also blocks publishing from this checkout.
+exec node tools/audit-git-publish.mjs --require-private

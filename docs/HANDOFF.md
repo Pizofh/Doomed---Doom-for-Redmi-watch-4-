@@ -1,5 +1,13 @@
 # Retomar el proyecto
 
+**Privacidad reforzada 2026-10-15, petición expresa del usuario.** No publicar
+MAC, claves de conexión/anteriores, seriales, logs o datos privados. Auditoría
+ampliada de 294 commits pasa:46 archivos locales privados/6 representaciones,
+sin coincidencias históricas. Ver docs/privacy.md. El hook .githooks/pre-push
+usa audit-git-publish.mjs --require-private; core.hooksPath activado en este PC.
+Bloquea errores y falta de perfiles actuales, sin imprimir valores. CI no tiene
+esos inputs; solo patrones genéricos/rutas. No saltarse hook ni subir privados.
+
 **GitHub conectado el 2026-10-15.** Remoto origin:
 https://github.com/Pizofh/Doomed---Doom-for-Redmi-watch-4-.git
 Rama local renombrada master→main, siguiendo origin/main; historial conservado.
