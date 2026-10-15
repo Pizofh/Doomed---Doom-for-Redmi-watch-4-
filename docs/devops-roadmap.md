@@ -1,5 +1,13 @@
 # Flujo reproducible y enfoque DevOps
 
+Actualización 2026-10-15: el workflow Windows/sintético está implementado en
+`.github/workflows/pc-rfcomm-offline.yml`. Se prepara el primer push del
+historial completo a [GitHub](https://github.com/Pizofh/Doomed---Doom-for-Redmi-watch-4-),
+rama `main`. Las dependencias, firmware, WAD y datos privados permanecen fuera
+de Git; `node tools/audit-git-publish.mjs` revisa los blobs históricos y valores
+privados actuales sin imprimirlos. El texto siguiente conserva el plan original
+de R73; sus afirmaciones de ausencia de workflow/remoto ya son históricas.
+
 Propuesta para la dirección DevOps solicitada, 2026-10-04. Este documento es un plan: no hay todavía workflow de GitHub Actions, release publicada ni instalador físico. El repositorio sigue local sin remoto. R73 demuestra Doom persistente en el guest S3, no compatibilidad M2315W1.
 
 ## Qué falta antes del reloj

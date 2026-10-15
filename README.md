@@ -1,5 +1,7 @@
 # DOOM en Redmi Watch 4
 
+[Repositorio GitHub](https://github.com/Pizofh/Doomed---Doom-for-Redmi-watch-4-) · [CI Windows y pruebas sintéticas](https://github.com/Pizofh/Doomed---Doom-for-Redmi-watch-4-/actions/workflows/pc-rfcomm-offline.yml)
+
 **Actual R281, solo PC:** [Transporte grande compilado y supervisado pasa](docs/doom-large-worker-r281.md).
 4,8 MB y sesión autenticada pasan por pipes y worker C# reales con sockets
 sintéticos. Diez escenarios cubren envío parcial, bloqueo, cancelación y cierre.
