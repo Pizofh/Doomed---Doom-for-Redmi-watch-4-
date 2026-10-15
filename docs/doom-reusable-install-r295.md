@@ -1,5 +1,9 @@
 # R295: DoomPlay instalado; dos ciclos manuales pendientes
 
+**Actualización R296:** usuario reporta globalmente «todo ok» al lote y describe
+rayones/colores bajo la imagen. [Observación pendiente de ubicar](doom-reusable-observation-r296.md).
+El texto siguiente conserva las instrucciones y estado anteriores al reporte.
+
 El usuario autorizó una instalación y dos ciclos observados según R294, con
 batería≥50%. Se ejecutó UN `install r294` del paquete ID365219960,28832bytes,
 SHA256 `f66628fe42ef40e5f69e5348bf52487e849d4047f5fa9506427228aff3430799`.

@@ -1,0 +1,17 @@
+{
+  "checkpoint": "R296",
+  "device": "M2315W1",
+  "firmware": "2.2.86",
+  "launcherId": "365219960",
+  "source": "User global confirmation in response to the authorized two-cycle/selector/return checklist",
+  "authorizedBatchReportedOk": true,
+  "perCycleExitStatusesIndividuallyReported": false,
+  "visualIssueReported": true,
+  "visualDescription": "Scratches or colored graphics below the Doom image, near the middle of the screen",
+  "visualLocationConfirmed": false,
+  "hudVersusRenderingArtifactResolved": false,
+  "expectedGameRectangle": {"x": 35, "y": 35, "width": 320, "height": 200},
+  "expectedStatusRectangle": {"x": 20, "y": 249, "width": 180, "height": 20},
+  "newHardwareCommandsAfterReport": false,
+  "newMetricsMeasured": false
+}

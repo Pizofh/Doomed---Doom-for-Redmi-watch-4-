@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**Actual R296:** [Reporte global de DoomPlay](doom-reusable-observation-r296.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Lote autorizado de dos ciclos/selector/retorno reportado favorablemente | M2315W1/FW2.2.86 | Usuario respondió globalmente «todo ok» al checklist | CONFIRMADO EN RW4 | Reporte global, sin detalle por ciclo | Sí, usuario | No estados individuales ni verificación nativa independiente |
+| Rayones/colores bajo el juego son HUD normal | Unidad física | Descripción sin imagen/posición exacta | SIN EVIDENCIA | Pendiente | No | También podría ser un defecto de imagen/etiqueta; no atribuir causa |
+
 **Actual R295:** [DoomPlay instalado](doom-reusable-install-r295.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

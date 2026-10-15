@@ -1,9 +1,9 @@
 # DOOM en Redmi Watch 4
 
-**Actual R295:** [DoomPlay instalado; dos ciclos manuales pendientes](docs/doom-reusable-install-r295.md).
-Ensayo autorizado: launcher de28,8KB registrado inactivo,13entradas anteriores
-intactas y gates PC cerrados. Usuario tiene instrucciones para probar dos
-arranques y el selector tras EXIT sin reinstalar. Resultados aún pendientes.
+**Actual R296:** [Lote de DoomPlay reportado OK; detalle visual pendiente](docs/doom-reusable-observation-r296.md).
+Usuario responde favorablemente al ensayo de dos ciclos/selector/retorno,
+pero observa rayones/colores bajo la imagen. Falta ubicarlos para distinguir
+HUD normal de un defecto de presentación. Sin nuevo arranque ni cambios físicos.
 
 **Actual R293: DOOM real ejecutado en Redmi Watch4 M2315W1 stock.**
 [Primer resultado físico](docs/doom-first-run-result-r293.md): el usuario jugó,

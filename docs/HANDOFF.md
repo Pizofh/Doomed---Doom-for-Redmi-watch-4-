@@ -1,5 +1,19 @@
 # Retomar el proyecto
 
+**Actual R296: usuario respondió globalmente TODO OK al lote DoomPlay, con detalle visual pendiente.**
+docs/doom-reusable-observation-r296.md y observations-r296.json. No repetir
+checklist/ensayo por rutina: respuesta favorable a2ciclos/selector/retorno,
+sin estadosdesglosados. Describe rayones/colores BAJO imagen/casi mitadpantalla.
+NO asumir normal ni corrupción: puedeHUDdentrorectángulo o artefactofuera.
+Geometríajuego x35..354,y35..234; HUDúltimasfilas,estadoPNGx20y249 180x20,
+dotx350y249. SerializerRW4BGRA4bytes+header4,internoRGB565;S3otroformato.
+Inspecciónlocalsin causademostrada; NO cambiócódigo ni hubo hardware después.
+GatesPCsiguen cerrados. Siguiente: si YA tienefoto pedirverla por mensaje
+normal (NOasync herramienta de texto para pediruploads); no reabrir/arrancar
+solo porfoto. UbicarHUD/estado/artefacto antesdeotraprueba/payload.
+No inventarFPS/RAM/cleanupindependiente. Autorizacióndosensayosconsumida según
+reporte global, no ejecutar un tercero. Solo commitlocal, no push/CIremota.
+
 **Actual R295: DoomPlay instalado INACTIVO, DOS ciclos manuales YA autorizados pendientes.**
 docs/doom-reusable-install-r295.md. UNinstallr294real completó RegisteredInactive:
 15parts24frames29460tx,close/workerexittrue0. Finally restauróNodefalse/r167 y
