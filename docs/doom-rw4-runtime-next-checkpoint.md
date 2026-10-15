@@ -1,5 +1,10 @@
 # Siguiente checkpoint: runtime de DOOM real en RW4
 
+Actualización R277: [cambiar de esfera y recoger al volver](doom-ram-close-r277.md)
+ya pasa con el backend nuevo. La salida normal y el cierre de página quedan
+cubiertos en S3. Sigue pendiente el contraste específico RW4 antes del ensayo
+físico agrupado: filesystem/caché/backend, presupuesto de memoria y rutaWAD.
+
 Actualización R276: la [integración PC del motor y el backend RAM nuevo](doom-ram-engine-r276.md)
 ya pasa E1M1, controles, pausa y dos salidas con JOIN/unload. Se completó esa
 parte de la preparación. Quedan recogida tras salida inesperada/reentrada y

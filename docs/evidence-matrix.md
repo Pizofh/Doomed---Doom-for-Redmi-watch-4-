@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**Actual R277 PC:** [Cierre de página y recogida al reentrar](doom-ram-close-r277.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Cambiar de esfera con Doom activo solicita STOP sin EXIT | S3 exacto, backend RAM nuevo | GC stop=true, finished1/joined0, controles neutrales antes de120s | CONFIRMADO EN EMULADOR | Alta para este cierre normal | Sí | No crash/kill/panic ni firmware físico |
+| Reentrar recoge el módulo y permite nuevos juegos | S3 exacto, mismo contexto UI | Cache drop/JOIN/rmmod;14/14, hilo/nodos ausentes; dos ciclos posteriores | CONFIRMADO EN EMULADOR | Alta para flujo probado | Sí | Owner sigue protegido; no transferencia a otro task |
+
 **Actual R276 PC:** [Motor real con el backend RAM nuevo](doom-ram-engine-r276.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

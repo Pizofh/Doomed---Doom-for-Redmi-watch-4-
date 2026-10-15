@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R277, solo PC:** [Salir cambiando de esfera y recoger al volver funciona](docs/doom-ram-close-r277.md).
+GC pide STOP; la UI posterior retira caché, hace JOIN y descarga el módulo.
+14/14 reservas liberadas, sin reboot. Controles y dos salidas normales siguen pasando.
+
 **Actual R276, solo PC:** [Doom real integrado con el nuevo backend RAM](docs/doom-ram-engine-r276.md).
 E1M1, avance, ambos giros, disparo, pausa/reanudación y dos START/EXIT pasan
 con hilo real y libc privada. Ambos liberan14/14 reservas y descargan el módulo.

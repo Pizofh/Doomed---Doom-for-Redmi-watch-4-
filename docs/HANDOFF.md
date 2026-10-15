@@ -1,5 +1,27 @@
 # Retomar el proyecto
 
+**Actual R277 PC: cierre por cambio de esfera y recogida al volver pasan.**
+[Resultado/reproducción](doom-ram-close-r277.md). Sin hardware nuevo.
+Lua doom-ram-ui.lua añade closing, GC soloSTOP, timer inhibido al cerrar;
+al reentrar valida fila rw4doomram276 de /proc/modules +snapshot, STOP,
+op7 en UI tras destrucción anterior, JOIN, stats14/14 y rmmod. Owner C no
+se cambia. Root permite stock scroll-chain fuera de los controles; controles
+mantienen flags sin propagación. Swipe385,430→385,40 evita botones inferiores.
+Test nuevo tools/test-doom-ram-close.mjs start|closed|reentry; no STOP/unload
+desdeCLI. Resultado artifacts/emulator/doom-ram-close-reentry-1792075170831:
+thread88, GCstoptrue, finished1/joined0 conStorage activa, luego14/14,
+reason1/code0/cleanup0; módulo/hilo/3nodos ausentes al reentrar. wall34587<120s.
+Regresión doom-ram-test-1792075184081 pasó controles/pausa y2START/EXIT,
+threads210/344,14/14 ambos. Captura r277-collected inspeccionada.
+ELF C no cambió:610484B/SHA4cc023ce788a69605c1265b874dc4926e27c11b1673b133f79c95939a330af2a.
+Lua SHAea7c49214c013e7fbaccbe2eca6a189517137413b900a0e2f077af44e87fdd5b.
+Builder ypackage rehechos,UIProbe refreshsinreset. UnresetVMsinmódulosANTES
+destageporreposo; ninguno para salir/recoger. Cleanupfinal ELF/WADtemporales
+retirados y nodos/módulo ausentes. UIProbe activa Closed; viejoDoomdir conservado.
+Siguiente: cerrar contratosRW4 filesystem/cache/backend/RAM/rutaWAD antes
+planfísicoagrupado. Ya no repetir cierrePC/fixturesC sin cambio o fallo.
+R270 sigueúltimofísico,234retirado/relojnormal; nada físico nuevoautorizado.
+
 **Actual R276 PC: Doom real + RAM image + pthread + libc privada pasan.**
 [Resultado y reproducción](doom-ram-engine-r276.md). Sin hardware nuevo.
 Commit posterior a0583d89. Builder tools/build-doom-ram-s3.mjs recompila80C

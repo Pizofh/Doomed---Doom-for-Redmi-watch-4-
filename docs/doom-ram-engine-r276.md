@@ -108,6 +108,10 @@ Doom ni para sustituir STOP/JOIN/unload.
 
 ## Qué falta
 
+Actualización: [R277](doom-ram-close-r277.md) completó y probó la recogida al
+reentrar tras cambiar de esfera, con GC STOP y retirada posterior desde UI.
+El párrafo siguiente describe lo que quedaba pendiente al cerrar R276.
+
 La salida explícita está probada; una salida inesperada de página/GC conserva
 el módulo después de pedir STOP. Todavía falta completar y probar la recogida
 al reentrar, manteniendo el retiro de caché exclusivamente en UI. También
