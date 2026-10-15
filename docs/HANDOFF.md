@@ -1,5 +1,31 @@
 # Retomar el proyecto
 
+**Actual R278 PC: contratos RW4 y carrier4,8MB preparados offline.**
+[Detalle/reproducción](doom-rw4-deployment-r278.md). Sin emulador/USB/BT nuevo.
+tools/review-rw4-deployment-r278.mjs normal|follow|contracts|resolved ejecutados;
+outputs inmutables artifacts/research/deployment-r278*. Final resolved verifica
+driverLVGL33f70 letter/ cache_size0; callbackopen33f28 formato/%s,read33efc,
+seek33ec0/tell33e9c; veneers64f7c→495b7c,64e14→496190,64fb4→4956a4.
+InicializadorLRU55078→64778,managerapply648e8→24590,dropcallback646c4;
+la invalidación24638 cierra decoder2517c. Headerinfo24bac lee4B/cierra y
+24fc0 recorredecoders; no añadir headercache S3. Backend físico siguependiente.
+Las primeras ventanas5f8cc0/5f95 eran exploratorias, NOportPOSIX identificado.
+Memoria: ELFstatic899056 +picoS3runtime6583985 +stack32768 =7515809B
+antesdecoder/loader/overhead. No doblecontarzone6MiB ni DG256k; ambos en pico.
+RAMfree/largestblock físico desconocidos; parámetroLRU0xd00000 no memoriausada.
+tools/package-doom-assets-r278.mjs ejecutado sinADB: build/doom-assets-r278,
+DoomAssets.face4807680B/SHA387e6c80616296ca7c8727e1a356e169c5b3575e1f2c33d4c9e9a32729ffa7c9.
+3records byte-exactos: main.lua220B (soloobjetoscolor),doom.elf603692B SHA45d3..,
+doom1.wad4196020B sharewarepin. IDpropuesto365219963, noinstalado.
+Sin hexenLua, sinlauncherC/IO/timers. Candidate mantieneWADplaceholder;
+NOejecutarcarrier yNOenviar. Extracciónruntime ypersistenciafísica sinprobar.
+Bloqueoconcreto: static-watchface-transfer chunks cap64parts; haríanfalta2353.
+static-watchface-session limita32768B init/send. Nocambiarcap a ciegas.
+Siguiente meta: instalador/launcherDoom completoPC,validarextracción/WADpath,
+transferenciagrandeacotada/journal/resume ypreflightmemoria antesplanfísico.
+No repetirfixturesC niensayosS3 sin cambios. CandidatoyELF no cambiaron.
+R270 sigueúltimofísico; ningúnpayload nuevoautorizado. ArtifactsWAD nuncaCIpúblico.
+
 **Actual R277 PC: cierre por cambio de esfera y recogida al volver pasan.**
 [Resultado/reproducción](doom-ram-close-r277.md). Sin hardware nuevo.
 Lua doom-ram-ui.lua añade closing, GC soloSTOP, timer inhibido al cerrar;

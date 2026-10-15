@@ -1,5 +1,10 @@
 # Siguiente checkpoint: runtime de DOOM real en RW4
 
+Actualización R278: [filesystem/caché identificados y assets empaquetados offline](doom-rw4-deployment-r278.md).
+La siguiente meta concreta es el instalador/launcher completo en PC: extracción
+y rutaWAD, transporte grande acotado y preflight de memoria antes del gate físico.
+El carrier de4,8MB no se instala con el transporte actual de probes64partes/32KiB.
+
 Actualización R277: [cambiar de esfera y recoger al volver](doom-ram-close-r277.md)
 ya pasa con el backend nuevo. La salida normal y el cierre de página quedan
 cubiertos en S3. Sigue pendiente el contraste específico RW4 antes del ensayo

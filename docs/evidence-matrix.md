@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**Actual R278 PC:** [Contratos de despliegue y carrier offline](doom-rw4-deployment-r278.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| LVGL puede dirigir /dev/... al filesystem NuttX | AP candidato RW4 | Driver33f70, letra/, formato/%s, callbacks y veneers cruzados | INFERENCIA RAZONABLE | Alta estática | Análisis | No nodo gráfico físico ensayado |
+| Invalidación por path cierra decoder mediante gestor LRU | AP candidato RW4 | Inicialización55078, aplicación648e8, callback646c4→2517c | INFERENCIA RAZONABLE | Alta para cadena inspeccionada | Análisis | No consumo/render/backend físico demostrado |
+| ELF y WAD caben como archivos separados en watchface | Compiler comunitario revisado, PC | Carrier4807680B, tres registros byte-exactos | CONFIRMADO SOLO EN PC | Alta para serialización | Sí | No extracción/instalación física |
+| El instalador actual admite el carrier de Doom | Herramienta propia | Cap64partes y32768bytes frente a2353partes necesarias | REFUTADO | Alta | Código inspeccionado | No es un límite demostrado del reloj |
+| Doom tiene RAM libre suficiente en M2315W1 | Unidad física | Subtotal estimado7515809B; free/largest block desconocidos | SIN EVIDENCIA | Pendiente | No | Pico S3 no es RAM total ni libre física |
+
 **Actual R277 PC:** [Cierre de página y recogida al reentrar](doom-ram-close-r277.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R278, solo PC:** [Rutas/caché RW4 contrastadas y assets empaquetados](docs/doom-rw4-deployment-r278.md).
+Carrier offline4,8MB con ELF/WAD separados y registros idénticos. El instalador
+de probes limita64partes/32KiB: falta preparar la transferencia grande y el launcher.
+RAM libre/extracción/aceptación física sin demostrar; no se envió el paquete.
+
 **Actual R277, solo PC:** [Salir cambiando de esfera y recoger al volver funciona](docs/doom-ram-close-r277.md).
 GC pide STOP; la UI posterior retira caché, hace JOIN y descarga el módulo.
 14/14 reservas liberadas, sin reboot. Controles y dos salidas normales siguen pasando.
