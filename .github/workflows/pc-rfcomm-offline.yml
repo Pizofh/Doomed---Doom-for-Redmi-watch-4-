@@ -20,6 +20,7 @@ on:
       - 'tools/test-doom-large-upload.mjs'
       - 'tools/doom-upload-pc-*.mjs'
       - 'tools/test-doom-upload-pc-session.mjs'
+      - 'tools/test-doom-large-worker.mjs'
       - 'tools/test-pc-pairing.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
   pull_request:
@@ -40,6 +41,7 @@ on:
       - 'tools/test-doom-large-upload.mjs'
       - 'tools/doom-upload-pc-*.mjs'
       - 'tools/test-doom-upload-pc-session.mjs'
+      - 'tools/test-doom-large-worker.mjs'
       - 'tools/test-pc-pairing.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
 
@@ -72,6 +74,9 @@ jobs:
       - name: Test lifecycle and default physical boundary
         shell: pwsh
         run: node tools/pc-rfcomm.mjs test
+      - name: Test compiled large-file IPC and supervisor without radio
+        shell: pwsh
+        run: node tools/test-doom-large-worker.mjs
       - name: Test worker supervision without radio
         shell: pwsh
         run: node tools/test-pc-rfcomm-supervisor.mjs

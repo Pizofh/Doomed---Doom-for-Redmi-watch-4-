@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash,createHmac,hkdfSync,createCipheriv,createDecipheriv} from 'node:crypto';
 import {FrameReader,v1Frame,command,fields,one,uint,bytes} from './rw4-xiaomi-protocol.mjs';
 import {packageCopy} from './doom-large-upload.mjs';
+import {LargeUploadPcPipe} from './doom-upload-pc-pipe.mjs';
 const peers=new WeakMap(),digest=(b,a='md5')=>createHash(a).update(b).digest();
 function ccm(key,nonce,input,decrypt=false){
  const c=decrypt?createDecipheriv('aes-128-ccm',key,nonce,{authTagLength:4}):createCipheriv('aes-128-ccm',key,nonce,{authTagLength:4});
@@ -94,3 +95,22 @@ export function createDoomUploadPcPeer(plan,{scenario='ok',chunkSize=2048,resume
 }
 export function pcPeerAccess(endpoint){const p=peers.get(endpoint);if(!p)throw Error('PcPeerRefused');p.claim();return p.access;}
 export function pcPeerSummary(endpoint){const p=peers.get(endpoint);if(!p)throw Error('PcPeerRefused');return{...p.stats,commandCounters:[...p.stats.commandCounters]};}
+
+// Native executable IPC, but still an owned synthetic peer and no radio. Both
+// transmitted frames and injected synthetic replies cross the C# worker loop.
+export function createDoomUploadIpcPeer(plan,options={}){
+ const endpoint=createDoomUploadPcPeer(plan,options),p=peers.get(endpoint),base=p.access;
+ const pipe=new LargeUploadPcPipe('bridge');let integrity=false;
+ const link=Object.freeze({
+  opened:()=>pipe.opened(),
+  send:async b=>{await pipe.send(b);await base.link.send(b);},
+  read:async()=>pipe.readSynthetic(await base.link.read()),
+  close:async()=>{
+   try{integrity=await pipe.summary();}catch{}
+   const closed=await pipe.close();await base.link.close();
+   p.stats.workerWireVerified=integrity;
+   return{...closed,wireIntegrityVerified:integrity};
+  }
+ });
+ p.access=Object.freeze({...base,link});return endpoint;
+}

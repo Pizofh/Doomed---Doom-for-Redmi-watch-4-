@@ -222,6 +222,18 @@ namespace Rw4.PcRfcomm
             var staticGate = new StringWriter();
             Check(Program.Dispatch(new[] { "session-static-r169" }, staticGate) == 2);
             Check(staticGate.ToString().Contains("E:GateClosed"));
+            var largeGate = new StringWriter();
+            Check(Program.Dispatch(new[] { "session-large-r281" }, largeGate) == 2);
+            Check(largeGate.ToString() == "E:GateClosed" + Environment.NewLine);
+            var largeBytes = new LargeSessionWorker.Budget();
+            for (int i = 0; i < LargeSessionWorker.ByteLimit / 4096; i++) Check(largeBytes.Reserve(4096));
+            Check(largeBytes.Reserve(LargeSessionWorker.ByteLimit % 4096));
+            Check(largeBytes.Bytes == LargeSessionWorker.ByteLimit && !largeBytes.Reserve(1));
+            var largeFrames = new LargeSessionWorker.Budget();
+            for (int i = 0; i < LargeSessionWorker.FrameLimit; i++) Check(largeFrames.Reserve(1));
+            Check(!largeFrames.Reserve(1));
+            Check(!new LargeSessionWorker.Budget().Reserve(0) && !new LargeSessionWorker.Budget().Reserve(4097));
+            Check(LargeSessionWorker.SessionMs == 660000 && LargeSessionWorker.SendIdleMs == 15000);
             foreach (string bad in new[] { "", "S:", "S:0", "S:GG", "R", "S:00\n", "S:" + new string('0',8194) })
                 Check(SessionWorker.ParseSend(bad) == null);
             ulong parsed;

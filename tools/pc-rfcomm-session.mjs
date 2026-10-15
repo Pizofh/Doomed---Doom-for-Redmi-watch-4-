@@ -21,9 +21,14 @@ export function validateAuth(value) {
   return Buffer.from(value.authKey.replace(/^0x/,''),'hex');
 }
 export class PrivatePipe {
-  constructor(executable,address,{spawnWorker = spawn,limitMs = 60000,workerProfile = 'readonly'} = {}) {
-    if (!['readonly','static-r169'].includes(workerProfile)) throw Error('CommandRefused');
-    this.child = spawnWorker(executable,[workerProfile === 'readonly' ? 'session-reviewed-r159' : 'session-static-r169'],{stdio:['pipe','pipe','pipe'],windowsHide:true,shell:false});
+  constructor(executable,address,{spawnWorker = spawn,limitMs = 60000,workerProfile = 'readonly',simulationScenario = 'ok'} = {}) {
+    const profiles={'readonly':['session-reviewed-r159'],'static-r169':['session-static-r169'],'large-r281':['session-large-r281']};
+    if(workerProfile==='large-pc-r281'){
+      if(address!=='PC_ONLY_R281'||!['ok','partial','bridge','send-zero','send-error','idle-timeout','session-timeout','send-hang','receive-eof','close-failure'].includes(simulationScenario))throw Error('CommandRefused');
+      profiles[workerProfile]=['large-ipc-sim-r281',simulationScenario];
+    }
+    if (!Object.hasOwn(profiles,workerProfile)) throw Error('CommandRefused');
+    this.child = spawnWorker(executable,profiles[workerProfile],{stdio:['pipe','pipe','pipe'],windowsHide:true,shell:false});
     this.queue = []; this.waiters = []; this.text = ''; this.failure = null;
     this.closeConfirmed = false; this.workerExitConfirmed = false; this.forced = false;
     this.nativeError = false; this.workerExitCode = null;

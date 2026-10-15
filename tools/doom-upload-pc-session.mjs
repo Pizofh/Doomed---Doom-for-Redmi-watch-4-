@@ -133,7 +133,8 @@ export async function runDoomUploadPc(endpoint,plan,secret,{resumeFrom=null}={})
   if(Buffer.isBuffer(secret))secret.fill(0);
   if(peer){
    try{const closed=await peer.link.close();report.closeConfirmed=closed.closeConfirmed;
-    if(!closed.closeConfirmed){report.status='StoppedNeedsReview';journal?.save({status:'Uncertain',upload:upload?{...upload,status:'Uncertain'}:null});}
+    if(closed.workerExitConfirmed!==undefined)Object.assign(report,{workerExitConfirmed:closed.workerExitConfirmed,workerExitCode:closed.workerExitCode,workerWireVerified:closed.wireIntegrityVerified});
+    if(!closed.closeConfirmed||closed.workerExitConfirmed===false||closed.nativeError||closed.workerExitCode!==undefined&&closed.workerExitCode!==0||closed.wireIntegrityVerified===false){report.status='StoppedNeedsReview';journal?.save({status:'Uncertain',upload:upload?{...upload,status:'Uncertain'}:null});}
    }catch{
     report.closeConfirmed=false;report.status='StoppedNeedsReview';
     try{const prior=upload??journal?.record.upload;journal?.save({status:'Uncertain',upload:prior?{...prior,status:'Uncertain'}:null});}catch{report.journalSaved=false;}

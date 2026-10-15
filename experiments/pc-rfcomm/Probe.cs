@@ -128,6 +128,7 @@ namespace Rw4.PcRfcomm
     {
         // Change only after reviewing the concrete static-package physical plan.
         private static readonly bool StaticPhysicalReviewed = false;
+        private static readonly bool LargePhysicalReviewed = false;
         internal static int Dispatch(string[] args, TextWriter output)
         {
             if (args.Length == 0 || (args.Length == 1 && args[0] == "plan"))
@@ -148,6 +149,13 @@ namespace Rw4.PcRfcomm
                 }
                 return SessionWorker.Run(Console.In, output, true);
             }
+            if (args.Length == 1 && args[0] == "session-large-r281") {
+                if (!LargePhysicalReviewed) { output.WriteLine("E:GateClosed"); output.Flush(); return 2; }
+                return LargeSessionWorker.RunNative(Console.In, output);
+            }
+            if (args.Length == 2 && args[0] == "large-ipc-sim-r281" &&
+                Array.IndexOf(new[] { "ok", "partial", "bridge", "send-zero", "send-error", "idle-timeout", "session-timeout", "send-hang", "receive-eof", "close-failure" }, args[1]) >= 0)
+                return LargeSessionWorker.Simulate(Console.In, output, args[1]);
             if (args.Length == 2 && args[0] == "simulate" &&
                 Array.IndexOf(new[] { "success", "refused", "timeout", "error", "close-failure" }, args[1]) >= 0)
             {

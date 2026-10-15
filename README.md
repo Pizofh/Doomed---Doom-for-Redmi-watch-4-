@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R281, solo PC:** [Transporte grande compilado y supervisado pasa](docs/doom-large-worker-r281.md).
+4,8 MB y sesión autenticada pasan por pipes y worker C# reales con sockets
+sintéticos. Diez escenarios cubren envío parcial, bloqueo, cancelación y cierre.
+Sin radio ni hardware nuevo. Siguiente: launcher RW4 y ruta WAD persistente.
+
 **Actual R280, solo PC:** [Sesión grande autenticada y reanudación integradas](docs/doom-upload-session-r280.md).
 22 escenarios pasan con receptor sintético de 4,8 MB: autenticación, envío,
 journal, corte/reanudación y catálogo final. CI preparada; sin Bluetooth ni

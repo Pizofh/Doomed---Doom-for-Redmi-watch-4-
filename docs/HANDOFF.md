@@ -1,5 +1,30 @@
 # Retomar el proyecto
 
+**Actual R281 PC: worker grande compilado y supervisado pasa.**
+[Detalle/reproducción](doom-large-worker-r281.md). Commit posterior a aae636d.
+Nuevo experiments/pc-rfcomm/LargeSessionWorker.cs, tools/doom-upload-pc-pipe.mjs,
+tools/test-doom-large-worker.mjs. RunCore compartido native/fixture: parcial,
+would-block, deadline/progreso y finally cierre aun con stdout roto.
+Budget4861000B/4128frames/4096frame/16384requests/131072RX, abrir20s,
+sesión660s/idleSend15s. Legacy SessionWorker intacto 16/32KiB/96/55s.
+Probe entry session-large-r281 gate false ANTES de destino/cache/nativeAPI.
+PrivatePipe admite large-r281 (cerrado) y large-pc-r281 con tokenPC_ONLY_R281.
+LargeUploadPcPipe verifica exe/sourcehash, solo escenarios sintéticos fijos;
+parent675s/open25s/io20s/close2s, no I/O simultánea, cancel/kill con salida
+confirmada y sin inventar closeConfirmed. 10 escenarios compiledIPC pasan:
+2353 frames parciales73B+wouldblock con SHA/len C#; auth/install/upload/catalog
+completos cruzando C# Send/Receive; zero/error/idle/total/stuckSend/EOF/closefail
+y cancel+concurrentcall. Bridge replies siguen sintéticas inyectadas Node.
+createDoomUploadIpcPeer integra worker a runnerR280, sin capability física.
+BuildSHA a1546894c7330995819ebaa12adf6225f168ed3175938be3649fe4dc3a479344.
+Resultado artifacts/doom-upload-session-r280/worker-r281-1792079473731.json.
+C# selftests5579, Xiaomi legacy, gates y R28022 escenarios pasan. CI Windows
+incorpora worker test tras build; CI remota no ejecutada. Sin VM/USB/BT nuevo.
+Siguiente: launcher RW4 + WAD path persistente. Antes físico: journal target
+real/lock, memoria, paquete/plan revisable. No repetir toy probes C/UI.
+Carrier inerte/ELF placeholder conservados. R270 último físico; no nueva
+autorización física. Estado VM R279 no modificado.
+
 **Actual R280 PC: sesión autenticada grande integrada, 22 escenarios pasan.**
 [Detalle y reproducción](doom-upload-session-r280.md).
 Nuevos tools/doom-upload-pc-session.mjs, doom-upload-pc-simulator.mjs,

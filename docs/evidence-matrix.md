@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R281 PC:** [Worker grande e IPC supervisado](doom-large-worker-r281.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| El worker C# transmite el paquete grande sin duplicar escrituras parciales | Proceso Windows/API sintética | 2353 frames, SHA256/longitud de C# iguales al envío Node, would-block | CONFIRMADO SOLO EN PC | Alta para bucle e IPC | Sí | No driver/radio real |
+| Sesión autenticada grande atraviesa el worker compilado | Peer Xiaomi sintético + C# real | Auth/install/upload/catálogo pasan con 2353 partes y exit0 | CONFIRMADO SOLO EN PC | Alta para integración | Sí | Respuestas creadas en Node e inyectadas al Receive del fixture |
+| Supervisor termina un envío bloqueado y confirma salida | Proceso hijo PC | Send infinito terminado por deadline y cancelación | CONFIRMADO SOLO EN PC | Alta local | Sí | No afirma cierre limpio tras kill ni instalación remota |
+| El perfil grande abre conexiones físicas | Entry point R281 | Gate E:GateClosed antes de leer destino/cache/API nativa | REFUTADO para perfil actual | Alta local | Sí | Preparado, todavía cerrado; caps viejos intactos |
+
 **Actual R280 PC:** [Sesión autenticada de upload grande](doom-upload-session-r280.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
