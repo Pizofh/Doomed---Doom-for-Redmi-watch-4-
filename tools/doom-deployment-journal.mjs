@@ -51,14 +51,19 @@ export class DoomDeploymentJournal{
      if(previous&&r.attempt!==previous.attempt&&!(r.attempt===previous.attempt+1&&r.status==='Created'&&previous.status==='Uncertain'))fail();
      previous=r;history.push(r);this.#lastHash=hash(line+'\n');
     }
-    if(!previous||previous.status!=='Uncertain'||previous.before===null)fail();
+    if(!previous||previous.status!=='Uncertain')fail();
+    let retryBaseline=null;
     if(retryWithoutData){
-     // A single separately reviewed second attempt, only after a first control
-     // exchange with no persisted Uploading/Intent/MASS phase. Keep all history.
      const attempt=history.filter(r=>r.attempt===previous.attempt);
-     if(previous.attempt!==1||attempt.map(r=>r.status).join(',')!=='Created,InstallIntent,UploadIntent,Uncertain'||attempt.some(r=>r.upload!==null))fail();
-    }else if(previous.upload?.status!=='Uncertain'||previous.upload.highestPossibleOffset<=previous.upload.offset)fail();
-    this.#resume=clone(previous);this.#record=previous;
+     const stages=attempt.map(r=>r.status).join(',');
+     const firstControl=previous.attempt===1&&stages==='Created,InstallIntent,UploadIntent,Uncertain'&&previous.before!==null;
+     const first=history.filter(r=>r.attempt===1);
+     const preflightOnly=previous.attempt===2&&stages==='Created,Uncertain'&&previous.before===null&&history.every(r=>r.upload===null)&&first.map(r=>r.status).join(',')==='Created,InstallIntent,UploadIntent,Uncertain';
+     if(!(firstControl||preflightOnly)||attempt.some(r=>r.upload!==null))fail();
+     retryBaseline=previous.before??[...first].reverse().find(r=>r.before!==null)?.before;
+     if(retryBaseline===null||retryBaseline===undefined)fail();
+    }else if(previous.before===null||previous.upload?.status!=='Uncertain'||previous.upload.highestPossibleOffset<=previous.upload.offset)fail();
+    this.#resume=clone({...previous,...(retryBaseline?{before:retryBaseline}:{})});this.#record=previous;
     this.#fd=fs.openSync(this.#file,'a');
     this.#append({...previous,attempt:previous.attempt+1,status:'Created',upload:null,before:null,attemptKind:retryWithoutData?'retry-no-data':'resume'});
    }else{

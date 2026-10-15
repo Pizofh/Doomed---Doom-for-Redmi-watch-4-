@@ -11,6 +11,7 @@ import {pcPeerAccess} from './doom-upload-pc-simulator.mjs';
 import {DoomDeploymentJournal,deploymentIdentity,disposeDeploymentIdentity} from './doom-deployment-journal.mjs';
 import {claimReviewedDoomEndpoint} from './doom-deployment-physical.mjs';
 import {parseDoomUploadAck} from './doom-upload-ack.mjs';
+import {compareDoomCatalogs} from './doom-deployment-catalog.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const directory=path.join(root,'artifacts/doom-upload-session-r280');
@@ -104,10 +105,15 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   await peer.link.opened();client.phase='Authenticating';
   if(peer.physical)report.watchCommandRequested=true;
   await client.authenticate(secret,[1]);
+  client.phase='DeviceInfo';
   const info=readDeviceInfo(await client.query(2,2));
+  report.devicePreflight={expectedModel:info.modelRecognized===true,expectedFirmware:info.firmware==='2.2.86'};
   if(info.modelRecognized!==true||info.firmware!=='2.2.86')refuse();
+  client.phase='CatalogPreflight';
   const before=catalog(readWatchfaces(await client.query(4,0)));
-  if(before.some(f=>f.id===plan.id)||parent&&!equal(parent.before,before))refuse();
+  const comparison=parent?compareDoomCatalogs(parent.before,before):null;
+  report.catalogPreflight={ownIdAbsent:!before.some(f=>f.id===plan.id),currentCount:before.length,...(comparison??{})};
+  if(before.some(f=>f.id===plan.id)||parent&&!(deploymentRetryWithoutData?comparison.sameMembership:equal(parent.before,before)))refuse();
   journal.save({status:'InstallIntent',before});client.phase='InstallIntent';
   const install=envelope(4,4,6,bytes(6,Buffer.concat([bytes(1,Buffer.from(plan.id)),uint(2,plan.size)])));
   const installAck=await client.exchange(install,4,4);

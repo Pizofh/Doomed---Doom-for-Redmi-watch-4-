@@ -1,5 +1,9 @@
 # R286: instalador grande integrado con journal privado
 
+Estado posterior: [R288](doom-large-install-preflight-r288.md) documenta los dos
+intentos físicos sin MASS y la continuación acotada pendiente de aprobación.
+El journal real ya existe; este documento conserva el diseño original.
+
 **Preparado y probado en PC; gates físicos cerrados.** No conexiones al reloj,
 transferencias físicas, ejecución del candidato ni consultas remotas de CI.
 El paquete fijo es R285:4827044bytes, ID365219963, SHA256

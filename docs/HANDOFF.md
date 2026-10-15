@@ -1,5 +1,27 @@
 # Retomar el proyecto
 
+**Actual R288: segundo intento autorizado consumido; NO continuar físicamente sin otra aprobación.**
+Plan/resultado: docs/doom-large-install-preflight-r288.md. Un retry-no-data real:
+LargeSessionRefused,5frames/185bytes,0MASS,sin INSTALL nuevo,close/workerexit true.
+Fuentes restauradas finally + helper reconstruido + gates cerrados comprobados.
+Consulta independiente: mismos13IDs, otra selección, ID propio ausente.
+Usuario aún no confirmó estado visual después de ESTE intento. Preguntar junto
+con revisión del siguiente envío, sin consultas físicas repetidas por rutina.
+Journal real MISMO archivo: attempt1 cuatro estados anteriores; attempt2 solo
+Created/Uncertain sin before/upload. NO borrar ni renombrar ni freshinstall.
+Guard PC corregido: retry sin datos compara IDs/canDelete y guarda selección
+ACTUAL; resume sigue exacto. Fases/reportes device/catalog seguros añadidos.
+Continuación SOLO patrón firmado exacto attempt2 anterior, todos upload null,
+recupera baseline attempt1 y añade attempt3; no attempt4. 16casos nuevos +18
+retry anteriores pasan; gates CLI/C# cerrados. No nuevo hardware tras corrección.
+Siguiente aprobación: mismo R285 ID365219963/4827044/d0fc... nativefalse,
+UN retry-no-data, observador≥50% durante4–6min; no C/Doom/activar/borrar.
+Solo tras autorización: DEPLOY+CONTROL_RETRY+C#Large temporal, RESUMEfalse,
+rebuild/prepare/un comando; finally restaurar/rebuild/test cerrado.
+Artifacts locales: artifacts/doom-deployment-physical-r287/attempt-result.json
+(posible UTF16LE), catalog-after.json. No MAC/key/raw logs. Commits locales,
+NO push ni CI remota/auditorías de publicación. Notas inferiores son históricas.
+
 **Actual R287: primer intento grande AUTORIZADO falló antes de MASS. Reloj normal.**
 Usuario aprobó un envío y observar≥50%. EjecutadoinstallR286: INSTALL0aceptado,
 UploadIntent/MalformedProtocol,7frames/277tx,0MASS. close/workerexittrue exit0.

@@ -13,8 +13,10 @@ function ccm(key,nonce,input,decrypt=false){
 }
 function referenceCrc(b){let crc=0xffffffff;for(const value of b){crc^=value;for(let bit=0;bit<8;bit++)crc=(crc>>>1)^((crc&1)?0xedb88320:0);}return(crc^0xffffffff)>>>0;}
 const scenarios=new Set(['ok','bad-key','v2','wrong-model','wrong-fw','collision','clear-response','reject','bad-md5','bad-offset','bad-chunk','disconnect','missing','active','protected','unrelated-lost','close-failure','deadline']);
-export function createDoomUploadPcPeer(plan,{scenario='ok',chunkSize=2048,resumePosition=0,target='fixture-one',ackShape='complete'}={}){
+export function createDoomUploadPcPeer(plan,{scenario='ok',chunkSize=2048,resumePosition=0,target='fixture-one',ackShape='complete',catalogRows=null}={}){
  if(!scenarios.has(scenario)||![2048,4080].includes(chunkSize)||!Number.isInteger(resumePosition)||resumePosition<0||resumePosition>=plan.size||!/^fixture-[a-z]+$/.test(target)||!['complete','stock-minimal','defaults'].includes(ackShape)||ackShape!=='complete'&&(chunkSize!==2048||resumePosition!==0||scenario!=='ok'))throw Error('PcPeerRefused');
+ if(catalogRows!==null&&(!Array.isArray(catalogRows)||catalogRows.length>64||catalogRows.filter(r=>r.active).length!==1||catalogRows.some(r=>!/^\d{9}$/.test(r.id)||typeof r.active!=='boolean'||typeof r.canDelete!=='boolean')||new Set(catalogRows.map(r=>r.id)).size!==catalogRows.length))throw Error('PcPeerRefused');
+ const initialCatalog=catalogRows?.map(r=>({...r}));
  const data=packageCopy(plan),reader=new FrameReader(),queue=[],parts=[],secret=Buffer.alloc(16,37);
  const stats={mutations:0,massFrames:0,sentFrames:0,bytes:0,closeCalls:0,wireVerified:false,commandAfterWrap:false,highestReceivedOffset:resumePosition,commandCounters:[]};
  let now=0,material=null,rx,tx,rxNonce,txNonce,uploaded=false,expectSerial=0,authReceived=false,installReceived=false,uploadReceived=false;
@@ -71,7 +73,10 @@ export function createDoomUploadPcPeer(plan,{scenario='ok',chunkSize=2048,resume
    const response=(field,body)=>reply(Buffer.concat([uint(1,type),uint(2,subtype),bytes(field,body)]),scenario!=='clear-response');
    if(type===2&&subtype===2){response(4,bytes(3,Buffer.concat([bytes(2,Buffer.from(scenario==='wrong-fw'?'2.2.87':'2.2.86')),bytes(4,Buffer.from(scenario==='wrong-model'?'OTHER':'M2315W1'))])));return;}
    if(type===4&&subtype===0){
-    const rows=[];if(!(uploaded&&scenario==='unrelated-lost'))rows.push(bytes(1,Buffer.concat([bytes(1,Buffer.from('123456789')),uint(3,uploaded&&scenario==='active'?0:1),uint(4,0)])));
+    const rows=[];if(!(uploaded&&scenario==='unrelated-lost')){
+     if(initialCatalog)for(const r of initialCatalog)rows.push(bytes(1,Buffer.concat([bytes(1,Buffer.from(r.id)),uint(3,uploaded&&scenario==='active'?0:r.active?1:0),uint(4,r.canDelete?1:0)])));
+     else rows.push(bytes(1,Buffer.concat([bytes(1,Buffer.from('123456789')),uint(3,uploaded&&scenario==='active'?0:1),uint(4,0)])));
+    }
     if((uploaded&&scenario!=='missing')||scenario==='collision')rows.push(bytes(1,Buffer.concat([bytes(1,Buffer.from(plan.id)),uint(3,scenario==='active'?1:0),uint(4,scenario==='protected'?0:1)])));
     response(6,bytes(1,Buffer.concat(rows)));return;
    }

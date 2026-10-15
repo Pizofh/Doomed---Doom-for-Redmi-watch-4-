@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R288:** [Segundo intento y guard de catálogo](doom-large-install-preflight-r288.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Segundo intento terminó antes de INSTALL y MASS | M2315W1/FW2.2.86 | 5frames/185bytes, journal attempt2 Created/Uncertain, upload=null | CONFIRMADO EN RW4 | Alta para control | Sí | Conexión/worker cerrados; confirmación visual pendiente |
+| Catálogo posterior mantiene 13 IDs con otra selección | Unidad física | Consulta independiente cerrada, ID propio ausente | CONFIRMADO EN RW4 | Alta para catálogo | Sí | No demuestra integridad del filesystem |
+| Retry conserva selección actual y bloquea cambios de entradas/permisos | PC sintético | 16 casos nuevos +18 anteriores; gates cerrados | CONFIRMADO SOLO EN PC | Alta para casos | Sí | Continuación attempt3 no autorizada ni ejecutada |
+
 **Actual R287:** [Intento físico y parser](doom-large-install-result-r287.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
@@ -7,7 +15,7 @@
 | INSTALL del paquete grande aceptado; ninguna parte MASS enviada | M2315W1/FW2.2.86 | status0, fallo UploadIntent,7frames/277bytes, journal con upload=null | CONFIRMADO EN RW4 | Alta para control | Sí | No instalación completa; posible reserva de estado |
 | Esfera y menús siguen normales tras el intento | Unidad física | Confirmación del usuario | CONFIRMADO EN RW4 | Alta para observación | Sí, usuario | Gates Node/C# cerrados y worker salido |
 | Parser exigía campos opcionales del protocolo | Código PC y fuentes comunitarias revisadas | Proto opcional + getters/default2048;39casos reproducen y validan corrección | CONFIRMADO SOLO EN PC | Alta para defecto | Sí | Cuál campo faltó físicamente sigue desconocido |
-| Reintento tras cero datos preserva historial y bloquea posibles MASS previos | PC sintético | 18casos y dry run firmado sobre copia del journal real | CONFIRMADO SOLO EN PC | Alta para casos | Sí | Gate propio cerrado; segundo envío no autorizado/ejecutado aún |
+| Reintento tras cero datos preserva historial y bloquea posibles MASS previos | PC sintético | 18casos y dry run firmado sobre copia del journal real | CONFIRMADO SOLO EN PC | Alta para casos | Sí | Segundo intento ejecutado después; resultado R288 |
 
 **Actual R286:** [Instalador y journal](doom-deployment-journal-r286.md).
 

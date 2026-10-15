@@ -1,6 +1,9 @@
-# R287: segundo intento tras cero partes, pendiente de aprobación
+# R287: segundo intento tras cero partes, autorización consumida
 
-**No ejecutado.** R286 consumió la autorización de un envío, sin MASS. El
+**Ejecutado con autorización: detenido antes de INSTALL, sin MASS.**
+Ver [resultado y nueva propuesta R288](doom-large-install-preflight-r288.md).
+El resto describe el plan histórico aprobado, no una autorización vigente.
+R286 consumió la autorización de un envío, sin MASS. El
 usuario confirmó esfera/menús normales. [Resultado y corrección](doom-large-install-result-r287.md).
 Se requiere revisión explícita de este segundo intento y usuario observando,
 batería≥50%, sin OTA/otro cliente/cambio de vínculo. No Doom/C ni activación.
