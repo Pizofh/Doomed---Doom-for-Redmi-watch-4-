@@ -7,7 +7,7 @@ namespace Rw4.PcRfcomm
 {
     internal static class LargeSessionWorker
     {
-        internal const int ByteLimit = 4861000, FrameLimit = 4128;
+        internal const int ByteLimit = 4900000, FrameLimit = 4128;
         internal const int SessionMs = 660000, SendIdleMs = 15000;
         internal sealed class Budget
         {

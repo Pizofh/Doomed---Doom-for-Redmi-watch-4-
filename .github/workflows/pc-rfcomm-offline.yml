@@ -22,6 +22,9 @@ on:
       - 'tools/test-doom-upload-pc-session.mjs'
       - 'tools/test-doom-large-worker.mjs'
       - 'tools/audit-git-publish.mjs'
+      - 'doom/platform-rw4/launcher/**'
+      - 'tools/*doom-launcher*.mjs'
+      - 'experiments/doom-runtime-rw4/launcher-tests-r282.lua'
       - 'tools/test-pc-pairing.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
   pull_request:
@@ -44,6 +47,9 @@ on:
       - 'tools/test-doom-upload-pc-session.mjs'
       - 'tools/test-doom-large-worker.mjs'
       - 'tools/audit-git-publish.mjs'
+      - 'doom/platform-rw4/launcher/**'
+      - 'tools/*doom-launcher*.mjs'
+      - 'experiments/doom-runtime-rw4/launcher-tests-r282.lua'
       - 'tools/test-pc-pairing.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
 
@@ -51,6 +57,20 @@ permissions:
   contents: read
 
 jobs:
+  launcher-contracts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Install Lua interpreter from Ubuntu packages
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends lua5.4
+      - name: Test launcher controller and UI with synthetic dependencies
+        run: lua5.4 experiments/doom-runtime-rw4/launcher-tests-r282.lua
+
   publish-audit:
     runs-on: windows-2022
     timeout-minutes: 3

@@ -1,5 +1,16 @@
 # Matriz de evidencia
 
+**Actual R282:** [Launcher persistente integrado](doom-persistent-launcher-r282.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Nuevo ELF RW4 contiene la ruta persistente WAD asignada | Build PC ARMv8-M | ELF previo reproducido; recompilación adapter/transport; sin imports | CONFIRMADO SOLO EN PC | Alta para build | Sí | Carga RW4 deshabilitada; no compatibilidad runtime nueva |
+| Launcher sin fuentes stock puede abrir/cerrar/reabrir DOOM | S3 VM exacta, ARMv7-A | Dos ciclos E1M1 con controles/pausa/EXIT y sin reinstalación | CONFIRMADO EN EMULADOR | Alta para S3 | Sí | No motor DOOM físico demostrado |
+| ELF/WAD/UI sobreviven reinicio desde un paquete integrado | S3 VM | 20 hashes antes/después reset, READY visible | CONFIRMADO EN EMULADOR | Alta para S3 | Sí | Filesystem/cache/parser RW4 físico aún no probado con paquete grande |
+| Recuperación por lease tras GC y procfs con cola variable | Simulación Lua | Caso STOP sin JOIN/rmmod en GC y recogida en nueva UI | CONFIRMADO SOLO EN PC | Alta para casos probados | Sí | Ensayo real R282 cubre EXIT; la ruta de reentrada nueva está simulada |
+| Tamaño final cabe en el presupuesto del worker grande | Worker C# PC | Fixture4827012B,2362partes, 10 escenarios y5589 aserciones | CONFIRMADO SOLO EN PC | Alta para IPC | Sí | Gate físico cerrado, no radio ni registro físico completo |
+| RW4 dispone de RAM suficiente para el port | Hardware | Subtotal orientativo7515845B, sin medida de heap/largest block | SIN EVIDENCIA | Pendiente | No | Pico runtime procede de S3, no asumir32MB libres |
+
 **Actual R281 PC:** [Worker grande e IPC supervisado](doom-large-worker-r281.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -14,7 +14,8 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),resul
 // Gate dispatch must return before cached-target lookup or socket startup.
 const gate=spawnSync(path.join(root,'artifacts/pc-rfcomm/Rw4PcRfcomm.exe'),['session-large-r281'],{input:'',encoding:'utf8',shell:false,windowsHide:true,timeout:3000});
 assert.equal(gate.status,2);assert.equal(gate.stdout.trim(),'E:GateClosed');assert.equal(gate.stderr,'');
-const plan=syntheticDoomUpload(),md5=createHash('md5').update(packageCopy(plan)).digest();
+// R282: use the final RW4 carrier's exact size, but independently owned bytes.
+const plan=syntheticDoomUpload(4827012),md5=createHash('md5').update(packageCopy(plan)).digest();
 const layout=uploadLayout(plan,{status:0,md5,chunkSize:2048,resumePosition:0});
 // Full 4.8MB framed/encrypted stream through partial writes + would-block in C#.
 {

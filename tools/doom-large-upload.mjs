@@ -12,7 +12,7 @@ export function prepareDoomAssets(raw){
  return mint(b,'365219963','review-carrier');
 }
 // Reproducible, owned non-game bytes for public CI. Never an installable face.
-export function syntheticDoomUpload(){const b=Buffer.alloc(4807680);for(let i=0;i<b.length;i++)b[i]=(i*29+(i>>>8))&255;Buffer.from('PC ONLY UPLOAD FIXTURE').copy(b);return mint(b,'365799998','synthetic-only');}
+export function syntheticDoomUpload(size=4807680){if(![4807680,4827012].includes(size))refuse();const b=Buffer.alloc(size);for(let i=0;i<b.length;i++)b[i]=(i*29+(i>>>8))&255;Buffer.from('PC ONLY UPLOAD FIXTURE').copy(b);return mint(b,'365799998','synthetic-only');}
 export function packageCopy(plan){const b=owned.get(plan);if(!b)refuse();return Buffer.from(b);}
 export function uploadStream(plan,offset=0){
  const b=owned.get(plan);if(!b||!Number.isInteger(offset)||offset<0||offset>=b.length)refuse();

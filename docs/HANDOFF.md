@@ -1,5 +1,40 @@
 # Retomar el proyecto
 
+**Actual R282 PC: launcher y WAD persistente integrados y probados.**
+[Detalle](doom-persistent-launcher-r282.md). No hardware nuevo; R270 último físico.
+Nuevo doom/platform-rw4/launcher/{controller,main}.lua, tools/*doom-launcher*.mjs,
+experiments/doom-runtime-rw4/launcher-tests-r282.lua. RW4 ID365219963/módulo
+rw4doom282, allow_native=false; PC ID365799913/rw4doompc282 allow_native=true.
+WAD compilado en AMBOS adapter/transport al base/lua/doom1.wad persistente.
+ELF previo reproducido antes de recompilar solo esos dos C; 80C no repetidos.
+RW4 ELF603728 SHA5365bf23602cc9b4fc8a55a0e0e29459518614dc1b240d1a81182d76f70bdf29.
+S3 ELF610540 SHA97a684758b8e19588a45bb2825f27a21f7454e4e5efba803f73a4a7ea8b28239.
+Build/pack tools rw4|s3; build no sobrescribe review completo, package permite
+misma payload/review presupuesto, archiva metadata inicial. 20 recursos exactos;
+no asumir unique-path-string porque WAD path ahora aparece dentro del ELF.
+RW4 package4827012 SHA1d6df25e064336122ce56449856d828dd1e30532d4b8fcb0c1467a4343db799b.
+S3 package4833824 SHAccea73b8d3d0109366fa09974cd5ff5239eb1aaf11184238dd4c324404f7867d.
+Bitmap labels propias: no fuentes. START manual; r+b control; lease propia
+SHAesperado+registro definido hastaNUL; shell capture+postcondiciones no tuple.
+EXIT detach/drop/STOP/finished/JOIN/stats/rmmod/registro/directorio/retirarlease.
+GC soloSTOP, recoge en reentry UI; esa ruta nueva solo test simulación enR282.
+22 contratos Lua pasan; suite también CI Ubuntu lua5.4 sin assets privados.
+S3 real paquete seleccionado desde stock, dos ciclos E1M1/move/turn/fire/pause/
+EXIT/relaunch sin reinstalar; módulos/nodos/lease ausentes al final. 20 hashes
+iguales tras reset con registro vacío. VM queda DoomLauncher ACTIVA READY,
+archivos persistentes 365799913/lua/, sin módulos cargados. GoBack despierta
+pantalla negra (no asumir falloUI; captura inicial estaba dormida). Neat index6,
+DoomAssets27,DoomLauncher28 tras rescan; 22swipesizq desdeNeat. Sin tocar Silent.
+Tests artifacts/emulator/doom-launcher-contracts-1792094882416/result.json,
+doom-launcher-test-1792095103022/result.json y verify-1792095285976/result.json.
+Worker grande cap ahora4900000 (antes4861000, no cabía +19KB del launcher);
+fixture exact4827012/2362partes pasa10IPC, C#5589. Legacycaps/gates y7+12modelo
+viejo pasan. No native profile de este paquete habilitado. CI añadida.
+RW4 static899092+picoS3runtime6583985+stack32768=7515845B antesdecoder/OS.
+Siguiente: despliegue físico/journal target real/preflight memoria y plan.
+prepareDoomAssets R279 sigue PINNED al carrierR278 (rechaza R282); no abrirlo
+sin nuevo plan. No repetir pruebas del motor/UI aprobadas ni cargar ELF RW4 enS3.
+
 **Privacidad reforzada 2026-10-15, petición expresa del usuario.** No publicar
 MAC, claves de conexión/anteriores, seriales, logs o datos privados. Auditoría
 ampliada de 294 commits pasa:46 archivos locales privados/6 representaciones,

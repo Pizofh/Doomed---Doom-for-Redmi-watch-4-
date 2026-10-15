@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R282, solo PC:** [Launcher, ejecutable y WAD persistentes integrados](docs/doom-persistent-launcher-r282.md).
+El paquete S3 abre E1M1, permite jugar, cierra y vuelve a abrir sin reinstalar.
+Los 20 recursos conservan sus hashes tras reset. El candidato RW4 ya tiene
+la ruta WAD definitiva; su carga nativa permanece bloqueada hasta revisión.
+
 [Repositorio GitHub](https://github.com/Pizofh/Doomed---Doom-for-Redmi-watch-4-) · [CI Windows y pruebas sintéticas](https://github.com/Pizofh/Doomed---Doom-for-Redmi-watch-4-/actions/workflows/pc-rfcomm-offline.yml)
 
 **Actual R281, solo PC:** [Transporte grande compilado y supervisado pasa](docs/doom-large-worker-r281.md).
