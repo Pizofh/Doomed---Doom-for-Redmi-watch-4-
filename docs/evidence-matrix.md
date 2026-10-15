@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R279 PC:** [Extracción y transferencia grande simulada](doom-large-transfer-r279.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| El carrier grande extrae y conserva ELF/WAD sin reinstalar | S3 exacto en PC | Tres hashes iguales tras selección y tras reset sin push | CONFIRMADO EN EMULADOR | Alta para S3 | Sí | ELF RW4 solo datos; no extracción física demostrada |
+| Modelo MASS soporta2353partes y resume tras entrega ambigua | Peer sintético PC | Roundtrip4,8MB, offset22462, CRC/CCM/secuencia/wrap | CONFIRMADO SOLO EN PC | Alta para modelo | Sí | Sin backend, radio, auth ni instalación real |
+| El nuevo upload está integrado al worker físico | Herramientas propias | No perfil físico nuevo; caps antiguos intactos y gates pasan | SIN EVIDENCIA | Pendiente | No | No levantar límites globales |
+| CI puede probar upload sin publicar datos de Doom/firmware | Configuración local | Fixture propia4,8MB y suite sintética pasan localmente | CONFIRMADO SOLO EN PC | Alta local | Sí | Job configurado; no ejecución GitHub comprobada |
+
 **Actual R278 PC:** [Contratos de despliegue y carrier offline](doom-rw4-deployment-r278.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

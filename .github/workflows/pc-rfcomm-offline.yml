@@ -16,6 +16,8 @@ on:
       - 'tools/pc-static-watchface.mjs'
       - 'tools/test-static-watchface-gates.mjs'
       - 'tools/pc-pairing.mjs'
+      - 'tools/doom-large-upload.mjs'
+      - 'tools/test-doom-large-upload.mjs'
       - 'tools/test-pc-pairing.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
   pull_request:
@@ -32,6 +34,8 @@ on:
       - 'tools/pc-static-watchface.mjs'
       - 'tools/test-static-watchface-gates.mjs'
       - 'tools/pc-pairing.mjs'
+      - 'tools/doom-large-upload.mjs'
+      - 'tools/test-doom-large-upload.mjs'
       - 'tools/test-pc-pairing.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
 
@@ -39,6 +43,16 @@ permissions:
   contents: read
 
 jobs:
+  large-file-model:
+    runs-on: windows-2022
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Test large upload and ambiguous delivery with owned synthetic data
+        run: node tools/test-doom-large-upload.mjs --synthetic
+
   simulated-client:
     runs-on: windows-2022
     timeout-minutes: 5

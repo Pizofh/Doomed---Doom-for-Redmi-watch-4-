@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R279, solo PC:** [Extracción persistente y upload grande simulado pasan](docs/doom-large-transfer-r279.md).
+ELF/WAD idénticos tras reset del emulador;2353partes, interrupción y resume
+validados en PC. CI sintética preparada sin assets. Backend RFCOMM y launcher
+final siguen pendientes; no hubo envío físico.
+
 **Actual R278, solo PC:** [Rutas/caché RW4 contrastadas y assets empaquetados](docs/doom-rw4-deployment-r278.md).
 Carrier offline4,8MB con ELF/WAD separados y registros idénticos. El instalador
 de probes limita64partes/32KiB: falta preparar la transferencia grande y el launcher.

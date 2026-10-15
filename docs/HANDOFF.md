@@ -1,5 +1,33 @@
 # Retomar el proyecto
 
+**Actual R279 PC: extracción/reset y modelo upload grande pasan; CI preparada.**
+[Detalle](doom-large-transfer-r279.md). NOhardware/NObackendgrandeconectado.
+tools/doom-assets-emulator-r279.mjs install|verify: carrierR278 instaladoen
+PC ID365799912 byte5=10/IDedit; fuente220B soloobjetoscolor, ARMv8ELFsoloDATOS.
+Tras selecciónDoomAssets enUIstock, lua/main.lua,doom.elf,doom1.wadextraídos
+hashidéntico. Verify1792078027023 ytrasreset1792078339669sinpush pasan.
+CarrierPC permaneceACTIVO/instalado,3archivos bajo /data/app/watchface/market/
+365799912/lua. Módulosvacíos. NoejecutarELFRW4enS3. Catálogo despuésresetNeat
+index6,Spotlight14,DoomAssets27; navegación total21swipesizq desdeNeat.
+tools/doom-large-upload.mjs modelo sinRFcomm/ADB/procesos,sóloadaptadorPC.
+PreparaR278pinned→corrigeIDheader167210065a365219963 (Compilerignoróarg);
+hashidonly100b40aa866b327761f75fefd300a2c1647e5c3cdd3baa5afd4d7fd6cd2a155f.
+No launcherC niWADpathasignado. NOperfilfísiconuevo. weak-ownedplan,suffixCRC,
+MASS5CCMnonce0,serial&255,4096partsmax,chunk2048/4080,pacing100,wirebudgetexacto.
+Intención durable porlotes32; escritura local NOACK; Uncertainaborta sinretry;
+resumeexigeMD5mismo yoffsetacotadoparent. Timeout600sentreenvíos,noabortapromisastuck.
+tools/test-doom-large-upload.mjs y --synthetic pasan7escenarios+12rechazos.
+Real result artifacts/doom-large-upload-r279-1792078435595;synthetic1792078411502.
+2353framesfull,1180maxchunk,fallotras11delivered/10locallywritten,resume22462
+2342frames; fsyncjournalactual,fallaantesenvío0/traslote32,límite0frames.
+Primertest1792078172596canceladovíawrite_stdinCtrlC porlayoutrecomputadoporframe;
+CIMconsulta fue denegada y NOseusópara matarprocesos. Corregidocachelayout/tests.
+GitHubworkflow job large-file-model usa fixturepropia sinWAD/firmware/artifactupload;
+CIremotaNOejecutada. Staticphysicalgates testpasa0sockets. Capsviejos intactos.
+Siguiente: integrar modelo enperfilRFCOMMpropio (auth/install/query/budget/cierre),
+launcherRW4+WADpersistente+preflightmemoria. No repetir pruebasC/UIaprobadas.
+ÚltimofísicoR270, sinpayloadnuevoautorizado. VM sigueownedPID11676últimoregistro.
+
 **Actual R278 PC: contratos RW4 y carrier4,8MB preparados offline.**
 [Detalle/reproducción](doom-rw4-deployment-r278.md). Sin emulador/USB/BT nuevo.
 tools/review-rw4-deployment-r278.mjs normal|follow|contracts|resolved ejecutados;

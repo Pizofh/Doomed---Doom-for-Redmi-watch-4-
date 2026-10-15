@@ -1,5 +1,10 @@
 # Siguiente checkpoint: runtime de DOOM real en RW4
 
+Actualización R279: [extracción persistente S3 y upload grande simulado](doom-large-transfer-r279.md)
+pasan. Falta integrar el modelo al perfil RFCOMM autenticado y preparar el
+launcher final con rutaWAD/preflight. CI sintética configurada, sin ejecución
+remota comprobada. No hay ensayo físico nuevo autorizado.
+
 Actualización R278: [filesystem/caché identificados y assets empaquetados offline](doom-rw4-deployment-r278.md).
 La siguiente meta concreta es el instalador/launcher completo en PC: extracción
 y rutaWAD, transporte grande acotado y preflight de memoria antes del gate físico.

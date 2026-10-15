@@ -1,0 +1,71 @@
+// PC preparation and injectable upload-stage model ONLY. No connection backend.
+// Do not relax the existing probe/session/native-worker limits to use this.
+import {createHash} from 'node:crypto';
+import {crc32} from './static-watchface-transfer.mjs';
+import {ccmEncrypt,packetNonce} from './rw4-xiaomi-protocol.mjs';
+const owned=new WeakMap(),hash=(b,a='sha256')=>createHash(a).update(b).digest('hex');
+const refuse=()=>{throw Error('DoomLargeUploadRefused');};
+function mint(b,id,kind){const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher:false,physicalEnabled:false});owned.set(p,b);return p;}
+export function prepareDoomAssets(raw){
+ if(!Buffer.isBuffer(raw)||raw.length!==4807680||hash(raw)!=='387e6c80616296ca7c8727e1a356e169c5b3575e1f2c33d4c9e9a32729ffa7c9'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='167210065'||raw[49]!==0)refuse();
+ const b=Buffer.from(raw);b.write('365219963',40,9,'ascii');
+ return mint(b,'365219963','review-carrier');
+}
+// Reproducible, owned non-game bytes for public CI. Never an installable face.
+export function syntheticDoomUpload(){const b=Buffer.alloc(4807680);for(let i=0;i<b.length;i++)b[i]=(i*29+(i>>>8))&255;Buffer.from('PC ONLY UPLOAD FIXTURE').copy(b);return mint(b,'365799998','synthetic-only');}
+export function packageCopy(plan){const b=owned.get(plan);if(!b)refuse();return Buffer.from(b);}
+export function uploadStream(plan,offset=0){
+ const b=owned.get(plan);if(!b||!Number.isInteger(offset)||offset<0||offset>=b.length)refuse();
+ const body=Buffer.alloc(22+b.length-offset);body[1]=16;Buffer.from(hash(b,'md5'),'hex').copy(body,2);body.writeUInt32LE(b.length,18);b.copy(body,22,offset);
+ const tail=Buffer.alloc(4);tail.writeUInt32LE(crc32(body));return Buffer.concat([body,tail]);
+}
+function validatePrevious(p,plan){
+ if(!p||p.schema!==1||p.id!==plan.id||p.sha256!==plan.sha256||p.size!==plan.size||p.status!=='Uncertain'||
+  !Number.isInteger(p.highestPossibleOffset)||p.highestPossibleOffset<1||p.highestPossibleOffset>plan.size||
+  !Number.isInteger(p.offset)||p.offset<0||p.offset>=plan.size||p.highestPossibleOffset<p.offset)refuse();
+}
+export function uploadLayout(plan,ack,previous=null){
+ const b=owned.get(plan);if(!b||!ack||ack.status!==0||!Buffer.isBuffer(ack.md5)||ack.md5.length!==16||ack.md5.toString('hex')!==hash(b,'md5')||![2048,4080].includes(ack.chunkSize)||!Number.isInteger(ack.resumePosition)||ack.resumePosition<0||ack.resumePosition>=b.length)refuse();
+ if(previous){validatePrevious(previous,plan);if(ack.resumePosition<previous.offset||ack.resumePosition>previous.highestPossibleOffset)refuse();}
+ else if(ack.resumePosition!==0)refuse();
+ const stream=uploadStream(plan,ack.resumePosition),partBytes=ack.chunkSize-4,total=Math.ceil(stream.length/partBytes);
+ if(total<1||total>4096)refuse();
+ return {stream,partBytes,total,offset:ack.resumePosition,chunkSize:ack.chunkSize,
+  wireBytes:stream.length+total*19, // per-part LE16/LE16 + CCM4 + outer11
+  part(index){if(!Number.isInteger(index)||index<1||index>total)refuse();const p=Buffer.alloc(4+Math.min(partBytes,stream.length-(index-1)*partBytes));p.writeUInt16LE(total);p.writeUInt16LE(index,2);stream.copy(p,4,(index-1)*partBytes,Math.min(index*partBytes,stream.length));return p;}};
+}
+export function massFrame(part,key,prefix,serial){
+ if(!Buffer.isBuffer(part)||part.length<5||part.length>4080||!Buffer.isBuffer(key)||key.length!==16||!Buffer.isBuffer(prefix)||prefix.length!==4||!Number.isSafeInteger(serial)||serial<0)refuse();
+ const cipher=ccmEncrypt(key,packetNonce(prefix),part),b=Buffer.alloc(cipher.length+11);
+ Buffer.from('badcfe','hex').copy(b);b[3]=5;b[4]=128;b.writeUInt16LE(cipher.length+3,5);b[7]=2;b[8]=serial&255;b[9]=1;cipher.copy(b,10);b[b.length-1]=239;return b;
+}
+export async function uploadToPcAdapter(plan,ack,api,previous=null){
+ const layout=uploadLayout(plan,ack,previous);
+ // Deliberately no physical adapter is supplied by this module or any CLI.
+ if(api?.scope!=='pc-upload-simulator'||typeof api.send!=='function'||typeof api.checkpoint!=='function'||typeof api.wait!=='function'||typeof api.clock!=='function'||!Number.isSafeInteger(api.initialSerial)||api.initialSerial<0||api.txBudgetBytes!==layout.wireBytes||!Buffer.isBuffer(api.key)||api.key.length!==16||!Buffer.isBuffer(api.noncePrefix)||api.noncePrefix.length!==4)refuse();
+ const record={schema:1,id:plan.id,sha256:plan.sha256,size:plan.size,status:'Ready',offset:layout.offset,chunkSize:layout.chunkSize,totalParts:layout.total,locallyWritten:0,wireBytes:0,highestPossibleOffset:layout.offset,remoteInstallationVerified:false};
+ const began=api.clock();
+ const snapshot=()=>Object.freeze({...record});
+ try{
+  for(let first=1;first<=layout.total;first+=32){
+   const last=Math.min(first+31,layout.total);
+   record.status='Intent';record.batchFirst=first;record.batchLast=last;
+   record.highestPossibleOffset=Math.min(plan.size,layout.offset+Math.max(0,last*layout.partBytes-22));
+   // Persist intent before ANY bytes in this bounded batch. A crash can leave
+   // up to32 possible writes; local queue completion is never a remote ACK.
+   await api.checkpoint(snapshot());
+   for(let i=first;i<=last;i++){
+    if(api.clock()-began>600000)throw Error('DoomUploadDeadline');
+    const frame=massFrame(layout.part(i),api.key,api.noncePrefix,api.initialSerial+i-1);
+    if(record.wireBytes+frame.length>api.txBudgetBytes)refuse();
+    await api.send(frame);record.locallyWritten=i;record.wireBytes+=frame.length;
+    if(i<layout.total)await api.wait(100);
+   }
+   record.status='LocallyWritten';await api.checkpoint(snapshot());
+  }
+  record.status='SentNotVerified';await api.checkpoint(snapshot());return snapshot();
+ }catch(error){
+  record.status='Uncertain';let journalSaved=true;try{await api.checkpoint(snapshot());}catch{journalSaved=false;}
+  return {...record,journalSaved,error:error.message==='DoomUploadDeadline'?'Deadline':'AdapterOrJournalFailure'};
+ }
+}
