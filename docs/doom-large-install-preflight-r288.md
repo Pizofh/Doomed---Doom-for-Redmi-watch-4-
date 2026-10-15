@@ -1,4 +1,9 @@
-# R288: segundo intento detenido en preflight; continuación pendiente
+# R288: segundo intento detenido en preflight; continuación ejecutada
+
+**Actualización:** el usuario confirmó retorno normal y autorizó el intento3.
+Se detuvo antes de INSTALL por dos bajas manuales posteriormente confirmadas.
+Autorización consumida; ver [resultado y propuesta R289](doom-large-install-removals-r289.md).
+El texto siguiente conserva el plan histórico, no una autorización vigente.
 
 El segundo intento fue autorizado y ejecutado una vez. Terminó con
 `LargeSessionRefused`: 5 frames / 185 bytes de control, cero partes MASS,

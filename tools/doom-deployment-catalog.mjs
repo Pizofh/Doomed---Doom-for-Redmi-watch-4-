@@ -13,3 +13,10 @@ export function compareDoomCatalogs(previous,current){
  const a=canonical(previous),b=canonical(current);
  return {sameMembership:!!a&&!!b&&JSON.stringify(a.entries)===JSON.stringify(b.entries),sameSelection:!!a&&!!b&&a.active===b.active};
 }
+// R289: the user confirmed exactly two manual deletions after the baseline.
+// Accept only those removals, with every surviving flag unchanged; no additions.
+export function reviewedTwoRemovals(previous,current){
+ if(!canonical(previous)||!canonical(current)||previous.length-current.length!==2)return false;
+ if(current.some(r=>!previous.some(p=>p.id===r.id&&p.canDelete===r.canDelete)))return false;
+ return previous.filter(p=>!current.some(r=>r.id===p.id)).every(p=>p.canDelete);
+}

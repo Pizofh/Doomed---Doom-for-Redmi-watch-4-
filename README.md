@@ -1,10 +1,10 @@
 # DOOM en Redmi Watch 4
 
-**Actual R288:** [Segundo intento detenido en preflight; corrección lista](docs/doom-large-install-preflight-r288.md).
-Cero partes enviadas en ambos intentos; paquete aún no instalado. El catálogo
-conserva 13 entradas, con otra esfera seleccionada. El guard corregido conserva
-la selección actual; 16 casos nuevos y 18 de retry pasan en PC. Gates cerrados;
-continuación física pendiente de nueva revisión. Doom físico aún no ejecutado.
+**Actual R289:** [Dos esferas borradas manualmente; continuación preparada](docs/doom-large-install-removals-r289.md).
+Tercer intento detenido antes de INSTALL: catálogo11 frente a13; el usuario
+confirmó dos bajas voluntarias y funcionamiento normal. Cero partes enviadas;
+paquete aún no instalado. Corrección acotada probada en49casos PC, gates cerrados
+y siguiente envío pendiente de revisión. Doom físico aún no ejecutado.
 
 **Actual R286, solo PC:** [Instalador grande con journal privado integrado](docs/doom-deployment-journal-r286.md).
 33casos pasan con el paquete real y receptor simulado, incluido worker C#.

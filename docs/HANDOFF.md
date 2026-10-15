@@ -1,5 +1,23 @@
 # Retomar el proyecto
 
+**Actual R289: intento3 consumido, reloj normal confirmado; NO enviar sin nueva autorización.**
+docs/doom-large-install-removals-r289.md contiene resultado+plan concreto.
+Ejecutado UN retry-no-data autorizado: modelo/FWtrue, catálogo11 vs13,
+CatalogPreflight/LargeSessionRefused,5frames185bytes0MASS,sin INSTALLnuevo.
+close/workerexittrue; finally fuentes restauradas/rebuild/testgates cerrado.
+Usuario confirmó borróDOSesferas y todo normal. No más consultas físicas.
+Journal real original añade attempt3 Created/Uncertain, before/uploadnull;
+NO borrar/renombrar/reemplazar/freshinstall. Ahora preparado attempt4 SOLO
+patrón firmado1control+2/3preflightsinMASS; catálogo exige exactamenteDOSbajas
+eliminables, sin altas/flagsalterados; conserva selección ACTUAL. Noattempt5.
+No nuevo hardware después de corrección.14casosnuevos+17catálogo+18retry=49PC
+pasan. Mismo paqueteR285 ID365219963/4827044/d0fc... nativefalse.
+Siguiente revisión: UNretry-no-data observador≥50%4–6min, sinactivar/C/Doom/borrar.
+Solo tras aprobación DEPLOY+CONTROL_RETRY+C#Large temporales, RESUMEfalse,
+rebuild/prepare/unenvío; finallyrestaurar/rebuild/testgates.
+Artifacts/doom-deployment-physical-r289/attempt-result.json (posibleUTF16LE).
+Solo commitslocales; NO push/CIremota/auditoríaspublicación. Histórico abajo.
+
 **Actual R288: segundo intento autorizado consumido; NO continuar físicamente sin otra aprobación.**
 Plan/resultado: docs/doom-large-install-preflight-r288.md. Un retry-no-data real:
 LargeSessionRefused,5frames/185bytes,0MASS,sin INSTALL nuevo,close/workerexit true.

@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R289:** [Bajas manuales confirmadas](doom-large-install-removals-r289.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Tercer intento se detuvo por catálogo11 vs13 antes de INSTALL | M2315W1/FW2.2.86 | Modelo/FW válidos, CatalogPreflight/sameMembership=false,5frames/185bytes,0MASS | CONFIRMADO EN RW4 | Alta para control | Sí | Conexión/worker cerrados; gates restaurados |
+| Dos esferas fueron borradas deliberadamente; reloj normal | Unidad física | Confirmación explícita del usuario | CONFIRMADO EN RW4 | Alta para observación | Sí, usuario | No demuestra integridad completa del FS |
+| Continuación acepta solo dos bajas eliminables y preserva selección actual | PC sintético | 14casos nuevos +17catálogo +18retry | CONFIRMADO SOLO EN PC | Alta para casos | Sí | Attempt4 pendiente de autorización; attempt5 bloqueado |
+
 **Actual R288:** [Segundo intento y guard de catálogo](doom-large-install-preflight-r288.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

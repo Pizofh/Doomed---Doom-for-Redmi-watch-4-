@@ -59,7 +59,8 @@ export class DoomDeploymentJournal{
      const firstControl=previous.attempt===1&&stages==='Created,InstallIntent,UploadIntent,Uncertain'&&previous.before!==null;
      const first=history.filter(r=>r.attempt===1);
      const preflightOnly=previous.attempt===2&&stages==='Created,Uncertain'&&previous.before===null&&history.every(r=>r.upload===null)&&first.map(r=>r.status).join(',')==='Created,InstallIntent,UploadIntent,Uncertain';
-     if(!(firstControl||preflightOnly)||attempt.some(r=>r.upload!==null))fail();
+     const reviewedRemovals=previous.attempt===3&&previous.before===null&&history.every(r=>r.upload===null)&&first.map(r=>r.status).join(',')==='Created,InstallIntent,UploadIntent,Uncertain'&&[2,3].every(n=>history.filter(r=>r.attempt===n).map(r=>r.status).join(',')==='Created,Uncertain');
+     if(!(firstControl||preflightOnly||reviewedRemovals)||attempt.some(r=>r.upload!==null))fail();
      retryBaseline=previous.before??[...first].reverse().find(r=>r.before!==null)?.before;
      if(retryBaseline===null||retryBaseline===undefined)fail();
     }else if(previous.before===null||previous.upload?.status!=='Uncertain'||previous.upload.highestPossibleOffset<=previous.upload.offset)fail();

@@ -11,7 +11,7 @@ import {pcPeerAccess} from './doom-upload-pc-simulator.mjs';
 import {DoomDeploymentJournal,deploymentIdentity,disposeDeploymentIdentity} from './doom-deployment-journal.mjs';
 import {claimReviewedDoomEndpoint} from './doom-deployment-physical.mjs';
 import {parseDoomUploadAck} from './doom-upload-ack.mjs';
-import {compareDoomCatalogs} from './doom-deployment-catalog.mjs';
+import {compareDoomCatalogs,reviewedTwoRemovals} from './doom-deployment-catalog.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const directory=path.join(root,'artifacts/doom-upload-session-r280');
@@ -112,8 +112,10 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   client.phase='CatalogPreflight';
   const before=catalog(readWatchfaces(await client.query(4,0)));
   const comparison=parent?compareDoomCatalogs(parent.before,before):null;
-  report.catalogPreflight={ownIdAbsent:!before.some(f=>f.id===plan.id),currentCount:before.length,...(comparison??{})};
-  if(before.some(f=>f.id===plan.id)||parent&&!(deploymentRetryWithoutData?comparison.sameMembership:equal(parent.before,before)))refuse();
+  const removalReview=deploymentRetryWithoutData&&parent?.attempt===3;
+  const acceptedRemovals=removalReview&&reviewedTwoRemovals(parent.before,before);
+  report.catalogPreflight={ownIdAbsent:!before.some(f=>f.id===plan.id),currentCount:before.length,...(comparison??{}),...(removalReview?{reviewedTwoRemovals:acceptedRemovals}:{})};
+  if(before.some(f=>f.id===plan.id)||parent&&!(deploymentRetryWithoutData?(removalReview?acceptedRemovals:comparison.sameMembership):equal(parent.before,before)))refuse();
   journal.save({status:'InstallIntent',before});client.phase='InstallIntent';
   const install=envelope(4,4,6,bytes(6,Buffer.concat([bytes(1,Buffer.from(plan.id)),uint(2,plan.size)])));
   const installAck=await client.exchange(install,4,4);

@@ -13,11 +13,12 @@ for(const changed of [[selected[0]],selected.map(r=>({...r,canDelete:true})),[..
 const d=dir(),first=await run(d,'bad-chunk',original);assert.equal(first.p.massFrames,0);const saved=fs.readFileSync(path.join(d,'transfer.jsonl'),'utf8');
 const removedDir=copy(d),second=await run(removedDir,'ok',[original[0]],true);assert.equal(second.r.phase,'CatalogPreflight');assert.equal(second.p.mutations,0);assert.equal(second.r.catalogPreflight.sameMembership,false);
 const capped=copy(removedDir),thirdFailure=await run(capped,'ok',[original[0]],true);assert.equal(thirdFailure.p.mutations,0);
-const fourthFailure=await run(capped,'ok',selected,true);assert.equal(fourthFailure.p.sentFrames,0);
+const fourthFailure=await run(capped,'ok',selected,true);assert.equal(fourthFailure.p.mutations,0);
+const fifthFailure=await run(capped,'ok',selected,true);assert.equal(fifthFailure.p.sentFrames,0);
 const third=await run(removedDir,'ok',selected,true);assert.equal(third.r.status,'RegisteredInactive');assert.equal(third.p.massFrames,2362);assert.equal(third.r.catalogPreflight.sameSelection,false);
 check(()=>assert(fs.readFileSync(path.join(removedDir,'transfer.jsonl'),'utf8').startsWith(saved)));
 const fourth=await run(removedDir,'ok',selected,true);assert.equal(fourth.p.sentFrames,0);
 const altered=await run(copy(d),'ok',selected.map(r=>({...r,canDelete:true})),true);assert.equal(altered.p.mutations,0);
 const normal=await run(d,'ok',[...selected].reverse(),true);assert.equal(normal.r.status,'RegisteredInactive');assert.equal(normal.p.massFrames,2362);assert.equal(normal.r.catalogPreflight.sameMembership,true);assert.equal(normal.r.catalogPreflight.sameSelection,false);
-const result={checkpoint:'R288',passed:true,cases,currentSelectionPreserved:true,membershipAndDeletionFlagsStillRequired:true,preflightOnlyContinuationBoundedToAttempt3:true,historyPreserved:true,physicalTransport:false};
+const result={checkpoint:'R289',passed:true,cases,currentSelectionPreserved:true,membershipAndDeletionFlagsStillRequired:true,fourthAttemptRequiresReviewedTwoRemovals:true,fifthAttemptBlocked:true,historyPreserved:true,physicalTransport:false};
 fs.mkdirSync(path.join(root,'artifacts/doom-catalog-preflight-r288'),{recursive:true});fs.writeFileSync(path.join(root,'artifacts/doom-catalog-preflight-r288/result.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
