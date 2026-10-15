@@ -11,6 +11,12 @@ export function prepareDoomAssets(raw){
  const b=Buffer.from(raw);b.write('365219963',40,9,'ascii');
  return mint(b,'365219963','review-carrier');
 }
+// Separate pin: do not broaden the older inert carrier's acceptance rules.
+export function prepareDoomLauncher(raw){
+ if(!Buffer.isBuffer(raw)||raw.length!==4827012||hash(raw)!=='1d6df25e064336122ce56449856d828dd1e30532d4b8fcb0c1467a4343db799b'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365219963'||raw[49]!==0)refuse();
+ // RW4 candidate still has allow_native=false. This factory opens no transport.
+ return mint(Buffer.from(raw),'365219963','review-launcher-native-disabled');
+}
 // Reproducible, owned non-game bytes for public CI. Never an installable face.
 export function syntheticDoomUpload(size=4807680){if(![4807680,4827012].includes(size))refuse();const b=Buffer.alloc(size);for(let i=0;i<b.length;i++)b[i]=(i*29+(i>>>8))&255;Buffer.from('PC ONLY UPLOAD FIXTURE').copy(b);return mint(b,'365799998','synthetic-only');}
 export function packageCopy(plan){const b=owned.get(plan);if(!b)refuse();return Buffer.from(b);}

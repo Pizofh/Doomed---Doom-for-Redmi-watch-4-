@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R283:** [Preflight de memoria](memory-preflight-r283.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Lua puede leer y cerrar `/proc/meminfo` | S3 VM revisada | Lectura real con parser productivo, dos pools separados | CONFIRMADO EN EMULADOR | Alta para esa VM | Sí | No prueba disponibilidad de la ruta en RW4 |
+| Parser/UI manejan límites, errores y una sola captura | Lua con I/O/widgets simulados | 45 casos, incluido modo sin releer y cierre tras errores | CONFIRMADO SOLO EN PC | Alta para casos | Sí | UI compuesta revisada; no selección LVGL real del nuevo paquete |
+| MemInfo está empaquetada para RW4 | Compilador PC revisado | 50 recursos idénticos, prepare21216B/11partes; gates cerrados | CONFIRMADO SOLO EN PC | Alta para bytes | Sí | No instalada físicamente |
+| Memoria disponible física es suficiente para Doom | M2315W1/FW2.2.86 | Ninguna medición real todavía | SIN EVIDENCIA | Pendiente | No | No sumar pools ni extrapolar Umem de S3 |
+
 **Actual R282:** [Launcher persistente integrado](doom-persistent-launcher-r282.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

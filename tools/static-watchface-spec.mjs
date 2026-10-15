@@ -121,7 +121,12 @@ const specs = Object.freeze({
     sha256:'8c69e4003c1caef9eed58902cfc5d45112d5b9cf21f7ccdab8c1b379284da3e8',
     sourceSha256:'3617fd532ac64b36112c8328b7a579d67446b815460f52aa29c231beefec81d5',
     sourceArtifact:'artifacts/exit-r265/app/lua/main.lua',nativeCodeIncluded:false,
-    artifact:'artifacts/exit-r265/ExitC-id-only.face',journal:'native-exit-r266.json'})
+    artifact:'artifacts/exit-r265/ExitC-id-only.face',journal:'native-exit-r266.json'}),
+  r283:Object.freeze({variant:'r283',contentKind:'lua-memory-preflight',id:'365219962',size:21216,
+    sha256:'c497120e409fa0d7412583d1f381033d6eab9476bc21d5205e8ac42aa5d3985b',
+    sourceSha256:'28f5c98dd1e7a07a4aa0b49d1f1c1bb0768b62b25aed6a1e80c8d18c087679a0',
+    sourceArtifact:'artifacts/memory-preflight-r283/app/lua/main.lua',nativeCodeIncluded:false,
+    artifact:'artifacts/memory-preflight-r283/MemInfo-id-only.face',journal:'memory-preflight-r283.json'})
 });
 export function staticSpec(variant = 'r167') {
   if (typeof variant !== 'string' || !Object.hasOwn(specs,variant)) throw Error('StaticSpecRefused');

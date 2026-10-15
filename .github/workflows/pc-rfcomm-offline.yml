@@ -25,6 +25,8 @@ on:
       - 'doom/platform-rw4/launcher/**'
       - 'tools/*doom-launcher*.mjs'
       - 'experiments/doom-runtime-rw4/launcher-tests-r282.lua'
+      - 'experiments/memory-preflight/**'
+      - 'tools/*memory-preflight*.mjs'
       - 'tools/test-pc-pairing.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
   pull_request:
@@ -50,6 +52,8 @@ on:
       - 'doom/platform-rw4/launcher/**'
       - 'tools/*doom-launcher*.mjs'
       - 'experiments/doom-runtime-rw4/launcher-tests-r282.lua'
+      - 'experiments/memory-preflight/**'
+      - 'tools/*memory-preflight*.mjs'
       - 'tools/test-pc-pairing.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
 
@@ -70,6 +74,8 @@ jobs:
           sudo apt-get install -y --no-install-recommends lua5.4
       - name: Test launcher controller and UI with synthetic dependencies
         run: lua5.4 experiments/doom-runtime-rw4/launcher-tests-r282.lua
+      - name: Test memory parser, bounded I/O and one-snapshot UI
+        run: lua5.4 experiments/memory-preflight/tests.lua
 
   publish-audit:
     runs-on: windows-2022

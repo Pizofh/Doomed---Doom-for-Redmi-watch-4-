@@ -1,10 +1,13 @@
 // Real4.8MB carrier, synthetic key/peer, durable private PC journal. No radio.
 import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import {createDecipheriv,createHash} from 'node:crypto';
 import {firstCRoot as root,sha256} from './first-c-source.mjs';
-import {prepareDoomAssets,syntheticDoomUpload,packageCopy,uploadLayout,massFrame,uploadToPcAdapter} from './doom-large-upload.mjs';
+import {prepareDoomAssets,prepareDoomLauncher,syntheticDoomUpload,packageCopy,uploadLayout,massFrame,uploadToPcAdapter} from './doom-large-upload.mjs';
 const synthetic=process.argv.length===3&&process.argv[2]==='--synthetic';
-if(process.argv.length!==2&&!synthetic)throw Error('FixedPcTestOnly');
-const raw=synthetic?null:fs.readFileSync(path.join(root,'build/doom-assets-r278/output/DoomAssets.face')),plan=synthetic?syntheticDoomUpload():prepareDoomAssets(raw),data=packageCopy(plan),md5=createHash('md5').update(data).digest();
+const launcher=process.argv.length===3&&process.argv[2]==='--launcher';
+if(process.argv.length!==2&&!synthetic&&!launcher)throw Error('FixedPcTestOnly');
+const raw=synthetic?null:fs.readFileSync(path.join(root,launcher?'build/doom-launcher-r282/rw4/DoomLauncher-rw4.face':'build/doom-assets-r278/output/DoomAssets.face')),prepare=launcher?prepareDoomLauncher:prepareDoomAssets,plan=synthetic?syntheticDoomUpload():prepare(raw),data=packageCopy(plan),md5=createHash('md5').update(data).digest();
+if(launcher)assert.throws(()=>prepareDoomAssets(raw));
+else assert.throws(()=>prepareDoomLauncher(raw??data));
 const out=path.join(root,'artifacts/doom-large-upload-r279-'+Date.now());fs.mkdirSync(out,{recursive:true});
 const key=Buffer.alloc(16,37),prefix=Buffer.from([4,3,2,1]),cases=[];
 const ack={status:0,md5,chunkSize:2048,resumePosition:0};
@@ -24,7 +27,7 @@ async function simulate(name,currentAck=ack,previous=null,failPart=0,failCheckpo
  cases.push({name,status:result.status,frames:sent,checkpoints,virtualMs:now});return {result,stream};
 }
 // More than8 wire-serial wraps, full payload roundtrip and actual durable journal.
-const full=await simulate('full');assert.equal(full.result.totalParts,2353);
+const full=await simulate('full');assert.equal(full.result.totalParts,launcher?2362:2353);
 await simulate('max-chunk',{...ack,chunkSize:4080});
 const interrupted=await simulate('interrupted',ack,null,11);assert.equal(interrupted.result.locallyWritten,10);
 const offset=interrupted.stream.length-22;assert.equal(offset,22462);
@@ -36,9 +39,9 @@ const timed=await simulate('deadline',ack,null,0,0,true);assert.equal(timed.resu
 let rejected=0;for(const bad of [{...ack,status:1},{...ack,md5:Buffer.alloc(16)},{...ack,md5:null},{...ack,chunkSize:512},{...ack,resumePosition:1},{...ack,resumePosition:data.length},{...ack,resumePosition:-1}]){assert.throws(()=>uploadLayout(plan,bad));rejected++;}
 assert.throws(()=>uploadLayout(plan,{...ack,resumePosition:interrupted.result.highestPossibleOffset+1},interrupted.result));rejected++;
 assert.throws(()=>uploadLayout(plan,{...ack,resumePosition:offset},{...interrupted.result,sha256:'0'.repeat(64)}));rejected++;
-const changed=Buffer.from(raw??data);changed[100]^=1;assert.throws(()=>prepareDoomAssets(changed));rejected++;
+const changed=Buffer.from(raw??data);changed[100]^=1;assert.throws(()=>prepare(changed));rejected++;
 assert.throws(()=>uploadLayout({...plan},ack));rejected++;
 assert.throws(()=>massFrame(Buffer.alloc(4081),key,prefix,0));rejected++;
 const before=data[100];const copy=packageCopy(plan);copy[100]^=1;assert.equal(packageCopy(plan)[100],before);
-const report={checkpoint:'R279',passed:true,syntheticOnly:synthetic,packageSha256:plan.sha256,bytes:plan.size,cases,rejectedCases:rejected,durablePcJournal:true,wireSerialWrapTested:true,completePayloadRoundtrip:true,resumeAfterAmbiguousWrite:true,physicalAdapterImplemented:false,physicalTransport:false};
+const report={checkpoint:launcher?'R283':'R279',passed:true,syntheticOnly:synthetic,launcherCarrier:launcher,packageSha256:plan.sha256,bytes:plan.size,cases,rejectedCases:rejected,durablePcJournal:true,wireSerialWrapTested:true,completePayloadRoundtrip:true,resumeAfterAmbiguousWrite:true,physicalAdapterImplemented:false,physicalTransport:false};
 fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

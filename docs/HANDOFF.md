@@ -1,5 +1,26 @@
 # Retomar el proyecto
 
+**Actual R283 PC: MemInfo preparada; NO instalada físicamente.**
+Ver memory-preflight-r283.md y memory-preflight-physical-plan-r283.md.
+45 contratos Lua/parser/UI pasan, lectura real S3 /proc/meminfo pasa. No shell,
+C, timers ni writes de Lua; snapshot4096B/EOF/cierre, MODE recorre sin releer.
+UI widgets simulados, composite PNG inspeccionado, no live selection R283.
+ID365219962 paquete21216B SHA c497120e409fa0d7412583d1f381033d6eab9476bc21d5205e8ac42aa5d3985b.
+SourceSHA28f5c98dd1e7a07a4aa0b49d1f1c1bb0768b62b25aed6a1e80c8d18c087679a0.
+50 recursos exactos, compiler sinADB; artifacts/memory-preflight-r283/{tests,
+review}.json, MemInfo-id-only.face y layout.png. Empaquetador no sobrescribe.
+staticSpec r283 + prepare pasa; verificador C# corregido5→6 fuentes actuales.
+Gates Node/C# cerrados comprobados, no Bluetooth ni hardware. Build nuevo
+2192f58fa703b41a0d95032ec8ba327876c543077c4da51a275a7f3c9bdf56c8.
+CI añade 45 contratos sin assets privados. Último físico sigue R270.
+Nuevo prepareDoomLauncher pin exacto R282, allow_native=false; vieja fábrica
+R278 intacta. Copia/byte alterado/rechazo vieja fábrica comprobados.
+Journal/lock de despliegue GRANDE contra destino físico aún pendiente; NO
+describir journalPC R280 como instalador físico listo. Antes obtener RAM real.
+Siguiente: revisión explícita del único ensayo MemInfo con usuario observando;
+NO abrir gates ni instalar antes. Valor MAXFREE mostrado literal, no inferir
+heap usado por malloc ni sumar GImageCache/Umem. Pantalla verde=parser, no fit.
+
 **Actual R282 PC: launcher y WAD persistente integrados y probados.**
 [Detalle](doom-persistent-launcher-r282.md). No hardware nuevo; R270 último físico.
 Nuevo doom/platform-rw4/launcher/{controller,main}.lua, tools/*doom-launcher*.mjs,

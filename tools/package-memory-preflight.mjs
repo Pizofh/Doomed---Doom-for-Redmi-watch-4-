@@ -1,0 +1,26 @@
+// Fixed Lua + original bitmaps only. Offline compiler has no ADB on PATH.
+import fs from 'node:fs';import path from 'node:path';import {spawnSync} from 'node:child_process';
+import {root,sha256,memorySource,memoryAssets} from './memory-preflight-source.mjs';
+if(process.argv.length!==2)throw Error('NoArguments');
+const out=path.join(root,'artifacts/memory-preflight-r283'),source=Buffer.from(memorySource()),assets=memoryAssets();
+const test=JSON.parse(fs.readFileSync(path.join(out,'tests.json'),'utf8'));
+if(!test.passed||test.scenarios!==45||test.sourceSha256!==sha256(source)||test.assetsSha256!==sha256(Buffer.concat(assets.records.flatMap(([n,b])=>[Buffer.from(n),b])))||!test.realProcfsRead||!test.moduleInventoryUnchanged)throw Error('UntestedSource');
+if(fs.existsSync(path.join(out,'review.json')))throw Error('AlreadyPackaged');
+const records=[['main.lua',source],...assets.records];
+const compilerRoot=path.join(root,'tools/local/easyface-v4.23-review'),compiler=path.join(compilerRoot,'Compiler.exe');
+if(fs.lstatSync(compilerRoot).isSymbolicLink()||fs.readdirSync(compilerRoot).some(n=>!['Compiler.exe','DeviceInfo.db','EasyFace_en.exe'].includes(n))||sha256(fs.readFileSync(compiler))!=='bfb8c3b6666b79de165884d832c69d46e5bbfa581c65c1e188cddfc4b9d6723a'||sha256(fs.readFileSync(path.join(compilerRoot,'DeviceInfo.db')))!=='7fde4b233d75e36985f709e84ea4c164c494b02d109bcdb5f50f0ab76e6c3f76')throw Error('CompilerChanged');
+for(const d of ['app/lua','images','output'])fs.mkdirSync(path.join(out,d),{recursive:true});
+for(const [n,b]of records)fs.writeFileSync(path.join(out,'app/lua',n),b,{flag:'wx'});
+fs.writeFileSync(path.join(out,'images/preview.png'),assets.preview,{flag:'wx'});
+const id='365219962',project='<?xml version="1.0" encoding="utf-8" ?>\n<FaceProject DeviceType="365"><Screen Title="MemInfo" Bitmap="preview.png"><Widget Shape="34" Name="app_lua%2Fmain.lua" X="0" Y="0" Width="390" Height="450" Alpha="0" Visible_Src="0" /></Screen></FaceProject>\n';
+fs.writeFileSync(path.join(out,'MemInfo.fprj'),project,{flag:'wx'});
+const r=spawnSync(compiler,['-b',path.join(out,'MemInfo.fprj'),path.join(out,'output'),'MemInfo.face',id],{cwd:out,shell:false,windowsHide:true,encoding:'utf8',timeout:30000,maxBuffer:1048576,env:{...process.env,TEMP:out,TMP:out,PATH:path.join(process.env.SystemRoot,'System32')}});
+fs.writeFileSync(path.join(out,'compiler-result.json'),JSON.stringify({status:r.status,stdout:r.stdout,stderr:r.stderr},null,2)+'\n');
+if(r.error||r.status!==0||!/No Errors/.test(r.stdout)||!/Watch:\s*RedmiWatch4/.test(r.stdout)||!/adb util is missing, skipping to upload/.test(r.stdout))throw Error('CompilerFailed');
+const b=fs.readFileSync(path.join(out,'output/MemInfo.face'));
+if(b.length<168||b.length>32064||b.subarray(0,4).toString('hex')!=='5aa53412'||b[5]!==0||b[49]!==0)throw Error('PackageLayout');b.write(id,40,9,'ascii');
+const entries=[];
+for(const [n,value]of records){const name=Buffer.from('lua/'+n),p=b.indexOf(name);if(p<20||b.indexOf(name,p+name.length)!==-1)throw Error('PathNotUnique');const word=b.readUInt32LE(p-20),nl=word>>>24,size=word&0xffffff;if(nl!==name.length||size!==value.length||!b.subarray(p+nl,p+nl+size).equals(value))throw Error('ReadbackMismatch');entries.push({name:n,size,sha256:sha256(value)});}
+fs.writeFileSync(path.join(out,'MemInfo-id-only.face'),b,{flag:'wx'});
+const report={checkpoint:'R283',id,size:b.length,sha256:sha256(b),sourceSha256:sha256(source),entries,serializedResourcesVerified:true,snapshotLimitBytes:4096,poolsNeverSummed:true,nativeExecutableIncluded:false,shellRequested:false,readPath:'/proc/meminfo',filesystemWritesByLua:false,physicalTransferEnabled:false,physicalWatchUsed:false,compilerAdbAvailable:false,bluetoothOperationRequested:false};
+fs.writeFileSync(path.join(out,'review.json'),JSON.stringify(report,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({...report,entries:entries.length}));
