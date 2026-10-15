@@ -1,0 +1,131 @@
+{
+  "checkpoint": "R273",
+  "imageSha256": "2c486395a01fb4e1d4a0f8b9b749fd6b1c3d522edc3c2f3813deaea9ab7388db",
+  "codeBase": 202375168,
+  "fingerprintBytes": 64,
+  "entries": [
+    {
+      "name": "malloc",
+      "offset": 2052480,
+      "sha256": "011e9c689f600c09f75cba5e8e21044fe68a864abdc0963f9a76f6c122583d2c",
+      "evidence": "static: heap wrapper; paired heap with free"
+    },
+    {
+      "name": "free",
+      "offset": 2052412,
+      "sha256": "6f302f889001a3eafd504d1db89032891adbf9766f54dd85692fcf4838eb6883",
+      "evidence": "static: same global heap as malloc"
+    },
+    {
+      "name": "fopen",
+      "offset": 2014988,
+      "sha256": "0b6968b039bc949632ae693e39d0f8da43609f315e341c369ec0844ee6df6a58",
+      "evidence": "NativeLog/Step physical plus static"
+    },
+    {
+      "name": "fclose",
+      "offset": 2015220,
+      "sha256": "38e8cc667fdc4f261e04004fb8c4701b069fadc9e6014ea4367e75d0988916ee",
+      "evidence": "NativeLog/Step physical plus static"
+    },
+    {
+      "name": "fread",
+      "offset": 2015536,
+      "sha256": "e3efc0ce879b9df2d10275abe12103ef561ce7b282bce9d03005e31b7803d811",
+      "evidence": "NativeLog physical plus static"
+    },
+    {
+      "name": "fseek",
+      "offset": 2015928,
+      "sha256": "ec342c93efc9945f8673fdeb75dea0ccd0423c3c475f3be916c58a37342582b3",
+      "evidence": "static: Lua seek call path; signed 32-bit offset"
+    },
+    {
+      "name": "ftell",
+      "offset": 2016040,
+      "sha256": "a524a0b321b6016ff002b447bbdee7968793aa62a1e3475fde7424d84625ee50",
+      "evidence": "static: 32-bit wrapper around wide internal tell"
+    },
+    {
+      "name": "feof",
+      "offset": 2017648,
+      "sha256": "1fda2d4ba111e58aa0a3743912465e51b09883f881de8fe9401f0bd3f9a3f69d",
+      "evidence": "static: opaque FILE flag accessor"
+    },
+    {
+      "name": "ferror",
+      "offset": 2017668,
+      "sha256": "6b0903c74c25d857e56a7412f601aa5facd9198e47ba81e6923024b5c7eb4868",
+      "evidence": "static: opaque FILE flag accessor"
+    },
+    {
+      "name": "clearerr",
+      "offset": 2017740,
+      "sha256": "afd65da12aec92285e60956b67f9d146499a91b86f9e021017bef3929f60474e",
+      "evidence": "static: opaque FILE flags"
+    },
+    {
+      "name": "owner_token",
+      "offset": 1822720,
+      "sha256": "6b5ceebb3f04e34302b416c39ac17a7a6125c8efcd00cbc33f85ba017750ac72",
+      "evidence": "static: current TCB pointer getter, NOT gettid/PID; no TCB layout dereferenced"
+    },
+    {
+      "name": "clock_ticks",
+      "offset": 1808692,
+      "sha256": "d8cd6d124b04d51908bd6cccbc45e831cbb68db01cb2548fcbdd1cd0015460dc",
+      "evidence": "static: 64-bit return; 10000 Hz inferred from Lua clock and conversion paths"
+    },
+    {
+      "name": "usleep",
+      "offset": 2047396,
+      "sha256": "d764b622a509ac46e911ae724874ab0d8b24ab672ef016725a68b995e9e33ede",
+      "evidence": "static: NSH usleep handler and usec-to-timespec path"
+    },
+    {
+      "name": "attr_init",
+      "offset": 2001088,
+      "sha256": "f19a1eb9dfbb340ac65ce8ae1ced8298d6ae263f56ddf6b43c39e64cdd437d6e",
+      "evidence": "static: copies 12 bytes"
+    },
+    {
+      "name": "attr_destroy",
+      "offset": 2001132,
+      "sha256": "d29415c2b4acf4da6899941365381b7eb8785ede41952e08db26a5b4c1cd509a",
+      "evidence": "static: clears 12 bytes"
+    },
+    {
+      "name": "attr_stack",
+      "offset": 2001204,
+      "sha256": "eceb69cd2b687e0f33109c515cd86d77f9f72eb06bccdc05e70b71a09ec03053",
+      "evidence": "static: word at offset 8, size greater than 255"
+    },
+    {
+      "name": "thread_create",
+      "offset": 2001580,
+      "sha256": "0fef0f556adf98d2aa4b3a5a313ac519a23e8938aee2fa252c1d2f6cf5645536",
+      "evidence": "static: four-argument wrapper into nx_create"
+    },
+    {
+      "name": "thread_join",
+      "offset": 1817760,
+      "sha256": "a5c8b4fb001d320c43d9a956905be094d9b0d8c4813520ffd33b20588904d00d",
+      "evidence": "static: join wait/result path; 0x1bc310 is cancellation, not join"
+    },
+    {
+      "name": "register",
+      "offset": 4814372,
+      "sha256": "85491dd56d1b07fc2333416dd68f99e71f18eb5542becc5a8b99af2630e4edee",
+      "evidence": "Step physical registration plus static"
+    },
+    {
+      "name": "unregister",
+      "offset": 4814448,
+      "sha256": "f6bab41a7a292510ebf3fb982634c4cee3c1f17d05771ddbd575a0ea1ad9e9df",
+      "evidence": "ExitC physical removal plus static"
+    }
+  ],
+  "completeFirmwareIdentityVerified": false,
+  "allContractsPhysicallyVerified": false,
+  "physicalDeploymentAuthorized": false
+}

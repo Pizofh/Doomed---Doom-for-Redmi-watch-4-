@@ -12,7 +12,7 @@ const target=['-march=armv7-a','-mthumb','-mfloat-abi=soft'];
 const flags=[...target,'-mlong-calls','-std=gnu17','-Os','-ffreestanding','-fno-builtin','-fno-common','-fno-pic','-ffunction-sections','-falign-functions=8','-fno-unwind-tables','-fno-asynchronous-unwind-tables','-fno-stack-protector','-Wall','-Wextra','-Werror','-Idoom/platform-rw4'];
 const hosts=['malloc','free','fopen','fclose','fread','fseek','ftell','feof','ferror','clearerr'];
 const prior=JSON.parse(fs.readFileSync(path.join(root,'build/doom-rw4-engine/runtime-review.json'))),raw=path.join(root,'build/doom-rw4-engine/runtime-device.c');if(prior.runtimeSourceSha256!==sha256(fs.readFileSync(raw)))throw Error('RuntimeChanged');
-run(path.join(tc,'bin/arm-none-eabi-gcc.exe'),[...flags,...hosts.map(n=>'-D'+n+'=rw4_host_'+n),'-Dnxsched_gettid=rw4_host_gettid','-c',raw,'-o',path.join(out,'runtime.o')],'runtime');
+run(path.join(tc,'bin/arm-none-eabi-gcc.exe'),[...flags,...hosts.map(n=>'-D'+n+'=rw4_host_'+n),'-Dnxsched_gettid=rw4_host_owner_token','-c',raw,'-o',path.join(out,'runtime.o')],'runtime');
 for(const [src,name]of [['doom/platform-rw4/device/libc-glue.c','glue'],['doom/platform-rw4/device/jump.S','jump']])run(path.join(tc,'bin/arm-none-eabi-gcc.exe'),[...flags,'-c',src,'-o',path.join(out,name+'.o')],name);
 const libraries=['libc.a','libm.a','libgcc.a'].map(name=>{
  const file=run(path.join(tc,'bin/arm-none-eabi-gcc.exe'),[...target,'-print-file-name='+name],name).trim();
@@ -22,7 +22,7 @@ const libraryPins=JSON.parse(fs.readFileSync(path.join(root,'doom/platform-rw4/d
 if(libraries.some(l=>libraryPins[l.name]!==l.sha256))throw Error('ReviewedEmulatorLibraryChanged');
 const symbols=new Map(),sh=image.readUInt32LE(32),stride=image.readUInt16LE(46),count=image.readUInt16LE(48);
 for(let i=0;i<count;i++){const p=sh+i*stride;if(image.readUInt32LE(p+4)!==2)continue;const off=image.readUInt32LE(p+16),size=image.readUInt32LE(p+20),q=sh+image.readUInt32LE(p+24)*stride,strings=image.subarray(image.readUInt32LE(q+16),image.readUInt32LE(q+16)+image.readUInt32LE(q+20));for(let a=off;a<off+size;a+=16){if((image[a+12]&15)!==2||!image.readUInt16LE(a+14))continue;const n=image.readUInt32LE(a);symbols.set(strings.toString('ascii',n,strings.indexOf(0,n)),image.readUInt32LE(a+4));}}
-const bindingNames=hosts.map(n=>['rw4_host_'+n,n]).concat([['rw4_host_gettid','nxsched_gettid'],['host_printf','printf']]);
+const bindingNames=hosts.map(n=>['rw4_host_'+n,n]).concat([['rw4_host_owner_token','nxsched_gettid'],['host_printf','printf']]);
 const bindings=bindingNames.map(([local,guest])=>{const address=symbols.get(guest);if(!address)throw Error('BindingAbsent');return {local,guest,address};});
 const adbExe=path.join(packageRoot,'platform-tools/adb.exe');if(sha256(fs.readFileSync(adbExe))!=='0e606318957baac81b997ccd8ee4bcdff79964a9921da07c716aea3e8d856af7')throw Error('AdbChanged');
 const adb=(args,label)=>run(adbExe,['-H','127.0.0.1','-P','5039','-s','emulator-5554',...args],label);

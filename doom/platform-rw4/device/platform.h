@@ -18,7 +18,8 @@ struct rw4_module_info { int (*uninit)(void *);void *arg;const void *exports;uns
 struct rw4_device_attr { uint32_t words[3]; };
 _Static_assert(sizeof(struct rw4_device_fops)==32&&sizeof(struct rw4_module_info)==16&&sizeof(struct rw4_device_attr)==12,"candidate RW4 contracts");
 _Static_assert(ATOMIC_INT_LOCK_FREE==2,"lock-free ARM words required");
-extern int rw4_host_gettid(void);
+extern int rw4_host_owner_token(void); /* Current-task identity, not a PID. */
+extern int rw4_host_validate(void);
 extern uint64_t rw4_host_clock_ticks(void);
 extern int rw4_host_usleep(unsigned);
 extern int rw4_host_attr_init(struct rw4_device_attr *);

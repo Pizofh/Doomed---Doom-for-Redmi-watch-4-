@@ -1,5 +1,37 @@
 # Retomar el proyecto
 
+**Actual R273 PC: candidato completo enlaza con cero imports; no se envió al reloj.**
+[Resultado, contratos y reproducción](doom-rw4-bindings-r273.md).
+Nuevo tools/build-doom-rw4-bindings.mjs consume los objetos de libc/device
+reconstruidos y el manifiesto device/firmware-bindings.lock.json (20 APIs).
+Salida 601308B/static897872, SHA
+67ebfd6f117040d89b5894997c0f0f9ab2cd35a09afd9b5aca4d69221cfe4dc7.
+FNV32 sobre64bytes por API antes de registrar nodos; imagen AP y SHA256 de
+esas64bytes por función fijados.
+No prueba ABI/memory map/firmware completo ni protege de un fault de lectura.
+owner_token llama al getter de TCB actual 1bd000, no gettid/PID; no interpreta
+TCB. Runtime macro nxsched_gettid→rw4_host_owner_token; _getpid privado=1.
+Wrappers en device/firmware-bindings.c; fseek/ftell32, clock64, attrs12,
+create1e8aac/join1bbca0 siguen contratos estáticos. 1bc310 NO es join.
+No cargar este ELF ARMv8 en S3. loadableModule=false, autorización física=false.
+Tests afectados S3 pasan: transporte1038 (nuevo rechazo deja cero nodos) y
+libc dos instancias18checks/6alloc/6free/streams0/fixtureintacta. Temporales
+y módulos retirados. Scripts siguen reportando etapa R272; resultado conjunto273.
+No repetir pruebas físicas o tests sin cambios.
+RAM image: Lua set_src5e1cac acepta string/userdata y pasa puntero al veneer
+5b4220→1c03dfd9. No mapear ese destino ROM como offset directo del AP.
+Upstream luavgl/LVGL8 solo contexto; layout RW4 y finalización/cache pendientes.
+No pasar header32 propio como descriptor ni liberar/reutilizar píxeles tras
+set_src/Timer sin contrato demostrado. Conservar fuerte referencia Lua y lease
+C hasta detach/cache/render completado; falta implementarlo y validarlo.
+Siguiente: cerrar entrega/retirada de imagen RAM, integrar WAD/marca/worker
+real en PC y preparar ensayo físico agrupado, no probes diminutos por defecto.
+R270 sigue último físico:234 retirado/reloj normal, gates físicos cerrados.
+Las tres variantes review-doom-rw4-platform ya ejecutadas; dirs research
+doom-platform-r273, -follow, -detail inmutables. No correr otra vez sobre ellos.
+
+Historial inmediato:
+
 **Actual R272 PC: C completo enlaza sin DG/libc pendientes;20rw4_host_* aún sin bind.**
 [Resultado/contratos/reproducción](doom-rw4-device-r272.md). No operación física.
 tools/build-doom-rw4-libc.mjs usa engine-port R271 y recompila solo runtime-host/

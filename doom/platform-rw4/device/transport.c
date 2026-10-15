@@ -106,7 +106,7 @@ static int control_close(struct rw4_device_file *f)
 static int start_game(void)
 {
     if(started)return -16;
-    started=1;owner=(unsigned)rw4_host_gettid();
+    started=1;owner=(unsigned)rw4_host_owner_token();
     struct rw4_device_attr attr;int rc=rw4_host_attr_init(&attr);if(rc){joined=1;return -5;}
     rc=rw4_host_attr_stack(&attr,32768);
     if(rc){joined=1;if(rw4_host_attr_destroy(&attr))error=1;return -5;}
@@ -122,7 +122,7 @@ static int control_write(struct rw4_device_file *f,const char *b,unsigned n)
     if(!atomic_load(&control_ref)||n!=16||get32(b)!=RW4_CONTROL_MAGIC||sequence==UINT32_MAX||get32(b+4)!=sequence+1)return -22;
     unsigned op=get32(b+8),value=get32(b+12);
     if(op<1||op>6||(op!=2&&value))return -22;
-    if(started&&owner!=(unsigned)rw4_host_gettid())return -1;
+    if(started&&owner!=(unsigned)rw4_host_owner_token())return -1;
     int rc=0;
     if(op==1)rc=start_game();
     else if(op==2){
@@ -207,6 +207,7 @@ __attribute__((aligned(8),section(".text.entry")))
 int rw4_doom_device_init(struct rw4_module_info *info)
 {
     if(!info)return -22;
+    if(rw4_host_validate())return -8;
     int rc=rw4_host_register(control_path,&control_ops,0600,NULL);if(rc)return rc;registered_control=1;
     rc=rw4_host_register(frame_path,&frame_ops,0400,NULL);
     if(rc){if(!rw4_host_unregister(control_path)){registered_control=0;return rc;}error=1;}

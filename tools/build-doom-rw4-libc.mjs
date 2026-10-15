@@ -23,13 +23,13 @@ try{
  const pinFile=path.join(root,'doom/platform-rw4/device/newlib.lock.json');
  const pins=JSON.parse(fs.readFileSync(pinFile));
  if(libs.some(l=>pins[l.name]!==l.sha256))throw Error('UnreviewedLibrary');
- run(path.join(tc,'bin/arm-none-eabi-gcc.exe'),[...flags,...hosts.map(n=>'-D'+n+'=rw4_host_'+n),'-Dnxsched_gettid=rw4_host_gettid','-c',path.join(baseDir,'runtime-device.c'),'-o',path.join(out,'runtime-host.o')],'runtime');
+ run(path.join(tc,'bin/arm-none-eabi-gcc.exe'),[...flags,...hosts.map(n=>'-D'+n+'=rw4_host_'+n),'-Dnxsched_gettid=rw4_host_owner_token','-c',path.join(baseDir,'runtime-device.c'),'-o',path.join(out,'runtime-host.o')],'runtime');
  run(path.join(tc,'bin/arm-none-eabi-gcc.exe'),[...flags,'-c','doom/platform-rw4/device/libc-glue.c','-o',path.join(out,'glue.o')],'glue');
  const output=path.join(out,'engine-libc.o');
  run(path.join(tc,'arm-none-eabi/bin/ld.exe'),['-r','-d','-T','doom/platform-rw4/device/module.ld',path.join(baseDir,'engine-port.o'),path.join(out,'runtime-host.o'),path.join(baseDir,'jump.o'),path.join(out,'glue.o'),'--start-group',...libs.map(l=>l.file),'--end-group','-o',output],'link');
  const re=run(path.join(tc,'bin/arm-none-eabi-readelf.exe'),['-W','-h','-A','-S','-s','-r',output],'review');fs.writeFileSync(path.join(out,'readelf.txt'),re);
  const imports=[...re.matchAll(/\bUND[ \t]+(\S+)[ \t]*$/gm)].map(m=>m[1]).sort();
- const expected=[...hosts.map(n=>'rw4_host_'+n),'rw4_host_gettid','DG_DrawFrame','DG_GetKey','DG_GetTicksMs','DG_Init','DG_SetWindowTitle','DG_SleepMs'].sort();
+ const expected=[...hosts.map(n=>'rw4_host_'+n),'rw4_host_owner_token','DG_DrawFrame','DG_GetKey','DG_GetTicksMs','DG_Init','DG_SetWindowTitle','DG_SleepMs'].sort();
  if(JSON.stringify(imports)!==JSON.stringify(expected))throw Error('UnexpectedImports:'+imports.join(','));
  const bytes=fs.readFileSync(output),sh=bytes.readUInt32LE(32),stride=bytes.readUInt16LE(46),count=bytes.readUInt16LE(48);
  if(bytes.readUInt16LE(16)!==1||bytes.readUInt16LE(18)!==40||bytes.readUInt32LE(24)!==0||stride!==40||sh+count*stride>bytes.length||!/Tag_CPU_arch: v8-M\.mainline/.test(re)||/Tag_ABI_VFP_args: VFP registers/.test(re))throw Error('ElfMismatch');

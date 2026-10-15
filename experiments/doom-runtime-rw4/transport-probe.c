@@ -7,9 +7,10 @@
 extern int host_printf(const char *,...);
 static const struct rw4_device_fops *ctl,*frame;
 static void *(*saved_worker)(void *);
-static unsigned registrations,removals,joins,stack_size;
+static unsigned registrations,removals,joins,stack_size,validation_failure=1;
 static struct rw4_runtime_stats stats;
-int rw4_host_gettid(void){return 17;}
+int rw4_host_owner_token(void){return 17;}
+int rw4_host_validate(void){return (int)validation_failure;}
 int rw4_host_attr_init(struct rw4_device_attr *p){p->words[0]=0;return 0;}
 int rw4_host_attr_stack(struct rw4_device_attr *p,unsigned n){(void)p;stack_size=n;return 0;}
 int rw4_host_attr_destroy(struct rw4_device_attr *p){(void)p;return 0;}
@@ -40,6 +41,8 @@ extern int rw4_doom_device_init(struct rw4_module_info *);
 int rw4_transport_probe_init(void *unused)
 {
     (void)unused;struct rw4_module_info info={0};
+    CHECK(rw4_doom_device_init(&info)==-8&&registrations==0&&ctl==NULL&&frame==NULL);
+    validation_failure=0;
     CHECK(rw4_doom_device_init(&info)==0&&registrations==2&&ctl&&frame&&info.uninit);
     CHECK(ctl->open(NULL)==0);CHECK(ctl->open(NULL)==-16);
     CHECK(ctl->read(NULL,(char *)buffer,128)==128&&read_word(0)==RW4_CONTROL_MAGIC);

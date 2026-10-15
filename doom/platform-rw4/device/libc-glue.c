@@ -8,7 +8,6 @@
 #include <errno.h>
 #include <stdint.h>
 #include <stddef.h>
-extern int rw4_host_gettid(void);
 static unsigned log_bytes;
 static unsigned char log_tail[256];
 /* Keep Thumb code on both targets. The S3 multilib's optimized memcpy uses
@@ -52,7 +51,7 @@ long _lseek(int fd,long offset,int origin)
 { (void)fd;(void)offset;(void)origin;errno=ESPIPE;return -1; }
 void *_sbrk(ptrdiff_t increment)
 { (void)increment;errno=ENOMEM;return (void *)(intptr_t)-1; }
-int _getpid(void){return rw4_host_gettid();}
+int _getpid(void){return 1;} /* Private libc identity; never a firmware PID. */
 int _kill(int pid,int signal)
 { (void)pid;(void)signal;errno=ENOSYS;return -1; }
 _Noreturn void _exit(int code){rw4_exit(code);}

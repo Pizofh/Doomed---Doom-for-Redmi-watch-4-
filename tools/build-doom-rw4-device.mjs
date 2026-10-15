@@ -21,7 +21,7 @@ try{
  run('arm-none-eabi/bin/ld.exe',['-r','-d','-T','doom/platform-rw4/device/module.ld','-e','rw4_doom_device_init',input,path.join(out,'adapter.o'),path.join(out,'transport.o'),gcc,'-o',output],'link');
  const re=run('bin/arm-none-eabi-readelf.exe',['-W','-h','-A','-S','-s','-r',output],'review');fs.writeFileSync(path.join(out,'readelf.txt'),re);
  const imports=[...re.matchAll(/\bUND[ \t]+(\S+)[ \t]*$/gm)].map(m=>m[1]).sort();
- const expected=[...prior.imports.filter(n=>!n.startsWith('DG_')),'rw4_host_clock_ticks','rw4_host_usleep','rw4_host_attr_init','rw4_host_attr_stack','rw4_host_attr_destroy','rw4_host_thread_create','rw4_host_thread_join','rw4_host_register','rw4_host_unregister'].sort();
+ const expected=[...prior.imports.filter(n=>!n.startsWith('DG_')),'rw4_host_validate','rw4_host_clock_ticks','rw4_host_usleep','rw4_host_attr_init','rw4_host_attr_stack','rw4_host_attr_destroy','rw4_host_thread_create','rw4_host_thread_join','rw4_host_register','rw4_host_unregister'].sort();
  if(JSON.stringify(expected)!==JSON.stringify(imports))throw Error('UnexpectedImports:'+imports.join(','));
  const b=fs.readFileSync(output),sh=b.readUInt32LE(32),size=b.readUInt16LE(46),count=b.readUInt16LE(48);
  if(b.readUInt16LE(16)!==1||b.readUInt16LE(18)!==40||!(b.readUInt32LE(24)&1)||size!==40||sh+count*size>b.length)throw Error('ElfMismatch');

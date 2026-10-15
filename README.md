@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R273, solo PC:** [El candidato completo enlaza sin imports pendientes](docs/doom-rw4-bindings-r273.md).
+Incluye 20 bindings candidatos y comprobaciones de código al iniciar. Las pruebas
+afectadas de libc y puente pasan en S3. Falta cerrar imagen LVGL, WAD y ciclo
+real del worker; todavía no es un paquete físico instalable. Reloj sin cambios.
+
 **Actual R272, trabajo PC:** [Motor, libc propia y puente ya enlazan juntos](docs/doom-rw4-device-r272.md).
 Pruebas de biblioteca C y controles/frames pasan en el emulador, con alcance
 documentado. Faltan bindings finales, presentación LVGL y WAD persistente;

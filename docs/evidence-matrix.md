@@ -1,5 +1,16 @@
 # Matriz de evidencia
 
+**Actual R273 PC:** [Bindings candidatos y enlace sin imports pendientes](doom-rw4-bindings-r273.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| DOOM original, runtime, libc, DG, puente y bindings enlazan sin imports | PC, candidato ARMv8-M soft-float | Builder R273, ELF 601308 bytes y hash documentado | CONFIRMADO LOCALMENTE | Alta para enlace | Sí | No demuestra ejecución física ni RAM libre |
+| Los 20 bindings corresponden a contratos completos utilizables en RW4 | Imagen AP candidata RW4 y pruebas físicas previas de algunas APIs | Inspección de wrappers/callers; manifiesto por función | INFERENCIA RAZONABLE para el conjunto | Mixta por API | Estático; no ejecución del conjunto | Create/join/attrs/clock y otras APIs no probadas físicamente por este port |
+| El getter 1bd000 devuelve un token del task, no un PID | Imagen AP candidata | Carga puntero global de task actual y lo retorna | INFERENCIA RAZONABLE | Alta para código inspeccionado | Estático | No se interpreta TCB ni se llama gettid a este getter |
+| Validación rechazada registra cero nodos | S3, fuente real del puente y host simulado | Nuevo caso transport-probe, 1038 checks totales | CONFIRMADO CON SIMULACIONES EN EMULADOR | Alta para fixture | Sí | No prueba lectura de código/ABI en RW4 |
+| Lua set_src recibe puntero de string/userdata | Imagen AP candidata RW4 | Ruta 5e1cac hacia veneer 5b4220 | INFERENCIA RAZONABLE | Alta para ruta estática | Estático | Descriptor/pixel format/lifetime y fin de render pendientes |
+| Frames RGB565 nuevos ya se muestran en reloj real | RW4 M2315W1 | No se ha enviado el port nuevo | SIN EVIDENCIA | Pendiente | No | Frames PNG previos no validan esta ruta RAM |
+
 **Actual R272 PC:** [Libc privada y adaptador completo de C](doom-rw4-device-r272.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
