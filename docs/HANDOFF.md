@@ -1,5 +1,26 @@
 # Retomar el proyecto
 
+**Actual R290: paquete COMPLETO instalado INACTIVO; reloj normal confirmado.**
+docs/doom-large-install-result-r290.md. Usuario autorizó UNenvíoR289 y observó.
+UN retry-no-data real terminó RegisteredInactive: expectedModel/FWtrue,
+catálogo11/reviewedTwoRemovalstrue,INSTALL0,ACKmd5/status/offset presentes,
+chunkausente→2048,offset0;2362MASS/2370frames/4872246tx. close/workerexittrue0.
+FinallyrestauróDEPLOY/CONTROL_RETRY/RESUMEfalse y C#Largefalse,rebuild/gatesPASS.
+Consulta independiente watchfaces:12entradas,11previasIDs/active/canDelete
+intactos,nuevo365219963inactivo/eliminable,1activa,0unknown,cierretrue.
+Usuario confirmó esfera/menús/desplazamiento normales. NO pedirlo otra vez.
+PaqueteR2854827044/d0fc...ELF603760/980e...WAD4196020 YA almacenados por paquete;
+hashesextraídosNO comprobados. allow_native=false; NO seleccionar launcher,
+START/insmod/C/Doom físico, borrar/reinstalar/reintentar/reboot sin nuevo plan.
+Journal real original termina attempt4RegisteredInactive, mantienehistoria;
+NO borrar/renombrar/sustituir. Autorización envío consumida; gates cerrados.
+Artifacts/doom-deployment-physical-r290/attempt-result.json(posibleUTF16LE),
+catalog-after.json. HelpercerradoSHA d2efc024ad441e661d828b37348ec88303625425ec57380061423bf1c1b4e4c5.
+Siguientecheckpoint prepararprimerarranqueDoomlimitado con archivos/RAM/imagen/
+salida/limpieza agrupados en plan. Evaluar launcherPEQUEÑO que use recursos
+ya instalados para no reenviar4,8MB; no habilitarnativoautomáticamente.
+Solo commitslocales, NO push/CIremota/auditoríaspublicación. Histórico abajo.
+
 **Actual R289: intento3 consumido, reloj normal confirmado; NO enviar sin nueva autorización.**
 docs/doom-large-install-removals-r289.md contiene resultado+plan concreto.
 Ejecutado UN retry-no-data autorizado: modelo/FWtrue, catálogo11 vs13,

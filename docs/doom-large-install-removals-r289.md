@@ -1,5 +1,9 @@
 # R289: dos bajas manuales confirmadas; paquete aún no enviado
 
+**Actualización R290:** continuación autorizada y completada; paquete inactivo,
+reloj normal confirmado. [Resultado](doom-large-install-result-r290.md).
+Autorización consumida; el plan siguiente es histórico y no permite repetirlo.
+
 El usuario autorizó UN intento conforme al plan R288, con observador y batería
 ≥50%. Se ejecutó retry-no-data una vez: modelo/firmware correctos, catálogo
 actual de11 entradas frente a13 anteriores, LargeSessionRefused en

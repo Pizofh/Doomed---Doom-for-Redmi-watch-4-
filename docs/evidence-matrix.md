@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R290:** [Instalación grande completada](doom-large-install-result-r290.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Paquete4827044B registrado inactivo mediante transporte stock | M2315W1/FW2.2.86 | INSTALL0, ACK MD5 coincide/offset0,2362MASS, catálogo independiente12entradas | CONFIRMADO EN RW4 | Alta para instalación/catalogación | Sí | Hashes de archivos extraídos no verificados; Doom no ejecutado |
+| Once esferas anteriores y selección preservadas; reloj normal | Unidad física | Comparación IDs/flags + confirmación del usuario | CONFIRMADO EN RW4 | Alta para observación | Sí | No verificación integral del FS ni reboot |
+| ACK real omite chunk; default2048 funciona | Sesión física attempt4 | Presencias registradas, envío completado | CONFIRMADO EN RW4 | Alta para esta sesión | Sí | No demuestra campos ausentes en attempt1 |
+| Doom original jugable físicamente | M2315W1 | Sin ejecución; allow_native=false | SIN EVIDENCIA | Pendiente | No | No confundir instalación con ejecución |
+
 **Actual R289:** [Bajas manuales confirmadas](doom-large-install-removals-r289.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

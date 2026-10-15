@@ -1,10 +1,10 @@
 # DOOM en Redmi Watch 4
 
-**Actual R289:** [Dos esferas borradas manualmente; continuación preparada](docs/doom-large-install-removals-r289.md).
-Tercer intento detenido antes de INSTALL: catálogo11 frente a13; el usuario
-confirmó dos bajas voluntarias y funcionamiento normal. Cero partes enviadas;
-paquete aún no instalado. Corrección acotada probada en49casos PC, gates cerrados
-y siguiente envío pendiente de revisión. Doom físico aún no ejecutado.
+**Actual R290:** [Paquete Doom de4,8MB instalado e inactivo en el reloj](docs/doom-large-install-result-r290.md).
+2362partes transferidas; consulta independiente confirma las11esferas previas
+y la selección conservadas. Usuario confirma funcionamiento normal; gates
+cerrados. El launcher mantiene C/Doom deshabilitado: ejecución física pendiente.
+Siguiente: preparar un primer arranque acotado con salida y limpieza.
 
 **Actual R286, solo PC:** [Instalador grande con journal privado integrado](docs/doom-deployment-journal-r286.md).
 33casos pasan con el paquete real y receptor simulado, incluido worker C#.
