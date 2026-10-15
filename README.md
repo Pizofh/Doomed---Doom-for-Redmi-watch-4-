@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R285, solo PC:** [Candidato RW4 de4MiB compilado y empaquetado](docs/doom-low-memory-candidate-r285.md).
+El presupuesto calcula5,17MiB antes de gastos aún sin medir. Paquete de4,8MB
+con carga nativa bloqueada; siguiente: instalador grande con journal privado.
+
 **Actual R284:** [RAM física medida; Doom consume2MiB menos en S3](docs/doom-memory-budget-r284.md).
 Umem libre6,68MiB en el reloj. E1M1 con zona4MiB pasa dos ciclos de controles,
 pausa y salida limpia en emulador; pico runtime4,28MiB. Doom físico pendiente.

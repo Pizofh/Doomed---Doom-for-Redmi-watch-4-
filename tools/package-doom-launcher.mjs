@@ -2,8 +2,10 @@
 import fs from 'node:fs';import path from 'node:path';import {spawnSync} from 'node:child_process';
 import {root,sha256,launcherSource} from './doom-launcher-source.mjs';
 import {launcherAssets} from './doom-launcher-assets.mjs';import {verifyShareware} from './wad-data.mjs';
-const target=process.argv[2];if(process.argv.length!==3||!['rw4','s3'].includes(target))throw Error('Expected rw4|s3');
-const out=path.join(root,'build/doom-launcher-r282',target),review=JSON.parse(fs.readFileSync(path.join(out,'review.json')));
+const lowMemory=process.argv[2]==='rw4-low-memory',target=lowMemory?'rw4':process.argv[2];
+if(process.argv.length!==3||!['rw4','s3'].includes(target))throw Error('Expected rw4|s3|rw4-low-memory');
+const out=lowMemory?path.join(root,'build/doom-low-memory-rw4-r285'):path.join(root,'build/doom-launcher-r282',target),review=JSON.parse(fs.readFileSync(path.join(out,'review.json')));
+if(lowMemory&&(review.checkpoint!=='R285'||review.zoneMiB!==4||review.nativeLoadEnabled!==false))throw Error('LowMemoryReviewMismatch');
 const elf=fs.readFileSync(path.join(out,'doom.elf')),wad=fs.readFileSync(path.join(root,'tools/local/doom-shareware/doom1.wad'));verifyShareware(wad);
 if(review.target!==target||review.elfSha256!==sha256(elf)||!review.wadPathAssigned||review.physicalDeploymentAuthorized!==false)throw Error('ReviewMismatch');
 const {source,config}=launcherSource(target,elf,wad),assets=launcherAssets();
@@ -38,7 +40,7 @@ else fs.writeFileSync(file,b,{flag:'wx'});
 const parts=Math.ceil((b.length+26)/2044),wire=b.length+26+parts*19;
 const worker=fs.readFileSync(path.join(root,'experiments/pc-rfcomm/LargeSessionWorker.cs'),'utf8');
 const workerLimit=Number(worker.match(/\bByteLimit\s*=\s*(\d+)/)?.[1]);if(!Number.isSafeInteger(workerLimit))throw Error('WorkerBudgetAbsent');
-const result={checkpoint:'R282',target,id:config.id,bytes:b.length,sha256:sha256(b),sourceSha256:sha256(Buffer.from(source)),records,wadPath:review.wadPath,wadPathAssigned:true,manualStartOnly:true,fontIndependent:true,nativeLoadEnabled:config.allow_native,physicalDeploymentAuthorized:false,physicalTransport:false,
+const result={checkpoint:lowMemory?'R285':'R282',target,...(lowMemory?{zoneMiB:4}:{}),id:config.id,bytes:b.length,sha256:sha256(b),sourceSha256:sha256(Buffer.from(source)),records,wadPath:review.wadPath,wadPathAssigned:true,manualStartOnly:true,fontIndependent:true,nativeLoadEnabled:config.allow_native,physicalDeploymentAuthorized:false,physicalTransport:false,
  upload:{defaultParts:parts,wireBytesWithoutControl:wire,existingWorkerByteLimit:workerLimit,fitsExistingWorker:wire+8192<=workerLimit},config};
 if(fs.existsSync(path.join(out,'package.json'))&&!fs.existsSync(path.join(out,'package-initial-review.json')))fs.copyFileSync(path.join(out,'package.json'),path.join(out,'package-initial-review.json'));
 fs.writeFileSync(path.join(out,'package.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify({...result,records:records.length}));

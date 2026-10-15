@@ -1,5 +1,30 @@
 # Retomar el proyecto
 
+**Actual R285 PC: candidato RW4 -mb4 y paquete nuevo listos, NO enviados.**
+Ver docs/doom-low-memory-candidate-r285.md. tools/build-doom-low-memory-rw4.mjs
+reusa source EXACTO adapter-low.c R284 SHA2e7e2146...; recompila solo adapter
+v8-M.main/thumb/soft, reproduce ELF R282 previo5365bf... antes de nuevo link.
+ELF603760 SHA980e13cc85813d463d229aec93b4b2000654b188b3c80a36bdcf30eaa3a3c8a5.
+build/doom-low-memory-rw4-r285/review.json y doom.elf. 80engine objetos/libc
+reutilizados, 0imports y3relocs anteriores. NO ejecutar ELF RW4 en VM S3.
+package-doom-launcher.mjs rw4-low-memory genera20recursos, mismoID365219963,
+módulo rw4doom282/basepersistente, allow_native=false. Paquete4827044 SHA
+d0fc0d8257e9a384b42129f312de99570b49dade455511d0fc5fddd80fecf048.
+SourceSHA54cd86feea0b3cf6639cb9848a0d584856b4aa83e611b931abe3508373cd2ea6.
+2362partes/wire4871948 +8192 cabe4900000, pins anteriores NO aceptan nuevohash.
+No factory/gate/transfer añadido aún para nuevo carrier. No más hardware R285.
+GNUsize confirma .text203880/.rodata130964/.data61172/.bss503088: raw899104;
+modelo loader alineado text334844/data564264=899108. +S3peak4486833+stack32768
+=5418709, margen1586419 frenteUmem libre. Reservar1MiB como SUPUESTO deja537843,
+NO cota medida, no prueba de fit. Picos físico/loader/UI/mapa malloc pendientes.
+inspect-doom-loader-memory.mjs fija SHA firmware+objdump y2500bytes4ventanas.
+Capturas privadas artifacts/research/doom-loader-r285/. Load0x1e7890 dos
+grupos alignsection/round4, shdr640bytes, IObuf32inicial ampliable, bind2048
+buffer+28nodos caché. No total loader2048 ni pools separados garantizados.
+Siguiente: instalador grande vinculado a destino/hash +journal/lock privado,
+plan concreto posterior para hardware. No repetir tests S3/memoria aprobados.
+Gates siguen cerrados. Usuario quiere SOLO commits locales; no push/CI remota.
+
 **Actual R284: MemInfo completada y Doom -mb4 probado en S3.**
 Usuario aporta fotos y confirma menús/retorno habitual. Observations JSON
 experiments/memory-preflight/observations-r284.json, sin fotos privadas.

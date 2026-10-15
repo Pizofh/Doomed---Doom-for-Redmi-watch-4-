@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R285:** [Candidato de4MiB y cargador](doom-low-memory-candidate-r285.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Candidato RW4 utiliza el mismo adaptador -mb4 probado en S3 | Build PC, ARMv8-M | SourceSHA idéntico; ELF previo reproducido; nuevo ELF/imports/atributos revisados | CONFIRMADO SOLO EN PC | Alta para build | Sí | No ejecución física nueva |
+| Secciones residentes del candidato suman899108bytes con alineación observada | ELF + imagen local R193 | Parser/size independientes y loader desensamblado | INFERENCIA RAZONABLE | Alta para cálculo, no heap real | Sí | Excluye overhead del allocator/loader/sistema; imagen no dump físico nuevo |
+| Loader observado reserva texto y datos por separado | Imagen local R193 | Flujo0x1e7890, SHF_WRITE y dos reservas alineadas | CONFIRMADO EN ARCHIVO | Alta para esa imagen | Sí, estático | No demuestra pools distintos ni reparto de Umem |
+| Paquete final4MiB incluye20recursos exactos y permanece deshabilitado | Compilador PC revisado |4827044B, configuración allow_native=false, pins viejos rechazan nuevo hash | CONFIRMADO SOLO EN PC | Alta para bytes/gates | Sí | Sin transferencia física |
+
 **Actual R284:** [Memoria física y zona de4MiB](doom-memory-budget-r284.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
