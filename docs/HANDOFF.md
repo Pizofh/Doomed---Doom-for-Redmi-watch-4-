@@ -1,5 +1,32 @@
 # Retomar el proyecto
 
+**Actual R274 PC: formato RW4 identificado, vista RAM/read/seek y VFS S3 pasan.**
+[Resultado y límites](doom-rw4-image-r274.md). No se tocó hardware.
+Alias LVGL código offset+1bff187c, datos+3bff187c: set_src4c75c→1c03dfd9
+y decoder_info24fc0→1c01683d cruzan sus veneers. No memory map completo.
+Header RW4=4bytes,cf4=32bpp (tabla c9340, ref21be8);320x200→19050004.
+No usar header S3 de12bytes en RW4. Nueva image-view.c/h convierte slots565
+a B,G,R,255 por read,256004B lógicos, sin reserva/frame ni writes de imagen.
+transport ahora registra tercer nodo /dev/rw4doomimage.bin con lease hasta
+close; header-only no consume frame; EOF/seek64 acotados; JOIN/uninit bloqueados
+por image_ref. Falta integrar widget/caché UI: NO afirmar render ya validado.
+ABI ampliada: fops seek+16; file f_pos64+8 y cookie driver+20, solo esos campos.
+AP495620 dispatcher;495a4c initcampos;495b1c temporal→FD. Tres fingerprints
+de contrato añadidos a20APIs (total23regiones). NO comparación de puntero file:
+se mueve/copia entreopen yread. Primer fixture VFS falló4 y dejóref retenida,
+rmmod16; se preservaron logs y se reseteó soloVM propia. Segundo falló17seek/EOF,
+faltaba clearerr de nuestro runtime; módulo retirado/ELFhashverificadoyretirado.
+Final VFS25checks pasa con stdio/VFS reales S3 y fops40adaptada; worker no corre.
+Test puente1114checks simulado pasa; codec1060checks/fullframeFNV1c083d2f pasa.
+Todo temporal/nodos/módulos retirados. No repetir tests iguales sin causa.
+Builddevice+bindings rehechos:603364B/static898936,0imports,entry203033,
+SHA a7ce84bf35ee6a0051c2690fbdb8e77cbf8d181c5fa89a3cbeefcb64bb3b8d90.
+Candidate NOinstallable/NOautorizado. Libc R273 sin cambios/no repetida.
+Siguiente trabajo: Lua widget+cache sólocontextoUI y presentación/salidaPC,
+luego WAD/marca/workerreal; preparar ensayo físico agrupado cuando corresponda.
+Los scripts review-rw4-image* ya ejecutados, outputsimage*r274* inmutables.
+No rearmar pruebas viejas; R270 sigue último físico/234retirado/relojnormal.
+
 **Actual R273 PC: candidato completo enlaza con cero imports; no se envió al reloj.**
 [Resultado, contratos y reproducción](doom-rw4-bindings-r273.md).
 Nuevo tools/build-doom-rw4-bindings.mjs consume los objetos de libc/device

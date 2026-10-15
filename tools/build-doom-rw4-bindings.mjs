@@ -15,8 +15,15 @@ const functions=lock.entries.map(e=>{
  return {...e,address:lock.codeBase+e.offset+1,fnv};
 });
 if(new Set(functions.map(e=>e.name)).size!==20||new Set(functions.map(e=>e.offset)).size!==20)throw Error('DuplicateBinding');
+if(!Array.isArray(lock.contracts)||lock.contracts.length!==3)throw Error('FileContractsAbsent');
+const contracts=lock.contracts.map(e=>{
+ if(!/^[a-z_]+$/.test(e.name)||!Number.isSafeInteger(e.offset)||e.offset<0||e.offset%2||e.offset+64>image.length)throw Error('InvalidContract');
+ const bytes=image.subarray(e.offset,e.offset+64);if(sha256(bytes)!==e.sha256)throw Error('ContractChanged:'+e.name);
+ let fnv=2166136261;for(const c of bytes)fnv=Math.imul(fnv^c,16777619)>>>0;
+ return {...e,address:lock.codeBase+e.offset+1,fnv};
+});
 const header=functions.map(e=>'#define RW4_ADDR_'+e.name.toUpperCase()+' UINT32_C(0x'+e.address.toString(16)+')').join('\n')+'\n'+
- 'static const struct {uintptr_t address;uint32_t fnv;} rw4_fingerprints[]={\n'+functions.map(e=>' {UINT32_C(0x'+(e.address-1).toString(16)+'),UINT32_C(0x'+e.fnv.toString(16)+')},').join('\n')+'\n};\n';
+ 'static const struct {uintptr_t address;uint32_t fnv;} rw4_fingerprints[]={\n'+[...functions,...contracts].map(e=>' {UINT32_C(0x'+(e.address-1).toString(16)+'),UINT32_C(0x'+e.fnv.toString(16)+')},').join('\n')+'\n};\n';
 fs.writeFileSync(path.join(out,'firmware-addresses.h'),header);
 const input=path.join(root,'build/doom-rw4-device/doom-device-unbound.o'),prior=JSON.parse(fs.readFileSync(path.join(root,'build/doom-rw4-device/review.json')));
 if(prior.elfSha256!==sha256(fs.readFileSync(input))||prior.firmwareBindings!==false)throw Error('PriorCandidateChanged');
@@ -31,7 +38,7 @@ try{
  if(b.readUInt16LE(16)!==1||b.readUInt16LE(18)!==40||!(b.readUInt32LE(24)&1)||/\bUND[ \t]+\S+[ \t]*$/m.test(re)||!/Tag_CPU_arch: v8-M\.mainline/.test(re)||/Tag_ABI_VFP_args: VFP registers/.test(re)||types.some(t=>!['R_ARM_ABS32','R_ARM_THM_CALL','R_ARM_THM_JUMP24'].includes(t)))throw Error('ElfContractMismatch');
  const sh=b.readUInt32LE(32),stride=b.readUInt16LE(46),count=b.readUInt16LE(48);if(stride!==40||sh+count*stride>b.length)throw Error('ElfSections');
  let staticBytes=0;for(let i=0;i<count;i++){const p=sh+i*stride;if(!(b.readUInt32LE(p+8)&2))continue;if(b.readUInt32LE(p+12))throw Error('NonzeroSectionVma');staticBytes+=b.readUInt32LE(p+20);}
- const result={checkpoint:'R273',elfSha256:sha256(b),elfBytes:b.length,staticBytes,entry:b.readUInt32LE(24),imports:[],relocationTypes:types,bindingCount:functions.length,firmwareBindings:true,allContractsPhysicallyVerified:false,
+ const result={checkpoint:'R274',elfSha256:sha256(b),elfBytes:b.length,staticBytes,entry:b.readUInt32LE(24),imports:[],relocationTypes:types,bindingCount:functions.length,contractFingerprints:contracts.length,firmwareBindings:true,allContractsPhysicallyVerified:false,
   bindingLockSha256:sha256(fs.readFileSync(path.join(root,'doom/platform-rw4/device/firmware-bindings.lock.json'))),bindingSourceSha256:sha256(fs.readFileSync(path.join(root,'doom/platform-rw4/device/firmware-bindings.c'))),unboundSha256:prior.elfSha256,
   runtimeFingerprints:true,ownerIdentity:'current-task pointer token, not PID',loadableModule:false,uiImageDeliveryValidated:false,wadPathAssigned:false,physicalDeploymentAuthorized:false,deviceExecuted:false,physicalTransport:false};
  fs.writeFileSync(path.join(out,'review.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

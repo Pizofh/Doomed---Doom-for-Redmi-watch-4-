@@ -1,5 +1,5 @@
 {
-  "checkpoint": "R273",
+  "checkpoint": "R274",
   "imageSha256": "2c486395a01fb4e1d4a0f8b9b749fd6b1c3d522edc3c2f3813deaea9ab7388db",
   "codeBase": 202375168,
   "fingerprintBytes": 64,
@@ -127,5 +127,25 @@
   ],
   "completeFirmwareIdentityVerified": false,
   "allContractsPhysicallyVerified": false,
-  "physicalDeploymentAuthorized": false
+  "physicalDeploymentAuthorized": false,
+  "contracts": [
+    {
+      "name": "file_seek_contract",
+      "offset": 4806176,
+      "sha256": "2a763b8300fb56355e5fb439d7d96bb34d532eb5d72d1de2ca6cb0387d287d3f",
+      "evidence": "static: fops seek +16, off64, file position +8"
+    },
+    {
+      "name": "file_open_contract",
+      "offset": 4807244,
+      "sha256": "c2c642cfb56b7e108ac8730d4fcd6930dc1118dd2ab4e0dc00fe4563f688ff73",
+      "evidence": "static: file position +8, inode +16, driver-private field +20 initialized before open"
+    },
+    {
+      "name": "file_descriptor_copy_contract",
+      "offset": 4807452,
+      "sha256": "147d053d7f04327b1893a9061fad0feb5087f7df2bec72546afdfd85d0904ec6",
+      "evidence": "static: temporary file then descriptor allocation forwards position/inode/private cookie"
+    }
+  ]
 }

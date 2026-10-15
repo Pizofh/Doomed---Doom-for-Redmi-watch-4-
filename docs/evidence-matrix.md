@@ -1,5 +1,16 @@
 # Matriz de evidencia
 
+**Actual R274 PC:** [Vista de imagen en RAM y VFS](doom-rw4-image-r274.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Segundo alias de código identifica set_src y decoder_info | Imagen AP candidata RW4 | Dos veneers coinciden con offsets +1bff187c | INFERENCIA RAZONABLE | Alta para funciones cruzadas | Estático | No memory map completo ni ejecución física |
+| Cabecera binaria de4bytes, cf4 de32bits, dimensiones11bits | Imagen AP candidata RW4 | Decoder/bitfields y tabla de profundidad | INFERENCIA RAZONABLE | Alta estática | Estático | Cabecera distinta de S3; no render probado |
+| Vista completa convierte frame y respeta read/seek/EOF | CPU emulada S3, código nuevo | image-probe,256004bytes/FNV1c083d2f | CONFIRMADO EN EMULADOR | Alta para codec | Sí | 1060checks incluyen lecturas repetidas de un frame |
+| Imagen conserva frame y cierra por VFS/stdio real | S3 exacto, tabla fops adaptada | Fixture25checks, todos los nodos retirados | CONFIRMADO EN EMULADOR | Alta para fixture | Sí | Worker simulado; no LVGL ni ABI físico |
+| Descriptor de open puede cambiar de dirección | AP candidato y VFS S3 | Open temporal/asignación; fallo con comparación de punteros y corrección cookie | INFERENCIA RAZONABLE EN RW4; CONFIRMADO EN EMULADOR para corrección | Alta para contrato inspeccionado | Estático y S3 | file+8 posición64 y privado+20; no ABI pública |
+| El widget LVGL ya dibuja este nodo virtual en RW4 | RW4 M2315W1 | Sin ensayo de presentación | SIN EVIDENCIA | Pendiente | No | Próxima integración PC, sin nuevo ensayo físico autorizado |
+
 **Actual R273 PC:** [Bindings candidatos y enlace sin imports pendientes](doom-rw4-bindings-r273.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

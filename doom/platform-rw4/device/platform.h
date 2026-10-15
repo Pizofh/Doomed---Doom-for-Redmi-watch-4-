@@ -6,13 +6,14 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdatomic.h>
-struct rw4_device_file; /* Never dereference private firmware file objects. */
+struct rw4_device_file; /* Image adapter uses candidate f_pos +8 and driver cookie +20. */
 struct rw4_device_fops {
     int (*open)(struct rw4_device_file *);
     int (*close)(struct rw4_device_file *);
     int (*read)(struct rw4_device_file *,char *,unsigned);
     int (*write)(struct rw4_device_file *,const char *,unsigned);
-    uintptr_t unused[4];
+    int64_t (*seek)(struct rw4_device_file *,int64_t,int);
+    uintptr_t unused[3];
 };
 struct rw4_module_info { int (*uninit)(void *);void *arg;const void *exports;unsigned nexports; };
 struct rw4_device_attr { uint32_t words[3]; };

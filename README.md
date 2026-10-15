@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R274, solo PC:** [Imagen virtual desde RAM y VFS real probado](docs/doom-rw4-image-r274.md).
+Se identificó el formato RW4 y se añadió read/seek/cierre con retención del frame.
+El candidato sigue enlazando sin imports. Falta integrar y validar el dibujo/caché
+de LVGL; no se envió ni ejecutó este port en el reloj.
+
 **Actual R273, solo PC:** [El candidato completo enlaza sin imports pendientes](docs/doom-rw4-bindings-r273.md).
 Incluye 20 bindings candidatos y comprobaciones de código al iniciar. Las pruebas
 afectadas de libc y puente pasan en S3. Falta cerrar imagen LVGL, WAD y ciclo

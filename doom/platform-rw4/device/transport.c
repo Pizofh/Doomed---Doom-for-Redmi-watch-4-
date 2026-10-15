@@ -1,20 +1,24 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later
  * Candidate RW4 bridge. Single UI producer, single engine worker.
- * No LVGL calls, filesystem writes, firmware file layout or forced task kill.
+ * No LVGL calls, filesystem writes or forced task kill. Image seek updates
+ * only the candidate firmware file position field reviewed in R274.
  */
 #include "platform.h"
 #include "runtime.h"
+#include "image-view.h"
 enum { FREE=0,WRITING,READY,READING };
 #define FRAME_BYTES (32u+RW4_FRAME_W*RW4_FRAME_H*2u)
 #define CLOSING UINT32_C(0x80000000)
 static const char control_path[]="/dev/rw4doomctl";
 static const char frame_path[]="/dev/rw4doomframe";
-static atomic_uint gate,control_ref,frame_ref,stop,paused,ready,accepting,finished;
+static const char image_path[]="/dev/rw4doomimage.bin";
+static atomic_uint gate,control_ref,frame_ref,image_ref,stop,paused,ready,accepting,finished;
 static atomic_uint requested,applied,epoch,ack,head,tail,overflows;
 static atomic_uint produced,dropped,metrics[12];
-static unsigned owner,sequence,started,joined,registered_control,registered_frame,error;
+static unsigned owner,sequence,started,joined,registered_control,registered_frame,registered_image,error;
 static int32_t thread;
 static unsigned control_cursor,frame_cursor,frame_slot;
+static unsigned image_cursor,image_slot;
 static uint32_t control_snapshot[32];
 struct frame { atomic_uint state;unsigned generation;unsigned char bytes[FRAME_BYTES]; };
 static struct frame frames[2];
@@ -139,7 +143,7 @@ static int control_write(struct rw4_device_file *f,const char *b,unsigned n)
         if(op==3)atomic_store(&paused,1);else atomic_store(&stop,1);
         atomic_store(&requested,0);atomic_fetch_add(&epoch,1);
     }else if(op==5){
-        if(!started||joined||!atomic_load(&finished)||atomic_load(&frame_ref))return -16;
+        if(!started||joined||!atomic_load(&finished)||atomic_load(&frame_ref)||atomic_load(&image_ref))return -16;
         void *value_out=NULL;rc=rw4_host_thread_join(thread,&value_out);
         if(rc||value_out){error=1;return -5;}joined=1;
         atomic_store(&head,atomic_load(&tail));atomic_store(&requested,0);atomic_store(&applied,0);
@@ -191,18 +195,75 @@ static int frame_read(struct rw4_device_file *f,char *b,unsigned n)
     for(unsigned i=0;i<n;i++)b[i]=(char)frames[frame_slot].bytes[frame_cursor+i];
     frame_cursor+=n;return (int)n;
 }
+/* Candidate file_lseek reads the 64-bit f_pos at +8 AFTER the callback.
+ * Returning the new offset alone is insufficient. No other FILE/file/TCB
+ * member is read or written except driver-owned f_priv +20 below. */
+static void image_position(struct rw4_device_file *f,unsigned position)
+{
+    unsigned char *bytes=(unsigned char *)f;
+    for(unsigned i=0;i<8;i++)bytes[8+i]=i<4?(unsigned char)(position>>(i*8)):0;
+}
+#define IMAGE_COOKIE UINT32_C(0x27494d47)
+static void image_cookie_set(struct rw4_device_file *f,uint32_t value)
+{put32((unsigned char *)f+20,value);}
+static int image_owned(struct rw4_device_file *f)
+{return f&&atomic_load(&image_ref)&&get32((const char *)f+20)==IMAGE_COOKIE;}
+static int image_open(struct rw4_device_file *f)
+{
+    if(!f)return -22;
+    /* file_open may operate on a temporary subsequently copied into the FD
+     * table. A pointer comparison is invalid; f_priv is copied with the file.
+     * A refused duplicate must not carry the successful descriptor's cookie. */
+    image_cookie_set(f,0);
+    if(enter())return -16;
+    unsigned expected=0;
+    if(!atomic_compare_exchange_strong(&image_ref,&expected,1)){leave();return -16;}
+    image_cookie_set(f,IMAGE_COOKIE);image_cursor=0;image_slot=2;image_position(f,0);return 0;
+}
+static int image_close(struct rw4_device_file *f)
+{
+    if(!image_owned(f))return -22;
+    if(image_slot<2)atomic_store(&frames[image_slot].state,FREE);
+    image_cookie_set(f,0);image_slot=2;atomic_store(&image_ref,0);leave();return 0;
+}
+static int image_read(struct rw4_device_file *f,char *b,unsigned n)
+{
+    if(!image_owned(f)||(!b&&n)||image_cursor>RW4_IMAGE_BYTES)return -22;
+    unsigned left=RW4_IMAGE_BYTES-image_cursor;if(n>left)n=left;
+    /* Reading only the fixed header must not consume a produced frame. */
+    if(n&&image_cursor+n>4&&image_slot==2){
+        for(unsigned slot=0;slot<2;slot++){
+            unsigned expected=READY;
+            if(atomic_compare_exchange_strong(&frames[slot].state,&expected,READING)){image_slot=slot;break;}
+        }
+        if(image_slot==2)return -11;
+    }
+    const unsigned char *pixels=image_slot<2?frames[image_slot].bytes+32:NULL;
+    int count=rw4_image_read(pixels,image_cursor,b,n);
+    if(count>=0){image_cursor+=(unsigned)count;image_position(f,image_cursor);}
+    return count;
+}
+static int64_t image_seek(struct rw4_device_file *f,int64_t offset,int origin)
+{
+    if(!image_owned(f))return -22;
+    int64_t result=rw4_image_seek(&image_cursor,offset,origin);
+    if(result>=0)image_position(f,image_cursor);
+    return result;
+}
 static int uninit(void *unused)
 {
     (void)unused;unsigned expected=0;
     if(!atomic_compare_exchange_strong(&gate,&expected,CLOSING))return -16;
     const struct rw4_runtime_stats *s=rw4_runtime_stats();
     if(error||(started&&!joined)||(joined&&(s->blocks||s->streams||s->cleanup_error))){atomic_store(&gate,0);return -16;}
+    if(registered_image){if(rw4_host_unregister(image_path)){error=1;return -16;}registered_image=0;}
     if(registered_frame){if(rw4_host_unregister(frame_path)){error=1;return -16;}registered_frame=0;}
     if(registered_control){if(rw4_host_unregister(control_path)){error=1;return -16;}registered_control=0;}
     return 0;
 }
-static const struct rw4_device_fops control_ops={control_open,control_close,control_read,control_write,{0}};
-static const struct rw4_device_fops frame_ops={frame_open,frame_close,frame_read,NULL,{0}};
+static const struct rw4_device_fops control_ops={control_open,control_close,control_read,control_write,NULL,{0}};
+static const struct rw4_device_fops frame_ops={frame_open,frame_close,frame_read,NULL,NULL,{0}};
+static const struct rw4_device_fops image_ops={image_open,image_close,image_read,NULL,image_seek,{0}};
 __attribute__((aligned(8),section(".text.entry")))
 int rw4_doom_device_init(struct rw4_module_info *info)
 {
@@ -211,7 +272,15 @@ int rw4_doom_device_init(struct rw4_module_info *info)
     int rc=rw4_host_register(control_path,&control_ops,0600,NULL);if(rc)return rc;registered_control=1;
     rc=rw4_host_register(frame_path,&frame_ops,0400,NULL);
     if(rc){if(!rw4_host_unregister(control_path)){registered_control=0;return rc;}error=1;}
-    else registered_frame=1;
+    else {
+        registered_frame=1;
+        rc=rw4_host_register(image_path,&image_ops,0400,NULL);
+        if(rc){
+            if(!rw4_host_unregister(frame_path))registered_frame=0;else error=1;
+            if(!rw4_host_unregister(control_path))registered_control=0;else error=1;
+            if(!error)return rc;
+        }else registered_image=1;
+    }
     info->uninit=uninit;info->arg=NULL;info->exports=NULL;info->nexports=0;
     return 0; /* No engine/worker until a later START from the UI owner. */
 }
