@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R294, solo PC:** [DoomPlay reutilizable preparado](docs/doom-reusable-physical-plan-r294.md).
+Oculta controles al salir y permite volver a iniciar tras cleanup. Paquete de
+28,8KB reutiliza el ELF/WAD físico existente;53casos Lua y paquete/gates pasan.
+Instalación y dos ciclos físicos pendientes de revisión. Selector aún no validado.
+
 **Actual R293: DOOM real ejecutado en Redmi Watch4 M2315W1 stock.**
 [Primer resultado físico](docs/doom-first-run-result-r293.md): el usuario jugó,
 confirmó controles y EXIT→CLOSED. Volvió a su esfera desde Ajustes, con menús y

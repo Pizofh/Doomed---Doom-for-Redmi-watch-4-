@@ -1,5 +1,29 @@
 # Retomar el proyecto
 
+**Actual R294: DoomPlay reutilizable PREPARADO SOLOPC; no autorización física aún.**
+Plan docs/doom-reusable-physical-plan-r294.md. R293realDoom1ciclo+CLOSED conocido;
+normal confirmado, NO repetir preguntas ni comandos físicos por rutina.
+UI nueva rootnoCLICKABLE; gamegroupCLICKABLE/PRESS_LOCK soloactivo, HIDDEN+
+noCLICKABLE enreposo, STARTsolovisibleidle. C/controlador/ELF/WAD originales
+sin cambios. Wrapperreusable sinmarcadeunuso; CRC/RAMcadaSTART,soloREADY/CLOSED,
+ERRORbloquea esaactivación,300ticksSTOP y pageOnPauseSTOP. No contador2usos:
+payloadpermiteSTARTmanualrepetido; planobservadosolo2ciclos.
+NuevoID365219960,DoomPlay,preview4barrasVERDES,28832B,
+SHAf66628fe42ef40e5f69e5348bf52487e849d4047f5fa9506427228aff3430799,
+sourceSHA19d0a8647d0b37404d5c5cd5a53a00c76579cf22a86fcd808a10cac164afa81e.
+Salida artifacts/doom-reusable-r294/package/DoomPlay-id-only.face.
+53casosLuaS3pasan22+20+11:native/UI simulados,WADCRC real, noC nuevoejecutado.
+Pack19recursos/15parts29143wire+512controlpins/gatepass;R291pinsintactospass.
+Prepare r294PASA,helpercerradorebuildSHA13ee615c879a161c59cc04acf564594bc6d566766c0cea6326d9e284841bf2e4.
+GatesNodefalse/variantr167,C#Staticfalse/Largefalse, ningunoabierto.
+Siguienterevisión: UNAinstallr294 inactiva +DOS ciclosusuarioSTART/juego/EXIT,
+selectorporzonaVACÍA sobreSTART→habitual→DoomPlay otra vez SINPCentre ciclos.
+Si falla primerselector/ERROR/noframe/dormidaCHECKING NOsegundociclo/reintento.
+Si autorizado habilitarStatic+r294+C#Static temporal,build/prepare/UNinstall;
+finallyrestaurar/rebuild/testclosed,catalogindependiente. Journalnuevo fijo
+tools/local/pc-rfcomm/doom-reusable-r294.json NOcreado. NO borraroldmarkers/apps.
+Solo commitslocales, no push/CIremota. No afirmar fixselector/relaunchfísico aún.
+
 **Actual R293: DOOM REAL FÍSICO funcionó; ensayo autorizado consumido.**
 docs/doom-first-run-result-r293.md y experiments/doom-runtime-rw4/observations-r293.json.
 Usuario: CHECKING completó, pudojugar, imagenarribapequeña, todosbotonesbien,

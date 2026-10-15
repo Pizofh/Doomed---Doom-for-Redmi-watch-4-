@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R294, solo PC:** [DoomPlay preparado](doom-reusable-physical-plan-r294.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Dos ciclos y reentrada conservan archivos y exigen cleanup | PC / Lua S3 |53casos:22base+20previos+11nuevos | CONFIRMADO SOLO EN PC | Alta para casos | Sí | Native y eventos simulados; no C nuevo ni conexión física |
+| UI deja fondo libre y controles ocultos después de CLOSED | Modelo de hit routing, Lua | Template real, HIDDEN/CLICKABLE/ancestros comprobados | CONFIRMADO SOLO EN PC | Alta para flags | Sí | No prueba apertura del selector stock en RW4 |
+| Paquete nuevo28832B con19recursos/pins y entrada cerrada | Build PC |15partes,29143wire+512control, prepare/test | CONFIRMADO SOLO EN PC | Alta para bytes | Sí | No instalado; no sustituye R291 ni carrier |
+
 **Actual R293:** [Primer DOOM físico reportado](doom-first-run-result-r293.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
