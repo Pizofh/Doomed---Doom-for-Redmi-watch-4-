@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R280, solo PC:** [Sesión grande autenticada y reanudación integradas](docs/doom-upload-session-r280.md).
+22 escenarios pasan con receptor sintético de 4,8 MB: autenticación, envío,
+journal, corte/reanudación y catálogo final. CI preparada; sin Bluetooth ni
+hardware nuevo. Faltan el worker grande y el launcher final para RW4.
+
 **Actual R279, solo PC:** [Extracción persistente y upload grande simulado pasan](docs/doom-large-transfer-r279.md).
 ELF/WAD idénticos tras reset del emulador;2353partes, interrupción y resume
 validados en PC. CI sintética preparada sin assets. Backend RFCOMM y launcher

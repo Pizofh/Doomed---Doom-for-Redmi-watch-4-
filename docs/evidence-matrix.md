@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R280 PC:** [Sesión autenticada de upload grande](doom-upload-session-r280.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Auth v1, install/upload y catálogo funcionan con miles de partes | Receptor sintético PC | 22 escenarios; 2353/1180 partes completas y consultas cifradas tras wrap | CONFIRMADO SOLO EN PC | Alta para integración simulada | Sí | No socket, firmware ni instalación física |
+| Reanudación valida plan, receptor, catálogo y tramo posible | Journal PC y peer sintético | Corte tras 11 entregas posibles; 10 escrituras locales; resume 22462; target/offset ajenos rechazados | CONFIRMADO SOLO EN PC | Alta para casos probados | Sí | Journal de simulación, sin bloqueo físico entre procesos |
+| RegisteredInactive demuestra el contenido extraído en RW4 | Respuesta de catálogo | Solo presencia/selección/flag; informe contentVerified=false | SIN EVIDENCIA | Pendiente | No | MD5/CRC del receiver PC no prueban almacenamiento físico |
+| El perfil grande permite conectar al reloj | Entradas propias | Solo endpoint PC de un uso; sin backend físico nuevo; gates anteriores pasan | REFUTADO para R280 | Alta local | Sí | Presupuesto anterior 32 KB/96 frames intacto |
+
 **Actual R279 PC:** [Extracción y transferencia grande simulada](doom-large-transfer-r279.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

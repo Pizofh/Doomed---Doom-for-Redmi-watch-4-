@@ -1,5 +1,26 @@
 # Retomar el proyecto
 
+**Actual R280 PC: sesión autenticada grande integrada, 22 escenarios pasan.**
+[Detalle y reproducción](doom-upload-session-r280.md).
+Nuevos tools/doom-upload-pc-session.mjs, doom-upload-pc-simulator.mjs,
+test-doom-upload-pc-session.mjs. Solo endpoint PC propio congelado y de un uso;
+sin PrivatePipe/backend físico nuevo. Auth v1/modelo/FW/catálogo antes de
+install/upload; serial &255 compartido MASS/PROTO, nonce counter separado.
+Presupuesto wire completo +8192, 32 comandos/4096 partes. Caps físicos intactos.
+Journal JSONL write/fsync por lote32, padre Uncertain ligado a targetTag y
+plan/catálogo; sin reintento automático. Resume 22462 tras 11 entregas posibles
+y 10 escrituras locales pasa 2342 partes. Completo2048:2353 partes/4852711B;
+4080:1180/4830424B. Catálogo RegisteredInactive NO prueba contenido instalado.
+Rechazos de auth/modelo/FW/ID/MD5/offset/chunk, entrada ausente/activada/no
+retirable, pérdida de catálogo, cierre fallido/deadline cubiertos.
+Resultado artifacts/doom-upload-session-r280/result-1792078932564.json.
+Tests anteriores Xiaomi y gates pasan 0 sockets. CI job large-file-model
+extendido; ejecución remota no realizada. Sin acceso nuevo a VM/USB/BT/reloj.
+Próximo: worker grande separado + supervisor/IPC sintético. Después launcher
+RW4/ruta WAD persistente/preflight memoria. No repetir motor/UI ya validados.
+El carrier sigue inerte, ELF RW4 con WAD placeholder. No payload físico nuevo
+autorizado; R270 último ensayo físico. Estado VM del bloque R279 no cambiado.
+
 **Actual R279 PC: extracción/reset y modelo upload grande pasan; CI preparada.**
 [Detalle](doom-large-transfer-r279.md). NOhardware/NObackendgrandeconectado.
 tools/doom-assets-emulator-r279.mjs install|verify: carrierR278 instaladoen
