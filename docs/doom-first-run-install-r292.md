@@ -1,5 +1,10 @@
 # R292: DoomRun instalado; ensayo manual pendiente
 
+**Actualización R293:** ensayo manual completado: juego/controles y CLOSED
+reportados; retorno habitual desde Ajustes y menús/corona normales. Selector
+por pulsación larga falló tras EXIT. [Resultado completo](doom-first-run-result-r293.md).
+El resto conserva el registro histórico de instalación, no un ensayo pendiente.
+
 El usuario autorizó un ensayo R291 y confirmó poder observar el reloj con
 batería≥50%. Se ejecutó UNA instalación del paquete fijado31544bytes,
 ID365219961, SHA256

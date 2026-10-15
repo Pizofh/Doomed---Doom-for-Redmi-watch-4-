@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R293:** [Primer DOOM físico reportado](doom-first-run-result-r293.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| DOOM original corre con render y controles | M2315W1/FW2.2.86 stock | Usuario completó CHECKING y reportó juego/imagen superior/todos los botones | CONFIRMADO EN RW4 | Alta para ensayo observado | Sí, usuario | Un ciclo; sin FPS/RAM numéricos ni grabación |
+| EXIT termina CLOSED y permite retorno desde Ajustes | Unidad física | Estado mostrado y retorno/menús/corona confirmados | CONFIRMADO EN RW4 | Alta para observación | Sí, usuario | Cleanup inferido del controlador; sin consulta nativa independiente posterior |
+| Selector por pulsación larga queda accesible tras EXIT | Unidad física, DoomRun R291 | Usuario tuvo que volver mediante Ajustes | REFUTADO | Alta para este ensayo | Sí, usuario | Posible captura de contactos por UI persistente; causa pendiente |
+| Puede relanzarse Doom sin PC/reinstalación | Unidad física | Launcher de ensayo consume una marca de uso; no segundo arranque | SIN EVIDENCIA | Pendiente | No | Archivos persistentes presentes; falta launcher reutilizable y validación |
+
 **Actual R292:** [DoomRun instalado inactivo](doom-first-run-install-r292.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

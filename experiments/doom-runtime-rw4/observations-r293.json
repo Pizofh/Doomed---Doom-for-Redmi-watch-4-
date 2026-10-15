@@ -1,0 +1,22 @@
+{
+  "checkpoint": "R293",
+  "device": "M2315W1",
+  "firmware": "2.2.86",
+  "source": "User report after the single authorized DoomRun R291 trial",
+  "launcherId": "365219961",
+  "carrierId": "365219963",
+  "checkingCompletedReported": true,
+  "gameplayAndTopDisplayReported": true,
+  "allButtonsWorkingReported": true,
+  "exitStatusReported": "CLOSED",
+  "longPressWatchfaceSelectorWorkedAfterExit": false,
+  "returnedThroughSettings": true,
+  "usualWatchfaceRestored": true,
+  "crownAndMenusNormalReported": true,
+  "nativeCleanupIndependentlyQueried": false,
+  "fpsMeasured": false,
+  "runtimeMemoryMeasuredOnPhysicalDevice": false,
+  "secondLaunchAttempted": false,
+  "relaunchWithoutPcVerified": false,
+  "newHardwareCommandsAfterReport": false
+}

@@ -1,5 +1,22 @@
 # Retomar el proyecto
 
+**Actual R293: DOOM REAL FÍSICO funcionó; ensayo autorizado consumido.**
+docs/doom-first-run-result-r293.md y experiments/doom-runtime-rw4/observations-r293.json.
+Usuario: CHECKING completó, pudojugar, imagenarribapequeña, todosbotonesbien,
+EXIT→CLOSED. Pulsaciónlarga NO abrióselector; volviódesdeAjustes y esfera/
+corona/menúsnormales confirmados. NO pedir confirmación normal otra vez.
+NO comandos físicos despuésdelreporte, NO reabrir/repetirSTART/borrarmarca,
+instalar/reiniciar/alterarvínculoautomáticamente. GatesPCcerrados comoR292.
+CLOSED sugierepostcondicionesJOIN/cleanup/rmmod/nodos del controlador; NOhay
+consultaregistronativoindependiente. No inventarFPS/RAM/latencia/estabilidad.
+Render320x200arriba previsto, nofull390x450. Unciclo observado, faltaMVPgeneral.
+Siguientecheckpoint PC: launcherREUTILIZABLE conliberacióncontactos/selector
+trasEXIT y dosciclos usandoELF/WAD existentes sinreinstalar. Nuevo plan+
+aprobación antesdeotromódulo/ensayofísico. HipótesisUI:root/controlesCLICKABLE/
+PRESS_LOCK visiblesdespuésCLOSED; HoldPadocultajuego+rootnoCLICKABLE alreposo.
+Reproducir/validarantesdeatribuircausa. No modificarpayloadR291yaaprobado ni
+presumir susegundoarranque; mantenerpinsyartefactoshistóricos. No push/CIremota.
+
 **Actual R292: DoomRun instalado INACTIVO; ensayo MANUAL ya autorizado, pendiente respuesta.**
 docs/doom-first-run-install-r292.md. Usuario aprobó UN ensayoR291≥50%observando.
 UNinstallr291real: RegisteredInactive,16parts25frames32191tx,close/workerexittrue0.

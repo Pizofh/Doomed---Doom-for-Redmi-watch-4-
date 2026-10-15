@@ -1,9 +1,10 @@
 # DOOM en Redmi Watch 4
 
-**Actual R292:** [DoomRun instalado; primer arranque manual pendiente](docs/doom-first-run-install-r292.md).
-Ensayo autorizado: launcher31,5KB registrado inactivo,12entradas previas
-preservadas y gates PC cerrados. Usuario tiene instrucciones para START una
-vez, CHECKING/E1M1/EXIT y retorno habitual. Ejecución física aún sin confirmar.
+**Actual R293: DOOM real ejecutado en Redmi Watch4 M2315W1 stock.**
+[Primer resultado físico](docs/doom-first-run-result-r293.md): el usuario jugó,
+confirmó controles y EXIT→CLOSED. Volvió a su esfera desde Ajustes, con menús y
+corona normales. Queda corregir el selector por pulsación larga después de
+salir y habilitar ciclos de juego sin reinstalar. Sin métricas de FPS todavía.
 
 **Actual R290:** [Paquete Doom de4,8MB instalado e inactivo en el reloj](docs/doom-large-install-result-r290.md).
 2362partes transferidas; consulta independiente confirma las11esferas previas
