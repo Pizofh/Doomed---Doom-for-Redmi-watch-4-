@@ -1,5 +1,9 @@
 # R294: DoomPlay reutilizable, preparado en PC
 
+**Actualización R295:** instalación y dos ciclos autorizados; instalación
+completada inactiva, resultados manuales pendientes. [Registro R295](doom-reusable-install-r295.md).
+No repetir la instalación. El resto conserva el plan aprobado.
+
 **Pendiente de autorización. No se ha instalado ni ejecutado en el reloj.**
 La siguiente prueba agrupa una instalación y dos ciclos manuales de juego,
 EXIT y retorno al selector, sin reinstalación ni intervención del PC entre

@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**Actual R295:** [DoomPlay instalado](doom-reusable-install-r295.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| DoomPlay28832B registrado inactivo;13entradas previas intactas | M2315W1/FW2.2.86 |15MASS,RegisteredInactive+catálogo independiente14entradas | CONFIRMADO EN RW4 | Alta para catálogo | Sí | Gates restaurados; no selección desde PC |
+| Selector restaurado y dos ciclos sin reinstalar | Unidad física | Ensayo autorizado e instrucciones enviadas | SIN EVIDENCIA | Pendiente | No | No inferir resultado de la instalación |
+
 **Actual R294, solo PC:** [DoomPlay preparado](doom-reusable-physical-plan-r294.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

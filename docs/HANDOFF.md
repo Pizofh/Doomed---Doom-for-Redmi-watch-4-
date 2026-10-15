@@ -1,5 +1,24 @@
 # Retomar el proyecto
 
+**Actual R295: DoomPlay instalado INACTIVO, DOS ciclos manuales YA autorizados pendientes.**
+docs/doom-reusable-install-r295.md. UNinstallr294real completó RegisteredInactive:
+15parts24frames29460tx,close/workerexittrue0. Finally restauróNodefalse/r167 y
+C#Staticfalse,helperrebuild+testpackageclosedPASÓ;Largefalseintacto.
+HelpercerradoSHA9bb86dc936d00f2e8c5adbd64eabbd842138a191b90fb6b1f86654da3d73cb34.
+Consultaindependiente14entradas,13previasIDs/flags/selecciónintactos,
+carrier365219963presente,DoomPlay365219960inactivo/eliminable,1activa0unknown.
+Journal tools/local/pc-rfcomm/doom-reusable-r294.json EXISTE no borrar/recrear.
+Artifacts/doom-reusable-physical-r295/install-result.json(posibleUTF16LE),catalog-after.json.
+Asyncyaenviada: elegirDoomPlay4barrasVERDES(noDoomRun),ciclo1START1/CHECKING
+despierto/juego/EXITantes30s/CLOSED; longpresszonaVACÍA sobreSTART→selector,
+habitual→DoomPlay,ciclo2igualSINPC/reinstalar,volverhabitualmenús/corona.
+Si primerselector/UI/ERROR/dormidaCHECKING falla NOciclo2/reabrir/insistir;
+volverdesdeAjustessiresponde. Esperarresultados, NO pedirotraautorización para
+esosmismos2ciclosyaaprobados. No afirmarseleccionfix/relaunch todavía.
+GatesPCcerrados NOdeshabilitanDoomPlayinstalado,permiteSTARTmanualtraschecks.
+Noejecutarmáscomandosporrutina. R293realDoom1ciclo sigueevidenciabase.
+Solo commitslocales NO push/CIremota. Histórico debajo.
+
 **Actual R294: DoomPlay reutilizable PREPARADO SOLOPC; no autorización física aún.**
 Plan docs/doom-reusable-physical-plan-r294.md. R293realDoom1ciclo+CLOSED conocido;
 normal confirmado, NO repetir preguntas ni comandos físicos por rutina.
