@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R276, solo PC:** [Doom real integrado con el nuevo backend RAM](docs/doom-ram-engine-r276.md).
+E1M1, avance, ambos giros, disparo, pausa/reanudación y dos START/EXIT pasan
+con hilo real y libc privada. Ambos liberan14/14 reservas y descargan el módulo.
+Pico del runtime6,28MiB; no equivale a RAM total. Sin nuevo ensayo físico.
+
 **Actual R275, solo PC:** [Frames desde RAM ya se ven en LVGL y salen limpiamente](docs/doom-ram-image-ui-r275.md).
 Dos ciclos visuales pasan en S3 con adaptador explícito: cuatro frames, sin archivos
 por frame y recursos retirados. Se corrigió el consumo anticipado por prefetch.

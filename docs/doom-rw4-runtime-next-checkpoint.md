@@ -1,5 +1,11 @@
 # Siguiente checkpoint: runtime de DOOM real en RW4
 
+Actualización R276: la [integración PC del motor y el backend RAM nuevo](doom-ram-engine-r276.md)
+ya pasa E1M1, controles, pausa y dos salidas con JOIN/unload. Se completó esa
+parte de la preparación. Quedan recogida tras salida inesperada/reentrada y
+contratos específicos RW4 de filesystem/caché/memoria/rutaWAD, antes del plan
+físico agrupado. Este documento no autoriza enviar el ELF PC al reloj.
+
 R270 cierra el ensayo del puente: carga de C, lectura, controles, STOP y retirada
 del módulo con su nodo fueron probados en M2315W1/FW2.2.86. El usuario confirmó
 diez verdes en ExitC y uso normal de menús/esferas. No implica DOOM físico ni

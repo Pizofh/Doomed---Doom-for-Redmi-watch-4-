@@ -1,5 +1,36 @@
 # Retomar el proyecto
 
+**Actual R276 PC: Doom real + RAM image + pthread + libc privada pasan.**
+[Resultado y reproducción](doom-ram-engine-r276.md). Sin hardware nuevo.
+Commit posterior a0583d89. Builder tools/build-doom-ram-s3.mjs recompila80C
+originales paraARMv7-A/Thumb/soft con libreríasv7-a/nofp fijadas y runtime
+generado R271; no reutiliza motor S3 hard-float. ELF610484B/SHA
+4cc023ce788a69605c1265b874dc4926e27c11b1673b133f79c95939a330af2a.
+S3 host adapta fops32→40; attrs12 confirmados DWARF, clock_gettime timespec16
+→ticks100us. Misma fuente adapter/transport/image-view/glue del candidato RW4.
+UI experiments/doom-runtime-rw4/doom-ram-ui.lua, modo package doomram.
+Helper tools/doom-ram-s3-emulator.mjs stage|test|cleanup usa guard loopback.
+Resultado artifacts/emulator/doom-ram-test-1792074005969/result.json:
+E1M1, avance, izquierda/derecha, disparo50→47, pausa neutral/resume pasan.
+Dos instancias: threads246/402, pico6583985B,14alloc/14free,cleanup0,
+reason1 STOP; módulo y3nodos retirados.114/29 presentaciones, NO mediciónFPS.
+No archivos de frames. Capturas inicial/trascontroles inspeccionadas.
+Primertest1792073804463 fallóLeftMissing: DEFOCUSED del botón anterior
+cancelaba el nuevo. Corregido: solo libera si mask==su key. EXIT14/14 sinreset.
+ELFno cambió al corregirLua. Otrotest fallópreSTART OwnFaceNotActive por
+transiciones rápidas; Silent accidental restauradoOFF. Usar650ms entrepantallas,
+verificar screenshots antes seleccionar. Selectorprev: swipe150→360 evitaBACK
+desde bordeizq; Storage2antesUIProbe. No usar20→360para iratrásencarrusel.
+Cleanup final retira /tmp/rw4-doom-ram-s3.elf y .wad trasverificarhashes;
+queda UIProbe365799903 DOOM RAM Closed, sin módulos/nodos. DirectorioDoom
+persistenteanteriorconservado. RequierestageparaSTART, NOejecutarloahora.
+VMpid11676 seguíaactiva; sesiónhost25093. ResetVMsinmódulosantesdestagepor
+pantallareposo, ninguno duranteDoom o salida. No consultarUSB/BTparaPC.
+Siguiente: completar recogida al reentrar traspageclose/GC enPC ycerrarcontratos
+RW4 filesystem/cache/backend/RAM/rutaWAD antesensayo físicoagrupado.
+No repetirprobesviejos. R270 sigueúltimofísico:234retirado/relojnormal.
+Sin nuevaautorizaciónfísica. CandidatoRW4 R275 no modificado/NOinstallable.
+
 **Actual R275 PC: frames RAM visibles en LVGL S3; 2ciclos START/NEXT/EXIT pasan.**
 [Resultado/reproducción/límites](doom-ram-image-ui-r275.md). No hardware.
 UI fixture experiments/doom-runtime-rw4/image-ui.lua +image-ui-probe.c:

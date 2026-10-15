@@ -1,5 +1,15 @@
 # Matriz de evidencia
 
+**Actual R276 PC:** [Motor real con el backend RAM nuevo](doom-ram-engine-r276.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| El nuevo puente ejecuta Doom original con WAD, imagen y controles | S3 exacto, recompilación soft-float y adaptadores explícitos | E1M1, coordenadas, dos giros, munición50→47, capturas inspeccionadas | CONFIRMADO EN EMULADOR | Alta | Sí | No ELF ni decoder físico RW4 |
+| Hilo real, libc privada y salida explícita pueden integrarse | S3 exacto | Dos STOP/finished/JOIN/rmmod,14/14 reservas, nodos ausentes | CONFIRMADO EN EMULADOR | Alta para salida explícita | Sí | No prueba aislamiento ni retirada desde GC |
+| Se puede abrir de nuevo sin reinstalar ELF/WAD | S3 exacto, launcher activo | Segundo START carga instancia nueva de los mismos archivos | CONFIRMADO EN EMULADOR | Alta | Sí | Archivos en tmpfs en este ensayo; persistencia física pendiente |
+| Pico del runtime de Doom es6.583.985bytes en este port | S3 exacto, dos instancias | Stats posteriores a JOIN | CONFIRMADO EN EMULADOR | Alta para reservas contabilizadas | Sí | Excluye BSS/código/stack/cachés; no RAM libre RW4 |
+| Salida inesperada/GC ya recoge todos los recursos del port nuevo | Nuevo launcher | GC solo pide STOP y conserva módulo | SIN EVIDENCIA | Pendiente | No | Reentrada con recogida pendiente |
+
 **Actual R275 PC:** [Presentación del nodo RAM, caché y EXIT](doom-ram-image-ui-r275.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
