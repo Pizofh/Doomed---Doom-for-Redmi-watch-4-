@@ -1,5 +1,27 @@
 # Retomar el proyecto
 
+**Actual R291: primer arranque Doom PREPARADO SOLOPC; pendiente autorización.**
+Plan docs/doom-first-run-physical-plan-r291.md. No hardware nuevo; R290normal.
+DoomRun ID365219961,31544B,SHA58f8a9b5d62cd1ac6851be1153029539771e2eaac13c0b5860d9c41e23b61698,
+sourceSHA ddf70b83387d6fe554bcb965f93a8e075e3f8b6bafd13605f277fcd5a75480dd.
+Salida artifacts/doom-first-run-r291/package-final/; borradorespackageyroot NOusar.
+Nuevo tinyprofile UIpropia, carga ELF/WADde365219963sinreenviar4.8MB.
+CRC32stream8192porTimer100ms,checksheaders/size,RAM UMEMfree6467285/largest4194320,
+marcaunuso14bytesANTESchecks, STARThumanmanual,300ticks~30sSTOP, pageOnPauseSTOP,
+salida JOIN/cleanup/identity/rmmod existente. CooperativoNOwatchdog;ELF120scooperativo.
+42casosLuaS3pasan(22base+20first),WADrealCRC4196020/371943786; native/UI simulated.
+No C nuevo ejecutado siquieraenVMenestaetapa. Testpackage19recursos/16partes/
+31874wire+512controlpinsyclosedgatepasa. prepare r291 PASA, helperrebuildcerrado.
+staticSpec r291 añadido; PHYSICAL_WRITESfalse/REVIEWED_VARIANTr167 y C#Staticfalse;
+gatesgrandesfalse. NO install/activar/C físico hasta aprobación explícita.
+Siguiente pregunta concreta UN ensayo installr291(inactivo)+selecciónSTART1,
+CHECKING~1minmantenerpantalla, E1M1/controlesbrevesEXIT, volverhabitual.
+Si aprobado: sóloStaticgatevariant=r291+C#Statictrue temporal,build/prepare/
+UNinstall,finallyrestaurar/rebuild/testclosed, catálogoindependiente.
+Journalnuevo tools/local/pc-rfcomm/doom-first-run-r291.json (no creadooffline).
+Si rechaza/corta NOretry/resume. Marcausonoeliminar. No garantías RAM/sandbox/
+recovery; riesgosOOM/panic/corrupción, planexpreso. Solo commitslocales NO push.
+
 **Actual R290: paquete COMPLETO instalado INACTIVO; reloj normal confirmado.**
 docs/doom-large-install-result-r290.md. Usuario autorizó UNenvíoR289 y observó.
 UN retry-no-data real terminó RegisteredInactive: expectedModel/FWtrue,

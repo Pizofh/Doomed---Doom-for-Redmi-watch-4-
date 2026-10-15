@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R291, solo PC:** [DoomRun preparado](doom-first-run-physical-plan-r291.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Launcher pequeño reutiliza ELF/WAD y limita un ensayo | PC / Lua S3 | 42casos, marca propia, CRC/RAM, STOP300ticks/EXIT/pageOnPause | CONFIRMADO SOLO EN PC | Alta para casos | Sí | Native/UI simulados; Timer no es watchdog |
+| CRC32 completo del WAD coincide entre Node y Lua | Archivo shareware en S3 | Lectura real4196020bytes,CRC371943786 y vectores conocidos | CONFIRMADO EN EMULADOR | Alta para ese archivo | Sí | No autentica contenido arbitrario ni valida los archivos físicos RW4 |
+| Paquete nuevo31544B y19recursos exactos, gate cerrado | Build PC | EasyFace/pins/readback,16partes,31874bytes+512control | CONFIRMADO SOLO EN PC | Alta para bytes | Sí | No instalado ni C nuevo ejecutado en RW4 |
+| RAM/privilegios/salida suficientes para Doom físico | M2315W1 | Solo presupuesto y contratos previos parciales | SIN EVIDENCIA | Pendiente | No | Primer arranque requiere revisión del riesgo y observación |
+
 **Actual R290:** [Instalación grande completada](doom-large-install-result-r290.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

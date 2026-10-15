@@ -11,10 +11,12 @@ function label(text,width,background){
  return png(width,20,(x,y)=>{x-=Math.floor((width-text.length*12)/2);const letter=Math.floor(x/12),gx=Math.floor((x%12)/2),gy=Math.floor((y-3)/2),g=glyphs[text[letter]];
   return g&&gx>=0&&gx<5&&gy>=0&&gy<7&&(g[gy]&(1<<(4-gx)))?[255,255,255]:background;});
 }
-export function launcherAssets(){
+export function launcherAssets({firstRun=false}={}){
  const output={title:label('DOOM',48,[16,32,48])};
  for(const name of ['READY','LOADING','PLAYING','PAUSED','STOPPING','CLOSED','ERROR','BLOCKED','RECOVERING'])output[name.toLowerCase()]=label(name,180,[16,32,48]);
+ if(firstRun)output.checking=label('CHECKING',180,[16,32,48]);
  for(const name of ['START','PAUSE','EXIT','UP','LEFT','RIGHT','FIRE'])output[name.toLowerCase()]=label(name,96,[36,92,128]);
  output.preview=png(390,450,(x,y)=>x>=147&&x<243&&y>=170&&y<266&&((x-147)%24<16)?[255,160,0]:[16,32,48]);
+ if(firstRun)output.preview=png(390,450,(x,y)=>x>=130&&x<260&&y>=155&&y<285&&(y-155)%26<16?[0,220,220]:[16,32,48]);
  return output;
 }

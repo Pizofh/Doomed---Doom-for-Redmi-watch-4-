@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R291, solo PC:** [Primer arranque físico preparado, pendiente de revisión](docs/doom-first-run-physical-plan-r291.md).
+Launcher DoomRun de31,5KB reutiliza ELF/WAD instalados. Verifica archivos/RAM,
+permite un START y pide salida a~30s.42casos Lua y paquete/gates pasan.
+No se ha instalado DoomRun ni ejecutado Doom en el reloj; permisos cerrados.
+
 **Actual R290:** [Paquete Doom de4,8MB instalado e inactivo en el reloj](docs/doom-large-install-result-r290.md).
 2362partes transferidas; consulta independiente confirma las11esferas previas
 y la selección conservadas. Usuario confirma funcionamiento normal; gates
