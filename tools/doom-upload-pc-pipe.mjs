@@ -8,7 +8,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const scenarios=new Set(['ok','partial','bridge','send-zero','send-error','idle-timeout','session-timeout','send-hang','receive-eof','close-failure']);
 const fail=()=>{throw Error('LargePcPipeRefused');};
 function hash(file){const st=fs.lstatSync(file);if(!st.isFile()||st.isSymbolicLink())fail();return createHash('sha256').update(fs.readFileSync(file)).digest('hex');}
-function executable(){
+export function reviewedLargeExecutable(){
  const directory=path.join(root,'artifacts/pc-rfcomm'),file=path.join(directory,'Rw4PcRfcomm.exe');
  const meta=JSON.parse(fs.readFileSync(path.join(directory,'build.json'),'utf8'));
  const sources=['Probe.cs','WinSockTransport.cs','PhysicalWorker.cs','SessionWorker.cs','LargeSessionWorker.cs','SelfTests.cs'];
@@ -20,7 +20,7 @@ export class LargeUploadPcPipe{
  constructor(scenario='ok',{operationMs=20000,openMs=25000,closeMs=2000,limitMs=675000}={}){
   if(!scenarios.has(scenario)||![operationMs,openMs,closeMs,limitMs].every(n=>Number.isInteger(n)&&n>=20&&n<=675000)||operationMs>20000||openMs>25000||closeMs>2000)fail();
   this.scenario=scenario;this.operationMs=operationMs;this.openMs=openMs;this.closeMs=closeMs;
-  this.pipe=new PrivatePipe(executable(),'PC_ONLY_R281',{workerProfile:'large-pc-r281',simulationScenario:scenario,limitMs});
+  this.pipe=new PrivatePipe(reviewedLargeExecutable(),'PC_ONLY_R281',{workerProfile:'large-pc-r281',simulationScenario:scenario,limitMs});
   this.busy=false;this.closing=false;this.txHash=createHash('sha256');this.txBytes=0;
  }
  async operation(fn,ms){

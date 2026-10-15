@@ -1,13 +1,15 @@
-// R280: authenticated large-transfer integration, restricted to owned PC peers.
-// No socket/ADB/process factory and no physical entry point.
+// Shared authenticated transfer core. PC peer and reviewed physical capability
+// have distinct branded entries; physical creation remains gated in its module.
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash,randomUUID} from 'node:crypto';
 import {XiaomiSession} from './pc-rfcomm-session.mjs';
 import {command,uint,bytes,fields,one,readDeviceInfo,readWatchfaces} from './rw4-xiaomi-protocol.mjs';
-import {packageCopy,uploadLayout,uploadToPcAdapter} from './doom-large-upload.mjs';
+import {packageCopy,uploadLayout,uploadToPcAdapter,uploadToReviewedAdapter} from './doom-large-upload.mjs';
 import {pcPeerAccess} from './doom-upload-pc-simulator.mjs';
+import {DoomDeploymentJournal,deploymentIdentity,disposeDeploymentIdentity} from './doom-deployment-journal.mjs';
+import {claimReviewedDoomEndpoint} from './doom-deployment-physical.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const directory=path.join(root,'artifacts/doom-upload-session-r280');
@@ -40,7 +42,7 @@ class PcJournal{
 }
 class PcLargeSession extends XiaomiSession{
  constructor(peer,plan){
-  super(peer.link,{clock:peer.clock,sleep:peer.wait,phoneNonce:()=>Buffer.alloc(16,71)});
+  super(peer.link,{clock:peer.clock,sleep:peer.wait,...(peer.physical===true?{}:{phoneNonce:()=>Buffer.alloc(16,71)})});
   this.plan=plan;this.txBytes=0;this.txLimit=0;this.massPhase=false;
   // Initial auth/queries/ACKs plus bounded post-upload catalogue polling.
   this.commandFrames=0;this.massFrames=0;this.phase='New';
@@ -69,17 +71,38 @@ class PcLargeSession extends XiaomiSession{
 
 // The only accepted endpoint is minted by the in-process simulator. Passing
 // PrivatePipe, a link factory, a hostname or a copied scope string is refused.
-export async function runDoomUploadPc(endpoint,plan,secret,{resumeFrom=null}={}){
- let peer,client,journal,parent,upload=null,report={checkpoint:'R280',simulated:true,physicalEnabled:false,status:'StoppedNeedsReview',registeredVerified:false,contentVerified:false,selectedByClient:false,bluetoothOperationRequested:false,watchCommandRequested:false};
+export async function runDoomUploadPc(endpoint,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false}={}){
+ return runLargeUpload(()=>pcPeerAccess(endpoint),plan,secret,{resumeFrom,deploymentDirectory,deploymentResume});
+}
+export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=false}={}){
+ return runLargeUpload(()=>{
+  if(plan?.kind!=='review-low-memory-native-disabled')refuse();
+  return claimReviewedDoomEndpoint(endpoint,{resume});
+ },plan,secret,{deploymentResume:resume});
+}
+async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false}={}){
+ let peer,client,journal,parent,identity,upload=null,report={checkpoint:'R280',simulated:true,physicalEnabled:false,status:'StoppedNeedsReview',registeredVerified:false,contentVerified:false,selectedByClient:false,bluetoothOperationRequested:false,watchCommandRequested:false};
  try{
-  peer=pcPeerAccess(endpoint);const data=packageCopy(plan),md5=digest(data);
+  peer=acquire();const data=packageCopy(plan),md5=digest(data);
+  if(peer.physical)Object.assign(report,{checkpoint:'R286',simulated:false,physicalEnabled:true});
   if(!Buffer.isBuffer(secret)||secret.length!==16)refuse();
-  if(resumeFrom)parent=parentRecord(resumeFrom,plan,peer.targetTag);
-  journal=new PcJournal(plan,peer.targetTag,resumeFrom);
+  if(deploymentDirectory!==null||peer.physical){
+   if(resumeFrom!==null)refuse();
+   identity=deploymentIdentity(peer.physical?peer.journalTarget:'pc:'+peer.targetTag,secret);
+   journal=new DoomDeploymentJournal(plan,identity,{...(deploymentDirectory!==null?{directory:deploymentDirectory}:{}),resume:deploymentResume});
+   parent=journal.resumeRecord;
+  }else{
+   if(deploymentResume)refuse();
+   if(resumeFrom)parent=parentRecord(resumeFrom,plan,peer.targetTag);
+   journal=new PcJournal(plan,peer.targetTag,resumeFrom);
+  }
   client=new PcLargeSession(peer,plan);
   // Worst-case supported 2048-byte parts, plus <=32 small control frames.
   client.txLimit=uploadLayout(plan,{status:0,md5,chunkSize:2048,resumePosition:0}).wireBytes+8192;
-  await peer.link.opened();client.phase='Authenticating';await client.authenticate(secret,[1]);
+  if(peer.physical)report.bluetoothOperationRequested=true;
+  await peer.link.opened();client.phase='Authenticating';
+  if(peer.physical)report.watchCommandRequested=true;
+  await client.authenticate(secret,[1]);
   const info=readDeviceInfo(await client.query(2,2));
   if(info.modelRecognized!==true||info.firmware!=='2.2.86')refuse();
   const before=catalog(readWatchfaces(await client.query(4,0)));
@@ -97,8 +120,8 @@ export async function runDoomUploadPc(endpoint,plan,secret,{resumeFrom=null}={})
   if(client.txBytes+layout.wireBytes+6*32>client.txLimit)refuse();
   journal.save({status:'Uploading'});client.phase='Uploading';client.massPhase=true;
   const initialSerial=client.serial;
-  upload=await uploadToPcAdapter(plan,ack,{
-   scope:'pc-upload-simulator',key:client.keys.tx,noncePrefix:client.keys.txNonce,
+  upload=await (peer.physical?uploadToReviewedAdapter:uploadToPcAdapter)(plan,ack,{
+   scope:peer.physical?'reviewed-doom-deployment':'pc-upload-simulator',...(peer.physical?{peer}:{}),key:client.keys.tx,noncePrefix:client.keys.txNonce,
    initialSerial,txBudgetBytes:layout.wireBytes,clock:peer.clock,wait:peer.wait,
    checkpoint:record=>journal.save({upload:record}),send:frame=>client.send(frame)
   },parent?.upload??null);
@@ -121,7 +144,7 @@ export async function runDoomUploadPc(endpoint,plan,secret,{resumeFrom=null}={})
   journal.save({status:report.status,upload});client.phase='Finished';
  }catch(error){
   report.status='StoppedNeedsReview';
-  report.failureReason=new Set(['LargeSessionRefused','DoomLargeUploadRefused','AuthHmacMismatch','UnsupportedProtocol','Timeout','MalformedProtocol','DecryptionFailed','AuthOrQueryRejected']).has(error?.message)?error.message:'LocalFailure';
+  report.failureReason=new Set(['LargeSessionRefused','DoomLargeUploadRefused','DoomJournalRefused','DoomPhysicalGateClosed','AuthHmacMismatch','UnsupportedProtocol','Timeout','MalformedProtocol','DecryptionFailed','AuthOrQueryRejected']).has(error?.message)?error.message:'LocalFailure';
   if(journal){
    // No automatic retry. Preserve the last pre-write bound if delivery is
    // ambiguous, including failures after local MASS completion.
@@ -140,7 +163,9 @@ export async function runDoomUploadPc(endpoint,plan,secret,{resumeFrom=null}={})
     try{const prior=upload??journal?.record.upload;journal?.save({status:'Uncertain',upload:prior?{...prior,status:'Uncertain'}:null});}catch{report.journalSaved=false;}
    }
   }
-  client?.dispose();journal?.close();
+  client?.dispose();
+  try{journal?.close();}catch{report.status='StoppedNeedsReview';report.journalCloseConfirmed=false;}
+  disposeDeploymentIdentity(identity);
  }
  return {...report,phase:client?.phase??'BeforeConnection',journal:journal?path.relative(root,journal.file).replaceAll('\\','/'):null,
   sentFrames:client?.sentFrames??0,txBytes:client?.txBytes??0,massPartsLocallyWritten:upload?.locallyWritten??0,

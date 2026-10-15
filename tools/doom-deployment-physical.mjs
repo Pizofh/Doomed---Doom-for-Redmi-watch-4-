@@ -1,0 +1,46 @@
+// Reviewed-package transport capability. Closed before any worker is created.
+import {PrivatePipe} from './pc-rfcomm-session.mjs';
+import {reviewedLargeExecutable} from './doom-upload-pc-pipe.mjs';
+const PHYSICAL_DEPLOYMENT_REVIEWED=false;
+const PHYSICAL_RESUME_REVIEWED=false;
+const endpoints=new WeakMap(),peers=new WeakSet(),fail=()=>{throw Error('DoomPhysicalGateClosed');};
+export function physicalDoomDeploymentEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED;}
+export function physicalDoomResumeEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_RESUME_REVIEWED;}
+export function isReviewedDoomPeer(peer){return PHYSICAL_DEPLOYMENT_REVIEWED&&peers.has(peer);}
+export function createReviewedDoomEndpoint(address,{resume=false}={}){
+ if(!PHYSICAL_DEPLOYMENT_REVIEWED||typeof resume!=='boolean'||resume&&!PHYSICAL_RESUME_REVIEWED)fail();
+ if(typeof address!=='string'||!/^[A-Fa-f0-9]{12}$/.test(address)||/^0{12}$/.test(address))fail();
+ let pipe=null,busy=false,closing=false,closePromise=null;
+ async function operation(fn,ms){
+  if(busy||closing)fail();busy=true;
+  const timer=setTimeout(()=>pipe?.force('SupervisorDeadline'),ms);
+  try{return await fn();}finally{clearTimeout(timer);busy=false;}
+ }
+ const link=Object.freeze({
+  opened:()=>operation(async()=>{
+   if(pipe)fail();
+   // Lazy creation is essential: journal lock and intent exist before open.
+   pipe=new PrivatePipe(reviewedLargeExecutable(),address,{workerProfile:'large-r281',limitMs:675000});
+   await pipe.opened();
+  },25000),
+  send:b=>operation(()=>{if(!pipe)fail();return pipe.send(b);},20000),
+  read:()=>operation(()=>{if(!pipe)fail();return pipe.read();},20000),
+  close:()=>{
+   if(closePromise)return closePromise;
+   closing=true;
+   closePromise=(async()=>{
+    if(!pipe)return{closeConfirmed:true,workerExitConfirmed:true,workerExitCode:0};
+    if(busy)pipe.force('Cancelled');
+    const timer=setTimeout(()=>pipe.force('SupervisorDeadline'),2000);
+    try{return await pipe.close();}finally{clearTimeout(timer);}
+   })();return closePromise;
+  }
+ });
+ const endpoint=Object.freeze({kind:'reviewed-doom-deployment'});
+ const peer=Object.freeze({link,physical:true,resumeReviewed:resume,journalTarget:'rw4:'+address.toLowerCase(),clock:()=>performance.now(),wait:ms=>new Promise(resolve=>setTimeout(resolve,ms))});
+ peers.add(peer);endpoints.set(endpoint,peer);
+ return endpoint;
+}
+export function claimReviewedDoomEndpoint(endpoint,{resume=false}={}){
+ if(!PHYSICAL_DEPLOYMENT_REVIEWED)fail();const peer=endpoints.get(endpoint);if(!peer||peer.resumeReviewed!==resume)fail();endpoints.delete(endpoint);return peer;
+}

@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R286, solo PC:** [Instalador grande con journal privado integrado](docs/doom-deployment-journal-r286.md).
+33casos pasan con el paquete real y receptor simulado, incluido worker C#.
+Destino/clave/archivo vinculados, lock exclusivo y reanudación explícita.
+[Ensayo físico propuesto](docs/doom-large-install-physical-plan-r286.md): gates cerrados.
+
 **Actual R285, solo PC:** [Candidato RW4 de4MiB compilado y empaquetado](docs/doom-low-memory-candidate-r285.md).
 El presupuesto calcula5,17MiB antes de gastos aún sin medir. Paquete de4,8MB
 con carga nativa bloqueada; siguiente: instalador grande con journal privado.

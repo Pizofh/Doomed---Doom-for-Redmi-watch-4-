@@ -1,8 +1,9 @@
-// PC preparation and injectable upload-stage model ONLY. No connection backend.
+// Package pins and bounded upload algorithm. No connection is opened here.
 // Do not relax the existing probe/session/native-worker limits to use this.
 import {createHash} from 'node:crypto';
 import {crc32} from './static-watchface-transfer.mjs';
 import {ccmEncrypt,packetNonce} from './rw4-xiaomi-protocol.mjs';
+import {isReviewedDoomPeer} from './doom-deployment-physical.mjs';
 const owned=new WeakMap(),hash=(b,a='sha256')=>createHash(a).update(b).digest('hex');
 const refuse=()=>{throw Error('DoomLargeUploadRefused');};
 function mint(b,id,kind){const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher:false,physicalEnabled:false});owned.set(p,b);return p;}
@@ -17,8 +18,12 @@ export function prepareDoomLauncher(raw){
  // RW4 candidate still has allow_native=false. This factory opens no transport.
  return mint(Buffer.from(raw),'365219963','review-launcher-native-disabled');
 }
+export function prepareDoomLowMemory(raw){
+ if(!Buffer.isBuffer(raw)||raw.length!==4827044||hash(raw)!=='d0fc0d8257e9a384b42129f312de99570b49dade455511d0fc5fddd80fecf048'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365219963'||raw[49]!==0)refuse();
+ return mint(Buffer.from(raw),'365219963','review-low-memory-native-disabled');
+}
 // Reproducible, owned non-game bytes for public CI. Never an installable face.
-export function syntheticDoomUpload(size=4807680){if(![4807680,4827012].includes(size))refuse();const b=Buffer.alloc(size);for(let i=0;i<b.length;i++)b[i]=(i*29+(i>>>8))&255;Buffer.from('PC ONLY UPLOAD FIXTURE').copy(b);return mint(b,'365799998','synthetic-only');}
+export function syntheticDoomUpload(size=4807680){if(![4807680,4827012,4827044].includes(size))refuse();const b=Buffer.alloc(size);for(let i=0;i<b.length;i++)b[i]=(i*29+(i>>>8))&255;Buffer.from('PC ONLY UPLOAD FIXTURE').copy(b);return mint(b,'365799998','synthetic-only');}
 export function packageCopy(plan){const b=owned.get(plan);if(!b)refuse();return Buffer.from(b);}
 export function uploadStream(plan,offset=0){
  const b=owned.get(plan);if(!b||!Number.isInteger(offset)||offset<0||offset>=b.length)refuse();
@@ -46,9 +51,17 @@ export function massFrame(part,key,prefix,serial){
  Buffer.from('badcfe','hex').copy(b);b[3]=5;b[4]=128;b.writeUInt16LE(cipher.length+3,5);b[7]=2;b[8]=serial&255;b[9]=1;cipher.copy(b,10);b[b.length-1]=239;return b;
 }
 export async function uploadToPcAdapter(plan,ack,api,previous=null){
+ if(api?.scope!=='pc-upload-simulator')refuse();
+ return uploadWithAdapter(plan,ack,api,previous);
+}
+export async function uploadToReviewedAdapter(plan,ack,api,previous=null){
+ if(api?.scope!=='reviewed-doom-deployment'||!isReviewedDoomPeer(api.peer))refuse();
+ return uploadWithAdapter(plan,ack,api,previous);
+}
+async function uploadWithAdapter(plan,ack,api,previous=null){
  const layout=uploadLayout(plan,ack,previous);
- // Deliberately no physical adapter is supplied by this module or any CLI.
- if(api?.scope!=='pc-upload-simulator'||typeof api.send!=='function'||typeof api.checkpoint!=='function'||typeof api.wait!=='function'||typeof api.clock!=='function'||!Number.isSafeInteger(api.initialSerial)||api.initialSerial<0||api.txBudgetBytes!==layout.wireBytes||!Buffer.isBuffer(api.key)||api.key.length!==16||!Buffer.isBuffer(api.noncePrefix)||api.noncePrefix.length!==4)refuse();
+ // Transport authority is checked by the separate entry points above.
+ if(typeof api.send!=='function'||typeof api.checkpoint!=='function'||typeof api.wait!=='function'||typeof api.clock!=='function'||!Number.isSafeInteger(api.initialSerial)||api.initialSerial<0||api.txBudgetBytes!==layout.wireBytes||!Buffer.isBuffer(api.key)||api.key.length!==16||!Buffer.isBuffer(api.noncePrefix)||api.noncePrefix.length!==4)refuse();
  const record={schema:1,id:plan.id,sha256:plan.sha256,size:plan.size,status:'Ready',offset:layout.offset,chunkSize:layout.chunkSize,totalParts:layout.total,locallyWritten:0,wireBytes:0,highestPossibleOffset:layout.offset,remoteInstallationVerified:false};
  const began=api.clock();
  const snapshot=()=>Object.freeze({...record});

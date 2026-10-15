@@ -1,5 +1,32 @@
 # Retomar el proyecto
 
+**Actual R286 PC: instalador grande/journal integrado; NO hardware nuevo.**
+docs/doom-deployment-journal-r286.md + doom-large-install-physical-plan-r286.md.
+Nuevo doom-deployment-journal.mjs: destino/key→tag+HMAC derivados, model/FW+hash
+de paquete en cada snapshot, HMAC/cadena SHA/seq; archivo transfer.jsonl fijo,
+wx watch.lock exclusivo/tokenpropio. Write+fsync antes de batches, 2MiB límite.
+Crash/lockviejo/incompleto/duplicado NO se rearma. Resume solo explícito con
+cadena completa/statusUncertain+bounds+MD5/catálogo iguales. No borrar privados.
+Ruta real tools/local/pc-rfcomm/doom-deployment/ AÚN NO creada por prepare.
+Tests artifacts/doom-deployment-r286-UUID/ con valores SOLO sintéticos.
+Nuevo pc-doom-deployment.mjs plan|prepare|install|resume pinR285d0fc...4827044.
+prepare PASA, valida archivo/fuente/helper+formatos privados sin conectar.
+factory prepareDoomLowMemory; pins R278/R282 intactos. Synthetic size4827044.
+doom-deployment-physical.mjs capability nueva; worker solo se crea al opened,
+DESPUÉS journal. PHYSICAL_DEPLOYMENT_REVIEWED=false, RESUME_REVIEWED=false;
+LargePhysicalReviewed=false C# intacto. Nonce real aleatorio; fixture sigue71.
+Core doom-upload-pc-session.mjs compartido entre peersPC y entrada física propia;
+uploadToPcAdapter/reviewedAdapter distintos, este último exige peer branded.
+reviewedLargeExecutable exportado de pc-pipe, limita al helper propio con hashes.
+No allow_native true: mismo paquete de R285 contiene carga C DESHABILITADA.
+33casos --local-package PASAN, incluye IPC C# real/sockets sintéticos,2362full/
+2351resume; antes29/30casos se ampliaron. 22legacy también pasan; gates CLI
+install/resume/C# y capability falsa pasan. No CI remota/push. Último físicoR283.
+Siguiente: revisión del único envío grande INACTIVO, planconcreto escrito.
+No ejecutar automáticamente, no START/insmod/activar/delete/reintentar. Autorizar
+envío no autoriza reanudación ni C/Doom. Usuario debe observar batería≥50%.
+Guardar SOLO commits locales como pidió; no repetir tests pasados por rutina.
+
 **Actual R285 PC: candidato RW4 -mb4 y paquete nuevo listos, NO enviados.**
 Ver docs/doom-low-memory-candidate-r285.md. tools/build-doom-low-memory-rw4.mjs
 reusa source EXACTO adapter-low.c R284 SHA2e7e2146...; recompila solo adapter

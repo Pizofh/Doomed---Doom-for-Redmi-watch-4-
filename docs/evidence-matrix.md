@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R286:** [Instalador y journal](doom-deployment-journal-r286.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Journal bloquea repetición, destino/clave/paquete distinto e historial incompleto | PC, identidades sintéticas | 33casos con HMAC/cadena/lock/crash/reanudación | CONFIRMADO SOLO EN PC | Alta para casos | Sí | No durabilidad absoluta ante corte eléctrico ni exclusión de otros clientes |
+| Paquete R285 atraviesa sesión autenticada y worker grande | PC + C# socket simulado | Digest/longitud,2362partes, catálogo inactivo; corte/resume | CONFIRMADO SOLO EN PC | Alta para integración simulada | Sí | No prueba radio/recepción RW4 |
+| Entrada física está conectada al núcleo y cerrada | Código/gates Node+C# | Prepare offline y rechazo install/resume/capabilities falsas | CONFIRMADO SOLO EN PC | Alta para bloqueo | Sí | Rama real del driver no ejecutada; native launcher también deshabilitado |
+| Paquete4,8MB instalado en RW4 | M2315W1 | Sin ensayo grande aprobado/ejecutado todavía | SIN EVIDENCIA | Pendiente | No | Plan concreto requiere revisión |
+
 **Actual R285:** [Candidato de4MiB y cargador](doom-low-memory-candidate-r285.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
