@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R284:** [Memoria física y zona de4MiB](doom-memory-budget-r284.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Umem libre7005128/largest6928624bytes en un snapshot | M2315W1/FW2.2.86 | Fotos de ambas páginas MemInfo y retorno normal del usuario | CONFIRMADO EN RW4 | Alta para lectura fotografiada | Sí, usuario | No RAM total ni disponibilidad futura; no mapeo malloc demostrado |
+| Zona4MiB carga E1M1 y admite controles/salida | S3 VM exacta | Dos ciclos C, frames, movimiento/giro/fuego/pausa/JOIN/14de14free | CONFIRMADO EN EMULADOR | Alta para esos ciclos | Sí | Pico4486833B; no UI/decoder nuevo ni estabilidad prolongada |
+| Doom cabe y funciona físicamente con zona4MiB | M2315W1 | Proyección5418693B antes de varios overheads, sin nuevo build/ejecución RW4 | SIN EVIDENCIA | Pendiente | No | Plausible, no demostrado; pools separados |
+
 **Actual R283:** [Preflight de memoria](memory-preflight-r283.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

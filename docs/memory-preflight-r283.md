@@ -1,7 +1,8 @@
 # R283: preflight de memoria preparado en PC
 
-Estado: **instalado e inactivo tras autorización explícita; lectura manual
-pendiente**. El usuario autorizó un único ensayo y confirmó que puede observar
+Estado: **ensayo completado; fotos y retorno normal confirmados**.
+[Valores físicos y siguiente avance](doom-memory-budget-r284.md).
+El usuario autorizó un único ensayo y confirmó que puede observar
 el reloj con batería≥50%. No repetir el envío.
 
 MemInfo lee `/proc/meminfo` una vez al pulsar READ RAM. MODE recorre los pools
@@ -75,8 +76,9 @@ Esto no verifica visualmente la UI ni prueba una lectura de memoria física.
 Gates Node/C# cerrados y recompilados en finally; test de todas las entradas
 cerradas pasa sin sockets. El journal privado de este intento ya existe;
 no borrarlo, reutilizarlo ni volver a instalar para obtener la lectura.
-Falta que el usuario seleccione MemInfo, pulse READ RAM una vez, recorra MODE
-y confirme el regreso a la esfera habitual. **RAM física aún desconocida.**
+El usuario seleccionó MemInfo, leyó el snapshot, fotografió ambas páginas y
+confirmó menús y regreso normal. Umem libre7005128/largest6928624bytes;
+el otro pool libre9160312/largest8413048bytes. No sumar ni extrapolar el total.
 
 ## Instalador: avance y pendiente
 

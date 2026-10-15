@@ -1,11 +1,13 @@
-# MemInfo R283: ensayo autorizado, instalación completada
+# MemInfo R283: ensayo completado
 
-**Instalada inactiva; lectura manual pendiente. Gates cerrados.** El usuario
+**Lectura de ambas páginas y retorno normal confirmados. Gates cerrados.**
+[Valores y análisis R284](doom-memory-budget-r284.md). El usuario
 respondió «Sí, autorizo y puedo observar el reloj». Un único envío completado,
 catálogo independiente confirma ID inactiva y entradas/selección previas
 conservadas. Conexión y worker cerrados; gates restaurados en finally y
 verificados. Autorización de envío consumida: **no reinstalar ni reenviar**.
-La revisión cubre todavía la selección/lectura manual descrita abajo.
+La revisión se consumió; la secuencia de abajo es el registro del ensayo,
+no autorización para repetirlo.
 
 ## Dispositivo y compatibilidad
 

@@ -1,0 +1,29 @@
+{
+  "checkpoint": "R284",
+  "device": "M2315W1",
+  "firmware": "2.2.86",
+  "source": "User photographs of MemInfo R283; numbers transcribed, no raw screenshots published",
+  "units": "bytes",
+  "singleSnapshot": true,
+  "pools": [
+    {
+      "displayedName": "IMG?CACHE",
+      "nameExact": false,
+      "note": "UI substitutes a question mark for an unsupported name character; do not infer the original name or allocator mapping",
+      "total": 13631144,
+      "free": 9160312,
+      "largest": 8413048
+    },
+    {
+      "displayedName": "UMEM",
+      "nameExact": true,
+      "total": 11031720,
+      "free": 7005128,
+      "largest": 6928624
+    }
+  ],
+  "menusAndReturnToNormalWatchfaceConfirmedByUser": true,
+  "poolsAddedTogether": false,
+  "mallocPoolMappingVerified": false,
+  "doomPhysicalExecutionAuthorized": false
+}

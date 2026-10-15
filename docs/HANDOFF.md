@@ -1,5 +1,28 @@
 # Retomar el proyecto
 
+**Actual R284: MemInfo completada y Doom -mb4 probado en S3.**
+Usuario aporta fotos y confirma menús/retorno habitual. Observations JSON
+experiments/memory-preflight/observations-r284.json, sin fotos privadas.
+Pool visible IMG?CACHE: total13631144/free9160312/largest8413048; nombre exacto
+desconocido (? sustituye _ o -). UMEM total11031720/free7005128/largest6928624.
+No sumar pools; malloc/loader mapping no demostrado. Medida NO 32MB libres.
+Usuario pide ahorrar: commits locales, NO push/CI remota/audit de publicación
+innecesarios. Mantener privacidad/exclusiones/gates; no subir nada nuevo.
+Nuevo tools/build-doom-low-memory.mjs reproduce ELF S3 R282 byte exacto,
+recompila SOLO adapter generado con -mb4 (opción upstream) y argc10. No cambia
+fuentes originales/RW4/launcher ni objetos Doom. ELF S3-only610568 SHA
+8400146175448f1f9a1b3b87325bede2accea8604c35835c624bc9bf9da45ccc.
+tools/test-doom-low-memory.mjs + low-memory-r284.lua pasan DOS ciclos reales
+sin UI nueva: E1M1, framesRGB565/143colores, movimiento/giros/fuego/pausa,
+STOP/JOIN/rmmod/14alloc14free/cleanup0. Pico4486833 vs6583985: ahorro2MiB.
+Resultados build/doom-low-memory-r284/test-result.json; ELF/script /tmp retirados,
+VM conserva launcher READY anterior y archivos persistentes sin cambiar.
+Proyección RW4 oldstatic899092+4486833+32768=5418693, margen1586435 antes
+loader/allocator/UI/cachés/variación. NO decir que físicamente cabe probado.
+Siguiente: candidato RW4 con -mb4 y presupuesto/loader, journal grande. No
+repetir MemInfo ni más microprobes. No ensayo C grande físico autorizado.
+Detalle docs/doom-memory-budget-r284.md. R283 de abajo es historia ya completada.
+
 **Actual R283: MemInfo instalada inactiva; lectura manual PENDIENTE.**
 Usuario autorizó UN ensayo y puede observar batería≥50%. Envío único
 RegisteredInactive11partes/TX21768/20frames/16rx, close/workerexit true;

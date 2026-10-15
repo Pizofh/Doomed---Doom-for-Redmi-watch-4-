@@ -1,9 +1,13 @@
 # DOOM en Redmi Watch 4
 
+**Actual R284:** [RAM física medida; Doom consume2MiB menos en S3](docs/doom-memory-budget-r284.md).
+Umem libre6,68MiB en el reloj. E1M1 con zona4MiB pasa dos ciclos de controles,
+pausa y salida limpia en emulador; pico runtime4,28MiB. Doom físico pendiente.
+
 **Actual R283:** [Medición de memoria preparada](docs/memory-preflight-r283.md).
 MemInfo lee un snapshot por pool sin shell ni C; 45 pruebas y lectura real S3
 pasan. Paquete RW4 de21KB instalado con autorización, inactivo; catálogo previo
-conservado y gates cerrados. **Lectura manual de RAM física pendiente.**
+conservado y gates cerrados. Lectura física y retorno normal ya confirmados.
 [Plan y estado del ensayo](docs/memory-preflight-physical-plan-r283.md).
 
 **Actual R282, solo PC:** [Launcher, ejecutable y WAD persistentes integrados](docs/doom-persistent-launcher-r282.md).
