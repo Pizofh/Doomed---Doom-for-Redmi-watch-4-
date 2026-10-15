@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R271, trabajo PC:** [El motor original y el runtime compilan para RW4](docs/doom-rw4-build-r271.md).
+Salida propia probada en el emulador. Objeto intermedio sin instalar: faltan
+bindings finales, ejecución y adaptador DG. Se agrupa la preparación para
+un ensayo físico corto de E1M1 cuando esos contratos estén revisados.
+
 **Actual R270 completo:** [C residente se descarga limpiamente](docs/native-exit-resume-physical-plan-r270.md).
 ExitC terminó con diez indicadores verdes y el reloj mantiene menús y esferas
 normales. Ya probamos carga C, controles y retirada del puente; DOOM físico

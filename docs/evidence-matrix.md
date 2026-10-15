@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R271 PC:** [Port del motor/runtime para la ISA RW4](doom-rw4-build-r271.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Los80C originales y runtime compilan para ARMv8-M/Thumb soft-float | Toolchain PC | build-doom-rw4, manifiesto181 blobs, ELF intermedio | CONFIRMADO LOCALMENTE | Alta | Sí | No entry, DG, worker o bindings; no prueba ejecución RW4 |
+| Salida propia vuelve desde llamadas anidadas y conserva stack/sentinels | Emulador S3, fuente jump.S del port | Test nativo R271 dos retornos, módulo/temporal retirados | CONFIRMADO EN EMULADOR | Alta para fixture | Sí | No contrato completo RW4 ni recuperación de crashes |
+| Malloc/free comparten heap; seek/tell y reloj tienen callers stock identificados | Imagen candidata RW4 fijada | Wrappers, calls Lua/loader y disassembly acotado | INFERENCIA RAZONABLE | Fuerte para rutas | Estática PC | Ninguna de estas llamadas nuevas se probó físicamente |
+| Doom completo cabe en la RAM disponible del RW4 | M2315W1 | Solo subtotal estático+zona+DG7081464bytes | SIN EVIDENCIA | Pendiente | No | Excluye otros buffers, stack, loader y overhead; RAM libre desconocida |
+
 **Actual R270:** [Reanudación registrada en el RW4](native-exit-resume-physical-plan-r270.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

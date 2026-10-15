@@ -1,5 +1,29 @@
 # Retomar el proyecto
 
+**Actual R271 PC: motor real y runtime compilados; ninguna operación física nueva.**
+Usuario aprobó acelerar a dos checkpoints: preparar el port completo en PC y,
+si los contratos lo permiten, un ensayo corto E1M1/controles/salida. No añadir
+probes físicos pequeños por defecto; tampoco hay autorización nueva de envío.
+[Resultado reproducible y límites R271](doom-rw4-build-r271.md).
+Builder tools/build-doom-rw4.mjs:80C originales→ARMv8-M Thumb soft/libgcc local;
+modo runtime reutiliza objeto comprobado y genera runtime-device.c del S3 fijado,
+con jump.S propio40bytes, sin tocar fuentes/fixtures S3.444560B/static534008B,
+36imports pendientes (DG6/libc30), no entry/bindings/transport/loadable module.
+Zona6MiB+DG256KB→subtotal7081464B antes de extras; RAM libre física desconocida.
+111warnings originales conservados. Hash final6206720ca434b8903a2ba41c29ccb5efce304341839e5cafa3e83cc4a695223a.
+test-doom-rw4-jump.mjs pasa en owned S3: valor7 y0→1 desde tres llamadas anidadas,
+sentinels/SP estables; módulo/ELF temporales retirados. No test físico/ABI completo.
+Primer fixture bloqueado por Werror antes de ejecutar; logs preservados.
+Research runtime/ follow/ contracts ya ejecutados, dirs inmutables; no repetirlos.
+Malloc/free1f5180/1f513c mismo heap; seek/tell1ec2b8/1ec328 desde Lua; reloj
+1b9934→1b98e4 devuelve64bits en r0/r1, /10000 observado. Candidatos estáticos,
+no llamadas físicas nuevas ni asumir origen/monotonicidad. No confundir comandofree.
+Continuar con libc/clock/worker y DG/frames/controles/WAD persistente, revisión de
+THM_CALL/JUMP24 y presupuesto total; no volver al debugging de Bluetooth/registro.
+No enviar los objetos intermedios, rearmar ExitC/StepC ni recargar234.
+
+Último resultado físico completado:
+
 **Actual R270 COMPLETO: módulo rw4step234 retirado; reloj normal.**
 El usuario autorizó completar el tramo y el ensayo. Se envió una sola parte
 de1916bytes (1886bytes útiles desde offset22462), con el mismo paquete/MD5.

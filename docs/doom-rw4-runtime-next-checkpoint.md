@@ -20,9 +20,15 @@ Trabajo agrupado, sin repetir las pruebas físicas de registro o controles:
    fuera de RAM cuando el filesystem lo permita y conservarlo fuera de Git.
 3. Validar en PC/emulador los casos de fallo, liberación y salida. El emulador S3
    valida lógica portable; no ejecuta ni demuestra ABI de un ELF para RW4.
-4. Solo si quedan contratos razonables, preparar un único ensayo físico agrupado
-   de memoria/tiempo/lectura y cierre, con hash/plan concretos para revisión.
-   No empezar directamente con E1M1 ni rearmar pruebas antiguas.
+4. El usuario aceptó agrupar el camino en dos checkpoints: preparación completa
+   en PC y, si los contratos lo permiten, un ensayo físico corto de E1M1 con
+   controles/salida/diagnóstico integrados. Preparar su hash y plan para revisión;
+   no intercalar por defecto probes físicos separados para cada dependencia.
+   Si una incertidumbre concreta impide ese ensayo, documentarla con evidencia,
+   sin rearmar pruebas antiguas ni sustituir revisión por intentos a ciegas.
+
+R271 completó la [compilación motor/runtime y prueba de salida](doom-rw4-build-r271.md).
+Es un objeto intermedio, aún sin bindings, DG o worker; no está listo para el reloj.
 
 La residencia temporal en RAM y la persistencia de los archivos siguen separadas.
 Salir debe cerrar lectores, detener ejecución, liberar reservas y retirar solo
