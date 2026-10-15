@@ -21,6 +21,7 @@ on:
       - 'tools/doom-upload-pc-*.mjs'
       - 'tools/test-doom-upload-pc-session.mjs'
       - 'tools/test-doom-large-worker.mjs'
+      - 'tools/audit-git-publish.mjs'
       - 'tools/test-pc-pairing.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
   pull_request:
@@ -42,6 +43,7 @@ on:
       - 'tools/doom-upload-pc-*.mjs'
       - 'tools/test-doom-upload-pc-session.mjs'
       - 'tools/test-doom-large-worker.mjs'
+      - 'tools/audit-git-publish.mjs'
       - 'tools/test-pc-pairing.mjs'
       - '.github/workflows/pc-rfcomm-offline.yml'
 
@@ -49,6 +51,17 @@ permissions:
   contents: read
 
 jobs:
+  publish-audit:
+    runs-on: windows-2022
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Audit reachable history for excluded assets and credential patterns
+        run: node tools/audit-git-publish.mjs
+
   large-file-model:
     runs-on: windows-2022
     timeout-minutes: 3

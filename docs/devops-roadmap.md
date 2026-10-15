@@ -1,8 +1,8 @@
 # Flujo reproducible y enfoque DevOps
 
 Actualización 2026-10-15: el workflow Windows/sintético está implementado en
-`.github/workflows/pc-rfcomm-offline.yml`. Se prepara el primer push del
-historial completo a [GitHub](https://github.com/Pizofh/Doomed---Doom-for-Redmi-watch-4-),
+`.github/workflows/pc-rfcomm-offline.yml`. El historial completo se publicó
+en [GitHub](https://github.com/Pizofh/Doomed---Doom-for-Redmi-watch-4-),
 rama `main`. Las dependencias, firmware, WAD y datos privados permanecen fuera
 de Git; `node tools/audit-git-publish.mjs` revisa los blobs históricos y valores
 privados actuales sin imprimirlos. El texto siguiente conserva el plan original

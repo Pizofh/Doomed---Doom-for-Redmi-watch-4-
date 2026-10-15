@@ -1,5 +1,17 @@
 # Retomar el proyecto
 
+**GitHub conectado el 2026-10-15.** Remoto origin:
+https://github.com/Pizofh/Doomed---Doom-for-Redmi-watch-4-.git
+Rama local renombrada master→main, siguiendo origin/main; historial conservado.
+Primer push293 commits hasta29cf3ec confirmado por ls-remote idéntico a HEAD.
+Auditó2177blobs/71439101bytes, sin hallazgos de assets excluidos, patrones de
+credenciales o coincidencias con clave/MAC actuales (sin imprimir valores).
+tools/audit-git-publish.mjs deja reporte ignorado artifacts/publish/git-audit.json.
+El primer push no mostró runs CI; el commit de seguimiento añade job audit
+de historial completo y su path trigger. Consultar Actions para estado real.
+Preferencia del usuario: subir los avances a GitHub, no dejarlos solo locales.
+No subir firmware/WAD/binarios/datos privados. Sin cambios de VM/reloj.
+
 **Actual R281 PC: worker grande compilado y supervisado pasa.**
 [Detalle/reproducción](doom-large-worker-r281.md). Commit posterior a aae636d.
 Nuevo experiments/pc-rfcomm/LargeSessionWorker.cs, tools/doom-upload-pc-pipe.mjs,
