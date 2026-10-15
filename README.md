@@ -1,9 +1,10 @@
 # DOOM en Redmi Watch 4
 
-**Actual R283, solo PC:** [Medición de memoria preparada](docs/memory-preflight-r283.md).
+**Actual R283:** [Medición de memoria preparada](docs/memory-preflight-r283.md).
 MemInfo lee un snapshot por pool sin shell ni C; 45 pruebas y lectura real S3
-pasan. Paquete RW4 de21KB verificado, todavía sin instalar ni medir RAM física.
-[Plan de ensayo pendiente de aprobación](docs/memory-preflight-physical-plan-r283.md).
+pasan. Paquete RW4 de21KB instalado con autorización, inactivo; catálogo previo
+conservado y gates cerrados. **Lectura manual de RAM física pendiente.**
+[Plan y estado del ensayo](docs/memory-preflight-physical-plan-r283.md).
 
 **Actual R282, solo PC:** [Launcher, ejecutable y WAD persistentes integrados](docs/doom-persistent-launcher-r282.md).
 El paquete S3 abre E1M1, permite jugar, cierra y vuelve a abrir sin reinstalar.

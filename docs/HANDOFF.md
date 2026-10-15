@@ -1,6 +1,15 @@
 # Retomar el proyecto
 
-**Actual R283 PC: MemInfo preparada; NO instalada físicamente.**
+**Actual R283: MemInfo instalada inactiva; lectura manual PENDIENTE.**
+Usuario autorizó UN ensayo y puede observar batería≥50%. Envío único
+RegisteredInactive11partes/TX21768/20frames/16rx, close/workerexit true;
+catálogo independiente autenticado confirma inactiva y previas conservadas.
+Gates restaurados en finally/rebuild/testgates pasan. Git sin cambios de gates.
+Journal tools/local/pc-rfcomm/memory-preflight-r283.json YA EXISTE: NO borrar,
+reinstalar, reenviar ni rearmar. Report post-install.json en artifacts propio.
+Se pidió al usuario seleccionar MemInfo, READ RAM UNA vez, MODE fotografiar
+TODOS los pools y volver habitual/confirmar menús. Esperar esa respuesta;
+NO asumir lectura/UI/salud confirmadas por catálogo. RAM física desconocida.
 Ver memory-preflight-r283.md y memory-preflight-physical-plan-r283.md.
 45 contratos Lua/parser/UI pasan, lectura real S3 /proc/meminfo pasa. No shell,
 C, timers ni writes de Lua; snapshot4096B/EOF/cierre, MODE recorre sin releer.
@@ -10,15 +19,15 @@ SourceSHA28f5c98dd1e7a07a4aa0b49d1f1c1bb0768b62b25aed6a1e80c8d18c087679a0.
 50 recursos exactos, compiler sinADB; artifacts/memory-preflight-r283/{tests,
 review}.json, MemInfo-id-only.face y layout.png. Empaquetador no sobrescribe.
 staticSpec r283 + prepare pasa; verificador C# corregido5→6 fuentes actuales.
-Gates Node/C# cerrados comprobados, no Bluetooth ni hardware. Build nuevo
-2192f58fa703b41a0d95032ec8ba327876c543077c4da51a275a7f3c9bdf56c8.
-CI añade 45 contratos sin assets privados. Último físico sigue R270.
+Gates Node/C# cerrados comprobados; último físico R283, lectura pendiente.
+Build cerrado5284909ae14fbe585d28910fd78a7010c8d53bddc347318dee139ceeeb3ac0a7.
+CI añade45contratos sin assets privados. Sesión sintética r283 pasa48casos.
 Nuevo prepareDoomLauncher pin exacto R282, allow_native=false; vieja fábrica
 R278 intacta. Copia/byte alterado/rechazo vieja fábrica comprobados.
 Journal/lock de despliegue GRANDE contra destino físico aún pendiente; NO
 describir journalPC R280 como instalador físico listo. Antes obtener RAM real.
-Siguiente: revisión explícita del único ensayo MemInfo con usuario observando;
-NO abrir gates ni instalar antes. Valor MAXFREE mostrado literal, no inferir
+Siguiente: respuesta del usuario del ensayo MemInfo YA instalado;
+NO abrir gates ni reinstalar. Valor MAXFREE mostrado literal, no inferir
 heap usado por malloc ni sumar GImageCache/Umem. Pantalla verde=parser, no fit.
 
 **Actual R282 PC: launcher y WAD persistente integrados y probados.**

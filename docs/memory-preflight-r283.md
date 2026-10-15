@@ -1,7 +1,8 @@
 # R283: preflight de memoria preparado en PC
 
-Estado: **paquete listo, no instalado en el reloj**. Última prueba física sigue
-siendo R270. No conexiones Bluetooth en R283.
+Estado: **instalado e inactivo tras autorización explícita; lectura manual
+pendiente**. El usuario autorizó un único ensayo y confirmó que puede observar
+el reloj con batería≥50%. No repetir el envío.
 
 MemInfo lee `/proc/meminfo` una vez al pulsar READ RAM. MODE recorre los pools
 de esa misma lectura; no vuelve a consultar el sistema. No usa shell, C,
@@ -61,7 +62,21 @@ ID365219962, **21216 bytes**, SHA256
 50 recursos, source SHA256
 `28f5c98dd1e7a07a4aa0b49d1f1c1bb0768b62b25aed6a1e80c8d18c087679a0`.
 11 partes con chunk2048; límites del instalador pequeño conservados.
-[Plan físico pendiente de aprobación](memory-preflight-physical-plan-r283.md).
+[Plan físico y estado](memory-preflight-physical-plan-r283.md).
+
+## Instalación física autorizada
+
+Un único envío: `RegisteredInactive`,11partes,21768bytes TX de la sesión,
+20frames enviados/16recibidos; cierre y salida del worker confirmados.
+No activación desde PC. Catálogo independiente autenticado confirma ID propia
+inactiva/eliminable y todas las entradas/selección previas conservadas.
+Esto no verifica visualmente la UI ni prueba una lectura de memoria física.
+
+Gates Node/C# cerrados y recompilados en finally; test de todas las entradas
+cerradas pasa sin sockets. El journal privado de este intento ya existe;
+no borrarlo, reutilizarlo ni volver a instalar para obtener la lectura.
+Falta que el usuario seleccione MemInfo, pulse READ RAM una vez, recorra MODE
+y confirme el regreso a la esfera habitual. **RAM física aún desconocida.**
 
 ## Instalador: avance y pendiente
 

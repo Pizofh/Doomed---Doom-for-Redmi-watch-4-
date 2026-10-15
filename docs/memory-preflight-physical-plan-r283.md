@@ -1,8 +1,11 @@
-# MemInfo R283: plan físico pendiente de autorización
+# MemInfo R283: ensayo autorizado, instalación completada
 
-**No ejecutado. Gates cerrados.** La autorización de ensayos anteriores no se
-reutiliza para este paquete. Solo después de revisión explícita y con el usuario
-junto al reloj se habilitaría temporalmente este perfil fijo.
+**Instalada inactiva; lectura manual pendiente. Gates cerrados.** El usuario
+respondió «Sí, autorizo y puedo observar el reloj». Un único envío completado,
+catálogo independiente confirma ID inactiva y entradas/selección previas
+conservadas. Conexión y worker cerrados; gates restaurados en finally y
+verificados. Autorización de envío consumida: **no reinstalar ni reenviar**.
+La revisión cubre todavía la selección/lectura manual descrita abajo.
 
 ## Dispositivo y compatibilidad
 
