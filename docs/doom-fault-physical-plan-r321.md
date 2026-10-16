@@ -1,6 +1,13 @@
 # R321: DoomFault conserva el error inicial y distingue la limpieza
 
-**Preparado en PC; sin autorización física ni envío.** Es una revisión de
+**Actualización R322:** reinicio normal/retorno confirmados e
+[instalación inactiva completada](doom-fault-install-r322.md). Gates restaurados;
+un START manual ya autorizado y solicitado, pendiente de resultado. No reenviar.
+El texto de preparación siguiente se conserva como plan aprobado.
+
+**Autorizado por el usuario con «ok» tras la solicitud concreta del plan;
+pendiente de confirmar reinicio normal, menús/corona, batería>=50% y observación.
+Sin envío físico todavía.** Es una revisión de
 diagnóstico Lua, no una corrección del render PNG. No se cambia el C instalado.
 
 ## Artefacto concreto

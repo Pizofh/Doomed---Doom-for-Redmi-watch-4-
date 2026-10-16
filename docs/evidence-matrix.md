@@ -1,5 +1,11 @@
 # Matriz de evidencia
 
+**Actual R322:** [DoomFault registrada inactiva](doom-fault-install-r322.md),
+18partes/26frames tras reinicio/retorno normal confirmado por usuario.
+Catálogo/ACKMD5/offset0 y cierre/worker verificados; contenido no autenticado.
+Gates restaurados,5589assertions helper y ocho escenarios paquete pasan offline.
+Un START manual pendiente; no evidencia nueva de causa PNG, carga o retirada C.
+
 **Actual R321:** [recorder de primer/último fallo preparado](doom-fault-physical-plan-r321.md).
 48casos Lua S3 (IO/nativo/widgets simulados) incluyen UI completa con fallos de
 constructor, consulta de tamaño y dimensiones, frente a open/write/close de

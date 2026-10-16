@@ -1,5 +1,31 @@
 # Retomar el proyecto
 
+**Actual R322: DoomFault INSTALADA INACTIVA; esperar FIRST/LAST/DIMS.**
+Usuario confirmó restartnormal/menús/corona/batería>=50%/observación. UN install
+RegisteredInactive,catprevio15,18partes/26frames/35724TX,ACKMD5offset0/chunk2048,
+cierre/workerexit0. No autoactivación/CdesdePC/retry/resume/delete niqueryextra.
+docs/doom-fault-install-r322.md. Artifactsprivados doom-fault-physical-r322/
+install-result/gates-restored.json. Journal fault-r321.jsonl EXISTE,norecrear.
+Finallyrestauró gatesyProbeoriginales;helpercerradoSHA24ab86192623cd548672d3631b7aebb0881bbd80f56440704bb0164ab86e0ec0;
+5589assertions0nativecalls+ochoescenariospaquete/gates pasan.
+Asyncsolicita seleccionarDoomFault(NO DoomIO), START1 soloREADY, CHECKINGdespierto,
+siERROR leerFIRST/LAST/DIMS sinrepetirSTART/EXIT/reabrir; siDoomfunciona EXIT~5s,
+CLOSED; volverhabitualdesdeAjustes yconfirmarmenús/corona. UNciclo,no2.
+Autorizaciónyaobtenida,no pedirlaotra vez ni enviar/reiniciar. NopayloadnuevoC:
+usaELF953yWAD963; conservarambos. Noresultadofísicomanualrecibidoaún, noinferir
+ausenciaviejo318/carganuevo321/renderfixdesdeelcatálogo. Solo commitlocal.
+
+**R321 aprobado; esperar confirmación de reinicio antes del envío R322.**
+Usuario respondió «ok» a la aprobación concreta del plan. Async pide reinicio
+normal desdehabitual, retorno menús/corona, batería>=50% y observación; aún
+sin respuesta a ese prerrequisito. No repetir permiso ni enviar antes.
+Journal fault-r321.jsonl y watch.lock AUSENTES; gates cerrados. Runner preparado
+sin ejecutar: artifacts/doom-fault-physical-r322/install-once.ps1, derivado del
+envío R319; abre solo deployment/fault/Large, guarda resultado sanitized,
+finally restaura bytes originales/build/testhelper/testpaquete. Un install,
+sin retry. Requiere ejecución física escalada después de confirmar retorno.
+No hardware, reboot desdePC, compilación ni envío en este turno de aprobación.
+
 **Actual R321: DoomFault listo en PC; aprobación física pendiente.**
 Usuario «ok» autorizó continuar corrección PC trasR320. No aprobaron nuevo
 reboot/instalación/START. Plan concreto docs/doom-fault-physical-plan-r321.md:

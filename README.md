@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R322:** [DoomFault instalada inactiva](docs/doom-fault-install-r322.md)
+tras reinicio normal confirmado; un envío completado y gates restaurados.
+Pendiente de un arranque manual autorizado para leer FIRST/LAST/DIMS.
+
 **Actual R321:** [DoomFault preparado en PC](docs/doom-fault-physical-plan-r321.md),
 35 KB de Lua/imágenes que conservan primer/último fallo y dimensiones.
 48 casos Lua y ocho escenarios de protocolo simulado pasan. Reutiliza ELF/WAD
