@@ -1,0 +1,22 @@
+{
+  "checkpoint": "R315",
+  "device": "M2315W1",
+  "firmware": "2.2.86",
+  "launcherId": "365219954",
+  "source": "User CExit photographs, all three pages, and confirmation of normal return/menus/crown",
+  "stage": 12,
+  "indicator": "red/orange",
+  "ioErrAbsolute": 16,
+  "page01": {"regOwn": 1, "lease": 1, "exitCodeDisplayed": 0, "controlOpen": 1, "controlRead": 1, "controlClose": 1},
+  "page02": {"sequence": 7, "started": 1, "ready": 1, "finished": 1, "joined": 0, "nativeError": 0},
+  "page03": {"reasonDisplayed": 0, "ioErr": 16, "peakDisplayed": 0, "allocatedDisplayed": 0, "freedDisplayed": 0, "cleanupDisplayed": 0},
+  "runtimeCleanupCountersDefined": false,
+  "joinAttemptedByCExit": false,
+  "rmmodAttemptedByCExit": false,
+  "normalMenuAndReturnReported": true,
+  "nativeUnloadVerified": false,
+  "commandWriteAcceptanceVerified": false,
+  "newHardwareCommandsAfterReport": false,
+  "interpretation": "Stage12 identifies write(command7 release-image) refusal, errno16. CExit stops and never advances to JOIN/rmmod. Displayed state is the last valid pre-command snapshot, not a post-failure re-read. With started1/joined0, image_ref busy is the direct native candidate, but actual image_close callbacks/cookie validity/reader liveness were not observed.",
+  "manualDeletionAdvice": {"inactiveOwnFaces": ["CInfo 365219955", "CExit 365219954"], "preserve": ["DoomRAM 365219957", "DoomLauncher 365219963"], "userCompletionConfirmed": false, "pcDeletionPerformed": false}
+}

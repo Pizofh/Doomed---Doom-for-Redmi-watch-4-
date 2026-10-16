@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R315:** [CExit localiza rechazo16 al liberar imagen](docs/doom-resident-close-result-r315.md).
+Se detuvo antes de JOIN/descarga; menús/corona normales. Se aconsejó retirar
+CInfo/CExit inactivas para espacio, conservando DoomRAM y DoomLauncher.
+
 **Actual R314:** [CExit instalada inactiva](docs/doom-resident-close-install-r314.md),
 15esferas previas conservadas y bloqueos PC restaurados. Un ensayo manual de
 cierre ya autorizado queda pendiente; todavía no confirma retirada del C.

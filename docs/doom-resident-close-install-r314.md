@@ -1,5 +1,9 @@
 # R314: CExit instalada; ensayo manual autorizado pendiente
 
+**Resultado R315:** [command7 rechazado en write, errno16](doom-resident-close-result-r315.md).
+No JOIN/rmmod; retorno/menús/corona normales. No repetir/reabrir. Los pendientes
+de abajo describen el estado posterior a la instalación, antes del ensayo.
+
 Usuario «si» aprobó [R313](doom-resident-close-physical-plan-r313.md): una
 instalación y un CLOSE C observado con batería≥50%. Un install r313 resultó
 RegisteredInactive,ID365219954,24176bytes,SHA256

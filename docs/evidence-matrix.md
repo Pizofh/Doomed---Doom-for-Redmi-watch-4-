@@ -1,5 +1,11 @@
 # Matriz de evidencia
 
+**Actual R315:** [fotos CExit](doom-resident-close-result-r315.md) muestran
+etapa12/IOERR16: rechazo en write del command7. JOIN/rmmod no ejecutados por
+CExit según su control de flujo. Retorno/menús/corona confirmados por usuario.
+Una referencia de imagen retenida es candidato directo; no close/reader/cache
+concretos verificados. Retirada manual CInfo/CExit aconsejada, aún sin confirmar.
+
 **Actual R314:** [CExit registrada inactiva](doom-resident-close-install-r314.md),
 catálogo independiente16entradas conserva15previas/selección; carriers presentes,
 cierre/worker confirmados, gates cerrados. Registro confirmado, contenido extraído

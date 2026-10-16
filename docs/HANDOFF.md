@@ -1,5 +1,21 @@
 # Retomar el proyecto
 
+**Actual R315: CExit etapa12/IOERR16; falla WRITE command7, NO JOIN/rmmod.**
+Fotos3páginas: REGOWN1/LEASE1/EXITCODE0/COPEN1/CREAD1/CCLOSE1;SEQ7/STARTED1/
+READY1/FINISHED1/JOINED0/ERROR0;REASON0/IOERR16/PEAK0/ALLOC0/FREED0/CLEANUP0.
+Usuario confirma habitual/menús/coronanormales. Snapshot visiblePREcomando,
+NOrelecturapostfallo;CCLOSE1 no prueba close del fdwrite. R315obs/doc guardados.
+command7 devuelve16enstarted/joinedguard oimage_refocupado; conprev1/0 el
+image_refretenido candidato directo; owner sería1 ypacket22. NOcausaRAM/PNG/
+decoderhandle/closecookieprobada. CeroStatsindefinidospreJOIN. NOforzarrefs0/unload,
+repetirCExit/Trace/RAM/reboot ni nuevos comandosfísicos. Siguiente lifecycleimagen,
+nootrointentoidénticoop7. No payload nuevo preparado/autorizado.
+Usuario pidióespacio; indiqué borrarmanualmente CInfo365219955+CExit365219954
+INACTIVAS (notimers/GCnative,ensayosfinalizados,CExitantesde shell). NOconfirmación
+deborradotodavía, NOPCdelete/catálogo/journalupdates, noconteo14asumido. Conservar
+DoomRAM365219957ELF yDoomLauncher365219963WAD. BorrarUI NOretiramóduloresidente.
+docs/doom-resident-close-result-r315.md. Solo commitlocal,sinpush/CI.
+
 **Actual R314: CExit instalada INACTIVA; UN CLOSE C manual YAautorizado pendiente.**
 Usuario«si»aprobóR313. UNinstallRegisteredInactive12parts21frames24747TX,
 close/workertrueexit0. FinallyStaticfalse/r167,C#Staticfalse,otrosgatescerrados,
