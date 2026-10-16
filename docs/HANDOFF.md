@@ -1,5 +1,17 @@
 # Retomar el proyecto
 
+**Actual R309: DoomTrace ERROR30 AL ABRIR; no START reportado.**
+FREE/MAX ceros son valores iniciales, NO medición RAM: view.ram solo en START.
+Control flow implica recuperación residente + tick con finished==1; checkpoint30
+agrupa JOIN/balance/registry/rmmod/postconditions. NO operación exacta/causa/unload
+confirmadas. No nuevo comando físico. docs/doom-trace-result-r309.md y
+experiments/doom-runtime-rw4/observations-r309.json. Pregunta async pendiente:
+¿CLOSED adicional apareció y retorno habitual/menús normales?, sin reabrir.
+No START/repetir/reabrirTrace/RAM; no borrar957/963, reboot o rmmod forzado.
+El ensayo R308 ya produjo resultado; no tratarlo como pendiente ni repetir.
+Próximo trabajo: localizar subpaso de cierre/estado C con lectura acotada,
+no bajar guards ni adivinar PNG/OOM. No payload nuevo preparado/autorizado.
+
 **Actual R308: DoomTrace instalada INACTIVA; UN ensayo manual YA autorizado pendiente.**
 Usuario «si» aprobó R307. UN install r307 RegisteredInactive,16partes/25frames/
 32511TX, cierre/workertrue exit0. Finally Staticfalse/r167 y C#Staticfalse,

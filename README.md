@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R309:** [DoomTrace abrió con ERROR30](docs/doom-trace-result-r309.md)
+durante la recuperación/cierre del C anterior. Falta localizar el subpaso;
+los ceros de FREE/MAX son valores iniciales, sin medición de RAM todavía.
+
 **Actual R308:** [DoomTrace instalada inactiva](docs/doom-trace-install-r308.md),
 con las 13 esferas anteriores conservadas y bloqueos PC restaurados.
 Un ensayo manual ya autorizado queda pendiente: código de fallo/RAM y cierre;

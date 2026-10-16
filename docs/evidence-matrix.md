@@ -1,5 +1,10 @@
 # Matriz de evidencia
 
+**Actual R309:** [ERROR30 al abrir DoomTrace](doom-trace-result-r309.md),
+confirmado por usuario. El flujo de código lo sitúa en recuperación/cierre
+del residente; operación exacta y descarga sin verificar. FREE/MAX cero no
+son una lectura de RAM. Sin nuevos comandos físicos tras el reporte.
+
 **Actual R308:** [DoomTrace instalada inactiva](doom-trace-install-r308.md).
 RegisteredInactive y catálogo independiente de 14 entradas conservan las 13
 anteriores y su selección; carriers ELF/WAD presentes, cierre/worker confirmados.

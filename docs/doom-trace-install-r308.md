@@ -1,5 +1,9 @@
 # R308: DoomTrace instalada; ensayo manual autorizado pendiente
 
+**Actualización R309:** [abrió con ERROR30 antes de START](doom-trace-result-r309.md).
+El ensayo ya produjo resultado: no repetir ni reabrir. Los pendientes de abajo
+describen el estado inmediatamente posterior a la instalación.
+
 El usuario autorizó el [plan R307](doom-trace-physical-plan-r307.md) con «si»:
 una instalación y un ensayo observado con batería ≥50%. Se ejecutó un único
 envío de DoomTrace ID365219956, 31.864 bytes, SHA256

@@ -1,0 +1,19 @@
+{
+  "checkpoint": "R309",
+  "device": "M2315W1",
+  "firmware": "2.2.86",
+  "launcherId": "365219956",
+  "source": "User report on opening DoomTrace after R308 installation",
+  "reportedSequence": ["initial ERROR and red indicator", "code 30"],
+  "reportedFreeAndMax": "all-zero digits; exact digit count not specified",
+  "startPressReported": false,
+  "ramSnapshotEstablished": false,
+  "cleanupCheckpointReached": true,
+  "exactCleanupOperationKnown": false,
+  "closedLabelReported": null,
+  "normalMenuAndReturnReportedForThisTrial": null,
+  "nativeUnloadVerified": false,
+  "newHardwareCommandsAfterReport": false,
+  "interpretation": "Stage30 is entered after control state finished==1 during recovery. It groups JOIN, cleanup balance, registry identity, rmmod and postconditions. It does not identify the failing operation or prove unload. FREE/MAX start at zero and are only updated on START, so this report does not establish zero available RAM.",
+  "nextConstraint": "Do not reopen or retry START, force unload, reboot, or delete DoomRAM/WAD resources. Ask whether CLOSED appeared and whether normal return works. Any future payload must retain ownership and cleanup guards."
+}
