@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**Actual R320:** [reporte ERROR3016 de DoomIO](doom-readers-result-r320.md),
+retorno habitual/menús/corona confirmado. Etapa30 limpieza pre-JOIN; errno16
+puede ser apertura o escritura de control, sin distinguirlo. No retirada
+confirmada de rw4png318 ni segundo ciclo. Dos casos Lua simulados reproducen
+3016 tras un fallo inicial25 oculto; no prueba de esa causa física. 38 casos
+totales pasan; firmware/nativo nuevo no ejecutados y fuentes físicas intactas.
+
 **Actual R319:** [DoomIO registrada inactiva](doom-readers-install-r319.md),
 tras reinicio/retorno normal confirmado por usuario. Un envío312partes/320frames,
 ACKMD5/offset0 y catálogo verificados; contenido no extraído/autenticado.

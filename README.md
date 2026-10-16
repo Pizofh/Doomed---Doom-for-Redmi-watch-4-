@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R320:** [DoomIO falla con ERROR3016](docs/doom-readers-result-r320.md)
+tras CHECKING; esfera habitual, menús y corona normales. Se detuvo antes de
+JOIN/descarga. PC reproduce que ese código puede ocultar un fallo inicial;
+no segundo ciclo ni otro intento físico.
+
 **Actual R319:** [DoomIO instalada inactiva](docs/doom-readers-install-r319.md)
 tras reinicio normal confirmado. Un envío completado, bloqueos PC restaurados;
 ensayo manual autorizado pendiente. Imagen animada y limpieza física aún por comprobar.

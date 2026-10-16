@@ -1,5 +1,9 @@
 # R319: DoomIO instalada inactiva; ensayo manual pendiente
 
+**Actualización R320:** el primer ciclo terminó en [ERROR3016](doom-readers-result-r320.md)
+tras CHECKING; retorno habitual/menús/corona confirmados. No segundo ciclo,
+reapertura, nuevo envío o reinicio. JOIN/descarga no confirmados.
+
 Usuario autorizó con «ok» el [plan R318](doom-readers-physical-plan-r318.md)
 y después confirmó reinicio normal completado, menús/corona normales,
 batería >=50% y disponibilidad para observar. No se repite aprobación.

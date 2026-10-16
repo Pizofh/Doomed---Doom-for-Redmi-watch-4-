@@ -1,5 +1,26 @@
 # Retomar el proyecto
 
+**Actual R320: DoomIO ERROR3016, habitual/menús/corona normales confirmados.**
+docs/doom-readers-result-r320.md. No ciclo2/reabrir/envío/reboot después del
+reporte. Residente actual asumir rw4png318/base953, NO viejo304 (reboot previo
+confirmado y flujo318 comprueba registro vacío antes de insmod). Stage30 antes
+de JOIN/rmmod, últimoerrno16 capturado en open O write ctl: NOafirmarwrite7
+confirmado/refimagenconcreta. Segúnflujo finished1/joined!=1, checksCRC/RAM/
+load/start pasaron; no snapshotexportado, causaengineexitdesconocida.
+Tests test-doom-readers-errors-r320.mjs:38casos(22+7+7+2),mockIO/native/widgets
+enLuaS3. Primerfalloimagen25->STOP->falloopenctl16 O write7/16 ambosmuestran3016:
+diagnósticoactual SOBRESCRIBEprimerfallo, pero no pruebaocurrenciaphysical.
+Timer/GC no retry trasERROR; ningúnnuevomódulo, inventarioS3igual/scratchretirado.
+Herramientaestática review-rw4-image-vfs-r320.mjs [registryopcional] fijahashAP/
+objdump+ventanas44374/4449c/444e0/446ec/4477c; wrappercache/callbacks revisados,
+driverconcretonoidentificado/causanuevaNOconfirmada. Ventanaregistryprevioopen
+NOpruebadriverregister. Output artifacts/research/image-vfs-r320*/ ignorado.
+Conservarprimerfallo + distinguiropen/write/closecontrol espróximocambioútil,
+agrupado, no repetir3016. No payload/plan/aprobaciónnuevos; no forzarrefs/rmmod,
+reabrirDoomIO/RAM/Trace, borrar953ELF/963WAD, ni reiniciar sinautorizaciónconcreta.
+Resultadoobservado artifacts/doom-readers-physical-r319/result-r320.json sinraw.
+Gatescerrados, paquete318/source909959... inmutables. Solo commitlocal,sinpush.
+
 **Actual R319: DoomIO INSTALADA INACTIVA; esperar resultado manual autorizado.**
 Usuario confirmó reboot NORMAL, menús/corona normales, batería>=50%/observación.
 UN install completado RegisteredInactive,14previas,312parts/320frames/643358TX,
