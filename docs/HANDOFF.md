@@ -1,5 +1,28 @@
 # Retomar el proyecto
 
+**Actual R310: CInfo SOLO PC listo; pendiente aprobación UN install+UN READ C.**
+Usuario confirma NO CLOSED y habitual/menús normales tras ERROR30. ObsR309
+actualizada; NO descarga demostrada. Sin comandos físicos desde reporte.
+CInfo36521995520120B SHA7c42c37d9775cc5860615e7c1fcb303a70642d39a47f565a2e87fc6e61c40430,
+source435e5b720f69be2d4c85d817869e1b05bbf1520f840b556b4a0de2c8c46ebe1a.
+artifacts/doom-resident-info-r310/package-final/CInfo-id-only.face32recursos,
+10parts20336MASS+512control; package-reviewed candidato previo descartado.
+Plan docs/doom-resident-info-physical-plan-r310.md. Journaldoom-resident-info-r310.json
+NO creado. Staticfalse/r167,C#Static/Largefalse,otrosdeploymentgatesfalse.
+Helper cerrado5122d49cbf9c7e640034be416e3035b20f6cf3e3366a3b6f23039a2aa1e7bf70.
+14casos LuaS3 con archivos/widgets mockPASS, paquete/pins/tamper/gatePASS,
+build/prepareOfflinePASS. Emulador estaba apagado, PID11676/QEMU/puertos ausentes;
+registro antiguo marcadoexited y emulator-host start con permiso, PID10984.
+Nueva sesión exec94909 conserva launcher; no hardware. No módulos/nodos probados.
+CInfoSINlecturaalabrir,SINtimer/shell/escrituras/STOP/JOIN/rmmod/carga/descarga.
+READ C1 lee registro/lease/capture1byte yctl128+EOF conclosefinally, antes/después
+registryestable. 3páginas de6filas, MODEsoloUI. Preview3barrasAMARILLAS.
+P1 REGOWN/LEASE/CAPTURE/COPEN/CREAD/CCLOSE;P2SEQ/STARTED/READY/FINISHED/JOINED/ERROR;
+P3REASON/CODE/PEAK/ALLOC/FREED/CLEANUP. Punto/códigoetapaerror. Datoscleanup
+solodefinidosjoined1. Usuario debe anotar/fotografiar3páginas,volverhabitualmenús.
+No repetir/reabrirTrace/RAM ni borrar957/963; siguiente payload lectura NO autorizado
+todavía. Solo commitlocal. No push/CI/repeticiónrutina.
+
 **Actual R309: DoomTrace ERROR30 AL ABRIR; no START reportado.**
 FREE/MAX ceros son valores iniciales, NO medición RAM: view.ram solo en START.
 Control flow implica recuperación residente + tick con finished==1; checkpoint30

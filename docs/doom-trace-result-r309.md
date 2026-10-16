@@ -1,8 +1,8 @@
 # R309: DoomTrace abre con ERROR30; RAM aún sin medir
 
 El usuario informa rojo/ERROR30 al abrir DoomTrace y ceros en FREE/MAX.
-No informa haber pulsado START. CLOSED adicional y retorno al menú siguen
-pendientes de aclaración; se solicitaron sin reabrir la prueba.
+No informa haber pulsado START. Después confirmó que no apareció CLOSED y
+que pudo volver a su esfera y usar los menús normalmente.
 No se envió ningún comando nuevo al reloj después del reporte.
 
 En el código instalado, recover comprueba registro/lease/estado del residente
@@ -23,3 +23,7 @@ las operaciones de cierre y obtener estado C/cleanup con una lectura acotada,
 sin repetir carga, JOIN ni rmmod a ciegas. No reducir guards de identidad,
 balance o cierre para permitir START. No reabrir DoomTrace/DoomRAM, borrar957/963,
 reiniciar o forzar descarga. No hay nuevo payload físico aprobado por este reporte.
+
+Preparado en PC [CInfo R310](doom-resident-info-physical-plan-r310.md), una
+captura de solo lectura del registro, lease, presencia de captura y control C.
+No se ha enviado al reloj y requiere revisar su plan antes del ensayo.

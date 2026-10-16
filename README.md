@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R310:** [CInfo preparado en PC](docs/doom-resident-info-physical-plan-r310.md)
+para leer el estado del residente y sus contadores en una captura, sin comandos
+de carga/descarga. Pendiente aprobación física. Usuario confirma menús normales
+y ausencia de CLOSED tras ERROR30.
+
 **Actual R309:** [DoomTrace abrió con ERROR30](docs/doom-trace-result-r309.md)
 durante la recuperación/cierre del C anterior. Falta localizar el subpaso;
 los ceros de FREE/MAX son valores iniciales, sin medición de RAM todavía.
