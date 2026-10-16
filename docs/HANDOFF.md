@@ -1,5 +1,22 @@
 # Retomar el proyecto
 
+**Actual R299: DoomStill instalado INACTIVO; ensayo manual ya autorizado pendiente respuesta.**
+docs/doom-snapshot-install-r299.md. UNinstallr298 completóRegisteredInactive:
+15parts24frames30400tx,close/workerexittrue0. FinallyNodefalse/r167+C#Staticfalse,
+rebuild/testpackageclosedPASS,Largefalseintacto. HelpercerradoSHA
+7b93832cea2a92fc3824568e8ad4fe3b38e2d51a6f26b74b782ce5e364390327.
+Catálogoindependiente14entradas,13actualespreviasIDs/flags/selecciónintactos,
+carrierpresente,DoomStill365219959inactivo/eliminable,1activa0unknown,cierretrue.
+Journal tools/local/pc-rfcomm/doom-snapshot-r298.json EXISTE; no borrar/recrear.
+Artifacts/doom-snapshot-physical-r299/install-result.json(posibleUTF16LE),catalog-after.json.
+Preguntaasyncyaenviada: DoomStill4barrasMAGENTA,PNG4colores/cuadrículaANTESSTART;
+siestábien START1/CHECKINGdespierto/PAUSEDobservar5s (fullframeofranjabasura),
+sincontroles,EXITantes30s/CLOSED+cuadrícula,volverhabitualmenús/corona.
+SiPNGmalNOSTART,siERROR/vacío/dormidaNOrepetir/reabrir. Esperarrespuesta.
+NO pedirautorizaciónotra para mismoensayo YAaprobado. No declararcausa/fix.
+GatesPCcerrados no deshabilitanSTARTmanualinstalado;marcaunusopropia.
+No comandosfísicosextra porrutina. Solo commitlocal NO push/CIremota.
+
 **Actual R297/R298: FOTOS CONFIRMAN RENDER CORRUPTO; diagnóstico congelado listo SOLOPC.**
 Usuario fotos:solofranjaarribamarcadaesDoom,restobug. Assistantreconocióvaloración
 optimista. NOHUDnormal, NOframecompleto/MVPvisual. docs/doom-render-corruption-r297.md.

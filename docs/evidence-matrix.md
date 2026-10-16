@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**Actual R299:** [DoomStill instalado inactivo](doom-snapshot-install-r299.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Snapshot registrado inactivo y13entradas previas conservadas | M2315W1/FW2.2.86 |15partes,RegisteredInactive, catálogo independiente14entradas | CONFIRMADO EN RW4 | Alta para catálogo | Sí | Cierre y gates restaurados; render manual pendiente |
+| PNG frente a frame fijo distingue la causa física | Unidad física | Instrucciones enviadas, sin resultado | SIN EVIDENCIA | Pendiente | No | No declarar fix o causa de la corrupción |
+
 **Actual R297/R298:** [Corrupción confirmada](doom-render-corruption-r297.md), [snapshot PC](doom-snapshot-physical-plan-r298.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R299:** [DoomStill instalado; comparación manual pendiente](docs/doom-snapshot-install-r299.md).
+Referencia PNG frente a un frame de Doom pausado, sin renovar Image. Ensayo
+autorizado, launcher inactivo, gates PC cerrados. Aún sin resultado ni fix.
+
 **Actual R297/R298: motor funcionando, render físico corrupto.**
 [Las fotografías](docs/doom-render-corruption-r297.md) confirman que solo una
 franja muestra Doom y el resto son artefactos. No se ha logrado el frame completo

@@ -1,5 +1,9 @@
 # R298: imagen de Doom pausada, diagnóstico pendiente de aprobación
 
+**Actualización R299:** ensayo autorizado e instalación inactiva completada.
+[Observación manual pendiente](doom-snapshot-install-r299.md). No repetir envío.
+El texto siguiente conserva el plan aprobado.
+
 **No instalado, sin nueva ejecución física.** Propuesta: una instalación
 inactiva y UN arranque manual con imagen congelada, seguido de EXIT y retorno.
 Es diagnóstico, no un parche de render confirmado. Reutiliza sin modificar
