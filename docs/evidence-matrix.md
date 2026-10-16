@@ -1,5 +1,10 @@
 # Matriz de evidencia
 
+**Actual R314:** [CExit registrada inactiva](doom-resident-close-install-r314.md),
+catálogo independiente16entradas conserva15previas/selección; carriers presentes,
+cierre/worker confirmados, gates cerrados. Registro confirmado, contenido extraído
+sin autenticar. Un cierre manual autorizado pendiente, sin evidencia nueva de retiroC.
+
 **Actual R313:** [CExit solo PC](doom-resident-close-physical-plan-r313.md),
 15casos LuaS3 con C/shell/widgets simulados verifican secuencia release/JOIN/
 balance/retirada y parada al primer rechazo, con etapas y errno. Paquete32recursos

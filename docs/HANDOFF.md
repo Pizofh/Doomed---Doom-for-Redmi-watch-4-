@@ -1,5 +1,21 @@
 # Retomar el proyecto
 
+**Actual R314: CExit instalada INACTIVA; UN CLOSE C manual YAautorizado pendiente.**
+Usuario«si»aprobóR313. UNinstallRegisteredInactive12parts21frames24747TX,
+close/workertrueexit0. FinallyStaticfalse/r167,C#Staticfalse,otrosgatescerrados,
+rebuild/testpaqueteclosedPASS. Helper0d40ce68fb195140ca4e884a5305709ccba95df7f210a8c10db0f4e8aed50f12.
+Catálogoindependiente16vs15previas,flags/selecciónpreservados,owninactivo/eliminable,
+WAD963/ELF957presentes,1activa0unknown,close/workertrue.contentVerifiedfalse.
+Noactivación/C commandsdesdePC. docs/doom-resident-close-install-r314.md.
+Journaldoom-resident-close-r313.json EXISTE NOrecrear/reintentar. Artifacts
+doom-resident-close-physical-r314/install-result.json(posibleUTF16LE),catalog-after.json.
+SiguienteusuarioCExit4barrasNARANJAS,C CLOSE,puntogris,CLOSE C1,anotarcódigo/color+
+3páginasMODE(P1REGOWN/LEASE/EXITCODE/COPEN/CREAD/CCLOSE;P2SEQ/STARTED/READY/FINISHED/
+JOINED/ERROR;P3REASON/IOERR/PEAK/ALLOC/FREED/CLEANUP),habitual+menús/corona.
+No pedir otra autorización para ese ensayo. FallaUI/errorNOrepetir/reabrir;
+NOSTARTDoom/Trace/RAM/reboot/borrar957/963/cambiarvínculo. RetiroCpendiente.
+Solo commitlocal, nopush/CI/repeticiónrutina.
+
 **Actual R313: CExit SOLO PC listo, pendiente aprobación UNinstall+UN CLOSE C.**
 User«ok»trasR312 dio continuarPC, NO aprobación física específica nueva todavía.
 Plan docs/doom-resident-close-physical-plan-r313.md. ID36521995424176B32recursos,

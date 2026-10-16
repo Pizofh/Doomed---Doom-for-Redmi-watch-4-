@@ -1,5 +1,9 @@
 # R313: CExit, cierre único y localizado del residente terminado
 
+**Actualización R314:** usuario autorizó; [instalada inactiva](doom-resident-close-install-r314.md),
+catálogo previo conservado y gates restaurados. UN CLOSE C manual autorizado
+pendiente. El estado soloPC de abajo corresponde a la preparación previa.
+
 **Solo PC, pendiente de autorización física.** Una instalación y un toque
 CLOSE C, observado con batería≥50%. No prueba Doom ni instala otro módulo.
 Responde a CInfo: registro/lease propios, FINISHED1/JOINED0/ERROR0, menús normales.
