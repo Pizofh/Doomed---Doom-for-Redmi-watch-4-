@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R313:** [CExit preparada en PC](docs/doom-resident-close-physical-plan-r313.md)
+para un cierre del residente con etapas/errno y parada al primer fallo.
+Sin nuevo C o arranque de Doom; aprobación física pendiente. Quince casos
+simulados y revisión del paquete pasan; aún no confirma corrección física.
+
 **Actual R312:** [CInfo confirma hilo terminado y JOIN pendiente](docs/doom-resident-info-result-r312.md).
 El módulo sigue residente, con registro/lease propios y consulta cerrada bien.
 El usuario volvió a su esfera y menús normales. Falta distinguir liberación

@@ -1,5 +1,11 @@
 # Matriz de evidencia
 
+**Actual R313:** [CExit solo PC](doom-resident-close-physical-plan-r313.md),
+15casos LuaS3 con C/shell/widgets simulados verifican secuencia release/JOIN/
+balance/retirada y parada al primer rechazo, con etapas y errno. Paquete32recursos
+y gate cerrado verificados. No nueva ejecución física, sin causa de bloqueo
+ni retiro físico confirmados. Aprobación del ensayo pendiente.
+
 **Actual R312:** [fotos CInfo](doom-resident-info-result-r312.md) confirman
 REG OWN/LEASE=1, lectura/cierre=1, FINISHED=1/JOINED=0/ERROR=0, SEQUENCE=7,
 código00 y punto verde. Módulo presente; no descarga. Usuario confirma retorno

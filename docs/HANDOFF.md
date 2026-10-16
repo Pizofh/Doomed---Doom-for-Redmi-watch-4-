@@ -1,5 +1,32 @@
 # Retomar el proyecto
 
+**Actual R313: CExit SOLO PC listo, pendiente aprobación UNinstall+UN CLOSE C.**
+User«ok»trasR312 dio continuarPC, NO aprobación física específica nueva todavía.
+Plan docs/doom-resident-close-physical-plan-r313.md. ID36521995424176B32recursos,
+SHA209350fb388977c248e55571e21aa544ac00beed3e8ee4a0854354df2b61c584,
+source3e78cb58f1309a9209cc938a2db200e619269459b92891561f83d20b8d88ec22.
+Artifactartifacts/doom-resident-close-r313/package-final/CExit-id-only.face.
+12parts24430MASS+512control. Journaldoom-resident-close-r313.json NOcreado.
+GatesStaticfalse/r167,C#Static/Largefalse,otrosdeploymentfalse. HelperclosedSHA
+d5b5420d0393b0cf2ad7c5ee822e07dcd8933cebe2072e15077a8c1c81173ce1.
+15LuaS3 casos con C/shell/files/widgetsMOCKPASS: cierres/busy/owner/balance/cleanup/
+preconditions/rmmod/node/captureguard,UIidle/once. TestUIharness inicialmente
+syntaxporcomentariosplit, corregido y15PASS; nofallopayload. Package/readback32/
+pins/tamper/gatePASS; build/prepareOfflinePASS. No comandos físicos trasR312.
+CExit preview4barrasNARANJAS,C CLOSE/CLOSE C/MODE. Inertealabrir,SINtimer/GCnative.
+Botón1:captureCInfo ownlease/finished1/error0; sijoined0 command7UNA,verifyseq,
+command5UNA,verifyseq/join; sijoined1skipambos; balance/error0+registry/lease
+antesde1rmmod. ShellcapturasSOLOui954/close-shell.txt,siocupadopara,max8192,
+exigerespuestavacía+registryempty+lsdevnodosausentes,retira957leaseexacta.
+NoSTART/STOP/cargarotroC/Doom. C owner/refcount/slotguards intactos. Primerfallo
+termina, noretry/recoversafe/timer/rmmodforzado. IOERR abs(errno),9999unknown.
+P1REGOWN/LEASE/EXITCODE/COPEN/CREAD/CCLOSE;P2SEQ/STARTED/READY/FINISHED/JOINED/ERROR;
+P3REASON/IOERR/PEAK/ALLOC/FREED/CLEANUP. Code10..14op7,20..24op5,30balance,
+31identity32rmmod33registry34nodes35lease; snapshotfallos1..7,preconditions8/9.
+Solo00verde+postconditionsasegura retiro;failurecamposúltimasnapshot,noactual.
+Manual1CLOSEy3páginasMODE,habitualmenús; NOreabrir/STARTDoominclusotraséxito
+sinrevisión. No marca persistente pero eso NOautoriza repetir. Solo commitlocal.
+
 **Actual R312: CInfo lectura física OK; FINISHED1/JOINED0/ERROR0, residente.**
 4fotos=P1/P2 repetidas,noP3. P1REGOWN1/LEASE1/CAPTURE0/COPEN1/CREAD1/CCLOSE1.
 P2SEQ7/STARTED1/READY1/FINISHED1/JOINED0/ERROR0. Código00/puntoverde, registryestable.
