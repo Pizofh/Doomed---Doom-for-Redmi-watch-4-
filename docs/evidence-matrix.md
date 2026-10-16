@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R316/R317:** [lector multidescriptor candidato](doom-png-lifecycle-r316-r317.md).
+Consulta get_info S3 con lector abierto: versión anterior rechaza, nueva pasa.
+114checks de VFS/posiciones/guardas y build ARMv8-M sin imports. AP local muestra
+una ruta PNG de error sin close; EIO+retorno sin close reproducidos con código
+propio en S3. No se ejecutó loader RW4, hilos/motor reales ni píxeles decodificados.
+La causa física y la corrección física siguen sin confirmar; candidato sin paquete
+ni autorización/instalación, módulo antiguo aún residente.
+
 **Actual R315:** [fotos CExit](doom-resident-close-result-r315.md) muestran
 etapa12/IOERR16: rechazo en write del command7. JOIN/rmmod no ejecutados por
 CExit según su control de flujo. Retorno/menús/corona confirmados por usuario.

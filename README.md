@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R316/R317:** [corrección de lectores PNG en C probada y compilada en PC](docs/doom-png-lifecycle-r316-r317.md).
+Un caso de consulta con lector abierto falla antes y pasa con posiciones
+independientes;114checks pasan en S3. El ejecutable candidato aún no se ha
+instalado y no confirma corrección del fallo físico.
+
 **Actual R315:** [CExit localiza rechazo16 al liberar imagen](docs/doom-resident-close-result-r315.md).
 Se detuvo antes de JOIN/descarga; menús/corona normales. Se aconsejó retirar
 CInfo/CExit inactivas para espacio, conservando DoomRAM y DoomLauncher.

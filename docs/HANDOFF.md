@@ -1,5 +1,36 @@
 # Retomar el proyecto
 
+**Actual R316/R317: corrección C multilector probada/compilada SOLO PC.**
+docs/doom-png-lifecycle-r316-r317.md. APstaticPNGinfo643ac/open642c4/close642b8,
+loader61e60 erroresread61ec8/short61ece retornan61ed0 SINclose61ee4: rutaestática
+confirmada, NO probarocurrenciaphysical/causalectura. Conversiónpng->bin3e8b8c
+existepero NOvinculadaalLuaactual. No confundirJPEGinit5de54conPNGinit64448.
+EmuladorR316base72checks(realVFS/S3LVGLinfo): heldreader bloquea get_info, fullPNG
+goldenexacto yEIOinyectado+sinclose retiene busy. R317114checks: nuevoslectores
+hasta8, posicionesfdindependientes, actualget_info conheldreaderPASA, limit8,
+close/unloadguards,UIowneropen/read/seek; faultEIOmodelado(NOAPejecutado).
+Nuevo tools/doom-png-readers-source-r316.mjs genera transportdesdePNGoriginal,
+NOmodificaoriginal/ELF304. Leaseframeúnica,refcountatomic,fdpos8/12,cookie20,
+sinheapnuevo/bindings niwritesframes; mantiene JOIN/unloadbloqueadosconlectores.
+Closeanyownerpermitefinalcallback;read/open/seekUIownertrasSTART. NOpruebafddup.
+Testmodules/temporales/nodosS3retirados; worker/OSthreadmock,norenderpixels/
+realDoom niRW4. Newtools test-rw4-png-loader-r316.mjs,test-rw4-png-readers-r317.mjs,
+review-rw4-png-lifecycle-r316.mjs modos fijos. EmuladorreabiertoalverPID10984/QEMU/
+puertosausentes: nuevoPID3532 sesión5298; antiguo marcadoexited. NoUSB/watch.
+Build FINAL build/doom-png-readers-r317/final/doom.elf605180B
+SHA8de1b31c8fe82c4fe3b52eb780e424cbdeca674c539557b58f20941093dc384f,
+transportd0fe36a03463348fb78a8298a97864a4bfbc9adf36ce4062d4897d5bfaba70c0.
+Mismoengine/libc/bindings523ce18…/WAD963/codec/zone4MiB; sinimports/nuevosbindings.
+Buildrepro980e13(originalR285),NOreprodelactualPNG6a5d43. Primera compilación
+parcialbuild/.../root fallóindentación, conservarNOusar; final/review.json válido.
+Pruebas artefacts/research/png-lifecycle-r316/{loader-tests,readers-tests}.json.
+NO paquete/launcher nuevo preparado/aprobado/instalado. Gatescerrados/journals
+intactos; viejoCresidenteNOreparableporestenuevoELF. Siguienteintegrarlauncher/
+installerpequeño agrupado+plan sustituciónnormal(quizárestartstockobservado,
+NOhacerlosinautorizaciónconcreta). No physicalrootcause/fixclaim aún, no más
+minidiagnósticosidénticos/noresetrefs/forzarrmmod/reabrirDoom/borrar957/963.
+CInfo/CExitborradosNOconfirmadosexplícitos; noconsultacatálogoextra. Solo commitlocal.
+
 **Actual R315: CExit etapa12/IOERR16; falla WRITE command7, NO JOIN/rmmod.**
 Fotos3páginas: REGOWN1/LEASE1/EXITCODE0/COPEN1/CREAD1/CCLOSE1;SEQ7/STARTED1/
 READY1/FINISHED1/JOINED0/ERROR0;REASON0/IOERR16/PEAK0/ALLOC0/FREED0/CLEANUP0.
