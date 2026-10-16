@@ -1,5 +1,10 @@
 # R301: DoomPNG, captura directa a PNG; pendiente de autorización
 
+**Actualización R302:** usuario autorizó el plan; instalación inactiva
+confirmada, [ensayo manual pendiente](doom-frame-png-install-r302.md).
+No repetir envío ni pedir aprobación nueva para el mismo ensayo autorizado.
+Lo siguiente conserva el plan aprobado.
+
 Meta única: observar un frame completo por una ruta diferente de
 `/dev/rw4doomimage.bin`. No es una corrección confirmada ni una solución de
 streaming. Solo hubo trabajo en PC después de la respuesta R300.

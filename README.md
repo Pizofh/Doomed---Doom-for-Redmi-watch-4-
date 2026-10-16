@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R302:** [DoomPNG instalada inactiva](docs/doom-frame-png-install-r302.md).
+Catálogo conserva las14esferas anteriores; bloqueos PC restaurados.
+Ensayo visual autorizado y pendiente; todavía no hay corrección confirmada.
+
 **Actual R300/R301:** [el frame fijo también sale corrupto](docs/doom-frozen-result-r300.md).
 La renovación rápida no es necesaria para el fallo. [DoomPNG preparado en PC](docs/doom-frame-png-physical-plan-r301.md)
 leerá una captura raw con checksum y la convertirá a PNG, conservando ELF/WAD.

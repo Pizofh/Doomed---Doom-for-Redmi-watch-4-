@@ -1,5 +1,20 @@
 # Retomar el proyecto
 
+**Actual R302: DoomPNG instalada INACTIVA; ensayo manual YAautorizado pendiente.**
+Usuario«ok» aprobó planR301. UNinstallr301 RegisteredInactive,16parts25frames/
+32351TX,close/workertrue0. Finally Nodefalse/r167+C#Staticfalse/Largefalse,
+rebuild/testpackageclosedPASS. HelpercerradoSHAff8173ecd2b6c14455ac1f7d9a73efcf63d2861148c563cddbe26c554468f594.
+Consultaindependiente15entradas,14previasflags/selecciónintactos,owninactivo/
+eliminable,carrierpresente,1activa0unknown,cierretrue. docs/doom-frame-png-install-r302.md.
+Journal tools/local/pc-rfcomm/doom-frame-png-r301.json EXISTE no borrar/recrear.
+artifacts/doom-frame-png-physical-r302/install-result.json(posibleUTF16LE),catalog-after.json.
+Instrucción: DoomPNG3barrasCIAN, referencia limpia antesSTART, START1,
+CHECKINGdespierto~CRC+5sconversión, PAUSEDobservar5sfullframe/franja, sincontroles,
+EXITantes30s/CLOSEDref,habitualmenús/corona. SiERROR/vacío/dormidaNOreabrir/repetir.
+NO pedirautorizaciónotra para mismoensayo, NOinstalarotra vez. Resultado pendiente.
+GatesPCcerrados no deshabilitanSTARTmanualinstalado. No afirmarfix todavía.
+Solo commitlocal, NOpush/CIremota. No comandos extra por rutina.
+
 **Actual R300/R301: DoomStill congelado sigue corrupto; DoomPNG listo SOLO PC.**
 Usuario: «todo ok excepto la imagen», sigue franja pequeña/basura dentro del
 recuadro. Reporte global favorable al resto del lote; sin estados individuales.

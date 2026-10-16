@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**Actual R302:** [DoomPNG instalada](doom-frame-png-install-r302.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| DoomPNG registrada inactiva,14esferas previas conservadas | M2315W1/FW2.2.86 | RegisteredInactive y catálogo independiente15entradas | CONFIRMADO EN RW4 | Alta para catálogo | Sí | Conexión cerrada, gates restaurados; START manual pendiente |
+| Captura PNG de Doom físicamente correcta | Misma unidad | Sin resultado manual aún | SIN EVIDENCIA | Pendiente | No | Ensayo ya autorizado, no repetir envío |
+
 **Actual R300/R301:** [frame fijo corrupto](doom-frozen-result-r300.md), [captura PNG preparada](doom-frame-png-physical-plan-r301.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
