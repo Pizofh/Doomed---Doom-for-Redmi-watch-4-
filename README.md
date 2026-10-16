@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R325:** [DoomRefs preparado con contadores C](docs/doom-refs-physical-plan-r325.md).
+194 checks C/VFS y51casos Lua pasan en S3; versión2 y páginas MODE sin IO.
+No enviado al reloj; diagnóstico de lectores, sin corrección física demostrada.
+
 **Actual R323:** [DoomFault identifica write7/errno16 al renovar imagen](docs/doom-fault-result-r323.md).
 Una Image ya devolvió320x200; falla liberar la anterior y después la limpieza.
 Retorno/menús disponibles, descarga C sin confirmar. No repetir el ensayo.

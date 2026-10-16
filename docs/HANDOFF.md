@@ -1,5 +1,45 @@
 # Retomar el proyecto
 
+**R325: DoomRefs preparado SOLO PC, pendiente de aprobación física.**
+Plan concreto: docs/doom-refs-physical-plan-r325.md. Un reinicio normal stock
+observado para retirar rw4png321 pendiente, un envío inactivo y un START con
+READY; ERROR: FIRST/LAST/DIMS y cuatro páginas MODE cached; CLOSED: no repetir.
+No hay aprobación de ese plan todavía. Ninguna operación física nueva.
+
+Paquete build/doom-refs-r325/package/DoomRefs-id-only.face, ID365219951,
+644796bytes/46recursos, SHA f514f46706ec100481af51453dcf3b54f63b24383145fce17fdd81f1a136a8c0.
+ELF build/doom-image-counters-r325/doom.elf,605684bytes,
+SHA94531cff5e62e5824b272b11cbbe7ee67df0479754b23581d6caca1e037370af.
+Lua21175bytes/SHAfa662c5a7c2c52433cf709a7f0200de3cd7c85f30890e76249c6a1468140bb69.
+Nuevo módulo rw4png325/base951, WAD compartido963. Mismos bindings/codec/engine.
+
+tools/doom-image-counters-source-r325.mjs deriva R317 con wrappers de callbacks;
+11atomics/44bytes BSS, sin heap/reset refs/cierre ajeno ni bindings nuevos.
+Packet128bytes VERSION2: words1–20 originales,21–32 refs/openOK/closeOK/closeErr/
+readCalls/readErr/seekErr/firstC/lastC/maxN/releaseErr/lastPosition. First/lastC
+site*256+errno:1open2close3read4seek5release. Contadores individuales atómicos,
+snapshot no transaccional. Rechaza v1. No comandos nuevos.
+tools/doom-refs-source-r325.mjs conserva FIRST/LAST/DIMS, guarda última lectura
+de estado YA programada antes de cleanup. MODE cuatro páginas solo memoria,
+sin consultas adicionales. Números8decimales/99999999 sin captura o saturado.
+
+Tests C194checks S3 VFS/stdio/get_info real; worker/thread/motor simulados,
+EIO explícito en fixture, no loader RW4 ni pixelsdecoded. Ctestmodule
+0440c54e56d60386a1fa05dc132d8aa74fe5afa5a7b14fff86588893083d0758 retirado,
+nodos/temporales ausentes. Primera compilación de fixture tuvo BOM intermedio,
+corregido antes de cargar. Source producción97fdddd8f72fa39a67fa4a1984f1071da9078fde558d542d3ab2cd0f6c5cd6ce;
+sourceinyectado de test distinto. artifacts/research/image-counters-r325/counters-tests.json.
+Lua51casos(48previos+3), mocks; UI reproduce24031607/30031607/320x200 y muestra
+12counters enMODE sinIO. artifacts/doom-refs-r325/{ui-tests,package-tests}.json.
+Paquete7escenarios/pins/gates y journalsviejos protegidos; R321package8pasa.
+
+CLI tools/pc-doom-refs-r325.mjs prepare ->OfflinePrepared316parts650826wire.
+Gate PHYSICAL_DEPLOYMENT_REVIEWED=false + PHYSICAL_REFS_R325_REVIEWED=false;
+C#Large=false. Nuevo journal refs-r325.jsonl no creado físicamente. Tras
+aprobación/retorno normal de reboot habilitar solo esos gates/Large, un install,
+finally cerrar/rebuild/test. No retry/resume/autoactivate/delete. El residente
+actual sigue siendo rw4png321, no ejecutar nuevo C sobre él ni reabrir pruebas.
+
 **R324: revisión técnica de callbacks, sin nueva prueba física.**
 docs/doom-reader-lifetime-r324.md y tools/review-rw4-image-lifetime-r324.mjs
 (modos fixed follow/finish/core), outputs AP privados ignorados. Driver `/`
