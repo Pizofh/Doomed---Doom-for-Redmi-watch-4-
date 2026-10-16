@@ -1,5 +1,11 @@
 # DOOM en Redmi Watch 4
 
+**Actual R318:** [DoomIO preparado y probado en PC](docs/doom-readers-physical-plan-r318.md):
+637 KB con C multilector, controles, códigos visibles y limpieza sin reintentos.
+36 casos Lua y siete escenarios de protocolo simulado pasan. Pendiente de
+aprobar reinicio normal observado, instalación y dos ciclos condicionados;
+sin nuevo envío al reloj ni confirmación de corrección física.
+
 **Actual R316/R317:** [corrección de lectores PNG en C probada y compilada en PC](docs/doom-png-lifecycle-r316-r317.md).
 Un caso de consulta con lector abierto falla antes y pasa con posiciones
 independientes;114checks pasan en S3. El ejecutable candidato aún no se ha

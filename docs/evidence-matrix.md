@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R318:** [DoomIO preparado](doom-readers-physical-plan-r318.md),
+ID365219953, 637108 bytes; ELF R317 y WAD existente. 22+7+7 casos Lua
+con IO/nativo/widgets simulados: juego/reinicio, STOP previo a release,
+fallos enclavados y no adopción del residente. 30 recursos exactos, siete
+escenarios de protocolo y perfil R304 anterior pasan; gates cerrados y nuevo
+journal separado. No se reinició el reloj ni se envió el paquete. El plan
+agrupa reinicio stock observado, una instalación y dos ciclos condicionados;
+aprobación física pendiente. Causa física y render/cierre nuevos sin confirmar.
+
 **Actual R316/R317:** [lector multidescriptor candidato](doom-png-lifecycle-r316-r317.md).
 Consulta get_info S3 con lector abierto: versión anterior rechaza, nueva pasa.
 114checks de VFS/posiciones/guardas y build ARMv8-M sin imports. AP local muestra

@@ -1,5 +1,36 @@
 # Retomar el proyecto
 
+**Actual R318: DoomIO listo SOLO PC; pedir aprobación concreta del plan.**
+Plan docs/doom-readers-physical-plan-r318.md: un reinicio NORMAL stock por el
+usuario desde su esfera habitual (NO reset de fábrica), un envío inactivo y
+hasta DOS ciclos manuales condicionados a CLOSED/imagen completa/menús normales.
+Nada físico ejecutado/autorizado en R318. Viejo rw4png304 sigue residente según
+última evidencia. No forzar refs/rmmod, repetir CExit/Trace/RAM ni cargar nuevo C.
+User deletion CInfo955/CExit954 sigue sin confirmación; se pueden quitar solo
+esas UI inactivas si falta cupo; conservar DoomLauncher963/WAD y DoomRAM957.
+Paquete build/doom-readers-r318/package/DoomIO-id-only.face, ID365219953,
+637108 bytes, SHA5fb7ec0b289a7492a0d97b3ef798de9aeba0003f2510be8c58b6d331d909a823.
+Lua9099594bee52dd635c048b38961423055556b8f7eb876481d4a5e3412b5d6abf;
+ELF R317 final 605180 bytes/8de1b31c8fe82c4fe3b52eb780e424cbdeca674c539557b58f20941093dc384f.
+Nuevo módulo rw4png318, mismos nodos PNG/control, own base953/lease/capture.
+Source tools/doom-readers-source-r318.mjs compone fuentes anteriores sin cambiar
+ensayos previos. STOP antes de release; fallo en presentación permite UN intento
+STOP+cleanup; fallos de cleanup enclavan ERROR sin retry desde Timer/GC. No adopta
+ningún residente: recover solo registro vacío o ERROR40. Digits: etapa/errno.
+Misma instancia segundo START omite CRC largo tras éxito; reopening verifica.
+36 Lua casos (22base/7juego/7fault) pasan en S3 interpreter con mocks; siete
+escenarios protocolo + gate cerrado + journal viejo protegido pasan. Test R304
+también pasa. Inicial test extendido falló por fixture que cambiaba callback ya
+capturado; se corrigió fixture y harness exige marcador FINAL, no solo exit0 de
+Lua. artifacts/doom-readers-r318/{ui-tests,package-tests}.json. 30 recursos exactos.
+Prepare: node tools/pc-doom-readers-r318.mjs prepare -> OfflinePrepared,312parts.
+Install bloqueado por PHYSICAL_DEPLOYMENT_REVIEWED=false y nuevo
+PHYSICAL_READERS_R318_REVIEWED=false; LargePhysicalReviewed=false en Probe.cs.
+Journal nuevo readers-r318.jsonl, NO EXISTE físico aún. No retry/resume aprobados.
+Tras autorización y retorno normal del reboot, habilitar SOLO gates apropiados,
+rebuild worker, un install, finally cerrar/rebuild/test. No abrir R304/static/etc.
+Sin push/CI remota/auditorías repetidas; conservar privacidad y solo commit local.
+
 **Actual R316/R317: corrección C multilector probada/compilada SOLO PC.**
 docs/doom-png-lifecycle-r316-r317.md. APstaticPNGinfo643ac/open642c4/close642b8,
 loader61e60 erroresread61ec8/short61ece retornan61ed0 SINclose61ee4: rutaestática

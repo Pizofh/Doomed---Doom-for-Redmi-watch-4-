@@ -3,11 +3,13 @@ import {PrivatePipe} from './pc-rfcomm-session.mjs';
 import {reviewedLargeExecutable} from './doom-upload-pc-pipe.mjs';
 const PHYSICAL_DEPLOYMENT_REVIEWED=false;
 const PHYSICAL_RAM_PNG_REVIEWED=false;
+const PHYSICAL_READERS_R318_REVIEWED=false;
 const PHYSICAL_RESUME_REVIEWED=false;
 const PHYSICAL_CONTROL_RETRY_REVIEWED=false;
 const endpoints=new WeakMap(),peers=new WeakSet(),fail=()=>{throw Error('DoomPhysicalGateClosed');};
 export function physicalDoomDeploymentEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED;}
 export function physicalDoomRamPngEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_RAM_PNG_REVIEWED;}
+export function physicalDoomReadersEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_READERS_R318_REVIEWED;}
 export function physicalDoomResumeEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_RESUME_REVIEWED;}
 export function physicalDoomControlRetryEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_CONTROL_RETRY_REVIEWED;}
 export function isReviewedDoomPeer(peer){return PHYSICAL_DEPLOYMENT_REVIEWED&&peers.has(peer);}
