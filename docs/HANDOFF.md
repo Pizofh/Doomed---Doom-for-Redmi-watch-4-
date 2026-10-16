@@ -1,5 +1,22 @@
 # Retomar el proyecto
 
+**Actual R305: DoomRAM instalada INACTIVA; DOS ciclos YAautorizados pendientes.**
+Usuario«utorizado» aprobóR304. UNinstallRegisteredInactive311parts319frames/
+640443TX,modeloFW/MD5/offset0bien,close/workertrue0. Finallydeployment/RAMPNG/
+resume/controlfalse,C#Large/Staticfalse,rebuild/gates+packagePASS. HelpercerradoSHA
+6759a08edfccaf8fecc5d16dbd73f6c3128d668cbc9c28f0b788664c6f6ab19b.
+Catálogoindependiente13vs12previasactuales, flags/selecciónintactos,owninactivo/
+eliminable,carrier365219963presente,1activa0unknown,cierretrue. NOexigir11estimado.
+docs/doom-ram-png-install-r305.md. Journaldoom-deployment/ram-png-r304.jsonl
+EXISTE; no borrar/recrear/reintentar; transfer.jsonlantiguointacto. Artifacts
+doom-ram-png-physical-r305/install-result.json(posibleUTF16LE),catalog-after.json.
+NO pedirautorizaciónotra para mismosDOS ciclosmanuales. DoomRAM5barrasNARANJAS,
+READY/START1/CHECKINGdespierto, PLAYINGfullimageMOVIMIENTO/controles/pausa,
+EXITantes30sCLOSED. Solosiprimerobien+CLOSED: SINsalirdeesferaSTART2(quick),
+EXITselectorhabitualmenús/corona. Antebasura/ERROR/vacío/suspensión/falloNOciclo2,
+NOrepetir/reabrir; volverdesdeAjustessiresponde. No tercertrial. Resultado pendiente,
+NOclaimfix/FPS. GatesPCcerrados no deshabilitanSTARTmanualinstalado. Solo commitlocal.
+
 **Actual R304: DoomRAM animado por PNG virtual listo SOLOPC, pendiente aprobación.**
 Usuario confirmó4borrados DoomStill/DoomRun/DoomPlay/MemInfo. Conteoesperado11
 desdeúltimo15, NOconsultadonuevamente. Preservar DoomLauncher365219963/WAD y

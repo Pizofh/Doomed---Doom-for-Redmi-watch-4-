@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R305:** [DoomRAM instalada inactiva](docs/doom-ram-png-install-r305.md).
+Catálogo previo conservado y bloqueos PC restaurados. Dos ciclos manuales
+autorizados pendientes de resultado; animación física todavía sin confirmar.
+
 **Actual R304:** [DoomRAM preparado para animación desde RAM](docs/doom-ram-png-physical-plan-r304.md).
 PNG virtual en C, controles y salida/reinicio, sin escribir frames a flash ni
 duplicar el WAD. Pruebas de C/VFS/Lua/transporte pasan; falta aprobación y

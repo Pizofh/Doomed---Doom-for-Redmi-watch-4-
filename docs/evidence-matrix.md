@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**Actual R305:** [DoomRAM instalada](doom-ram-png-install-r305.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| DoomRAM registrada inactiva,12entradas anteriores conservadas | M2315W1/FW2.2.86 | RegisteredInactive y catálogo independiente13entradas | CONFIRMADO EN RW4 | Alta para catálogo | Sí | Cierre/gates restaurados, C aún no iniciado por usuario |
+| Animación y segundo arranque correctos en DoomRAM | Unidad física | Ensayo manual autorizado pendiente | SIN EVIDENCIA | Pendiente | No | No repetir envío ni pedir otra aprobación para el mismo ensayo |
+
 **Actual R304:** [animación PNG desde RAM preparada](doom-ram-png-physical-plan-r304.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

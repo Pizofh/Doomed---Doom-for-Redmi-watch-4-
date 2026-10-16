@@ -1,5 +1,9 @@
 # R304: DoomRAM, animación por PNG virtual en RAM
 
+**Actualización R305:** autorización recibida e instalación inactiva confirmada;
+[dos ciclos manuales pendientes](doom-ram-png-install-r305.md). No repetir envío
+ni solicitar de nuevo autorización para esos ciclos. El resto es el plan aprobado.
+
 **Preparado solo en PC; sin autorización ni instalación física nueva.**
 Meta: imagen completa en movimiento, controles y salida/reinicio, agrupados
 en una instalación y dos ciclos manuales condicionados al éxito del primero.
