@@ -1,5 +1,17 @@
 # Retomar el proyecto
 
+**R324: revisión técnica de callbacks, sin nueva prueba física.**
+docs/doom-reader-lifetime-r324.md y tools/review-rw4-image-lifetime-r324.mjs
+(modos fixed follow/finish/core), outputs AP privados ignorados. Driver `/`
+registrado33faa->4488c, cache0, close33f18/read33efc/open33f28. Close llama
+POSIX64fac pero retorna0: puede ocultar fallo close, no se prueba ocurrencia.
+No confundir con driver recursos5f914c cuyo close vacío es intencionado.
+Método Lua objeto.delete5dff8c identificado por tabla19a3e0; según flag propio
+userdata+4 llama nativo vía5b42f8->1f404->1f234 directamente. No evidencia para
+afirmar que añadir una espera arregle3016. file_close4942f4 limpia f_priv
+DESPUÉS del callback, no antes. Faltan contadores C open/close/read/seek/ref
+para separar close oculto/lectura fallida/lector vivo. No payload/fix nuevo.
+
 **Actual R323: FIRST24031607/LAST30031607/DIMS03200200, ERROR.**
 Usuario puede volver/usar menú. docs/doom-fault-result-r323.md. Primero es
 etapa24/op3WRITE/errno16/command7 al renovarimagen trasdetach. DIMS320x200
