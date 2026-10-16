@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R321:** [recorder de primer/último fallo preparado](doom-fault-physical-plan-r321.md).
+48casos Lua S3 (IO/nativo/widgets simulados) incluyen UI completa con fallos de
+constructor, consulta de tamaño y dimensiones, frente a open/write/close de
+limpieza. Conserva FIRST inmutable y distingue LAST; sin retries trasERROR.
+Paquete35060bytes/32recursos, sin ELF/WAD, ocho escenarios de protocolo pasan;
+gates cerrados/journal separado. No envío, reboot ni C físico nuevo. No demuestra
+la causa original de3016 ni una corrección física del PNG.
+
 **Actual R320:** [reporte ERROR3016 de DoomIO](doom-readers-result-r320.md),
 retorno habitual/menús/corona confirmado. Etapa30 limpieza pre-JOIN; errno16
 puede ser apertura o escritura de control, sin distinguirlo. No retirada

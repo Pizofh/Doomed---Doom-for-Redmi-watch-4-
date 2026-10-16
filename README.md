@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R321:** [DoomFault preparado en PC](docs/doom-fault-physical-plan-r321.md),
+35 KB de Lua/imágenes que conservan primer/último fallo y dimensiones.
+48 casos Lua y ocho escenarios de protocolo simulado pasan. Reutiliza ELF/WAD
+instalados; no corrige aún el render. Ensayo físico pendiente de aprobación.
+
 **Actual R320:** [DoomIO falla con ERROR3016](docs/doom-readers-result-r320.md)
 tras CHECKING; esfera habitual, menús y corona normales. Se detuvo antes de
 JOIN/descarga. PC reproduce que ese código puede ocultar un fallo inicial;

@@ -1,5 +1,37 @@
 # Retomar el proyecto
 
+**Actual R321: DoomFault listo en PC; aprobación física pendiente.**
+Usuario «ok» autorizó continuar corrección PC trasR320. No aprobaron nuevo
+reboot/instalación/START. Plan concreto docs/doom-fault-physical-plan-r321.md:
+UN reinicio normal stock observado desdehabitual, UN envío inactivo, UN START
+condicionadoREADY, leer FIRST/LAST/DIMS o CLOSED y volver habitual/menús/corona.
+No ciclo2. Residente actual asumir rw4png318/base953; no reabrir/forzar/borrar.
+Paquete build/doom-fault-r321/package/DoomFault-id-only.face ID365219952,
+35060bytes/32recursos/SHA836cb01accfaf7a403c9629757ea8d5620586c140cd0cf8af4ae52d679718106.
+Lua20248bytes/SHA079e682cff9d4b6121b468df0790b7a89dc7464b5410e25abfeb847d312d01f2.
+NOELF/WAD incluidos. Reutiliza605180B ELF R317 instaladoenDoomIO953, mismohash
+8de1b31...; WAD963. Conservar953/963. Nuevo nombre módulo rw4png321, lease/capture
+enui_base952, sin tocarauxiliares953. Nativebase953 yui_base952 distintos.
+fault-record-r321.lua conserva snapshots numéricos primero/último (sinrawstrings)
+ywidth/height9999desconocido. FIRST/LAST ocho dígitos:etapa/op/errno/comando;
+DIMS ancho4alto4. Ops1openctl,2read,3write,4close,5setvbuf,6Imageconstructor,
+7get_img_size,8dimensiones,9delete,0sinIO. Captura antesdeclose, no duplica
+fault al safewrapper siya registrado; cleanupfaultenclavadoR318 intacto.
+Source tools/doom-fault-source-r321.mjs compone variante sin editar fuentes
+R318 niELF. Pruebas test-doom-fault-ui-r321.mjs:48casos(36previos+12nuevos),
+incluye UIbitmaprealcompuesta con mocks, camposfirst,last/dims y flagsselector.
+Paquete test-doom-fault-package-r321.mjs:8escenarios incluye faltaindependiente
+carrier953/963, journalsviejosprotegidos, pin/noELF/gateclosed. R318package7
+tambiénpasa. artifacts/doom-fault-r321/{ui-tests,package-tests}.json ignorados.
+CLI tools/pc-doom-fault-r321.mjs prepare ->OfflinePrepared18parts35428wire,
+sinjournal/radio. Installgate PHYSICAL_DEPLOYMENT_REVIEWED=false + nuevo
+PHYSICAL_FAULT_R321_REVIEWED=false, C#LargePhysicalReviewed=false. Nuevojournal
+fault-r321.jsonl (no físico creado); no resume/retry. Usa perfil grande porque
+35060 excede32768, NO ampliar staticbudget. Solo gatesfault/deployment/Large
+trasaprobación+retornoreboot; finallycerrar/rebuild/test. No envíoahora.
+No fixPNGclaim: permite diagnosticar primerfallooculto; no observación nueva
+del residente. Solo commitlocal, sin push/auditoríasrepetidas.
+
 **Actual R320: DoomIO ERROR3016, habitual/menús/corona normales confirmados.**
 docs/doom-readers-result-r320.md. No ciclo2/reabrir/envío/reboot después del
 reporte. Residente actual asumir rw4png318/base953, NO viejo304 (reboot previo

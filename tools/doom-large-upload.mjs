@@ -6,7 +6,7 @@ import {ccmEncrypt,packetNonce} from './rw4-xiaomi-protocol.mjs';
 import {isReviewedDoomPeer} from './doom-deployment-physical.mjs';
 const owned=new WeakMap(),hash=(b,a='sha256')=>createHash(a).update(b).digest('hex');
 const refuse=()=>{throw Error('DoomLargeUploadRefused');};
-function mint(b,id,kind){const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher:['review-ram-png-manual','review-readers-r318-manual'].includes(kind),physicalEnabled:false});owned.set(p,b);return p;}
+function mint(b,id,kind){const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher:['review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual'].includes(kind),physicalEnabled:false});owned.set(p,b);return p;}
 export function prepareDoomAssets(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==4807680||hash(raw)!=='387e6c80616296ca7c8727e1a356e169c5b3575e1f2c33d4c9e9a32729ffa7c9'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='167210065'||raw[49]!==0)refuse();
  const b=Buffer.from(raw);b.write('365219963',40,9,'ascii');
@@ -31,6 +31,11 @@ export function prepareDoomRamPng(raw){
 export function prepareDoomReaders(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==637108||hash(raw)!=='5fb7ec0b289a7492a0d97b3ef798de9aeba0003f2510be8c58b6d331d909a823'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365219953'||raw[49]!==0)refuse();
  return mint(Buffer.from(raw),'365219953','review-readers-r318-manual');
+}
+// Lua-only first/last-fault recorder, referencing the installed R318 ELF.
+export function prepareDoomFault(raw){
+ if(!Buffer.isBuffer(raw)||raw.length!==35060||hash(raw)!=='836cb01accfaf7a403c9629757ea8d5620586c140cd0cf8af4ae52d679718106'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365219952'||raw[49]!==0)refuse();
+ return mint(Buffer.from(raw),'365219952','review-fault-r321-manual');
 }
 // Reproducible, owned non-game bytes for public CI. Never an installable face.
 export function syntheticDoomUpload(size=4807680){if(![4807680,4827012,4827044].includes(size))refuse();const b=Buffer.alloc(size);for(let i=0;i<b.length;i++)b[i]=(i*29+(i>>>8))&255;Buffer.from('PC ONLY UPLOAD FIXTURE').copy(b);return mint(b,'365799998','synthetic-only');}
