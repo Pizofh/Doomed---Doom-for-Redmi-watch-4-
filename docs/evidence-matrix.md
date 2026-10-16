@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**Actual R319:** [DoomIO registrada inactiva](doom-readers-install-r319.md),
+tras reinicio/retorno normal confirmado por usuario. Un envío312partes/320frames,
+ACKMD5/offset0 y catálogo verificados; contenido no extraído/autenticado.
+Cierre/worker confirmados; gates restaurados y5589assertions del helper más
+siete escenarios de paquete pasan offline. Ensayo manual pendiente; no afirmar
+ausencia física del módulo anterior o corrección de render/cierre por el envío.
+
 **Actual R318:** [DoomIO preparado](doom-readers-physical-plan-r318.md),
 ID365219953, 637108 bytes; ELF R317 y WAD existente. 22+7+7 casos Lua
 con IO/nativo/widgets simulados: juego/reinicio, STOP previo a release,

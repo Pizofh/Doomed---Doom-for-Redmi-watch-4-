@@ -1,7 +1,14 @@
 # R318: DoomIO, ensayo agrupado del puente PNG multilector
 
-Preparado y probado en PC. **Pendiente de autorización física.** No se ha
-reiniciado, instalado ni enviado comandos al reloj durante esta revisión.
+**Actualización R319:** reinicio normal y retorno confirmados por el usuario;
+[instalación inactiva completada](doom-readers-install-r319.md), gates restaurados.
+Ensayo manual ya autorizado y solicitado, pendiente de resultado. No reenviar.
+El texto de preparación siguiente se conserva como plan aprobado.
+
+Preparado y probado en PC. **Autorizado por el usuario con «ok» tras la
+solicitud concreta de este plan. Pendiente de confirmar el reinicio normal,
+retorno habitual y disponibilidad para observar con batería >=50%.** No se ha
+reiniciado desde PC, instalado ni enviado comandos al reloj durante esta revisión.
 
 Objetivo: probar animación completa, controles, salida limpia y segundo inicio
 en una sola instalación. El cambio C permite lectores PNG simultáneos con

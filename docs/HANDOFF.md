@@ -1,6 +1,33 @@
 # Retomar el proyecto
 
-**Actual R318: DoomIO listo SOLO PC; pedir aprobación concreta del plan.**
+**Actual R319: DoomIO INSTALADA INACTIVA; esperar resultado manual autorizado.**
+Usuario confirmó reboot NORMAL, menús/corona normales, batería>=50%/observación.
+UN install completado RegisteredInactive,14previas,312parts/320frames/643358TX,
+ACKMD5offset0/chunk2048, cierre/workerexit0. No autoactivación, C desdePC, retry,
+resume, delete o consulta física extra. docs/doom-readers-install-r319.md.
+Finalmente restaurados deployment/readers/RAMPNG/resume/controlretry y C#Large/
+Static cerrados; rebuilt helper d10e34e0014e7990af06098745bb3a5d99daf62f43f4098e5a5eb4405533e9bd,
+5589 assertions0nativecalls + siete escenarios paquete/gates pasan.
+artifacts/doom-readers-physical-r319/{install-result,gates-restored}.json y
+install-once.ps1 ignorados. Journal readers-r318.jsonl EXISTE, no borrar/recrear.
+Se pidió async seleccionar DoomIO(NO DoomRAM), START1 con READY, CHECKING
+despierto, observar imagen completa animada/controles/pausa/EXIT<30s. Solo si
+CLOSED/todoOK, START2 sin salir de instancia, EXIT, habitual/selector/menús/corona.
+AnteERROR/basura/sueño/missingUI no ciclo2/reabrir; reportar cuatro dígitos
+etapa/errno. Ya autorizado, NO pedir permiso de nuevo ni enviar/reboot adicionales.
+Resultado visual/cierre/ausencia viejaC aún desconocidos; catálogo no los prueba.
+Solo commit local, sin CI/push; MAC/key/raw no impresos.
+
+**Actual R318: DoomIO autorizado; esperar confirmación del reinicio normal.**
+Usuario respondió «ok» al permiso concreto del plan R318. Se pidió por async
+reiniciar normalmente desde la esfera habitual, confirmar menús/corona,
+batería >=50% y observación disponible. TODAVÍA SIN RESPUESTA a esa pregunta.
+No repetir permiso del plan, no enviar hasta confirmar ese prerrequisito.
+Nuevo journal readers-r318.jsonl y watch.lock comprobados AUSENTES, gates
+cerrados. No hubo hardware, restart, build ni instalación en este turno.
+Abajo, el estado de preparación previo a esta aprobación:
+
+**R318: DoomIO preparado SOLO PC.**
 Plan docs/doom-readers-physical-plan-r318.md: un reinicio NORMAL stock por el
 usuario desde su esfera habitual (NO reset de fábrica), un envío inactivo y
 hasta DOS ciclos manuales condicionados a CLOSED/imagen completa/menús normales.

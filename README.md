@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R319:** [DoomIO instalada inactiva](docs/doom-readers-install-r319.md)
+tras reinicio normal confirmado. Un envío completado, bloqueos PC restaurados;
+ensayo manual autorizado pendiente. Imagen animada y limpieza física aún por comprobar.
+
 **Actual R318:** [DoomIO preparado y probado en PC](docs/doom-readers-physical-plan-r318.md):
 637 KB con C multilector, controles, códigos visibles y limpieza sin reintentos.
 36 casos Lua y siete escenarios de protocolo simulado pasan. Pendiente de
