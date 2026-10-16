@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R303:** [frame PNG completo correcto](doom-png-result-r303.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Doom estático completo correcto por PNG y retorno a menús/esfera | M2315W1/FW2.2.86 | Usuario confirma imagen completa y todo normal | CONFIRMADO EN RW4 | Alta para reporte | Sí, usuario | Área configurada320×200, sin prueba de animación o390×450 |
+| Ruta binaria asociada al fallo, frente a PNG | Misma unidad y ELF/WAD | Frame fijoBIN corrupto; captura raw→PNG correcta | INFERENCIA FUERTE | Alta para comparación | Sí | No identifica contrato/decoder exacto |
+| Memoria del reloj agotada | Unidad física | Usuario sospecha;15esferas en último catálogo | SIN EVIDENCIA | Pendiente | No | Posible cupo; no medir ni borrar por rutina |
+
 **Actual R302:** [DoomPNG instalada](doom-frame-png-install-r302.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

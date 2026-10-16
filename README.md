@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R303:** [DoomPNG muestra el frame completo correctamente](docs/doom-png-result-r303.md),
+con retorno a menús/esfera normal según el usuario. La ruta PNG valida la
+captura estática; queda corregir la animación mediante RAM, sin escribir
+frames continuos en flash. Conservar DoomLauncher, que almacena ELF/WAD.
+
 **Actual R302:** [DoomPNG instalada inactiva](docs/doom-frame-png-install-r302.md).
 Catálogo conserva las14esferas anteriores; bloqueos PC restaurados.
 Ensayo visual autorizado y pendiente; todavía no hay corrección confirmada.

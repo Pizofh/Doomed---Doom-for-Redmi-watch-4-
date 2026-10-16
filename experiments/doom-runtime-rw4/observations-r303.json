@@ -1,0 +1,23 @@
+{
+  "checkpoint": "R303",
+  "device": "M2315W1",
+  "firmware": "2.2.86",
+  "launcherId": "365219958",
+  "source": "User report after the authorized DoomPNG trial",
+  "fullDoomImageReportedCorrect": true,
+  "menusAndWatchfaceSwitchReportedNormal": true,
+  "authorizedBatchReportedOk": true,
+  "exitStatusIndividuallyReported": false,
+  "animationTestedByThisTrial": false,
+  "actual390x450FullScreenProven": false,
+  "rawFrameChecksumSuccessInferredFromProductionCodeAndImageDisplayed": true,
+  "binPresentationPathPrimarySuspect": true,
+  "exactBinDecoderRootCauseEstablished": false,
+  "userConcernAboutStorage": true,
+  "lastKnownCatalogCount": 15,
+  "filesystemFreeSpaceMeasured": false,
+  "manualRemovalAdvice": ["DoomStill", "DoomRun", "DoomPlay", "MemInfo"],
+  "preserve": ["DoomLauncher (365219963, shared ELF/WAD)", "DoomPNG (365219958, successful diagnostic)"],
+  "removalsPerformedOrConfirmed": false,
+  "newHardwareCommandsAfterReport": false
+}

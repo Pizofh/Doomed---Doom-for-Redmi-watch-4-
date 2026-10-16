@@ -1,5 +1,19 @@
 # Retomar el proyecto
 
+**Actual R303: DoomPNG FRAME COMPLETO CORRECTO, retorno normal confirmado.**
+Usuario: todo bien, Doom completo, menús/cambioesfera normales. Registra
+observations-r303.json y docs/doom-png-result-r303.md. Frame320x200, NO390x450
+demostrado ni animación/FPS nuevo. FNV/EOF/cierres inferidos por código antes
+Image; no mediciónindependiente. RutaBIN principal sospechosa, causaexactapendiente.
+NOescribir PNGcontinuamente enflash paraanimar. Próximameta animación porRAM.
+Ensayo R301/R302 consumido. Ningúncomandofísico trasreporte; gatescerrados.
+Usuario pregunta québorrar: desdehabitual puedeeliminar DoomStill/DoomRun/
+DoomPlay/MemInfo (365219959/961/960/962); NO borrar DoomLauncher365219963
+carrierELF/WAD4.8MB ni DoomPNG365219958 referenciaéxito. Últimocatálogo15;
+posiblecupo, espacioFS/RAM no medidos. Borrados NO ejecutados/confirmados.
+No tocarjournals ni exigirhistóricodecatálogo igual trasborrados manuales.
+Solo commitlocal, NOpush/CIremota. No nuevoensayofísico aprobado.
+
 **Actual R302: DoomPNG instalada INACTIVA; ensayo manual YAautorizado pendiente.**
 Usuario«ok» aprobó planR301. UNinstallr301 RegisteredInactive,16parts25frames/
 32351TX,close/workertrue0. Finally Nodefalse/r167+C#Staticfalse/Largefalse,

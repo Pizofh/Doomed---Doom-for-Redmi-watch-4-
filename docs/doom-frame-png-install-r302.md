@@ -1,5 +1,9 @@
 # R302: DoomPNG instalada inactiva; observación manual pendiente
 
+**Actualización R303:** ensayo completado; el usuario confirma Doom completo,
+menús y cambio de esfera normales. [Resultado y dependencias](doom-png-result-r303.md).
+No repetir el ensayo; las secciones siguientes conservan el registro previo.
+
 El usuario autorizó el [plan R301](doom-frame-png-physical-plan-r301.md) con
 «ok». Una ejecución de `install r301` terminó RegisteredInactive: ID365219958,
 31.704bytes, SHA256ae84530371510fd13e4e4803959c3fc954704ad3405fa6e4b285a0e9888d566c.
