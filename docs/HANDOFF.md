@@ -1,5 +1,21 @@
 # Retomar el proyecto
 
+**Actual R323: FIRST24031607/LAST30031607/DIMS03200200, ERROR.**
+Usuario puede volver/usar menú. docs/doom-fault-result-r323.md. Primero es
+etapa24/op3WRITE/errno16/command7 al renovarimagen trasdetach. DIMS320x200
+pruebaobjetoImagecreado/tamaño consultado antes; NOpruebapíxeles/animación.
+Luego cleanup30/write7/16 antesJOIN. STOPintentado porfallo24; finished1en
+cleanupsegúnflujo; descargaNOconfirmada. Asumir rw4png321 residente, baseELF953,
+lease/capture952,WAD963. No reabrir/START/reboot/forzarrmmod nuevos.
+Ahora primerfallo NOconstructor/getsize/opencontrol; foco lifecyclecache/reader
+retirement entreframes. Noatribuirreaderconcreto/closecookie/ram/guardassinprueba.
+Usuario pidequéborrar: aconsejado DoomTrace956+DoomRAM957 INACTIVAS desdehabitual,
+sinabrirlas. Ambasold304 borrables trasrebootprevio/registrovacío al cargar321,
+no dependenciesactuales(ELF953WAD963). ConservarDoomIO953,DoomFault952,
+DoomLauncher963. Delete manualaúnNOconfirmado; noinventarioredundante ni
+asumircountmenor. Borrarviejasliberaflash,no descarga321. Gatescerrados;
+sincomandofísiconuevo. Solo commitlocal.
+
 **Actual R322: DoomFault INSTALADA INACTIVA; esperar FIRST/LAST/DIMS.**
 Usuario confirmó restartnormal/menús/corona/batería>=50%/observación. UN install
 RegisteredInactive,catprevio15,18partes/26frames/35724TX,ACKMD5offset0/chunk2048,

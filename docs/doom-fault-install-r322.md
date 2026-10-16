@@ -1,5 +1,9 @@
 # R322: DoomFault instalada inactiva; un arranque manual pendiente
 
+**Actualización R323:** [FIRST24031607/LAST30031607/DIMS320x200](doom-fault-result-r323.md).
+ERROR al liberar imagen durante renovación; vuelta/menús disponibles. Sin
+segundo ciclo, JOIN o descarga confirmados. No repetir ni reabrir.
+
 Usuario aprobó el [plan R321](doom-fault-physical-plan-r321.md) con «ok» y
 confirmó reinicio normal, menús/corona normales, batería>=50% y disponibilidad
 para observar. Un único envío completó **RegisteredInactive**, sin activación

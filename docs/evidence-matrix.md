@@ -1,5 +1,12 @@
 # Matriz de evidencia
 
+**Actual R323:** [FIRST24031607/LAST30031607/DIMS03200200](doom-fault-result-r323.md).
+Primera falla write7/errno16 al retirar imagen para renovar, luego misma
+escritura en cleanup pre-JOIN. Image creó/consultó320x200; no evidencia de
+píxeles o animación correctos. Retorno/menús disponibles según usuario.
+Residente rw4png321 sin descarga confirmada; DoomTrace/DoomRAM aconsejadas
+para retiro manual, aún no confirmado. No nueva operación física.
+
 **Actual R322:** [DoomFault registrada inactiva](doom-fault-install-r322.md),
 18partes/26frames tras reinicio/retorno normal confirmado por usuario.
 Catálogo/ACKMD5/offset0 y cierre/worker verificados; contenido no autenticado.

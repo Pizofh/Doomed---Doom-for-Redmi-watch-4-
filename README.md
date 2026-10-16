@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R323:** [DoomFault identifica write7/errno16 al renovar imagen](docs/doom-fault-result-r323.md).
+Una Image ya devolvió320x200; falla liberar la anterior y después la limpieza.
+Retorno/menús disponibles, descarga C sin confirmar. No repetir el ensayo.
+
 **Actual R322:** [DoomFault instalada inactiva](docs/doom-fault-install-r322.md)
 tras reinicio normal confirmado; un envío completado y gates restaurados.
 Pendiente de un arranque manual autorizado para leer FIRST/LAST/DIMS.
