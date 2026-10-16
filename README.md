@@ -1,9 +1,10 @@
 # DOOM en Redmi Watch 4
 
-**Actual R296:** [Lote de DoomPlay reportado OK; detalle visual pendiente](docs/doom-reusable-observation-r296.md).
-Usuario responde favorablemente al ensayo de dos ciclos/selector/retorno,
-pero observa rayones/colores bajo la imagen. Falta ubicarlos para distinguir
-HUD normal de un defecto de presentación. Sin nuevo arranque ni cambios físicos.
+**Actual R297/R298: motor funcionando, render físico corrupto.**
+[Las fotografías](docs/doom-render-corruption-r297.md) confirman que solo una
+franja muestra Doom y el resto son artefactos. No se ha logrado el frame completo
+correcto del MVP. [Diagnóstico de imagen fija preparado](docs/doom-snapshot-physical-plan-r298.md):
+mismo ELF/WAD,47casos Lua, sin nuevos cambios físicos; pendiente de revisión.
 
 **Actual R293: DOOM real ejecutado en Redmi Watch4 M2315W1 stock.**
 [Primer resultado físico](docs/doom-first-run-result-r293.md): el usuario jugó,

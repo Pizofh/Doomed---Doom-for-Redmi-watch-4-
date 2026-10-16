@@ -1,5 +1,9 @@
 # R296: lote reportado OK; detalle visual pendiente
 
+**Corrección R297:** fotos del usuario confirman corrupción fuera de la franja
+útil; no era HUD normal. [Investigación](doom-render-corruption-r297.md).
+La valoración siguiente es histórica, anterior a recibir esas fotos.
+
 En respuesta al checklist de los dos ciclos autorizados, selector y retorno,
 el usuario respondió «todo ok» y añadió que ve rayones/colores debajo de la
 imagen de Doom, aproximadamente en mitad de la pantalla. Es una confirmación

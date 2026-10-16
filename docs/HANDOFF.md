@@ -1,5 +1,30 @@
 # Retomar el proyecto
 
+**Actual R297/R298: FOTOS CONFIRMAN RENDER CORRUPTO; diagnóstico congelado listo SOLOPC.**
+Usuario fotos:solofranjaarribamarcadaesDoom,restobug. Assistantreconocióvaloración
+optimista. NOHUDnormal, NOframecompleto/MVPvisual. docs/doom-render-corruption-r297.md.
+Último usuario «okahorasi ejecuta»: autoriza investigación/cambiosPC, no hubo
+nuevohardware. Mantenergatescerrados hasta revisión plan docs/doom-snapshot-physical-plan-r298.md.
+Se revisaronCcodec/VFS/ABI/APventanaslocales; NOcausademostrada, NOcambiaron
+formatos/stride/bindings/ELF. PreparadoDoomStill: UI PNGreferenciacuadrícula
+320x200, START1marca/CRC/RAM/sameELF,primerframe→PAUSE+UNImage, sinrenovar,
+inputs/resumedisabled, EXIT/autoSTOP30s/cleanup y referenciaretorna.
+Si PNGbien+frozenmal descarta renovaciónnecesaria; frozenbien apunta timing/
+lifetime, no pruebaexacta. Este payloadNOesfixconfirmado.
+ID365219959,29772B,SHA09e9da3ff0301a2f479abe8cd9c98b0fe055c7f0edb13e9ee72a2fe27e45f7ba,
+source7c2af63e4832d32199256f107b053ae9bba1f260e006bf5fd535dd14672fdb59.
+artifacts/doom-snapshot-r298/package/DoomStill-id-only.face;preview4barrasMAGENTA.
+47casosLua22+20+5PASS,native/UI simulated,NOCnuevoejecutado. Pack20recursos/
+15parts30083wire+512controlpinsclosedPASS. prepare r298PASS;helperclosedSHA
+7099eba1e226cc154db255efdd57427e04cafad049440f6f2975c1c8382076c4.
+StaticSpec r298nuevo; Nodefalse/r167,C#Static/Largefalse. Journalnuevo
+tools/local/pc-rfcomm/doom-snapshot-r298.json NOcreado. Plan1install+1START
+manualobservado≥50%,PNGbaselineANTESSTART; si bad noSTART, no controls,
+PAUSEDframefijo5s, EXITCLOSED,habitualmenús. NO reintentar/reanudar/borrar apps.
+Con14faces puedellegar15; rechazo full parar. Preguntar revisión precisaantes
+deinstalar,sourceusuarioinitialhardwaregate. No screenshotsprivadoscommiteados.
+Solo commitslocales, NO push/CIremota. No nuevasmétricasinventadas.
+
 **Actual R296: usuario respondió globalmente TODO OK al lote DoomPlay, con detalle visual pendiente.**
 docs/doom-reusable-observation-r296.md y observations-r296.json. No repetir
 checklist/ensayo por rutina: respuesta favorable a2ciclos/selector/retorno,

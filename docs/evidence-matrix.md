@@ -1,5 +1,13 @@
 # Matriz de evidencia
 
+**Actual R297/R298:** [Corrupción confirmada](doom-render-corruption-r297.md), [snapshot PC](doom-snapshot-physical-plan-r298.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Frame físico completo correcto; rayones son HUD | M2315W1/FW2.2.86 | Dos fotos, usuario delimita franja útil; resto patrones corruptos | REFUTADO | Alta para observación | Sí, fotos | Motor/input/EXIT son avances separados, no MVP visual logrado |
+| Fallo causado por formato, stride, seek o caché concretos | Unidad física | Inspección local sin causa demostrada | SIN EVIDENCIA | Pendiente | No | No parchear ABI/formato a ciegas |
+| Snapshot conserva una Image/lease y pausa el mismo motor | Lua S3 con native/UI simulados |47casos y paquete20recursos/pins | CONFIRMADO SOLO EN PC | Alta para casos | Sí | No instalado; no demuestra corrección gráfica |
+
 **Actual R296:** [Reporte global de DoomPlay](doom-reusable-observation-r296.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

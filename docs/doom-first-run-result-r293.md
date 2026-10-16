@@ -1,5 +1,9 @@
 # R293: DOOM real ejecutado en Redmi Watch4 stock
 
+**Limitación confirmada después, R297:** la imagen completa está corrupta;
+solo una franja contiene Doom reconocible. No confundir ejecución/controles
+con render correcto o MVP visual completo. [Corrección](doom-render-corruption-r297.md).
+
 En el único ensayo autorizado de DoomRun, el usuario confirmó que CHECKING
 terminó, pudo jugar, la imagen apareció en la parte superior, todos los
 botones funcionaron y EXIT terminó en **CLOSED**. Volvió a su esfera desde
