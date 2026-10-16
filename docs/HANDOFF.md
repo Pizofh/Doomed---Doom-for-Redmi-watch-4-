@@ -1,5 +1,39 @@
 # Retomar el proyecto
 
+**Actual R304: DoomRAM animado por PNG virtual listo SOLOPC, pendiente aprobación.**
+Usuario confirmó4borrados DoomStill/DoomRun/DoomPlay/MemInfo. Conteoesperado11
+desdeúltimo15, NOconsultadonuevamente. Preservar DoomLauncher365219963/WAD y
+DoomPNG365219958. Pidió acelerar/créditos: NOmásdiagnósticosmínimos/CI/push.
+PreguntaCHECKING: temporal; ahora reducción SOLOsegundoSTARTsin salir de misma
+instanciaLua. Reabrir verificaotra vez. Audio/savegames contemplados sinimplementar;
+prioridad imagenmovimiento/salida, guardados,sonido. observations-r304.json.
+
+Plan docs/doom-ram-png-physical-plan-r304.md. NO hardware nuevo autorizado/hecho.
+DoomRAM365219957634212B, SHA98d0c6c54a16e4c1575e170d6add896df742d26cbff445a6d4a38bfa31338326,
+source1c0396d3973d2c7629351a8f5af5b561ac4b349310239d56882cf599dd6deff7.
+build/doom-ram-png-r304/package/DoomRAM-id-only.face. ELF604992B SHA6a5d43df8a3c9753c6b943ca5fd25a9835edd7cd97b4f93a33aa199d8926704e.
+Módulorw4png304, base365219957/lua, WADcompartido365219963/lua/doom1.wad.
+ReproduceexactamenteoldELF980e13... antesenlace. Mismoengine/adapter4MiB/bindings.
+Nuevo png-view.c/h PNG192278B virtual desdeRGB565,1KBCRCtable,NOPNGbufferextra
+ni escriturasframeflash. Decoderstock puedeasignarRAM. Transport generado
+porpngTransport cambiaheader/pathy prepararCRC al adquiriframe; sourcesviejasintactas.
+Nuevo/dev/rw4doomimage.png, controla/rawigual. UIreusable/controles100ms/30sSTOP,
+cache/leasecleanupigual. No FPS/hardwaredecoderprobados. VerplanriesgosOOM/panic.
+811CchecksS3+30VFSreal+22base7Lua+7protocolscenarioPASS; oldgates/nativeclosedPASS.
+No repeat testsjustbecause. build/package inmutables: no rerun sobre reviewexistente.
+pc-doom-ram-png.mjs prepare PASS sinprivateI/O/radio; install gateclosedPASS.
+NuevafactoryprepareDoomRamPngpin; kindreview-ram-png-manual; nativeLaunchertrue.
+NuevoPHYSICAL_RAM_PNG_REVIEWED=false ademásdeployment/resume/controlfalse;
+ProbeStatic/Largefalse. Nuevojournaldoom-deployment/ram-png-r304.jsonl NOcreado,
+transfer.jsonlanteriorintacto; mismowatch.lockglobal. Noresume/retry ennuevoCLI.
+Pedirrevisiónconcreta1install634KB+2ciclosmanualesobservados≥50%,segundosolosi
+primeroCLOSED/fullframe/inputsbien, sin salirLua parafastSTART, luegoEXITselectorhabitual.
+Preview5barrasNARANJAS. install311partes~40-60sestimado. Cnuevo síesriesgo aunque
+bindingsiguales; nofirmware/recoveryintegral. Trasaprobarabrirdeployment+RAMPNG
+yC#Largeúnicamente; build/prepare/installUNAVEZ; finallyrestore/build/testclosed,
+siinstalócatálogoindependiente. No cambiarvínculos/healthchecks porrutina.
+Solo commitlocal, NOpush. Nuevoplan NOautorizado todavíaporelusuario.
+
 **Actual R303: DoomPNG FRAME COMPLETO CORRECTO, retorno normal confirmado.**
 Usuario: todo bien, Doom completo, menús/cambioesfera normales. Registra
 observations-r303.json y docs/doom-png-result-r303.md. Frame320x200, NO390x450

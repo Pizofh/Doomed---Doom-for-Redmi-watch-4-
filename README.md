@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R304:** [DoomRAM preparado para animación desde RAM](docs/doom-ram-png-physical-plan-r304.md).
+PNG virtual en C, controles y salida/reinicio, sin escribir frames a flash ni
+duplicar el WAD. Pruebas de C/VFS/Lua/transporte pasan; falta aprobación y
+ensayo físico. El usuario confirmó retirar cuatro diagnósticos anteriores.
+
 **Actual R303:** [DoomPNG muestra el frame completo correctamente](docs/doom-png-result-r303.md),
 con retorno a menús/esfera normal según el usuario. La ruta PNG valida la
 captura estática; queda corregir la animación mediante RAM, sin escribir

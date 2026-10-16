@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R304:** [animación PNG desde RAM preparada](doom-ram-png-physical-plan-r304.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Cuatro diagnósticos eliminados manualmente | Unidad física | Usuario confirma la lista aconsejada | CONFIRMADO POR USUARIO | Alta para reporte | Sí | Conteo11 inferido, sin consulta nueva |
+| PNG virtual generada por C con seek/lease | ARM S3, VFS real |811codec+30VFSchecks | CONFIRMADO EN EMULADOR | Alta para casos | Sí | Worker simulado, decoder no probado |
+| Animación correcta desde nuevo nodo PNG en RW4 | Unidad física | Solo candidato PC | SIN EVIDENCIA | Pendiente | No | Nuevo ensayo requiere revisión |
+| Segundo START evita CRC completo | Misma instanciaLua, mocks |7casos nuevos | CONFIRMADO SOLO EN PC | Alta para casos | Sí | Reabrir esfera sigue verificando |
+
 **Actual R303:** [frame PNG completo correcto](doom-png-result-r303.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

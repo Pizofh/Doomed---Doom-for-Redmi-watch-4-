@@ -9,7 +9,7 @@ import {command,uint,bytes,fields,one,readDeviceInfo,readWatchfaces} from './rw4
 import {packageCopy,uploadLayout,uploadToPcAdapter,uploadToReviewedAdapter} from './doom-large-upload.mjs';
 import {pcPeerAccess} from './doom-upload-pc-simulator.mjs';
 import {DoomDeploymentJournal,deploymentIdentity,disposeDeploymentIdentity} from './doom-deployment-journal.mjs';
-import {claimReviewedDoomEndpoint} from './doom-deployment-physical.mjs';
+import {claimReviewedDoomEndpoint,physicalDoomRamPngEnabled} from './doom-deployment-physical.mjs';
 import {parseDoomUploadAck} from './doom-upload-ack.mjs';
 import {compareDoomCatalogs,reviewedTwoRemovals} from './doom-deployment-catalog.mjs';
 
@@ -78,7 +78,9 @@ export async function runDoomUploadPc(endpoint,plan,secret,{resumeFrom=null,depl
 }
 export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=false,retryWithoutData=false}={}){
  return runLargeUpload(()=>{
-  if(plan?.kind!=='review-low-memory-native-disabled')refuse();
+  if(plan?.kind==='review-ram-png-manual'){
+   if(!physicalDoomRamPngEnabled()||resume||retryWithoutData)refuse();
+  }else if(plan?.kind!=='review-low-memory-native-disabled')refuse();
   return claimReviewedDoomEndpoint(endpoint,{resume,retryWithoutData});
  },plan,secret,{deploymentResume:resume,deploymentRetryWithoutData:retryWithoutData});
 }
@@ -111,6 +113,7 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   if(info.modelRecognized!==true||info.firmware!=='2.2.86')refuse();
   client.phase='CatalogPreflight';
   const before=catalog(readWatchfaces(await client.query(4,0)));
+  if(plan.kind==='review-ram-png-manual'&&!before.some(f=>f.id==='365219963'))refuse();
   const comparison=parent?compareDoomCatalogs(parent.before,before):null;
   const removalReview=deploymentRetryWithoutData&&parent?.attempt===3;
   const acceptedRemovals=removalReview&&reviewedTwoRemovals(parent.before,before);

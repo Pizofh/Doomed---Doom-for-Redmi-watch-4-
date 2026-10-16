@@ -1,0 +1,22 @@
+{
+  "checkpoint": "R304",
+  "manualRemovalsConfirmedByUser": ["DoomStill", "DoomRun", "DoomPlay", "MemInfo"],
+  "expectedCountAfterFourRemovals": 11,
+  "catalogRequeried": false,
+  "doomLauncherAndDoomPngRemovalRequested": false,
+  "preparedOnly": "DoomRAM 365219957",
+  "physicalInstallAuthorized": false,
+  "newPhysicalCommands": false,
+  "newNativeElf": true,
+  "wadDuplicated": false,
+  "frameWritesToFlash": 0,
+  "nativeCodecArmChecks": 811,
+  "nativeVfsChecks": 30,
+  "luaBaseCases": 22,
+  "luaNewCases": 7,
+  "protocolScenarios": 7,
+  "soundImplemented": false,
+  "savegamesValidatedOnWatch": false,
+  "checkingReducedOnlyForSameLuaInstanceRestart": true,
+  "proposedPriority": ["correct moving image and exit", "savegames", "sound"]
+}

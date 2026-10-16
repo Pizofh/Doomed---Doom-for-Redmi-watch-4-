@@ -6,7 +6,7 @@ import {ccmEncrypt,packetNonce} from './rw4-xiaomi-protocol.mjs';
 import {isReviewedDoomPeer} from './doom-deployment-physical.mjs';
 const owned=new WeakMap(),hash=(b,a='sha256')=>createHash(a).update(b).digest('hex');
 const refuse=()=>{throw Error('DoomLargeUploadRefused');};
-function mint(b,id,kind){const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher:false,physicalEnabled:false});owned.set(p,b);return p;}
+function mint(b,id,kind){const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher:kind==='review-ram-png-manual',physicalEnabled:false});owned.set(p,b);return p;}
 export function prepareDoomAssets(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==4807680||hash(raw)!=='387e6c80616296ca7c8727e1a356e169c5b3575e1f2c33d4c9e9a32729ffa7c9'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='167210065'||raw[49]!==0)refuse();
  const b=Buffer.from(raw);b.write('365219963',40,9,'ascii');
@@ -21,6 +21,11 @@ export function prepareDoomLauncher(raw){
 export function prepareDoomLowMemory(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==4827044||hash(raw)!=='d0fc0d8257e9a384b42129f312de99570b49dade455511d0fc5fddd80fecf048'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365219963'||raw[49]!==0)refuse();
  return mint(Buffer.from(raw),'365219963','review-low-memory-native-disabled');
+}
+// Independent reviewed native+UI update. No WAD included; manual START only.
+export function prepareDoomRamPng(raw){
+ if(!Buffer.isBuffer(raw)||raw.length!==634212||hash(raw)!=='98d0c6c54a16e4c1575e170d6add896df742d26cbff445a6d4a38bfa31338326'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365219957'||raw[49]!==0)refuse();
+ return mint(Buffer.from(raw),'365219957','review-ram-png-manual');
 }
 // Reproducible, owned non-game bytes for public CI. Never an installable face.
 export function syntheticDoomUpload(size=4807680){if(![4807680,4827012,4827044].includes(size))refuse();const b=Buffer.alloc(size);for(let i=0;i<b.length;i++)b[i]=(i*29+(i>>>8))&255;Buffer.from('PC ONLY UPLOAD FIXTURE').copy(b);return mint(b,'365799998','synthetic-only');}
