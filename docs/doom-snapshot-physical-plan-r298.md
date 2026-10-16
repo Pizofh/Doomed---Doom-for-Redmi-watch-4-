@@ -1,5 +1,9 @@
 # R298: imagen de Doom pausada, diagnóstico pendiente de aprobación
 
+**Actualización R300:** plan autorizado, instalado y ensayo completado;
+[el frame fijo sigue corrupto](doom-frozen-result-r300.md). Autorización
+consumida. El texto siguiente es el plan histórico.
+
 **Actualización R299:** ensayo autorizado e instalación inactiva completada.
 [Observación manual pendiente](doom-snapshot-install-r299.md). No repetir envío.
 El texto siguiente conserva el plan aprobado.

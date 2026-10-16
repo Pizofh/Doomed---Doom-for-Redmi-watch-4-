@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R300/R301:** [frame fijo corrupto](doom-frozen-result-r300.md), [captura PNG preparada](doom-frame-png-physical-plan-r301.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| Congelar Image corrige el render | M2315W1/FW2.2.86 | Usuario ve la misma franja/basura dentro del recuadro | REFUTADO | Alta para reporte | Sí, usuario | Renovación no es necesaria; causa exacta pendiente |
+| Referencia/salida/retorno normales | Mismo ensayo | «todo ok excepto la imagen» | CONFIRMADO EN RW4 | Reporte global | Sí, usuario | Sin estados detallados ni nueva comprobación independiente |
+| Encoder raw→PNG conserva los píxeles | Lua S3/PC, frame sintético |64.000píxeles,202CRC,Adler;22casos | CONFIRMADO SOLO EN PC | Alta para casos | Sí | C de origen y decoder RW4 no ejercitados |
+| DoomPNG presenta Doom físico completo | M2315W1 | Paquete listo, sin instalar | SIN EVIDENCIA | Pendiente | No | Requiere nuevo ensayo autorizado |
+
 **Actual R299:** [DoomStill instalado inactivo](doom-snapshot-install-r299.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |

@@ -1,0 +1,17 @@
+{
+  "checkpoint": "R300",
+  "device": "M2315W1",
+  "firmware": "2.2.86",
+  "launcherId": "365219959",
+  "source": "User response to the authorized DoomStill reference/frozen-frame/EXIT/return checklist",
+  "authorizedBatchReportedOkExceptImage": true,
+  "referencePngReportedOkInGlobalResponse": true,
+  "referencePngSeparatelyDescribed": false,
+  "frozenDoomStillCorrupt": true,
+  "description": "Only a small part shows Doom; garbage remains below, confined inside the smaller rectangle",
+  "rapidImageRenewalNecessaryForCorruption": false,
+  "exactRootCauseEstablished": false,
+  "individualExitStatusSeparatelyReported": false,
+  "newHardwareCommandsAfterReport": false,
+  "newMetricsMeasured": false
+}

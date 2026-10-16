@@ -1,5 +1,11 @@
 # DOOM en Redmi Watch 4
 
+**Actual R300/R301:** [el frame fijo también sale corrupto](docs/doom-frozen-result-r300.md).
+La renovación rápida no es necesaria para el fallo. [DoomPNG preparado en PC](docs/doom-frame-png-physical-plan-r301.md)
+leerá una captura raw con checksum y la convertirá a PNG, conservando ELF/WAD.
+Conversión de64.000píxeles y lifecycle probados; nueva prueba física pendiente
+de autorización. Gates cerrados; sin comandos nuevos al reloj ni push remoto.
+
 **Actual R299:** [DoomStill instalado; comparación manual pendiente](docs/doom-snapshot-install-r299.md).
 Referencia PNG frente a un frame de Doom pausado, sin renovar Image. Ensayo
 autorizado, launcher inactivo, gates PC cerrados. Aún sin resultado ni fix.

@@ -1,5 +1,10 @@
 # R299: DoomStill instalado; observación manual pendiente
 
+**Actualización R300:** el usuario completó el ensayo. Reportó todo normal
+excepto el frame, que conserva la franja de Doom y basura debajo.
+Ver [resultado R300](doom-frozen-result-r300.md). No repetir el ensayo.
+La sección siguiente conserva el registro previo a esa respuesta.
+
 El usuario autorizó una instalación y un ensayo observado del plan R298,
 batería≥50%. Una ejecución de `install r298` completó RegisteredInactive:
 ID365219959,29772bytes,SHA256

@@ -1,5 +1,32 @@
 # Retomar el proyecto
 
+**Actual R300/R301: DoomStill congelado sigue corrupto; DoomPNG listo SOLO PC.**
+Usuario: «todo ok excepto la imagen», sigue franja pequeña/basura dentro del
+recuadro. Reporte global favorable al resto del lote; sin estados individuales.
+observations-r300.json, docs/doom-frozen-result-r300.md. Renovación rápida NO
+necesaria; causa exacta pendiente. No pedir repetir DoomStill ni otro healthcheck.
+R298/R299 ensayo consumido. Ningún comando físico después del reporte.
+
+DoomPNG ID365219958,31704B, SHAae84530371510fd13e4e4803959c3fc954704ad3405fa6e4b285a0e9888d566c,
+sourcefd17dab3c793f73d81c34b36f8546ac3eeb1aafc6c09f8a4d9dfe5e5f81b2181.
+artifacts/doom-frame-png-r301/package/DoomPNG-id-only.face. Plan completo:
+docs/doom-frame-png-physical-plan-r301.md. NO instalado/ensayado/autorizado.
+Meta: raw32+128000RGB565/FNV ->unaPNG195651B propia (retener trasEXIT), noBIN.
+MismoELF/WAD/CRC/RAM/one-shot/PAUSE/STOP30s/cleanup. Cuatrofilas/tick50ticks,
+sininputs/RESUME. Raw callbacks físicamente nuevos; nuevaFlash196KB+memoriaPNG.
+PNG incompleta se retiene en error, nunca reintentar/reabrir; captura se cierra
+antes STOP/JOIN/crearImage. Error=>STOP sin unloadciego, mismo lease/recover.
+PC:22encoder casos,64000píxeles/202CRC/Adler comprobados,22+20+7UI PASS.
+Paquete15recursos/16parts32034MASS+512control<=32768; pins/gateclosedPASS.
+prepare r301 OfflinePrepared. HelpercerradoSHA42836543bc947052bc19fb283af78a575ea71949437cf33dd306519c64b586dd.
+Gates Nodefalse/r167,C#Staticfalse/Largefalse; no cambiaron gates ni C ni ELF.
+Journal tools/local/pc-rfcomm/doom-frame-png-r301.json NO creado.
+Siguiente SOLO tras aprobación concreta:1installr301+1STARTmanual observado≥50%.
+Preview3barrasCIAN, referencia limpia antesSTART, CHECKINGCRC+5sPNG, PAUSED5s,
+EXITantes30s/CLOSED/ref, habitualmenús/corona. No3ertrialDoomPlay ni borrarfaces.
+Restaurargates/build/testclosed finally comoR299. Sinretry/resumeautomáticos.
+Solo commitlocal,NOpush/CIremota, no datos privados o firmware/WAD enGit.
+
 **Actual R299: DoomStill instalado INACTIVO; ensayo manual ya autorizado pendiente respuesta.**
 docs/doom-snapshot-install-r299.md. UNinstallr298 completóRegisteredInactive:
 15parts24frames30400tx,close/workerexittrue0. FinallyNodefalse/r167+C#Staticfalse,

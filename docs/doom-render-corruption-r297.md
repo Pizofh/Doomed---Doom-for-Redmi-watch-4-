@@ -31,6 +31,7 @@ de dibujo y duración de sus buffers/leases al renovar imágenes. El controller
 actual elimina/recrea Image e invalida la fuente aproximadamente cada100ms;
 el próximo experimento mantiene una sola Image y una sola generación.
 
-[DoomStill R298](doom-snapshot-physical-plan-r298.md) está preparado en PC para
-separar renovación de presentación estática. No es una corrección del defecto
-ni prueba de causa. No hubo nueva conexión al reloj en esta sesión.
+[DoomStill R298](doom-snapshot-physical-plan-r298.md) se preparó para separar
+renovación de presentación estática. [Resultado posterior R300](doom-frozen-result-r300.md):
+el frame fijo también sale corrupto; la renovación no es necesaria para el
+fallo. No se ha demostrado aún la causa exacta.
