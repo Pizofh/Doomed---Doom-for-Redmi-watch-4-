@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R308:** [DoomTrace instalada inactiva](docs/doom-trace-install-r308.md),
+con las 13 esferas anteriores conservadas y bloqueos PC restaurados.
+Un ensayo manual ya autorizado queda pendiente: código de fallo/RAM y cierre;
+todavía no confirma una corrección del render animado.
+
 **Actual R306/R307:** [DoomRAM mostró ERROR antes del juego](docs/doom-ram-failure-r306.md);
 el usuario pudo volver al menú. Causa y descarga de C aún sin confirmar.
 [DoomTrace preparado](docs/doom-trace-physical-plan-r307.md):31,9KB de Lua,

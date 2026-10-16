@@ -1,5 +1,10 @@
 # R307: DoomTrace, revisión pequeña con código de fallo y salida ordenada
 
+**Actualización R308:** usuario autorizó instalación y ensayo. Un envío quedó
+registrado inactivo; gates restaurados y catálogo anterior conservado.
+[Instalación y siguiente ensayo manual](doom-trace-install-r308.md).
+El estado pendiente de aprobación descrito abajo corresponde a la preparación.
+
 **Solo PC, pendiente de aprobación física.** Una instalación y UN START,
 observado con batería≥50%. Se necesita porque ERROR de R306 no identifica
 el paso que falló y el decoder S3 no reproduce el fallo. No es una corrección

@@ -1,5 +1,22 @@
 # Retomar el proyecto
 
+**Actual R308: DoomTrace instalada INACTIVA; UN ensayo manual YA autorizado pendiente.**
+Usuario «si» aprobó R307. UN install r307 RegisteredInactive,16partes/25frames/
+32511TX, cierre/workertrue exit0. Finally Staticfalse/r167 y C#Staticfalse,
+rebuild/test-paquete-gatePASS; otros gates siguen cerrados. Helper cerradoSHA
+4e683f1ce86b420ba66547e27c9c1f1a9291cd4fd9445ccab47cbaf2cc350ac8.
+Consulta independiente14vs13 previas, IDs/flags/selección intactos, owninactivo/
+eliminable, WAD963/ELF957 presentes,1activa0unknown,close/workertrue.
+contentVerified=false. docs/doom-trace-install-r308.md. Journaldoom-trace-r307.json
+EXISTE: no recrear/reintentar. No activación/recuperación/C desde PC.
+Siguiente: usuario DoomTrace4barrasBLANCAS. RECOVERING esperarREADY/CLOSED;
+ERRORinicial anotar2dígitos/FREE/MAX/CLOSEDextra SIN START. Si habilitadoSTART1,
+CHECKINGdespierto; ERROR anotar mismosdatos trasunossegundos sinrepetir.
+Si juego completo/animado observar5s+EXITantes30s. Habitual+menús/corona.
+No pedir otra aprobación para este ensayo; no reabrirDoomRAM ni borrar957/963.
+La preparación histórica sin aprobar de abajo queda sustituida por R308.
+Solo commitlocal; no push/CI ni repetir pruebas rutinarias.
+
 **Actual R306/R307: DoomRAM falló; DoomTrace pequeño listo SOLOPC, sin aprobar.**
 UsuarioCHECKING→instanteblanco→ERROR/rojo; volvióhabitual/menúsnormales.
 NOimagenjuego, NOpruebanativaarrancada/retirada, NOcausa. Segundo cicloR304

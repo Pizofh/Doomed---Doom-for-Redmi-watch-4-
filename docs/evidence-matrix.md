@@ -1,5 +1,11 @@
 # Matriz de evidencia
 
+**Actual R308:** [DoomTrace instalada inactiva](doom-trace-install-r308.md).
+RegisteredInactive y catálogo independiente de 14 entradas conservan las 13
+anteriores y su selección; carriers ELF/WAD presentes, cierre/worker confirmados.
+CONFIRMADO EN RW4 para registro, no para extracción o ejecución del paquete.
+Ensayo manual autorizado pendiente; causa del ERROR y animación sin confirmar.
+
 **Actual R306/R307:** [fallo observado](doom-ram-failure-r306.md), [revisión del launcher preparada](doom-trace-physical-plan-r307.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
