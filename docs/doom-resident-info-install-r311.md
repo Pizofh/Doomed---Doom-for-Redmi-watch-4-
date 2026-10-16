@@ -1,5 +1,9 @@
 # R311: CInfo instalada inactiva; una lectura manual autorizada pendiente
 
+**Resultado R312:** [lectura completada; hilo terminado, JOIN pendiente](doom-resident-info-result-r312.md).
+REG OWN/LEASE=1, FINISHED=1, JOINED=0, ERROR=0. Retorno/menús normales.
+El ensayo ya produjo resultado; no repetir ni reabrir por los pendientes históricos de abajo.
+
 El usuario respondió «ok» al [plan R310](doom-resident-info-physical-plan-r310.md):
 una instalación y una lectura observada, batería≥50%. Un envío install r310
 registró CInfo365219955 inactiva,20.120bytes,SHA256

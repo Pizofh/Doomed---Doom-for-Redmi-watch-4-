@@ -1,5 +1,10 @@
 # DOOM en Redmi Watch 4
 
+**Actual R312:** [CInfo confirma hilo terminado y JOIN pendiente](docs/doom-resident-info-result-r312.md).
+El módulo sigue residente, con registro/lease propios y consulta cerrada bien.
+El usuario volvió a su esfera y menús normales. Falta distinguir liberación
+de imagen de condiciones previas de JOIN; no hay causa de render confirmada.
+
 **Actual R311:** [CInfo instalada inactiva](docs/doom-resident-info-install-r311.md),
 14esferas previas conservadas y bloqueos PC restaurados. Una captura manual
 del estado residente ya autorizada queda pendiente; todavía no verifica descarga.

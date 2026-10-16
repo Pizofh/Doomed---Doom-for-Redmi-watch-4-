@@ -1,5 +1,20 @@
 # Retomar el proyecto
 
+**Actual R312: CInfo lectura física OK; FINISHED1/JOINED0/ERROR0, residente.**
+4fotos=P1/P2 repetidas,noP3. P1REGOWN1/LEASE1/CAPTURE0/COPEN1/CREAD1/CCLOSE1.
+P2SEQ7/STARTED1/READY1/FINISHED1/JOINED0/ERROR0. Código00/puntoverde, registryestable.
+Usuario confirma habitual/menúsnormales. docs/doom-resident-info-result-r312.md,
+observations-r312.json. No comandos físicos tras fotos. EnsayoR311consumido,
+NOrepetir/reabrirCInfo/Trace/RAM. P3stats solo definidosjoined1, NOpedirfotoP3
+si exige reabrir. No descargaC; guardar957ELF/963WAD/lease/vínculo.
+Acotado antesdeJOINcompletado: controller detach7->join5->balance/registry/rmmod.
+Hostjoinrc/valuefailure pondríaERROR1, no respalda esa rama elERROR0 observado.
+Candidatosdetach/release/owner/refcounts/slot/I/O, no causa demostrada. El test
+Cexistingreproducebloqueoporlector/lease, NO equivalencia física. Próximocambio
+debedistinguir7vs5 yerrno exacto, detenerseprimerfallosinretrycleanup; no quitar
+guards/forzarunload. Aún NO nuevo payload preparado/autorizado. No suponerOOM,
+PNGdefectuoso/pthreadABI. No reboot/borrar/START. Solo commitlocal,sinpush/CI.
+
 **Actual R311: CInfo instalada INACTIVA; UN READ C YA autorizado pendiente.**
 Usuario«ok»aprobóR310. UN installr310 RegisteredInactive10parts19framesTX20653B,
 close/workertrueexit0. Finally NodeStaticfalse/r167,C#Staticfalse,otrosgatescerrados,

@@ -1,0 +1,19 @@
+{
+  "checkpoint": "R312",
+  "device": "M2315W1",
+  "firmware": "2.2.86",
+  "launcherId": "365219955",
+  "source": "Four user photographs; pages01 and02 repeated, plus user confirms normal return and menus",
+  "snapshotCode": 0,
+  "snapshotIndicator": "green",
+  "page01": {"regOwn": 1, "lease": 1, "capture": 0, "controlOpen": 1, "controlRead": 1, "controlClose": 1},
+  "page02": {"sequence": 7, "started": 1, "ready": 1, "finished": 1, "joined": 0, "nativeError": 0},
+  "page03Provided": false,
+  "runtimeCleanupCountersDefined": false,
+  "normalMenuAndReturnReported": true,
+  "residentModulePresent": true,
+  "nativeUnloadVerified": false,
+  "newHardwareCommandsAfterReport": false,
+  "interpretation": "Owned resident module and exact matching lease; snapshot opened/read/closed with stable registry. Worker finished but JOIN has not completed. In this implementation a failed host join/result sets nativeError=1, so nativeError=0 narrows candidates toward failures before that branch, or detach/open/write/close. It does not prove a leaked image reader, ownership mismatch, missing memory, decoder failure or host-join ABI issue.",
+  "nextConstraint": "No additional photo/reopen needed solely for undefined pre-JOIN counters. Preserve module, ELF/WAD and lease. Next physical cleanup must distinguish detach/release and JOIN with exact I/O failure, retain owner/refcount guards, avoid automatic retries or forced unload, and obtain approval for any new payload."
+}

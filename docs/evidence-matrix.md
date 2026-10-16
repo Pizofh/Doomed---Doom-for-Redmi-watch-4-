@@ -1,5 +1,11 @@
 # Matriz de evidencia
 
+**Actual R312:** [fotos CInfo](doom-resident-info-result-r312.md) confirman
+REG OWN/LEASE=1, lectura/cierre=1, FINISHED=1/JOINED=0/ERROR=0, SEQUENCE=7,
+código00 y punto verde. Módulo presente; no descarga. Usuario confirma retorno
+y menús normales. Causa concreta de bloqueo antes de completar JOIN pendiente;
+estadísticas de limpieza de runtime aún no definidas. Sin comandos nuevos.
+
 **Actual R311:** [CInfo registrada inactiva](doom-resident-info-install-r311.md),
 catálogo independiente15entradas conserva14previas/selección, carriers presentes,
 cierre/worker confirmados. CONFIRMADO EN RW4 para registro; no autenticación
