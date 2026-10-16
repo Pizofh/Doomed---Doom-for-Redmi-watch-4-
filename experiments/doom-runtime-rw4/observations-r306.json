@@ -1,0 +1,17 @@
+{
+  "checkpoint": "R306",
+  "device": "M2315W1",
+  "firmware": "2.2.86",
+  "launcherId": "365219957",
+  "source": "User report after first authorized DoomRAM START",
+  "reportedSequence": ["CHECKING", "brief white screen", "ERROR and red indicator"],
+  "gameImageReported": false,
+  "normalMenuAndReturnReported": true,
+  "nativeLoadOrStartVerifiedByReport": false,
+  "nativeUnloadVerified": false,
+  "exactFailureStageKnown": false,
+  "secondCycleConditionNotSatisfied": true,
+  "newHardwareCommandsAfterReport": false,
+  "s3DecoderInfoAndOpenTests": {"regularPng": true, "virtualPng": true, "checks": 35, "visualPixelsInspected": false, "rw4EquivalenceClaimed": false},
+  "preparedNextPayload": "DoomTrace 365219956; UI only, same installed ELF/WAD; not physically authorized"
+}

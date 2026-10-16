@@ -1,5 +1,11 @@
 # DOOM en Redmi Watch 4
 
+**Actual R306/R307:** [DoomRAM mostró ERROR antes del juego](docs/doom-ram-failure-r306.md);
+el usuario pudo volver al menú. Causa y descarga de C aún sin confirmar.
+[DoomTrace preparado](docs/doom-trace-physical-plan-r307.md):31,9KB de Lua,
+código de fallo/RAM y salida ordenada, mismo C/WAD. Pendiente de aprobación;
+no es todavía una corrección física del render.
+
 **Actual R305:** [DoomRAM instalada inactiva](docs/doom-ram-png-install-r305.md).
 Catálogo previo conservado y bloqueos PC restaurados. Dos ciclos manuales
 autorizados pendientes de resultado; animación física todavía sin confirmar.

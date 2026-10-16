@@ -1,5 +1,9 @@
 # R305: DoomRAM instalada inactiva; dos ciclos manuales pendientes
 
+**Actualización R306:** primer START terminó en ERROR tras CHECKING/un instante
+blanco. Menús y retorno normales. [Resultado](doom-ram-failure-r306.md).
+La condición del segundo ciclo no se cumplió; no repetir ni reabrir.
+
 Usuario autorizó el [plan R304](doom-ram-png-physical-plan-r304.md) con
 «utorizado»: una instalación y dos ciclos observados, el segundo condicionado
 al éxito/CLOSED del primero. Una ejecución de `pc-doom-ram-png.mjs install`

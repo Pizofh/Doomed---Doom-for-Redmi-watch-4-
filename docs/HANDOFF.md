@@ -1,5 +1,47 @@
 # Retomar el proyecto
 
+**Actual R306/R307: DoomRAM falló; DoomTrace pequeño listo SOLOPC, sin aprobar.**
+UsuarioCHECKING→instanteblanco→ERROR/rojo; volvióhabitual/menúsnormales.
+NOimagenjuego, NOpruebanativaarrancada/retirada, NOcausa. Segundo cicloR304
+condiciónNOcumplida; NOreabrir/repetirDoomRAM. No comandosfísicosdespuésdelreporte.
+docs/doom-ram-failure-r306.md y observations-r306.json. Cpodríaseguircargado;
+NOforzarrmmod/reboot/borrarDoomRAM365219957 o carrier365219963.
+
+PC: test-rw4-png-decoder.mjs ejecuta decoderREAL S3 get_info/open/close sobre
+PNGregular yPNGvirtual, ambos320x200/openOK,35checks. Sinpixelsvisuales ni
+equivalenciaRW4. Archivos/módulo/nodospropiosS3retirados. artifacts/doom-ram-png-r304/decoder-tests.json.
+InspecciónAPmetadatos/ventanasexistentesNOcausa; no asumirfstat/formato/RAM.
+No cambiaron C/ELF/WAD trasR306. HeaderLVGL9websolo contextoprototiposS3,
+no nuevosbindingsfísicos. Evitar búsquedasamplias research/**/*.json (ruido/URLs).
+
+Siguiente paquete DoomTrace36521995631864B SHA5cb06a7c3135412f54203afe7a8e4233c1b4395f58ff5cf6f1206eec702609d6,
+sourcea58190e62aaad411f9f10934fdf7f272ebcff76f14fa606158b8927ddadcb74f.
+artifacts/doom-trace-r307/package-reviewed/DoomTrace-id-only.face,26recursos,
+16parts32194MASS+512control<=32768. package/package-finaldescartadosNOpins.
+tools/doom-trace-source.mjs+trace-main.lua, mismoELFbase365219957/604992B6a5d43...
+yWADcarrier365219963; módulo rw4png304. NewUIui_base365219956. SinC/WADreenviados.
+32Lua22base+10tracePASS; paquete/source/readback/tamper/gateclosedPASS.
+build/prepare r307 OfflinePreparedPASS; helperclosedSHAd403798e60b91c7fa9c124aeef50024465b75eee30a34fbd28c45af04906b531.
+Todosgatescerrados NodeStaticfalse/r167,C#Static/Largefalse,deployment/RAMPNG/
+resume/controlfalse. Journaltools/local/pc-rfcomm/doom-trace-r307.json NOcreado.
+
+Plan docs/doom-trace-physical-plan-r307.md, PENDIENTEautorización 1install+1START
+observado≥50%. AlSELECCIONARpuedeRECUPERAR/retiraroldmod SOLOlease/hash/registro/
+estado/dueñocoincidentes; STOP/JOIN/cache/rmmodnormal, noadopciónciega.
+STARTone-use14B marca, RAMantesCRC ydespués, mismosumbralesno rebajados.
+PNGpreflight33B/firma320x200/seekend192278/EOF/close antesImage. Sincontroles,
+animaciónsifunciona,EXIT30s. Erroresfijan2dígitosyFREE/MAX; safetrySTOP ytick
+continúacierre, rótuloCLOSEDabajosoloalrecibirCLOSED aunqueERRORsigavisible.
+SiSTOPfalla módulos/lease se retienen; GCsoloSTOP. NoLogcrudo/nuevasPNGflash.
+Codigos01CRC/marca,02RAM,10..13prechecks,14..18load/fresh/lease/start,19estado,
+20open21header22size23EOF24close25Image26getsize27present30cleanup40recover.
+Preview4barrasBLANCAS. Inicialpaneloscuro/no grid; siRECOVERINGesperarREADY/
+CLOSED;siERRORinicialanotarcódigoFREE/MAX/CLOSEDsinSTART. START1sihabilitado,
+CHECKINGdespierto,erroranotarmismosdatos; sijuego5s+EXITCLOSED; habitualmenús.
+No pedirotraautorizaciónR304ya consumida; esteNUEVOpayloadsípendienteaprobación.
+No instalar/push/CIremota sininstrucción. Solo commitlocal. Créditosprioridad:
+no repetirensayos/suites/healhchecks porrutina ni investigarABIaciegas.
+
 **Actual R305: DoomRAM instalada INACTIVA; DOS ciclos YAautorizados pendientes.**
 Usuario«utorizado» aprobóR304. UNinstallRegisteredInactive311parts319frames/
 640443TX,modeloFW/MD5/offset0bien,close/workertrue0. Finallydeployment/RAMPNG/

@@ -1,5 +1,14 @@
 # Matriz de evidencia
 
+**Actual R306/R307:** [fallo observado](doom-ram-failure-r306.md), [revisión del launcher preparada](doom-trace-physical-plan-r307.md).
+
+| Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
+|---|---|---|---|---|---|---|
+| DoomRAM mostró juego animado | M2315W1/FW2.2.86 | CHECKING/blanco/ERROR; sin juego | REFUTADO PARA ENSAYO | Alta | Sí, usuario | No repetir segundo ciclo |
+| Menú y retorno funcionan tras el fallo | Misma unidad | Usuario confirma | CONFIRMADO EN RW4 | Alta para reporte | Sí | No demuestra descarga del módulo |
+| PNG virtual admite info/open/close en decoder S3 real | EmuladorS3 |35checks; normal y virtual320×200/openOK | CONFIRMADO EN EMULADOR | Alta para casos | Sí | Sin comparar píxeles, no es RW4 |
+| DoomTrace identifica fallo y hace salida normal tras error de imagen | LuaS3 mocks |10nuevos+22base | CONFIRMADO SOLO EN PC | Alta para casos | Sí | Hardware pendiente, no causa/fix confirmados |
+
 **Actual R305:** [DoomRAM instalada](doom-ram-png-install-r305.md).
 
 | Claim | Device / scope | Evidence | Classification | Confidence | Tested locally | Notes |
