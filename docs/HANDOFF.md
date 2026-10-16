@@ -1,5 +1,21 @@
 # Retomar el proyecto
 
+**Actual R311: CInfo instalada INACTIVA; UN READ C YA autorizado pendiente.**
+Usuario«ok»aprobóR310. UN installr310 RegisteredInactive10parts19framesTX20653B,
+close/workertrueexit0. Finally NodeStaticfalse/r167,C#Staticfalse,otrosgatescerrados,
+rebuild/testpaqueteclosedPASS. HelperSHA51d9053901047c9a1fe0c137ffed6588784c169875bb7e71e9c98662a866834d.
+Catálogoindependiente15vs14previas,flags/selecciónpreservados,owninactivo/eliminable,
+WAD963/ELF957presentes,1activa0unknown,close/workertrue.contentVerifiedfalse.
+Noactivación/Lua/C/residentread desdePC. docs/doom-resident-info-install-r311.md.
+Journaldoom-resident-info-r310.json EXISTE NO recrear/reintentar. Artefactos
+artifacts/doom-resident-info-physical-r311/install-result.json(posibleUTF16LE),catalog-after.json.
+SiguienteusuarioCInfo3barrasAMARILLAS,READ C1siUI/puntogris,seisfilas.
+Anotarcódigo/color+3páginasconMODE(noI/O);P1REGOWN/LEASE/CAPTURE/COPEN/CREAD/CCLOSE;
+P2SEQ/STARTED/READY/FINISHED/JOINED/ERROR;P3REASON/CODE/PEAK/ALLOC/FREED/CLEANUP.
+Despuéshabitual+menús/corona. SiUIausente/errornoREADrepeat/reabrir; capturaparcial.
+No pedir otra autorización para esa lectura. NOreabrirTrace/RAM,reboot,borrar957/963,
+forzarrmmod. EstadoC/unloadtodavía desconocidos. Solo commitlocal no push/CI.
+
 **Actual R310: CInfo SOLO PC listo; pendiente aprobación UN install+UN READ C.**
 Usuario confirma NO CLOSED y habitual/menús normales tras ERROR30. ObsR309
 actualizada; NO descarga demostrada. Sin comandos físicos desde reporte.

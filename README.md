@@ -1,5 +1,9 @@
 # DOOM en Redmi Watch 4
 
+**Actual R311:** [CInfo instalada inactiva](docs/doom-resident-info-install-r311.md),
+14esferas previas conservadas y bloqueos PC restaurados. Una captura manual
+del estado residente ya autorizada queda pendiente; todavía no verifica descarga.
+
 **Actual R310:** [CInfo preparado en PC](docs/doom-resident-info-physical-plan-r310.md)
 para leer el estado del residente y sus contadores en una captura, sin comandos
 de carga/descarga. Pendiente aprobación física. Usuario confirma menús normales

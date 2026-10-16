@@ -1,5 +1,9 @@
 # R310: CInfo, una captura de solo lectura del residente
 
+**Actualización R311:** usuario autorizó; [instalada inactiva](doom-resident-info-install-r311.md),
+catálogo previo conservado y gates restaurados. Una lectura manual autorizada
+pendiente. El estado soloPC de abajo describe la preparación previa.
+
 **Solo PC; pendiente de autorización física.** El usuario confirma ERROR30,
 sin CLOSED y con retorno a esfera/menús normal. Esta consulta distingue estado
 del hilo/JOIN, resultado del motor, balance de allocations y archivos retenidos.

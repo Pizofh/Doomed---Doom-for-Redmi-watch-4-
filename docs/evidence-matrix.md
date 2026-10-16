@@ -1,5 +1,11 @@
 # Matriz de evidencia
 
+**Actual R311:** [CInfo registrada inactiva](doom-resident-info-install-r311.md),
+catálogo independiente15entradas conserva14previas/selección, carriers presentes,
+cierre/worker confirmados. CONFIRMADO EN RW4 para registro; no autenticación
+del contenido extraído. Captura manual autorizada pendiente, sin nueva evidencia
+de estado/descarga del módulo C. Gates restaurados.
+
 **Actual R310:** usuario confirma ausencia de CLOSED y menús/retorno normales
 en DoomTrace; no demuestra descarga del C. [CInfo solo PC](doom-resident-info-physical-plan-r310.md):
 14casos LuaS3 con archivos/widgets simulados verifican lectura acotada, cierre
