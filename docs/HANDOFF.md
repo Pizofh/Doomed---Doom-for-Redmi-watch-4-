@@ -1,10 +1,19 @@
+# R357: licencia predeterminada GPL-2.0-only elegida por usuario
+
+Usuario eligio "esa" tras explicacion de GPL-2.0-only. LICENSE contiene textoGPL2
+verbatim verificado contra blob upstream; LICENSING.md define default para codigo
+propio sin aviso distinto. SPDX GPL-2.0-or-later ya existentes se conservan,
+tambien dependencias/derechos previamente otorgados. No estrechar esos archivos
+ni alterar sus hashes/buildpins. README/guia actualizados. Sin cambio al juego,
+paquete instalado o gates. Eleccion de licencia ya resuelta; no volver a preguntar.
+
 # R356: entrega publica preparada y prototipo de efectos en PC
 
 Usuario autoriza preparacionGitHub local y avanzar0.2, con gastoacotado. No push.
 Guia docs/getting-started.md y notas docs/releases/v0.1.0.md listas; explican
 buildincremental y falta segundo propietario, no fingir instalador universal.
-Licencia general propia preguntada asincronicamente; falta respuesta. No inventar
-licencia del autor. SPDX de archivos/dependencias se conserva individualmente.
+Licencia general propia preguntada entonces; resuelta en R357 como GPL-2.0-only.
+SPDX de archivos/dependencias se conserva individualmente.
 Doctor tools/check-release-prerequisites.mjs verifica181blobs y entradas fijadas,
 sin auth/MAC/logs;4escenarios pasan, cleanCheckoutBuildSupported=false explicito.
 AudioPC tools/audio-reference-r356.mjs:DMX+4canalesmono/22050/S16/bloques<=512;

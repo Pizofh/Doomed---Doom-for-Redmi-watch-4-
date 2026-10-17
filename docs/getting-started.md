@@ -69,8 +69,10 @@ históricas de instalación se conservan como evidencia, no como manual actual.
 
 El código upstream conserva sus avisos y licencia GPL. Los datos WAD y las
 herramientas externas tienen sus propios términos; no se incluyen en esta
-entrega pública. La licencia general del código propio está pendiente de elección
-del autor; no se deduce una licencia general de la mera visibilidad en GitHub.
+entrega pública. El código propio tiene licencia predeterminada **GPL-2.0-only**,
+salvo los archivos con otro aviso explícito. Los avisos existentes
+GPL-2.0-or-later se mantienen. Consulta [el alcance de las licencias](../LICENSING.md)
+y [el texto GPL 2](../LICENSE).
 
 Para reportar un problema basta el modelo, firmware, nombre de la esfera, pasos
 y mensaje de error. No adjuntar MAC, claves, logs privados ni partidas.

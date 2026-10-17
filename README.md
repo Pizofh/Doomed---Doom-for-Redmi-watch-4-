@@ -85,6 +85,10 @@ Build details and trial evidence are in the linked R351 plan and local reports.
 
 ## Sources and private data
 
+Original project source code defaults to **GPL-2.0-only**, except where a file
+has an explicit different notice. Existing `GPL-2.0-or-later` notices and upstream
+licenses remain in effect. See [LICENSE](LICENSE) and [licensing scope](LICENSING.md).
+
 Upstream: doomgeneric revision dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284;
 its original GPL license is retained with the local source. Game data has its
 own license. See [source review](docs/doom-build-audit.md) and
