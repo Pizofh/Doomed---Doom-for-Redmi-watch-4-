@@ -1,4 +1,4 @@
-# Estado actual R349: DoomPads listo localmente, pendiente aprobacion fisica
+# Estado actual R350: DoomPads instalado inactivo, ensayo manual pendiente
 
 DoomWide R348 probado por usuario: imagen grande/fluidez/pausa/salida correctas;
 TIME25153,TICS851,IMAGES247,CERROR0,GPUCODE0,PHASE2. Pidio retroceso, accion
@@ -9,9 +9,15 @@ Motor real/modelo2ciclos y UI2partidas pasan;14alloc/14free,uso real,retroceso,
 pausa congelada/resume,STOPjoin/unload. NuevecasosLua y7escenarios paquete pasan.
 Paquete646764B/46recursos, SHAe2290d4225e208c6c2e398b499b3c37af80fc96942dd5764d83e319487f2ff38.
 Prepare317partes652813wire,sinradio. GatesDEPLOYMENT/PADS/C#Large cerrados.
-Plan docs/doom-pads-physical-plan-r349.md. RunnerR350 preparado,no ejecutado.
-Pendiente aprobacion especifica: UNA instalacion inactiva y UN ensayo20s,
-bateria>=50%,sinreboot/WAD/borrado/retry/resume. ConservarWide942+Launcher963.
+Plan docs/doom-pads-physical-plan-r349.md. Usuario autorizo UNA instalacion y UN
+ensayo20s observando bateria>=50%. RunnerR350 ejecutado una vez: RegisteredInactive,
+317partes offset0,registro confirmado,contenido no releido,seleccion sin activar.
+Conexion cerrada,worker exit0,gates restaurados/helper cerrado reconstruido;
+5589asserts y7escenarios offline pasan. Reporte artifacts/doom-pads-physical-r350/.
+Pendiente ensayo manual: DoomPads previewcruceta+dosbotonesCIAN,READY->STARTuna,
+cuatrodirecciones/FIRE/USAR/PAUSA-SEGUIR/SALIR antes20s;CLOSED->cifras/impresion.
+Error/corrupcion/suspension->no repetir ni reabrir,MODEcodigos. Sin mas envios,
+sinreboot/WAD/borrado/retry/resume. ConservarWide942+Launcher963.
 Solo commits locales; no push/CI ni notas sobre borrado de esferas.
 
 # R347: DoomWide validado localmente

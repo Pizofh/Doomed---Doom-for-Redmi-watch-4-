@@ -65,7 +65,13 @@ Prepare:317partes/652813wire. DEPLOYMENT/PADS_R349/C#Large cerrados.
 Runner de un intento preparado en artifacts/doom-pads-physical-r350/
 install-once.ps1; no ejecutado. Abre solo los permisos correspondientes,
 restaura bytes exactos finalmente y reconstruye/verifica el helper cerrado.
-No autorización física R349 recibida todavía.
+R350: usuario autorizó una instalación y un ensayo observando batería>=50%.
+Runner ejecutado una vez: RegisteredInactive,317partes,offset0, registro
+confirmado; contenido no releído. Selección sin activar por cliente.
+Conexión cerrada y worker exit0. Gates restaurados; helper cerrado reconstruido,
+5589asserts y siete escenarios offline pasan. Ensayo manual pendiente.
+No repetir envío. Reportes sanitizados: artifacts/doom-pads-physical-r350/
+install-result.json y gates-restored.json.
 
 Evidencia local: build/doom-pads-r349/{rw4,s3-ui,s3-model,package};
 artifacts/research/pads-launcher-r349/result.json;
