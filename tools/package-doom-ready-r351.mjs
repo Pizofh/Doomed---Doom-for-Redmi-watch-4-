@@ -1,0 +1,33 @@
+// Offline package. Compiler is isolated from adb; no device/radio operation.
+import fs from 'node:fs';import path from 'node:path';import {spawnSync} from 'node:child_process';import assert from 'node:assert/strict';
+import {root,sha256,readyLauncher as directLauncher,readyAssets as directAssets,readyId as directId} from './doom-ready-r351.mjs';import {verifyShareware} from './wad-data.mjs';
+import {readyUiFixture} from './ready-ui-fixture-r351.mjs';
+import {readyAdapter,readyTransport,readyRuntime} from './doom-ready-source-r351.mjs';
+if(process.argv.length!==2)throw Error('FixedPackageOnly');
+const build=path.join(root,'build/doom-ready-r351/rw4'),out=path.join(root,'build/doom-ready-r351/package');assert(!fs.existsSync(out),'OutputExists');
+const elf=fs.readFileSync(path.join(build,'doom.elf')),review=JSON.parse(fs.readFileSync(path.join(build,'review.json'))),wad=fs.readFileSync(path.join(root,'tools/local/doom-shareware/doom1.wad'));verifyShareware(wad);
+assert.equal(review.elfSha256,sha256(elf));assert.equal(elf.length,613484);assert.equal(review.extraStaticBytes,199520);assert.equal(sha256(elf),'e403b6ccc4b35a056699acefb8dc6a88f99414618d55aa3e3c72d9066816e5ee');assert.equal(review.pngCodec,false);assert.equal(review.physicalDeploymentAuthorized,false);
+const p=directLauncher(elf,wad),ui=JSON.parse(fs.readFileSync(path.join(root,'artifacts/research/ready-launcher-r351/result.json')));
+assert(ui.passed&&ui.cases===10&&ui.sourceSha256===p.sourceSha256);
+const engine=JSON.parse(fs.readFileSync(path.join(root,'build/doom-ready-r351/s3-model/test-result.json')));assert(engine.passed&&engine.cycles.length===2&&engine.rejectedCommandsPerCycle===11&&engine.backwards&&engine.useAction&&engine.saveLoad&&engine.corruptNativeImportRejected&&engine.stopRealJoinDirectCloseUnload);
+for(const mode of ['rw4','s3-ui','s3-model']){const r=JSON.parse(fs.readFileSync(path.join(root,'build/doom-ready-r351',mode,'review.json')));assert.equal(r.generatedHashes.adapter,sha256(readyAdapter()));assert.equal(r.generatedHashes.transport,sha256(readyTransport()));assert.equal(r.generatedHashes.runtime,sha256(readyRuntime()));for(const[p,h]of Object.entries(r.sourceHashes))assert.equal(sha256(fs.readFileSync(path.join(root,p))),h);}
+const touchUi=JSON.parse(fs.readFileSync(path.join(root,'artifacts/emulator/ready-ui-r351/result.json'))),touchClean=JSON.parse(fs.readFileSync(path.join(root,'artifacts/emulator/ready-ui-r351/cleanup.json')));assert(touchUi.passed&&touchUi.exactProductionMain&&touchClean.restored&&touchClean.moduleAndNodeAbsent);
+const fixture=readyUiFixture(p,fs.readFileSync(path.join(root,'build/doom-ready-r351/s3-ui/doom.elf'))),stage=path.join(root,'artifacts/emulator/ready-ui-r351'),record=JSON.parse(fs.readFileSync(path.join(stage,'record.json')));assert.equal(sha256(fixture),record.sourceSha256);assert.equal(fs.readFileSync(path.join(stage,'main.lua'),'utf8'),fixture);
+for(const[n,b]of Object.entries(directAssets()))if(n!=='preview')assert.equal(sha256(fs.readFileSync(path.join(stage,n+'.png'))),sha256(b));
+assert(touchUi.longSession&&touchUi.saveLoadAcrossUnload&&touchUi.corruptBankFallback&&touchUi.cycles[0].wallMs>120000);
+const store=JSON.parse(fs.readFileSync(path.join(root,'artifacts/research/ready-store-r351/result.json'))),campaign=JSON.parse(fs.readFileSync(path.join(root,'artifacts/research/ready-campaign-r351/result.json')));assert(store.passed&&store.cases===23&&store.sourceHashes.STORE_SOURCE===sha256(p.parts.store)&&store.sourceHashes.WRAPPER_SOURCE===sha256(p.parts.wrapper));assert(campaign.passed&&campaign.maps.length===9&&campaign.maps.every(m=>m.allocated===m.freed&&m.saveBytes<196608));
+const assets=directAssets(),records=[['main.lua',Buffer.from(p.source)],['doom.elf',elf],...Object.entries(assets).filter(([n])=>n!=='preview').map(([n,b])=>[n+'.png',b])];
+const dir=path.join(root,'tools/local/easyface-v4.23-review'),compiler=path.join(dir,'Compiler.exe');
+assert(!fs.lstatSync(dir).isSymbolicLink());assert(fs.readdirSync(dir).every(n=>['Compiler.exe','DeviceInfo.db','EasyFace_en.exe'].includes(n)));
+assert.equal(sha256(fs.readFileSync(compiler)),'bfb8c3b6666b79de165884d832c69d46e5bbfa581c65c1e188cddfc4b9d6723a');assert.equal(sha256(fs.readFileSync(path.join(dir,'DeviceInfo.db'))),'7fde4b233d75e36985f709e84ea4c164c494b02d109bcdb5f50f0ab76e6c3f76');
+for(const d of ['app/lua','images','output'])fs.mkdirSync(path.join(out,d),{recursive:true});for(const[n,b]of records)fs.writeFileSync(path.join(out,'app/lua',n),b,{flag:'wx'});
+fs.writeFileSync(path.join(out,'images/preview.png'),assets.preview,{flag:'wx'});
+fs.writeFileSync(path.join(out,'DoomReady.fprj'),'<?xml version="1.0" encoding="utf-8" ?>\n<FaceProject DeviceType="365"><Screen Title="DoomReady" Bitmap="preview.png"><Widget Shape="34" Name="app_lua%2Fmain.lua" X="0" Y="0" Width="390" Height="450" Alpha="0" Visible_Src="0" /></Screen></FaceProject>\n',{flag:'wx'});
+const r=spawnSync(compiler,['-b',path.join(out,'DoomReady.fprj'),path.join(out,'output'),'DoomReady.face',directId],{cwd:out,shell:false,windowsHide:true,encoding:'utf8',timeout:30000,maxBuffer:1048576,env:{...process.env,TEMP:out,TMP:out,PATH:path.join(process.env.SystemRoot,'System32')}});
+fs.writeFileSync(path.join(out,'compiler-result.json'),JSON.stringify({status:r.status,stdout:r.stdout,stderr:r.stderr},null,2));
+assert(!r.error&&r.status===0&&/No Errors/.test(r.stdout)&&/Watch:\s*RedmiWatch4/.test(r.stdout)&&/adb util is missing, skipping to upload/.test(r.stdout),'Compiler');
+const bytes=fs.readFileSync(path.join(out,'output/DoomReady.face'));assert(bytes.length<700000&&bytes.readUInt32LE(0)===0x1234a55a&&bytes[5]===0&&bytes[49]===0);bytes.write(directId,40,9,'ascii');
+const entries=records.map(([n,b])=>{const name=Buffer.from('lua/'+n),found=[];for(let at=bytes.indexOf(name);at>=0;at=bytes.indexOf(name,at+1)){if(at<20)continue;const word=bytes.readUInt32LE(at-20);if((word&0xffffff)===b.length&&(word>>>24)===name.length&&bytes.subarray(at+name.length,at+name.length+b.length).equals(b))found.push(at+name.length);}assert.equal(found.length,1,'Resource '+n);return{name:n,size:b.length,offset:found[0],sha256:sha256(b)};});
+fs.writeFileSync(path.join(out,'DoomReady-id-only.face'),bytes,{flag:'wx'});
+const result={checkpoint:'R351',id:directId,size:bytes.length,sha256:sha256(bytes),sourceSha256:p.sourceSha256,elfSha256:review.elfSha256,entries,config:p.config,manualStartOnly:true,nativeExecutableIncluded:true,wadIncluded:false,pngFrameCodec:false,physicalTransferEnabled:false,physicalWatchUsed:false,compilerAdbAvailable:false};
+fs.writeFileSync(path.join(out,'review.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify({...result,entries:entries.length}));

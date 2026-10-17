@@ -11,6 +11,9 @@
 /build/
 *.wad
 *.WAD
+save-a.rw4
+save-b.rw4
+*.dsg
 *.elf
 *.rpk
 *.bin

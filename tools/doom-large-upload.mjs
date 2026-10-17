@@ -6,7 +6,7 @@ import {ccmEncrypt,packetNonce} from './rw4-xiaomi-protocol.mjs';
 import {isReviewedDoomPeer} from './doom-deployment-physical.mjs';
 const owned=new WeakMap(),hash=(b,a='sha256')=>createHash(a).update(b).digest('hex');
 const refuse=()=>{throw Error('DoomLargeUploadRefused');};
-function mint(b,id,kind){const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher:['review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual','review-fast-r331-manual','review-palette-r333-manual','review-bench-r335-manual','review-demand-r337-manual','review-direct-r343-manual','review-touch-r345-manual','review-wide-r347-manual','review-pads-r349-manual'].includes(kind),physicalEnabled:false});owned.set(p,b);return p;}
+function mint(b,id,kind){const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher:['review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual','review-fast-r331-manual','review-palette-r333-manual','review-bench-r335-manual','review-demand-r337-manual','review-direct-r343-manual','review-touch-r345-manual','review-wide-r347-manual','review-pads-r349-manual','review-ready-r351-manual'].includes(kind),physicalEnabled:false});owned.set(p,b);return p;}
 export function prepareDoomAssets(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==4807680||hash(raw)!=='387e6c80616296ca7c8727e1a356e169c5b3575e1f2c33d4c9e9a32729ffa7c9'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='167210065'||raw[49]!==0)refuse();
  const b=Buffer.from(raw);b.write('365219963',40,9,'ascii');
@@ -82,6 +82,10 @@ export function prepareDoomWide(raw){
 export function prepareDoomPads(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==646764||hash(raw)!=='e2290d4225e208c6c2e398b499b3c37af80fc96942dd5764d83e319487f2ff38'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365219941'||raw[49]!==0)refuse();
  return mint(Buffer.from(raw),'365219941','review-pads-r349-manual');
+}
+export function prepareDoomReady(raw){
+ if(!Buffer.isBuffer(raw)||raw.length!==660896||hash(raw)!=='fa2146fde2cb9bba9a7637779c747fdbbb24faf62e7b56386c66e575f3ead5c8'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365219940'||raw[49]!==0)refuse();
+ return mint(Buffer.from(raw),'365219940','review-ready-r351-manual');
 }
 // Reproducible, owned non-game bytes for public CI. Never an installable face.
 export function syntheticDoomUpload(size=4807680){if(![4807680,4827012,4827044].includes(size))refuse();const b=Buffer.alloc(size);for(let i=0;i<b.length;i++)b[i]=(i*29+(i>>>8))&255;Buffer.from('PC ONLY UPLOAD FIXTURE').copy(b);return mint(b,'365799998','synthetic-only');}

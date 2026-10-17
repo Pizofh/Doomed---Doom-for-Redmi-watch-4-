@@ -1,24 +1,27 @@
-# Estado actual R350: DoomPads instalado inactivo, ensayo manual pendiente
+# Estado actual R351: DoomReady listo, pendiente aprobacion fisica conjunta
 
-DoomWide R348 probado por usuario: imagen grande/fluidez/pausa/salida correctas;
-TIME25153,TICS851,IMAGES247,CERROR0,GPUCODE0,PHASE2. Pidio retroceso, accion
-y redistribucion con pausa mas pequena. Sin pedir chequeos de menus adicionales.
-DoomPads941 conserva render Wide; cruceta6teclas, FIRE/USAR, PAUSA96x34,
-SALIR76x34. Protocolo5/nodo rw4doompads; renderer y motor originales.
-Motor real/modelo2ciclos y UI2partidas pasan;14alloc/14free,uso real,retroceso,
-pausa congelada/resume,STOPjoin/unload. NuevecasosLua y7escenarios paquete pasan.
-Paquete646764B/46recursos, SHAe2290d4225e208c6c2e398b499b3c37af80fc96942dd5764d83e319487f2ff38.
-Prepare317partes652813wire,sinradio. GatesDEPLOYMENT/PADS/C#Large cerrados.
-Plan docs/doom-pads-physical-plan-r349.md. Usuario autorizo UNA instalacion y UN
-ensayo20s observando bateria>=50%. RunnerR350 ejecutado una vez: RegisteredInactive,
-317partes offset0,registro confirmado,contenido no releido,seleccion sin activar.
-Conexion cerrada,worker exit0,gates restaurados/helper cerrado reconstruido;
-5589asserts y7escenarios offline pasan. Reporte artifacts/doom-pads-physical-r350/.
-Pendiente ensayo manual: DoomPads previewcruceta+dosbotonesCIAN,READY->STARTuna,
-cuatrodirecciones/FIRE/USAR/PAUSA-SEGUIR/SALIR antes20s;CLOSED->cifras/impresion.
-Error/corrupcion/suspension->no repetir ni reabrir,MODEcodigos. Sin mas envios,
-sinreboot/WAD/borrado/retry/resume. ConservarWide942+Launcher963.
-Solo commits locales; no push/CI ni notas sobre borrado de esferas.
+DoomPads R350 probado: usuario confirma sinlag/interaccion/pausa/CLOSED correctos.
+TIME26809,TICS948,IMAGES273,CERROR0,GPUCODE0,PHASE2. Pidio flechas mayores y
+cerrar el proyecto con el mayor avance posible en una entrega; solo trabajo local.
+DoomReady940: flechas70x58, renderWide identico, sesiones30min cooperativas,
+ELF CRC cache solo contexto/WAD CRC completo enC, mapas1..9, GUARDAR/CARGAR
+en PAUSA con dos bancos alternados propios y verificacion. Sin sonido/autosave.
+NativeRAMslot196608B, ninguna escrituraFSdesdeC; nodos rw4doomready/rw4doomslot,
+protocolo6. FREE6956611/LARGEST4194320, zona4MiB. Slots pertenecen a la esfera.
+Close de importacion invalida libera VFS con exito y valid=0 impide LOAD;
+prueba CRC negativa detecto/corrigio retencionVFS antes del paquete.
+2ciclos engine con11rechazos,10casos controlador y23store/wrapper pasan.
+UI final147017ms/4801tics/3384presentaciones y segundo ciclo tras unload,
+save persistido y banco corrupto ignorado;14alloc14free,PHASE2,cleanup porhash.
+StartupS3 5726/2659ms. Nueve mapas arrancan/guardan/cargan/cerran, no playthrough.
+Paquete660896B/55recursos/324partes, SHAfa2146fde2cb9bba9a7637779c747fdbbb24faf62e7b56386c66e575f3ead5c8.
+Prepare667078wire,7escenarios paquete pasan,pinPads preservado. Todosgatescerrados.
+Plan docs/doom-ready-physical-plan-r351.md; runnerR352 preparado,no ejecutado.
+Pendiente aprobacion especifica de UNA instalacion inactiva y DOS arranques:
+primer juego~2min con guardar/mover/cargar/CLOSED y reentrada sin reinstalar,
+PAUSA/CARGAR para probarpersistencia y SALIR. Bateria>=50%,observacion.
+ConservarDoomPads941+Launcher963; sinreboot/borrado/WAD/retry/resume.
+README/guia actualizados. Solo commitslocales,no push/CI/no notas de borrado.
 
 # R347: DoomWide validado localmente
 

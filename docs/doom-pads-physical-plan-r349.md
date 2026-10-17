@@ -1,5 +1,10 @@
 # R349 DoomPads: retroceso, acción y controles compactos
 
+Ensayo físico R350 completado: usuario confirma controles e interacción
+correctos, pausa/salida CLOSED y juego sin lag. TIME26809ms,TICS948,IMAGES273,
+C ERROR0,GPU CODE0,PHASE2. Solicita flechas ligeramente mayores; los otros
+botones le resultan cómodos.273/26,809≈10,18presentaciones/s, sin medir FPS del panel.
+
 Deriva de DoomWide probado físicamente con pausa y salida correctas.
 Conserva la imagen proporcional de aproximadamente383×239, zoom306/256,
 antialias0, dos buffers512000B, zona4MiB, timer40ms y una lectura de estado
@@ -69,7 +74,7 @@ R350: usuario autorizó una instalación y un ensayo observando batería>=50%.
 Runner ejecutado una vez: RegisteredInactive,317partes,offset0, registro
 confirmado; contenido no releído. Selección sin activar por cliente.
 Conexión cerrada y worker exit0. Gates restaurados; helper cerrado reconstruido,
-5589asserts y siete escenarios offline pasan. Ensayo manual pendiente.
+5589asserts y siete escenarios offline pasan. Ensayo manual completado arriba.
 No repetir envío. Reportes sanitizados: artifacts/doom-pads-physical-r350/
 install-result.json y gates-restored.json.
 
