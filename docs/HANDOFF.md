@@ -1,4 +1,14 @@
-# R354: cierre local 0.1.0-rc1; falta solo partida continua 10–15 min
+# R355: primera version jugable 0.1.0 aceptada
+
+Usuario reporta aproximadamente media hora de juego sin fallos; murio, recupero
+partida guardada y salio CLOSED. Aceptacion larga COMPLETADA. No pedir cifras,
+repeticiones ni otros ensayos para cerrar. Duracion aproximada, no prueba de
+activacion exacta del corte30min ni campana completa. No cambios al juego.
+Entrega final build/releases/Doomed-0.1.0/ con mismo paquete R351 fijado porSHA,
+guia/manifiesto/sumas actualizados. RC anterior conservada como historica.
+Sin instalar/radio/gates/push. DoomReady940+Launcher963; Pads941 respaldo.
+
+# R354: cierre local 0.1.0-rc1; pendiente entonces partida continua 10–15 min
 
 Usuario aprobo cerrar version jugable, paquete/guia y prueba larga sobre DoomReady
 ya instalada. Sin nuevo payload ni instalacion. No sonido/multitouch/autofire.

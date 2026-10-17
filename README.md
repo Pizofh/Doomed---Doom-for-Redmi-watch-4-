@@ -8,6 +8,9 @@ The user confirmed gameplay, larger controls, interaction, pause, save/load with
 the original screen melt, persistence after switching to another face, and clean
 CLOSED exit. The final short cycle reported zero engine/graphics errors and
 phase2. DoomPads remains the previously tested fallback.
+The final acceptance session lasted approximately 30 minutes according to the
+user, including death, recovery from a save and CLOSED exit, with no failures
+reported.
 
 DoomReady includes faster checks, longer sessions and persistent save/load.
 Local tests also cover a147-second session and save/load in all nine shareware
@@ -17,9 +20,9 @@ multitouch support is unconfirmed.
 
 [Playing guide (Spanish)](docs/playing.md) | [Current handoff](docs/HANDOFF.md)
 
-**First playable release:** [0.1.0-rc1 handoff (Spanish)](docs/first-playable-release.md).
-It preserves the tested package byte for byte. The remaining acceptance item is
-a continuous 10–15 minute physical session; no new face installation is needed.
+**First playable release:** [0.1.0 handoff (Spanish)](docs/first-playable-release.md).
+Acceptance is complete. It preserves the tested package byte for byte; no new
+face installation is needed.
 
 ## Controls and presentation
 

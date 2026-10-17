@@ -2,8 +2,10 @@
 
 DoomReady ya fue probado en el reloj: controles, interacción, pausa, guardado,
 carga con la transición original, persistencia al cambiar de esfera y salida
-CLOSED correctos. El límite completo de30min y una campaña entera no se han
-validado físicamente.
+CLOSED correctos. En la aceptación final el usuario jugó aproximadamente media
+hora, recuperó una partida guardada tras morir y salió en CLOSED sin fallos.
+La activación exacta del límite automático de30min y una campaña entera no se
+han validado físicamente.
 
 ## Arranque y controles
 

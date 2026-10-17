@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 
 assert.equal(process.argv.length, 2, 'No arguments supported');
 const root = fileURLToPath(new URL('../', import.meta.url));
-const output = path.join(root, 'build/releases/Doomed-0.1.0-rc1');
+const output = path.join(root, 'build/releases/Doomed-0.1.0');
 const expectedHash = 'fa2146fde2cb9bba9a7637779c747fdbbb24faf62e7b56386c66e575f3ead5c8';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 function read(relative) {
@@ -36,13 +36,15 @@ const files = new Map([
   ['doom-build-audit.md', read('docs/doom-build-audit.md')],
 ]);
 const manifest = {
-  version: '0.1.0-rc1', status: 'Pending physical 10–15 minute session',
+  version: '0.1.0', status: 'First playable release accepted',
   gameplayBaseline: 'R351/R352', faceId: review.id,
   compatibility: {model: 'M2315W1', firmware: '2.2.86'},
   capabilities: {saveLoad: true, persistentSave: true, sound: false,
     simultaneousTouchButtons: 1, cooperativeSessionLimitMinutes: 30},
   validation: {physicalGameplay: true, physicalSaveLoadAcrossFaces: true,
-    physicalContinuous10to15Minutes: false, physical30MinuteCap: false,
+    physicalContinuous10to15Minutes: true,
+    userReportedSessionMinutesApproximate: 30, physicalLoadAfterDeath: true,
+    physical30MinuteCap: false,
     physicalFullCampaign: false},
   files: [...files].map(([name, bytes]) => ({name, bytes: bytes.length, sha256: hash(bytes)})),
   deviceOperationPerformed: false, wadIncluded: false, savesIncluded: false,
@@ -58,4 +60,5 @@ for (const [name, bytes] of files) {
 }
 console.log(JSON.stringify({status: 'LocalReleaseStaged', output,
   files: [...files.keys()], packageSha256: expectedHash,
-  pending: 'Physical continuous 10–15 minute session', deviceOperationPerformed: false}));
+  acceptance: 'User reported approximately 30 minutes, load after death and CLOSED',
+  deviceOperationPerformed: false}));

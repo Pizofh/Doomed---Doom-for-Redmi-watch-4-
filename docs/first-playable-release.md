@@ -1,8 +1,8 @@
-# Doomed 0.1.0-rc1 — primera versión jugable
+# Doomed 0.1.0 — primera versión jugable
 
 Entrega local basada en **DoomReady R351**, probado físicamente en R352.
 No cambia el ejecutable, la esfera ni las partidas que ya están en el reloj.
-Se conserva como candidata hasta completar la prueba continua descrita abajo.
+La prueba larga de aceptación se completó satisfactoriamente.
 
 ## Qué incluye
 
@@ -14,7 +14,8 @@ reloj, con buena fluidez y salida CLOSED.
 Compatibilidad revisada: Redmi Watch 4 **M2315W1, firmware 2.2.86**.
 Un botón táctil activo a la vez; sin sonido ni disparo automático.
 Límite cooperativo de 30 minutos por sesión, incluyendo pausas.
-Ni el límite completo ni la campaña entera se han validado físicamente.
+Se probó una sesión de aproximadamente media hora. La activación exacta del
+límite automático y la campaña entera siguen sin validación física.
 
 ## Instalación y conservación
 
@@ -48,24 +49,17 @@ sus dos copias alternadas protegen frente a una escritura incompleta.
 
 Consultar [la guía de juego](playing.md) para mensajes y límites del guardado.
 
-## Única comprobación pendiente para cerrar la candidata
+## Resultado de aceptación — 17 de octubre de 2026
 
-Usar la DoomReady instalada, sin reinicio previo ni nueva instalación, con
-batería suficiente y pudiendo observar el reloj:
+El usuario jugó aproximadamente media hora, murió durante la partida y recuperó
+el progreso desde un guardado. Reportó que nada falló y que la salida terminó
+en CLOSED. Esto completa la aceptación de la primera versión jugable; no hace
+falta repetir el ensayo ni recoger más cifras.
 
-1. Jugar entre 10 y 15 minutos, manteniendo la pantalla despierta. Comprobar que
-   la fluidez y los controles siguen como al principio; no hacen falta cifras.
-2. Hacia el final, PAUSA → GUARDAR → GUARDADO. Moverse y después
-   PAUSA → CARGAR → CARGADO → SEGUIR; comprobar que restaura lo guardado.
-3. SALIR → CLOSED y volver a la esfera habitual. Informar solo si hubo un
-   problema; para cerrar basta confirmar duración aproximada y resultado.
-
-Ante ERROR, ERROR SLOT, corrupción de imagen o bloqueo, detener la prueba y
-describir lo ocurrido sin repetir START. Mantener el resultado como pendiente
-hasta recibir el reporte: esta entrega no afirma que la prueba ya se realizó.
-
-Esta comprobación no valida el límite de 30 minutos ni garantiza recuperación
-ante un bloqueo del sistema. La recuperación integral sigue sin validar.
+La duración es aproximada y reportada por el usuario, sin telemetría adicional.
+No demuestra que se haya disparado el corte automático de 30 minutos ni que se
+haya completado toda la campaña. La recuperación integral del sistema ante un
+bloqueo sigue sin validar.
 
 ## Preparación local
 
@@ -75,7 +69,7 @@ Desde la raíz del repositorio:
 node tools/stage-playable-release-r354.mjs
 ```
 
-Escribe únicamente en `build/releases/Doomed-0.1.0-rc1/`: paquete exacto,
+Escribe únicamente en `build/releases/Doomed-0.1.0/`: paquete exacto,
 guías, manifiesto y sumas SHA256. Comprueba la identidad del paquete antes de
 copiarlo y no sobrescribe una entrega existente. No recompila ni modifica gates.
 Los binarios y esta carpeta permanecen ignorados por Git. Fuentes y licencias
