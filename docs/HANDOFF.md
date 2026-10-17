@@ -1,4 +1,27 @@
-# Estado actual R344: DoomDirect probado fisicamente, mejora de fluidez
+# Estado actual R345: DoomTouch combinado listo localmente; pendiente permiso fisico
+
+Usuario pide controles transparentes encima del juego y reunir rendimiento en
+una sola configuracion. Nuevo DoomTouch943, preview CRUZ CIAN; C identico a
+Direct343 (606564B, SHAcb7d0c4c0322c9b1c9c827fb67511705262caf988beb04075c66f9c887a16de3).
+Sin PNG por frame; una lectura de estado/tick en vez de dos; PLAYING deduplicado;
+timer40ms/750ticks conserva salida cooperativa~30s. Imagen320x200 sin escalado.
+Pads35%opacity y glifosRGBA: capa visual en activeScreen trasImageC, hitboxes
+dentro del contexto de esfera. Retiro visual/hits en CLOSED/error/pageOnPause.
+9casos Lua pasan, incl100ticks/200opens/0updates redundantes. UI S3 real con
+main produccion/adaptador S3: dos ciclos, disparo50->49, teclas sueltas alpausar,
+14alloc14free, cero error, cierre/join/unload y restauracion del fixture.
+No atribuir FPS fisicos ni optimo garantizado; medir una vez frente aDirect.
+43recursos empaquetados, nuevo pin/gate/journalTOUCH_R345/touch-r345.jsonl,
+sin tocar pins/gates antiguos. Guard cerrado antes de privados; sin radio.
+Paquete644560B SHAc686a9b4d5c13ae004a452866939c19539119ecb5cc792b71831c4c303ec1a0c;
+Lua20936B SHA6dd2f1a4d5f4e494922fd3996b523ec4dcfba20a3cf3fe2a20c6a9dd796b8d69.
+7escenarios de paquete pasan y7del anteriorDirect; prepare316partes650590wire.
+Plan: docs/doom-touch-physical-plan-r345.md. RunnerR346 preparado, no ejecutado.
+Siguiente: pedir UNA instalacion inactiva y UN ensayo manual<=20s observando
+bateria>=50%; no reboot/WAD/retry/resume/borrado. ConservarDirect944+carrier963.
+No repetir tests pasados ni checks remotos; commits locales unicamente.
+
+# R344: DoomDirect probado fisicamente, mejora de fluidez
 
 Resultado usuario: TIME MS21818, TICS779, IMAGES168; C ERROR0,
 campo GPU reportado como gpumode0, PHASE2 (=DIRECT_CLOSED).
