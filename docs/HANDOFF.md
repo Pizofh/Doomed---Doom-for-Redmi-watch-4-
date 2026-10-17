@@ -1,3 +1,21 @@
+# Estado actual R335: DoomBench preparado, pendiente de aprobaci?n f?sica
+
+R334/DoomPalette: usuario confirma imagen/colores, controles y CLOSED correctos;
+mejora parcial pero sigue demasiado lento. Navegaci?n normal. No reboot previo.
+R335 mide clock y pipeline antes de otra optimizaci?n: tres sleeps200ms y fases
+~5s sin Images/~5s con Images; autoSTOP fuera del observer. Mismo motor, codec,
+bindings, 4MiB y guards RAM; protocolo128-v3. No ensayo f?sico nuevo autorizado.
+Plan completo/pins/l?mites: docs/doom-benchmark-physical-plan-r335.md.
+150 checks C/VFS +68 Lua +7 escenarios upload pasan; prepare318partes/655324wire.
+ID365219946,649256B, SHA4ab579c492a51f5743d5c5f71b362f2d96f56ca43fdc24b306562a59a904ac38.
+ELF607400B SHAfd41ae2439a0b24d211fa5c837603c1fb399aa7ee013d8afdacbfbada172ab0b.
+CLI pc-doom-bench-r335.mjs; gates DEPLOYMENT/BENCH_R335/Large cerrados.
+Runner preparado artifacts/doom-bench-physical-r336/install-once.ps1, NO ejecutado.
+Un install inactivo y un ciclo autom?tico propuestos; cuatro p?ginas MODE tras
+CLOSED. Conservar DoomLauncher963 y DoomPalette947. Journal bench-r335.jsonl
+no creado. Sin push/remote checks; asumir salud normal salvo aviso del usuario.
+Los estados pendientes anteriores son hist?ricos y quedan sustituidos aqu?.
+
 # Retomar el proyecto
 
 **Actual R333: DoomPalette listo, pendiente de autorización física.**

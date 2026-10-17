@@ -10,6 +10,7 @@ const PHYSICAL_LEASE_R327_REVIEWED=false;
 const PHYSICAL_HOLD_R329_REVIEWED=false;
 const PHYSICAL_FAST_R331_REVIEWED=false;
 const PHYSICAL_PALETTE_R333_REVIEWED=false;
+const PHYSICAL_BENCH_R335_REVIEWED=false;
 const PHYSICAL_RESUME_REVIEWED=false;
 const PHYSICAL_CONTROL_RETRY_REVIEWED=false;
 const endpoints=new WeakMap(),peers=new WeakSet(),fail=()=>{throw Error('DoomPhysicalGateClosed');};
@@ -22,6 +23,7 @@ export function physicalDoomLeaseEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&
 export function physicalDoomHoldEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_HOLD_R329_REVIEWED;}
 export function physicalDoomFastEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_FAST_R331_REVIEWED;}
 export function physicalDoomPaletteEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_PALETTE_R333_REVIEWED;}
+export function physicalDoomBenchEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_BENCH_R335_REVIEWED;}
 export function physicalDoomResumeEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_RESUME_REVIEWED;}
 export function physicalDoomControlRetryEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_CONTROL_RETRY_REVIEWED;}
 export function isReviewedDoomPeer(peer){return PHYSICAL_DEPLOYMENT_REVIEWED&&peers.has(peer);}
