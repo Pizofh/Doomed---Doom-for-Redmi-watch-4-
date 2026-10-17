@@ -136,3 +136,14 @@ Evidencia local: build/doom-ready-r351/{rw4,s3-model,s3-ui,package};
 artifacts/research/{ready-launcher-r351,ready-store-r351,ready-campaign-r351};
 artifacts/emulator/ready-ui-r351/{result,cleanup}.json;
 artifacts/doom-ready-r351/package-tests.json. Aprobación física todavía pendiente.
+
+## R352: instalación inactiva completada
+
+Usuario autorizó UNA instalación y DOS arranques observando batería>=50%.
+Runner R352 ejecutado una vez: RegisteredInactive,324partes,offset0, registro
+confirmado; contenido no releído. Selección sin activar por cliente.
+Conexión cerrada y worker exit0. Gates restaurados a bytes originales; helper
+cerrado reconstruido,5589asserts y siete escenarios offline pasan.
+Reportes sanitizados: artifacts/doom-ready-physical-r352/install-result.json
+y gates-restored.json. Journal ready-r351.jsonl creado; no repetir envío.
+Pendientes ambos arranques manuales descritos arriba. Sin reboot ni más envíos.

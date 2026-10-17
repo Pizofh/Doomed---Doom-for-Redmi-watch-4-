@@ -1,4 +1,4 @@
-# Estado actual R351: DoomReady listo, pendiente aprobacion fisica conjunta
+# Estado actual R352: DoomReady instalado inactivo, dos arranques pendientes
 
 DoomPads R350 probado: usuario confirma sinlag/interaccion/pausa/CLOSED correctos.
 TIME26809,TICS948,IMAGES273,CERROR0,GPUCODE0,PHASE2. Pidio flechas mayores y
@@ -16,8 +16,13 @@ save persistido y banco corrupto ignorado;14alloc14free,PHASE2,cleanup porhash.
 StartupS3 5726/2659ms. Nueve mapas arrancan/guardan/cargan/cerran, no playthrough.
 Paquete660896B/55recursos/324partes, SHAfa2146fde2cb9bba9a7637779c747fdbbb24faf62e7b56386c66e575f3ead5c8.
 Prepare667078wire,7escenarios paquete pasan,pinPads preservado. Todosgatescerrados.
-Plan docs/doom-ready-physical-plan-r351.md; runnerR352 preparado,no ejecutado.
-Pendiente aprobacion especifica de UNA instalacion inactiva y DOS arranques:
+Plan docs/doom-ready-physical-plan-r351.md. Usuario autorizo UNA instalacion
+y DOS arranques observando bateria>=50%. RunnerR352 ejecutado una vez:
+RegisteredInactive,324partes offset0,registro confirmado,contenido no releido.
+Seleccion no activada por cliente,conexion cerrada,worker exit0,gates restaurados,
+helper cerrado reconstruido,5589asserts y7escenarios offline pasan.
+Reportes artifacts/doom-ready-physical-r352/. No repetir envio.
+Pendientes DOS arranques manuales:
 primer juego~2min con guardar/mover/cargar/CLOSED y reentrada sin reinstalar,
 PAUSA/CARGAR para probarpersistencia y SALIR. Bateria>=50%,observacion.
 ConservarDoomPads941+Launcher963; sinreboot/borrado/WAD/retry/resume.
