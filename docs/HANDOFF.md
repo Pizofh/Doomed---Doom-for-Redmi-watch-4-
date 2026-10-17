@@ -1,5 +1,26 @@
 # Retomar el proyecto
 
+**Actual R333: DoomPalette listo, pendiente de autorización física.**
+Plan/pins/evidencia docs/doom-palette-physical-plan-r333.md. R332 DoomFast:
+botones/imagen/CLOSED correctos, algo más rápido pero aún lento. No reboot previo.
+R333 PNG indexado320x200/65048B (~66% menos bytes), expansión RGB idéntica al
+RGB565 de DoomFast, <=256colores; rechaza257 antes de Image y suelta solo slot
+recién reservado. No encoded/indexed frame buffer, heap o bindings nuevos.
+BSS+2824; guard RAM+4096=>min_free6471381, largest4194320/zona4MiB iguales.
+4255checks codec/145VFS con S3 decoder real/61Lua y7escenarios paquete pasan;
+regresión R331 pasa. Encoder S3 total25300->23400us/3rondas: no gran ganancia
+CPU, hipótesis reducir datos/decoder, no FPS RW4. Si no mejora, medir pipeline.
+
+DoomPalette365219947,645952B/46recursos, SHAebb889227feafa8fd7cf1fa820d2170723847dfc49c5642911b9673f3a19c26f.
+ELF606272B SHA2accf39509b79f32eef7050a8be501c1d6372116ecd3df0f34311aa25839b9c2;
+Lua21743B SHA2ae089250b1ca8d75e0dfafb9d57c0332887403cd3ad984b598c04ff9d044a93.
+Módulo rw4png333/base947; WAD963, conservar963/backup948. Prepare offline
+317partes/652001wire pasa. CLI pc-doom-palette-r333.mjs, journal palette-r333.jsonl
+no creado. DEPLOYMENT/PALETTE_R333/Large cerrados. No envío o ejecución física
+nuevos. Propuesta1install inactivo/hasta2ciclos observados; sin reinicio,
+autoactivar/borrar/retry/resume. Segunda vuelta solo tras CLOSED y render/
+controles correctos. Párrafos R331 y siguientes históricos, sustituidos aquí.
+
 **Actual R331: DoomFast preparado, pendiente de aprobación física.**
 Plan/pins/pruebas en docs/doom-fast-physical-plan-r331.md. R330 DoomHold muestra
 Doom, controles operativos y CLOSED, pero lento. No necesita reboot previo.

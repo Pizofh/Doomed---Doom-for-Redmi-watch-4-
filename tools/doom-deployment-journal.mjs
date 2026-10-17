@@ -34,7 +34,7 @@ export class DoomDeploymentJournal{
  #fd=null;#lock=null;#token=randomUUID();#key;#tag;#plan;#record;#lastHash='0'.repeat(64);#file;#lockFile;#resume=null;
  constructor(plan,identity,{directory:where=defaultDirectory,resume=false,retryWithoutData=false}={}){
   packageCopy(plan);const binding=identities.get(identity);if(!binding||typeof resume!=='boolean'||typeof retryWithoutData!=='boolean'||resume&&retryWithoutData)fail();
-  const dir=directory(where);this.#file=path.join(dir,plan.kind==='review-fast-r331-manual'?'fast-r331.jsonl':plan.kind==='review-hold-r329-manual'?'hold-r329.jsonl':plan.kind==='review-lease-r327-manual'?'lease-r327.jsonl':plan.kind==='review-refs-r325-manual'?'refs-r325.jsonl':plan.kind==='review-fault-r321-manual'?'fault-r321.jsonl':plan.kind==='review-readers-r318-manual'?'readers-r318.jsonl':plan.kind==='review-ram-png-manual'?'ram-png-r304.jsonl':'transfer.jsonl');this.#lockFile=path.join(dir,'watch.lock');
+  const dir=directory(where);this.#file=path.join(dir,plan.kind==='review-palette-r333-manual'?'palette-r333.jsonl':plan.kind==='review-fast-r331-manual'?'fast-r331.jsonl':plan.kind==='review-hold-r329-manual'?'hold-r329.jsonl':plan.kind==='review-lease-r327-manual'?'lease-r327.jsonl':plan.kind==='review-refs-r325-manual'?'refs-r325.jsonl':plan.kind==='review-fault-r321-manual'?'fault-r321.jsonl':plan.kind==='review-readers-r318-manual'?'readers-r318.jsonl':plan.kind==='review-ram-png-manual'?'ram-png-r304.jsonl':'transfer.jsonl');this.#lockFile=path.join(dir,'watch.lock');
   this.#key=Buffer.from(binding.key);this.#tag=binding.tag;this.#plan=plan;
   try{
    this.#lock=fs.openSync(this.#lockFile,'wx',0o600);
