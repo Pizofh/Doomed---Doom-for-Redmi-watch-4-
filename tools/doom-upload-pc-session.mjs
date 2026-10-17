@@ -9,7 +9,7 @@ import {command,uint,bytes,fields,one,readDeviceInfo,readWatchfaces} from './rw4
 import {packageCopy,uploadLayout,uploadToPcAdapter,uploadToReviewedAdapter} from './doom-large-upload.mjs';
 import {pcPeerAccess} from './doom-upload-pc-simulator.mjs';
 import {DoomDeploymentJournal,deploymentIdentity,disposeDeploymentIdentity} from './doom-deployment-journal.mjs';
-import {claimReviewedDoomEndpoint,physicalDoomRamPngEnabled,physicalDoomReadersEnabled,physicalDoomFaultEnabled,physicalDoomRefsEnabled,physicalDoomLeaseEnabled,physicalDoomHoldEnabled,physicalDoomFastEnabled,physicalDoomPaletteEnabled,physicalDoomBenchEnabled} from './doom-deployment-physical.mjs';
+import {claimReviewedDoomEndpoint,physicalDoomRamPngEnabled,physicalDoomReadersEnabled,physicalDoomFaultEnabled,physicalDoomRefsEnabled,physicalDoomLeaseEnabled,physicalDoomHoldEnabled,physicalDoomFastEnabled,physicalDoomPaletteEnabled,physicalDoomBenchEnabled,physicalDoomDemandEnabled} from './doom-deployment-physical.mjs';
 import {parseDoomUploadAck} from './doom-upload-ack.mjs';
 import {compareDoomCatalogs,reviewedTwoRemovals} from './doom-deployment-catalog.mjs';
 
@@ -96,6 +96,8 @@ export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=fal
    if(!physicalDoomPaletteEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind==='review-bench-r335-manual'){
    if(!physicalDoomBenchEnabled()||resume||retryWithoutData)refuse();
+  }else if(plan?.kind==='review-demand-r337-manual'){
+   if(!physicalDoomDemandEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind!=='review-low-memory-native-disabled')refuse();
   return claimReviewedDoomEndpoint(endpoint,{resume,retryWithoutData});
  },plan,secret,{deploymentResume:resume,deploymentRetryWithoutData:retryWithoutData});

@@ -1,3 +1,26 @@
+# Estado actual R337: DoomDemand preparado, pendiente de aprobaci?n f?sica
+
+R336/DoomBench termin? CLOSED, navegaci?n normal. Clock2019ticks/200ms respalda
+escala actual; motor185tics/5080ms sin Images y187/5461ms con Images;22Images,
+PREP507/READ445/FRAME239ms, TICK5468/SLEEP11/GAP1285ms. Unos4 Images/s,
+no FPS f?sicos. No reabrir bench para repetir medici?n.
+R337 evita D_Display cuando no hay slot FREE mediante nodrawers original;
+TryRunTics/entrada siguen. Snapshot tambi?n tras Tick sin dibujar. Mismo PNG,
+resoluci?n320x200/colores, bindings,4MiB; RAM3724B sobreR331 dentro4096guard.
+164checks C/VFS +71Lua +2ciclos E1M1/hilos reales S3 +7escenarios upload pasan.
+S3 demuestra slots llenos=>sin nuevos dibujos pero tics avanzan; controles,
+pausa/resume, STOP/JOIN/unload correctos;14alloc/14free en ambos ciclos.
+UI normal jugable; tras EXIT/CLOSED fotografiar TIME MS/TICS/IMAGES.
+Plan/pins/l?mites: docs/doom-demand-physical-plan-r337.md. Un install inactivo y
+un ciclo<=20s propuestos; no reboot previo. Payload nuevo a?n NO autorizado.
+ID365219945,645148B, SHA149d7a2ac8bdeaebfb4a36f090f747c5d7b26c77807d17dd32e5674a9cde7071.
+ELF607636B SHA0ea7b00529435a0d4a249f5aa12c52bd9c584bc95bba2aba0b4ef870c88232b6.
+CLI pc-doom-demand-r337.mjs;prepare316partes/651178wire;gates todos cerrados.
+Runner artifacts/doom-demand-physical-r338/install-once.ps1 preparado NO ejecutado;
+journal demand-r337.jsonl no creado. Conservar carrier963/respaldo947.
+Sin push/checks remotos; asumir salud normal salvo aviso del usuario.
+Estados pendientes anteriores sustituidos por este; no registrar housekeeping.
+
 # Estado actual R335: DoomBench preparado, pendiente de aprobaci?n f?sica
 
 R334/DoomPalette: usuario confirma imagen/colores, controles y CLOSED correctos;
