@@ -1,0 +1,10 @@
+// Pinned AP inspected as data only. No module build, radio, ioctl or watch IO.
+import fs from 'node:fs';import path from 'node:path';import {spawnSync} from 'node:child_process';
+import {root,sha256} from './doom-ready-r351.mjs';
+if(process.argv.length!==2)throw Error('FixedStaticReview');
+const file=path.join(root,'tools/local/firmware-research/rw4-stock-candidate-r193/vela-ap-inspection-only.bin'),b=fs.readFileSync(file),exe=path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-objdump.exe'),out=path.join(root,'artifacts/research/rw4-touch-r353');
+if(fs.existsSync(out)||sha256(b)!=='2c486395a01fb4e1d4a0f8b9b749fd6b1c3d522edc3c2f3813deaea9ab7388db'||sha256(fs.readFileSync(exe))!=='ff61beda5538d78c2ff41d05ff6f694dc96f02ddb75f8db0a5936d995437cda1')throw Error('ReviewInputsChanged');fs.mkdirSync(out,{recursive:true});
+const anchors=[0x667c8,0x687a8,0x6979c,0x6a5d0,0x6a68c,0x6a80c].map(offset=>{const p=Buffer.alloc(4);p.writeUInt32LE(0x3bff187c+offset);const references=[];for(let at=b.indexOf(p);at>=0;at=b.indexOf(p,at+1))references.push(at);return{stringOffset:offset,references};});
+const windows=[['touch-upper',0x1c2b00,0x1c3200],['hynitron-setup',0x1d6500,0x1d6900],['zinitix-events',0x1da880,0x1dacc0],['chipone-events',0x1dc600,0x1dcc00],['chipone-max-points',0x1dcc00,0x1dcf00]];
+for(const[name,start,end]of windows){const r=spawnSync(exe,['-D','-b','binary','-m','arm','-EL','-M','force-thumb','--start-address='+start,'--stop-address='+end,file],{windowsHide:true,shell:false,encoding:'utf8',timeout:10000,maxBuffer:524288});if(r.status||r.error)throw Error('DisassemblyFailed');fs.writeFileSync(path.join(out,name+'.txt'),r.stdout);}
+const report={checkpoint:'R353',imageSha256:sha256(b),anchors,windows:windows.map(([name,start,end])=>({name,start,end})),scope:'Static investigation; individual hardware controller and exposed point count unconfirmed',physicalTransport:false,firmwareExecuted:false};fs.writeFileSync(path.join(out,'review.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report));

@@ -26,10 +26,14 @@ Usuario confirma ambos arranques satisfactorios: guardar/cargar con screenmelt,
 persistencia tras cambiar de esfera y CLOSED. Ultimo ciclo corto TIME2406ms,
 TICS89,IMAGES18,CERROR0,GPUCODE0,PHASE2. No medir primer juego o FPS con eso.
 No pedir mas cifras/repeticiones; limite30min y campa?a entera no probados enHW.
-Pregunta actual: mover+FIRE. C acepta mascaras combinadas; UI envia una tecla
-por contacto. Multitouch HW/API stock sin confirmar; no confundir limiteUI
-con limitepanel. FIREtoggle/autofire es alternativa propuesta, no implementada
-ni nuevo payload autorizado. Sin mas pruebas/envios autorizados.
+R353: usuario pide 2/3 botones realmente sostenidos; rechaza FIREtoggle/autofire
+y movimiento retenido. C acepta combinaciones, UI una tecla. Revision offline:
+adaptadorChipone emite npoints1/ID0; upperhalf admite muestras variables pero
+no demuestra que lowerdriver entregue varios contactos. AP contiene varias
+familiasTP; controlador activo/capacidadpanel aun sin identificar. Sin ruta
+multitouch verificada, conservar inputDoomReady. No basta cambiar mascarasUI.
+Ver docs/touch-feasibility-r353.md y tools/review-rw4-touch-r353.mjs.
+Sin payload/modulo/radio/firmwarepatch ni mas pruebas/envios autorizados.
 ConservarDoomPads941+Launcher963; sinreboot/borrado/WAD/retry/resume.
 README/guia actualizados. Solo commitslocales,no push/CI/no notas de borrado.
 
