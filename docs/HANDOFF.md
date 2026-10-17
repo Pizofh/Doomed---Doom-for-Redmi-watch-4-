@@ -1,4 +1,13 @@
-# Estado actual R344: DoomDirect instalado inactivo, ensayo manual pendiente
+# Estado actual R344: DoomDirect probado fisicamente, mejora de fluidez
+
+Resultado usuario: TIME MS21818, TICS779, IMAGES168; C ERROR0,
+campo GPU reportado como gpumode0, PHASE2 (=DIRECT_CLOSED).
+Controles/salida/retorno/menus normales; claramente mas jugable aunque aun lag.
+168/21.818=7.700 presentaciones/s frente a139/27.821=4.996 Images/s de
+DoomDemand: cocientes de contadores diferentes y ensayos no controlados,
+no FPS de panel ni benchmark equivalente. Mejora percibida confirmada;
+no techo del hardware demostrado. Sin nuevo ensayo ni envio autorizado.
+Actual jugable DoomDirect944, depende del WAD de DoomLauncher963.
 
 Usuario autorizo UNA instalacion y UN ensayo observando bateria>=50%.
 Runner R344 ejecutado una vez: RegisteredInactive, catalogo previo13,
@@ -8,9 +17,7 @@ Sesion cerrada y worker exit0. Gates restaurados a sus bytes originales;
 helper cerrado reconstruido,5589asserts y7escenarios de paquete pasan.
 Reportes privados sanitizados: artifacts/doom-direct-physical-r344/install-result.json
 y gates-restored.json. Journal direct-r343.jsonl creado. No repetir envio.
-Pendiente usuario: seleccionar DoomDirect SEIS barrasCIAN, READY/START una vez,
-controles/PAUSE/RESUME y EXIT antes20s; CLOSED ->TIME MS/TICS/IMAGES y fluidez.
-Si falla, no repetir/reabrir; MODE cached C ERROR/GPU CODE/PHASE si disponible.
+Ensayo manual autorizado completado; resultado arriba.
 Sin reboot ni segundo ciclo autorizados; asumir salud normal salvo aviso.
 
 # R343: Doom directo integrado y paquete validado localmente
@@ -40,7 +47,7 @@ TIME MS/TICS/IMAGES trasCLOSED; MODE ->C ERROR/GPU CODE/PHASE cached.
 Paquete DoomDirect ID365219944,SEIS barrasCIAN,640508B/37recursos/314partes,
 SHAa0ddd3fce496c88cebb6d3ceea6fef18e8aa54fd65734b5ecf01357baf013bd6.
 Lua17931B SHAb06d1927366f0e23afa8e4d5b777a447de7babed4c095eef1206544001191ddb.
-WADcarrier963 no duplicado. Conservar945+963. Docs/plan: docs/doom-direct-physical-plan-r343.md.
+WADcarrier963 no duplicado. Runtime actual944+963. Docs/plan: docs/doom-direct-physical-plan-r343.md.
 CLI pc-doom-direct-r343.mjs prepare paso314partes646500wire sinjournal/radio;
 install rechaza antes de privados con DEPLOYMENT/DIRECT_R343/C#Large cerrados.
 Runner artifacts/doom-direct-physical-r344/install-once.ps1 ejecutado tras

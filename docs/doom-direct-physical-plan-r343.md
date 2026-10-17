@@ -1,9 +1,16 @@
 # R343: DoomDirect, una imagen persistente desde memoria
 
-R344: usuario autorizó una instalación y un ensayo. Paquete registrado inactivo;
-ensayo manual pendiente. Sesión cerrada, worker exit0, gates restaurados y
+R344: usuario autorizó una instalación y un ensayo, ambos completados.
+Paquete registrado inactivo antes de selección manual. Sesión cerrada, worker exit0, gates restaurados y
 helper cerrado verificado. No reenvío ni segundo ciclo. El registro está
 confirmado; no se releyó el contenido instalado.
+
+Resultado físico comunicado: TIME MS21818, TICS779, IMAGES168, C ERROR0,
+campo GPU comunicado como «gpumode»0, PHASE2 (=DIRECT_CLOSED). Usuario confirma
+controles, salida, retorno y menús normales; más jugable aunque persiste lag.
+~7,70 presentaciones/s por contador; el ensayo anterior Demand dio ~5,00
+Images/s. Son contadores de rutas diferentes y recorridos no controlados,
+no FPS medidos del panel ni prueba de un límite del reloj.
 Conservar DoomDemand945 y el carrier DoomLauncher963. No hubo Bluetooth ni
 lecturas de MAC/credenciales durante esta preparación.
 
