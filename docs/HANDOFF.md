@@ -1,5 +1,25 @@
 # Retomar el proyecto
 
+**Actual R331: DoomFast preparado, pendiente de aprobación física.**
+Plan/pins/pruebas en docs/doom-fast-physical-plan-r331.md. R330 DoomHold muestra
+Doom, controles operativos y CLOSED, pero lento. No necesita reboot previo.
+Codec propio nuevo mantiene PNG320x200/192278B idéntico; cursor secuencial y
+Adler+CRC en una pasada, sin buffers/imports/comandos nuevos. Transporte R329
+idéntico. Ccodec5708checks, VFS142checks yLua59casos pasan; package46recursos,
+7escenarios y regresión R329 pasan; prepare316partes/651618wire. No envío físico.
+Benchmark emulador solo prepare/read:153400us->24200us agregado3rondas (~6,3x),
+no FPS ni promesa de aceleración RW4. Datos completos/límites en el plan.
+
+DoomFast365219948,645588B, SHA7dbecda4486d1f9314dffcceacf2c82abc726d6260ac1f5c056f97e329af38fd.
+ELF605908B SHA7e16929469dfa183b151a4f7e53a61b52dcfe80f1fc7b86e00655495e563b077;
+Lua21743B SHA3a3af095ab159dd42f40fe5cc1ca3d9a4fab6891a050b8babf275a7316620fdc.
+CodecSHA009dd32024e076294d4b9fab97e2f0407049bdd88792e592e147c7dfa11e87e7.
+Módulo rw4png331/base948; WAD963, conservar carrier963/backup949. CLI
+pc-doom-fast-r331.mjs; journal fast-r331.jsonl no creado. DEPLOYMENT,FAST_R331
+yLarge cerrados. Propuesta una instalación inactiva/hasta2ciclos, segundo solo
+tras CLOSED e imagen/controles correctos; sin reinicio/retry/resume/borrado.
+Lo que sigue R329/R327 y demás es histórico, sustituido por este estado.
+
 **Actual R329: DoomHold listo, pendiente de aprobación física.**
 Plan/evidencia/pins en docs/doom-hold-physical-plan-r329.md. R328 DoomLease
 mostró Doom con parpadeo, controles no confirmados y CLOSED; no necesita reboot

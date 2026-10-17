@@ -6,7 +6,7 @@ import {ccmEncrypt,packetNonce} from './rw4-xiaomi-protocol.mjs';
 import {isReviewedDoomPeer} from './doom-deployment-physical.mjs';
 const owned=new WeakMap(),hash=(b,a='sha256')=>createHash(a).update(b).digest('hex');
 const refuse=()=>{throw Error('DoomLargeUploadRefused');};
-function mint(b,id,kind){const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher:['review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual'].includes(kind),physicalEnabled:false});owned.set(p,b);return p;}
+function mint(b,id,kind){const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher:['review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual','review-fast-r331-manual'].includes(kind),physicalEnabled:false});owned.set(p,b);return p;}
 export function prepareDoomAssets(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==4807680||hash(raw)!=='387e6c80616296ca7c8727e1a356e169c5b3575e1f2c33d4c9e9a32729ffa7c9'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='167210065'||raw[49]!==0)refuse();
  const b=Buffer.from(raw);b.write('365219963',40,9,'ascii');
@@ -50,6 +50,10 @@ export function prepareDoomLease(raw){
 export function prepareDoomHold(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==645476||hash(raw)!=='be5f8cf0568fa6868c1477822fc3ef2611c8e4788f2d3a9d2b87b987887836b1'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365219949'||raw[49]!==0)refuse();
  return mint(Buffer.from(raw),'365219949','review-hold-r329-manual');
+}
+export function prepareDoomFast(raw){
+ if(!Buffer.isBuffer(raw)||raw.length!==645588||hash(raw)!=='7dbecda4486d1f9314dffcceacf2c82abc726d6260ac1f5c056f97e329af38fd'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365219948'||raw[49]!==0)refuse();
+ return mint(Buffer.from(raw),'365219948','review-fast-r331-manual');
 }
 // Reproducible, owned non-game bytes for public CI. Never an installable face.
 export function syntheticDoomUpload(size=4807680){if(![4807680,4827012,4827044].includes(size))refuse();const b=Buffer.alloc(size);for(let i=0;i<b.length;i++)b[i]=(i*29+(i>>>8))&255;Buffer.from('PC ONLY UPLOAD FIXTURE').copy(b);return mint(b,'365799998','synthetic-only');}
