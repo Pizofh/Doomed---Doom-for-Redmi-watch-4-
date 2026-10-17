@@ -52,6 +52,13 @@ huella, aún no llamables. Falta cerrar esperas del proxy y escenario/foco antes
 de implementar transporte y preparar hardware. Ver
 [ciclo de vida y decisión](audio-lifecycle-r359.md).
 
+**Avance R360:** controlador de transporte C compilado para RW4 y probado con
+fallos en S3, sin llamar al audio. Retiene recursos ante timeout/cierre ambiguo;
+dos ciclos normales pasan. El proxy inspeccionado hace envío/recepción síncronos
+sin deadline visible en esa ruta. Falta confirmar configuración de socket y foco;
+no se promete cancelación ni descarga segura de un worker bloqueado. Ver
+[control de transporte y evidencia](audio-transport-r360.md).
+
 1. Identificar por inspección del firmware fijado la ruta de salida PCM y su
    contrato real: formato, frecuencia, buffers, ownership, exclusión con llamadas
    y cierre. No asumir que las interfaces genéricas NuttX son las de esta unidad.

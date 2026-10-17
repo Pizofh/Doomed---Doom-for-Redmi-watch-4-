@@ -1,3 +1,20 @@
+# R360: guard C probado; proxy síncrono todavía sin plazo demostrado
+
+Continuar sonido local sin alterar DoomReady ni instalar en reloj. No autorización
+física nueva. docs/audio-transport-r360.md contiene evidencia/límites.
+transport-guard.h/.c: propietario único, tokens, una operación pendiente,
+orden de etapas, escrituras completas, pausa entregas, timeout persistente,
+retención ante cierre ambiguo, no segundo CLOSE. Adaptador aún no implementado.
+test-audio-transport-r360.mjs pasó C real S3 y compilación RW4, dos ciclos y fallos.
+build/audio-transport-r360/result.json; módulo retirado, lsmod igual, fichero propio borrado.
+review-rw4-audio-lifecycle-r359.mjs --proxy-r360 produjo 3 ventanas privadas.
+4e15d8 lock+20 -> 4e10c8 send-loop flags0 -> 4e1108 recv-loop flags0 -> unlock.
+send cero no avanza; recv cero=-32. No deadline/poll visible aquí; posible timeout
+configurado en otra parte todavía sin revisar. Un worker no cancela llamada.
+Siguiente: creación/configuración socket (proxy-open y connect) y foco genérico
+4e1948/4e19bc, sin usar wrapper teléfono. No hardware listo, no repetir tests
+sin cambios ni auditorías Git/CI/push. Mantener uso de créditos contenido.
+
 # R359: transporte media gestionado elegido; esperas/foco pendientes
 
 Usuario"ok" continua sonido local. docs/audio-lifecycle-r359.md contiene resultado.
