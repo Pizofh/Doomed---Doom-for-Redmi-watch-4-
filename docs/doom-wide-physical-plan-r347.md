@@ -1,7 +1,11 @@
 # R347 DoomWide: imagen ampliada, controles redistribuidos y pausa visible
 
-Paquete completo y validado localmente. Instalación y ensayo físicos pendientes
-de aprobación. Usuario eligió ampliar manteniendo proporción y pidió optimizar
+R348: usuario autorizó una instalación y un ensayo. Paquete RegisteredInactive,
+317partes sin resume, sesión cerrada y worker exit0; registro confirmado,
+contenido no releído. Gates restaurados, helper cerrado verificado y ensayos
+offline de cierre pasan. Ensayo manual pendiente; no repetir el envío.
+Reporte: artifacts/doom-wide-physical-r348/install-result.json.
+Usuario eligió ampliar manteniendo proporción y pidió optimizar
 antes del ensayo, conservando la fluidez conseguida por DoomTouch.
 
 ## Implementación y rendimiento
@@ -84,9 +88,9 @@ artifacts/doom-wide-r347/package-tests.json. No inferir FPS RW4 desde la VM.
    Asumir menús/corona normales salvo aviso.
 
 Prepare offline:317partes/652677wire, sin radio ni journal. Gates
-DEPLOYMENT/WIDE_R347/C#Large cerrados. Runner R348 preparado y parseado, **no
-ejecutado**: artifacts/doom-wide-physical-r348/install-once.ps1. Una invocación
-tras aprobación; finally restaura bytes exactos y reconstruye helper cerrado.
+DEPLOYMENT/WIDE_R347/C#Large cerrados. Runner R348 ejecutado una vez tras
+aprobación: artifacts/doom-wide-physical-r348/install-once.ps1. Finally restauró
+bytes exactos y reconstruyó helper cerrado;5589asserts y7escenarios paquete pasan.
 Todos los permisos de payloads/retry/resume anteriores permanecen cerrados.
 
 Revisión física exigida por la regla inicial del usuario: zoom/antialias son

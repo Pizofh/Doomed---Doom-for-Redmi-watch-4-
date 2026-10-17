@@ -1,4 +1,19 @@
-# Estado actual R347: DoomWide terminado localmente; pendiente aprobacion fisica
+# Estado actual R348: DoomWide instalado inactivo; ensayo manual pendiente
+
+Usuario autorizo UNA instalacion y UN ensayo20s observando bateria>=50%.
+RunnerR348 ejecutado una vez: RegisteredInactive,317partes, resume0,
+seleccion no activada porcliente, registro confirmado (contenido no releido).
+Sesion cerrada, worker exit0; gates restaurados a bytes originales, helper
+cerrado reconstruido,5589asserts y7escenarios paquete pasan. No repetir envio.
+Reportes sanitizados: artifacts/doom-wide-physical-r348/install-result.json
+y gates-restored.json. Journalwide-r347.jsonl creado.
+Pendiente seleccionar DoomWide MARCO NARANJA, READY ->START una vez,
+CHECKING despierto; controles, PAUSAesperar2s (PAUSADO/CONTINUAR), CONTINUAR
+ySALIR antes20s dejuego. CLOSED ->TIME MS/TICS/IMAGES, fluidez vsTouch.
+ERROR/corrupcion/suspension/UIausente ->no repetir/reabrir; MODE cachedcodigos.
+Sin segundo ciclo ni reboot autorizados. Asumir salud normal salvo aviso.
+
+# R347: DoomWide validado localmente
 
 Usuario eligio imagen mayor/proporcion y controles redistribuidos; pidio
 optimizar antes de esperar otro reporte de lag. DoomWide942, marco NARANJA.
@@ -20,10 +35,10 @@ ningun reset para cerrar ciclos. No inferirFPSfisicos deS3.
 Paquete646628B/44recursos/317partes SHA275e1aa7383f021af2cbb549ad170991d38f2b25912f99f18bfe59234b8c96b3;
 Lua21169B SHAb89ab9b7e473231eaee03762c2e02fcb4003559726f5051a1147a8ef45480a60.
 7escenarios paquete y7Touch pasan. Prepare317partes652677wire sinjournal/radio.
-Plan docs/doom-wide-physical-plan-r347.md. RunnerR348 preparado/parseado,
-NO ejecutado; WIDE_R347/DEPLOYMENT/C#Large ypermisosanteriores cerrados.
-Siguiente pedir UNA instalacion inactiva y UN ensayo<=20s bateria>=50%
-observando. ConservarTouch943+carrier963; no reboot/WAD/retry/resume/borrado.
+Plan docs/doom-wide-physical-plan-r347.md. Instalacion autorizada y completadaR348;
+WIDE_R347/DEPLOYMENT/C#Large ypermisosanteriores restaurados/cerrados.
+Pendiente UN ensayo<=20s. ConservarTouch943+carrier963;
+no reboot/WAD/retry/resume/borrado.
 PAUSAesperar2s/CONTINUAR/SALIR; recoger TIME MS/TICS/IMAGES, fluidez. NuevoC
 solo cambia Image setup pero requiere aprobacion porregla inicial. Sinpush/CI.
 
