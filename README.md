@@ -19,10 +19,17 @@ validated. Touch input currently accepts one action at a time; hardware
 multitouch support is unconfirmed.
 
 [Playing guide (Spanish)](docs/playing.md) | [Current handoff](docs/HANDOFF.md)
+[Getting started / installation status](docs/getting-started.md) |
+[0.2 work](docs/next-version.md)
 
 **First playable release:** [0.1.0 handoff (Spanish)](docs/first-playable-release.md).
 Acceptance is complete. It preserves the tested package byte for byte; no new
 face installation is needed.
+
+New visitors: this is currently a source and documentation release. A fresh-clone
+build and a second-owner installation have not been validated. Start with the
+getting-started guide and `node tools/check-release-prerequisites.mjs`; it never
+connects to a watch or reads connection credentials.
 
 ## Controls and presentation
 

@@ -1,3 +1,22 @@
+# R356: entrega publica preparada y prototipo de efectos en PC
+
+Usuario autoriza preparacionGitHub local y avanzar0.2, con gastoacotado. No push.
+Guia docs/getting-started.md y notas docs/releases/v0.1.0.md listas; explican
+buildincremental y falta segundo propietario, no fingir instalador universal.
+Licencia general propia preguntada asincronicamente; falta respuesta. No inventar
+licencia del autor. SPDX de archivos/dependencias se conserva individualmente.
+Doctor tools/check-release-prerequisites.mjs verifica181blobs y entradas fijadas,
+sin auth/MAC/logs;4escenarios pasan, cleanCheckoutBuildSupported=false explicito.
+AudioPC tools/audio-reference-r356.mjs:DMX+4canalesmono/22050/S16/bloques<=512;
+tests de bounds/resample/clip/pausa/stop/continuidad pasan. Preview WAD exacto:
+55efectos,11025/22050Hz,max18560muestras. WAVprivado generado,no escuchado ni
+subido. No integracion C/audiofisico/medicion rendimiento del reloj.
+Siguiente paso acotado docs/next-version.md: identificar salida PCM en AP fijado,
+portar backendC solo si contrato utilizable;musica/multitouch fuera. Sin payload.
+AuditGitprivacidad corregido a lotes8MiB porque historia109MB excedia buffer96MiB;
+362commits/2838blobs/14lotes,sin hallazgos conocidos, alcance limitado detector.
+Ningun cambio al juego instalado, firmware, gates o sesionfisica.
+
 # R355: primera version jugable 0.1.0 aceptada
 
 Usuario reporta aproximadamente media hora de juego sin fallos; murio, recupero

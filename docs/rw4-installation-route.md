@@ -1,4 +1,9 @@
-# Instalación y retirada: unidad identificada, ruta pendiente
+# Instalación y retirada: investigación histórica
+
+**Esta página conserva decisiones antiguas, algunas superadas.** Para el estado
+actual de 0.1.0 y los requisitos de otro propietario, usar
+[la guía de inicio](getting-started.md). No ejecutar los pasos de esta cronología
+como un instalador actual.
 
 R75, 2026-10-04. Datos comunicados por usuario: M2315W1, versión mostrada2.2.86, teléfono Android, Mi Fitness3.59.1i. Se conserva la letra final exactamente. Origen/firma de la app, región, ABI y loader no verificados. No se descargaron APKs, obtuvieron claves, conectaron dispositivos ni instalaron paquetes.
 

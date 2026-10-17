@@ -1,0 +1,62 @@
+# 0.2: preparación y efectos de sonido
+
+0.1.0 está aceptada y permanece intacta. El usuario pidió preparar su entrega
+pública y avanzar la siguiente versión sin ensayos pequeños sucesivos ni gasto
+abierto de créditos. Todo R356 es local; no hay nuevo payload físico autorizado.
+
+## Trabajo ya ejecutado
+
+Un comprobador de requisitos informa las carencias de otro entorno sin leer
+credenciales. Se comprobó contra checkout vacío, fuentes ausentes, compilador
+alterado y los 181 archivos upstream del entorno local. Hace visible la deuda
+del build incremental; no pretende resolverla ni habilita instalación.
+
+El prototipo de audio es un **modelo de referencia en Node para PC**, separado
+del motor y del juego instalado. Decodifica los 55 efectos DS del WAD fijado,
+con muestras de 11025/22050 Hz; el mayor tiene 18560 muestras útiles. Se probó
+un mezclador mono de cuatro canales y salida PCM signed 16-bit a 22050 Hz:
+límites del formato, padding DMX, conversión de frecuencia, saturación,
+pausa sin consumir posición, stop, silencio y continuidad entre bloques.
+
+El formato y el recorte de padding se contrastaron con
+[CacheSFX de doomgeneric en la revisión fijada](https://github.com/ozkl/doomgeneric/blob/dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284/doomgeneric/i_sdlsound.c).
+El modelo conserva vistas sobre muestras de 8 bits y produce bloques de hasta
+512 muestras (1024 bytes PCM); no expande todo el banco a PCM. La memoria de
+Node/WAD en PC no representa el presupuesto del reloj.
+
+Se generó un WAV privado de dos segundos de pistola en
+`artifacts/research/audio-r356/pistol-local-only.wav`, sin reproducirlo ni
+redistribuirlo. Es una comprobación del contenido PCM; no se ha escuchado ni
+validado por hardware. El informe del inventario queda en la misma carpeta.
+
+```powershell
+node tools/test-audio-reference-r356.mjs
+node tools/preview-audio-r356.mjs
+```
+
+El segundo comando necesita el WAD local exacto y rechaza sobrescribir la salida.
+No abre un dispositivo de audio ni contiene conexión Bluetooth.
+
+## Siguiente implementación, con alcance cerrado
+
+1. Identificar por inspección del firmware fijado la ruta de salida PCM y su
+   contrato real: formato, frecuencia, buffers, ownership, exclusión con llamadas
+   y cierre. No asumir que las interfaces genéricas NuttX son las de esta unidad.
+2. Si hay una ruta utilizable, portar el modelo al backend C de efectos, con
+   memoria acotada y entrega no bloqueante. Conectar `DG_sound_module` y una
+   implementación explícita de música deshabilitada; mantener silencio como
+   comportamiento válido si el dispositivo no está disponible. El `i_sound.c`
+   upstream incluye SDL_mixer bajo FEATURE_SOUND: activar el define solo no basta.
+3. Comprobar en PC/emulador el backend, pausa/carga/salida y carga de memoria,
+   antes de preparar **un ensayo físico combinado** concreto para aprobación.
+   No añadir diagnóstico a DoomReady ni cambiar su paquete durante esta fase.
+
+La documentación upstream distingue los módulos de sonido y música:
+[portabilidad de doomgeneric](https://github.com/ozkl/doomgeneric/tree/dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284#sound).
+Música MUS/MIDI y multitáctil están fuera de esta tanda. No se promete audio
+físico hasta conocer y probar la ruta de salida.
+
+La segunda línea de 0.2 es sustituir la cadena de objetos/build logs históricos
+por una receta desde fuentes y entradas explícitas, sin rutas absolutas de este
+PC. El comprobador y la guía pública son el primer paso; el build limpio y la
+instalación por otro propietario aún no están completados.

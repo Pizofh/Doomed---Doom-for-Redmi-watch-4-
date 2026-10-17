@@ -9,7 +9,7 @@ const requirePrivate=process.argv[2]==='--require-private';
 if(process.argv.length!==2&&!(process.argv.length===3&&requirePrivate))throw Error('Unexpected arguments');
 function git(args,input){
  const run=spawnSync('git',['-c','safe.directory='+root.replaceAll('\\','/'),...args],{cwd:root,input,windowsHide:true,shell:false,maxBuffer:96*1024*1024});
- if(run.error||run.status!==0)throw Error('GitAuditFailed');return run.stdout;
+ if(run.error||run.status!==0)throw Error('GitAuditFailed:'+(run.error?.code??run.status));return run.stdout;
 }
 const references=git(['rev-list','--objects','--all']).toString('utf8').trim().split('\n');
 const paths=new Map(references.map(line=>{const at=line.indexOf(' ');return at<0?[line,'']:[line.slice(0,at),line.slice(at+1)];}));
@@ -62,9 +62,19 @@ if(fs.existsSync(local))for(const entry of fs.readdirSync(local,{withFileTypes:t
  }
 }
 const findings=[],add=(_sha,file,category)=>findings.push({path:file,category});
-const payload=git(['cat-file','--batch'],blobs.map(row=>row[0]).join('\n')+'\n');
-let at=0,bytes=0;
-for(const [sha,,sizeText]of blobs){
+// History grows across research checkpoints. Bound each batch instead of
+// buffering every historical blob in a single child-process stdout pipe.
+const batches=[];let batch=[],batchBytes=0,bytes=0;
+for(const row of blobs){
+ const size=Number(row[2]);
+ if(!Number.isSafeInteger(size)||size<0)throw Error('GitAuditSizeInvalid');
+ if(size>32*1024*1024){add(row[0],paths.get(row[0])??'','oversized-blob-unscanned');continue;}
+ if(batch.length&&batchBytes+size>8*1024*1024){batches.push(batch);batch=[];batchBytes=0;}
+ batch.push(row);batchBytes+=size;
+}if(batch.length)batches.push(batch);
+for(const group of batches){
+ const payload=git(['cat-file','--batch'],group.map(row=>row[0]).join('\n')+'\n');let at=0;
+ for(const [sha,,sizeText]of group){
  const end=payload.indexOf(10,at),header=payload.subarray(at,end).toString('ascii').split(' '),size=Number(sizeText);
  if(header[0]!==sha||Number(header[2])!==size)throw Error('GitAuditFramingFailed');
  const body=payload.subarray(end+1,end+1+size);at=end+size+2;bytes+=size;
@@ -78,9 +88,10 @@ for(const [sha,,sizeText]of blobs){
  }
  const text=body.toString('utf8');
  if(/\b(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|AKIA[A-Z0-9]{16})\b|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/.test(text))add(sha,file,'credential-pattern');
+ }
+ if(at!==payload.length)throw Error('GitAuditTrailingData');
 }
-if(at!==payload.length)throw Error('GitAuditTrailingData');
-const report={passed:findings.length===0,commits:Number(git(['rev-list','--count','HEAD']).toString()),reachableBlobs:blobs.length,totalBlobBytes:bytes,privateValuesChecked:secrets.length,privateFilesScanned,findings,
+const report={passed:findings.length===0,commits:Number(git(['rev-list','--count','HEAD']).toString()),reachableBlobs:blobs.length,batches:batches.length,totalBlobBytes:bytes,privateValuesChecked:secrets.length,privateFilesScanned,findings,
  scope:'reachable Git history; known current/historical authorization values, device addresses and serials from local private inputs plus selected credential/binary patterns; not a complete secret detector'};
 fs.mkdirSync(path.join(root,'artifacts/publish'),{recursive:true});
 fs.writeFileSync(path.join(root,'artifacts/publish/git-audit.json'),JSON.stringify(report,null,2)+'\n');
