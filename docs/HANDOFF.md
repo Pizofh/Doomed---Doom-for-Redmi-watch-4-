@@ -1,3 +1,26 @@
+# Estado actual R340: imagen persistente real en S3 pasa; RW4 a?n sin payload nuevo
+
+Prototipo C/UI,2fuentes inmutables320x200x32,una Image por ciclo,Timer50ms.
+Dos ciclos de59presentaciones/2905y2925ms. Capturas:19,77y16,82cambiosvisibles/s,
+96capturas/6144000p?xeles sin mezclas;~1,23/1,20ms set-src+refresh medio S3.
+No motor Doom, GPU/RW4 ni FPS f?sicos inferidos. Patrones precalculados.
+Crea/cambia/elimina Image en tarea UI desde callback de driver; no LVGL en
+init/worker/GC/uninit. Cada refresh y STOP comprueban cola vac?a por offsets
+DWARF S3 (display.layer_head672,layer.task_head56,next64);cache retirada y
+m?dulo descargado normalmente en ambos ciclos. Buffers vivos hasta entonces.
+Readback confirma restauraci?n Lua previo de UIProbe903. Storage seleccionado,
+m?dulo/nodo y temporales propios retirados. No reset para terminar el ensayo.
+Tipos exactos:lv_image_dsc_t S3=20B;R339 us? contenedor24B con4B padding, no ABI24.
+ELF4820B SHA2f471ec48c6367e68d01c1c84f32895e98132ce545ca2b20dc6a7217b25e609e.
+Docs/evidencia:docs/direct-image-ui-prototype-r340.md;tools/build-direct-ui-s3-r340.mjs,
+tools/direct-ui-s3-r340.mjs(stage/test/cleanup). Resultados artifacts/emulator/
+direct-ui-r340-stage/test-result.json.13bindings S3,512000B patrones est?ticos.
+Siguiente: contrastar nuevas funciones/contexto UI/formato32bit/fin de dibujo
+con AP RW4 y presupuesto RAM. No reutilizar offsets/tipos S3 como firmwareRW4.
+R338/DoomDemand f?sico cerrado/controles bien pero~5Images/s; conservar945+carrier963.
+Sin paquete, Bluetooth ni prueba f?sica nuevos. No autorizaci?n f?sica pendiente.
+Sin push/checks remotos/housekeeping. Estados anteriores hist?ricos.
+
 # Estado actual R339: evaluaci?n de imagen directa, sin payload f?sico nuevo
 
 R338/DoomDemand: CLOSED, controles/navegaci?n normales; mejora percibida pero lag.

@@ -43,7 +43,9 @@ aislada, y falta verificar el backend de dibujo para el descriptor directo.
 
 tools/test-direct-decoder-r339.mjs compila un módulo propio pequeño para el
 guest fijado SHA849a04f6d461938022ffb820143f870be7e91933b3fb538d009b24c7fa6098fa.
-Usa el layout S3 explícito de24bytes/header12 y XRGB8888, diferente del RW4.
+Usa un contenedor S3 de24bytes/header12 y XRGB8888, diferente del RW4.
+R340 confirma por DWARF que el descriptor real ocupa20bytes: los últimos4bytes
+de aquella sonda eran relleno y no se consumían como parte del descriptor.
 Imagen320x200, buffer propio estático256000bytes. Sin Doom, workers, drivers,
 widgets, pantalla o GPU. Bindings resueltos de la tabla de símbolos del guest.
 
