@@ -9,7 +9,7 @@ import {command,uint,bytes,fields,one,readDeviceInfo,readWatchfaces} from './rw4
 import {packageCopy,uploadLayout,uploadToPcAdapter,uploadToReviewedAdapter} from './doom-large-upload.mjs';
 import {pcPeerAccess} from './doom-upload-pc-simulator.mjs';
 import {DoomDeploymentJournal,deploymentIdentity,disposeDeploymentIdentity} from './doom-deployment-journal.mjs';
-import {claimReviewedDoomEndpoint,physicalDoomRamPngEnabled,physicalDoomReadersEnabled,physicalDoomFaultEnabled,physicalDoomRefsEnabled} from './doom-deployment-physical.mjs';
+import {claimReviewedDoomEndpoint,physicalDoomRamPngEnabled,physicalDoomReadersEnabled,physicalDoomFaultEnabled,physicalDoomRefsEnabled,physicalDoomLeaseEnabled} from './doom-deployment-physical.mjs';
 import {parseDoomUploadAck} from './doom-upload-ack.mjs';
 import {compareDoomCatalogs,reviewedTwoRemovals} from './doom-deployment-catalog.mjs';
 
@@ -86,6 +86,8 @@ export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=fal
    if(!physicalDoomFaultEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind==='review-refs-r325-manual'){
    if(!physicalDoomRefsEnabled()||resume||retryWithoutData)refuse();
+  }else if(plan?.kind==='review-lease-r327-manual'){
+   if(!physicalDoomLeaseEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind!=='review-low-memory-native-disabled')refuse();
   return claimReviewedDoomEndpoint(endpoint,{resume,retryWithoutData});
  },plan,secret,{deploymentResume:resume,deploymentRetryWithoutData:retryWithoutData});

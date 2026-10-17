@@ -1,5 +1,31 @@
 # Retomar el proyecto
 
+**Actual R327: DoomLease preparado y validado, sin aprobación física aún.**
+Plan fijo: docs/doom-lease-physical-plan-r327.md. Corrección/evidencia en
+docs/doom-image-lease-r327.md. R326 instaló DoomRefs aprobado; fotos completas
+FIRST24031607/LAST30031607/DIMS320x200, refs1/open8/close7, clserr0/reads6/rderr1,
+skerr0/firstC779/lastC1296/maxread192278/relerr1/pos4. Retorno normal confirmado.
+El módulo actual rw4png325 puede seguir residente; no reabrir pruebas ni forzar
+descarga. Nuevo ensayo requiere aprobación y un reinicio normal observado.
+
+R327 reserva READY/prepara PNG con command8 antes de crear Image; EAGAIN solo
+en esa reserva espera otro tick sin consumir secuencia ni crear lectores.
+Mismos bindings/codec/engine/zona4MiB, counters v2 y guard de cierre. Baseline
+sin inyección reproduce histórico produced>0/no READY/read-11 (30 checks).
+Candidato129 checks C/VFS y55 casos Lua pasan; no decoder RW4 ni hilos reales.
+Siete escenarios de upload/gates/journals y regresión R325 pasan. No ensayo
+físico nuevo. No se afirma causa física completa ni corrección física probada.
+
+DoomLease365219950,645404B,46recursos, paquete SHA502dbc6b9081ad7f61da0d7377e6809ee7a6f957b24138d77a854cb1a0e63a95.
+ELF605772B SHA14ff85dbe2de6ea7373e0b4a71f0f1aadd42d2381c854770fc03edf87c7b9fd1;
+Lua21695B SHA3b4fe3cd034bc79e9c836d22c0c0fa4bbdbf12be819dfd91d4693c5028d88681.
+Módulo rw4png327/base950; solo WAD compartido963. CLI pc-doom-lease-r327.mjs;
+gate DEPLOYMENT+LEASE_R327 y C#Large cerrados; journal lease-r327.jsonl no creado.
+Plan propone un reinicio observado, envío inactivo y START/EXIT único; ERROR
+usa las cinco páginas cached. Sin retry/resume/adopción/activación/borrado.
+
+Lo siguiente es histórico, sustituido por R327/R326 arriba.
+
 **R325: DoomRefs preparado SOLO PC, pendiente de aprobación física.**
 Plan concreto: docs/doom-refs-physical-plan-r325.md. Un reinicio normal stock
 observado para retirar rw4png321 pendiente, un envío inactivo y un START con

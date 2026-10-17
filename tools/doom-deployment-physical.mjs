@@ -6,6 +6,7 @@ const PHYSICAL_RAM_PNG_REVIEWED=false;
 const PHYSICAL_READERS_R318_REVIEWED=false;
 const PHYSICAL_FAULT_R321_REVIEWED=false;
 const PHYSICAL_REFS_R325_REVIEWED=false;
+const PHYSICAL_LEASE_R327_REVIEWED=false;
 const PHYSICAL_RESUME_REVIEWED=false;
 const PHYSICAL_CONTROL_RETRY_REVIEWED=false;
 const endpoints=new WeakMap(),peers=new WeakSet(),fail=()=>{throw Error('DoomPhysicalGateClosed');};
@@ -14,6 +15,7 @@ export function physicalDoomRamPngEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&
 export function physicalDoomReadersEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_READERS_R318_REVIEWED;}
 export function physicalDoomFaultEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_FAULT_R321_REVIEWED;}
 export function physicalDoomRefsEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_REFS_R325_REVIEWED;}
+export function physicalDoomLeaseEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_LEASE_R327_REVIEWED;}
 export function physicalDoomResumeEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_RESUME_REVIEWED;}
 export function physicalDoomControlRetryEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_CONTROL_RETRY_REVIEWED;}
 export function isReviewedDoomPeer(peer){return PHYSICAL_DEPLOYMENT_REVIEWED&&peers.has(peer);}
