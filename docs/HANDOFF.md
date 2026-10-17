@@ -1,3 +1,24 @@
+# Estado actual R339: evaluaci?n de imagen directa, sin payload f?sico nuevo
+
+R338/DoomDemand: CLOSED, controles/navegaci?n normales; mejora percibida pero lag.
+TIME27821ms/TICS981/IMAGES139;FIRST/LAST0,DIMS320x200. ~5Images/s/~35tics/s.
+R339 prueba local: S3 decoder acepta descriptor XRGB8888 reutilizado320x200;
+31checks,12open/close/drop:directo300us vs archivoPNG26000us agregados. No Image,
+GPU/p?xeles/FPS medidos. No prometer87x de FPS ni extrapolar timings al RW4.
+AP RW4 variable-open24c04 usa data_ptr+8 directo para cf4/5/6 (32bit); cf18
+RGB565 va a error24c52. Lua set_src pasa string/userdata pointer; invalidate
+aparece en tabla. Canvas/set_buffer no demostrados como API Lua utilizable.
+Decisi?n: prototipo PC de Image persistente y buffers32bit inmutables. Requiere
+p?xeles completos, presentaci?n medida y ownership/retirada/backend terminados
+antes de hardware. Sincronizaci?n GPU RW4 sigue sin cerrar; no liberar por un
+Timer o retorno de set_src. No hay prueba de techo f?sico5FPS. No otro PNG
+como sustituto. Plan/criterios/evidencia: docs/direct-render-feasibility-r339.md.
+No paquete, gate, Bluetooth, instalaci?n ni ensayo f?sico nuevos autorizados.
+Herramientas review-rw4-direct-render-r339.mjs y test-direct-decoder-r339.mjs.
+Resultados ignorados artifacts/research/direct-render-r339 y direct-decoder-r339.
+Conservar DoomLauncher963 y DoomDemand945; DoomPalette947 respaldo opcional.
+Sin push/checks remotos ni housekeeping. Estados anteriores hist?ricos.
+
 # Estado actual R337: DoomDemand preparado, pendiente de aprobaci?n f?sica
 
 R336/DoomBench termin? CLOSED, navegaci?n normal. Clock2019ticks/200ms respalda
