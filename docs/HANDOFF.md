@@ -1,3 +1,43 @@
+# Estado actual R343: Doom directo integrado y paquete listo, PENDIENTE aprobacion
+
+Doom real usa direct-view-r342 con transporte nuevo direct-transport-r343.c:
+copias32bit a dos buffers512000B, una Image C, cero PNG/nodos de frame.
+Control /dev/rw4doomdirect, MAGIC0x34445752,256B/v4. Ops1START2INPUT3PAUSE4STOP
+5JOIN+cierreImage6RESUME7PRESENT; no frame devuelve exito sin dibujar.
+JOIN OS real antes de retirar listener/Image/cache. Uninit bloquea errores,
+writer/worker/control pendientes. Sin LVGL en init/uninit/GC/worker.
+Build RW4 final606564B SHAcb7d0c4c0322c9b1c9c827fb67511705262caf988beb04075c66f9c887a16de3,
+secciones1157094B (+251758B frenteDemand),17huellas graficas/owner mas bindings
+previos. Posicion35,35: setters x18a7c/y18ab4 contrastados tablaLua19a68c/19a698.
+Backend S3 independiente con DWARF9, nunca ejecutar adaptadorRW4 en VM.
+Dos ciclos Doom+pthread reales/modelo grafico:30presentaciones, movimiento,
+giro/fire/pausa/resume/backpressure/rechazos6porciclo/STOP/join/cierre/unload.
+Dos ciclos con UI real S3:102/101presentaciones,204/202drawEvents,309/306fences;
+capturas pausadas64000px RGB565 hash exacto a fuente (159colores) ambas.
+Motor pico4486833B,14alloc14free por ciclo. No inferir FPS fisicos del RW4.
+VM reiniciada antes del ensayoUI sin modulo cargado por UI sin respuesta;
+ensayos finalizaron sin reset. Cleanup confirma Storage activo, UIProbe903
+source previo restaurado con readback/hash, modulo/nodo/temporales retirados.
+Launcher RW4 de bitmap: sin Image Lua por frame; timer50ms/limite600ticks;
+guardFREE6723139/LARGEST4194320 antes de load; CRC ELF/WAD y cache verificada.
+TIME MS/TICS/IMAGES trasCLOSED; MODE ->C ERROR/GPU CODE/PHASE cached.
+8casos controlador/mock y main parseado;7escenarios transferencia y7R337 pasan.
+Paquete DoomDirect ID365219944,SEIS barrasCIAN,640508B/37recursos/314partes,
+SHAa0ddd3fce496c88cebb6d3ceea6fef18e8aa54fd65734b5ecf01357baf013bd6.
+Lua17931B SHAb06d1927366f0e23afa8e4d5b777a447de7babed4c095eef1206544001191ddb.
+WADcarrier963 no duplicado. Conservar945+963. Docs/plan: docs/doom-direct-physical-plan-r343.md.
+CLI pc-doom-direct-r343.mjs prepare paso314partes646500wire sinjournal/radio;
+install rechaza antes de privados con DEPLOYMENT/DIRECT_R343/C#Large cerrados.
+Runner artifacts/doom-direct-physical-r344/install-once.ps1 preparado y parseado,
+NO ejecutado. Journal nuevo direct-r343.jsonl no creado. No abrir gates sin
+aprobacion del usuario de UNA instalacion y UN ensayo observando bateria>=50%.
+Antes de fisico: esperar aprobacion; tras ella ejecutar runner una vez, informar
+instalacion y dar instrucciones READY/START/EXIT<=20s. No reboot previo, retry,
+resume, activacion/borrado ni segundo ciclo. Asumir salud normal salvo aviso.
+Riesgos: listeners/esperaGPU32bit nuevos fisicos; bloqueos/panic/corrupcion sin
+recovery integral. Hooks observan nuestras esperas, no errores internos previos
+ya consumidos. Estado historico R342 abajo. Solo commits locales/sin push/CI.
+
 # Estado actual R342: bridge directo implementado, C probado; integracion pendiente
 
 Nucleo device/direct-view-r342.[ch] y adaptador direct-rw4-r342.[ch] nuevos.
