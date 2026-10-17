@@ -59,6 +59,11 @@ sin deadline visible en esa ruta. Falta confirmar configuración de socket y foc
 no se promete cancelación ni descarga segura de un worker bloqueado. Ver
 [control de transporte y evidencia](audio-transport-r360.md).
 
+**Avance R361:** ABI de foco antigua identificada: devuelve un token entero
+codificado, no un objeto que Doom deba liberar. Creación/conexión del proxy sin
+timeout explícito en el caller; falta revisar el método inferior del socket y
+recuperar la configuración de escenarios. Ver [foco y socket](audio-focus-r361.md).
+
 1. Identificar por inspección del firmware fijado la ruta de salida PCM y su
    contrato real: formato, frecuencia, buffers, ownership, exclusión con llamadas
    y cierre. No asumir que las interfaces genéricas NuttX son las de esta unidad.

@@ -1,3 +1,18 @@
+# R361: ABI de foco antigua y creación de socket fijadas
+
+docs/audio-focus-r361.md; focus-contract-r361.json no llamable.
+review-rw4-audio-lifecycle-r359 --focus-r361 genera 3 ventanas privadas existentes.
+review-audio-focus-r361 --check verifica contrato/6 instrucciones/literal/AP.
+focus_request4e19bc args initial*,scenario,callback,cookie, retorno token entero
+(id<<16)|15, si initial==1 suma8 al id. No heap pointer. abandon4e1f94 signed>14,
+ASR16, tabla bajo lock. Falta quiescencia callback y funciones tabla.
+Config literal /etc/media//media_focus.conf, contenido/escenario no recuperado.
+proxy_connect4e14e8 alloc44, socket(domain ap=1/otro65,type1,proto0), connect,
+initlock+20; sin setsockopt/nonblock explícitos. create498780 contempla tipo0x800,
+caller no lo pasa. connect48e45c indirecto ops+28, falta implementación inferior.
+Siguiente: métodos local/remoto y config media, sin payload físico todavía.
+No repetir tests PCM/guard sin cambios. DoomReady intacto; crédito contenido.
+
 # R360: guard C probado; proxy síncrono todavía sin plazo demostrado
 
 Continuar sonido local sin alterar DoomReady ni instalar en reloj. No autorización

@@ -7,16 +7,18 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const proxy=process.argv.length===3&&process.argv[2]==='--proxy-r360';
-if(process.argv.length!==2&&!proxy)throw Error('Fixed review only');
+const focus=process.argv.length===3&&process.argv[2]==='--focus-r361';
+if(process.argv.length!==2&&!proxy&&!focus)throw Error('Fixed review only');
 const ap=path.join(root,'tools/local/firmware-research/rw4-stock-candidate-r193/vela-ap-inspection-only.bin');
 const exe=path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-objdump.exe');
 const hash=b=>createHash('sha256').update(b).digest('hex');
 const bytes=fs.readFileSync(ap);
 if(hash(bytes)!=='2c486395a01fb4e1d4a0f8b9b749fd6b1c3d522edc3c2f3813deaea9ab7388db'||
 hash(fs.readFileSync(exe))!=='ff61beda5538d78c2ff41d05ff6f694dc96f02ddb75f8db0a5936d995437cda1')throw Error('Inputs changed');
-const output=path.join(root,'artifacts/research/'+(proxy?'audio-r360':'audio-r359'));
+const output=path.join(root,'artifacts/research/'+(focus?'audio-r361':proxy?'audio-r360':'audio-r359'));
 if(fs.existsSync(output))throw Error('Review exists');
-const windows=proxy?[['proxy-command',0x4df6c0,0x4dfb80],['proxy-open',0x4dfb80,0x4dfe00],
+const windows=focus?[['focus-generic',0x4e1948,0x4e2200],['socket-wrappers',0x48e320,0x48e800],
+['socket-create',0x498780,0x498900]]:proxy?[['proxy-command',0x4df6c0,0x4dfb80],['proxy-open',0x4dfb80,0x4dfe00],
 ['proxy-transport',0x4e0c00,0x4e1a00]]:[['bes-device',0x1f8600,0x1f9c00],['bes-io',0x1fa100,0x1fb500],
 ['nxplayer-life',0x217db4,0x218b50],['media-io',0x4dfd00,0x4e09c0],
 ['focus-client',0x3d6f00,0x3d77c0]];

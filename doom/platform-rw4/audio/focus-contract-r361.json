@@ -1,0 +1,59 @@
+{
+  "checkpoint": "R361",
+  "imageSha256": "2c486395a01fb4e1d4a0f8b9b749fd6b1c3d522edc3c2f3813deaea9ab7388db",
+  "fingerprintBytes": 64,
+  "callable": false,
+  "physicalDeploymentAuthorized": false,
+  "firmwareExecuted": false,
+  "entries": [
+    {
+      "name": "focus_request",
+      "fileOffset": 5118396,
+      "sha256": "a11dfd705696eb860e2664624448d40b3ea5ad438f269619469dbec0f7a56d54"
+    },
+    {
+      "name": "focus_abandon",
+      "fileOffset": 5119892,
+      "sha256": "32718da3df649684e26db16cffa9a77825bec2324ba4d1a73d317a5c1fc75993"
+    },
+    {
+      "name": "proxy_connect",
+      "fileOffset": 5117160,
+      "sha256": "0aa8ecbb00ff6ccdd2fb2c7181d24186763be2717824e741e456cb177bd8c8fd"
+    },
+    {
+      "name": "socket_create",
+      "fileOffset": 4818816,
+      "sha256": "1f1c6e7bd23d5964820ffc79b97741def706e165c854709184712de5d1bbee2f"
+    }
+  ],
+  "focus": {
+    "requestArguments": [
+      "int *initial",
+      "const char *scenario",
+      "callback",
+      "void *cookie"
+    ],
+    "returnRepresentation": "encoded 32-bit integer token, not a heap pointer",
+    "normalToken": "(id << 16) | 15; initial==1 adds 8 to id before encoding",
+    "abandon": "signed token >14, arithmetic shift right 16, table removal under shared lock",
+    "configuration": "/etc/media//media_focus.conf",
+    "scenarioVerified": false,
+    "callbackQuiescenceVerified": false
+  },
+  "proxy": {
+    "socketTypeArgument": 1,
+    "protocolArgument": 0,
+    "localDomain": 1,
+    "remoteDomain": 65,
+    "explicitNonblockingFlagInCreate": false,
+    "timeoutConfiguredInReviewedConnect": false,
+    "lowerSocketWaitBoundVerified": false
+  },
+  "unresolved": [
+    "exact scenario and speaker route",
+    "bounded connect/accept/control/data IO",
+    "callback quiescence after focus abandonment",
+    "all lower socket implementations"
+  ]
+}
