@@ -1,3 +1,14 @@
+# R354: cierre local 0.1.0-rc1; falta solo partida continua 10–15 min
+
+Usuario aprobo cerrar version jugable, paquete/guia y prueba larga sobre DoomReady
+ya instalada. Sin nuevo payload ni instalacion. No sonido/multitouch/autofire.
+docs/first-playable-release.md contiene instrucciones concretas; helper
+tools/stage-playable-release-r354.mjs copia paquete R351 exacto a build/releases/
+Doomed-0.1.0-rc1 con allowlist, manifiesto y SHA256SUMS, sin recompilar/radio/gates.
+No dar por completada la prueba larga sin reporte. Pedir solo duracionaprox,
+fluidez/guardar/cargar/CLOSED; no mas cifras, reset o esferas de diagnostico.
+Conservar DoomReady940+Launcher963; Pads941 respaldo. Solo commitlocal, sinpush.
+
 # Estado actual R352: DoomReady probado fisicamente, guardado persistente correcto
 
 DoomPads R350 probado: usuario confirma sinlag/interaccion/pausa/CLOSED correctos.

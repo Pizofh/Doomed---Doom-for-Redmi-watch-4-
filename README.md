@@ -17,6 +17,10 @@ multitouch support is unconfirmed.
 
 [Playing guide (Spanish)](docs/playing.md) | [Current handoff](docs/HANDOFF.md)
 
+**First playable release:** [0.1.0-rc1 handoff (Spanish)](docs/first-playable-release.md).
+It preserves the tested package byte for byte. The remaining acceptance item is
+a continuous 10–15 minute physical session; no new face installation is needed.
+
 ## Controls and presentation
 
 - Proportional game image about 383 x 239 on a 390 x 450 display.
