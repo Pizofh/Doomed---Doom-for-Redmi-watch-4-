@@ -9,7 +9,7 @@ import {command,uint,bytes,fields,one,readDeviceInfo,readWatchfaces} from './rw4
 import {packageCopy,uploadLayout,uploadToPcAdapter,uploadToReviewedAdapter} from './doom-large-upload.mjs';
 import {pcPeerAccess} from './doom-upload-pc-simulator.mjs';
 import {DoomDeploymentJournal,deploymentIdentity,disposeDeploymentIdentity} from './doom-deployment-journal.mjs';
-import {claimReviewedDoomEndpoint,physicalDoomRamPngEnabled,physicalDoomReadersEnabled,physicalDoomFaultEnabled,physicalDoomRefsEnabled,physicalDoomLeaseEnabled,physicalDoomHoldEnabled,physicalDoomFastEnabled,physicalDoomPaletteEnabled,physicalDoomBenchEnabled,physicalDoomDemandEnabled,physicalDoomDirectEnabled,physicalDoomTouchEnabled,physicalDoomWideEnabled} from './doom-deployment-physical.mjs';
+import {claimReviewedDoomEndpoint,physicalDoomRamPngEnabled,physicalDoomReadersEnabled,physicalDoomFaultEnabled,physicalDoomRefsEnabled,physicalDoomLeaseEnabled,physicalDoomHoldEnabled,physicalDoomFastEnabled,physicalDoomPaletteEnabled,physicalDoomBenchEnabled,physicalDoomDemandEnabled,physicalDoomDirectEnabled,physicalDoomTouchEnabled,physicalDoomWideEnabled,physicalDoomPadsEnabled} from './doom-deployment-physical.mjs';
 import {parseDoomUploadAck} from './doom-upload-ack.mjs';
 import {compareDoomCatalogs,reviewedTwoRemovals} from './doom-deployment-catalog.mjs';
 
@@ -98,6 +98,8 @@ export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=fal
    if(!physicalDoomBenchEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind==='review-demand-r337-manual'){
    if(!physicalDoomDemandEnabled()||resume||retryWithoutData)refuse();
+  }else if(plan?.kind==='review-pads-r349-manual'){
+   if(!physicalDoomPadsEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind==='review-wide-r347-manual'){
    if(!physicalDoomWideEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind==='review-touch-r345-manual'){

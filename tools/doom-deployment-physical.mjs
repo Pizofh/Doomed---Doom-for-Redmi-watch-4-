@@ -12,6 +12,7 @@ const PHYSICAL_FAST_R331_REVIEWED=false;
 const PHYSICAL_PALETTE_R333_REVIEWED=false;
 const PHYSICAL_BENCH_R335_REVIEWED=false;
 const PHYSICAL_DEMAND_R337_REVIEWED=false;
+const PHYSICAL_PADS_R349_REVIEWED=false;
 const PHYSICAL_WIDE_R347_REVIEWED=false;
 const PHYSICAL_TOUCH_R345_REVIEWED=false;
 const PHYSICAL_DIRECT_R343_REVIEWED=false;
@@ -29,6 +30,7 @@ export function physicalDoomFastEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&P
 export function physicalDoomPaletteEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_PALETTE_R333_REVIEWED;}
 export function physicalDoomBenchEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_BENCH_R335_REVIEWED;}
 export function physicalDoomDemandEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_DEMAND_R337_REVIEWED;}
+export function physicalDoomPadsEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_PADS_R349_REVIEWED;}
 export function physicalDoomWideEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_WIDE_R347_REVIEWED;}
 export function physicalDoomTouchEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_TOUCH_R345_REVIEWED;}
 export function physicalDoomDirectEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_DIRECT_R343_REVIEWED;}

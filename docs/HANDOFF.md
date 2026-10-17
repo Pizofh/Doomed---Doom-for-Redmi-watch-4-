@@ -1,17 +1,18 @@
-# Estado actual R348: DoomWide instalado inactivo; ensayo manual pendiente
+# Estado actual R349: DoomPads listo localmente, pendiente aprobacion fisica
 
-Usuario autorizo UNA instalacion y UN ensayo20s observando bateria>=50%.
-RunnerR348 ejecutado una vez: RegisteredInactive,317partes, resume0,
-seleccion no activada porcliente, registro confirmado (contenido no releido).
-Sesion cerrada, worker exit0; gates restaurados a bytes originales, helper
-cerrado reconstruido,5589asserts y7escenarios paquete pasan. No repetir envio.
-Reportes sanitizados: artifacts/doom-wide-physical-r348/install-result.json
-y gates-restored.json. Journalwide-r347.jsonl creado.
-Pendiente seleccionar DoomWide MARCO NARANJA, READY ->START una vez,
-CHECKING despierto; controles, PAUSAesperar2s (PAUSADO/CONTINUAR), CONTINUAR
-ySALIR antes20s dejuego. CLOSED ->TIME MS/TICS/IMAGES, fluidez vsTouch.
-ERROR/corrupcion/suspension/UIausente ->no repetir/reabrir; MODE cachedcodigos.
-Sin segundo ciclo ni reboot autorizados. Asumir salud normal salvo aviso.
+DoomWide R348 probado por usuario: imagen grande/fluidez/pausa/salida correctas;
+TIME25153,TICS851,IMAGES247,CERROR0,GPUCODE0,PHASE2. Pidio retroceso, accion
+y redistribucion con pausa mas pequena. Sin pedir chequeos de menus adicionales.
+DoomPads941 conserva render Wide; cruceta6teclas, FIRE/USAR, PAUSA96x34,
+SALIR76x34. Protocolo5/nodo rw4doompads; renderer y motor originales.
+Motor real/modelo2ciclos y UI2partidas pasan;14alloc/14free,uso real,retroceso,
+pausa congelada/resume,STOPjoin/unload. NuevecasosLua y7escenarios paquete pasan.
+Paquete646764B/46recursos, SHAe2290d4225e208c6c2e398b499b3c37af80fc96942dd5764d83e319487f2ff38.
+Prepare317partes652813wire,sinradio. GatesDEPLOYMENT/PADS/C#Large cerrados.
+Plan docs/doom-pads-physical-plan-r349.md. RunnerR350 preparado,no ejecutado.
+Pendiente aprobacion especifica: UNA instalacion inactiva y UN ensayo20s,
+bateria>=50%,sinreboot/WAD/borrado/retry/resume. ConservarWide942+Launcher963.
+Solo commits locales; no push/CI ni notas sobre borrado de esferas.
 
 # R347: DoomWide validado localmente
 

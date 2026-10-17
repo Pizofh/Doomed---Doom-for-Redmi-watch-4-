@@ -1,5 +1,12 @@
 # R347 DoomWide: imagen ampliada, controles redistribuidos y pausa visible
 
+Ensayo físico R348 completado: el usuario confirmó imagen grande, fluidez,
+controles, PAUSA/CONTINUAR y salida CLOSED correctos. TIME25153ms,
+TICS851, IMAGES247; C ERROR0, GPU CODE0, PHASE2. Menús normales.
+Solicitó añadir retroceso y acción, redistribuir controles y reducir PAUSA.
+El cociente 9,82 presentaciones/s incluye pausa; no es FPS de panel medido.
+La propuesta siguiente es R349; no ampliar más el ancho ni cambiar el renderer.
+
 R348: usuario autorizó una instalación y un ensayo. Paquete RegisteredInactive,
 317partes sin resume, sesión cerrada y worker exit0; registro confirmado,
 contenido no releído. Gates restaurados, helper cerrado verificado y ensayos
