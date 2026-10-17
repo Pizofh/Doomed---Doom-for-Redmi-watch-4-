@@ -1,4 +1,18 @@
-# Estado actual R345: DoomTouch combinado listo localmente; pendiente permiso fisico
+# Estado actual R346: DoomTouch instalado inactivo; ensayo manual pendiente
+
+Usuario autorizo UNA instalacion y UN ensayo de20s observando bateria>=50%.
+RunnerR346 ejecutado una vez: RegisteredInactive,316partes, resume0,
+seleccion no activada por cliente, registro confirmado (contenido no releido).
+Sesion cerrada, worker exit0; gates restaurados a bytes originales, helper
+cerrado reconstruido,5589asserts y7escenarios paquete pasan. No repetir envio.
+Reportes sanitizados propios: artifacts/doom-touch-physical-r346/install-result.json
+y gates-restored.json. Journaltouch-r345.jsonl creado.
+Pendiente seleccionar DoomTouch CRUZ CIAN, READY ->START una vez, mantener
+CHECKING despierto, probar pads/PAUSE/RESUME/EXIT antes20s, anotar TIME MS/TICS/
+IMAGES y fluidez. ERROR ->no repetir/reabrir; MODE C ERROR/GPU CODE/PHASE.
+Sin segundo ciclo ni reinicio autorizados; asumir salud normal salvo aviso.
+
+# R345: DoomTouch combinado validado localmente
 
 Usuario pide controles transparentes encima del juego y reunir rendimiento en
 una sola configuracion. Nuevo DoomTouch943, preview CRUZ CIAN; C identico a
@@ -16,9 +30,9 @@ sin tocar pins/gates antiguos. Guard cerrado antes de privados; sin radio.
 Paquete644560B SHAc686a9b4d5c13ae004a452866939c19539119ecb5cc792b71831c4c303ec1a0c;
 Lua20936B SHA6dd2f1a4d5f4e494922fd3996b523ec4dcfba20a3cf3fe2a20c6a9dd796b8d69.
 7escenarios de paquete pasan y7del anteriorDirect; prepare316partes650590wire.
-Plan: docs/doom-touch-physical-plan-r345.md. RunnerR346 preparado, no ejecutado.
-Siguiente: pedir UNA instalacion inactiva y UN ensayo manual<=20s observando
-bateria>=50%; no reboot/WAD/retry/resume/borrado. ConservarDirect944+carrier963.
+Plan: docs/doom-touch-physical-plan-r345.md. Instalacion aprobada y completadaR346.
+Pendiente UN ensayo manual<=20s; no reboot/WAD/retry/resume/borrado.
+ConservarDirect944+carrier963.
 No repetir tests pasados ni checks remotos; commits locales unicamente.
 
 # R344: DoomDirect probado fisicamente, mejora de fluidez

@@ -1,6 +1,10 @@
 # DoomTouch R345: controles superpuestos y perfil único de presentación
 
-Preparado localmente; instalación y ensayo físico pendientes de aprobación.
+R346: usuario autorizó una instalación y un ensayo. Instalación completada,
+RegisteredInactive,316partes sin resume, sesión cerrada y worker exit0.
+Registro confirmado; contenido no releído. Gates restaurados y helper cerrado
+verificado (5589asserts y7escenarios de paquete). Ensayo manual pendiente;
+no repetir el envío. Reporte: artifacts/doom-touch-physical-r346/install-result.json.
 El usuario pidió reunir los cambios de rendimiento y controles en una versión.
 
 ## Configuración
@@ -61,7 +65,7 @@ Lua20936bytes SHA256 6dd2f1a4d5f4e494922fd3996b523ec4dcfba20a3cf3fe2a20c6a9dd796
 Manifest: build/doom-touch-r345/package/review.json; CLI pc-doom-touch-r345.mjs.
 Prepare offline:316partes/650590wire, sin journal ni radio. Runner parseado.
 Journal independiente touch-r345.jsonl. DEPLOYMENT/TOUCH_R345 y C#Large cerrados.
-Runner artifacts/doom-touch-physical-r346/install-once.ps1 preparado, no ejecutado.
+Runner artifacts/doom-touch-physical-r346/install-once.ps1 ejecutado una vez.
 
 1. Usuario observa, batería>=50%. Un envío inactivo, sin activar ni borrar
    esferas, sin reenviar WAD, retry, resume o reboot. Conservar Direct944 y963.
