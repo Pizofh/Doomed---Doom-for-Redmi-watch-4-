@@ -1,4 +1,19 @@
-# Estado actual R343: Doom directo integrado y paquete listo, PENDIENTE aprobacion
+# Estado actual R344: DoomDirect instalado inactivo, ensayo manual pendiente
+
+Usuario autorizo UNA instalacion y UN ensayo observando bateria>=50%.
+Runner R344 ejecutado una vez: RegisteredInactive, catalogo previo13,
+314partes escritas, sin resume, seleccion no activada por cliente.
+Registro confirmado; contenido instalado no releido (contentVerified:false).
+Sesion cerrada y worker exit0. Gates restaurados a sus bytes originales;
+helper cerrado reconstruido,5589asserts y7escenarios de paquete pasan.
+Reportes privados sanitizados: artifacts/doom-direct-physical-r344/install-result.json
+y gates-restored.json. Journal direct-r343.jsonl creado. No repetir envio.
+Pendiente usuario: seleccionar DoomDirect SEIS barrasCIAN, READY/START una vez,
+controles/PAUSE/RESUME y EXIT antes20s; CLOSED ->TIME MS/TICS/IMAGES y fluidez.
+Si falla, no repetir/reabrir; MODE cached C ERROR/GPU CODE/PHASE si disponible.
+Sin reboot ni segundo ciclo autorizados; asumir salud normal salvo aviso.
+
+# R343: Doom directo integrado y paquete validado localmente
 
 Doom real usa direct-view-r342 con transporte nuevo direct-transport-r343.c:
 copias32bit a dos buffers512000B, una Image C, cero PNG/nodos de frame.
@@ -28,11 +43,9 @@ Lua17931B SHAb06d1927366f0e23afa8e4d5b777a447de7babed4c095eef1206544001191ddb.
 WADcarrier963 no duplicado. Conservar945+963. Docs/plan: docs/doom-direct-physical-plan-r343.md.
 CLI pc-doom-direct-r343.mjs prepare paso314partes646500wire sinjournal/radio;
 install rechaza antes de privados con DEPLOYMENT/DIRECT_R343/C#Large cerrados.
-Runner artifacts/doom-direct-physical-r344/install-once.ps1 preparado y parseado,
-NO ejecutado. Journal nuevo direct-r343.jsonl no creado. No abrir gates sin
-aprobacion del usuario de UNA instalacion y UN ensayo observando bateria>=50%.
-Antes de fisico: esperar aprobacion; tras ella ejecutar runner una vez, informar
-instalacion y dar instrucciones READY/START/EXIT<=20s. No reboot previo, retry,
+Runner artifacts/doom-direct-physical-r344/install-once.ps1 ejecutado tras
+aprobacion; resultado R344 arriba. Instrucciones READY/START/EXIT<=20s.
+No reboot previo, retry,
 resume, activacion/borrado ni segundo ciclo. Asumir salud normal salvo aviso.
 Riesgos: listeners/esperaGPU32bit nuevos fisicos; bloqueos/panic/corrupcion sin
 recovery integral. Hooks observan nuestras esperas, no errores internos previos

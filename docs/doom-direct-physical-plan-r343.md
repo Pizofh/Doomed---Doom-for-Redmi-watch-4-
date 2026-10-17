@@ -1,6 +1,9 @@
 # R343: DoomDirect, una imagen persistente desde memoria
 
-Paquete preparado; instalación y ensayo físico todavía no autorizados.
+R344: usuario autorizó una instalación y un ensayo. Paquete registrado inactivo;
+ensayo manual pendiente. Sesión cerrada, worker exit0, gates restaurados y
+helper cerrado verificado. No reenvío ni segundo ciclo. El registro está
+confirmado; no se releyó el contenido instalado.
 Conservar DoomDemand945 y el carrier DoomLauncher963. No hubo Bluetooth ni
 lecturas de MAC/credenciales durante esta preparación.
 
@@ -100,7 +103,7 @@ integral validada; ninguna garantía de interrumpir una callback colgada.
 
 DEPLOYMENT/DIRECT_R343 y C#Large siguen cerrados. Prepare offline pasó:
 314partes/646500wire, sin journal ni radio. Runner preparado y parseado,
-**no ejecutado**: artifacts/doom-direct-physical-r344/install-once.ps1.
-Solo después de aprobación abriría esos tres gates para una invocación,
-restaurando bytes exactos y helper cerrado en finally. Los gates antiguos,
+Ejecutado tras aprobación: artifacts/doom-direct-physical-r344/install-once.ps1.
+Abrió esos tres gates para una invocación y restauró bytes exactos y helper
+cerrado en finally. Los gates antiguos,
 static/retry/resume quedan cerrados. Solo commits locales, sin push/CI remoto.
