@@ -1,5 +1,23 @@
 # Retomar el proyecto
 
+**Actual R329: DoomHold listo, pendiente de aprobación física.**
+Plan/evidencia/pins en docs/doom-hold-physical-plan-r329.md. R328 DoomLease
+mostró Doom con parpadeo, controles no confirmados y CLOSED; no necesita reboot
+previo al siguiente ensayo. R329 consulta READY con command9 antes de detach,
+mantiene imagen/lease/controles si pendiente, y reserva con8 solo tras retirar.
+Mismo motor/codec/bindings/zona4MiB; sin buffers/imports/firmware nuevos.
+142 checks C/VFS y59 casos Lua pasan, paquete46recursos/siete escenarios y
+regresión R327 pasan; prepare offline316partes/651506wire. No nuevo ensayo físico.
+
+DoomHold365219949,645476B, SHAbe5f8cf0568fa6868c1477822fc3ef2611c8e4788f2d3a9d2b87b987887836b1.
+ELF605796B SHAde82634e961871d34b675b38dc4a715578ac0642ff93062eb6fa6f1ab2a3f6ce;
+Lua21743B SHAb41f6b73249ca515496637c8c7f7dd64d682c8066119ba7f4b7fddb3f766a1c1.
+Módulo rw4png329/base949, WAD compartido963. Conservar carrier963/backup950.
+CLI pc-doom-hold-r329.mjs; journal hold-r329.jsonl no creado. DEPLOYMENT,
+HOLD_R329 y Large cerrados. Propuesta: instalación inactiva y hasta2ciclos,
+segundo solo tras CLOSED y render/controles correctos. Ninguna aprobación aún.
+Lo anterior R327/R326 y siguientes párrafos son históricos, sustituidos aquí.
+
 **Actual R327: DoomLease preparado y validado, sin aprobación física aún.**
 Plan fijo: docs/doom-lease-physical-plan-r327.md. Corrección/evidencia en
 docs/doom-image-lease-r327.md. R326 instaló DoomRefs aprobado; fotos completas
