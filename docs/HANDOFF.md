@@ -1,4 +1,33 @@
-# Estado actual R346: DoomTouch probado; fluidez buena, revisar PAUSE y layout
+# Estado actual R347: DoomWide terminado localmente; pendiente aprobacion fisica
+
+Usuario eligio imagen mayor/proporcion y controles redistribuidos; pidio
+optimizar antes de esperar otro reporte de lag. DoomWide942, marco NARANJA.
+BackendC nuevo aplica zoom306/256 y antialias0 solo en primer src de Image,
+propietarioUI. Fuente320x200/buffers512000B/motor/transporte/fences identicos;
+baselineELF anterior reproducido porSHA en ambos builds. Imagen~383x239,
+todos los pads debajo (y>=252), HUD libre, sin mezcla de botones enareaanimada.
+PAUSA grande145x50 ->CONTINUAR y PAUSADO visible; capas dentro contextoLua.
+Timer40ms/750ticks y una lectura/tick conservados. Sin escaladoCPU/PNGporframe.
+RW4 ELF607116B SHA408caa1de2e6f6c697012be26b0a43645fd502e88b5259d932acff9b6d4a8275;
+extraStatic242B, guardFREE6727235/LARGEST4194320. Dos nuevas huellas de setter:
+zoom4d420/tabla19a144, antialias4d538/tabla19a150. Solo inspeccion AP fijado.
+9casosLua pasan, main parseado; UI S3 final2ciclos111/104presentaciones,
+14alloc14free, error0, municion49, teclas0 alpausar; tics ypresentaciones
+congelados600ms y retomados134->135/133->135; glifosCONTINUAR/PAUSADO visibles.
+Capturas correctas, cleanup restaura source yretira modulo/nodo/temporales.
+VM reiniciada antes deensayos sinmodulo propio por UIstock sinrespuesta,
+ningun reset para cerrar ciclos. No inferirFPSfisicos deS3.
+Paquete646628B/44recursos/317partes SHA275e1aa7383f021af2cbb549ad170991d38f2b25912f99f18bfe59234b8c96b3;
+Lua21169B SHAb89ab9b7e473231eaee03762c2e02fcb4003559726f5051a1147a8ef45480a60.
+7escenarios paquete y7Touch pasan. Prepare317partes652677wire sinjournal/radio.
+Plan docs/doom-wide-physical-plan-r347.md. RunnerR348 preparado/parseado,
+NO ejecutado; WIDE_R347/DEPLOYMENT/C#Large ypermisosanteriores cerrados.
+Siguiente pedir UNA instalacion inactiva y UN ensayo<=20s bateria>=50%
+observando. ConservarTouch943+carrier963; no reboot/WAD/retry/resume/borrado.
+PAUSAesperar2s/CONTINUAR/SALIR; recoger TIME MS/TICS/IMAGES, fluidez. NuevoC
+solo cambia Image setup pero requiere aprobacion porregla inicial. Sinpush/CI.
+
+# R346: DoomTouch probado; fluidez buena, revisar PAUSE y layout
 
 Ensayo usuario completado: TIME MS26461,TICS842,IMAGES246,C ERROR0,GPU CODE0,
 PHASE2 (=DIRECT_CLOSED). Salida/retorno/menus normales. Usuario describe
