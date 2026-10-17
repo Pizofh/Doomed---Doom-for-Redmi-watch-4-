@@ -39,6 +39,12 @@ No abre un dispositivo de audio ni contiene conexión Bluetooth.
 
 ## Siguiente implementación, con alcance cerrado
 
+**Avance R358:** ruta PCM localizada por inspección del firmware; núcleo C de
+cuatro voces compilado para RW4 y ejecutado en S3 con muestras idénticas al modelo
+de PC. No integrado al juego ni conectado al altavoz. El ownership/formato y la
+liberación completa del driver siguen pendientes. Ver
+[contrato y evidencia de audio](audio-contract-r358.md).
+
 1. Identificar por inspección del firmware fijado la ruta de salida PCM y su
    contrato real: formato, frecuencia, buffers, ownership, exclusión con llamadas
    y cierre. No asumir que las interfaces genéricas NuttX son las de esta unidad.

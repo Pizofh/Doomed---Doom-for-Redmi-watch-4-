@@ -1,3 +1,24 @@
+# R358: PCM localizado; mezcladorC probado en S3; driver aun no cerrado
+
+Usuario "ok sigamos" autoriza trabajo local para sonido0.2, no payloadfisico.
+APpinned scan507strings; nxplayer/audioUpper/BES-RPMsg/media-focus presentes.
+docs/audio-contract-r358.md separa hechos/inferencia: upperioctl0x1001..0x100f,
+caps16B/MQ8B; stockraw usa pcm2p/mono/S16/48000 pero no prueba rutaaltavoz.
+Falta arbitraje/foco, formato real y ownership/STOP-dequeue-close completo.
+No enlazar direccionesdriver ni copiar ABI actualOpenVela. No ensayo listo aun.
+Core doom/platform-rw4/audio/pcm-core.c+h:GPL2only,4vocesmono,DMX,remuestreoentero,
+S16saturado,estado104B ARM32/bloque<=1024B caller-owned,sinheap/drivers/threads.
+RW4obj text490,data0,bss0. No cache/transporte/driver incluidos en esas cifras.
+tools/test-audio-core-r358.mjs compilaRW4 y ejecuta S3CortexA7 sinlibgcc/imports;
+vectores a4frecuencias coinciden Node, pausa/stop/bounds pasan. Init pasa, unload
+y lsmod igualbefore. Resultado build/audio-core-r358-cortex-a7/result.json.
+IntentoS3previo conlibgcc rechazo loader; copia fallida propia retirada porhash,
+sin reset ni modulo retenido. Artefactos compilacion previos conservados locales.
+NoWAD/PCM/deviceaudio en modulo sintentico. Sin nuevo paquete ni cambioDoomReady.
+Inspeccion reproducible tools/review-rw4-audio{,-code}-r358.mjs, salidasignoradas.
+Proximo: cerrar ruta salida/foco/ownership antes de backend DG_sound_module y
+ensayo combinado; usuario quiere avanzar sin muchas esferas/tandas pequenas.
+
 # R357: licencia predeterminada GPL-2.0-only elegida por usuario
 
 Usuario eligio "esa" tras explicacion de GPL-2.0-only. LICENSE contiene textoGPL2
