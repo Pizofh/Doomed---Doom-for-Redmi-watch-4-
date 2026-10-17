@@ -45,6 +45,13 @@ de PC. No integrado al juego ni conectado al altavoz. El ownership/formato y la
 liberación completa del driver siguen pendientes. Ver
 [contrato y evidencia de audio](audio-contract-r358.md).
 
+**Decisión R359:** priorizar media player gestionado sobre buffers DMA directos.
+El lower BES inspeccionado tiene PAUSE/RESUME sin efecto y el cliente de media
+antiguo cierra la conexión ante escrituras parciales. Ocho candidatos fijados por
+huella, aún no llamables. Falta cerrar esperas del proxy y escenario/foco antes
+de implementar transporte y preparar hardware. Ver
+[ciclo de vida y decisión](audio-lifecycle-r359.md).
+
 1. Identificar por inspección del firmware fijado la ruta de salida PCM y su
    contrato real: formato, frecuencia, buffers, ownership, exclusión con llamadas
    y cierre. No asumir que las interfaces genéricas NuttX son las de esta unidad.

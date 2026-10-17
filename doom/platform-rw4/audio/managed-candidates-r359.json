@@ -1,0 +1,57 @@
+{
+  "checkpoint": "R359",
+  "imageSha256": "2c486395a01fb4e1d4a0f8b9b749fd6b1c3d522edc3c2f3813deaea9ab7388db",
+  "fingerprintBytes": 64,
+  "status": "Static candidates, incomplete lifecycle contract",
+  "callable": false,
+  "physicalDeploymentAuthorized": false,
+  "firmwareExecuted": false,
+  "entries": [
+    {
+      "name": "player_open",
+      "fileOffset": 5111968,
+      "sha256": "fe32a77ca8af84ff168e4880ed0b748fd75d56b60b5f59433cfbe982680e4b49"
+    },
+    {
+      "name": "player_close",
+      "fileOffset": 5111984,
+      "sha256": "b4cb16eb35179205565a3f3c53ac555aadd5d48cda685e4b47b7305437659148"
+    },
+    {
+      "name": "player_prepare",
+      "fileOffset": 5112212,
+      "sha256": "5f6279bb12b575bf88bc006892419e2008f2d59e081c9119bfefabf6a2dddffa"
+    },
+    {
+      "name": "player_write_data",
+      "fileOffset": 5112696,
+      "sha256": "8ad39a1001a1e76e31a01eb49e6a8907ef8a4c663b3d5dc6c84842b0a9ee6381"
+    },
+    {
+      "name": "player_close_socket",
+      "fileOffset": 5112828,
+      "sha256": "d5afef5013dbdb548a8a19e30cbe8ed3b282a3e6974e38270d0e6396bd6f34d5"
+    },
+    {
+      "name": "player_get_socket",
+      "fileOffset": 5112864,
+      "sha256": "9a1ce7e54ba515a82e46f44b3fcc7b58be3a2bb426e64702fd814fc4af65535e"
+    },
+    {
+      "name": "player_start",
+      "fileOffset": 5112896,
+      "sha256": "3706af497a2de88c937e5c737f48d5871e4d24bfc4a07562845fab9d42fbc723"
+    },
+    {
+      "name": "player_stop",
+      "fileOffset": 5112960,
+      "sha256": "3994e32ce75154497fca641997645595576ca8fb57961a7a9ef3e88093f4999d"
+    }
+  ],
+  "unresolved": [
+    "stream route and focus ownership",
+    "bounded prepare/write/control waits",
+    "stop and close failure semantics",
+    "full referenced-callee review"
+  ]
+}

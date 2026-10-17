@@ -1,3 +1,20 @@
+# R359: transporte media gestionado elegido; esperas/foco pendientes
+
+Usuario"ok" continua sonido local. docs/audio-lifecycle-r359.md contiene resultado.
+BESpause/resume1f8648/1f862c solo log+return0; no asumir pausa/silencio deDMA.
+NxplayerSTOP sigue devoluciones; FreeBuffer/UnregisterMQ/Release/close despues.
+MediaRW4 write4e0378 exige envio completo, parcial>=0 fuerza104/closefd20=0;
+negativo tambiencierra, difiere upstreamactual EINTR. get_socket4e0420 no cede
+ownership. prepare4e0194 esperaaccept; close4e00b0 puede fallarRPC/proxydisconnect
+antes de liberar. No descargar/reenviar/repetirclose ciegamente anteambiguedad.
+Preferir media gestionado, no DMA/HAL directo. 8candidatos conhuellas64B en
+doom/platform-rw4/audio/managed-candidates-r359.json,callable:false/no autorizacion.
+Herramientas review-rw4-audio-lifecycle-r359 + review-audio-managed-candidates-r359.
+Falta revisar proxy/tiemposespera y scenario/focus. Wrapper audio_focus_request
+del telefono no usar comoAPIgenerica. Siguiente transporteC con doblefallos
+solo trascontrato; no payload/testfisico listo. MezcladorCsin cambios, no rerun.
+Sin instalar/radio/reboot/push. No preguntar alusuario por pruebamanual aun.
+
 # R358: PCM localizado; mezcladorC probado en S3; driver aun no cerrado
 
 Usuario "ok sigamos" autoriza trabajo local para sonido0.2, no payloadfisico.
