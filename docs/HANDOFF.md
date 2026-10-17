@@ -1,3 +1,25 @@
+# Estado actual R341: ruta RW4 identificada; errores de espera limitan el cierre
+
+Revision estatica del AP fijado, sin firmware ejecutado, Bluetooth ni payload.
+Lua Image confirma create4c740; default41b18/active13bfc; refresh20cb0 tiene
+registro independiente41978. Flush1fccc llama drawWait21880: ctx+52. Init55dbc
+instala gpuWait55ba0 en el mismo campo; configuracion driver5592c lo selecciona.
+gpuWait llama finish59678, registra errores pero los pierde (void). Finish
+propaga fe78 -> preparacion/submit/wait; comando kernel5 ->139b2 ->135b8 espera
+notificacion con deadline; timeout retorna4. No basta retorno de refresh para
+certificar exito. Segundo finish correcto no demuestra ausencia de error previo
+consumido por wrapper. Resolver observabilidad antes de validar retirada.
+Audit pasa6punteros/8calls Thumb/campos callback/salto kernel contra AP completo.
+Herramienta tools/review-rw4-direct-lifetime-r341.mjs modos entry/follow/fence/
+finish/contract/wait/audit, cada uno no sobrescribe artifacts/research propios.
+Mapa, evidencia y limites: docs/direct-image-rw4-contract-r341.md. Sin trasladar
+offsets LVGL9 S3; RW4 driver.draw_ctx96,ctx.wait52. Guard vivo aun sin validar.
+Siguiente implementacion local: bridge UI de una Image/dos buffers32bit,
+guards errores/lifetime y RAM512000B de fuentes, pruebas de fallos antes de
+paquete fisico. No prometer20FPS RW4;5Images/s actual no es techo demostrado.
+Conservar DoomDemand945 y carrier963. Sin aprobacion fisica pendiente, sin
+push/checks remotos ni housekeeping. R340 y estados anteriores historicos.
+
 # Estado actual R340: imagen persistente real en S3 pasa; RW4 a?n sin payload nuevo
 
 Prototipo C/UI,2fuentes inmutables320x200x32,una Image por ciclo,Timer50ms.
