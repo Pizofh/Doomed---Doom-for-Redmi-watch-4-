@@ -1,3 +1,32 @@
+# Estado actual R342: bridge directo implementado, C probado; integracion pendiente
+
+Nucleo device/direct-view-r342.[ch] y adaptador direct-rw4-r342.[ch] nuevos.
+Una Image, dos buffers320x200x32, un productor con tickets/generaciones,
+publicacion atomica, slot visible inmutable y anterior libre tras finish/cache.
+Callback registrada solo en Image propia (no reemplazo stock). AP Image dibuja
+MAIN21/POST24; finales22/25 llaman finish59678 con resultado antes del void wait
+stock. DELETE33 externo invalida puntero y bloquea instancia. Primer error fijo;
+no reinicio, reutilizacion ni unload tras fallo. Retira callback antes de delete
+normal. Close exige productor salido y join real del integrador; bool no validaOS.
+Native valida15huellas, display/parent/ctx y callback; usa offsets RW4, no S3.
+build-direct-rw4-r342 compila ARMv8-M Thumb soft,0imports, SIN entry de modulo.
+Componente4732B,secciones2304B,SHA779409a9d35b0e589a719756601cd4d566d4bd1b8825ed1a6f27a3886d810e06.
+Buffers externos512000B; no presupuesto neto Doom aun. No paquete instalable.
+test-direct-view-r342 ejecuta mismo nucleo C en S3 con graficos/scheduler
+modelados:20escenarios,329asserts de control+3072000pixeles,2ciclos24frames.
+Inyecta fallos de finish inicial/MAIN/POST/present/close, luego stock exitoso:
+primer error permanece. Ownership/tickets/join/slots/borrado/fallos host pasan.
+Modulo de tests y temporal propios retirados normalmente. Sin UI/LVGL real,
+threads reales ni Doom nuevo; no FPS inferidos ni adaptadorRW4 ejecutado.
+Limite: callback captura NUESTRAS esperas, no errores internos ya consumidos;
+backend/eventos vivos pendientes. No declarar R341 completo fisicamente.
+Docs: docs/direct-image-bridge-r342.md. Evidencia build/direct-rw4-r342 y
+artifacts/research/direct-view-r342; reviewer review-rw4-events-r342 entry/follow.
+Siguiente: integrar productor Doom+join real, posicionar Image y validar dibujo/
+retirada real local, presupuesto RAM, luego paquete/plan y aprobacion fisica.
+Conservar DoomDemand945+carrier963. Sin Bluetooth, payload fisico, autorizacion
+pendiente, push/checks remotos ni housekeeping. Estados previos historicos.
+
 # Estado actual R341: ruta RW4 identificada; errores de espera limitan el cierre
 
 Revision estatica del AP fijado, sin firmware ejecutado, Bluetooth ni payload.
