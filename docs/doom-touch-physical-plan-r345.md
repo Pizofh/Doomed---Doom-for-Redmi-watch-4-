@@ -3,8 +3,16 @@
 R346: usuario autorizó una instalación y un ensayo. Instalación completada,
 RegisteredInactive,316partes sin resume, sesión cerrada y worker exit0.
 Registro confirmado; contenido no releído. Gates restaurados y helper cerrado
-verificado (5589asserts y7escenarios de paquete). Ensayo manual pendiente;
+verificado (5589asserts y7escenarios de paquete). Ensayo manual completado;
 no repetir el envío. Reporte: artifacts/doom-touch-physical-r346/install-result.json.
+
+Resultado del usuario: TIME MS26461,TICS842,IMAGES246,C ERROR0,GPU CODE0,
+PHASE2 (cierre). Salida, retorno y menús normales. Describe buena fluidez,
+«sin lag»; reporta que PAUSE no sirve y espacio inferior desaprovechado.
+Foto confirma disposición actual. ~9,30presentaciones/s por contador;
+no benchmark controlado ni FPS físicos de pantalla. Falta revisar PAUSE:
+la UI oculta PAUSED y no cambia su botón, aunque eso no demuestra por sí
+solo la causa completa del problema. No repetir el ensayo ni enviar otro payload.
 El usuario pidió reunir los cambios de rendimiento y controles en una versión.
 
 ## Configuración

@@ -1,4 +1,20 @@
-# Estado actual R346: DoomTouch instalado inactivo; ensayo manual pendiente
+# Estado actual R346: DoomTouch probado; fluidez buena, revisar PAUSE y layout
+
+Ensayo usuario completado: TIME MS26461,TICS842,IMAGES246,C ERROR0,GPU CODE0,
+PHASE2 (=DIRECT_CLOSED). Salida/retorno/menus normales. Usuario describe
+"sin lag", muy jugable; reporta PAUSE sin funcionar y espacio inferior sinuso.
+Foto confirma viewport320x200 enpartealta y huecoinferior grande.
+246/26.461=9.2967presentaciones/s (Direct168/21.818=7.700); ensayos no
+controlados, posibles pausas y sensacion subjetiva, no FPS de panel.
+No mas tuning pequeno de rendimiento. Preservar esta ruta y C probado.
+Pendiente preferencia de layout: ampliar al ancho util manteniendo proporcion
+y redistribuir controles, o tamano actual y botones mayores abajo.
+PAUSED actualmente oculta status igualquePLAYING y conserva leyendaPAUSE;
+falta feedback visual demostrado por codigo, aun sin causa completa del fallo
+fisico. Proximo: botonRESUME/indicadorPAUSED visible y verificar tics congelados.
+Sin nuevo payload/ensayo fisico autorizado. PaqueteR345 publicado local intacto.
+
+# R346: instalacion inactiva confirmada
 
 Usuario autorizo UNA instalacion y UN ensayo de20s observando bateria>=50%.
 RunnerR346 ejecutado una vez: RegisteredInactive,316partes, resume0,
@@ -7,9 +23,7 @@ Sesion cerrada, worker exit0; gates restaurados a bytes originales, helper
 cerrado reconstruido,5589asserts y7escenarios paquete pasan. No repetir envio.
 Reportes sanitizados propios: artifacts/doom-touch-physical-r346/install-result.json
 y gates-restored.json. Journaltouch-r345.jsonl creado.
-Pendiente seleccionar DoomTouch CRUZ CIAN, READY ->START una vez, mantener
-CHECKING despierto, probar pads/PAUSE/RESUME/EXIT antes20s, anotar TIME MS/TICS/
-IMAGES y fluidez. ERROR ->no repetir/reabrir; MODE C ERROR/GPU CODE/PHASE.
+Ensayo manual completado; resultado y observaciones arriba.
 Sin segundo ciclo ni reinicio autorizados; asumir salud normal salvo aviso.
 
 # R345: DoomTouch combinado validado localmente
