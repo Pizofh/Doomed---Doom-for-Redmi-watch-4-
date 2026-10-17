@@ -1,8 +1,9 @@
 # Jugar a Doom
 
-DoomPads ya fue probado en el reloj: imagen grande, movimiento, disparo,
-interacción, pausa y salida correctos. Las funciones nuevas de DoomReady
-descritas aquí necesitan todavía su ensayo físico.
+DoomReady ya fue probado en el reloj: controles, interacción, pausa, guardado,
+carga con la transición original, persistencia al cambiar de esfera y salida
+CLOSED correctos. El límite completo de30min y una campaña entera no se han
+validado físicamente.
 
 ## Arranque y controles
 

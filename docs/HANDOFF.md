@@ -1,4 +1,4 @@
-# Estado actual R352: DoomReady instalado inactivo, dos arranques pendientes
+# Estado actual R352: DoomReady probado fisicamente, guardado persistente correcto
 
 DoomPads R350 probado: usuario confirma sinlag/interaccion/pausa/CLOSED correctos.
 TIME26809,TICS948,IMAGES273,CERROR0,GPUCODE0,PHASE2. Pidio flechas mayores y
@@ -22,9 +22,14 @@ RegisteredInactive,324partes offset0,registro confirmado,contenido no releido.
 Seleccion no activada por cliente,conexion cerrada,worker exit0,gates restaurados,
 helper cerrado reconstruido,5589asserts y7escenarios offline pasan.
 Reportes artifacts/doom-ready-physical-r352/. No repetir envio.
-Pendientes DOS arranques manuales:
-primer juego~2min con guardar/mover/cargar/CLOSED y reentrada sin reinstalar,
-PAUSA/CARGAR para probarpersistencia y SALIR. Bateria>=50%,observacion.
+Usuario confirma ambos arranques satisfactorios: guardar/cargar con screenmelt,
+persistencia tras cambiar de esfera y CLOSED. Ultimo ciclo corto TIME2406ms,
+TICS89,IMAGES18,CERROR0,GPUCODE0,PHASE2. No medir primer juego o FPS con eso.
+No pedir mas cifras/repeticiones; limite30min y campa?a entera no probados enHW.
+Pregunta actual: mover+FIRE. C acepta mascaras combinadas; UI envia una tecla
+por contacto. Multitouch HW/API stock sin confirmar; no confundir limiteUI
+con limitepanel. FIREtoggle/autofire es alternativa propuesta, no implementada
+ni nuevo payload autorizado. Sin mas pruebas/envios autorizados.
 ConservarDoomPads941+Launcher963; sinreboot/borrado/WAD/retry/resume.
 README/guia actualizados. Solo commitslocales,no push/CI/no notas de borrado.
 

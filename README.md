@@ -3,15 +3,17 @@
 Original DOOM running on the Redmi Watch 4 with stock firmware, a native C
 engine and a Lua/LVGL watchface interface.
 
-**Physically tested:** DoomPads R349/R350. The user confirmed fluid gameplay,
-forward/backward movement, turning, firing, doors/switches, pause and clean exit.
-The latest trial closed with zero engine/graphics errors. Presentation counters
-were 273 images over 26.809 seconds; this is not a panel FPS measurement.
+**Physically tested:** [DoomReady R351/R352](docs/doom-ready-physical-plan-r351.md).
+The user confirmed gameplay, larger controls, interaction, pause, save/load with
+the original screen melt, persistence after switching to another face, and clean
+CLOSED exit. The final short cycle reported zero engine/graphics errors and
+phase2. DoomPads remains the previously tested fallback.
 
-**Release candidate:** [DoomReady R351](docs/doom-ready-physical-plan-r351.md).
-Larger direction buttons, faster checks, longer sessions and persistent save/load.
-Local engine/UI tests pass; a new physical trial is still required before those
-features are described as validated on the watch.
+DoomReady includes faster checks, longer sessions and persistent save/load.
+Local tests also cover a147-second session and save/load in all nine shareware
+maps. The30-minute cap and a whole campaign playthrough have not been physically
+validated. Touch input currently accepts one action at a time; hardware
+multitouch support is unconfirmed.
 
 [Playing guide (Spanish)](docs/playing.md) | [Current handoff](docs/HANDOFF.md)
 

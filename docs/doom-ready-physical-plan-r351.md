@@ -146,4 +146,20 @@ Conexión cerrada y worker exit0. Gates restaurados a bytes originales; helper
 cerrado reconstruido,5589asserts y siete escenarios offline pasan.
 Reportes sanitizados: artifacts/doom-ready-physical-r352/install-result.json
 y gates-restored.json. Journal ready-r351.jsonl creado; no repetir envío.
-Pendientes ambos arranques manuales descritos arriba. Sin reboot ni más envíos.
+Ambos arranques manuales completados según el usuario. Sin más envíos autorizados.
+
+## R352: resultado físico satisfactorio
+
+El usuario confirma guardado/carga, transición original de pantalla que se
+derrite y persistencia incluso después de cambiar de esfera. Resultado general
+satisfactorio y salida CLOSED. Último ciclo corto: TIME2406ms,TICS89,IMAGES18,
+C ERROR0,GPU CODE0,PHASE2. Estas cifras no miden la duración del primer juego,
+la velocidad completa de CHECKING ni FPS del panel. No hace falta otro ensayo
+para repetir números. Sin verificación física del límite30min ni playthrough.
+
+Pregunta posterior: movimiento y disparo simultáneos. El motor acepta máscaras
+combinadas, pero la UI/controlador actual solo envía una tecla por contacto.
+No se ha confirmado multitouch del hardware/API stock. No atribuir esa
+restricción del port al panel físico sin evidencia. Una alternativa de UI sería
+FIRE con activación/desactivación del disparo continuo, liberado al pausar/salir;
+solo propuesta, sin implementar ni autorizar otro payload.
