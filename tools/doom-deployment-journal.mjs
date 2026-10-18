@@ -59,7 +59,7 @@ export class DoomDeploymentJournal{
      const stages=attempt.map(r=>r.status).join(',');
      const firstControl=previous.attempt===1&&stages==='Created,InstallIntent,UploadIntent,Uncertain'&&previous.before!==null;
      const first=history.filter(r=>r.attempt===1);
-     const soundLocalOnly=plan.kind==='review-sound-r365-manual'&&previous.attempt===1&&stages==='Created,Uncertain'&&previous.before===null&&history.every(r=>r.upload===null);
+     const soundLocalOnly=plan.kind==='review-sound-r365-manual'&&previous.attempt===1&&['Created,Uncertain','Created,Uncertain,Uncertain'].includes(stages)&&previous.before===null&&history.every(r=>r.before===null&&r.upload===null);
      const preflightOnly=previous.attempt===2&&stages==='Created,Uncertain'&&previous.before===null&&history.every(r=>r.upload===null)&&first.map(r=>r.status).join(',')==='Created,InstallIntent,UploadIntent,Uncertain';
      const reviewedRemovals=previous.attempt===3&&previous.before===null&&history.every(r=>r.upload===null)&&first.map(r=>r.status).join(',')==='Created,InstallIntent,UploadIntent,Uncertain'&&[2,3].every(n=>history.filter(r=>r.attempt===n).map(r=>r.status).join(',')==='Created,Uncertain');
      if(!(firstControl||preflightOnly||reviewedRemovals||soundLocalOnly)||attempt.some(r=>r.upload!==null))fail();

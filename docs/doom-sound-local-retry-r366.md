@@ -18,8 +18,10 @@ de CachedTarget.Check y RunNative. No se llegó a consultar el reloj.
 
 - Journal independiente; ninguna historia anterior borrada ni renombrada.
 - `retry-local` explícito, requiere puerta Sound y puerta de retry del endpoint.
-- El journal solo acepta este caso para Sound en attempt=1, con exactamente
-  Created/Uncertain, before=null, y ninguna información de upload en la historia.
+- El journal solo acepta este caso para Sound en attempt=1, con Created seguido
+  de una o dos marcas Uncertain, before=null en toda la historia y ninguna
+  información de upload. El cierre del supervisor puede guardar la segunda
+  marca; no representa otra transferencia.
 - Nueva entrada append-only con attempt=2; una tercera reentrada local se rechaza.
 - El nuevo catálogo será baseline porque nunca se obtuvo uno en este intento.
   Debe preservar sus esferas y selección. No autoriza retry de datos o resume.
@@ -47,3 +49,14 @@ vez `node tools/pc-doom-sound-r365.mjs retry-local`. Cerrar después las tres
 puertas JS y el perfil C#, recompilar el transporte cerrado. No repetir ante
 rechazo ni corte. Con RegisteredInactive confirmado, indicar los dos ensayos
 manuales de R365. No volver a pedir aprobación para el mismo reintento aprobado.
+
+## Resultado del reintento autorizado
+
+El usuario aprobó R366. Tras corregir la aceptación de las dos marcas locales
+Uncertain (sin conectar ni añadir intento), se completó una transferencia real:
+RegisteredInactive, registro confirmado, installStatus=0, MD5 eco coincidente,
+328 partes, sin reanudación, cierre de conexión y salida del worker confirmados.
+No se activó DoomSound ni se ejecutó C automáticamente. No se leyó de vuelta el
+contenido instalado; la verificación de archivos queda en el START manual.
+Las tres puertas JS y el perfil C# quedaron restaurados a false y el transporte
+cerrado se recompiló. Quedan pendientes los dos ensayos manuales ya aprobados.

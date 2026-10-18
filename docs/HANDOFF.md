@@ -1,3 +1,26 @@
+# R366 instalado inactivo; esperar dos ensayos manuales ya autorizados
+
+Usuario autorizó UNreintento+mismos2arranques, batería>=50 ypuedeobservar.
+Instalación terminó RegisteredInactive,registeredVerified=true,installStatus0,
+md5EchoMatches=true,resume0,328partes,closeConfirmed yworkerExitConfirmed=true,
+exit0. Noactivarautomático. Contenidoenflashnoleídodevuelta(contentVerifiedfalse),
+Lua/CdebenverificaralSTART. No más envíos ni reintentos autorizados/necesarios.
+
+Antesdelaconexión hubo otrolocalDoomJournalRefused: historial tenía
+Created/Uncertain/Uncertain por doblecleanup, testsolocubríaunamarca. Corregido
+soloSoundattempt1,1o2Uncertain,todoshistorialbefore=null/upload=null; testreproduce
+doblemarca yrechazatercerintento. Esa negativa noappendiniciótransferencia.
+Después hubo UNatransferencia real aprobada yseconfirmócorrecta.
+
+Restaurados main/Sound/controlretryJS=false, LargePhysicalReviewedC#=false y
+recompiladoexenativocerrado. NOrehabilitar ni instalar nada al recibirresultado.
+Dar/esperarinstrucciones manuales: seleccionarDoomSound(preview3barrasamarillas),
+START1,probarsonidodisparo/puerta,pause2s/resume,guardar/cargar,EXIT<=60s.
+Solo conaudioOK,CLOSEDyAUDIOERR0,segundoSTARTcorto+EXIT. MODE3paginas
+(rendimiento,GPU,audio). Recoger AUDIOERR/PCM SFX/CACHE(532927) si falla/silencio.
+No pedirmenús/corona si usuario nodiceproblema. Anteerror no repetir/reabrir.
+Falta oírsonido real y confirmarreutilización física; no afirmarlo logrado aún.
+
 # R366: R365 aprobado pero no instalado; reintento local preparado
 
 El usuario aprobó instalación+2arranques R365. No hubo transmisión ni consultas.
