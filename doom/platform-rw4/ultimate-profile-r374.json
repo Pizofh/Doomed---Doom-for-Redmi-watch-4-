@@ -1,0 +1,20 @@
+{
+  "id": "365220001",
+  "product": "DoomUltimate",
+  "module": "rw4ultimate374",
+  "archiveSha256": "fb887fc0d9516370ce834b3fc6366696a40c07d8b276424392ffc1e394f8c961",
+  "wadBytes": 12408292,
+  "wadSha256": "6fdf361847b46228cfebd9f3af09cd844282ac75f3edbb61ca4cb27103ce2e7f",
+  "wadCrc32": 3205409472,
+  "wadLumps": 2306,
+  "wadDirectory": 12371396,
+  "episodes": 4,
+  "mapsPerEpisode": 9,
+  "audioCacheBytes": 688128,
+  "audioSampleBytes": 684809,
+  "slotCapacity": 196608,
+  "zoneMiB": 3,
+  "minFree": 7153219,
+  "minLargest": 4194320,
+  "physicalDeploymentAuthorized": false
+}

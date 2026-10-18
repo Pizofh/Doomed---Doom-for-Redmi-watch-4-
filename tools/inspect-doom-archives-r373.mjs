@@ -52,7 +52,7 @@ export function inspectIwad(b){
    allDmxSamplesFitCurrentCache:soundBytes<=544*1024},
   rawMapBytesAreNotRuntimeRam:true,deviceCompatibilityTested:false};
 }
-export function inspectArchive(b){
+export function inspectArchive(b,onIwad){
  check(b.length>=22&&b.length<=MAX_ZIP,'ZipSize');
  let end=-1;
  for(let i=b.length-22;i>=Math.max(0,b.length-65557);i--)if(b.readUInt32LE(i)===0x06054b50&&i+22+b.readUInt16LE(i+20)===b.length){end=i;break;}
@@ -79,7 +79,8 @@ export function inspectArchive(b){
    if(method===0){check(packed===length,'StoredSize');wad=b.subarray(data,data+packed);}
    else{const decoded=inflateRawSync(b.subarray(data,data+packed),{maxOutputLength:MAX_WAD,info:true});check(decoded.engine.bytesWritten===packed,'DeflateConsumption');wad=decoded.buffer;}
    check(wad.length===length&&crc32(wad)===crc,'ZipPayloadChecksum');total+=length;
-   wads.push({entry:name,zipCrcVerified:true,...inspectIwad(wad)});
+   const inspected={entry:name,zipCrcVerified:true,...inspectIwad(wad)};
+   wads.push(inspected);if(onIwad)onIwad(name,wad,inspected);
   }
   cursor+=46+nl+extra+comment;
  }

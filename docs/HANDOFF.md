@@ -1,3 +1,35 @@
+# R374 local terminado; consulta del usuario sobre edición más completa
+
+Usuario dijo «vamos con el1». Se importó WAD Ultimate fijado del ZIP a
+tools/local/doom-ultimate/doom.wad (ignorado). No programas del ZIP ni reloj.
+Perfil doom/platform-rw4/ultimate-profile-r374.json, ID365220001/DoomUltimate,
+módulo rw4ultimate374, path propio doom.wad; 4episodios/36mapas/CRC3205409472.
+Builder --ultimate-r374 conserva R372startup, caché672KiB(+128),zona3MiB,
+slot192KiB; Cslot/adapter admite4ep y nueva identidad. Fuentes anteriores intactas.
+RW4ELF624976B SHA410d7bd578e28112f19b6c2fd1a184a17e7f94bf454ba34cc456fb6f93230cd6.
+S3ELF633400B SHA46fb624fa23c6dbee2d04cc9113f37c3327515ca588fb50ca50f98f15e6b97de.
+2ciclos producción menú/save/load/titleload/join/unload pasan, cache684809,error0.
+36mapas reales arrancan/save/load/cierre, alloc==free/streams0. Maxsave74450B;
+maxPeakDynamic3467433B NO RAM total. Gráficos/audio modelados; no playthrough/FPS
+RW4. No repetir tests; docs/ultimate-local-r374.md. WAD S3 propio retirado,
+guest sin módulos/nodos retenidos. Resultados buildR374/artifactscampaign.
+
+Usuario luego pidió revisar último Descargas: doom_complete.pk3,19.5MBcomprimido,
+3279entries/47695663B descomprimidos/173mapas. WadSmoosh + MAPINFO/ZScript,
+incluye referencias Doom1/2,Master,TNT,Plutonia,SIGIL. Solo índice/smooshed/mapinfo
+leídos, no extracción/ejecución. No compatible directamente con motor actual.
+Después pidió «espera...lo más completo y que logre quedar; busca acá el mejor»
+en archive.org/download/doom-wads. Se revisó listado sin descargar más contenido;
+se detuvo preparación de paquete. Recomendación técnica: Ultimate1.9 local para
+Doom1 completo; expansión futura por WADs separados/selector, no PK3GZDoom.
+
+NO paquete/UI/instalador/gate físico R374 todavía. Pendiente UIpropia/config/
+slotbank CRC, validación exactaUI/slotajeno/heldaudio y planconcreto. Archivo con
+WAD~13MB excede workeractual4900000B/4128frames/660000ms. NO subir límiteglobal;
+diseñarperfilacotadoseparado y revisar instalador/espacio antes de pedir permiso.
+User «espera» impide continuar elección/envío hasta resolver su consulta; el test
+local ya iniciado terminó y se limpiaron recursos. No envío autorizado.
+
 # R373: WAD completos aportados e inspeccionados, sin extracción ni ejecución
 
 Usuario pidió revisar los dos ZIP más recientes de Descargas. Cada uno solo
