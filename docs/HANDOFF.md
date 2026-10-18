@@ -1,4 +1,27 @@
-# R380 preparado: pendiente de aprobación de UNA reanudación
+# R380 instalado inactivo: pendientes los DOS ensayos manuales aprobados
+
+Usuario aprobó UNA reanudación y DOSensayos el 2026-10-18. Se ejecutó UNAvez:
+modelo/FW correctos, catálogo10/samemembership/sameselection, INSTALL0,
+ACKMD5/status0/offset3378710/chunk2048.1364partes de cola enviadas,
+1372frames/2813338BTX. RegisteredInactive/registeredVerifiedtrue,
+contentVerifiedfalse/selectedByClientfalse. Cierre y workerexit0 confirmados,
+nativeErrorfalse. Gatesgeneral+R380 JS/RetailC# cerrados y rebuild inmediato.
+No borrados/SET/reinicio ni otra conexión. Journal intento3 conservado.
+
+No repetir instalación/consulta/tests del emulador. Falta el ensayo físico
+ya autorizado: DoomPacked ID365220002 (marco menta/tres barras), READY→START
+una vez y mantener CHECKING despierto. Primer ciclo≤90s juego: título/cuatro
+episodios, NEWGAME→I, primer disparo/sonido/movimiento/USAR/pausa, guardar
+y SALIR→CLOSED. Solo si funciona: esfera habitual/reabrir/START, cargar desde
+título, comprobar guardado, MENU→NEWGAME→IV breve, SALIR≤90s→CLOSED.
+Ante ERROR/corrupción/suspensión/silencio/cierre fallido no repetir ni hacer
+segundo ciclo; MODE CERROR/GPUCODE/PHASE y AUDIOERR/PCMSFX si responde,
+volver desde Ajustes; reiniciar solo si queda imagen encima. No pedir otra
+autorización para estos DOSensayos. No asumir rendimiento/memoria/primer
+efecto válidos antes del reporte. Usuario prefiere asumir menús normales
+salvo que indique fallo; no repetir preguntas de salud innecesariamente.
+
+## R380 preparación anterior
 
 R379 autorizado/consumido el 2026-10-18: modelo/FW y catálogo10 iguales,
 INSTALL0, ACK MD5correcto/status0/offset3378710/chunk2048. Guard desde0

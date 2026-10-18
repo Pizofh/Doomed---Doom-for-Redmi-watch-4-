@@ -1,6 +1,6 @@
 # R380: completar una vez el paquete parcial confirmado
 
-Preparado; pendiente de nueva aprobación. R379 recibió del reloj un ACK
+Aprobado por el usuario el 2026-10-18: una reanudación y ambos ensayos. R379 recibió del reloj un ACK
 cifrado con MD5coincidente y posición3378710B, sin enviar MASS. Su guard
 solo permitía empezar en0 y detuvo correctamente. Este plan permite continuar
 desde esa posición, sin convertirlo en una recuperación automática genérica.
@@ -79,3 +79,18 @@ explícita nueva para esta continuación concreta. Escribe flash y conserva
 el riesgo de bloqueo/corrupción/reinicio y del lector C aún no probado en
 hardware. El límite cooperativo no corta una llamada nativa bloqueada.
 Recuperación integral sigue sin validar.
+
+## Resultado de instalación — 2026-10-18
+
+Una reanudación autorizada completada. Modelo/FW esperados, catálogo10 con
+mismos miembros/selección, INSTALL0. ACK cifrado con MD5correcto/status0,
+posición3378710 exacta/chunk2048. Cola1364partes enviada;1372frames y2813338B
+TX con consultas. Registro propio inactivo verificado, selección/esferas
+anteriores preservadas. RegisteredInactive, registeredVerifiedtrue,
+contentVerifiedfalse, selectedByClientfalse. Cierre y workerexit0 confirmados;
+nativeErrorfalse, sin fallback/retry. Gatesgeneral/R380/RetailC# cerrados y
+worker reconstruido inmediatamente. No borrados/reinicio/SET ni consulta extra.
+
+Los DOSensayos manuales ya aprobados siguen pendientes. El registro no prueba
+el contenido completo del WAD ni rendimiento/sonido en hardware; la comprobación
+del lector y el reporte del usuario deben confirmarlos. No repetir instalación.
