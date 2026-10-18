@@ -1,5 +1,13 @@
 # 0.2: preparación y efectos de sonido
 
+**Candidato R365 preparado:** efectos integrados en Doom, cuatro voces y cola
+PCM en memoria; adaptador media/foco con servicio simulado y compilación RW4.
+Dos ciclos y arranque/save/load/salida en los nueve mapas pasan con zona de
+3 MiB. Paquete DoomSound ID365219939 de 669676 bytes listo, sin envío físico.
+La reproducción RW4 permanece sin validar: solicita un ensayo combinado concreto
+en [plan físico R365](doom-sound-physical-plan-r365.md). Esperas del servicio
+siguen cooperativas; no se promete cancelación de una llamada bloqueada.
+
 0.1.0 está aceptada y permanece intacta. El usuario pidió preparar su entrega
 pública y avanzar la siguiente versión sin ensayos pequeños sucesivos ni gasto
 abierto de créditos. Todo R356 es local; no hay nuevo payload físico autorizado.

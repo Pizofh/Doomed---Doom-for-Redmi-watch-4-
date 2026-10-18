@@ -1,3 +1,47 @@
+# R365: DoomSound integrado y empaquetado; pendiente aprobación física específica
+
+Usuario pidió continuar hasta lograr sonido y volver a montar en reloj. Se completó
+trabajo local, aún sin prueba ni transferencia física. Pedir una única aprobación
+concreta del plan docs/doom-sound-physical-plan-r365.md. NO volver a pedirla si
+ya llega respuesta autorizando este paquete/ensayo. No exigir reinicio previo.
+
+DoomSound ID365219939, rw4sound365, 669676 B, 58 recursos, 328 partes.
+build/doom-audio-r365/package/DoomSound-id-only.face, SHA
+26fd403d01e2ac79120d2102bd49ca7f3272a61ff05a24ee623fbc7137235ad6.
+ELF623096 SHA cf52c9d8b31570bfb90ae28d6ea950c90932ce223f166be8eba6d4462dd48dc4.
+Preview tres barras amarillas. Conserva DoomReady940 y carrier963, sin WAD nuevo.
+No importar/escribir saves de940, bancos propios939. Controles/render igualReady.
+MODE ahora3paginas: rendimiento, GPU, audio(AUDIO ERR=s64,PCM SFX=s62,CACHE=s63).
+
+Audio código nuevo doom/platform-rw4/audio/{doom-sfx,doom-module,sink-worker,
+media-sink,media-model}, pipeline4voicesS16/22050; 544KiBcache532927 muestras de55
+efectos, aliasescomparten; SPSC4*512samples (~93ms máximo PCM encola), noflash.
+Motor3MiBcompensaestaticos/stack; runtimepeak3438257+nativo/stack/servicio.
+Servicio físico no ejecutado: media-sink usaFocusMusic,playerMusic/prepareoptions
+format=s16le,sample_rate=22050,channels=1. Foco callback atomic sinreentrada,
+worker pausa/silencia/duck; STOP+CLOSE+abandon. Cierre sinack nofinished=no
+unload; gameworker espera audio, puede quedarse sinCLOSED y requerirreinicio.
+No deadline/cancelación demostrados paraRPC/socket; explicitar al aprobar.
+
+ROMFSAPbase1298360,size13776 validado checksum, configrealprivada enartifacts
+audio-romfs-r362/audio-policy-r362: ruta graphpcm2p/48000, Music=>InMusic,
+políticas speaker/A2DP/SCO, matrizprioridad12escenarios. No publicar configraw.
+focus-table4df334/4df53c/4df5f8 callbacks síncronos bajo lock de foco; abandon
+borraentrada. NuevasbindingsAP9funcs generadaslocal/fingerprints64B.
+
+Pasó: C adapterfaults(r364), dosciclosDoomrealconserviciomodeladoR365,
+9mapasstart/save/load/salidaR365, compileRW4, paquete58recursos/tamper5,
+parseLuaexactaenVM, CLIinstallgateclosedyofflineprepare. No repetir sin cambios.
+Build scripts tools/build-doom-audio-r362.mjs (outputR365), test-doom-audio-r362,
+test-ready-campaign-r351 --audio-r365,package-doom-sound-r365,test-doom-sound-package.
+R362/R363/R364 outputs retenidosprivadoscomoiteraciones, productoúnicoR365.
+
+tools/pc-doom-sound-r365.mjs prepare listo. install cerrado. Gates
+PHYSICAL_DEPLOYMENT_REVIEWED=false y PHYSICAL_SOUND_R365_REVIEWED=false en
+doom-deployment-physical.mjs. Abrirsoloestos tras aprobación, instalarUNAvez,
+cerrarlos después, nuncaAUTOretry/resume. Noauth/MAC leídosenturno.
+No push ni auditoríasGitglobales. Usuario asume menús/corona normales si nodice.
+
 # R361: ABI de foco antigua y creación de socket fijadas
 
 docs/audio-focus-r361.md; focus-contract-r361.json no llamable.
