@@ -1,4 +1,24 @@
-# R378 comprimido listo; pendiente de aprobación física
+# R378: envío parcial detenido; sin instalación registrada
+
+Usuario aprobó el 2026-10-18 UNA instalación y DOS ensayos manuales≤90s.
+Intento consumido: modelo/FW y catálogo10 correctos, INSTALLstatus0, ACK
+hash/status0/offset0; 1687/3017partes escritas localmente, 3482621B TX,
+1695frames. LargeSessionRefused durante Uploading; workerexit1 y cierre
+confirmados. Journal packed-r378.jsonl intento1 Uncertain, seq112,
+highestPossibleOffset3466602B. No presumir entrega remota ni espacio liberado.
+NO reintentar/reanudar ni seleccionar DoomPacked. No ensayos realizados.
+General+PackedR378 JS/RetailC# cerrados y reconstruidos inmediatamente.
+Consulta posterior SOLO catálogo completa/cifrada/HMAC: mismas10esferas y
+selección, ID365220002 ausente; cierre/workerexit0. No borrados/SET/reinicio.
+
+El informe anterior omitió el diagnóstico nativo al cerrar, así que NO se
+conoce el error específico del intento: no atribuirlo a radio, espacio,
+timeout o compresión. Se añadieron los campos nativos ya validados al informe
+compartido y prueba sintética de timeout durante MASS; 23escenarios pasan.
+Esto no modifica el paquete ni recupera retroactivamente el código perdido.
+Falta preparar/revisar cualquier nuevo intento y obtener nueva aprobación;
+el journal actual prohíbe todos los retry/resume. No repetir pruebas de juego
+ni compresión ya aprobadas sin cambios. El resto describe preparación previa.
 
 R376 autorizado/consumido: guardcatálogo10 pasa, INSTALLstatus3,6frames/226BTX,
 0MASS. Cierre/workerexit confirmados. Gates JSgeneral/R376/RetailC# cerrados y

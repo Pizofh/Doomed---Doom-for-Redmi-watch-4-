@@ -221,6 +221,11 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   if(Buffer.isBuffer(secret))secret.fill(0);
   if(peer){
    try{const closed=await peer.link.close();report.closeConfirmed=closed.closeConfirmed;
+    // PrivatePipe already validates these bounded native enums/codes. Retain
+    // them before the worker is discarded; never export raw OS text or pipes.
+    if(closed.nativeError!==undefined)Object.assign(report,{nativeError:closed.nativeError,
+     nativeOutcome:closed.nativeOutcome??null,nativeErrorCode:closed.nativeErrorCode??null,
+     nativeFailureStage:closed.failureStage??null,transportSupervisor:closed.supervisor??null});
     if(closed.workerExitConfirmed!==undefined)Object.assign(report,{workerExitConfirmed:closed.workerExitConfirmed,workerExitCode:closed.workerExitCode,workerWireVerified:closed.wireIntegrityVerified});
     if(!closed.closeConfirmed||closed.workerExitConfirmed===false||closed.nativeError||closed.workerExitCode!==undefined&&closed.workerExitCode!==0||closed.wireIntegrityVerified===false){report.status='StoppedNeedsReview';journal?.save({status:'Uncertain',upload:upload?{...upload,status:'Uncertain'}:null});}
    }catch{

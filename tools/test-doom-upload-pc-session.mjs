@@ -35,6 +35,15 @@ const disconnected=await run('disconnect');
 assert.equal(disconnected.result.status,'StoppedNeedsReview');assert.equal(disconnected.peer.massFrames,11);
 assert.equal(disconnected.result.massPartsLocallyWritten,10);assert.equal(disconnected.peer.highestReceivedOffset,22462);
 const parent=path.join(root,disconnected.result.journal);
+const nativeFailure=await run('native-send-timeout');
+assert.equal(nativeFailure.result.status,'StoppedNeedsReview');
+assert.equal(nativeFailure.result.nativeError,true);
+assert.equal(nativeFailure.result.nativeOutcome,'Deadline');
+assert.equal(nativeFailure.result.nativeErrorCode,null);
+assert.equal(nativeFailure.result.nativeFailureStage,'Send');
+assert.equal(nativeFailure.result.transportSupervisor,null);
+assert.equal(nativeFailure.result.workerExitCode,1);
+assert.equal(nativeFailure.result.massPartsLocallyWritten,10);
 const resumed=await run('ok',{resumePosition:22462},{resumeFrom:parent});
 assert.equal(resumed.result.status,'RegisteredInactive');assert.equal(resumed.result.resumeOffset,22462);assert.equal(resumed.peer.massFrames,2342);
 // Unknown/out-of-bound offsets and a different target cannot borrow a journal.

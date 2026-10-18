@@ -1,6 +1,6 @@
 # R378: Ultimate Doom comprimido, una instalación inactiva
 
-**Preparado y probado localmente; falta aprobación física nueva.** No usar
+**Aprobado por el usuario el 2026-10-18: una instalación y ambos ensayos.** No usar
 autorizaciones R374/R375/R376 consumidas. Usuario pidió compresión antes de
 borrar más esferas. Esta versión incluye el juego completo sin quitar datos.
 
@@ -90,3 +90,23 @@ Este nuevo lector C puede bloquear/corromper el sistema o requerir reinicio.
 El límite cooperativo no interrumpe una llamada nativa atascada. Sigue sin
 haber recuperación integral validada. La regla inicial del usuario exige
 revisar este payload nuevo antes de escribirlo en el reloj.
+
+## Resultado del intento autorizado — 2026-10-18
+
+INSTALLstatus0 y negociación hash/status0/offset0 aceptados. Transferencia
+interrumpida durante MASS: 1687/3017partes completadas localmente,
+1695frames/3482621B TX. No equivale a recepción remota. Informe final
+StoppedNeedsReview/LargeSessionRefused, cierre confirmado y workerexit1.
+Journal propio intento1 Uncertain, seq112, highestPossibleOffset3466602B;
+conservado sin reintento ni reanudación. Gates cerrados/rebuild inmediato.
+
+Consulta posterior solo de catálogo: cifrado/HMAC, mismas10esferas y selección,
+ID365220002 ausente. Socket/worker cerrados, exit0. No instalado/seleccionado,
+sin borrados ni ensayos manuales. No se midió la ocupación del parcial.
+
+El error nativo específico no se conservó en el informe original. No se puede
+concluir la causa exacta. Se corrigió el informe compartido para conservar los
+campos nativos que PrivatePipe ya valida, sin texto OS privado; prueba
+sintética de fallo durante MASS y regresión compartida23casos aprobadas.
+Paquete/ELF sin cambios. Cualquier nuevo envío requiere procedimiento revisado
+y otra aprobación; esta autorización ya se consumió.
