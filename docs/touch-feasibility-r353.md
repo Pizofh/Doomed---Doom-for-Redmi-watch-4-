@@ -1,5 +1,11 @@
 # R353: simultaneous touch feasibility
 
+Follow-up R371 inspected all direct Thumb BL candidates to the stock report
+function across the pinned AP. Three reviewed callers all construct npoints=1;
+this strengthens the stock-path limitation without identifying the physical
+panel or excluding every indirect call. See the [R371/R372 decision and evidence](touch-path-and-audio-startup-r371-r372.md).
+No physical touch diagnostic or change to the accepted game was made.
+
 The user wants two or three independently held buttons, with release stopping
 each action. Toggle fire, autofire, and latched movement are explicitly rejected.
 DoomReady remains unchanged with one active touch button.

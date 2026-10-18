@@ -1,11 +1,24 @@
 # 0.2: efectos de sonido confirmados en el reloj
 
-**R370 preparado, sin instalar:** título y menú original, controles contextuales
+**R370 instalado y probado por el usuario:** título y menú original, controles contextuales
 OK/ATRÁS y MENU, NEW GAME/episodio/dificultad, título sin demo automática y carga
-de checkpoint desde el título. Dos recorridos locales confirman primer mapa y
-spawn original; queda comparar lo que percibe el usuario en el reloj.
-[Paquete y ensayo R370](doom-menu-physical-plan-r370.md). DoomVoice permanece
-como versión con sonido aceptada; esta mejora aún requiere aprobación física.
+de checkpoint desde el título. El usuario confirma menú/carga/cambio de esfera
+y funcionamiento general. El primer efecto audible sigue pendiente. El WAD
+actual es shareware, solo episodio1; no confundir episodios ausentes con salto
+a otro mapa. [Paquete y resultado R370](doom-menu-physical-plan-r370.md).
+
+**R371/R372, trabajo local posterior:** tres rutas stock de entrada inspeccionadas
+reportan un solo punto. No hay ruta demostrada para dos dedos; se conserva un
+dedo sin autofire/toggles. Una carrera de inicio de audio se reproduce y tiene
+un candidato local que retiene la mezcla durante apertura y prepara con silencio.
+Prueba determinista y dos ciclos de Doom real en S3 pasan; el altavoz físico no
+está validado para este cambio. No hay paquete ni envío nuevo autorizado.
+[Evidencia y límites R371/R372](touch-path-and-audio-startup-r371-r372.md).
+
+El soporte completo espera un WAD comercial del usuario, que aún no lo tiene.
+Después habrá que adaptar identidad/mapas/cache de efectos/guardados y validar
+memoria con esos datos. Priorizar un ensayo combinado concreto y la entrega
+reproducible; música original y trabajo sobre lower drivers quedan fuera del cierre.
 
 **Resultado físico R369:** el usuario oyó disparos, respiraciones y muerte del
 monstruo; reportó dos pruebas sin problema, CLOSED, PCM SFX=646 y AUDIO ERR=0,

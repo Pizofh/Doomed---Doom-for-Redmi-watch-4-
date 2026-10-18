@@ -2,11 +2,15 @@
 // Real Doom menus, keys, map/spawn, saves and audio threads; graphics modeled.
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
 import {root,sha256} from './doom-ready-source-r351.mjs';import {session} from './doom-ui-emulator.mjs';
-const quitOnly=process.argv[2]==='--quit-only';assert(process.argv.length===2||(process.argv.length===3&&quitOnly));
-const out=path.join(root,'build/doom-audio-r370/s3-model'),elf=path.join(out,'doom.elf');
+const startup=process.argv[2]==='--startup-r372';
+const quitOnly=process.argv[2]==='--quit-only';assert(process.argv.length===2||(process.argv.length===3&&(quitOnly||startup)));
+const out=path.join(root,startup?'build/doom-audio-r372/s3-model':'build/doom-audio-r370/s3-model'),elf=path.join(out,'doom.elf');
 const review=JSON.parse(fs.readFileSync(path.join(out,'review.json'),'utf8'));
 assert.equal(sha256(fs.readFileSync(elf)),review.elfSha256);if(!quitOnly)assert(!fs.existsSync(path.join(out,'test-result.json')));
-const vm=session('doom-menu'),remote='/tmp/rw4-menu-r370.elf',script='/tmp/rw4-menu-r370.lua';
+const owned=session(startup?'doom-startup-menu':'doom-menu');
+const render=s=>startup?s.replaceAll('rw4menu370','rw4prime372').replaceAll('/tmp/rw4-menu-r370','/tmp/rw4-menu-r372'):s;
+const vm={folder:owned.folder,adb:(args,...rest)=>owned.adb(args.map(v=>typeof v==='string'?render(v):v),...rest)};
+const remote=render('/tmp/rw4-menu-r370.elf'),script=render('/tmp/rw4-menu-r370.lua');
 const before=vm.adb(['shell','lsmod'],'before');assert.equal(before.trim().split(/\r?\n/).length,1);
 for(const p of [remote,script,'/dev/rw4doomready'])assert(/^nsh: ls: stat failed: 2\r?$/im.test(vm.adb(['shell','ls',p],'absence')));
 let original=fs.readFileSync(path.join(root,'experiments/doom-runtime-rw4/ready-engine-r351.lua'),'utf8');
@@ -78,7 +82,7 @@ local ok,why=xpcall(run,debug.traceback)
 if not ok then pcall(function()command(10);command(4);for _=1,40 do local s=state();if s[6]==1 and s[47]==1 then command(5);break end;wait()end;shell('rmmod rw4menu370')end);error(why)end
 print('MENU_QUIT_R370_OK')
 `;
- const local=path.join(vm.folder,'quit.lua');fs.writeFileSync(local,q);vm.adb(['push',local,script],'quit-fixture');
+ const local=path.join(vm.folder,'quit.lua');fs.writeFileSync(local,render(q));vm.adb(['push',local,script],'quit-fixture');
  const text=vm.adb(['shell','lua',script],'quit',{timeoutMs:45000});assert(text.includes('MENU_QUIT_R370_OK'),text.slice(-1500));
  assert.equal(vm.adb(['shell','lsmod'],'after-quit'),before);for(const p of [remote,script])vm.adb(['shell','rm',p],'remove-own');
  const result={passed:true,originalQuitJoinedAndUnloaded:true,physicalWatchUsed:false};
@@ -99,7 +103,7 @@ if not ok then
  error(why)
 end
 `;
- fs.writeFileSync(play,header+"local diagnostic=''\nlocal function run()\n"+start+newGame+rest+'\nend\n'+cleanup);
+ fs.writeFileSync(play,render(header+"local diagnostic=''\nlocal function run()\n"+start+newGame+rest+'\nend\n'+cleanup));
  vm.adb(['push',play,script],'play-fixture');const text=vm.adb(['shell','lua',script],'play-'+i,{timeoutMs:45000});
  const report=path.join(vm.folder,'result-'+i+'.txt');vm.adb(['pull','/tmp/rw4-menu-r370-result.txt',report],'result-'+i);
  const reported=fs.readFileSync(report,'utf8');assert.equal(reported,'PASS',reported);
@@ -127,10 +131,10 @@ command(6);command(10);command(4)
 for _=1,40 do local s=state();if s[6]==1 and s[47]==1 then command(5);break end;wait()end
 assert(state()[7]==1);shell('rmmod rw4menu370');print('MENU_TITLE_LOAD_R370_OK')
 `;
-const loadFile=path.join(vm.folder,'title-load.lua');fs.writeFileSync(loadFile,header+titleLoad);
+const loadFile=path.join(vm.folder,'title-load.lua');fs.writeFileSync(loadFile,render(header+titleLoad));
 vm.adb(['push',loadFile,script],'title-load-fixture');assert(vm.adb(['shell','lua',script],'title-load',{timeoutMs:45000}).includes('MENU_TITLE_LOAD_R370_OK'));
 assert.equal(vm.adb(['shell','lsmod'],'after-title-load'),before);
 for(const p of [remote,script,'/tmp/rw4-ready351-save.dsg','/tmp/rw4-menu-r370-saved.bin'])vm.adb(['shell','rm',p],'remove-own');
-const result={passed:true,realDoom:true,titleHeldBeyondAttractDeadline:true,originalMenuNewGame:true,originalPlayer1SpawnBothCycles:true,
+const result={passed:true,checkpoint:startup?'R372':'R370',realDoom:true,titleHeldBeyondAttractDeadline:true,originalMenuNewGame:true,originalPlayer1SpawnBothCycles:true,
  menuConfirmationDoesNotFire:true,saveLoad:true,loadDirectlyFromTitle:true,pauseResume:true,twoCyclesJoinedAndUnloaded:true,modeledAudio:true,devicePlayback:false,physicalWatchUsed:false,cycles};
 fs.writeFileSync(path.join(out,'test-result.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

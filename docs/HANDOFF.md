@@ -1,3 +1,45 @@
+# R371/R372: multitáctil stock sin ruta viable; candidato de arranque de audio local
+
+Usuario aceptó plan: viabilidad táctil, audio, WAD completo y entrega conjunta.
+Aclaró que aún no tiene WAD completo; preguntó por obtenerlo y por precio.
+Se verificó GOG oficial DOOM+DOOMII con originales DOS; compra requiere su cuenta.
+No se descargó WAD comercial ni se tocó el reloj. No anotar precios cambiantes
+como requisito del build. Esperar copia/ruta antes de validar otros episodios.
+
+R371 inventaría Thumb BL hacia notify0x1c2fec en toda la imagen AP fijada:
+0x1dadc0,0x1dccee,0x1de8c8. Las tres rutas construyen npoints=1 e ID0. No hay
+puntero absoluto Thumb a notify. Upper puede manejar más, pero no reconstruir
+contactos que lower descarta. No es grafo exhaustivo indirecto/tail-call ni
+identifica panel activo; no afirmar hardware universalmente single-touch. No
+preparar otra prueba de Doom ni prometer dos dedos con la ruta actual. Trabajo
+de lower driver sería otro alcance. Usuario rechaza autofire/toggles/latched.
+Helper tools/review-rw4-touch-path-r371.mjs, informe rw4-touch-r371-v3 ignorado.
+
+R372 reproduce una carrera del audio anterior: mezcla avanza/cola llena de
+silencio durante open; el primer efecto corto se consume y descarta antes de
+que el sink lea. No afirmar que sea la única causa física. Nueva variante
+local congela mezcla hasta open+4bloques512samples silenciosos(~93ms) y publica
+flag atómico; mantiene juego/joins/cierre R369, sin nueva API/hilo/bancoPCM.
+No garantiza speaker-ready ni interrumpe llamadas síncronas bloqueadas.
+Fuentes aceptadas intactas; generator tools/doom-audio-startup-r372.mjs y nuevo
+startup-r372.c/h; builder explícito --startup-r372. Sin instalador/gate/paquete
+R372 ni autorización física nueva. No instalar bajo autorización R370 consumida.
+
+RW4 ELF624972B SHA50a55b3f0dfc667b224664365feb6497d45b2ca1acfc2fa5d2037b2644d08176.
+S3 ELF633312B SHAa28e773d0264169616308df7162f6eb4e9e4698000ed88e7d758e83d70df2362.
+test-audio-startup-r372 pasa baseline-loss+7casos C con scheduling/serviciofake,
+64muestras iniciales exactas; compila RW4, no audio real. Primer intento tuvo
+THM_CALL intrafichero; -ffunction-sections como el test de PCM existente deja
+soloABS32. No se cargó ese primer ELF rechazado por el gate de relocación.
+test-doom-menu-r370 --startup-r372 pasa dos ciclos con Doom/hilos reales,
+título/NEWGAME/E1M1/spawn/save/load/titleload/pausa/join/unload; PCM931/938,
+nonzero122/121,cache532927,error0, gráficos/audio modelados. No repetir tests.
+Siguiente: si se prepara payload, pinnear nuevas fuentes/ELF, adaptar paquete
+y probar recuperación bloqueada/UI exacta antes de pedir aprobación concreta.
+WAD completo requiere adaptar identidad/maps/cacheFX/save y probar con archivo
+real; no prometer compatibilidad basada en shareware. Gates físicos cerrados.
+Detalle: docs/touch-path-and-audio-startup-r371-r372.md. No push/CI/auditorías.
+
 # R370: menú y carga confirmados físicamente
 
 Ampliación del mismo ensayo: usuario confirma «todo todo ok», menú/carga y
