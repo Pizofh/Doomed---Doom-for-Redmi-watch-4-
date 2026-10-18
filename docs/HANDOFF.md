@@ -1,3 +1,21 @@
+# R373: WAD completos aportados e inspeccionados, sin extracción ni ejecución
+
+Usuario pidió revisar los dos ZIP más recientes de Descargas. Cada uno solo
+contiene un WAD: Ultimate Doom, The.zip/DOOM.WAD12408292B,36mapas E1M1..E4M9,
+2306lumps; Doom II - Hell on Earth (v1.9).zip/DOOM2.WAD14604584B,32mapas,2919lumps.
+CRC ZIP/deflate/directorios/registros pasan. IdentidadMD5 coincide referencias
+Debian1.9. SHA256/CRC32/pins: docs/retail-iwad-inspection-r373.md. Inspector
+tools/inspect-doom-archives-r373.mjs. Nada extraído a disco, ejecutado o enviado.
+No pedir que compre/consiga otro WAD: ya están en estos ZIP locales.
+
+DMX con ÚLTIMA entrada por nombre como motor (Ultimate55duplicados anteriores):
+Ultimate67efectos684809B útiles; DoomII107/1240277B. Caché557056B: excesos127753
+(~125KiB) y683221(~667KiB). Contar todos los DS brutos inflaba Ultimate a122/
+1217736B; no usar esa cifra inicial. Falta comprobar caché real y todos los mapas;
+rawmapmax E4M9190318B/MAP14204410B no es RAM/FPS. Empezar Ultimate; adaptar perfil
+WAD, mapas/save/cache. No reemplazar shareware963 ni tocar partidas anteriores.
+Revisión solicitada no autoriza instalar; no hay nuevo ensayo físico aprobado.
+
 # R371/R372: multitáctil stock sin ruta viable; candidato de arranque de audio local
 
 Usuario aceptó plan: viabilidad táctil, audio, WAD completo y entrega conjunta.

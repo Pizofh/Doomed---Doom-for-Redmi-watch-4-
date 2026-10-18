@@ -84,7 +84,9 @@ audio modelado se conserva por separado en el build R372.
 
 ## Juego completo
 
-El usuario indicó que aún no tiene un WAD completo. La edición instalada sigue
+El usuario indicó inicialmente que aún no tenía un WAD completo; R373 revisó
+después sus dos ZIP locales. Ver [identidades y recursos](retail-iwad-inspection-r373.md).
+La edición instalada sigue
 siendo shareware E1M1–E1M9; no se descarga ni incorpora un WAD comercial. GOG
 ofrece DOOM + DOOM II con las versiones originales DOS, según su ficha oficial:
 https://www.gog.com/en/game/doom_doom_ii . El usuario debe adquirir/acceder a esa

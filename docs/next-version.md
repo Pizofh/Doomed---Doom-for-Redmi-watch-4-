@@ -15,8 +15,11 @@ Prueba determinista y dos ciclos de Doom real en S3 pasan; el altavoz físico no
 está validado para este cambio. No hay paquete ni envío nuevo autorizado.
 [Evidencia y límites R371/R372](touch-path-and-audio-startup-r371-r372.md).
 
-El soporte completo espera un WAD comercial del usuario, que aún no lo tiene.
-Después habrá que adaptar identidad/mapas/cache de efectos/guardados y validar
+R373 revisó los dos ZIP aportados: Ultimate Doom1.9/36mapas y DoomII1.9/32mapas,
+con CRC/directorios y MD5 de referencia coincidentes, sin extraer ni ejecutar.
+La caché de sonido actual no alcanza para todos los efectos. Ver
+[identidades y recursos R373](retail-iwad-inspection-r373.md).
+Habrá que adaptar identidad/mapas/cache de efectos/guardados y validar
 memoria con esos datos. Priorizar un ensayo combinado concreto y la entrega
 reproducible; música original y trabajo sobre lower drivers quedan fuera del cierre.
 
