@@ -35,6 +35,7 @@ export class DoomDeploymentJournal{
  constructor(plan,identity,{directory:where=defaultDirectory,resume=false,retryWithoutData=false}={}){
   packageCopy(plan);const binding=identities.get(identity);if(!binding||typeof resume!=='boolean'||typeof retryWithoutData!=='boolean'||resume&&retryWithoutData)fail();
   const dir=directory(where);this.#file=path.join(dir,plan.kind==='review-ready-r351-manual'?'ready-r351.jsonl':plan.kind==='review-pads-r349-manual'?'pads-r349.jsonl':plan.kind==='review-wide-r347-manual'?'wide-r347.jsonl':plan.kind==='review-touch-r345-manual'?'touch-r345.jsonl':plan.kind==='review-direct-r343-manual'?'direct-r343.jsonl':plan.kind==='review-demand-r337-manual'?'demand-r337.jsonl':plan.kind==='review-bench-r335-manual'?'bench-r335.jsonl':plan.kind==='review-palette-r333-manual'?'palette-r333.jsonl':plan.kind==='review-fast-r331-manual'?'fast-r331.jsonl':plan.kind==='review-hold-r329-manual'?'hold-r329.jsonl':plan.kind==='review-lease-r327-manual'?'lease-r327.jsonl':plan.kind==='review-refs-r325-manual'?'refs-r325.jsonl':plan.kind==='review-fault-r321-manual'?'fault-r321.jsonl':plan.kind==='review-readers-r318-manual'?'readers-r318.jsonl':plan.kind==='review-ram-png-manual'?'ram-png-r304.jsonl':'transfer.jsonl');this.#lockFile=path.join(dir,'watch.lock');
+  if(plan.kind==='review-sound-r365-manual')this.#file=path.join(dir,'sound-r365.jsonl');
   this.#key=Buffer.from(binding.key);this.#tag=binding.tag;this.#plan=plan;
   try{
    this.#lock=fs.openSync(this.#lockFile,'wx',0o600);
@@ -58,11 +59,12 @@ export class DoomDeploymentJournal{
      const stages=attempt.map(r=>r.status).join(',');
      const firstControl=previous.attempt===1&&stages==='Created,InstallIntent,UploadIntent,Uncertain'&&previous.before!==null;
      const first=history.filter(r=>r.attempt===1);
+     const soundLocalOnly=plan.kind==='review-sound-r365-manual'&&previous.attempt===1&&stages==='Created,Uncertain'&&previous.before===null&&history.every(r=>r.upload===null);
      const preflightOnly=previous.attempt===2&&stages==='Created,Uncertain'&&previous.before===null&&history.every(r=>r.upload===null)&&first.map(r=>r.status).join(',')==='Created,InstallIntent,UploadIntent,Uncertain';
      const reviewedRemovals=previous.attempt===3&&previous.before===null&&history.every(r=>r.upload===null)&&first.map(r=>r.status).join(',')==='Created,InstallIntent,UploadIntent,Uncertain'&&[2,3].every(n=>history.filter(r=>r.attempt===n).map(r=>r.status).join(',')==='Created,Uncertain');
-     if(!(firstControl||preflightOnly||reviewedRemovals)||attempt.some(r=>r.upload!==null))fail();
+     if(!(firstControl||preflightOnly||reviewedRemovals||soundLocalOnly)||attempt.some(r=>r.upload!==null))fail();
      retryBaseline=previous.before??[...first].reverse().find(r=>r.before!==null)?.before;
-     if(retryBaseline===null||retryBaseline===undefined)fail();
+     if(!soundLocalOnly&&(retryBaseline===null||retryBaseline===undefined))fail();
     }else if(previous.before===null||previous.upload?.status!=='Uncertain'||previous.upload.highestPossibleOffset<=previous.upload.offset)fail();
     this.#resume=clone({...previous,...(retryBaseline?{before:retryBaseline}:{})});this.#record=previous;
     this.#fd=fs.openSync(this.#file,'a');

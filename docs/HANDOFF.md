@@ -1,3 +1,27 @@
+# R366: R365 aprobado pero no instalado; reintento local preparado
+
+El usuario aprobó instalación+2arranques R365. No hubo transmisión ni consultas.
+Proceso1falló BeforeConnection/DoomJournalRefused por faltar filename nuevo;
+corregido sound-r365.jsonl. Proceso2 creó Created/Uncertain pero C# LargePhysicalReviewed
+estaba false, retornó GateClosed/exit2 antesdeRunNative/conexión. Report tx0,
+sentFrames0,massParts0,before=null,upload=null. NO seleccionar DoomSound aún.
+
+Se preparó docs/doom-sound-local-retry-r366.md y CLI retry-local, journal solo
+permite Soundattempt1Created/Uncertain/before=null/uploadtodosnull ->attempt2.
+Tercerareentrada rechazada; noafectaotroskinds. Test-sound-journal-r365 pasócon
+identidadclavefalsas. PruebaC#temporalLarge=true/build/test-large-native-gate-r365
+con targetvacío pasóE:InvalidTarget sinBT. RestauradoLarge=falseybuildcerrado.
+Main/Sound/controlretry JS todosfalse. Auth/MAC seleyeronensendpathpero jamás
+seimprimieron. No archivospreviosborrados/renombrados.
+
+Pedirautorización UNreintento delmismopaquete+2ensayos porqueR365prohibíaretry;
+si llega, NO pedirdenuevo. Abrir Probe.cs LargePhysicalReviewed=true, build,
+test-large-native-gate-r365 sinBT; luego JSmain+Sound+controlretry=true;
+node tools/pc-doom-sound-r365.mjs retry-local UNAvez. Cerrar3JSyLargeC#ybuild
+despuésdelresultado, tambiénenfallo. Noautorreintentos. PaqueteintactoSHA26fd...ad6.
+Conregistroinactivoconfirmado, darinstruccionesmanualesR365(2cicloshasta60s).
+No nuevaspruebasPCM/juego/auditoríasGit/push necesarios. Conserva940+963.
+
 # R365: DoomSound integrado y empaquetado; pendiente aprobación física específica
 
 Usuario pidió continuar hasta lograr sonido y volver a montar en reloj. Se completó

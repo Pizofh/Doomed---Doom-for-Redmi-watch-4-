@@ -100,7 +100,7 @@ export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=fal
   }else if(plan?.kind==='review-demand-r337-manual'){
    if(!physicalDoomDemandEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind==='review-sound-r365-manual'){
-   if(!physicalDoomSoundEnabled()||resume||retryWithoutData)refuse();
+   if(!physicalDoomSoundEnabled()||resume)refuse();
   }else if(plan?.kind==='review-ready-r351-manual'){
    if(!physicalDoomReadyEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind==='review-pads-r349-manual'){
@@ -147,10 +147,11 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   if(plan.nativeLauncher&&!before.some(f=>f.id==='365219963'))refuse();
   if(plan.kind==='review-fault-r321-manual'&&!before.some(f=>f.id==='365219953'))refuse();
   const comparison=parent?compareDoomCatalogs(parent.before,before):null;
+  const soundLocalOnly=plan.kind==='review-sound-r365-manual'&&deploymentRetryWithoutData&&parent?.before===null&&parent?.upload===null;
   const removalReview=deploymentRetryWithoutData&&parent?.attempt===3;
   const acceptedRemovals=removalReview&&reviewedTwoRemovals(parent.before,before);
   report.catalogPreflight={ownIdAbsent:!before.some(f=>f.id===plan.id),currentCount:before.length,...(comparison??{}),...(removalReview?{reviewedTwoRemovals:acceptedRemovals}:{})};
-  if(before.some(f=>f.id===plan.id)||parent&&!(deploymentRetryWithoutData?(removalReview?acceptedRemovals:comparison.sameMembership):equal(parent.before,before)))refuse();
+  if(before.some(f=>f.id===plan.id)||parent&&!soundLocalOnly&&!(deploymentRetryWithoutData?(removalReview?acceptedRemovals:comparison.sameMembership):equal(parent.before,before)))refuse();
   journal.save({status:'InstallIntent',before});client.phase='InstallIntent';
   const install=envelope(4,4,6,bytes(6,Buffer.concat([bytes(1,Buffer.from(plan.id)),uint(2,plan.size)])));
   const installAck=await client.exchange(install,4,4);
