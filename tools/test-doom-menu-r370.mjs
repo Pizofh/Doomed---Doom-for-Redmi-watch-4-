@@ -2,15 +2,33 @@
 // Real Doom menus, keys, map/spawn, saves and audio threads; graphics modeled.
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
 import {root,sha256} from './doom-ready-source-r351.mjs';import {session} from './doom-ui-emulator.mjs';
-const packed=process.argv[2]==='--packed-r378';
+import {doom2Profile} from './doom2-source-r384.mjs';
+const doom2=process.argv[2]==='--doom2-r384';
+const packed=doom2||process.argv[2]==='--packed-r378';
 const ultimate=packed||process.argv[2]==='--ultimate-r374';
 const startup=ultimate||process.argv[2]==='--startup-r372';
 const quitOnly=process.argv[2]==='--quit-only';assert(process.argv.length===2||(process.argv.length===3&&(quitOnly||startup)));
-const out=path.join(root,packed?'build/doom-audio-r378/s3-model':ultimate?'build/doom-audio-r374/s3-model':startup?'build/doom-audio-r372/s3-model':'build/doom-audio-r370/s3-model'),elf=path.join(out,'doom.elf');
+const out=path.join(root,doom2?'build/doom-audio-r384/s3-model':packed?'build/doom-audio-r378/s3-model':ultimate?'build/doom-audio-r374/s3-model':startup?'build/doom-audio-r372/s3-model':'build/doom-audio-r370/s3-model'),elf=path.join(out,'doom.elf');
 const review=JSON.parse(fs.readFileSync(path.join(out,'review.json'),'utf8'));
 assert.equal(sha256(fs.readFileSync(elf)),review.elfSha256);if(!quitOnly)assert(!fs.existsSync(path.join(out,'test-result.json')));
 const owned=session(startup?'doom-startup-menu':'doom-menu');
-const render=s=>ultimate?s.replaceAll('rw4menu370',packed?'rw4packed378':'rw4ultimate374').replaceAll('/tmp/rw4-menu-r370',packed?'/tmp/rw4-menu-r378':'/tmp/rw4-menu-r374').replaceAll('371943786','3205409472').replaceAll('532927','684809'):startup?s.replaceAll('rw4menu370','rw4prime372').replaceAll('/tmp/rw4-menu-r370','/tmp/rw4-menu-r372'):s;
+let spawn;
+if(doom2){
+ const b=fs.readFileSync(path.join(root,'build/doom2-r384/doom2.wad')),dir=b.readUInt32LE(8);let marker;
+ for(let i=0;i<b.readUInt32LE(4);i++)if(b.toString('ascii',dir+i*16+8,dir+i*16+16).replace(/\0.*$/,'')==='MAP01')marker=i;
+ assert(marker!==undefined);const at=dir+(marker+1)*16,offset=b.readUInt32LE(at),size=b.readUInt32LE(at+4);const starts=[];
+ for(let i=0;i<size;i+=10)if(b.readUInt16LE(offset+i+6)===1)starts.push({x:b.readInt16LE(offset+i),y:b.readInt16LE(offset+i+2),angle:b.readUInt16LE(offset+i+4)});
+ assert.equal(starts.length,1);spawn=starts[0];
+}
+const render=s=>{
+ let text=ultimate?s.replaceAll('rw4menu370',packed?'rw4packed378':'rw4ultimate374').replaceAll('/tmp/rw4-menu-r370',packed?'/tmp/rw4-menu-r378':'/tmp/rw4-menu-r374').replaceAll('371943786','3205409472').replaceAll('532927','684809'):startup?s.replaceAll('rw4menu370','rw4prime372').replaceAll('/tmp/rw4-menu-r370','/tmp/rw4-menu-r372'):s;
+ if(doom2)text=text.replaceAll('rw4packed378','rw4doomii384').replaceAll('/tmp/rw4-menu-r378','/tmp/rw4-menu-r384')
+ .replaceAll('3205409472',String(doom2Profile.wadCrc32)).replaceAll('684809',String(doom2Profile.audioSampleBytes))
+ .replace('tap(8);tap(8);tap(8) -- NEW GAME, episode 1, selected difficulty','tap(8);tap(8) -- Doom II: NEW GAME, difficulty (no episode submenu)')
+ .replace('initial[69]==1056*65536 and initial[70]==((-3616*65536)&0xffffffff) and initial[71]==0x40000000 and initial[72]==101',
+ 'initial[69]==(('+spawn.x+'*65536)&0xffffffff) and initial[70]==(('+spawn.y+'*65536)&0xffffffff) and initial[71]=='+((Math.floor(spawn.angle/45)*0x20000000)>>>0)+' and initial[72]==101');
+ return text;
+};
 const vm={folder:owned.folder,adb:(args,...rest)=>owned.adb(args.map(v=>typeof v==='string'?render(v):v),...rest)};
 const remote=render('/tmp/rw4-menu-r370.elf'),script=render('/tmp/rw4-menu-r370.lua');
 const before=vm.adb(['shell','lsmod'],'before');assert.equal(before.trim().split(/\r?\n/).length,1);
@@ -137,6 +155,6 @@ const loadFile=path.join(vm.folder,'title-load.lua');fs.writeFileSync(loadFile,r
 vm.adb(['push',loadFile,script],'title-load-fixture');assert(vm.adb(['shell','lua',script],'title-load',{timeoutMs:45000}).includes('MENU_TITLE_LOAD_R370_OK'));
 assert.equal(vm.adb(['shell','lsmod'],'after-title-load'),before);
 for(const p of [remote,script,'/tmp/rw4-ready351-save.dsg','/tmp/rw4-menu-r370-saved.bin'])vm.adb(['shell','rm',p],'remove-own');
-const result={passed:true,checkpoint:packed?'R378':ultimate?'R374':startup?'R372':'R370',realDoom:true,titleHeldBeyondAttractDeadline:true,originalMenuNewGame:true,originalPlayer1SpawnBothCycles:true,
+const result={passed:true,checkpoint:doom2?'R384':packed?'R378':ultimate?'R374':startup?'R372':'R370',realDoom:true,titleHeldBeyondAttractDeadline:true,originalMenuNewGame:true,originalPlayer1SpawnBothCycles:true,
  menuConfirmationDoesNotFire:true,saveLoad:true,loadDirectlyFromTitle:true,pauseResume:true,twoCyclesJoinedAndUnloaded:true,modeledAudio:true,devicePlayback:false,physicalWatchUsed:false,cycles};
 fs.writeFileSync(path.join(out,'test-result.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

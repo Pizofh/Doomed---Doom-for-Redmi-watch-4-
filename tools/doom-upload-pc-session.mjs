@@ -17,7 +17,7 @@ import {physicalDoomVoiceEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomMenuEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomUltimateEnabled,physicalDoomUltimateAfterSpaceEnabled,physicalDoomUltimateAfterCatalogEnabled,physicalDoomPackedEnabled,physicalDoomPackedRestartEnabled,physicalDoomPackedResumeEnabled} from './doom-deployment-physical.mjs';
 import {uploadLimits} from './doom-retail-limits-r374.mjs';
-import {physicalDoomBootEnabled,physicalDoomLeanEnabled,physicalDoomStartEnabled} from './doom-deployment-physical.mjs';
+import {physicalDoomBootEnabled,physicalDoomLeanEnabled,physicalDoomStartEnabled,physicalDoomIIEnabled} from './doom-deployment-physical.mjs';
 import {compareDoomCatalogs,reviewedTwoRemovals,reviewedUltimateSpaceRemovals,reviewedUltimateCatalogRetry} from './doom-deployment-catalog.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
@@ -87,7 +87,9 @@ export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=fal
  return runLargeUpload(()=>{
   if(typeof afterSpace!=='boolean'||afterSpace&&plan?.kind!=='review-ultimate-r374-manual')refuse();
   if(typeof afterCatalog!=='boolean'||afterCatalog&&(plan?.kind!=='review-ultimate-r374-manual'||afterSpace))refuse();
-  if(['review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan?.kind)){
+  if(plan?.kind==='review-doom2-r384-manual'){
+   if(!physicalDoomIIEnabled()||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked)refuse();
+  }else if(['review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan?.kind)){
    if(!(plan.kind==='review-start-r383-manual'?physicalDoomStartEnabled():plan.kind==='review-lean-r382-manual'?physicalDoomLeanEnabled():physicalDoomBootEnabled())||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked)refuse();
   }else if(plan?.kind==='review-packed-r378-manual'){
    if(typeof restartPacked!=='boolean'||typeof resumePacked!=='boolean'||restartPacked&&resumePacked||!(resumePacked?physicalDoomPackedResumeEnabled():restartPacked?physicalDoomPackedRestartEnabled():physicalDoomPackedEnabled())||resume||retryWithoutData||afterSpace||afterCatalog)refuse();
@@ -133,7 +135,7 @@ export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=fal
    if(!physicalDoomDirectEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind!=='review-low-memory-native-disabled')refuse();
   if((restartPacked||resumePacked)&&plan?.kind!=='review-packed-r378-manual')refuse();
-  return claimReviewedDoomEndpoint(endpoint,{resume,retryWithoutData,retail:['review-ultimate-r374-manual','review-packed-r378-manual'].includes(plan?.kind),afterSpace,afterCatalog,packed:plan?.kind==='review-packed-r378-manual',restartPacked,resumePacked});
+  return claimReviewedDoomEndpoint(endpoint,{resume,retryWithoutData,retail:['review-doom2-r384-manual','review-ultimate-r374-manual','review-packed-r378-manual'].includes(plan?.kind),afterSpace,afterCatalog,packed:plan?.kind==='review-packed-r378-manual',restartPacked,resumePacked,doom2:plan?.kind==='review-doom2-r384-manual'});
  },plan,secret,{deploymentResume:resume,deploymentRetryWithoutData:retryWithoutData,deploymentAfterSpace:afterSpace,deploymentAfterCatalog:afterCatalog,deploymentRestartPacked:restartPacked,deploymentResumePacked:resumePacked});
 }
 async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false,deploymentRetryWithoutData=false,deploymentAfterSpace=false,deploymentAfterCatalog=false,deploymentRestartPacked=false,deploymentResumePacked=false}={}){
@@ -165,7 +167,7 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   if(info.modelRecognized!==true||info.firmware!=='2.2.86')refuse();
   client.phase='CatalogPreflight';
   const before=catalog(readWatchfaces(await client.query(4,0)));
-  if(plan.nativeLauncher&&!['review-ultimate-r374-manual','review-packed-r378-manual','review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan.kind)&&!before.some(f=>f.id==='365219963'))refuse();
+  if(plan.nativeLauncher&&!['review-doom2-r384-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan.kind)&&!before.some(f=>f.id==='365219963'))refuse();
   if(['review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan.kind)&&!before.some(f=>f.id==='365220002'))refuse();
   if(plan.kind==='review-fault-r321-manual'&&!before.some(f=>f.id==='365219953'))refuse();
   const comparison=parent?compareDoomCatalogs(parent.before,before):null;

@@ -8,7 +8,7 @@ import {uploadLimits} from './doom-retail-limits-r374.mjs';
 const owned=new WeakMap(),hash=(b,a='sha256')=>createHash(a).update(b).digest('hex');
 const refuse=()=>{throw Error('DoomLargeUploadRefused');};
 function mint(b,id,kind){
- const nativeLauncher=['review-start-r383-manual','review-lean-r382-manual','review-boot-r381-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual','review-fast-r331-manual','review-palette-r333-manual','review-bench-r335-manual','review-demand-r337-manual','review-direct-r343-manual','review-touch-r345-manual','review-wide-r347-manual','review-pads-r349-manual','review-ready-r351-manual','review-sound-r365-manual','review-audio-r367-manual','review-voice-r369-manual','review-menu-r370-manual'].includes(kind);
+ const nativeLauncher=['review-doom2-r384-manual','review-start-r383-manual','review-lean-r382-manual','review-boot-r381-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual','review-fast-r331-manual','review-palette-r333-manual','review-bench-r335-manual','review-demand-r337-manual','review-direct-r343-manual','review-touch-r345-manual','review-wide-r347-manual','review-pads-r349-manual','review-ready-r351-manual','review-sound-r365-manual','review-audio-r367-manual','review-voice-r369-manual','review-menu-r370-manual'].includes(kind);
  const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher,physicalEnabled:false});owned.set(p,b);return p;
 }
 export function prepareDoomAssets(raw){
@@ -115,6 +115,10 @@ export function syntheticRetailUpload(){const b=Buffer.alloc(13090600);for(let i
 export function prepareDoomPacked(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==6165808||hash(raw)!=='069e1a1dfdd676de6382565ba177cad411c07647929b8158dbe8d131cc9a490a'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365220002'||raw[49]!==0)refuse();
  return mint(Buffer.from(raw),'365220002','review-packed-r378-manual');
+}
+export function prepareDoomII(raw){
+ if(!Buffer.isBuffer(raw)||raw.length!==7221744||hash(raw)!=='483dcce2620f99839f930881c5024f1b0c67885e27a36cd1b1a26e5d6864f5a1'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365220006'||raw[49]!==0)refuse();
+ return mint(Buffer.from(raw),'365220006','review-doom2-r384-manual');
 }
 export function prepareDoomBoot(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==41900||hash(raw)!=='fa971e356a2d7d79757eb9deae49e3475285d1b24ed83cb13101ab070c6cca9a'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365220003'||raw[49]!==0)refuse();

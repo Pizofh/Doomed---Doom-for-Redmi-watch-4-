@@ -1,4 +1,47 @@
-# R383 arranca y permite jugar; salida/reapertura fallaron
+# R384 Doom II listo localmente; falta espacio y aprobación física
+
+Usuario pidió «dale el2». Solo preparación local, ningún envío/R384journal.
+DoomII ID365220006/rw4doomii384, marcoROJO/DOSBARRASVERTICALES; autónomo
+sin DoomLauncher/DoomPacked. Paquete7221744B SHA256
+483dcce2620f99839f930881c5024f1b0c67885e27a36cd1b1a26e5d6864f5a1
+en build/doom2-r384/package/DoomII-id-only.face, privado/ignorado.
+ELF630004B SHAb800ffa5a1880fdeb8a3839bd738eca2ba15d2898dbd6315632902c6087dc575.
+Lua30160B SHAf4731caa45feb2c7bf502956022bfab2de30a2a7273d3671ae98d32be83d4995.
+WAD lógico14604584B/32mapas; lossless6531369B/223páginas. 107SFX remuestreados
+a mitad de frecuencia,620164B en640KiB; menor fidelidad, ninguno omitido.
+No música MIDI. Mantiene render grande/controles de un dedo/zona3MiB/slots192KiB,
+bancos propios con CRC distinto. No multitáctil añadido.
+
+Cambios audio:16bloques silencio~372ms y alimentar silencio con cola vacía;
+no afirmar primer sonido corregido sin hardware. ALLOC2227500B,32140menos
+queR378; guardas7366211/4194320 INTACTAS. Cierre: audio_wait independiente500,
+stop500, startup2250callbacks; oculta overlays enSTOPPING/RECOVERING.
+GATE80detach/81stop/82audio/83join/84unload, CODE709audio_timeout. No forceunload.
+R383 ERROR fue DESPUÉS de SALIR, confirmado por usuario; causa aún desconocida.
+
+Validado:32mapas arrancan/guardan/cargan/cierran con join/unload, todosallocated==
+freed/audioerr0/cache620164. Máximoguardado81378B/picodinámico3484597B.
+Dos ciclos título/NEWGAME/spawnMAP01/controles/guardar/cargar/carga desde título,
+joins/unload pasan.24casosLuaUI, audio prepare/close retenidos con hilos reales,
+siete escenarios startup (repetido tras corregir expectativa de fixture sobre
+writes silenciosos; motor intacto), paquete77resources/6tamper/3534partesC#IPC/
+5fallos/6retriesdenegados pasan. RegresiónR383paquete/shared23 pasan. Gráficos y
+audio modelados; no FPS/altavoz RW4 ni playthrough de32mapas. Temporales y WAD
+guest retirados, sin módulos retenidos. Todos los gates JS/C# cerrados.
+
+Plan docs/doom2-physical-plan-r384.md. ESPACIO antes de enviar:
+DoomLauncher4827044+DoomPacked6165808+DoomII7221744=18214596>cuota15728640.
+Proponer retirar manualmente SOLO DoomLauncher antiguo si conserva DoomI
+completo; ambos completos son autónomos y suman13387552, margen2341088 para
+otras caras (no medición). Conservar DoomPacked/habitual. No borrar desdePC.
+Falta confirmación de liberación y aprobación específica UNA instalación/DOS
+arranques≤60s; no inferir del «daleel2». Reinicio normal antes de abrir porque
+R383 no confirmó descarga, NO Restablecer. Relojcerca/MiFitnesscerrado/batería≥50/
+observación. CLIpc-doom2-r384.mjs prepare|install. GateDOOM2/retail cerrado;
+tras aprobar solo general+DOOM2JS/C#Retail, build/emptytarget readiness, install1,
+cerrar/rebuild inmediato. Ningún retry/resume automático.
+
+## R383 resultado anterior
 
 Resultado del ensayo autorizado, según usuario: juego y controles funcionaron;
 no probó guardar/cargar. Al intentar volver apareció ERROR; salió de la esfera,
