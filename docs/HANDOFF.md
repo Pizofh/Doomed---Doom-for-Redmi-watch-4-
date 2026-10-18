@@ -1,4 +1,18 @@
-# R383 DoomStart listo; pendiente de aprobación nueva
+# R383 DoomStart instalado inactivo; pendiente un ensayo autorizado
+
+Usuario autorizó UNA instalación y UN arranque, reinicio previo, batería≥50%
+y observación. Instalación realizada el 2026-10-18 una sola vez: RegisteredInactive,
+registeredVerifiedtrue/contentVerifiedfalse; modelo/FW esperados, catálogo13,
+INSTALL0/ACKMD5/status0/offset0;24partes/32frames/47978BTX.
+Cierre confirmado, workerexit0/nativeErrorfalse. Gatesgeneral/StartJS/C#Large
+cerrados y rebuild inmediato. Journalstart-r383 existe: NO repetir envío.
+No SET/borrados/reenvío ELF/WAD. CONSERVAR DoomPacked365220002.
+Falta solo UN ensayo ya autorizado: reinicio normal desde Ajustes antes de
+abrir DoomStart ámbar/tresverticales. READY→START1; mantener despierto,
+esperar arranque~90s+checksum. Sierror GATE/FREE/MAX,CODE/READ/TOTAL;
+siGATE≥50 START/READY/FINISH y JOIN/REASON/EXIT. No repetir/reabrir.
+Si inicia, NEWGAME→I, controles/sonido/pausa y SALIR≤60sjuego→CLOSED.
+No segundo ciclo. No pedir autorización adicional para este ensayo.
 
 R382 físico: no juego, GATE60/FREE7370096/MAX4776864/CODE999/READ629904/
 TOTAL629904. Métricas0 salvoPHASE1/AUDIOEND1. RAMguard ya pasa por3885B,
@@ -22,13 +36,12 @@ build/doom-start-r383/package; reusa365220002(CONSERVAR DoomPacked).
 6tamper/24partesIPC/retries6/dependencia/CLI pasan. R382paquete y shared23
 pasan. No repetir campaña C. Sin radio/escritura al reloj en preparación.
 
-Plan docs/doom-start-physical-plan-r383.md listo: pedirUNA instalación47.2KB
-y UNensayo≤60sjuego, batería≥50%/observararranque~90s, con REINICIO normal
+Plan docs/doom-start-physical-plan-r383.md aprobado: UNA instalación47.2KB
+ya completada y UNensayo≤60sjuego, batería≥50%/observararranque~90s, con REINICIO normal
 antes de abrir porque R382 cargó C sin descarga confirmada (no Restablecer).
 Puede instalarse inactivo antes, esperar conexión cerrada antes de reiniciar.
-CLIpc-doom-boot-r381.mjs install --start-r383. GateSTARTfalse, todo cerrado.
-Tras aprobar abrir SOLO general+StartJS/C#Large, build/emptytargetready,
-installUNAvez; cerrar/rebuild siempre. Journalstart-r383, no retries/resume.
+CLIpc-doom-boot-r381.mjs install --start-r383 ya consumido. GateSTARTfalse,
+todo cerrado/rebuild confirmado. Journalstart-r383, no retries/resume.
 Manualtrasreinicio READY→START1, CHECKING/LOADINGdespierto; sierror6cifras+
 flags2páginasnuevas siGATE≥50; no repetir. Siinicia controles/sonido/pausa y
 SALIR≤60s→CLOSED. No segundoarranque. No usar permisosR382consumidos.

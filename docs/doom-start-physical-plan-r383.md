@@ -1,6 +1,15 @@
 # R383: diagnosticar el fallo inmediato de arranque y separar esperas
 
-Preparado; falta aprobación nueva. R382 superó RAM:7370096≥7366211 y
+Instalado inactivo tras autorización explícita del usuario el 2026-10-18.
+Una sola ejecución: RegisteredInactive/registeredVerifiedtrue; modelo/FW
+esperados, catálogo13/ownIDausente, INSTALL0/ACKMD5/status0/offset0.
+24partes/32frames/47978BTX. Sin SET/borrados ni reenvío ELF/WAD.
+closeConfirmed y workerExitConfirmedtrue, exit0/nativeErrorfalse.
+Gatesgeneral/StartJS/C#Large cerrados y ejecutable recompilado al terminar.
+contentVerifiedfalse: pendiente UN ensayo manual ya autorizado, con reinicio
+normal antes de abrir. Sin segundo arranque ni otro envío autorizado.
+
+R382 superó RAM:7370096≥7366211 y
 MAX4776864≥4194320. GATE60/CODE999, PHASE1/AUDIOEND1 y demás métricas0.
 Llegó a command1; no juego/CLOSED. No hay confirmación de join/unload.
 Usuario aclaró sin repetir prueba que el error fue CASI INMEDIATO tras
