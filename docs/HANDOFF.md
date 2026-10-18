@@ -1,4 +1,24 @@
-# R383 DoomStart instalado inactivo; pendiente un ensayo autorizado
+# R383 arranca y permite jugar; salida/reapertura fallaron
+
+Resultado del ensayo autorizado, según usuario: juego y controles funcionaron;
+no probó guardar/cargar. Al intentar volver apareció ERROR; salió de la esfera,
+regresó y ya no pudo iniciar. No informó CLOSED ni cifras de diagnóstico.
+No atribuir causa a timeout/audio ni dar join/unload por confirmados.
+Sonido defectuoso al principio, después se normaliza. No reabrir para obtener
+cifras; reinicio normal desde Ajustes antes de otra prueba, sin Restablecer.
+Ensayo R383 consumido; no queda otro arranque/envío autorizado.
+
+Usuario aclara que su nostalgia era por Doom II y pregunta si conviene migrar.
+Inspección local: doomgeneric ya reconoce Doom II/commercial; WAD aportado
+14604584B/32mapas, frente Ultimate12408292B/36mapas. El tamaño del WAD no
+equivale a RAM activa. Perfil actual fija identidad/CRC, mapas de episodios y
+slots; cachéSFX672KiB no cubre1240277B de todos los efectos DoomII. Hará falta
+perfil/compresión, audio con presupuesto acotado, slots separados y validación
+de32mapas. No prometer mismo FPS/RAM ni compatibilidad sin probar. Recomendación:
+corregir cierre y arranque de audio compartidos, luego preparar DoomII localmente,
+sin otra instalación diagnóstica física solo para decidir. No WADII enviado.
+
+## Registro de instalación R383
 
 Usuario autorizó UNA instalación y UN arranque, reinicio previo, batería≥50%
 y observación. Instalación realizada el 2026-10-18 una sola vez: RegisteredInactive,

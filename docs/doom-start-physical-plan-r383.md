@@ -1,5 +1,16 @@
 # R383: diagnosticar el fallo inmediato de arranque y separar esperas
 
+## Resultado manual
+
+El usuario confirmó arranque, juego y controles. No probó guardar/cargar.
+Al intentar volver apareció ERROR; al salir de la esfera y regresar ya no pudo
+iniciar. No confirmó CLOSED ni aportó códigos: causa y descarga no verificadas.
+Sonido defectuoso al principio, después normal. Ensayo autorizado consumido;
+no repetir ni reabrir para recoger códigos. Antes de otra prueba, reinicio normal
+desde Ajustes para retirar el estado posiblemente residente. No Restablecer.
+
+## Instalación y preparación
+
 Instalado inactivo tras autorización explícita del usuario el 2026-10-18.
 Una sola ejecución: RegisteredInactive/registeredVerifiedtrue; modelo/FW
 esperados, catálogo13/ownIDausente, INSTALL0/ACKMD5/status0/offset0.
