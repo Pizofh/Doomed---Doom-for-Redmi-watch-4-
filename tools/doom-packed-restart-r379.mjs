@@ -19,3 +19,12 @@ export function reviewedPackedInterruption(history){
  return history.slice(4).every(r=>r.upload.offset===0&&r.upload.chunkSize===2048&&r.upload.totalParts===3017&&r.upload.remoteInstallationVerified===false)&&
   history.slice(108).every(r=>r.upload.highestPossibleOffset===3466602)&&history.slice(109).every(r=>r.upload.wireBytes===3480281);
 }
+
+// R379 sent no new MASS data: the device requested an existing offset.
+export function reviewedPackedResumeHistory(history){
+ if(!Array.isArray(history)||history.length!==116||!reviewedPackedInterruption(history.slice(0,112)))return false;
+ const tail=history.slice(112),baseline=history[111].before;
+ return tail.map(r=>r.status).join(',')==='Created,InstallIntent,UploadIntent,Uncertain'&&tail.every((r,i)=>
+  r.attempt===2&&r.attemptKind==='restart-packed-r379'&&r.upload===null&&r.id==='365220002'&&r.size===6165808&&
+  r.sha256===history[0].sha256&&(i===0?r.before===null:JSON.stringify(r.before)===JSON.stringify(baseline)));
+}

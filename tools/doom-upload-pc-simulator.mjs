@@ -13,7 +13,7 @@ function ccm(key,nonce,input,decrypt=false){
  return Buffer.concat([c.update(body),c.final(),...(decrypt?[]:[c.getAuthTag()])]);
 }
 function referenceCrc(b){let crc=0xffffffff;for(const value of b){crc^=value;for(let bit=0;bit<8;bit++)crc=(crc>>>1)^((crc&1)?0xedb88320:0);}return(crc^0xffffffff)>>>0;}
-const scenarios=new Set(['ok','bad-key','v2','wrong-model','wrong-fw','collision','clear-response','reject','bad-md5','bad-offset','bad-chunk','disconnect','native-send-timeout','packed-interruption','missing','active','protected','unrelated-lost','close-failure','deadline']);
+const scenarios=new Set(['ok','bad-key','v2','wrong-model','wrong-fw','collision','clear-response','reject','bad-md5','bad-offset','bad-chunk','resume-missing-md5','resume-missing-offset','disconnect','native-send-timeout','packed-interruption','missing','active','protected','unrelated-lost','close-failure','deadline']);
 export function createDoomUploadPcPeer(plan,{scenario='ok',chunkSize=2048,resumePosition=0,target='fixture-one',ackShape='complete',catalogRows=null}={}){
  if(!scenarios.has(scenario)||![2048,4080].includes(chunkSize)||!Number.isInteger(resumePosition)||resumePosition<0||resumePosition>=plan.size||!/^fixture-[a-z]+$/.test(target)||!['complete','stock-minimal','defaults'].includes(ackShape)||ackShape!=='complete'&&(chunkSize!==2048||resumePosition!==0||scenario!=='ok'))throw Error('PcPeerRefused');
  if(catalogRows!==null&&(!Array.isArray(catalogRows)||catalogRows.length>64||catalogRows.filter(r=>r.active).length!==1||catalogRows.some(r=>!/^\d{9}$/.test(r.id)||typeof r.active!=='boolean'||typeof r.canDelete!=='boolean')||new Set(catalogRows.map(r=>r.id)).size!==catalogRows.length))throw Error('PcPeerRefused');
@@ -91,7 +91,7 @@ export function createDoomUploadPcPeer(plan,{scenario='ok',chunkSize=2048,resume
    assert.equal(type,22);assert.equal(subtype,0);assert(installReceived&&!uploadReceived);uploadReceived=true;
    const start=fields(one(fields(one(parsed,24,2)),1,2));assert.equal(one(start,1,0),16);
    assert(one(start,2,2).equals(digest(data)));assert.equal(one(start,3,0),data.length);
-   response(24,bytes(2,ackShape==='stock-minimal'?uint(2,0):ackShape==='defaults'?Buffer.alloc(0):Buffer.concat([bytes(1,scenario==='bad-md5'?Buffer.alloc(16):digest(data)),uint(2,0),uint(4,scenario==='bad-offset'?data.length-1:resumePosition),uint(5,scenario==='bad-chunk'?4096:chunkSize)])));
+   response(24,bytes(2,ackShape==='stock-minimal'?uint(2,0):ackShape==='defaults'?Buffer.alloc(0):Buffer.concat([...(scenario==='resume-missing-md5'?[]:[bytes(1,scenario==='bad-md5'?Buffer.alloc(16):digest(data))]),uint(2,0),...(scenario==='resume-missing-offset'?[]:[uint(4,scenario==='bad-offset'?data.length-1:resumePosition)]),uint(5,scenario==='bad-chunk'?4096:chunkSize)])));
   }
  };
  const endpoint=Object.freeze({kind:'owned-pc-xiaomi-peer',physicalEnabled:false});

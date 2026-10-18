@@ -3,7 +3,7 @@ import fs from 'node:fs';import path from 'node:path';
 import {createHash,createHmac,randomUUID,timingSafeEqual} from 'node:crypto';
 import {firstCRoot as root} from './first-c-source.mjs';import {packageCopy} from './doom-large-upload.mjs';
 import {uploadLimits} from './doom-retail-limits-r374.mjs';
-import {reviewedPackedInterruption} from './doom-packed-restart-r379.mjs';
+import {reviewedPackedInterruption,reviewedPackedResumeHistory} from './doom-packed-restart-r379.mjs';
 const identities=new WeakMap(),owned=new WeakSet(),fail=()=>{throw Error('DoomJournalRefused');};
 const clone=x=>JSON.parse(JSON.stringify(x)),hash=b=>createHash('sha256').update(b).digest('hex');
 const mac=(key,value)=>createHmac('sha256',key).update(value).digest();
@@ -34,10 +34,11 @@ function upload(value,plan){
 const transitions={Created:['InstallIntent'],InstallIntent:['UploadIntent'],UploadIntent:['Uploading'],Uploading:['SentNotVerified'],SentNotVerified:['SentNotVerified','RegisteredInactive','UnexpectedActivation','UnexpectedSelection','RegisteredNotRemovable']};
 export class DoomDeploymentJournal{
  #fd=null;#lock=null;#token=randomUUID();#key;#tag;#plan;#record;#lastHash='0'.repeat(64);#file;#lockFile;#resume=null;
- constructor(plan,identity,{directory:where=defaultDirectory,resume=false,retryWithoutData=false,afterSpace=false,afterCatalog=false,restartPacked=false}={}){
+ constructor(plan,identity,{directory:where=defaultDirectory,resume=false,retryWithoutData=false,afterSpace=false,afterCatalog=false,restartPacked=false,resumePacked=false}={}){
   packageCopy(plan);const binding=identities.get(identity);if(!binding||typeof resume!=='boolean'||typeof retryWithoutData!=='boolean'||resume&&retryWithoutData)fail();
   if(plan.kind==='review-packed-r378-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog))fail();
   if(typeof restartPacked!=='boolean'||restartPacked&&(plan.kind!=='review-packed-r378-manual'||resume||retryWithoutData||afterSpace||afterCatalog))fail();
+  if(typeof resumePacked!=='boolean'||resumePacked&&(plan.kind!=='review-packed-r378-manual'||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked))fail();
   if(typeof afterSpace!=='boolean'||afterSpace&&(plan.kind!=='review-ultimate-r374-manual'||resume||retryWithoutData))fail();
   if(typeof afterCatalog!=='boolean'||afterCatalog&&(plan.kind!=='review-ultimate-r374-manual'||resume||retryWithoutData||afterSpace))fail();
   const dir=directory(where);this.#file=path.join(dir,plan.kind==='review-ready-r351-manual'?'ready-r351.jsonl':plan.kind==='review-pads-r349-manual'?'pads-r349.jsonl':plan.kind==='review-wide-r347-manual'?'wide-r347.jsonl':plan.kind==='review-touch-r345-manual'?'touch-r345.jsonl':plan.kind==='review-direct-r343-manual'?'direct-r343.jsonl':plan.kind==='review-demand-r337-manual'?'demand-r337.jsonl':plan.kind==='review-bench-r335-manual'?'bench-r335.jsonl':plan.kind==='review-palette-r333-manual'?'palette-r333.jsonl':plan.kind==='review-fast-r331-manual'?'fast-r331.jsonl':plan.kind==='review-hold-r329-manual'?'hold-r329.jsonl':plan.kind==='review-lease-r327-manual'?'lease-r327.jsonl':plan.kind==='review-refs-r325-manual'?'refs-r325.jsonl':plan.kind==='review-fault-r321-manual'?'fault-r321.jsonl':plan.kind==='review-readers-r318-manual'?'readers-r318.jsonl':plan.kind==='review-ram-png-manual'?'ram-png-r304.jsonl':'transfer.jsonl');this.#lockFile=path.join(dir,'watch.lock');
@@ -51,7 +52,7 @@ export class DoomDeploymentJournal{
   try{
    this.#lock=fs.openSync(this.#lockFile,'wx',0o600);
    fs.writeFileSync(this.#lock,JSON.stringify({token:this.#token,pid:process.pid})+'\n');fs.fsyncSync(this.#lock);
-   const exists=fs.existsSync(this.#file);if(exists&&!resume&&!retryWithoutData&&!afterSpace&&!afterCatalog&&!restartPacked||!exists&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked))fail();
+   const exists=fs.existsSync(this.#file);if(exists&&!resume&&!retryWithoutData&&!afterSpace&&!afterCatalog&&!restartPacked&&!resumePacked||!exists&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
    if(exists){
     regular(this.#file,2097152);const data=fs.readFileSync(this.#file,'utf8');if(!data.endsWith('\n'))fail();
     let previous=null;const history=[];
@@ -65,7 +66,10 @@ export class DoomDeploymentJournal{
     }
     if(!previous||previous.status!=='Uncertain')fail();
     let retryBaseline=null;
-    if(restartPacked){
+    if(resumePacked){
+     if(!reviewedPackedResumeHistory(history))fail();
+     retryBaseline=history[111].before;
+    }else if(restartPacked){
      if(!reviewedPackedInterruption(history))fail();
      retryBaseline=previous.before;
     }else if(afterCatalog){
@@ -89,9 +93,9 @@ export class DoomDeploymentJournal{
      retryBaseline=previous.before??[...first].reverse().find(r=>r.before!==null)?.before;
      if(!soundLocalOnly&&(retryBaseline===null||retryBaseline===undefined))fail();
     }else if(previous.before===null||previous.upload?.status!=='Uncertain'||previous.upload.highestPossibleOffset<=previous.upload.offset)fail();
-    this.#resume=clone({...previous,...(retryBaseline?{before:retryBaseline}:{}),...(restartPacked?{upload:null}:{})});this.#record=previous;
+    this.#resume=clone({...previous,...(retryBaseline?{before:retryBaseline}:{}),...(restartPacked?{upload:null}:resumePacked?{upload:history[111].upload}:{})});this.#record=previous;
     this.#fd=fs.openSync(this.#file,'a');
-    this.#append({...previous,attempt:previous.attempt+1,status:'Created',upload:null,before:null,attemptKind:restartPacked?'restart-packed-r379':afterCatalog?'retry-catalog-r376':afterSpace?'retry-after-space-r375':retryWithoutData?'retry-no-data':'resume'});
+    this.#append({...previous,attempt:previous.attempt+1,status:'Created',upload:null,before:null,attemptKind:resumePacked?'resume-packed-r380':restartPacked?'restart-packed-r379':afterCatalog?'retry-catalog-r376':afterSpace?'retry-after-space-r375':retryWithoutData?'retry-no-data':'resume'});
    }else{
     this.#fd=fs.openSync(this.#file,'wx',0o600);
     this.#append({schema:2,targetTag:this.#tag,model:'M2315W1',firmware:'2.2.86',id:plan.id,sha256:plan.sha256,size:plan.size,seq:0,attempt:1,status:'Created',before:null,upload:null,previous:this.#lastHash});

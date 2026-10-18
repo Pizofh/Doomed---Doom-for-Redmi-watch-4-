@@ -1,4 +1,27 @@
-# R379 preparado: pendiente de nueva aprobación
+# R380 preparado: pendiente de aprobación de UNA reanudación
+
+R379 autorizado/consumido el 2026-10-18: modelo/FW y catálogo10 iguales,
+INSTALL0, ACK MD5correcto/status0/offset3378710/chunk2048. Guard desde0
+detuvo correctamente antes de MASS:7frames/277BTX,0partes nuevas,
+DoomLargeUploadRefused. NativeErrorfalse, close/workerexit0. Gatesgeneral+
+R379/RetailC# cerrados/rebuild. Journalpacked116filas: intento2restart-packed
+Created→InstallIntent→UploadIntent→Uncertain/uploadnull, prefijo112intacto.
+No registrado ni ensayos. No otra consulta física necesaria por ahora.
+
+R380 usa MISMO paquete/ID/ELF, CLIprepare-resume/install-resume. Exige HMAC/
+cadena del journal116filas exactas, agrega intento3resume-packed-r380,
+recupera descriptorupload de intento1. ACKdebe incluir MD5correcto y offset
+EXACTO3378710; otrooffset (incluido0) o faltaidentidad bloquean antes de MASS.
+Catálogo mismo conjunto/flags y selecciónACTUAL. Quedan2787098B/1364partes,
+wire2813040B. 53casos locales nuevos y R37947/shared23 pasan. Predicado
+estructural acepta historial físico sin tocarlo; HMACsevalida antes de conectar.
+Plan docs/doom-packed-resume-r380.md listo, falta aprobación UNA reanudación
+y DOSarranques≤90s, batería≥50%, observar3–6min, reloj alPC/MiFitness cerrado.
+Gate PHYSICAL_PACKED_RESUME_R380_REVIEWED=false. Tras aprobar abrir SOLO
+general+R380 JS/RetailC#, build/emptytargetready, install-resumeUNAvez;
+cerrar/rebuild antecualquierresultado ANTESde jugar. No retry4/SET/borrados.
+
+## R379 preparación anterior
 
 Usuario confirma cambio de distancia/conexión durante R378; ya vuelve a dejar
 reloj al lado del PC. No prueba causa exacta. Mismo paquete R378 sin cambios.

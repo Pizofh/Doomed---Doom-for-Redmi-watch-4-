@@ -1,6 +1,6 @@
 # R379: un nuevo envío completo del mismo DoomPacked
 
-Preparado; pendiente de aprobación nueva. Usuario confirma cambio de distancia
+Aprobado y consumido el 2026-10-18. Usuario confirma cambio de distancia
 o conexión durante R378 y ahora vuelve a dejar el reloj junto al PC. Es una
 causa posible, no un diagnóstico nativo confirmado: el código original no se
 conservó. No se ha iniciado otro envío ni consulta física durante R379.
@@ -77,3 +77,16 @@ ya se consumió. El envío escribe flash y podría bloquear/corromper el sistema
 o requerir reinicio. Se conserva el riesgo del lector C aún no validado en
 hardware; el límite cooperativo no detiene llamadas nativas bloqueadas.
 Recuperación integral sigue sin validar.
+
+## Resultado R379
+
+Intento2 autorizado: modelo/FW esperados, catálogo10/mismosmiembros y selección,
+INSTALLstatus0. ACK cifrado con MD5correcto/status0, posición3378710B,
+chunk2048por defecto. El guard de comienzo desde0 detuvo antes de MASS:
+DoomLargeUploadRefused,7frames/277B TX,0partes nuevas. Cierre/workerexit0,
+nativeErrorfalse. No juego instalado/registrado; no ensayos manuales.
+General+R379/RetailC# cerrados/rebuild inmediato. Journal116filas, intento2
+Created→InstallIntent→UploadIntent→Uncertain, uploadnull, prefijo112 intacto.
+El reloj conserva datos parciales; no borrarlos ni reiniciar el envío a ciegas.
+Se prepara R380 para UNA reanudación aprobada por separado en la posición
+confirmada, con identidad del archivo y límites del intento1. No reutilizar R379.

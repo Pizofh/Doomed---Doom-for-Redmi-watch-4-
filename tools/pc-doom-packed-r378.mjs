@@ -3,16 +3,16 @@
 import fs from 'node:fs';import path from 'node:path';import {createHash} from 'node:crypto';
 import {root,sha256,packedLauncher} from './doom-packed-r378.mjs';
 import {prepareDoomPacked,uploadLayout} from './doom-large-upload.mjs';
-import {physicalDoomPackedEnabled,physicalDoomPackedRestartEnabled,createReviewedDoomEndpoint} from './doom-deployment-physical.mjs';
+import {physicalDoomPackedEnabled,physicalDoomPackedRestartEnabled,physicalDoomPackedResumeEnabled,createReviewedDoomEndpoint} from './doom-deployment-physical.mjs';
 import {runReviewedDoomDeployment} from './doom-upload-pc-session.mjs';import {reviewedLargeExecutable} from './doom-upload-pc-pipe.mjs';
 import {assertRetailNativeDispatchReady} from './large-native-dispatch.mjs';
 import {validateTarget} from './pc-rfcomm-supervisor.mjs';import {validateAuth} from './pc-rfcomm-session.mjs';
 const base={checkpoint:'R378',id:'365220002',physicalEnabled:false,bluetoothOperationRequested:false,filesTransferred:false};
 function read(file,max){const s=fs.lstatSync(file);if(!s.isFile()||s.isSymbolicLink()||s.size>max)throw Error();return fs.readFileSync(file);}
 try{
- const action=process.argv[2]??'plan';if(process.argv.length>3||!['plan','prepare','install','prepare-restart','install-restart'].includes(action))throw Error();
- const restartPacked=action.endsWith('-restart');if(restartPacked)base.checkpoint='R379';
- if(action.startsWith('install')&&!(restartPacked?physicalDoomPackedRestartEnabled():physicalDoomPackedEnabled())){console.log(JSON.stringify({...base,status:'PhysicalGateClosed'}));process.exitCode=2;}
+ const action=process.argv[2]??'plan';if(process.argv.length>3||!['plan','prepare','install','prepare-restart','install-restart','prepare-resume','install-resume'].includes(action))throw Error();
+ const restartPacked=action.endsWith('-restart'),resumePacked=action.endsWith('-resume');if(restartPacked)base.checkpoint='R379';if(resumePacked)base.checkpoint='R380';
+ if(action.startsWith('install')&&!(resumePacked?physicalDoomPackedResumeEnabled():restartPacked?physicalDoomPackedRestartEnabled():physicalDoomPackedEnabled())){console.log(JSON.stringify({...base,status:'PhysicalGateClosed'}));process.exitCode=2;}
  else if(action==='plan')console.log(JSON.stringify({...base,status:'OfflineReviewOnly',bytes:6165808,manualStartOnly:true,compressedWad:true}));
  else{
   const dir=path.join(root,'build/doom-audio-r378/package'),b=read(path.join(dir,'DoomPacked-id-only.face'),6165808),plan=prepareDoomPacked(b);
@@ -21,12 +21,13 @@ try{
   if(review.sha256!==plan.sha256||review.sourceSha256!==p.sourceSha256||review.elfSha256!==sha256(elf)||!b.includes(Buffer.from(p.source))||!b.includes(elf)||!review.manualStartOnly||review.wadIncluded!==true)throw Error();
   reviewedLargeExecutable();
   if(action.startsWith('prepare')){
-   const l=uploadLayout(plan,{status:0,md5:createHash('md5').update(b).digest(),chunkSize:2048,resumePosition:0});
-   console.log(JSON.stringify({...base,status:'OfflinePrepared',bytes:plan.size,sha256:plan.sha256,parts:l.total,wireBytes:l.wireBytes,originalWadBytes:12408292,compressedWadBytes:5482926,journalCreated:false,restartPacked,requiredOffset:0}));
+   const offset=resumePacked?3378710:0,previous=resumePacked?{schema:1,id:plan.id,sha256:plan.sha256,size:plan.size,status:'Uncertain',offset:0,highestPossibleOffset:3466602}:null;
+   const l=uploadLayout(plan,{status:0,md5:createHash('md5').update(b).digest(),chunkSize:2048,resumePosition:offset},previous);
+   console.log(JSON.stringify({...base,status:'OfflinePrepared',bytes:plan.size,sha256:plan.sha256,parts:l.total,wireBytes:l.wireBytes,originalWadBytes:12408292,compressedWadBytes:5482926,journalCreated:false,restartPacked,resumePacked,requiredOffset:offset}));
   }else{
    assertRetailNativeDispatchReady();
    const priv=path.join(root,'tools/local/pc-rfcomm'),address=validateTarget(JSON.parse(read(path.join(priv,'target.json'),4096))),key=validateAuth(JSON.parse(read(path.join(priv,'auth.json'),4096)));
-   try{const r=await runReviewedDoomDeployment(createReviewedDoomEndpoint(address,{retail:true,packed:true,restartPacked}),plan,key,{restartPacked});console.log(JSON.stringify({...r,checkpoint:base.checkpoint}));process.exitCode=r.status==='RegisteredInactive'&&r.closeConfirmed&&r.workerExitConfirmed?0:1;}finally{key.fill(0);}
+   try{const r=await runReviewedDoomDeployment(createReviewedDoomEndpoint(address,{retail:true,packed:true,restartPacked,resumePacked}),plan,key,{restartPacked,resumePacked});console.log(JSON.stringify({...r,checkpoint:base.checkpoint}));process.exitCode=r.status==='RegisteredInactive'&&r.closeConfirmed&&r.workerExitConfirmed?0:1;}finally{key.fill(0);}
   }
  }
 }catch(error){console.error(error.message==='NativeProfileNotReady'?'Native retail profile closed; stopped before private reads, journal or radio.':'DoomPacked refused; no retry, resume or raw private output.');process.exitCode=1;}
