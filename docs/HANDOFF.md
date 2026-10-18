@@ -1,4 +1,20 @@
-# R382 DoomLean listo; pendiente de nueva aprobación
+# R382 DoomLean instalado inactivo; UN ensayo aprobado pendiente
+
+Usuario aprobó instalación y ensayo el 2026-10-18. Una instalación completa:
+modelo/FW correctos, catálogo12/ownIDausente, INSTALL0/ACKMD5/status0/offset0/
+chunk2048.21partes/29frames/43033BTX. RegisteredInactive, selección/esferas
+preservadas, contentVerifiedfalse. Cierre/workerexit0/nativeErrorfalse.
+Gatesgeneral/LeanJS/C#Large cerrados/rebuild inmediato, otros cerrados.
+No borrados/SET/reinicio ni ELF/WAD reenviados. No más radio necesario.
+
+Pendiente UN ensayo ya autorizado: DoomLean marcoAZUL/SEISBARRAS, siREADY
+START1/CHECKINGdespierto. ERROR→GATE/FREE/MAX+MODE→CODE/READ/TOTAL, no
+repetir/reabrir. Si inicia NEWGAME→I, controles/primer sonido/pausa y
+SALIR≤60s→CLOSED; reportarfluidez. Sin segundo arranque. No pedir otra
+aprobación para este ensayo ni volver a preguntar menús si no reporta fallo.
+No asumir que los30widgets diferidos liberan suficiente RAM hasta medir.
+
+## R382 preparación anterior
 
 R381 físico GATE21/CODE201, FREE7361008/MAX4776864, READ/TOTAL629904.
 Faltan5203B frente min7366211; bloquecontiguo sí supera4194320. ELFCRCpass,

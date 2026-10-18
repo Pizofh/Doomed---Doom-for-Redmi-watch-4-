@@ -1,6 +1,6 @@
 # R382: liberar la interfaz de diagnóstico antes de CHECKING
 
-Preparado; falta aprobación física nueva. R381 confirma GATE21/CODE201:
+Aprobado e instalado inactivo el 2026-10-18; ensayo manual pendiente. R381 confirma GATE21/CODE201:
 UMEMfree7361008 < mínimo7366211, diferencia5203B. MAX4776864 supera4194320.
 READ/TOTAL629904 indican checksum ELF correcto. Este camino rechaza antes
 de cargar C. Usuario regresó y menús normales. No repetir R381 ni bajar guard.
@@ -69,3 +69,13 @@ inicial del usuario. No añade C, pero cambia vida de objetos LVGL y podría
 cargar el mismo motor completo aún no validado físicamente. Riesgo de
 bloqueo/corrupción/reinicio; salida cooperativa no corta llamadas bloqueadas.
 Recuperación integral sigue sin validar.
+
+## Instalación R382
+
+Una instalación autorizada: modelo/FW esperados, catálogo12/IDnuevo ausente,
+INSTALL0, ACKMD5/status0/offset0/chunk2048.21partes/29frames/43033B TX.
+RegisteredInactive/registeredVerifiedtrue, contentVerifiedfalse y
+selectedByClientfalse. Selección/esferas preservadas; cierre/workerexit0 y
+nativeErrorfalse. Gatesgeneral/LeanJS/LargeC# cerrados y worker reconstruido
+inmediatamente; Retail/Boot y demás siguieron cerrados. No borrados/SET/
+reinicio ni reenvío de C/WAD. UN ensayo manual ya aprobado pendiente.
