@@ -96,3 +96,13 @@ workerexit0 confirmados/nativeErrorfalse. Gatesgeneral/BootJS/LargeC#
 cerrados y worker reconstruido inmediatamente; Retail permaneció cerrado.
 No borrados/SET/reinicio ni reenvío WAD/ELF. UN ensayo manual ya aprobado
 pendiente; no repetir instalación.
+
+### Ensayo físico R381
+
+Usuario: GATE21, FREE7361008, MAX4776864, CODE201, READ629904/TOTAL629904;
+resto de contadores nativos0. Regresó y menús normales. El checksum ELF
+terminó correctamente; el guard de UMEM rechazó por5203B de free, antes de
+native.start()/insmod. Max supera el mínimo4194320 por582544B: no es este
+rechazo por bloque contiguo. No repetir START ni bajar umbrales.
+R382 difiere solo en el momento de crear los30widgets del panel de diagnóstico,
+que antes ocupaban RAM aun ocultos. No cambia C/caché/CRC/guard.

@@ -1,4 +1,32 @@
-# R381 DoomBoot instalado inactivo; UN ensayo manual aprobado pendiente
+# R382 DoomLean listo; pendiente de nueva aprobación
+
+R381 físico GATE21/CODE201, FREE7361008/MAX4776864, READ/TOTAL629904.
+Faltan5203B frente min7366211; bloquecontiguo sí supera4194320. ELFCRCpass,
+rechazo antes de insmod. Usuario volvió/menús normales. No repetir ni bajar
+guard. ContadoresC0 son esperables en este camino y ya hay causa confirmada.
+
+R382 aplaza30widgets de diagnóstico, crea solo6enREADY; ERROR/CLOSED los
+recrea y cadaCHECKING elimina otra vez panel+MODE antes de CRC/GC/RAM.
+MISMO C/ELF/WAD/caché2páginas/render/audio/slots y guard7366211/4194320.
+No modificación del lector. Bytes ahorrados en RW4 NO medidos; verificar
+FREEsi aún rechaza.16casos Lua+UI pasan, confirma6widgets/elim30/recreación
+y dosciclos. Package7recursos/6tamper/21partesIPC/retry6/dependencias pasa.
+RegresiónR381 y shared23 pasan; no repetir campañaC sin cambios.
+
+DoomLeanID365220004, MARCOAZUL/SEISBARRAS, paquete42312B SHA
+49e2e10535cbca4466248b10bf77d96c64a679774cb2b21486489ea083bb7901,
+Lua29266B SHA8400604e8ecdc05bb94f7011f7556514499d037422419d4f25d79428ddecae72.
+build/doom-lean-r382/package; reusa365220002(CONSERVAR DoomPacked), sinELF/WAD.
+CLIpc-doom-boot-r381.mjs prepare|install --lean-r382; gateLEANR382false,
+todo cerrado. Plan docs/doom-lean-physical-plan-r382.md listo: pedirUNA
+instalación42KB y UNensayo≤60s/batería≥50%/observar, sinreinicio/borrado/SET.
+Tras aprobación abrir SOLO general+LeanJS/C#Large, build/emptytargetready,
+installUNAvez, cerrar/rebuild siempre antes de jugar. Journallean-r382 separado,
+sin retries/resume. ManualREADY→START1; ERROR→GATE/FREE/MAX+MODE→CODE/READ/
+TOTAL, no insistir. Si inicia controles/sonido/pausa ySALIR≤60s→CLOSED.
+No segundo arranque autorizado. No radio adicional en esta preparación.
+
+## R381 instalación y preparación anteriores
 
 Usuario aprobó instalación y ensayo el 2026-10-18. Envío único completo:
 modelo/FW correctos, catálogo11/IDnuevoausente, INSTALL0, ACKMD5/status0/
