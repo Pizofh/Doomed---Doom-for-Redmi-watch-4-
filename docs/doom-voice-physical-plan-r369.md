@@ -126,3 +126,16 @@ No selección automática ni ejecución de C. contentVerified=false: no se leyó
 de vuelta el contenido; el START manual verifica ELF/WAD. Gates main/Voice y
 Large C# restaurados a false y transporte cerrado recompilado. Pendiente el
 resultado físico manual; no repetir envío ni pedir la misma aprobación.
+
+## Resultado físico recibido
+
+El usuario oyó disparos, respiraciones y la muerte del monstruo después de abrir
+la primera puerta. Reportó CLOSED, PCM SFX=646, AUDIO ERR=0, dos pruebas sin
+problema y regreso normal a su esfera. No reportó otra imagen retenida.
+Esto confirma efectos audibles y cierres correctos en los ensayos descritos;
+no constituye todavía una sesión larga o campaña completa con audio.
+
+Antes de la primera puerta no oyó sonido. No hay medición de tiempo ni orden
+de efectos suficiente para atribuirlo a buffering, inicio del servicio o eventos
+del juego. Se conserva como observación pendiente, sin solicitar otro ensayo
+ni afirmar que ese comportamiento sea normal. No hay nuevo envío autorizado.

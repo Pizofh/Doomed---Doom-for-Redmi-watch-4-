@@ -1,4 +1,19 @@
-# R369 instalado inactivo; esperar ensayo manual ya autorizado
+# R369: efectos de sonido confirmados físicamente; dos pruebas correctas
+
+Usuario confirmó en DoomVoice disparos, respiraciones y muerte del monstruo,
+CLOSED, PCM SFX=646 y AUDIO ERR=0. Probó dos veces sin problema y pudo volver
+normalmente. No reportó nueva imagen retenida. Sonido físico logrado para estos
+ensayos; no ampliar esta evidencia a sesión larga/campaña completa con audio.
+
+Observación pendiente: no oyó audio antes de abrir la primera puerta. Después
+sí hubo efectos. No hay tiempos ni secuencia suficiente para distinguir demora,
+buffering o cuándo se solicitaron los efectos: no declararlo normal ni resuelto.
+No pedir otra prueba ahora. Próximo trabajo local: revisar arranque/latencia del
+audio conservando el render y cierre aceptados; cualquier payload nuevo requiere
+su aprobación concreta. Gates main/Voice/Large cerrados. No reenviar ni reabrir
+R365/R367. No tests repetidos, push, CI ni auditorías generales.
+
+# R369 instalación autorizada ejecutada; historial
 
 Usuario autorizó UNA instalación y DOS arranques condicionados<=30s, puede
 observar/batería>=50%. Envío terminado RegisteredInactive, registeredVerifiedtrue,

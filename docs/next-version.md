@@ -1,4 +1,10 @@
-# 0.2: preparación y efectos de sonido
+# 0.2: efectos de sonido confirmados en el reloj
+
+**Resultado físico R369:** el usuario oyó disparos, respiraciones y muerte del
+monstruo; reportó dos pruebas sin problema, CLOSED, PCM SFX=646 y AUDIO ERR=0,
+y regreso normal a su esfera. No reportó imagen retenida sobre los menús.
+El audio comenzó después de la primera puerta: falta medir o explicar ese
+inicio tardío. No se ha validado todavía una sesión larga con audio.
 
 **R369:** R367 se instaló y falló: silencio y cierre bloqueado con imagen sobre
 los menús. Reloj recuperado con reinicio y esfera habitual. Se encontró en el
@@ -6,8 +12,8 @@ servidor del firmware exacto que SET_OPTIONS separa pares con `:`, mientras
 enviábamos comas. DoomVoice corrige ese formato y separa retirada de imagen,
 join del juego y join del audio, conservando recursos si el servicio se atasca.
 Pasaron pruebas de llamadas bloqueadas, dos ciclos de Doom y cierre/reentrada
-locales. [Paquete y ensayo propuesto R369](doom-voice-physical-plan-r369.md).
-Instalación cerrada; sonido físico todavía sin validar. No reabrir R365/R367.
+locales. [Paquete y resultado físico R369](doom-voice-physical-plan-r369.md).
+Instalación cerrada; no reabrir las versiones fallidas R365/R367.
 
 **Candidato R365 preparado:** efectos integrados en Doom, cuatro voces y cola
 PCM en memoria; adaptador media/foco con servicio simulado y compilación RW4.
