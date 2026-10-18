@@ -76,6 +76,17 @@ No se presenta el servicio o GPU modelados como nueva validación física.
 
 ## Ensayo autorizado y resultado físico
 
+En una ampliación del mismo resultado, el usuario confirma menú/carga/cambio
+de esfera y funcionamiento general; observa solo un capítulo disponible y
+que el primer efecto no se oye, pero sí los siguientes. Cree que quizá hubo
+lag de audio, sin medida. Esto mantiene abierto el arranque del audio aunque
+la navegación funcione. No se repitió ensayo ni se envió otro payload.
+
+La inspección del directorio del WAD local fijado4196020B enumera E1M1–E1M9,
+sin otros episodios. El M_Episode original rechaza otras elecciones en modo
+shareware. Explica el capítulo disponible; no demuestra por sí solo que la
+posición que recuerda el usuario sea correcta o distinta. No modifica assets.
+
 El usuario respondió: «todo se vio bien. cargó bien, si se vio el menú. cambié
 esfera y toto». Confirma menú visible, carga y cambio de esfera, con resultado
 general positivo y sin fallos reportados. No aportó mediciones de audio,

@@ -1,5 +1,18 @@
 # R370: menú y carga confirmados físicamente
 
+Ampliación del mismo ensayo: usuario confirma «todo todo ok», menú/carga y
+cambio de esfera; solo puede elegir un capítulo. Reporta pérdida del primer
+efecto: el audio se oye después de que ya haya ocurrido un sonido; posible lag
+de audio percibido, sin medida. No declarar audio resuelto ni hacer otro envío.
+Inspección local del directorio del WAD fijado4196020B enumera únicamente
+E1M1..E1M9. M_Episode upstream rechaza episodios>1 cuando gamemode=shareware:
+limitación del contenido instalado, no prueba de que empiece en otro mapa.
+La posición percibida por el usuario sigue sin comparación visual exacta.
+Audio: sink abre/prepara/start en hilo propio sin confirmación de reproducción;
+SPSC4bloques descarta/avanza mezcla si se llena. Estos son posibles puntos para
+investigar al arranque, no causa física demostrada. No añadir replay/autofire ni
+presentar silencio de calentamiento como corrección sin medir su efecto real.
+
 Respuesta del usuario al ensayo: «todo se vio bien. cargó bien, si se vio el
 menú. cambié esfera y toto». Resultado general positivo; confirma menú visible,
 carga y cambio de esfera sin problema reportado. No solicitar cifras ni otra
