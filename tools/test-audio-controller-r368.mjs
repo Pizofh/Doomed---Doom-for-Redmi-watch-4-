@@ -4,9 +4,10 @@ import fs from 'node:fs';import path from 'node:path';import assert from 'node:a
 import {root,readyLauncher} from './doom-ready-r351.mjs';
 import {recoveryController} from './doom-audio-recovery-r368.mjs';
 import {session} from './doom-ui-emulator.mjs';
-assert.equal(process.argv.length,2);
+import {menuController} from './doom-menu-r370.mjs';
+const menu=process.argv[2]==='--menu-r370';assert(process.argv.length===2||(process.argv.length===3&&menu));
 const prior=readyLauncher(fs.readFileSync(path.join(root,'build/doom-ready-r351/rw4/doom.elf')),fs.readFileSync(path.join(root,'tools/local/doom-shareware/doom1.wad')));
-const controller=recoveryController(prior.parts.controller);
+const controller=menu?menuController(recoveryController(prior.parts.controller)):recoveryController(prior.parts.controller);
 const old=fs.readFileSync(path.join(root,'experiments/doom-runtime-rw4/launcher-tests-r282.lua'),'utf8');
 let fixture=old.slice(0,old.indexOf('local function test(fn)'));
 fixture=fixture.replaceAll('/dev/rw4doomctl','/dev/rw4doomready').replaceAll('0x32574452','0x36445752')
@@ -17,6 +18,7 @@ fixture=fixture.replace("elseif op==5 then\n                    assert(not t.ima
  "elseif op==10 then t.state[45]=0;t.state[46]=0\n                elseif op==5 then\n                    assert(t.state[45]==0 and t.state[46]==0 and t.state[47]==1,'detach/quiet before full join');");
 fixture=fixture.replace("elseif op==7 then assert(not t.image,'detach before image release')",
  "elseif op==7 then assert(t.state[45]==1);t.state[23]=(t.state[23]or 0)+1");
+if(menu)fixture=fixture.replaceAll("string.rep('\\0',256)","string.rep('\\0',288)").replaceAll('for i=1,64','for i=1,72').replace('t.state[2]=7','t.state[2]=8');
 const tests=`
 local function test(fn)fn();cases=cases+1 end
 local function playing(t)t.backend.start();t.backend.tick();t.backend.tick();assert(t.backend.phase()=='PLAYING')end

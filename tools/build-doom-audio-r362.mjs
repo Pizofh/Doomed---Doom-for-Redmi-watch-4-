@@ -5,13 +5,15 @@ import {spawnSync} from 'node:child_process';import {createHash} from 'node:cryp
 import {fileURLToPath} from 'node:url';
 import {audioBindings} from './audio-bindings-r363.mjs';
 import {recoveryTransport} from './doom-audio-recovery-r368.mjs';
+import {menuAdapter,menuTransport,menuEngineSource} from './doom-menu-source-r370.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url)),mode=process.argv[2];
-const corrected=process.argv[3]==='--recovery-r369';
+const menu=process.argv[3]==='--menu-r370';
+const corrected=menu||process.argv[3]==='--recovery-r369';
 const recovery=process.argv[3]==='--recovery-r368'||corrected;
 assert((process.argv.length===3||(process.argv.length===4&&recovery))&&['rw4','s3-model','s3-hold'].includes(mode),'Fixed targets');
 assert(mode!=='s3-hold'||recovery);
 const baselineMode=mode==='s3-hold'?'s3-model':mode;
-const checkpoint=corrected?'R369':recovery?'R368':'R367';
+const checkpoint=menu?'R370':corrected?'R369':recovery?'R368':'R367';
 const out=path.join(root,'build/doom-audio-'+checkpoint.toLowerCase(),mode),old=path.join(root,'build/doom-ready-r351',baselineMode);
 assert(!fs.existsSync(path.join(out,'review.json')),'Reviewed output exists');fs.mkdirSync(out,{recursive:true});
 const hash=b=>createHash('sha256').update(b).digest('hex');
@@ -28,7 +30,7 @@ const ld=path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-ld.exe');
 function flags(label){const a=recipe.find(x=>x.label===label).args;return a.slice(0,a.indexOf('-c'));}
 const engineFlags=[...flags('compile-0'),'-Idoom/platform-rw4/audio','-DFEATURE_SOUND'];
 const portFlags=[...flags('compile-1'),'-Idoom/platform-rw4/audio',...(mode==='s3-hold'?['-DRW4_AUDIO_HOLD_TEST']:[])];
-function compile(source,name,engine=false){const obj=path.join(out,name+'.o');run(gcc,[...(engine?engineFlags:portFlags),'-c',source,'-o',obj],name);return obj;}
+function compile(source,name,engine=false){const obj=path.join(out,name+'.o');run(gcc,[...(engine?engineFlags:portFlags),...(name==='m_menu'?['-Wno-error=unused-parameter','-Wno-error=unused-but-set-parameter','-Wno-error=enum-conversion']:[]),'-c',source,'-o',obj],name);return obj;}
 function once(s,a,b){assert.equal(s.split(a).length,2,a);return s.replace(a,()=>b);}
 const input=fs.readFileSync(path.join(root,'third_party/doomgeneric/doomgeneric/i_sound.c'),'utf8');
 let sound=once(input,'#include <SDL_mixer.h>','/* PCM backend needs no SDL. */');
@@ -43,6 +45,7 @@ adapter=once(adapter,'"-mb","4"','"-mb","3"');
 adapter=once(adapter,'#include "platform.h"','#include "platform.h"\n#include "doom-sfx.h"\n#include "sink-worker.h"');
 adapter=once(adapter,'waiting=1;paused_at=raw_ticks();','doomed_sfx_pause(1);rw4_audio_sink_pause(1);waiting=1;paused_at=raw_ticks();');
 adapter=once(adapter,'paused_ms+=raw_ticks()-paused_at;waiting=0;','paused_ms+=raw_ticks()-paused_at;waiting=0;doomed_sfx_pause(0);rw4_audio_sink_pause(0);');
+if(menu)adapter=menuAdapter(adapter);
 fs.writeFileSync(path.join(out,'adapter.c'),adapter);
 let transport=fs.readFileSync(path.join(old,'transport.c'),'utf8');
 transport=once(transport,'#include "platform.h"','#include "platform.h"\n#include "doom-sfx.h"\n#include "sink-worker.h"');
@@ -51,6 +54,7 @@ transport=once(transport,'atomic_store(&accepting,0);atomic_store(&applied,0);at
 transport=once(transport,'snapshot[44]=atomic_load(&tick_cost);',
  'snapshot[60]=rw4_audio_sink_metric(0);snapshot[61]=rw4_audio_sink_metric(1);snapshot[62]=doomed_sfx_cache_bytes();snapshot[63]=rw4_audio_sink_metric(2);\n        snapshot[44]=atomic_load(&tick_cost);');
 if(recovery)transport=recoveryTransport(transport);
+if(menu)transport=menuTransport(transport);
 if(mode==='s3-hold'){
  transport=once(transport,'op>10','op>11');
  transport=once(transport,'if(op==10){','if(op==11){extern void rw4_audio_model_release(void);rw4_audio_model_release();}else if(op==10){');
@@ -59,9 +63,15 @@ fs.writeFileSync(path.join(out,'transport.c'),transport);
 const replacements=new Map([[path.join(old,'ready-0.o'),compile(path.join(out,'adapter.c'),'adapter',true)],
  [path.join(old,'ready-1.o'),compile(path.join(out,'transport.c'),'transport')]]);
 const extras=['pcm-core','doom-sfx','doom-module','sink-worker','media-sink'].map(n=>compile('doom/platform-rw4/audio/'+n+'.c',n,n==='doom-module'));
+let menuObject;
+if(menu){
+ const input=fs.readFileSync(path.join(root,'third_party/doomgeneric/doomgeneric/m_menu.c'),'utf8');
+ fs.writeFileSync(path.join(out,'m_menu.c'),menuEngineSource(input));menuObject=compile(path.join(out,'m_menu.c'),'m_menu',true);
+}
 if(recovery)extras.push(compile('doom/platform-rw4/device/direct-detach-r368.c','direct-detach'));
 if(mode!=='rw4'){
  replacements.set(path.join(root,'build/doom-ram-s3/i_sound.o'),soundObject);
+ if(menu)replacements.set(path.join(root,'build/doom-ram-s3/m_menu.o'),menuObject);
  extras.push(compile('doom/platform-rw4/audio/media-model.c','media-model'));
 }else{
  const generated=audioBindings(root);fs.writeFileSync(path.join(out,'audio-bindings.c'),generated.source);
@@ -69,7 +79,7 @@ if(mode!=='rw4'){
  extras.push(compile(path.join(out,'audio-bindings.c'),'audio-bindings'));
  const names=fs.readFileSync(path.join(root,'third_party/doomgeneric/doomgeneric/Makefile'),'utf8').match(/^SRC_DOOM = (.+)$/m)[1].trim().split(/\s+/).filter(n=>n!=='doomgeneric_xlib.o');
  assert.equal(names.length,80);
- const objects=names.map(n=>n==='i_sound.o'?soundObject:path.join(root,'build/doom-rw4-engine',n));
+ const objects=names.map(n=>n==='i_sound.o'?soundObject:n==='m_menu.o'&&menu?menuObject:path.join(root,'build/doom-rw4-engine',n));
  const engine=path.join(out,'engine-libc.o'),libraries=JSON.parse(fs.readFileSync(path.join(root,'build/doom-rw4-libc/review.json'),'utf8')).libraries;
  for(const l of libraries){l.file=run(gcc,['-march=armv8-m.main','-mthumb','-mfloat-abi=soft','-print-file-name='+l.name],l.name).trim();assert.equal(hash(fs.readFileSync(l.file)),l.sha256);}
  run(ld,['-r','-d','-T','doom/platform-rw4/device/module.ld',...objects,
@@ -87,7 +97,8 @@ const sources=['pcm-core.c','doom-sfx.c','doom-module.c','sink-worker.c','media-
 const result={checkpoint,mode,elfBytes:fs.statSync(elf).size,elfSha256:hash(fs.readFileSync(elf)),
  baselineSha256:baseline.elfSha256,audio:mode==='rw4'?'candidate managed media':'modeled managed media service, not playback',realEngine:true,
  sourceHashes:Object.fromEntries(sources.map(p=>[p,hash(fs.readFileSync(path.join(root,'doom/platform-rw4/audio',p)))])),
- generatedHashes:{adapter:hash(adapter),transport:hash(transport)},
+ generatedHashes:{adapter:hash(adapter),transport:hash(transport),...(menu?{menu:hash(fs.readFileSync(path.join(out,'m_menu.c')))}:{})},
+ menuSourceHashes:menu?Object.fromEntries(['tools/doom-menu-source-r370.mjs','doom/platform-rw4/device/menu-input-r370.c','third_party/doomgeneric/doomgeneric/m_menu.c'].map(p=>[p,hash(fs.readFileSync(path.join(root,p)))])):{},
  recoverySourceHashes:recovery?Object.fromEntries(['doom/platform-rw4/device/direct-detach-r368.c','doom/platform-rw4/device/direct-detach-r368.h','tools/doom-audio-recovery-r368.mjs'].map(p=>[p,hash(fs.readFileSync(path.join(root,p)))])):{},zoneMiB:3,
  rw4Executable:mode==='rw4',physicalDeploymentAuthorized:false,physicalTransport:false};
 fs.writeFileSync(path.join(out,'review.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

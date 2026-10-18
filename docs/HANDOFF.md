@@ -1,3 +1,41 @@
+# R370 listo; pendiente aprobación física específica para DoomMenu
+
+Usuario aclara que faltan título/menú y percibe otro nivel/posición con muertos.
+No considerar su percepción resuelta solo por tests S3; R367/R369 verificaban
+spawn original solo en emulador. R370 elimina -warp Y -skill (ambos autostart),
+abre TITLEPIC, flechas/OK/ATRÁS y botón MENU64; mantiene título sin demoattract.
+NEW GAME original/episodio/dificultad. Keyrelease conserva tecla traducida para
+no soltar FIRE tras confirmar Enter. SAVE/LOAD del menú remiten a PAUSA portable;
+CARGAR desde título probado, GUARDAR oculto fuera de nivel. Música no añadida.
+Sound/render/cleanup R369 conservados; no afirmar resuelto inicio tardío audio.
+
+DoomMenu936 rw4menu370 preview4líneasverdes, paquete673488B64recursos,
+build/doom-audio-r370/package/DoomMenu-id-only.face,
+SHAf95a8d3bf5882aa5d7af5dca089a0ecd8841546df876d6f8da36685a8f3bf4a8.
+ELF624260 SHAe7ff2e2871a4ab394886a80a6c399581eaf7c22faddbb1c87e54e3d9178b9719.
+LuaSHAcf2100ceb032feda8f3c1cf1b5c52bc881cbc4bda9450e9f3c0e42f0906c0f5d.
+Controlv8/snapshot72. NuevoCmenu-input-r370 y generadoresdoom-menu*. Builder
+build-doom-audio-r362 {rw4|s3-model} --menu-r370. Tests reales2ciclos+titleload,
+QUIT original, UI exactamock,controller7cases,paquete/tamper/parse/gateoffline.
+Modelográficos/audio; nadafísicoR370. Cuerpo m_menu upstream generado conserva
+licencia; redirige solo Save/Load al mensaje PAUSA, sin DOSfiles/noautocarga.
+
+Pedir aprobación del plan docs/doom-menu-physical-plan-r370.md: UNAinstalación
+inactiva+DOSarranques<=60s>=50bateríaobservando, primero título/newgame/episodio1/
+skill/primer mapa/controles/FX/guardar/salir; segundo solo todoOK, título/PAUSA/
+CARGAR/SEGUIR/SALIR. ConservarVoice937+Ready940+carrier963; bancos936 propios.
+No reinicio/retry/resume/WAD/borrado/autoselección. Si aprobación llega no pedir
+otra. AbrirLargeC#/build/checkInvalidTarget, JSmain+Menu solamente y UNAvez
+pc-doom-voice-r369 install --menu-r370; cerrarJS/C# y rebuildcerrado siempre.
+Journalmenu-r370.jsonl, prepareoffline listo, compiledLarge cerrado. No autorizar
+Voiceporaccidente: nuevoflagCLIeligeperfilpin/gate/IDporseparado. Noauthleída.
+
+TestsS3inicialesfallaron porarnés: dosprocesosLua cambianowner, se hizo snapshot
+y resetguest soloemulador; luego unproceso45s acotado. Restos/modelos retirados.
+La transiciónmelt necesita present Timer antes de medirinput. Resultadofinal
+twoCyclesJoinedAndUnloaded/originalPlayer1SpawnBothCycles/loadDirectlyFromTitle
+true, PCMnozero/error0. No repetir tests aprobados ni CI/auditorías/push.
+
 # R369: efectos de sonido confirmados físicamente; dos pruebas correctas
 
 Usuario confirmó en DoomVoice disparos, respiraciones y muerte del monstruo,

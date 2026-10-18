@@ -19,9 +19,10 @@ export function session(label) {
     hash(fs.readFileSync(path.join(packageRoot,'system-images/vela-release-4.0/nuttx')))!==guestHash)throw Error('Reviewed inputs changed');
   const folder=path.join(projectRoot,'artifacts/emulator/'+label+'-'+Date.now());fs.mkdirSync(folder);
   let serial=0;
-  function adb(args,name) {
+  function adb(args,name,{timeoutMs=15000}={}) {
+    if(!Number.isInteger(timeoutMs)||timeoutMs<1000||timeoutMs>45000)throw Error('Invalid owned guest command deadline');
     const r=spawnSync(exe,['-H','127.0.0.1','-P','5039','-s','emulator-5554',...args],
-      {shell:false,windowsHide:true,encoding:'utf8',timeout:15000,maxBuffer:65536,env:{...process.env,ADB_MDNS_AUTO_CONNECT:'0'}});
+      {shell:false,windowsHide:true,encoding:'utf8',timeout:timeoutMs,maxBuffer:65536,env:{...process.env,ADB_MDNS_AUTO_CONNECT:'0'}});
     fs.writeFileSync(path.join(folder,(++serial)+'-'+name+'.json'),JSON.stringify({args,status:r.status,stdout:r.stdout,stderr:r.stderr,error:r.error?.message??null},null,2)+'\n');
     if(r.error||r.status!==0)throw Error('ADB failed: '+name);return r.stdout+r.stderr;
   }

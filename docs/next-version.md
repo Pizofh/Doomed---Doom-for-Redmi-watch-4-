@@ -1,5 +1,12 @@
 # 0.2: efectos de sonido confirmados en el reloj
 
+**R370 preparado, sin instalar:** título y menú original, controles contextuales
+OK/ATRÁS y MENU, NEW GAME/episodio/dificultad, título sin demo automática y carga
+de checkpoint desde el título. Dos recorridos locales confirman primer mapa y
+spawn original; queda comparar lo que percibe el usuario en el reloj.
+[Paquete y ensayo R370](doom-menu-physical-plan-r370.md). DoomVoice permanece
+como versión con sonido aceptada; esta mejora aún requiere aprobación física.
+
 **Resultado físico R369:** el usuario oyó disparos, respiraciones y muerte del
 monstruo; reportó dos pruebas sin problema, CLOSED, PCM SFX=646 y AUDIO ERR=0,
 y regreso normal a su esfera. No reportó imagen retenida sobre los menús.

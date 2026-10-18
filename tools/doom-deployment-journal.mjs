@@ -38,6 +38,7 @@ export class DoomDeploymentJournal{
   if(plan.kind==='review-sound-r365-manual')this.#file=path.join(dir,'sound-r365.jsonl');
   if(plan.kind==='review-audio-r367-manual')this.#file=path.join(dir,'audio-r367.jsonl');
   if(plan.kind==='review-voice-r369-manual')this.#file=path.join(dir,'voice-r369.jsonl');
+  if(plan.kind==='review-menu-r370-manual')this.#file=path.join(dir,'menu-r370.jsonl');
   this.#key=Buffer.from(binding.key);this.#tag=binding.tag;this.#plan=plan;
   try{
    this.#lock=fs.openSync(this.#lockFile,'wx',0o600);

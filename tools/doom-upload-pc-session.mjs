@@ -14,6 +14,7 @@ import {parseDoomUploadAck} from './doom-upload-ack.mjs';
 import {physicalDoomSoundEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomAudioEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomVoiceEnabled} from './doom-deployment-physical.mjs';
+import {physicalDoomMenuEnabled} from './doom-deployment-physical.mjs';
 import {compareDoomCatalogs,reviewedTwoRemovals} from './doom-deployment-catalog.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
@@ -101,6 +102,8 @@ export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=fal
    if(!physicalDoomBenchEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind==='review-demand-r337-manual'){
    if(!physicalDoomDemandEnabled()||resume||retryWithoutData)refuse();
+  }else if(plan?.kind==='review-menu-r370-manual'){
+   if(!physicalDoomMenuEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind==='review-voice-r369-manual'){
    if(!physicalDoomVoiceEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind==='review-audio-r367-manual'){

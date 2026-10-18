@@ -16,6 +16,7 @@ const PHYSICAL_READY_R351_REVIEWED=false;
 const PHYSICAL_SOUND_R365_REVIEWED=false;
 const PHYSICAL_AUDIO_R367_REVIEWED=false;
 const PHYSICAL_VOICE_R369_REVIEWED=false;
+const PHYSICAL_MENU_R370_REVIEWED=false;
 const PHYSICAL_PADS_R349_REVIEWED=false;
 const PHYSICAL_WIDE_R347_REVIEWED=false;
 const PHYSICAL_TOUCH_R345_REVIEWED=false;
@@ -38,6 +39,7 @@ export function physicalDoomReadyEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&
 export function physicalDoomSoundEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_SOUND_R365_REVIEWED;}
 export function physicalDoomAudioEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_AUDIO_R367_REVIEWED;}
 export function physicalDoomVoiceEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_VOICE_R369_REVIEWED;}
+export function physicalDoomMenuEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_MENU_R370_REVIEWED;}
 export function physicalDoomPadsEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_PADS_R349_REVIEWED;}
 export function physicalDoomWideEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_WIDE_R347_REVIEWED;}
 export function physicalDoomTouchEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_TOUCH_R345_REVIEWED;}

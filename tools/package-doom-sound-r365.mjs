@@ -7,15 +7,18 @@ import {verifyShareware} from './wad-data.mjs';
 import {audioLauncher,audioAssets,audioId} from './doom-audio-r367.mjs';
 import {audioBindings} from './audio-bindings-r363.mjs';
 import {voiceLauncher,voiceAssets,voiceId} from './doom-voice-r369.mjs';
-const voice=process.argv.length===3&&process.argv[2]==='--r369';
+import {menuLauncher,menuAssets,menuId} from './doom-menu-r370.mjs';
+const menu=process.argv.length===3&&process.argv[2]==='--r370';
+const voice=menu||(process.argv.length===3&&process.argv[2]==='--r369');
 const corrected=voice||(process.argv.length===3&&process.argv[2]==='--r367');assert(process.argv.length===2||corrected);
-const version=voice?'r369':corrected?'r367':'r365',product=voice?'DoomVoice':corrected?'DoomAudio':'DoomSound',id=voice?voiceId:corrected?audioId:soundId;
+const version=menu?'r370':voice?'r369':corrected?'r367':'r365',product=menu?'DoomMenu':voice?'DoomVoice':corrected?'DoomAudio':'DoomSound',id=menu?menuId:voice?voiceId:corrected?audioId:soundId;
 const build=path.join(root,'build/doom-audio-'+version+'/rw4'),out=path.join(root,'build/doom-audio-'+version+'/package');
 assert(!fs.existsSync(out));
 const review=JSON.parse(fs.readFileSync(path.join(build,'review.json'),'utf8')),elf=fs.readFileSync(path.join(build,'doom.elf'));
 assert.equal(sha256(elf),review.elfSha256);assert.equal(review.zoneMiB,3);assert(review.rw4Executable&&!review.physicalDeploymentAuthorized);
 for(const [p,h]of Object.entries(review.sourceHashes))assert.equal(sha256(fs.readFileSync(path.join(root,'doom/platform-rw4/audio',p))),h);
 for(const [p,h]of Object.entries(review.recoverySourceHashes??{}))assert.equal(sha256(fs.readFileSync(path.join(root,p))),h);
+for(const [p,h]of Object.entries(review.menuSourceHashes??{}))assert.equal(sha256(fs.readFileSync(path.join(root,p))),h);
 if(corrected)assert.equal(fs.readFileSync(path.join(build,'audio-bindings.c'),'utf8'),audioBindings(root).source);
 const tested=JSON.parse(fs.readFileSync(path.join(root,'build/doom-audio-'+version+'/s3-model/test-result.json'),'utf8'));
 assert(tested.passed&&tested.twoCyclesJoinedAndUnloaded&&tested.cycles.every(c=>c.cachedSampleBytes===532927&&c.nonSilentBlocks>0&&!c.error));
@@ -25,11 +28,16 @@ if(voice){
  assert(JSON.parse(fs.readFileSync(path.join(root,'artifacts/research/audio-server-r368/contract-r369.json'),'utf8')).newOptionsSelectPcm);
  assert(JSON.parse(fs.readFileSync(path.join(root,'artifacts/research/direct-detach-r368/result.json'),'utf8')).passed);
 }
+if(menu){
+ const ui=JSON.parse(fs.readFileSync(path.join(root,'build/doom-audio-r370/ui-result.json'),'utf8'));
+ assert(ui.passed&&tested.originalMenuNewGame&&tested.loadDirectlyFromTitle);
+}
 if(corrected)assert(tested.originalPlayer1SpawnBothCycles);
 const campaign=JSON.parse(fs.readFileSync(path.join(root,'artifacts/research/audio-campaign-r365/result.json'),'utf8'));
 assert(campaign.passed&&campaign.maps.length===9&&campaign.maps.every(m=>m.allocated===m.freed));
 const wad=fs.readFileSync(path.join(root,'tools/local/doom-shareware/doom1.wad'));verifyShareware(wad);
-const p=(voice?voiceLauncher:corrected?audioLauncher:soundLauncher)(elf,wad),assets=(voice?voiceAssets:corrected?audioAssets:soundAssets)();
+const p=(menu?menuLauncher:voice?voiceLauncher:corrected?audioLauncher:soundLauncher)(elf,wad),assets=(menu?menuAssets:voice?voiceAssets:corrected?audioAssets:soundAssets)();
+if(menu)assert.equal(JSON.parse(fs.readFileSync(path.join(root,'build/doom-audio-r370/ui-result.json'),'utf8')).exactProductionMain,p.sourceSha256);
 const records=[['main.lua',Buffer.from(p.source)],['doom.elf',elf],...Object.entries(assets).filter(([n])=>n!=='preview').map(([n,b])=>[n+'.png',b])];
 const compilerDir=path.join(root,'tools/local/easyface-v4.23-review'),compiler=path.join(compilerDir,'Compiler.exe');
 assert(!fs.lstatSync(compilerDir).isSymbolicLink());assert(fs.readdirSync(compilerDir).every(n=>['Compiler.exe','DeviceInfo.db','EasyFace_en.exe'].includes(n)));
@@ -50,7 +58,7 @@ const entries=records.map(([n,b])=>{const name=Buffer.from('lua/'+n),found=[];
   if((word&0xffffff)===b.length&&(word>>>24)===name.length&&bytes.subarray(at+name.length,at+name.length+b.length).equals(b))found.push(at+name.length);}
  assert.equal(found.length,1,n);return {name:n,size:b.length,offset:found[0],sha256:sha256(b)};});
 fs.writeFileSync(path.join(out,product+'-id-only.face'),bytes,{flag:'wx'});
-const result={checkpoint:voice?'R369':corrected?'R367':'R365',id,size:bytes.length,sha256:sha256(bytes),elfSha256:sha256(elf),sourceSha256:p.sourceSha256,entries,config:p.config,
+const result={checkpoint:menu?'R370':voice?'R369':corrected?'R367':'R365',id,size:bytes.length,sha256:sha256(bytes),elfSha256:sha256(elf),sourceSha256:p.sourceSha256,entries,config:p.config,
  manualStartOnly:true,nativeExecutableIncluded:true,wadIncluded:false,physicalTransferEnabled:false,physicalWatchUsed:false};
 fs.writeFileSync(path.join(out,'review.json'),JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify({...result,entries:entries.length}));
