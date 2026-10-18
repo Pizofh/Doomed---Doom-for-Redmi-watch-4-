@@ -74,7 +74,13 @@ sintética, preparación offline y puerta de instalación cerrada. No se repiti�
 la campaña de nueve mapas ni los tests de driver/audio/render sin cambios.
 No se presenta el servicio o GPU modelados como nueva validación física.
 
-## Ensayo autorizado; instalación terminada, ejecución manual pendiente
+## Ensayo autorizado y resultado físico
+
+El usuario respondió: «todo se vio bien. cargó bien, si se vio el menú. cambié
+esfera y toto». Confirma menú visible, carga y cambio de esfera, con resultado
+general positivo y sin fallos reportados. No aportó mediciones de audio,
+posición exacta, duración ni estados de cierre individuales; no se infieren
+esas mediciones ni se exige otra prueba para repetir lo ya aceptado.
 
 El usuario autorizó esta instalación y ambos ensayos condicionados. La única
 instalación terminó RegisteredInactive/registeredVerified=true, installStatus0,

@@ -1,4 +1,13 @@
-# R370 instalado inactivo; pendientes los dos ensayos manuales autorizados
+# R370: menú y carga confirmados físicamente
+
+Respuesta del usuario al ensayo: «todo se vio bien. cargó bien, si se vio el
+menú. cambié esfera y toto». Resultado general positivo; confirma menú visible,
+carga y cambio de esfera sin problema reportado. No solicitar cifras ni otra
+confirmación de menús/corona. No atribuir a esta respuesta mediciones de audio,
+coordenadas del spawn, duración o estados CLOSED de cada ciclo no detallados.
+DoomMenu es la versión actual con menú; conservar DoomLauncher como portador
+del WAD y DoomReady como respaldo estable. Las partidas de otras versiones
+siguen en sus carpetas propias, sin migración. No nuevo envío autorizado.
 
 Usuario autorizó UNA instalación y DOS arranques condicionados<=60s, batería>=50%
 y observando. Envío terminado RegisteredInactive, registeredVerified=true,
@@ -6,9 +15,7 @@ installStatus=0, MD5ecoOK,330partes,resume0,338frames,680080B transmitidos.
 closeConfirmed/workerExitConfirmed=true, exit0. contentVerified=false (sin
 readback). Sin selección ni START automático. Main/Menu JS y Large C# cerrados;
 transporte recompilado con physicalEnabled=false. No reintento ni nuevo envío.
-Dar/esperar prueba DoomMenu cuatro líneas verdes: título/OK/NEW GAME/episodio1/
-dificultad/controles/audio/PAUSA-GUARDAR/SEGUIR/SALIR-CLOSED. Solo si todo bien,
-reabrir título y PAUSA-CARGAR-SEGUIR/SALIR-CLOSED. No repetir aprobación ni tests.
+Ensayo entregado y respuesta recibida arriba. No repetir aprobación ni tests.
 
 Usuario aclara que faltan título/menú y percibe otro nivel/posición con muertos.
 No considerar su percepción resuelta solo por tests S3; R367/R369 verificaban
@@ -27,7 +34,8 @@ LuaSHAcf2100ceb032feda8f3c1cf1b5c52bc881cbc4bda9450e9f3c0e42f0906c0f5d.
 Controlv8/snapshot72. NuevoCmenu-input-r370 y generadoresdoom-menu*. Builder
 build-doom-audio-r362 {rw4|s3-model} --menu-r370. Tests reales2ciclos+titleload,
 QUIT original, UI exactamock,controller7cases,paquete/tamper/parse/gateoffline.
-Modelográficos/audio; ejecución física R370 aún pendiente. Cuerpo m_menu upstream generado conserva
+Gráficos/audio modelados en tests; resultado físico general positivo arriba.
+Cuerpo m_menu upstream generado conserva
 licencia; redirige solo Save/Load al mensaje PAUSA, sin DOSfiles/noautocarga.
 
 Plan aprobado docs/doom-menu-physical-plan-r370.md: UNAinstalación
