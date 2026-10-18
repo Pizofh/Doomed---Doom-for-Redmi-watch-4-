@@ -89,7 +89,7 @@ También pasaron fallos del adaptador, contrato estático del servidor, 61 recur
 cinco alteraciones rechazadas y parse de Lua exacta. Gate de instalación cerrado,
 prepare offline y journal independiente probados con identidad/clave sintéticas.
 
-## Ensayo solicitado, todavía sin autorizar
+## Ensayo autorizado
 
 UNA instalación inactiva y DOS arranques manuales de hasta 30 s con batería ≥50%,
 usuario observando y volumen audible. Conserva DoomReady/DoomLauncher y bancos
@@ -115,3 +115,14 @@ Tras autorización: abrir únicamente perfil C# Large y gates JS main+Voice,
 recompilar y comprobar InvalidTarget sin radio antes de credenciales/journal;
 `node tools/pc-doom-voice-r369.mjs install` UNA vez. Restaurar gates cerrados y
 recompilar el transporte. No activar automáticamente. Journal voice-r369.jsonl.
+
+## Instalación ejecutada
+
+El usuario autorizó una instalación y los dos ensayos condicionados, pudiendo
+observar con batería ≥50%. Se completó UN envío: RegisteredInactive,
+registeredVerified=true, installStatus=0, MD5 eco coincidente, resume=0,
+329 partes, closeConfirmed=true, workerExitConfirmed=true, exit=0.
+No selección automática ni ejecución de C. contentVerified=false: no se leyó
+de vuelta el contenido; el START manual verifica ELF/WAD. Gates main/Voice y
+Large C# restaurados a false y transporte cerrado recompilado. Pendiente el
+resultado físico manual; no repetir envío ni pedir la misma aprobación.

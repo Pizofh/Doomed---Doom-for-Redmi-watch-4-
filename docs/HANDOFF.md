@@ -1,4 +1,20 @@
-# R369 listo; pedir aprobación concreta, sin nueva instalación física
+# R369 instalado inactivo; esperar ensayo manual ya autorizado
+
+Usuario autorizó UNA instalación y DOS arranques condicionados<=30s, puede
+observar/batería>=50%. Envío terminado RegisteredInactive, registeredVerifiedtrue,
+installStatus0, MD5ecoOK,329partes,resume0, closeConfirmed/workerExitConfirmedtrue,
+exit0. No selección/START automático. contentVerifiedfalse (sin readback).
+Main/VoiceJS y LargeC# false restaurados; transporte cerrado recompilado.
+
+Dar/esperar manual DoomVoice (NO DoomAudio/Sound), CINCO barras AMARILLAS.
+READY->START1, CHECKINGdespierto, disparo/puerta, PAUSA2s/SEGUIR, SALIR<=30s.
+Recoger sonido/CLOSED/AUDIOERR/PCM; si falla MODEhasta CALL/AUDIOEND/IMAGEON,
+sin repetirSTART/reabrir. Segundo solo sonido+CLOSED+ERR0: STARTcorto, cambiar
+esfera desdeAjustes, volverDoomVoice comprobar CLOSED sin otra partida.
+Si overlaymenús reaparece, reiniciar y dejarhabitual. No más envío autorizado.
+No pedir menús/corona si no reportaproblema. No push/CI/auditorías extras.
+
+# R369 preparado y aprobado después; historial técnico
 
 R367 físico falló: silencio, AUDIOERR0/PCM0/CACHE532927, error al cambiar esfera
 y al SALIR tras reinicio, imagen persistente sobre menús. Usuario confirmó reloj
