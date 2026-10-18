@@ -35,6 +35,7 @@ export class DoomDeploymentJournal{
  #fd=null;#lock=null;#token=randomUUID();#key;#tag;#plan;#record;#lastHash='0'.repeat(64);#file;#lockFile;#resume=null;
  constructor(plan,identity,{directory:where=defaultDirectory,resume=false,retryWithoutData=false,afterSpace=false,afterCatalog=false}={}){
   packageCopy(plan);const binding=identities.get(identity);if(!binding||typeof resume!=='boolean'||typeof retryWithoutData!=='boolean'||resume&&retryWithoutData)fail();
+  if(plan.kind==='review-packed-r378-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog))fail();
   if(typeof afterSpace!=='boolean'||afterSpace&&(plan.kind!=='review-ultimate-r374-manual'||resume||retryWithoutData))fail();
   if(typeof afterCatalog!=='boolean'||afterCatalog&&(plan.kind!=='review-ultimate-r374-manual'||resume||retryWithoutData||afterSpace))fail();
   const dir=directory(where);this.#file=path.join(dir,plan.kind==='review-ready-r351-manual'?'ready-r351.jsonl':plan.kind==='review-pads-r349-manual'?'pads-r349.jsonl':plan.kind==='review-wide-r347-manual'?'wide-r347.jsonl':plan.kind==='review-touch-r345-manual'?'touch-r345.jsonl':plan.kind==='review-direct-r343-manual'?'direct-r343.jsonl':plan.kind==='review-demand-r337-manual'?'demand-r337.jsonl':plan.kind==='review-bench-r335-manual'?'bench-r335.jsonl':plan.kind==='review-palette-r333-manual'?'palette-r333.jsonl':plan.kind==='review-fast-r331-manual'?'fast-r331.jsonl':plan.kind==='review-hold-r329-manual'?'hold-r329.jsonl':plan.kind==='review-lease-r327-manual'?'lease-r327.jsonl':plan.kind==='review-refs-r325-manual'?'refs-r325.jsonl':plan.kind==='review-fault-r321-manual'?'fault-r321.jsonl':plan.kind==='review-readers-r318-manual'?'readers-r318.jsonl':plan.kind==='review-ram-png-manual'?'ram-png-r304.jsonl':'transfer.jsonl');this.#lockFile=path.join(dir,'watch.lock');
@@ -43,6 +44,7 @@ export class DoomDeploymentJournal{
   if(plan.kind==='review-voice-r369-manual')this.#file=path.join(dir,'voice-r369.jsonl');
   if(plan.kind==='review-menu-r370-manual')this.#file=path.join(dir,'menu-r370.jsonl');
   if(plan.kind==='review-ultimate-r374-manual')this.#file=path.join(dir,'ultimate-r374.jsonl');
+  if(plan.kind==='review-packed-r378-manual')this.#file=path.join(dir,'packed-r378.jsonl');
   this.#key=Buffer.from(binding.key);this.#tag=binding.tag;this.#plan=plan;
   try{
    this.#lock=fs.openSync(this.#lockFile,'wx',0o600);

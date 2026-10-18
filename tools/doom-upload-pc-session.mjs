@@ -15,7 +15,7 @@ import {physicalDoomSoundEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomAudioEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomVoiceEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomMenuEnabled} from './doom-deployment-physical.mjs';
-import {physicalDoomUltimateEnabled,physicalDoomUltimateAfterSpaceEnabled,physicalDoomUltimateAfterCatalogEnabled} from './doom-deployment-physical.mjs';
+import {physicalDoomUltimateEnabled,physicalDoomUltimateAfterSpaceEnabled,physicalDoomUltimateAfterCatalogEnabled,physicalDoomPackedEnabled} from './doom-deployment-physical.mjs';
 import {uploadLimits} from './doom-retail-limits-r374.mjs';
 import {compareDoomCatalogs,reviewedTwoRemovals,reviewedUltimateSpaceRemovals,reviewedUltimateCatalogRetry} from './doom-deployment-catalog.mjs';
 
@@ -86,7 +86,9 @@ export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=fal
  return runLargeUpload(()=>{
   if(typeof afterSpace!=='boolean'||afterSpace&&plan?.kind!=='review-ultimate-r374-manual')refuse();
   if(typeof afterCatalog!=='boolean'||afterCatalog&&(plan?.kind!=='review-ultimate-r374-manual'||afterSpace))refuse();
-  if(plan?.kind==='review-ultimate-r374-manual'){
+  if(plan?.kind==='review-packed-r378-manual'){
+   if(!physicalDoomPackedEnabled()||resume||retryWithoutData||afterSpace||afterCatalog)refuse();
+  }else if(plan?.kind==='review-ultimate-r374-manual'){
    if(!(afterCatalog?physicalDoomUltimateAfterCatalogEnabled():afterSpace?physicalDoomUltimateAfterSpaceEnabled():physicalDoomUltimateEnabled())||resume||retryWithoutData)refuse();
   }else if(plan?.kind==='review-ram-png-manual'){
    if(!physicalDoomRamPngEnabled()||resume||retryWithoutData)refuse();
@@ -127,7 +129,7 @@ export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=fal
   }else if(plan?.kind==='review-direct-r343-manual'){
    if(!physicalDoomDirectEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind!=='review-low-memory-native-disabled')refuse();
-  return claimReviewedDoomEndpoint(endpoint,{resume,retryWithoutData,retail:plan?.kind==='review-ultimate-r374-manual',afterSpace,afterCatalog});
+  return claimReviewedDoomEndpoint(endpoint,{resume,retryWithoutData,retail:['review-ultimate-r374-manual','review-packed-r378-manual'].includes(plan?.kind),afterSpace,afterCatalog,packed:plan?.kind==='review-packed-r378-manual'});
  },plan,secret,{deploymentResume:resume,deploymentRetryWithoutData:retryWithoutData,deploymentAfterSpace:afterSpace,deploymentAfterCatalog:afterCatalog});
 }
 async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false,deploymentRetryWithoutData=false,deploymentAfterSpace=false,deploymentAfterCatalog=false}={}){
@@ -159,7 +161,7 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   if(info.modelRecognized!==true||info.firmware!=='2.2.86')refuse();
   client.phase='CatalogPreflight';
   const before=catalog(readWatchfaces(await client.query(4,0)));
-  if(plan.nativeLauncher&&plan.kind!=='review-ultimate-r374-manual'&&!before.some(f=>f.id==='365219963'))refuse();
+  if(plan.nativeLauncher&&!['review-ultimate-r374-manual','review-packed-r378-manual'].includes(plan.kind)&&!before.some(f=>f.id==='365219963'))refuse();
   if(plan.kind==='review-fault-r321-manual'&&!before.some(f=>f.id==='365219953'))refuse();
   const comparison=parent?compareDoomCatalogs(parent.before,before):null;
   const soundLocalOnly=plan.kind==='review-sound-r365-manual'&&deploymentRetryWithoutData&&parent?.before===null&&parent?.upload===null;

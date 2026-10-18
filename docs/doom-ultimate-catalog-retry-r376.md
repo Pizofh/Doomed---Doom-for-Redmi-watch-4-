@@ -1,6 +1,6 @@
 # R376: catálogo contrastado, mismo Ultimate
 
-**Pendiente de nueva aprobación física.** R375 fue autorizado y consumido:
+**Autorizado y consumido; rechazado por almacenamiento sin enviar el archivo.** R375 fue autorizado y consumido:
 CatalogPreflight,14→10entradas, selección igual, revisión de removidos=false,
 5frames/185B TX,0partes, sin INSTALL ni upload. Cierre/socket y worker
 confirmados/exit0. Gates cerrados y worker reconstruido al terminar.
@@ -52,3 +52,16 @@ targetvacío antes de privados/journal; ejecutar install-after-catalog una vez;
 cerrar gates y rebuild antes de abrir la esfera. Ante rechazo/corte, parar.
 Espacio/RAM pueden seguir siendo insuficientes; riesgos de bloqueo,
 corrupción/reinicio y recovery integral no validado se mantienen.
+
+## Resultado físico R376
+
+Un install-after-catalog autorizado: modelo/FW correctos, catálogo10,
+reviewedCatalogR376=true, selección igual/IDnuevo ausente. INSTALLstatus3;
+6frames/226B TX,0partes, RegisteredVerified=false. Cierre y worker confirmados,
+exit0. Gates general/R376/Retail cerrados y worker reconstruido. Journal
+intento3 conservado Uncertain, sin autorización de otro intento.
+
+Investigación offline R377 identificó una cuota conjunta de15MiB para esferas
+market. El paquete13.09MB más el carrier4.827MB ya la superan, sin contar otras
+esferas. Usuario prefirió evaluar compresión antes de más eliminaciones.
+Se prepara el lector comprimido R378; no reutilizar esta aprobación.

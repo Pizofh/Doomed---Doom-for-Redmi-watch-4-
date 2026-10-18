@@ -1,4 +1,57 @@
-# R376 corrección del catálogo lista; pendiente de aprobación
+# R378 comprimido listo; pendiente de aprobación física
+
+R376 autorizado/consumido: guardcatálogo10 pasa, INSTALLstatus3,6frames/226BTX,
+0MASS. Cierre/workerexit confirmados. Gates JSgeneral/R376/RetailC# cerrados y
+rebuild. Intento3 journal Uncertain intacto. No cuarto intento autorizado.
+Usuario prefiere compresión antes de borrar más (solo usa una esfera).
+
+R377 estático: cuota15MiB conjunta market existentes+tamañoentrante,
+prepareoffset43ca08, cmp43cc0a/branch43ccb8. Carrier4827044+paquete13090600
+ya suman17917644>15728640. docs/packed-wad-r378.md; toolreview-rw4-storage-r377.
+No consulta física ni byteslibres medidos en R377.
+
+R378: tools/pack-ultimate-r378.mjs genera privado build/doom-packed-r378/doom.rwc
+5482926B SHA f177618dd0da2ba304b9d12049832607d39904ee0b36536a3d83037f6afec38c,
+190páginasdeflate64KiB, sin pérdida. Reader C doscachés64K+input64K/8cursores,
+sin nueva ABI/hilo/escritura. tinf upstream fijado57ffa1... en lock/licenciaZlib,
+fetch-tinf-r378 source-only (third_party ignorado). Byte/lump+600random/8faults
+Ctest PASA. Rama --packed-r378 del builder compila rw4/s3-model/s3-hold.
+RW4ELF629904B SHA1de7d78294e7885513344990e477a4d7530aa85f2955eba7e1210b10f724d746.
+S3ELF638300B SHA21f531ca0efd9a6954c98ae3a14a92a7d1fbbfa99cf9105bf8c3257dc207c91d.
+2ciclos menús/save/load/titleload/cierre PASAN; 36mapas con compresión PASAN
+(NO repetir), final artifacts/research/packed-campaign-r378/result.json.
+Extra secciones203728B, guard+212992 →minfree7366211/minlargest4194320.
+
+Finales PASAN: UI exacta con13headersválidos/dañados, store23 y heldprepare/
+close. Paquete generado con package-ultimate-r374.mjs --packed-r378:
+DoomPackedID365220002 privado6165808B (antes13090600), SHA256
+069e1a1dfdd676de6382565ba177cad411c07647929b8158dbe8d131cc9a490a, fuente27715B
+SHA933395b6dc77ae114b54c5276db4af4dcf1c2223dbf82e270e589ea615babda3.
+Factory prepareDoomPacked en doom-large-upload fija size/hash/ID, native=true.
+CLI pc-doom-packed-r378.mjs plan/prepare/install. Scope packed:true+retail:true
+independiente, PHYSICAL_PACKED_R378_REVIEWED=false; todos gatescerrados.
+Journal propio packed-r378.jsonl, prohíbe todos retries/resume. PackageTest65
+recursos/6tamper/3017partesIPC/5fallos/4retryModes pasa; funciona sin carrier.
+Regresiones18/17 pasan. Plan docs/doom-packed-physical-plan-r378.md listo:
+pedir aprobación UNA instalación inactiva6.17MB y DOSarranques≤90s, batería≥50%,
+observación6–10min; conserva esferas/partidas restantes y no borra nada.
+NO usar R376consumida. Tras aprobar abrir SOLO general+PackedR378 JS y RetailC#,
+rebuild/targetvacío antes de privados/journal, installUNAvez. Después cerrar
+gates y rebuild ANTES del ensayo. No otrosIDs/autoSET/retry/resume.
+
+Emulador estaba apagado: se verificó PID5752 ausente/puertos ausentes, respaldó
+vela_data.bin en artifacts/research/ultimate-storage-r377/pre-compression...
+y registro viejo, marcó observación y arrancó instanciaaislada PID10572
+(sesión24112). Headerownership+ADB ahora pasan. Scriptstagepacked escribe
+solo/data/app/watchface/market/365799913/lua/doom-r378.wad, readbackSHAok.
+WAD comprimido del S3 YA retirado, al igual que el raw del Creader; módulos
+y nodos limpios, QEMU aislado queda funcionando para próximas pruebas.
+Primer ELF sufría sufijo.rwc tratado como lump único; build preservado en
+build/doom-audio-r378-pre-wad-suffix, NO usar. Fixtures de campaña fallidos
+preservados; versión final corrige espera de mapa y rm sin-f. No C nuevo
+desde el build final. No confundir fallos de fixture con Doom físico.
+
+## R376 antes del intento
 
 R375 fue autorizado/consumido: CatalogPreflight,count10, sameSelectiontrue,
 reviewedSpaceRemovalsfalse,5frames/185BTX,0MASS/sinINSTALL. Close/workerexit

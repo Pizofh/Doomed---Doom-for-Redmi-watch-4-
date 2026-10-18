@@ -4,14 +4,18 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import {spawnSync} from 'node:child_process';
 import {root,sha256,once} from './doom-ready-source-r351.mjs';import {session} from './doom-ui-emulator.mjs';
 import {ultimateProfile as p} from './doom-ultimate-source-r374.mjs';
-assert.equal(process.argv.length,2);
-const dir=path.join(root,'build/doom-audio-r374/s3-model'),out=path.join(root,'artifacts/research/ultimate-campaign-r374');
+const packed=process.argv[2]==='--packed-r378';assert(process.argv.length===2||(packed&&process.argv.length===3));
+const dir=path.join(root,packed?'build/doom-audio-r378/s3-model':'build/doom-audio-r374/s3-model'),out=path.join(root,packed?'artifacts/research/packed-campaign-r378':'artifacts/research/ultimate-campaign-r374');
 assert(!fs.existsSync(out));fs.mkdirSync(out,{recursive:true});
 const review=JSON.parse(fs.readFileSync(path.join(dir,'review.json'),'utf8')),logs=JSON.parse(fs.readFileSync(path.join(dir,'build-log.json'),'utf8'));
 assert.equal(sha256(fs.readFileSync(path.join(dir,'doom.elf'))),review.elfSha256);
 const adapter=fs.readFileSync(path.join(dir,'adapter.c'),'utf8');assert.equal(sha256(adapter),review.generatedHashes.adapter);
 const vm=session('ultimate-campaign'),remote='/tmp/rw4-ultimate-map-r374.elf',script='/tmp/rw4-ultimate-map-r374.lua';
 const before=vm.adb(['shell','lsmod'],'before');assert.equal(before.trim().split(/\r?\n/).length,1);
+if(packed)for(const n of [remote,script,'/tmp/rw4-ultimate-map-r374-result.txt']){
+ const absent=/^nsh: ls: stat failed: 2\r?$/im.test(vm.adb(['shell','ls',n],'check-owned-fixture'));
+ if(!absent)vm.adb(['shell','rm',n],'tidy-owned-fixture');
+}
 for(const n of [remote,script,'/dev/rw4doomready','/dev/rw4doomslot'])assert(/^nsh: ls: stat failed: 2\r?$/im.test(vm.adb(['shell','ls',n],'absence')));
 function run(name,args){const r=spawnSync(path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-'+name+'.exe'),args,{cwd:root,windowsHide:true,shell:false,encoding:'utf8',timeout:15000,maxBuffer:65536});assert(!r.error&&r.status===0,r.stderr);}
 const maps=[];
@@ -36,7 +40,7 @@ local function shell(c)local ok,why,n=os.execute(c);assert(ok and why=='exit' an
 local stats
 local function run()
  shell('insmod ${remote} rw4ultmap374');state();command(1);local ready
- for _=1,120 do local s=state();if s[5]==1 then ready=s;break end;assert(s[6]==0,'stopped before map: '..s[15]..'/'..s[16]);wait()end
+ for _=1,${packed?200:120} do local s=state();if s[5]==1 and s[35]==0 and s[36]==${episode} and s[37]==${map} then ready=s;break end;assert(s[6]==0,'stopped before map: '..s[15]..'/'..s[16]);wait()end
  assert(ready and ready[35]==0 and ready[36]==${episode} and ready[37]==${map},'map startup')
  assert(ready[63]==${p.audioSampleBytes} and ready[64]==0,'all effects cached')
  for _=1,6 do command(7);wait()end;command(3);for _=1,4 do wait()end
@@ -70,7 +74,7 @@ if not ok then error(why)end
  for(const n of [remote,script,'/tmp/rw4-ultimate-map-r374-result.txt'])vm.adb(['shell','rm',n],'remove-own');
  fs.writeFileSync(path.join(out,'progress.json'),JSON.stringify(maps,null,2)+'\n');console.log(label+' passed ('+maps.length+'/36)');
 }
-const result={passed:true,maps,all36MapsStartSaveLoad:true,zoneMiB:p.zoneMiB,audioCacheBytes:p.audioCacheBytes,
+const result={passed:true,maps,compressedReader:packed,all36MapsStartSaveLoad:true,zoneMiB:p.zoneMiB,audioCacheBytes:p.audioCacheBytes,
  maxSaveBytes:Math.max(...maps.map(m=>m.saveBytes)),maxPeakDynamic:Math.max(...maps.map(m=>m.peakDynamic)),
  realEngine:true,realThreads:true,graphicsAndAudioModeled:true,wholeCampaignPlaythrough:false,physicalTransport:false};
 fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify({...result,maps:maps.length}));

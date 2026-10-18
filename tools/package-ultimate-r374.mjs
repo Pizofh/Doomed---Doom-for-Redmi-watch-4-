@@ -3,30 +3,39 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {root,sha256,ultimateLauncher,ultimateAssets} from './doom-ultimate-r374.mjs';
-import {ultimateProfile as p} from './doom-ultimate-source-r374.mjs';
+import {ultimateProfile} from './doom-ultimate-source-r374.mjs';
+import {packedLauncher,packedAssets,packedProfile} from './doom-packed-r378.mjs';
+import {packedConfig} from './doom-packed-source-r378.mjs';
+const packed=process.argv[2]==='--packed-r378';assert(process.argv.length===2||(packed&&process.argv.length===3));
+const p=packed?{...ultimateProfile,...packedProfile}:ultimateProfile,version=packed?'r378':'r374';
 const json=f=>JSON.parse(fs.readFileSync(path.join(root,f),'utf8'));
-const build=path.join(root,'build/doom-audio-r374/rw4'),out=path.join(root,'build/doom-audio-r374/package');
+const build=path.join(root,'build/doom-audio-'+version+'/rw4'),out=path.join(root,'build/doom-audio-'+version+'/package');
 assert(!fs.existsSync(out),'refuse overwrite');
-const review=json('build/doom-audio-r374/rw4/review.json'),elf=fs.readFileSync(path.join(build,'doom.elf'));
+const review=json('build/doom-audio-'+version+'/rw4/review.json'),elf=fs.readFileSync(path.join(build,'doom.elf'));
 assert.equal(sha256(elf),review.elfSha256);assert(review.rw4Executable&&!review.physicalDeploymentAuthorized);
-assert.deepEqual(review.ultimate.profile,p);
+assert.deepEqual(review.ultimate.profile,ultimateProfile);
+if(packed){const data=packedConfig('rw4');assert.deepEqual(review.packed.p,data.p);assert.deepEqual(review.packed.lock,data.lock);
+ assert.equal(review.packed.readerSha256,sha256(fs.readFileSync(path.join(root,'doom/platform-rw4/packed/reader-r378.c'))));
+ assert.equal(fs.readFileSync(path.join(build,'packed-config.h'),'utf8'),data.header);
+ assert(json('build/doom-packed-r378/reader-test/result.json').passed);}
 for(const field of ['sourceHashes','recoverySourceHashes','menuSourceHashes','startupSourceHashes'])
  for(const [file,hash]of Object.entries(review[field])){
   const source=field==='sourceHashes'?'doom/platform-rw4/audio/'+file:file;
   assert.equal(sha256(fs.readFileSync(path.join(root,source))),hash,source);
  }
-const tested=json('build/doom-audio-r374/s3-model/test-result.json');
+const tested=json('build/doom-audio-'+version+'/s3-model/test-result.json');
 assert(tested.passed&&tested.twoCyclesJoinedAndUnloaded&&tested.originalMenuNewGame&&tested.loadDirectlyFromTitle);
 assert(tested.cycles.every(c=>c.cachedSampleBytes===p.audioSampleBytes&&c.nonSilentBlocks>0&&!c.error));
-assert(json('build/doom-audio-r374/s3-hold/test-result.json').passed);
+assert(json('build/doom-audio-'+version+'/s3-hold/test-result.json').passed);
 assert(json('build/audio-startup-r372/result.json').passed);
-const campaign=json('artifacts/research/ultimate-campaign-r374/result.json');
+const campaign=json(packed?'artifacts/research/packed-campaign-r378/result.json':'artifacts/research/ultimate-campaign-r374/result.json');
 assert(campaign.passed&&campaign.maps.length===36);
 const wad=fs.readFileSync(path.join(root,'tools/local/doom-ultimate/doom.wad'));
 assert.equal(wad.length,p.wadBytes);assert.equal(sha256(wad),p.wadSha256);
-const launcher=ultimateLauncher(elf,fs.readFileSync(path.join(root,'tools/local/doom-shareware/doom1.wad')));
-assert.equal(json('build/doom-audio-r374/ui-result.json').exactProductionMain,launcher.sourceSha256);
-const assets=ultimateAssets(),records=[['main.lua',Buffer.from(launcher.source)],['doom.elf',elf],['doom.wad',wad],
+const launcher=(packed?packedLauncher:ultimateLauncher)(elf,fs.readFileSync(path.join(root,'tools/local/doom-shareware/doom1.wad')));
+assert.equal(json('build/doom-audio-'+version+'/ui-result.json').exactProductionMain,launcher.sourceSha256);
+const assets=(packed?packedAssets:ultimateAssets)(),records=[['main.lua',Buffer.from(launcher.source)],['doom.elf',elf],
+ [packed?'doom-r378.wad':'doom.wad',packed?fs.readFileSync(path.join(root,'build/doom-packed-r378/doom.rwc')):wad],
  ...Object.entries(assets).filter(([n])=>n!=='preview').map(([n,b])=>[n+'.png',b])];
 const compilerDir=path.join(root,'tools/local/easyface-v4.23-review'),compiler=path.join(compilerDir,'Compiler.exe');
 assert(!fs.lstatSync(compilerDir).isSymbolicLink());
@@ -43,7 +52,7 @@ const r=spawnSync(compiler,['-b',project,path.join(out,'output'),p.product+'.fac
 fs.writeFileSync(path.join(out,'compiler-result.json'),JSON.stringify({status:r.status,stdout:r.stdout,stderr:r.stderr},null,2));
 assert(!r.error&&r.status===0&&/No Errors/.test(r.stdout)&&/Watch:\s*RedmiWatch4/.test(r.stdout)&&/adb util is missing, skipping to upload/.test(r.stdout));
 const bytes=fs.readFileSync(path.join(out,'output',p.product+'.face'));
-assert(bytes.length>13000000&&bytes.length<13200000&&bytes.readUInt32LE(0)===0x1234a55a&&bytes[5]===0&&bytes[49]===0);
+assert(bytes.length>(packed?6100000:13000000)&&bytes.length<(packed?6300000:13200000)&&bytes.readUInt32LE(0)===0x1234a55a&&bytes[5]===0&&bytes[49]===0);
 bytes.write(p.id,40,9,'ascii');
 const entries=records.map(([name,b])=>{
  const n=Buffer.from('lua/'+name),found=[];
@@ -52,7 +61,7 @@ const entries=records.map(([name,b])=>{
  assert.equal(found.length,1,name);return {name,size:b.length,offset:found[0],sha256:sha256(b)};
 });
 fs.writeFileSync(path.join(out,p.product+'-id-only.face'),bytes,{flag:'wx'});
-const result={checkpoint:'R374',id:p.id,size:bytes.length,sha256:sha256(bytes),elfSha256:sha256(elf),wadSha256:sha256(wad),sourceSha256:launcher.sourceSha256,
+const result={checkpoint:packed?'R378':'R374',id:p.id,size:bytes.length,sha256:sha256(bytes),elfSha256:sha256(elf),wadSha256:sha256(wad),sourceSha256:launcher.sourceSha256,
  config:launcher.config,entries,manualStartOnly:true,wadIncluded:true,privateCommercialData:true,physicalTransferEnabled:false,physicalWatchUsed:false};
 fs.writeFileSync(path.join(out,'review.json'),JSON.stringify(result,null,2)+'\n');
 console.log(JSON.stringify({...result,entries:entries.length}));
