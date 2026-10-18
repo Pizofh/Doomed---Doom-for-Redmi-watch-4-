@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {audioBindings} from './audio-bindings-r363.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url)),mode=process.argv[2];
 assert(process.argv.length===3&&['rw4','s3-model'].includes(mode),'Fixed targets');
-const out=path.join(root,'build/doom-audio-r365',mode),old=path.join(root,'build/doom-ready-r351',mode);
+const out=path.join(root,'build/doom-audio-r367',mode),old=path.join(root,'build/doom-ready-r351',mode);
 assert(!fs.existsSync(path.join(out,'review.json')),'Reviewed output exists');fs.mkdirSync(out,{recursive:true});
 const hash=b=>createHash('sha256').update(b).digest('hex');
 const log=[];function run(tool,args,label){const r=spawnSync(tool,args,{cwd:root,windowsHide:true,shell:false,encoding:'utf8',timeout:30000,maxBuffer:2097152});
@@ -72,7 +72,7 @@ const readelf=path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-read
 const meta=run(readelf,['-W','-h','-A','-s','-r',elf],'readelf');
 assert(!/\bUND[ \t]+\S+[ \t]*$/m.test(meta));fs.writeFileSync(path.join(out,'readelf.txt'),meta);
 const sources=['pcm-core.c','doom-sfx.c','doom-module.c','sink-worker.c','media-sink.c',mode==='rw4'?'media-sink.h':'media-model.c'];
-const result={checkpoint:'R365',mode,elfBytes:fs.statSync(elf).size,elfSha256:hash(fs.readFileSync(elf)),
+const result={checkpoint:'R367',mode,elfBytes:fs.statSync(elf).size,elfSha256:hash(fs.readFileSync(elf)),
  baselineSha256:baseline.elfSha256,audio:mode==='rw4'?'candidate managed media':'modeled managed media service, not playback',realEngine:true,
  sourceHashes:Object.fromEntries(sources.map(p=>[p,hash(fs.readFileSync(path.join(root,'doom/platform-rw4/audio',p)))])),
  generatedHashes:{adapter:hash(adapter),transport:hash(transport)},zoneMiB:3,

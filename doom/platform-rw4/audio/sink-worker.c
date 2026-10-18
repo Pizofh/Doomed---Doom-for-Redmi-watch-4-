@@ -24,7 +24,7 @@ static void *audio_worker(void *unused){
  if(rc)atomic_store(&error,(unsigned)(rc<0?-rc:rc));
  /* A failed/blocked close never claims quiet or permits unload. */
  int closed=rw4_audio_device_close();
- if(closed){atomic_store(&error,(unsigned)(closed<0?-closed:closed));return 0;}
+ if(closed){unsigned empty=0;atomic_compare_exchange_strong(&error,&empty,(unsigned)(closed<0?-closed:closed));return 0;}
  atomic_store(&finished,1);return 0;
 }
 int rw4_audio_sink_begin(void){

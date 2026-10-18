@@ -1,3 +1,42 @@
+# R367 preparado; Sound físico sin audio y causa de direcciones localizada
+
+Usuario probóR365:todoOKsinsonido,AUDIOERR22,PCM0,CACHE532927; segundoensayo
+NOautorizadopracticamenteporcondiciónaudioOK, no repetir. DiceSTARTsinCARGAR
+apareceenunladoycadáveres. ScriptsverificaronWAD:15decorcadáveresE1M1,
+spawnP1(1056,-3616,90°). DosciclosS3realconfirmaronexactospawn,50ammo100health
+sinautoload,inclusodespuésdesave/loadanterior. Físicocoordenadasnocapturadas.
+
+Error propio:audio-bindings-r363 usabaoffset+1bff187c(aliasinspección) envezde
+0c100000delcontratofirmware-bindings.lock. R367leeese lock,validapinnedAP,
+contrasta4bindingslegacy y punteroabsolutoAP4e0188=c5df909. Fingerprintsconservados.
+Código22anteriorconsistenteguardFPperoetapanoestabareportada. Nuevoscódigos
+1xxxvalidación(1001..9pin),2xxxfoco,3xxxopen,4xxxprepare,5xxxstart,6xxxpause,
+7xxxwrite(7104partial),8xxxclose,9xxxabandon. Cierreconservaprimererror.
+
+NuevoDoomAudio ID365219938,rw4audio367,previewCUATROBARRASAMARILLAS.
+build/doom-audio-r367/package/DoomAudio-id-only.face,669980B,58recursos.
+SHA1b7887eddc2a609460fb521a29c7f8a57476c0c301bc9cf261286fa5fdb38f05.
+ELF623320SHA3a7726ae20173d89623ef03aa144181b3e2e0e3a99181ad9d731cf3895d05730.
+docs/doom-audio-physical-plan-r367.md concreto,listoparaUNAaprobación nueva
+instalacióninactiva+2STARTmanualhasta60s,>=50batería,observación,volumenaudible.
+Si llegaaprobaciónNO volverapreguntar. No aprobado aún. No envío/arranqueR367.
+
+Gatesmain+PHYSICAL_AUDIO_R367_REVIEWED+LargePhysicalReviewed=false. CLI
+pc-doom-audio-r367.mjs comprueba dispatchcon targetvacío antesdeauth/journal;
+prepareofflineOK,instalacióncerrada. Journalindependienteaudio-r367.jsonlprobado
+conclave/identidadfalsa. No retry/resumeparaR367. TrasaprobaciónabrirC#Large,
+build,abrirJSmain+Audio(noSound/controlretry),installUNAvez,cerrartodo+build.
+ConRegisteredInactive darprimerensayoSTARTsonido/puerta/pausa/save/load/EXIT,
+soloaudioOK+CLOSED+ERR0segundo. Mismoscontroles/render/zonade3MB/caché55efectos.
+Conserva940/963/939ybancos;R367propios938sinmigración. NoC/WAD/frameflashnuevos
+fuera delnuevoELF/paquetecandidato. Serviciofísicoaúnsinprobar,cooperativecleanup.
+
+ValidadoCfaultsconetapasexactas(build/audio-media-r367),2ciclosDoomrealS3
+originalPlayer1SpawnBothCycles=true,cache532927,PCMnonzero,error0,save/load,
+pause/join/unload. CompileRW4,generaciónbindingscontratada,paquete58resources,
+tamper5,Luaexactaparse,CLIoffline/gateclosed,journalpropio. No repetir9mapas
+(mismazona/engineR365),auditoríasGit,CI/push. Sonidonogarantizadohastaoírreloj.
+
 # R366 instalado inactivo; esperar dos ensayos manuales ya autorizados
 
 Usuario autorizó UNreintento+mismos2arranques, batería>=50 ypuedeobservar.

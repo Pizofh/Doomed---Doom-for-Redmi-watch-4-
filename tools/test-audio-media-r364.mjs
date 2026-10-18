@@ -4,7 +4,7 @@ import fs from 'node:fs';import path from 'node:path';import assert from 'node:a
 import {spawnSync} from 'node:child_process';import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';import {session} from './doom-ui-emulator.mjs';
 assert.equal(process.argv.length,2);const root=fileURLToPath(new URL('../',import.meta.url));
-const out=path.join(root,'build/audio-media-r364');assert(!fs.existsSync(out));
+const out=path.join(root,'build/audio-media-r367');assert(!fs.existsSync(out));
 const verify=spawnSync(process.execPath,['tools/build-rw4-file-r214.mjs','verify-inputs'],{cwd:root,encoding:'utf8',windowsHide:true,timeout:15000});assert.equal(verify.status,0);
 fs.mkdirSync(out,{recursive:true});const hash=b=>createHash('sha256').update(b).digest('hex');
 function run(name,args){const r=spawnSync(path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-'+name+'.exe'),args,
@@ -19,7 +19,7 @@ const elf=path.join(out,'test.elf');run('ld',['-r','-T','doom/platform-rw4/devic
 const meta=run('readelf',['-W','-s','-r',elf]);assert(!/\bUND[ \t]+\S+[ \t]*$/m.test(meta));
 assert([...meta.matchAll(/\bR_ARM_[A-Z0-9_]+\b/g)].every(m=>m[0]==='R_ARM_ABS32'));
 const bytes=fs.readFileSync(elf);assert(bytes.length<65536);
-const vm=session('audio-media'),remote='/tmp/doomed-audio-media-r364.elf';
+const vm=session('audio-media'),remote='/tmp/doomed-audio-media-r367.elf';
 const before=vm.adb(['shell','lsmod'],'before');assert(!/audio364/.test(before));
 assert(/^nsh: ls: stat failed: 2\r?$/im.test(vm.adb(['shell','ls',remote],'absence')));
 vm.adb(['push',elf,remote],'push');const copy=path.join(vm.folder,'readback.elf');vm.adb(['pull',remote,copy],'readback');assert.equal(hash(fs.readFileSync(copy)),hash(bytes));

@@ -6,6 +6,16 @@ import {createHash} from 'node:crypto';
 export function audioBindings(root){
  const bytes=fs.readFileSync(path.join(root,'tools/local/firmware-research/rw4-stock-candidate-r193/vela-ap-inspection-only.bin'));
  assert.equal(createHash('sha256').update(bytes).digest('hex'),'2c486395a01fb4e1d4a0f8b9b749fd6b1c3d522edc3c2f3813deaea9ab7388db');
+ const lock=JSON.parse(fs.readFileSync(path.join(root,'doom/platform-rw4/device/firmware-bindings.lock.json'),'utf8'));
+ assert.equal(lock.codeBase,0x0c100000);assert.equal(lock.imageSha256,createHash('sha256').update(bytes).digest('hex'));
+ // Independent absolute function pointer in the stock media callback wrapper.
+ assert.equal(bytes.readUInt32LE(0x4e0188),lock.codeBase+0x4df908+1);
+ const legacy=fs.readFileSync(path.join(root,'build/doom-rw4-bindings/firmware-addresses.h'),'utf8');
+ for(const name of ['malloc','free','fopen','fclose']){
+  const entry=lock.entries.find(e=>e.name===name);assert(entry);
+  const match=legacy.match(new RegExp('RW4_ADDR_'+name.toUpperCase()+' UINT32_C\\((0x[0-9a-f]+)\\)'));
+  assert(match);assert.equal(parseInt(match[1],16),lock.codeBase+entry.offset+1);
+ }
  const functions=[['focus_request',0x4e19bc,'int (*)(int *,const char *,void (*)(int,void *),void *)'],
   ['focus_abandon',0x4e1f94,'int (*)(int)'],['open',0x4e00a0,'void *(*)(const char *)'],
   ['prepare',0x4e0194,'int (*)(void *,const char *,const char *)'],['start',0x4e0440,'int (*)(void *)'],
@@ -13,7 +23,7 @@ export function audioBindings(root){
   ['write',0x4e0378,'int (*)(void *,const void *,unsigned)'],['close',0x4e00b0,'int (*)(void *,int)']];
  const records=functions.map(([name,offset,type])=>{const b=bytes.subarray(offset,offset+64);let fnv=2166136261;
   for(const byte of b)fnv=Math.imul(fnv^byte,16777619)>>>0;
-  return {name,offset,type,address:offset+0x1bff187c,fnv,sha256:createHash('sha256').update(b).digest('hex')};});
+  return {name,offset,type,address:offset+lock.codeBase,fnv,sha256:createHash('sha256').update(b).digest('hex')};});
  const source=`/* Candidate AP only. New physical execution requires review. */
 #include "media-sink.h"
 #include <stdint.h>
@@ -22,7 +32,7 @@ static int validate(void){
  for(unsigned i=0;i<sizeof(pins)/sizeof(pins[0]);i++){
   const volatile unsigned char *p=(const volatile unsigned char *)pins[i].address;
   uint32_t h=2166136261u;for(unsigned j=0;j<64;j++)h=(h^p[j])*16777619u;
-  if(h!=pins[i].fnv)return -1;
+  if(h!=pins[i].fnv)return -(int)(i+1);
  }return 0;
 }
 static const struct doomed_media_api api={validate,${records.map(r=>'('+r.type+')'+(r.address+1)+'u').join(',')}};

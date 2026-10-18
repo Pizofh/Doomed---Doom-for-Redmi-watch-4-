@@ -1,5 +1,12 @@
 # 0.2: preparación y efectos de sonido
 
+**R367:** el primer ensayo R365 jugó/cerró sin sonido (ERR22, PCM0). Se corrigió
+una base de direcciones de audio que no coincidía con los bindings físicos ya
+usados por el port; se conserva la validación y se separan errores por etapa.
+DoomAudio669980B preparado sin instalar. [Plan R367](doom-audio-physical-plan-r367.md).
+El inicio original se verificó en dos ciclos del emulador; el WAD ya incluye
+cadáveres decorativos, sin autocarga al START. Sonido físico aún pendiente.
+
 **Candidato R365 preparado:** efectos integrados en Doom, cuatro voces y cola
 PCM en memoria; adaptador media/foco con servicio simulado y compilación RW4.
 Dos ciclos y arranque/save/load/salida en los nueve mapas pasan con zona de

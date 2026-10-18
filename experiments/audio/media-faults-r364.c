@@ -25,7 +25,8 @@ const struct doomed_media_api *rw4_media_api(void){return &api;}
 int rw4_audio_media_test_init(void *info){
  (void)info;short pcm[2]={4000,-4000};
  for(fail=1;fail<=6;fail++){
-  CHECK(rw4_audio_device_open()<0);CHECK(!rw4_audio_device_close());CHECK(!owned&&!focus);
+  int expected[]={0,-1022,-2016,-2016,-3005,-4005,-5005};
+  CHECK(rw4_audio_device_open()==expected[fail]);CHECK(!rw4_audio_device_close());CHECK(!owned&&!focus);
  }
  fail=0;CHECK(!rw4_audio_device_open());
  CHECK(rw4_audio_device_write(pcm,4)==4);
@@ -35,8 +36,8 @@ int rw4_audio_media_test_init(void *info){
  event(1,0);CHECK(rw4_audio_device_write(pcm,4)==4&&writes==before);
  event(0,0);CHECK(rw4_audio_device_write(pcm,4)==4);
  fail=10;event(4,0);CHECK(rw4_audio_device_write(pcm,4)==4);event(0,0);
- fail=8;CHECK(rw4_audio_device_write(pcm,4)==-4);
- fail=9;CHECK(rw4_audio_device_write(pcm,4)==2);
+ fail=8;CHECK(rw4_audio_device_write(pcm,4)==-7004);
+ fail=9;CHECK(rw4_audio_device_write(pcm,4)==-7104);
  CHECK(rw4_audio_device_write(pcm,3)<0);fail=0;
  CHECK(!rw4_audio_device_close());CHECK(!owned&&!focus);
  /* Final ambiguous-close scenario: retain handle and focus, never repeat. */
