@@ -129,8 +129,17 @@ namespace Rw4.PcRfcomm
         // Change only after reviewing the concrete static-package physical plan.
         private static readonly bool StaticPhysicalReviewed = false;
         private static readonly bool LargePhysicalReviewed = false;
+        private static readonly bool RetailPhysicalReviewed = false;
         internal static int Dispatch(string[] args, TextWriter output)
         {
+            if (args.Length == 1 && args[0] == "session-retail-r374")
+            {
+                if (!RetailPhysicalReviewed) { output.WriteLine("E:GateClosed"); return 2; }
+                return LargeSessionWorker.RunNative(Console.In, output, true);
+            }
+            if (args.Length == 2 && args[0] == "retail-ipc-sim-r374" &&
+                Array.IndexOf(new[] { "ok", "partial", "bridge", "send-zero", "send-error", "idle-timeout", "session-timeout", "send-hang", "receive-eof", "close-failure" }, args[1]) >= 0)
+                return LargeSessionWorker.Simulate(Console.In, output, args[1], true);
             if (args.Length == 0 || (args.Length == 1 && args[0] == "plan"))
             {
                 output.WriteLine("{\"checkpoint\":\"R148\",\"mode\":\"offline-only\",\"physicalEnabled\":false,\"bluetoothOperationRequested\":false,\"watchCommandRequested\":false}");

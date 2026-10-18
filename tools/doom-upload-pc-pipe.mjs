@@ -17,10 +17,10 @@ export function reviewedLargeExecutable(){
  return file;
 }
 export class LargeUploadPcPipe{
- constructor(scenario='ok',{operationMs=20000,openMs=25000,closeMs=2000,limitMs=675000}={}){
-  if(!scenarios.has(scenario)||![operationMs,openMs,closeMs,limitMs].every(n=>Number.isInteger(n)&&n>=20&&n<=675000)||operationMs>20000||openMs>25000||closeMs>2000)fail();
+ constructor(scenario='ok',{operationMs=20000,openMs=25000,closeMs=2000,retail=false,limitMs=retail?1275000:675000}={}){
+  if(typeof retail!=='boolean'||!scenarios.has(scenario)||![operationMs,openMs,closeMs,limitMs].every(n=>Number.isInteger(n)&&n>=20&&n<=(retail?1275000:675000))||operationMs>20000||openMs>25000||closeMs>2000)fail();
   this.scenario=scenario;this.operationMs=operationMs;this.openMs=openMs;this.closeMs=closeMs;
-  this.pipe=new PrivatePipe(reviewedLargeExecutable(),'PC_ONLY_R281',{workerProfile:'large-pc-r281',simulationScenario:scenario,limitMs});
+  this.pipe=new PrivatePipe(reviewedLargeExecutable(),retail?'PC_ONLY_R374':'PC_ONLY_R281',{workerProfile:retail?'retail-pc-r374':'large-pc-r281',simulationScenario:scenario,limitMs});
   this.busy=false;this.closing=false;this.txHash=createHash('sha256');this.txBytes=0;
  }
  async operation(fn,ms){

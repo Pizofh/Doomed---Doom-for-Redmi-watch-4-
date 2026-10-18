@@ -234,6 +234,18 @@ namespace Rw4.PcRfcomm
             Check(!largeFrames.Reserve(1));
             Check(!new LargeSessionWorker.Budget().Reserve(0) && !new LargeSessionWorker.Budget().Reserve(4097));
             Check(LargeSessionWorker.SessionMs == 660000 && LargeSessionWorker.SendIdleMs == 15000);
+            var retailGate = new StringWriter();
+            Check(Program.Dispatch(new[] { "session-retail-r374" }, retailGate) == 2);
+            Check(retailGate.ToString() == "E:GateClosed" + Environment.NewLine);
+            var retailBytes = new LargeSessionWorker.Budget(true);
+            for (int i = 0; i < LargeSessionWorker.RetailByteLimit / 4096; i++) Check(retailBytes.Reserve(4096));
+            Check(retailBytes.Reserve(LargeSessionWorker.RetailByteLimit % 4096));
+            Check(retailBytes.Bytes == 13400000 && !retailBytes.Reserve(1));
+            var retailFrames = new LargeSessionWorker.Budget(true);
+            for (int i = 0; i < 6632; i++) Check(retailFrames.Reserve(1));
+            Check(!retailFrames.Reserve(1));
+            Check(!new LargeSessionWorker.Budget(true).Reserve(0) && !new LargeSessionWorker.Budget(true).Reserve(4097));
+            Check(LargeSessionWorker.RetailSessionMs == 1260000);
             foreach (string bad in new[] { "", "S:", "S:0", "S:GG", "R", "S:00\n", "S:" + new string('0',8194) })
                 Check(SessionWorker.ParseSend(bad) == null);
             ulong parsed;

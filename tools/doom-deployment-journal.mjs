@@ -2,6 +2,7 @@
 import fs from 'node:fs';import path from 'node:path';
 import {createHash,createHmac,randomUUID,timingSafeEqual} from 'node:crypto';
 import {firstCRoot as root} from './first-c-source.mjs';import {packageCopy} from './doom-large-upload.mjs';
+import {uploadLimits} from './doom-retail-limits-r374.mjs';
 const identities=new WeakMap(),owned=new WeakSet(),fail=()=>{throw Error('DoomJournalRefused');};
 const clone=x=>JSON.parse(JSON.stringify(x)),hash=b=>createHash('sha256').update(b).digest('hex');
 const mac=(key,value)=>createHmac('sha256',key).update(value).digest();
@@ -27,7 +28,7 @@ function rows(value){
 }
 function upload(value,plan){
  if(value===null)return;
- if(!value||value.schema!==1||value.id!==plan.id||value.sha256!==plan.sha256||value.size!==plan.size||!['Intent','LocallyWritten','SentNotVerified','Uncertain'].includes(value.status)||![2048,4080].includes(value.chunkSize)||!Number.isInteger(value.totalParts)||value.totalParts<1||value.totalParts>4096||!Number.isInteger(value.locallyWritten)||value.locallyWritten<0||value.locallyWritten>value.totalParts||!Number.isInteger(value.offset)||value.offset<0||value.offset>=plan.size||!Number.isInteger(value.highestPossibleOffset)||value.highestPossibleOffset<value.offset||value.highestPossibleOffset>plan.size||!Number.isInteger(value.wireBytes)||value.wireBytes<0||value.wireBytes>4900000||value.remoteInstallationVerified!==false)fail();
+ if(!value||value.schema!==1||value.id!==plan.id||value.sha256!==plan.sha256||value.size!==plan.size||!['Intent','LocallyWritten','SentNotVerified','Uncertain'].includes(value.status)||![2048,4080].includes(value.chunkSize)||!Number.isInteger(value.totalParts)||value.totalParts<1||value.totalParts>uploadLimits(plan).parts||!Number.isInteger(value.locallyWritten)||value.locallyWritten<0||value.locallyWritten>value.totalParts||!Number.isInteger(value.offset)||value.offset<0||value.offset>=plan.size||!Number.isInteger(value.highestPossibleOffset)||value.highestPossibleOffset<value.offset||value.highestPossibleOffset>plan.size||!Number.isInteger(value.wireBytes)||value.wireBytes<0||value.wireBytes>uploadLimits(plan).wireBytes||value.remoteInstallationVerified!==false)fail();
 }
 const transitions={Created:['InstallIntent'],InstallIntent:['UploadIntent'],UploadIntent:['Uploading'],Uploading:['SentNotVerified'],SentNotVerified:['SentNotVerified','RegisteredInactive','UnexpectedActivation','UnexpectedSelection','RegisteredNotRemovable']};
 export class DoomDeploymentJournal{
@@ -39,6 +40,7 @@ export class DoomDeploymentJournal{
   if(plan.kind==='review-audio-r367-manual')this.#file=path.join(dir,'audio-r367.jsonl');
   if(plan.kind==='review-voice-r369-manual')this.#file=path.join(dir,'voice-r369.jsonl');
   if(plan.kind==='review-menu-r370-manual')this.#file=path.join(dir,'menu-r370.jsonl');
+  if(plan.kind==='review-ultimate-r374-manual')this.#file=path.join(dir,'ultimate-r374.jsonl');
   this.#key=Buffer.from(binding.key);this.#tag=binding.tag;this.#plan=plan;
   try{
    this.#lock=fs.openSync(this.#lockFile,'wx',0o600);

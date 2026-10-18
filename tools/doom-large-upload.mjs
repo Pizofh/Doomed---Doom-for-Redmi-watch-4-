@@ -4,9 +4,10 @@ import {createHash} from 'node:crypto';
 import {crc32} from './static-watchface-transfer.mjs';
 import {ccmEncrypt,packetNonce} from './rw4-xiaomi-protocol.mjs';
 import {isReviewedDoomPeer} from './doom-deployment-physical.mjs';
+import {uploadLimits} from './doom-retail-limits-r374.mjs';
 const owned=new WeakMap(),hash=(b,a='sha256')=>createHash(a).update(b).digest('hex');
 const refuse=()=>{throw Error('DoomLargeUploadRefused');};
-function mint(b,id,kind){const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher:['review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual','review-fast-r331-manual','review-palette-r333-manual','review-bench-r335-manual','review-demand-r337-manual','review-direct-r343-manual','review-touch-r345-manual','review-wide-r347-manual','review-pads-r349-manual','review-ready-r351-manual','review-sound-r365-manual','review-audio-r367-manual','review-voice-r369-manual','review-menu-r370-manual'].includes(kind),physicalEnabled:false});owned.set(p,b);return p;}
+function mint(b,id,kind){const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher:kind==='review-ultimate-r374-manual'||['review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual','review-fast-r331-manual','review-palette-r333-manual','review-bench-r335-manual','review-demand-r337-manual','review-direct-r343-manual','review-touch-r345-manual','review-wide-r347-manual','review-pads-r349-manual','review-ready-r351-manual','review-sound-r365-manual','review-audio-r367-manual','review-voice-r369-manual','review-menu-r370-manual'].includes(kind),physicalEnabled:false});owned.set(p,b);return p;}
 export function prepareDoomAssets(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==4807680||hash(raw)!=='387e6c80616296ca7c8727e1a356e169c5b3575e1f2c33d4c9e9a32729ffa7c9'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='167210065'||raw[49]!==0)refuse();
  const b=Buffer.from(raw);b.write('365219963',40,9,'ascii');
@@ -103,6 +104,11 @@ export function prepareDoomMenu(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==673488||hash(raw)!=='f95a8d3bf5882aa5d7af5dca089a0ecd8841546df876d6f8da36685a8f3bf4a8'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365219936'||raw[49]!==0)refuse();
  return mint(Buffer.from(raw),'365219936','review-menu-r370-manual');
 }
+export function prepareDoomUltimate(raw){
+ if(!Buffer.isBuffer(raw)||raw.length!==13090600||hash(raw)!=='dfd89cd54542142a3cddb5dd444f6553fbd648b6e9d7dd1140f9b67b464ad8ca'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365220001'||raw[49]!==0)refuse();
+ return mint(Buffer.from(raw),'365220001','review-ultimate-r374-manual');
+}
+export function syntheticRetailUpload(){const b=Buffer.alloc(13090600);for(let i=0;i<b.length;i++)b[i]=(i*29+(i>>>8))&255;Buffer.from('PC ONLY RETAIL FIXTURE').copy(b);return mint(b,'365799997','synthetic-retail-r374');}
 // Reproducible, owned non-game bytes for public CI. Never an installable face.
 export function syntheticDoomUpload(size=4807680){if(![4807680,4827012,4827044].includes(size))refuse();const b=Buffer.alloc(size);for(let i=0;i<b.length;i++)b[i]=(i*29+(i>>>8))&255;Buffer.from('PC ONLY UPLOAD FIXTURE').copy(b);return mint(b,'365799998','synthetic-only');}
 export function packageCopy(plan){const b=owned.get(plan);if(!b)refuse();return Buffer.from(b);}
@@ -121,7 +127,7 @@ export function uploadLayout(plan,ack,previous=null){
  if(previous){validatePrevious(previous,plan);if(ack.resumePosition<previous.offset||ack.resumePosition>previous.highestPossibleOffset)refuse();}
  else if(ack.resumePosition!==0)refuse();
  const stream=uploadStream(plan,ack.resumePosition),partBytes=ack.chunkSize-4,total=Math.ceil(stream.length/partBytes);
- if(total<1||total>4096)refuse();
+ if(total<1||total>uploadLimits(plan).parts)refuse();
  return {stream,partBytes,total,offset:ack.resumePosition,chunkSize:ack.chunkSize,
   wireBytes:stream.length+total*19, // per-part LE16/LE16 + CCM4 + outer11
   part(index){if(!Number.isInteger(index)||index<1||index>total)refuse();const p=Buffer.alloc(4+Math.min(partBytes,stream.length-(index-1)*partBytes));p.writeUInt16LE(total);p.writeUInt16LE(index,2);stream.copy(p,4,(index-1)*partBytes,Math.min(index*partBytes,stream.length));return p;}};
@@ -155,7 +161,7 @@ async function uploadWithAdapter(plan,ack,api,previous=null){
    // up to32 possible writes; local queue completion is never a remote ACK.
    await api.checkpoint(snapshot());
    for(let i=first;i<=last;i++){
-    if(api.clock()-began>600000)throw Error('DoomUploadDeadline');
+    if(api.clock()-began>uploadLimits(plan).uploadMs)throw Error('DoomUploadDeadline');
     const frame=massFrame(layout.part(i),api.key,api.noncePrefix,api.initialSerial+i-1);
     if(record.wireBytes+frame.length>api.txBudgetBytes)refuse();
     await api.send(frame);record.locallyWritten=i;record.wireBytes+=frame.length;

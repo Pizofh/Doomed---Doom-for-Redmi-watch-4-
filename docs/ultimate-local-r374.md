@@ -38,19 +38,33 @@ Resultados ignorados: `build/doom-audio-r374/s3-model/test-result.json` y
 del S3 fue verificado por readback y retirado después de los tests. El WAD
 shareware, las esferas y el reloj físico permanecen intactos.
 
-## Trabajo pendiente antes de hardware
+## Paquete y transporte preparados (sin hardware)
 
-No hay paquete ni gate/instalador R374. Faltan UI/config/bancos propios,
-validación de la UI exacta, rechazo de slots ajenos y cierre con audio bloqueado.
-La entrega con WAD será de unos13MB. El worker grande actual tiene límite
-4900000B/4128frames y sesión660000ms: no puede enviarla. No ampliar sus límites
-globalmente. Se necesita un perfil separado y acotado, comprobar el presupuesto
-del instalador/almacenamiento y presentar plan concreto para nueva aprobación.
+Paquete privado13090600B, SHA256
+`dfd89cd54542142a3cddb5dd444f6553fbd648b6e9d7dd1140f9b67b464ad8ca`.
+Contiene65recursos, WAD/ELF/config y bancos propios. Lua27335B, parse y UI
+exactos aprobados localmente. Pasan23casos de bancos, incluida identidad
+shareware rechazada, y prepare/close de audio bloqueados con Doom/hilos reales.
+El WAD temporal del S3 volvió a retirarse tras ese ensayo.
+
+Perfil de transporte R374 separado: C#13400000B/6632frames/1260000ms y
+algoritmo6600partes/1200000ms. Límites del perfil anterior intactos. Gates JS
+y C# cerrados; `pc-doom-ultimate-r374.mjs prepare` solo hace revisión offline.
+Pasó6405partes de paquete exacto por IPC cifrado del C# y receptor sintético,
+además de escrituras parciales13.1MB, rechazos/corte/deadlines y regresión
+del perfil antiguo. Ningún socket nativo ni reloj usado.
+
+Plan concreto en `docs/doom-ultimate-physical-plan-r374.md`. Falta autorización
+para una instalación inactiva y dos arranques manuales. El espacio libre de
+flash y rendimiento/RAM real de esta edición siguen sin medir; el paquete
+mayor exige aproximadamente12–18min de observación, no4–6min. Sin retry/resume
+ni borrado de esferas. El WAD comercial permanece ignorado, nunca en Git.
 
 Durante las pruebas el usuario pidió revisar `doom_complete.pk3` y después
 esperar la comparación de una colección. Se pausó la preparación del paquete;
-el ensayo local ya iniciado terminó limpiamente. No seguir instalando bajo
-ninguna aprobación anterior consumida.
+el ensayo local ya iniciado terminó limpiamente. Tras «ok, entiendo» se cerró
+la preparación local de Ultimate. No instalar bajo una aprobación anterior
+consumida.
 
 El PK3 local tiene3279entradas,47695663B sin comprimir y173mapas WAD; `smooshed.txt`
 identifica WadSmoosh. `mapinfo.txt` refiere Doom1/2, MasterLevels, TNT, Plutonia y

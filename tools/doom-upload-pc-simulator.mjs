@@ -4,6 +4,7 @@ import {createHash,createHmac,hkdfSync,createCipheriv,createDecipheriv} from 'no
 import {FrameReader,v1Frame,command,fields,one,uint,bytes} from './rw4-xiaomi-protocol.mjs';
 import {packageCopy} from './doom-large-upload.mjs';
 import {LargeUploadPcPipe} from './doom-upload-pc-pipe.mjs';
+import {retailPlan,uploadLimits} from './doom-retail-limits-r374.mjs';
 const peers=new WeakMap(),digest=(b,a='md5')=>createHash(a).update(b).digest();
 function ccm(key,nonce,input,decrypt=false){
  const c=decrypt?createDecipheriv('aes-128-ccm',key,nonce,{authTagLength:4}):createCipheriv('aes-128-ccm',key,nonce,{authTagLength:4});
@@ -29,7 +30,7 @@ export function createDoomUploadPcPeer(plan,{scenario='ok',chunkSize=2048,resume
   async read(){return queue.shift()??Buffer.alloc(0);},
   async close(){stats.closeCalls++;for(const b of [material,secret])b?.fill(0);return{closeConfirmed:scenario!=='close-failure'};},
   async send(buffer){
-   assert(buffer.length<=4096);stats.sentFrames++;stats.bytes+=buffer.length;assert(stats.bytes<=4900000);assert(stats.sentFrames<=4128);
+   assert(buffer.length<=4096);stats.sentFrames++;stats.bytes+=buffer.length;assert(stats.bytes<=uploadLimits(plan).wireBytes);assert(stats.sentFrames<=uploadLimits(plan).parts+32);
    reader.push(buffer);const f=reader.next();assert(f);assert.equal(reader.next(),null);
    if(f.channel===0){queue.push(v1Frame(0,Buffer.from([scenario==='v2'?2:1]),{dataType:0}));return;}
    assert.equal(f.serial,expectSerial++&255);
@@ -105,7 +106,7 @@ export function pcPeerSummary(endpoint){const p=peers.get(endpoint);if(!p)throw 
 // transmitted frames and injected synthetic replies cross the C# worker loop.
 export function createDoomUploadIpcPeer(plan,options={}){
  const endpoint=createDoomUploadPcPeer(plan,options),p=peers.get(endpoint),base=p.access;
- const pipe=new LargeUploadPcPipe('bridge');let integrity=false;
+ const pipe=new LargeUploadPcPipe('bridge',{retail:retailPlan(plan)});let integrity=false;
  const link=Object.freeze({
   opened:()=>pipe.opened(),
   send:async b=>{await pipe.send(b);await base.link.send(b);},

@@ -15,6 +15,8 @@ import {physicalDoomSoundEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomAudioEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomVoiceEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomMenuEnabled} from './doom-deployment-physical.mjs';
+import {physicalDoomUltimateEnabled} from './doom-deployment-physical.mjs';
+import {uploadLimits} from './doom-retail-limits-r374.mjs';
 import {compareDoomCatalogs,reviewedTwoRemovals} from './doom-deployment-catalog.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
@@ -55,7 +57,7 @@ class PcLargeSession extends XiaomiSession{
  }
  async send(frame){
   if(!Buffer.isBuffer(frame)||frame.length>4096||this.txBytes+frame.length>this.txLimit)refuse();
-  if(frame[3]===5){if(!this.massPhase||++this.massFrames>4096)refuse();}
+  if(frame[3]===5){if(!this.massPhase||++this.massFrames>uploadLimits(this.plan).parts)refuse();}
   else if(this.massPhase||++this.commandFrames>32)refuse();
   this.sentFrames++;this.txBytes+=frame.length;await this.link.send(frame);
  }
@@ -82,7 +84,9 @@ export async function runDoomUploadPc(endpoint,plan,secret,{resumeFrom=null,depl
 }
 export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=false,retryWithoutData=false}={}){
  return runLargeUpload(()=>{
-  if(plan?.kind==='review-ram-png-manual'){
+  if(plan?.kind==='review-ultimate-r374-manual'){
+   if(!physicalDoomUltimateEnabled()||resume||retryWithoutData)refuse();
+  }else if(plan?.kind==='review-ram-png-manual'){
    if(!physicalDoomRamPngEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind==='review-readers-r318-manual'){
    if(!physicalDoomReadersEnabled()||resume||retryWithoutData)refuse();
@@ -121,7 +125,7 @@ export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=fal
   }else if(plan?.kind==='review-direct-r343-manual'){
    if(!physicalDoomDirectEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind!=='review-low-memory-native-disabled')refuse();
-  return claimReviewedDoomEndpoint(endpoint,{resume,retryWithoutData});
+  return claimReviewedDoomEndpoint(endpoint,{resume,retryWithoutData,retail:plan?.kind==='review-ultimate-r374-manual'});
  },plan,secret,{deploymentResume:resume,deploymentRetryWithoutData:retryWithoutData});
 }
 async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false,deploymentRetryWithoutData=false}={}){
@@ -153,7 +157,7 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   if(info.modelRecognized!==true||info.firmware!=='2.2.86')refuse();
   client.phase='CatalogPreflight';
   const before=catalog(readWatchfaces(await client.query(4,0)));
-  if(plan.nativeLauncher&&!before.some(f=>f.id==='365219963'))refuse();
+  if(plan.nativeLauncher&&plan.kind!=='review-ultimate-r374-manual'&&!before.some(f=>f.id==='365219963'))refuse();
   if(plan.kind==='review-fault-r321-manual'&&!before.some(f=>f.id==='365219953'))refuse();
   const comparison=parent?compareDoomCatalogs(parent.before,before):null;
   const soundLocalOnly=plan.kind==='review-sound-r365-manual'&&deploymentRetryWithoutData&&parent?.before===null&&parent?.upload===null;

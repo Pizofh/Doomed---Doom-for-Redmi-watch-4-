@@ -9,12 +9,17 @@ namespace Rw4.PcRfcomm
     {
         internal const int ByteLimit = 4900000, FrameLimit = 4128;
         internal const int SessionMs = 660000, SendIdleMs = 15000;
+        // R374 is selected only by its separate dispatch/gate. Old caps stay fixed.
+        internal const int RetailByteLimit = 13400000, RetailFrameLimit = 6632, RetailSessionMs = 1260000;
         internal sealed class Budget
         {
+            private readonly bool retail;
+            internal Budget() : this(false) { }
+            internal Budget(bool retailProfile) { retail = retailProfile; }
             internal int Bytes, Frames;
             internal bool Reserve(int count)
             {
-                if (count < 1 || count > 4096 || Frames >= FrameLimit || count > ByteLimit - Bytes) return false;
+                if (count < 1 || count > 4096 || Frames >= (retail ? RetailFrameLimit : FrameLimit) || count > (retail ? RetailByteLimit : ByteLimit) - Bytes) return false;
                 Bytes += count; Frames++; return true;
             }
         }
@@ -24,7 +29,7 @@ namespace Rw4.PcRfcomm
             internal readonly int Code;
             internal Failure(Outcome outcome, int code = 0) { Outcome = outcome; Code = code; }
         }
-        internal static int RunNative(TextReader input, TextWriter output)
+        internal static int RunNative(TextReader input, TextWriter output, bool retail = false)
         {
             ulong address;
             if (!CachedTarget.Parse(input.ReadLine(), out address)) { output.WriteLine("E:InvalidTarget"); output.Flush(); return 2; }
@@ -34,7 +39,7 @@ namespace Rw4.PcRfcomm
             return RunCore(input, output, new WinSockTransport(api, address, true),
                 data => api.Receive(data.Socket, data.Bytes),
                 data => api.Send(data.Socket, data.Bytes, data.Offset, data.Count),
-                api.LastError, new RealClock());
+                api.LastError, new RealClock(), retail);
         }
         internal sealed class Io
         {
@@ -45,12 +50,13 @@ namespace Rw4.PcRfcomm
         // Same loop used by native and synthetic APIs; injected IClock makes
         // partial writes, would-block and deadlines testable without radio.
         internal static int RunCore(TextReader input, TextWriter output, ITransport transport,
-            Func<Io,int> receive, Func<Io,int> send, Func<int> lastError, IClock clock)
+            Func<Io,int> receive, Func<Io,int> send, Func<int> lastError, IClock clock, bool retail = false)
         {
             long began = clock.Milliseconds;
             int exit = 1, requests = 0, received = 0;
             string stage = "Opening";
-            var budget = new Budget();
+            var budget = new Budget(retail);
+            int sessionMs = retail ? RetailSessionMs : SessionMs;
             Func<long> elapsed = () => clock.Milliseconds - began;
             try
             {
@@ -60,12 +66,12 @@ namespace Rw4.PcRfcomm
                 if (elapsed() >= 20000) throw new Failure(Outcome.Deadline);
                 if (step.Outcome != Outcome.Opened) throw new Failure(step.Outcome, step.NativeError);
                 output.WriteLine("OPEN"); output.Flush();
-                while (elapsed() < SessionMs && ++requests <= 16384)
+                while (elapsed() < sessionMs && ++requests <= (retail ? 32768 : 16384))
                 {
                     // Blocking stdin/stdout are bounded externally by the parent
                     // supervisor; the native socket itself is nonblocking.
                     string line = input.ReadLine();
-                    if (elapsed() >= SessionMs) throw new Failure(Outcome.Deadline);
+                    if (elapsed() >= sessionMs) throw new Failure(Outcome.Deadline);
                     if (line == "C" || line == null) { exit = 0; break; }
                     var native = transport as WinSockTransport;
                     UIntPtr socket = native != null ? native.ActiveSocket : UIntPtr.Zero;
@@ -97,7 +103,7 @@ namespace Rw4.PcRfcomm
                         long progressAt = clock.Milliseconds;
                         while (offset < data.Length)
                         {
-                            if (elapsed() >= SessionMs || clock.Milliseconds - progressAt >= SendIdleMs) throw new Failure(Outcome.Deadline);
+                            if (elapsed() >= sessionMs || clock.Milliseconds - progressAt >= SendIdleMs) throw new Failure(Outcome.Deadline);
                             int count = send(new Io { Socket = socket, Bytes = data, Offset = offset, Count = data.Length - offset });
                             if (count == 0) throw new Failure(Outcome.Disconnected);
                             if (count < 0)
@@ -137,9 +143,9 @@ namespace Rw4.PcRfcomm
         }
         // Executable IPC fixture: no NativeWinSockApi or CachedTarget lookup.
         // Returns SHA256 + byte count on R, after accepting synthetic S frames.
-        internal static int Simulate(TextReader input, TextWriter output, string scenario)
+        internal static int Simulate(TextReader input, TextWriter output, string scenario, bool retail = false)
         {
-            if (input.ReadLine() != "PC_ONLY_R281") { output.WriteLine("E:InvalidTarget"); output.Flush(); return 2; }
+            if (input.ReadLine() != (retail ? "PC_ONLY_R374" : "PC_ONLY_R281")) { output.WriteLine("E:InvalidTarget"); output.Flush(); return 2; }
             var clock = new FakeClock();
             var transport = new FakeTransport { Begin = () => new Step(Outcome.Opened), CloseOk = scenario != "close-failure" };
             var captured = new MemoryStream();
@@ -165,11 +171,11 @@ namespace Rw4.PcRfcomm
                 if (scenario == "send-zero") return 0;
                 if (scenario == "send-error") throw new IOException("PRIVATE-CANARY");
                 if (scenario == "idle-timeout") return -1;
-                if (scenario == "session-timeout") { clock.Now = SessionMs; return -1; }
+                if (scenario == "session-timeout") { clock.Now = retail ? RetailSessionMs : SessionMs; return -1; }
                 if (scenario == "partial" && calls % 5 == 0) return -1;
                 int count = scenario == "partial" ? Math.Min(73, io.Count) : io.Count;
                 captured.Write(io.Bytes, io.Offset, count); return count;
-            }, () => 10035, clock);
+            }, () => 10035, clock, retail);
         }
     }
 }

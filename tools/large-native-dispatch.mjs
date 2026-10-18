@@ -5,3 +5,7 @@ export function assertLargeNativeDispatchReady(){
  const r=spawnSync(reviewedLargeExecutable(),['session-large-r281'],{input:'\n',encoding:'utf8',windowsHide:true,shell:false,timeout:5000});
  if(r.error||r.status!==2||r.stdout.trim()!=='E:InvalidTarget')throw Error('NativeProfileNotReady');
 }
+export function assertRetailNativeDispatchReady(){
+ const r=spawnSync(reviewedLargeExecutable(),['session-retail-r374'],{input:'\n',encoding:'utf8',windowsHide:true,shell:false,timeout:5000});
+ if(r.error||r.status!==2||r.stdout.trim()!=='E:InvalidTarget')throw Error('NativeProfileNotReady');
+}

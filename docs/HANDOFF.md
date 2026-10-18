@@ -1,4 +1,37 @@
-# R374 local terminado; consulta del usuario sobre edición más completa
+# R374 listo para revisión física; puertas cerradas
+
+Tras «ok, entiendo» se completó la preparación local autorizada de Ultimate.
+Paquete privado13090600B/65recursos, SHA256
+dfd89cd54542142a3cddb5dd444f6553fbd648b6e9d7dd1140f9b67b464ad8ca.
+Main27335B SHA4092c1be9759fc647917cc6821c1c19ae049d4956afd6a2aab925f3a539ad9ca.
+tools/doom-ultimate-r374.mjs configura paths/CRC/bancos propios ID365220001.
+Preview marco ámbar y4barras verticales. UI exacta+parse completos pasan;
+23casos store/CRC/RAM, sharewarebank rechazado; heldprepare/close con realDoom
+pasan. WAD S3 temporal otra vez retirado y módulos/nodos limpios. No repetir
+los36mapas ni ciclos sin cambios al C. No audio/FPS físicos nuevos.
+
+tools/package-ultimate-r374.mjs genera el paquete privado ignorado. NO publicar
+IWAD. tools/pc-doom-ultimate-r374.mjs plan/prepare/install; gates cerrados.
+Nuevo perfil separado session-retail-r374 con RetailPhysicalReviewed=false;
+mantener LargePhysicalReviewed=false. C#13.4MB/6632frames/21min; algoritmo
+6600partes/20min, supervisor21m15s. Antiguos límites intactos. Paqueteexacto
+6405partes2048/3212partes4080. Tests de paquete6alteraciones, envío entero
+cifrado por IPC nativo sintético, parcial13.1MB,6rechazos/cortes,4fallos
+nativos y perfil antiguo pasan. Regresión IPC anterior10escenarios y C#15499
+aserciones pasan. Sin radio/credenciales/journal físico.
+
+Plan docs/doom-ultimate-physical-plan-r374.md: pedir autorización nueva para
+UNA instalación inactiva y DOS arranques≤90s. Observación12–18min y batería≥50%.
+Sin retry/resume/borrado/selección desdePC, conservar versiones/partidas.
+Flash libre no medida: staging/paquete mayor pueden fallar/llenarFS. Guard
+RAM7153219/4194320 no se rebaja si rechaza. No recovery integral validado.
+Antes de hardware: aprobación explícita de este paquete, abrir SOLO gates
+general+Ultimate JS y RetailC#, rebuild y targetvacío→InvalidTarget antes
+de privados/journal. Tras único envío cerrar gates/rebuild antes del ensayo.
+No aprovechar aprobaciones antiguas consumidas. Resultado ignorado nuevo:
+build/doom-audio-r374/package-test.json. Commit local autorizado, no push.
+
+## Preparación del motor y revisión de edición
 
 Usuario dijo «vamos con el1». Se importó WAD Ultimate fijado del ZIP a
 tools/local/doom-ultimate/doom.wad (ignorado). No programas del ZIP ni reloj.
@@ -23,12 +56,9 @@ en archive.org/download/doom-wads. Se revisó listado sin descargar más conteni
 se detuvo preparación de paquete. Recomendación técnica: Ultimate1.9 local para
 Doom1 completo; expansión futura por WADs separados/selector, no PK3GZDoom.
 
-NO paquete/UI/instalador/gate físico R374 todavía. Pendiente UIpropia/config/
-slotbank CRC, validación exactaUI/slotajeno/heldaudio y planconcreto. Archivo con
-WAD~13MB excede workeractual4900000B/4128frames/660000ms. NO subir límiteglobal;
-diseñarperfilacotadoseparado y revisar instalador/espacio antes de pedir permiso.
-User «espera» impide continuar elección/envío hasta resolver su consulta; el test
-local ya iniciado terminó y se limpiaron recursos. No envío autorizado.
+La consulta de edición terminó con «ok, entiendo» y se siguió con Ultimate.
+El PK3 sigue fuera de alcance; no cambiar a DoomII/expansiones automáticamente.
+No envío autorizado todavía.
 
 # R373: WAD completos aportados e inspeccionados, sin extracción ni ejecución
 

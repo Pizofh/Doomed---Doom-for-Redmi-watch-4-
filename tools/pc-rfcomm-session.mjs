@@ -22,10 +22,14 @@ export function validateAuth(value) {
 }
 export class PrivatePipe {
   constructor(executable,address,{spawnWorker = spawn,limitMs = 60000,workerProfile = 'readonly',simulationScenario = 'ok'} = {}) {
-    const profiles={'readonly':['session-reviewed-r159'],'static-r169':['session-static-r169'],'large-r281':['session-large-r281']};
+    const profiles={'readonly':['session-reviewed-r159'],'static-r169':['session-static-r169'],'large-r281':['session-large-r281'],'retail-r374':['session-retail-r374']};
     if(workerProfile==='large-pc-r281'){
       if(address!=='PC_ONLY_R281'||!['ok','partial','bridge','send-zero','send-error','idle-timeout','session-timeout','send-hang','receive-eof','close-failure'].includes(simulationScenario))throw Error('CommandRefused');
       profiles[workerProfile]=['large-ipc-sim-r281',simulationScenario];
+    }
+    if(workerProfile==='retail-pc-r374'){
+      if(address!=='PC_ONLY_R374'||!['ok','partial','bridge','send-zero','send-error','idle-timeout','session-timeout','send-hang','receive-eof','close-failure'].includes(simulationScenario))throw Error('CommandRefused');
+      profiles[workerProfile]=['retail-ipc-sim-r374',simulationScenario];
     }
     if (!Object.hasOwn(profiles,workerProfile)) throw Error('CommandRefused');
     this.child = spawnWorker(executable,profiles[workerProfile],{stdio:['pipe','pipe','pipe'],windowsHide:true,shell:false});
