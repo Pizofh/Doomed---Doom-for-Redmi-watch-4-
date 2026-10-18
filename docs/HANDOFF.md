@@ -1,4 +1,18 @@
-# R381 DoomBoot preparado; pendiente de aprobación nueva
+# R381 DoomBoot instalado inactivo; UN ensayo manual aprobado pendiente
+
+Usuario aprobó instalación y ensayo el 2026-10-18. Envío único completo:
+modelo/FW correctos, catálogo11/IDnuevoausente, INSTALL0, ACKMD5/status0/
+offset0/chunk2048;21partes,29frames/42621BTX. RegisteredInactive, selección/
+esferas preservadas, contentVerifiedfalse. Cierre/workerexit0/nativeErrorfalse.
+Gatesgeneral/BootJS y C#Large cerrados/rebuild inmediato; Retail quedó cerrado.
+No borrados/SET/reinicio ni WAD/ELF reenviado. No más Bluetooth necesario.
+
+Falta UN ensayo ya autorizado: DoomBoot (marcoROSA/cincobarras), SOLO siREADY
+STARTuna vez/CHECKINGdespierto. SiERRORantesodespuésSTART, anotar GATE/FREE/MAX
+y MODE→CODE/READ/TOTAL, no repetir ni reabrir; volverdesdeAjustes. Si inicia,
+NEWGAME→I, controles/sonido/pausa y SALIR≤60s→CLOSED, reportarfluidez.
+Sinsegundoarranque. No inferir causa todavía; gates/guardRAMsiguen cerrados.
+El resto del bloque describe preparación previa.
 
 Primer ensayo R380: CHECKING→ERROR; todas las páginas C en0, no salió juego.
 Usuario volvió/menús normales. No pedir comprobación repetida ni segundoSTART.

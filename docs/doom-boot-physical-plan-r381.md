@@ -1,6 +1,6 @@
 # R381: launcher pequeño para identificar el fallo de CHECKING
 
-Preparado; pendiente de aprobación física nueva. Usuario reportó en R380
+Aprobado e instalado inactivo el 2026-10-18; ensayo manual pendiente. Usuario reportó en R380
 CHECKING→ERROR, todos los contadores nativos en0; volvió a su esfera/menús.
 No repitió el ensayo ni se pidió el segundo arranque. Ceros no prueban que
 jamás se ejecutó init nativo: pueden fallar antes del primer snapshot.
@@ -85,3 +85,14 @@ inicial exige aprobación explícita. No añade C, pero cambia el orden GC/RAM
 y puede intentar cargar el mismo motor aún no validado con este WAD en
 hardware: riesgo de bloqueo/corrupción/reinicio. El cierre es cooperativo,
 no garantiza cortar llamadas bloqueadas. Recuperación integral sin validar.
+
+## Resultado de instalación
+
+Una instalación autorizada: modelo/FW correctos, catálogo11/ownIDausente,
+INSTALL0 y ACKMD5/status0/offset0/chunk2048.21partes,29frames/42621B TX.
+RegisteredInactive/registeredVerifiedtrue/contentVerifiedfalse,
+selectedByClientfalse. Esferas y selección anteriores preservadas. Cierre y
+workerexit0 confirmados/nativeErrorfalse. Gatesgeneral/BootJS/LargeC#
+cerrados y worker reconstruido inmediatamente; Retail permaneció cerrado.
+No borrados/SET/reinicio ni reenvío WAD/ELF. UN ensayo manual ya aprobado
+pendiente; no repetir instalación.
