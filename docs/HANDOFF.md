@@ -1,3 +1,48 @@
+# R369 listo; pedir aprobación concreta, sin nueva instalación física
+
+R367 físico falló: silencio, AUDIOERR0/PCM0/CACHE532927, error al cambiar esfera
+y al SALIR tras reinicio, imagen persistente sobre menús. Usuario confirmó reloj
+normal tras reinicio dejando esfera habitual sin abrir Doom. No repetir Audio938
+ni Sound939. DoomReady940 sigue como versión jugable aceptada, carrier963.
+
+Correcciones locales R368/R369: juego deja de esperar audio para FINISHED/join;
+op10 retira Image/listener en UI con fences, SIN liberar buffers/código ni exigir
+join. GC conserva op4 solo atomics. op5 retira descriptores tras join real juego,
+pero solo marca joined/unload tras quiet+join audio. Errores gráficos persistentes
+admiten retirada visual, no borrado del error ni unload. Controller nuevo versión7,
+50ticks (~2s nominal) espera cierre audio; ERROR/cuarentena si sigue pendiente.
+No timeout que cancele llamada nativa. No garantía física de cleanup aún.
+
+Hallazgo importante: vela_audio.bin del stock fijado, SHA6e0dd7d67bfdf9c6ed6dc31b7b8a777c84d88d0d5ee992316c062b6ba3e2228c.
+Inspección privada artifacts/research/audio-server-r368, nunca ejecutar/publicar.
+SET_OPTIONS3 tbb a f2bf6 usa ':'/ '='; antes opcionesconcomas hacían formatentero
+inválido. Preparación rechaza formato antes de abrir/conectar pipe. Tabla real
+mp3/ogg/s16le/silk/wav (silk descriptorRAM). R369 envía opcionesconcolon.
+Esta vía explica hangprepare, pero R367 no capturó llamada actual; no afirmar
+única causa ni audio logrado. Nuevo snapshot UI: s45 Image, s46 hook, s47 quiet,
+s48 CALL (0idle,1validate,2focus,3open,4prepare,5start,6pause,7write,8stop,9close,10abandon).
+
+DoomVoice ID365219937 rw4voice369, preview CINCO barras amarillas. Paquete
+build/doom-audio-r369/package/DoomVoice-id-only.face 672372B,61resources,
+SHAdca5c7cdb2c21da337275e85841b54286b56d10e267fe35d403d7a28d1ecc348.
+ELF624456 SHA4b1c28d3ad1886ab2c16e359539f0ac4936476df8f3d1df19fecf39657fda690.
+LuaSHAd12ba5b1124c8f2e3fed2f7ad79bed76437de0ecdccf4160812c6d959660d52b.
+docs/doom-voice-physical-plan-r369.md pide UNAinstalacióninactiva+DOSarranques<=30s,
+observación/batería>=50/audioaudible. Segundo solo sonido+CLOSED+ERR0: cambiar
+esfera desde juego y volver para comprobar CLOSED. No guardar/cargar extra ni
+reinicioprevio/retry/resume/WAD/borrado/autoselección. Aprobación aún pendiente.
+
+Gates main/Voice y C#Large false. CLI pc-doom-voice-r369 prepare offline listo,
+journalvoice-r369.jsonl independiente probado fakekeys; compiledLarge cerrado.
+Tras aprobación específica no pedirotra: abrirC#Large/build/checkInvalidTarget,
+JSmain+Voice, instalaruna vez, cerrarJS/C# y buildclosed. NadafísicoenR368/R369.
+
+Tests R369: contractservidor,compileRW4,2ciclosmotorreal+save/load+PCM+join/unload,
+S3hold prepare/close (imagen retirada antesgamejoin, unloadrechazado hasta release),
+mediafaults,7controllercases,26rendercasesinclbaseline,package61/tamper5/Luaparse.
+S3 audio/graphics modelados, no reproducciónreal. No repetir unchanged tests,
+CI/Gitaudits/push. Nuevos C/h y tools están locales; commit propio sin privados.
+
 # R367 instalado inactivo; esperar primer ensayo físico de direcciones corregidas
 
 Usuario autorizó instalación+2ensayos<=60s,>=50%batería,podíaobservar.

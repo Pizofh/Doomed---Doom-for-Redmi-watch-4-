@@ -4,9 +4,15 @@ import fs from 'node:fs';import path from 'node:path';import assert from 'node:a
 import {spawnSync} from 'node:child_process';import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {audioBindings} from './audio-bindings-r363.mjs';
+import {recoveryTransport} from './doom-audio-recovery-r368.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url)),mode=process.argv[2];
-assert(process.argv.length===3&&['rw4','s3-model'].includes(mode),'Fixed targets');
-const out=path.join(root,'build/doom-audio-r367',mode),old=path.join(root,'build/doom-ready-r351',mode);
+const corrected=process.argv[3]==='--recovery-r369';
+const recovery=process.argv[3]==='--recovery-r368'||corrected;
+assert((process.argv.length===3||(process.argv.length===4&&recovery))&&['rw4','s3-model','s3-hold'].includes(mode),'Fixed targets');
+assert(mode!=='s3-hold'||recovery);
+const baselineMode=mode==='s3-hold'?'s3-model':mode;
+const checkpoint=corrected?'R369':recovery?'R368':'R367';
+const out=path.join(root,'build/doom-audio-'+checkpoint.toLowerCase(),mode),old=path.join(root,'build/doom-ready-r351',baselineMode);
 assert(!fs.existsSync(path.join(out,'review.json')),'Reviewed output exists');fs.mkdirSync(out,{recursive:true});
 const hash=b=>createHash('sha256').update(b).digest('hex');
 const log=[];function run(tool,args,label){const r=spawnSync(tool,args,{cwd:root,windowsHide:true,shell:false,encoding:'utf8',timeout:30000,maxBuffer:2097152});
@@ -21,7 +27,7 @@ const gcc=path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-gcc.exe'
 const ld=path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-ld.exe');
 function flags(label){const a=recipe.find(x=>x.label===label).args;return a.slice(0,a.indexOf('-c'));}
 const engineFlags=[...flags('compile-0'),'-Idoom/platform-rw4/audio','-DFEATURE_SOUND'];
-const portFlags=[...flags('compile-1'),'-Idoom/platform-rw4/audio'];
+const portFlags=[...flags('compile-1'),'-Idoom/platform-rw4/audio',...(mode==='s3-hold'?['-DRW4_AUDIO_HOLD_TEST']:[])];
 function compile(source,name,engine=false){const obj=path.join(out,name+'.o');run(gcc,[...(engine?engineFlags:portFlags),'-c',source,'-o',obj],name);return obj;}
 function once(s,a,b){assert.equal(s.split(a).length,2,a);return s.replace(a,()=>b);}
 const input=fs.readFileSync(path.join(root,'third_party/doomgeneric/doomgeneric/i_sound.c'),'utf8');
@@ -44,11 +50,17 @@ transport=once(transport,'atomic_store(&accepting,0);atomic_store(&applied,0);at
  'doomed_sfx_end();rw4_audio_sink_stop();\n    while(!rw4_audio_sink_quiet())(void)rw4_host_usleep(20000);\n    if(rw4_audio_sink_join())atomic_store(&error,1);\n    atomic_store(&accepting,0);atomic_store(&applied,0);atomic_store(&requested,0);');
 transport=once(transport,'snapshot[44]=atomic_load(&tick_cost);',
  'snapshot[60]=rw4_audio_sink_metric(0);snapshot[61]=rw4_audio_sink_metric(1);snapshot[62]=doomed_sfx_cache_bytes();snapshot[63]=rw4_audio_sink_metric(2);\n        snapshot[44]=atomic_load(&tick_cost);');
+if(recovery)transport=recoveryTransport(transport);
+if(mode==='s3-hold'){
+ transport=once(transport,'op>10','op>11');
+ transport=once(transport,'if(op==10){','if(op==11){extern void rw4_audio_model_release(void);rw4_audio_model_release();}else if(op==10){');
+}
 fs.writeFileSync(path.join(out,'transport.c'),transport);
 const replacements=new Map([[path.join(old,'ready-0.o'),compile(path.join(out,'adapter.c'),'adapter',true)],
  [path.join(old,'ready-1.o'),compile(path.join(out,'transport.c'),'transport')]]);
 const extras=['pcm-core','doom-sfx','doom-module','sink-worker','media-sink'].map(n=>compile('doom/platform-rw4/audio/'+n+'.c',n,n==='doom-module'));
-if(mode==='s3-model'){
+if(recovery)extras.push(compile('doom/platform-rw4/device/direct-detach-r368.c','direct-detach'));
+if(mode!=='rw4'){
  replacements.set(path.join(root,'build/doom-ram-s3/i_sound.o'),soundObject);
  extras.push(compile('doom/platform-rw4/audio/media-model.c','media-model'));
 }else{
@@ -72,9 +84,10 @@ const readelf=path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-read
 const meta=run(readelf,['-W','-h','-A','-s','-r',elf],'readelf');
 assert(!/\bUND[ \t]+\S+[ \t]*$/m.test(meta));fs.writeFileSync(path.join(out,'readelf.txt'),meta);
 const sources=['pcm-core.c','doom-sfx.c','doom-module.c','sink-worker.c','media-sink.c',mode==='rw4'?'media-sink.h':'media-model.c'];
-const result={checkpoint:'R367',mode,elfBytes:fs.statSync(elf).size,elfSha256:hash(fs.readFileSync(elf)),
+const result={checkpoint,mode,elfBytes:fs.statSync(elf).size,elfSha256:hash(fs.readFileSync(elf)),
  baselineSha256:baseline.elfSha256,audio:mode==='rw4'?'candidate managed media':'modeled managed media service, not playback',realEngine:true,
  sourceHashes:Object.fromEntries(sources.map(p=>[p,hash(fs.readFileSync(path.join(root,'doom/platform-rw4/audio',p)))])),
- generatedHashes:{adapter:hash(adapter),transport:hash(transport)},zoneMiB:3,
+ generatedHashes:{adapter:hash(adapter),transport:hash(transport)},
+ recoverySourceHashes:recovery?Object.fromEntries(['doom/platform-rw4/device/direct-detach-r368.c','doom/platform-rw4/device/direct-detach-r368.h','tools/doom-audio-recovery-r368.mjs'].map(p=>[p,hash(fs.readFileSync(path.join(root,p)))])):{},zoneMiB:3,
  rw4Executable:mode==='rw4',physicalDeploymentAuthorized:false,physicalTransport:false};
 fs.writeFileSync(path.join(out,'review.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

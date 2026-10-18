@@ -1,11 +1,13 @@
 # 0.2: preparación y efectos de sonido
 
-**R367:** el primer ensayo R365 jugó/cerró sin sonido (ERR22, PCM0). Se corrigió
-una base de direcciones de audio que no coincidía con los bindings físicos ya
-usados por el port; se conserva la validación y se separan errores por etapa.
-DoomAudio669980B preparado sin instalar. [Plan R367](doom-audio-physical-plan-r367.md).
-El inicio original se verificó en dos ciclos del emulador; el WAD ya incluye
-cadáveres decorativos, sin autocarga al START. Sonido físico aún pendiente.
+**R369:** R367 se instaló y falló: silencio y cierre bloqueado con imagen sobre
+los menús. Reloj recuperado con reinicio y esfera habitual. Se encontró en el
+servidor del firmware exacto que SET_OPTIONS separa pares con `:`, mientras
+enviábamos comas. DoomVoice corrige ese formato y separa retirada de imagen,
+join del juego y join del audio, conservando recursos si el servicio se atasca.
+Pasaron pruebas de llamadas bloqueadas, dos ciclos de Doom y cierre/reentrada
+locales. [Paquete y ensayo propuesto R369](doom-voice-physical-plan-r369.md).
+Instalación cerrada; sonido físico todavía sin validar. No reabrir R365/R367.
 
 **Candidato R365 preparado:** efectos integrados en Doom, cuatro voces y cola
 PCM en memoria; adaptador media/foco con servicio simulado y compilación RW4.

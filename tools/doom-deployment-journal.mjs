@@ -37,6 +37,7 @@ export class DoomDeploymentJournal{
   const dir=directory(where);this.#file=path.join(dir,plan.kind==='review-ready-r351-manual'?'ready-r351.jsonl':plan.kind==='review-pads-r349-manual'?'pads-r349.jsonl':plan.kind==='review-wide-r347-manual'?'wide-r347.jsonl':plan.kind==='review-touch-r345-manual'?'touch-r345.jsonl':plan.kind==='review-direct-r343-manual'?'direct-r343.jsonl':plan.kind==='review-demand-r337-manual'?'demand-r337.jsonl':plan.kind==='review-bench-r335-manual'?'bench-r335.jsonl':plan.kind==='review-palette-r333-manual'?'palette-r333.jsonl':plan.kind==='review-fast-r331-manual'?'fast-r331.jsonl':plan.kind==='review-hold-r329-manual'?'hold-r329.jsonl':plan.kind==='review-lease-r327-manual'?'lease-r327.jsonl':plan.kind==='review-refs-r325-manual'?'refs-r325.jsonl':plan.kind==='review-fault-r321-manual'?'fault-r321.jsonl':plan.kind==='review-readers-r318-manual'?'readers-r318.jsonl':plan.kind==='review-ram-png-manual'?'ram-png-r304.jsonl':'transfer.jsonl');this.#lockFile=path.join(dir,'watch.lock');
   if(plan.kind==='review-sound-r365-manual')this.#file=path.join(dir,'sound-r365.jsonl');
   if(plan.kind==='review-audio-r367-manual')this.#file=path.join(dir,'audio-r367.jsonl');
+  if(plan.kind==='review-voice-r369-manual')this.#file=path.join(dir,'voice-r369.jsonl');
   this.#key=Buffer.from(binding.key);this.#tag=binding.tag;this.#plan=plan;
   try{
    this.#lock=fs.openSync(this.#lockFile,'wx',0o600);

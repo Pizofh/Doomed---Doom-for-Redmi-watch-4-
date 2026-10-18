@@ -3,8 +3,8 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';import {session} from './doom-ui-emulator.mjs';
-assert.equal(process.argv.length,2);const root=fileURLToPath(new URL('../',import.meta.url));
-const out=path.join(root,'build/audio-media-r367');assert(!fs.existsSync(out));
+const corrected=process.argv[2]==='--r369';assert(process.argv.length===2||(process.argv.length===3&&corrected));const root=fileURLToPath(new URL('../',import.meta.url));
+const out=path.join(root,corrected?'build/audio-media-r369':'build/audio-media-r367');assert(!fs.existsSync(out));
 const verify=spawnSync(process.execPath,['tools/build-rw4-file-r214.mjs','verify-inputs'],{cwd:root,encoding:'utf8',windowsHide:true,timeout:15000});assert.equal(verify.status,0);
 fs.mkdirSync(out,{recursive:true});const hash=b=>createHash('sha256').update(b).digest('hex');
 function run(name,args){const r=spawnSync(path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-'+name+'.exe'),args,

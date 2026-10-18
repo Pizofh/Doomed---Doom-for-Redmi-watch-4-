@@ -3,8 +3,10 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';import {fileURLToPath} from 'node:url';
 import {session} from './doom-ui-emulator.mjs';import {verifyShareware} from './wad-data.mjs';
-assert.equal(process.argv.length,2);
-const root=fileURLToPath(new URL('../',import.meta.url)),out=path.join(root,'build/doom-audio-r367/s3-model');
+const corrected=process.argv[2]==='--recovery-r369';
+const recovery=process.argv[2]==='--recovery-r368'||corrected;
+assert(process.argv.length===2||(process.argv.length===3&&recovery));
+const root=fileURLToPath(new URL('../',import.meta.url)),out=path.join(root,corrected?'build/doom-audio-r369/s3-model':recovery?'build/doom-audio-r368/s3-model':'build/doom-audio-r367/s3-model');
 const review=JSON.parse(fs.readFileSync(path.join(out,'review.json'),'utf8')),elf=path.join(out,'doom.elf');
 assert.equal(review.mode,'s3-model');assert.equal(review.rw4Executable,false);
 assert.equal(createHash('sha256').update(fs.readFileSync(elf)).digest('hex'),review.elfSha256);
@@ -14,6 +16,9 @@ const before=vm.adb(['shell','lsmod'],'before');assert.equal(before.trim().split
 for(const p of [remote,script,'/dev/rw4doomready'])assert(/^nsh: ls: stat failed: 2\r?$/im.test(vm.adb(['shell','ls',p],'absence')));
 const wad=path.join(vm.folder,'doom1.wad');vm.adb(['pull','/data/app/watchface/market/365799913/lua/doom1.wad',wad],'wad');verifyShareware(fs.readFileSync(wad));
 let lua=fs.readFileSync(path.join(root,'experiments/doom-runtime-rw4/ready-engine-r351.lua'),'utf8');
+if(recovery){
+ lua=lua.replace('s[2]==6','s[2]==7').replace('if s[6]==1 then ended=s','if s[6]==1 and s[47]==1 then ended=s');
+}
 lua=lua.replaceAll('/tmp/rw4-doom-ready-r351.elf',remote).replaceAll('rw4ready351','rw4audio362');
 lua=lua.replace("'E1M1')","'E1M1')\nassert(initial[38]==1056*65536 and initial[39]==((-3616*65536)&0xffffffff) and initial[40]==0x40000000 and initial[41]==50 and initial[42]==100,'original player1 spawn')\nprint('ORIGINAL_SPAWN_OK')");
 lua=lua.replace("shell('rmmod rw4audio362')",`assert(s[61]>0 and s[62]>0 and s[63]==532927 and s[64]==0,'audio pipeline/full WAD cache')

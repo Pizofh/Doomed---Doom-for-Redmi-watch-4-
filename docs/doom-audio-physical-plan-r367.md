@@ -99,3 +99,11 @@ No se seleccionó la esfera ni se ejecutó C automáticamente. No se leyó de vu
 el contenido: su comprobación queda en el START manual. Puertas JS main/Audio
 y perfil Large C# restaurados a false; transporte cerrado recompilado. Pendiente
 el resultado manual del usuario, sin afirmar todavía que suene el reloj.
+
+## Resultado físico recibido: falló sonido y cierre
+
+AUDIO ERR=0, PCM SFX=0, CACHE=532927. Al cambiar de esfera y también al salir
+después de reiniciar, la imagen quedó sobre los menús y no completó CLOSED.
+El usuario recuperó el reloj reiniciando y dejando la esfera habitual, sin
+reabrir Doom. No repetir este paquete. Corrección y límites en
+[plan R369](doom-voice-physical-plan-r369.md); no hay nuevo ensayo autorizado.
