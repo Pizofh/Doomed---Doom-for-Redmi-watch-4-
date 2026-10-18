@@ -23,6 +23,7 @@ const PHYSICAL_ULTIMATE_CATALOG_R376_REVIEWED=false;
 const PHYSICAL_PACKED_R378_REVIEWED=false;
 const PHYSICAL_PACKED_RESTART_R379_REVIEWED=false;
 const PHYSICAL_PACKED_RESUME_R380_REVIEWED=false;
+const PHYSICAL_BOOT_R381_REVIEWED=false;
 const PHYSICAL_PADS_R349_REVIEWED=false;
 const PHYSICAL_WIDE_R347_REVIEWED=false;
 const PHYSICAL_TOUCH_R345_REVIEWED=false;
@@ -52,6 +53,7 @@ export function physicalDoomUltimateAfterCatalogEnabled(){return PHYSICAL_DEPLOY
 export function physicalDoomPackedEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_PACKED_R378_REVIEWED;}
 export function physicalDoomPackedRestartEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_PACKED_RESTART_R379_REVIEWED;}
 export function physicalDoomPackedResumeEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_PACKED_RESUME_R380_REVIEWED;}
+export function physicalDoomBootEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_BOOT_R381_REVIEWED;}
 export function physicalDoomPadsEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_PADS_R349_REVIEWED;}
 export function physicalDoomWideEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_WIDE_R347_REVIEWED;}
 export function physicalDoomTouchEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_TOUCH_R345_REVIEWED;}

@@ -94,3 +94,13 @@ worker reconstruido inmediatamente. No borrados/reinicio/SET ni consulta extra.
 Los DOSensayos manuales ya aprobados siguen pendientes. El registro no prueba
 el contenido completo del WAD ni rendimiento/sonido en hardware; la comprobación
 del lector y el reporte del usuario deben confirmarlos. No repetir instalación.
+
+### Primer ensayo reportado
+
+Usuario: CHECKING→ERROR; CERROR/GPUCODE/PHASE y todas las páginas en0,
+sin juego visible; salió y menús responden. Segundo arranque no se realiza
+según regla de parada. No inferir que nunca ejecutó init C: puede fallar antes
+del primer snapshot. No hay checksum/RAM/etapa Lua visible en R378.
+Se prepara launcher-only R381 para conservar el error de preflight, mostrar
+etapa/RAM y recoger temporales del CRC antes de medir, sin rebajar guardas ni
+reenviar el juego. No hay causa exacta ni corrección física confirmadas.

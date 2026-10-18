@@ -1,4 +1,31 @@
-# R380 instalado inactivo: pendientes los DOS ensayos manuales aprobados
+# R381 DoomBoot preparado; pendiente de aprobación nueva
+
+Primer ensayo R380: CHECKING→ERROR; todas las páginas C en0, no salió juego.
+Usuario volvió/menús normales. No pedir comprobación repetida ni segundoSTART.
+Ceros no prueban ausencia de init C: aún no sabemos causa exacta.
+
+DoomBootID365220003,41900B SHAfa971e356a2d7d79757eb9deae49e3475285d1b24ed83cb13101ab070c6cca9a,
+Lua28995B SHAf67ddb3259179e58647e475d0417121dcba59dd63173711a502da1b8c7977d3b.
+Paquete build/doom-boot-r381/package, soloLua+6labels/preview, NOELF/WAD.
+Reusa base/engine/slots/gráficos de365220002; CONSERVAR DoomPacked.
+Mismo C y guardRAM7366211/4194320, GCantesRAM. Etapa/ram/code/readbyte visibles
+en páginas5/6. No afirmar fallo RAM/archivo ni mejora física todavía.
+16casos Lua exacta+UI simulada/two cycles pasan; package7recursos/6tamper/
+21partesC#IPC/retry6modes/dependencias/CLI pasan. No repetir tests del motor.
+Tools doom-boot-r381, test-boot-r381, package-boot-r381, test-boot-package-r381,
+pc-doom-boot-r381. PHYSICAL_BOOT_R381_REVIEWED=false; todo gate cerrado.
+Plan docs/doom-boot-physical-plan-r381.md: pedir UNA instalación42KB y UN
+ensayo≤60s. Tras aprobar abrir SOLO general+Boot JS y C#Large (no Retail),
+build/emptytargetready, installUNAvez; cerrar/rebuild siempre antes de jugar.
+Journalboot-r381 separado, no retries/resume. Exige carrier365220002 presente.
+Manual: marcoROSA/cincobarras; READY→START1, error→GATE/FREE/MAX+MODE→CODE/
+READ/TOTAL; no repetir/reabrir. Si inicia, jugar≤60s y SALIR→CLOSED. No segundo
+arranque. No borrar/reinstalar juego ni usar la autorización R380 consumida.
+No radio ni escritura al reloj durante esta preparación. Fuente/ELF/WAD R378
+siguen intactos. Primer paquete de UI previo a checkpoints recovery archivado
+localmente package-before-recovery-checks; NO usar, factory solo acepta final.
+
+## R380 instalación anterior
 
 Usuario aprobó UNA reanudación y DOSensayos el 2026-10-18. Se ejecutó UNAvez:
 modelo/FW correctos, catálogo10/samemembership/sameselection, INSTALL0,
