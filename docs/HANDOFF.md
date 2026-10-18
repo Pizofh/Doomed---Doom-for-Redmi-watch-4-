@@ -1,4 +1,14 @@
-# R370 listo; pendiente aprobación física específica para DoomMenu
+# R370 instalado inactivo; pendientes los dos ensayos manuales autorizados
+
+Usuario autorizó UNA instalación y DOS arranques condicionados<=60s, batería>=50%
+y observando. Envío terminado RegisteredInactive, registeredVerified=true,
+installStatus=0, MD5ecoOK,330partes,resume0,338frames,680080B transmitidos.
+closeConfirmed/workerExitConfirmed=true, exit0. contentVerified=false (sin
+readback). Sin selección ni START automático. Main/Menu JS y Large C# cerrados;
+transporte recompilado con physicalEnabled=false. No reintento ni nuevo envío.
+Dar/esperar prueba DoomMenu cuatro líneas verdes: título/OK/NEW GAME/episodio1/
+dificultad/controles/audio/PAUSA-GUARDAR/SEGUIR/SALIR-CLOSED. Solo si todo bien,
+reabrir título y PAUSA-CARGAR-SEGUIR/SALIR-CLOSED. No repetir aprobación ni tests.
 
 Usuario aclara que faltan título/menú y percibe otro nivel/posición con muertos.
 No considerar su percepción resuelta solo por tests S3; R367/R369 verificaban
@@ -17,18 +27,15 @@ LuaSHAcf2100ceb032feda8f3c1cf1b5c52bc881cbc4bda9450e9f3c0e42f0906c0f5d.
 Controlv8/snapshot72. NuevoCmenu-input-r370 y generadoresdoom-menu*. Builder
 build-doom-audio-r362 {rw4|s3-model} --menu-r370. Tests reales2ciclos+titleload,
 QUIT original, UI exactamock,controller7cases,paquete/tamper/parse/gateoffline.
-Modelográficos/audio; nadafísicoR370. Cuerpo m_menu upstream generado conserva
+Modelográficos/audio; ejecución física R370 aún pendiente. Cuerpo m_menu upstream generado conserva
 licencia; redirige solo Save/Load al mensaje PAUSA, sin DOSfiles/noautocarga.
 
-Pedir aprobación del plan docs/doom-menu-physical-plan-r370.md: UNAinstalación
+Plan aprobado docs/doom-menu-physical-plan-r370.md: UNAinstalación
 inactiva+DOSarranques<=60s>=50bateríaobservando, primero título/newgame/episodio1/
 skill/primer mapa/controles/FX/guardar/salir; segundo solo todoOK, título/PAUSA/
 CARGAR/SEGUIR/SALIR. ConservarVoice937+Ready940+carrier963; bancos936 propios.
-No reinicio/retry/resume/WAD/borrado/autoselección. Si aprobación llega no pedir
-otra. AbrirLargeC#/build/checkInvalidTarget, JSmain+Menu solamente y UNAvez
-pc-doom-voice-r369 install --menu-r370; cerrarJS/C# y rebuildcerrado siempre.
-Journalmenu-r370.jsonl, prepareoffline listo, compiledLarge cerrado. No autorizar
-Voiceporaccidente: nuevoflagCLIeligeperfilpin/gate/IDporseparado. Noauthleída.
+No reinicio/retry/resume/WAD/borrado/autoselección. Instalación ya consumida;
+Journalmenu-r370.jsonl. CLI con flag explícito eligió perfil/pin/gate/ID Menu.
 
 TestsS3inicialesfallaron porarnés: dosprocesosLua cambianowner, se hizo snapshot
 y resetguest soloemulador; luego unproceso45s acotado. Restos/modelos retirados.

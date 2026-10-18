@@ -74,7 +74,14 @@ sintética, preparación offline y puerta de instalación cerrada. No se repiti�
 la campaña de nueve mapas ni los tests de driver/audio/render sin cambios.
 No se presenta el servicio o GPU modelados como nueva validación física.
 
-## Ensayo solicitado, aún sin autorizar
+## Ensayo autorizado; instalación terminada, ejecución manual pendiente
+
+El usuario autorizó esta instalación y ambos ensayos condicionados. La única
+instalación terminó RegisteredInactive/registeredVerified=true, installStatus0,
+MD5eco correcto,330partes,resume0,338frames y680080B transmitidos. Conexión y
+worker cerrados, exit0. No selección ni START automático; contentVerified=false
+porque no hay lectura de contenido. Main/Menu JS y Large C# restaurados a false,
+transporte cerrado recompilado. No se permite otro envío con esta aprobación.
 
 UNA instalación inactiva y DOS arranques manuales de hasta60s, con batería≥50%,
 volumen audible y usuario observando. Sin reinicio previo, borrado, reintento,
@@ -100,4 +107,4 @@ Tras aprobación abrir solo main+Menu JS y Large C#, compilar y comprobar
 InvalidTarget sin radio antes de privados; ejecutar una vez:
 `node tools/pc-doom-voice-r369.mjs install --menu-r370`.
 Journal independiente menu-r370.jsonl. Restaurar puertas cerradas y recompilar
-transporte. No activar ni ejecutar C automáticamente. No nueva aprobación aún.
+transporte. No activar ni ejecutar C automáticamente. La aprobación ya fue recibida.
