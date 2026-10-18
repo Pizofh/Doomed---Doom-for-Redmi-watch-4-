@@ -1,4 +1,25 @@
-# R374 listo para revisión física; puertas cerradas
+# R374 intento autorizado rechazado antes del archivo; puertas cerradas
+
+Usuario autorizó UNA instalación y DOS arranques; luego «sigue, se habían
+acabado los créditos». Antes de esa continuación solo se habían abierto
+gates/compilado/verificado targetvacío; NO se había iniciado install.
+Se ejecutó install una vez tras su continuación: StoppedNeedsReview,
+InstallIntent/installStatus3, modelo/FW correctos, catálogo14/ownIDausente,
+6frames/226B TX,0partes MASS, registeredVerifiedfalse. Cierre/socket y worker
+confirmados/exit0. NO payload instalado ni arranques. GateJSgeneral+Ultimate
+y C#Retail cerrados y worker reconstruido. Journal privado ultimate-r374.jsonl
+Uncertain intacto. No retry autorizado, tampoco si0partes.
+
+Estado3 ya trazado en docs/static-id-physical-result-r175.md a recurso MiFitness
+face_hint_storage_low (campo5→callback3→recurso). No byteslibres/cupo exacto
+ni prueba de límite13MB/RAM. Se pidió al usuario liberar espacio conservando
+DoomMenu/DoomLauncher/habitual; se espera su respuesta. No PCdelete/SET ni
+consulta posterior. Al confirmar espacio: preparar plan/guard/journal de un
+eventual reintento separado, sin reutilizar aprobación R374. Dos ensayos
+manuales no proceden hasta que haya instalación real. No cambiar el payload
+innecesariamente. No registrar detalles triviales de borrados en commits.
+
+## Preparación local completada antes del intento
 
 Tras «ok, entiendo» se completó la preparación local autorizada de Ultimate.
 Paquete privado13090600B/65recursos, SHA256

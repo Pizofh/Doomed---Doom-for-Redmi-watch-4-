@@ -1,9 +1,9 @@
 # R374: Ultimate Doom, paquete completo y aislado
 
-Preparado localmente; **sin autorización física todavía**. Una instalación
-inactiva y dos arranques manuales como máximo. Las aprobaciones anteriores
-están consumidas. No abrir gates, consultar el reloj ni crear journal privado
-antes de aprobar este paquete concreto.
+El usuario autorizó expresamente una instalación inactiva y dos arranques
+manuales con batería≥50% y observación. **El intento de instalación ya se
+consumió y fue rechazado antes del archivo**. No hay autorización de reintento.
+No se hicieron los arranques manuales porque el paquete no quedó instalado.
 
 ## Paquete
 
@@ -106,3 +106,24 @@ Puede haber bloqueo/panic/corrupción de flash, falta de espacio o necesidad de
 reinicio. El límite de sesión es cooperativo, no detiene un cuelgue. La
 recuperación integral sigue sin validar. Estos riesgos requieren la revisión
 del usuario para este nuevo payload antes de cualquier escritura física.
+
+## Resultado del único intento autorizado
+
+El transporte Retail se compiló habilitado y rechazó un target vacío antes
+de lookup nativo. Se ejecutó `pc-doom-ultimate-r374.mjs install` una vez.
+Modelo/FW correctos; catálogo14esferas, IDnuevo ausente. Respuesta de INSTALL
+4/4: **installStatus3**. FaseInstallIntent, StoppedNeedsReview,
+registeredVerified=false,6frames/226B TX, **0partes MASS**, sin petición de
+upload22/0 ni selección desde PC. CloseConfirmed/workerExitConfirmed=true,
+workerExitCode0. Journal privado `ultimate-r374.jsonl` conservado Uncertain.
+
+La [traza estática del cliente Mi Fitness3.59.1i](static-id-physical-result-r175.md)
+ya identificaba el campo5/estado3 como `face_hint_storage_low`. Es un rechazo
+de almacenamiento/cupo de esferas; no mide bytes libres ni demuestra un límite
+de tamaño del archivo o falta de RAM. No se volvió a consultar el reloj.
+
+Se cerraron gates JS general/Ultimate y C#Retail inmediatamente, y se
+reconstruyó el worker cerrado. No retry/resume, borrado ni otra escritura.
+Usuario recibió indicación de conservar DoomMenu/DoomLauncher y esfera
+habitual; se espera confirmación de espacio antes de preparar/revisar un
+eventual intento nuevo. El paquete y sus hashes no cambiaron.
