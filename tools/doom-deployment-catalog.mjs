@@ -20,3 +20,11 @@ export function reviewedTwoRemovals(previous,current){
  if(current.some(r=>!previous.some(p=>p.id===r.id&&p.canDelete===r.canDelete)))return false;
  return previous.filter(p=>!current.some(r=>r.id===p.id)).every(p=>p.canDelete);
 }
+// R375: user confirmed freeing space. Accept only removals of deletable faces;
+// preserve the retained carrier, surviving flags and CURRENT selection.
+export function reviewedUltimateSpaceRemovals(previous,current){
+ if(!canonical(previous)||!canonical(current)||current.length>=previous.length)return false;
+ if(!current.some(r=>r.id==='365219963'))return false;
+ if(current.some(r=>!previous.some(p=>p.id===r.id&&p.canDelete===r.canDelete)))return false;
+ return previous.filter(p=>!current.some(r=>r.id===p.id)).every(p=>p.canDelete);
+}

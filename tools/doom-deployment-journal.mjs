@@ -33,8 +33,9 @@ function upload(value,plan){
 const transitions={Created:['InstallIntent'],InstallIntent:['UploadIntent'],UploadIntent:['Uploading'],Uploading:['SentNotVerified'],SentNotVerified:['SentNotVerified','RegisteredInactive','UnexpectedActivation','UnexpectedSelection','RegisteredNotRemovable']};
 export class DoomDeploymentJournal{
  #fd=null;#lock=null;#token=randomUUID();#key;#tag;#plan;#record;#lastHash='0'.repeat(64);#file;#lockFile;#resume=null;
- constructor(plan,identity,{directory:where=defaultDirectory,resume=false,retryWithoutData=false}={}){
+ constructor(plan,identity,{directory:where=defaultDirectory,resume=false,retryWithoutData=false,afterSpace=false}={}){
   packageCopy(plan);const binding=identities.get(identity);if(!binding||typeof resume!=='boolean'||typeof retryWithoutData!=='boolean'||resume&&retryWithoutData)fail();
+  if(typeof afterSpace!=='boolean'||afterSpace&&(plan.kind!=='review-ultimate-r374-manual'||resume||retryWithoutData))fail();
   const dir=directory(where);this.#file=path.join(dir,plan.kind==='review-ready-r351-manual'?'ready-r351.jsonl':plan.kind==='review-pads-r349-manual'?'pads-r349.jsonl':plan.kind==='review-wide-r347-manual'?'wide-r347.jsonl':plan.kind==='review-touch-r345-manual'?'touch-r345.jsonl':plan.kind==='review-direct-r343-manual'?'direct-r343.jsonl':plan.kind==='review-demand-r337-manual'?'demand-r337.jsonl':plan.kind==='review-bench-r335-manual'?'bench-r335.jsonl':plan.kind==='review-palette-r333-manual'?'palette-r333.jsonl':plan.kind==='review-fast-r331-manual'?'fast-r331.jsonl':plan.kind==='review-hold-r329-manual'?'hold-r329.jsonl':plan.kind==='review-lease-r327-manual'?'lease-r327.jsonl':plan.kind==='review-refs-r325-manual'?'refs-r325.jsonl':plan.kind==='review-fault-r321-manual'?'fault-r321.jsonl':plan.kind==='review-readers-r318-manual'?'readers-r318.jsonl':plan.kind==='review-ram-png-manual'?'ram-png-r304.jsonl':'transfer.jsonl');this.#lockFile=path.join(dir,'watch.lock');
   if(plan.kind==='review-sound-r365-manual')this.#file=path.join(dir,'sound-r365.jsonl');
   if(plan.kind==='review-audio-r367-manual')this.#file=path.join(dir,'audio-r367.jsonl');
@@ -45,7 +46,7 @@ export class DoomDeploymentJournal{
   try{
    this.#lock=fs.openSync(this.#lockFile,'wx',0o600);
    fs.writeFileSync(this.#lock,JSON.stringify({token:this.#token,pid:process.pid})+'\n');fs.fsyncSync(this.#lock);
-   const exists=fs.existsSync(this.#file);if(exists&&!resume&&!retryWithoutData||!exists&&(resume||retryWithoutData))fail();
+   const exists=fs.existsSync(this.#file);if(exists&&!resume&&!retryWithoutData&&!afterSpace||!exists&&(resume||retryWithoutData||afterSpace))fail();
    if(exists){
     regular(this.#file,2097152);const data=fs.readFileSync(this.#file,'utf8');if(!data.endsWith('\n'))fail();
     let previous=null;const history=[];
@@ -59,7 +60,11 @@ export class DoomDeploymentJournal{
     }
     if(!previous||previous.status!=='Uncertain')fail();
     let retryBaseline=null;
-    if(retryWithoutData){
+    if(afterSpace){
+     if(previous.attempt!==1||history.length!==3||history.map(r=>r.status).join(',')!=='Created,InstallIntent,Uncertain'||
+        history.some(r=>r.upload!==null||r.attempt!==1)||previous.before===null)fail();
+     retryBaseline=previous.before;
+    }else if(retryWithoutData){
      const attempt=history.filter(r=>r.attempt===previous.attempt);
      const stages=attempt.map(r=>r.status).join(',');
      const firstControl=previous.attempt===1&&stages==='Created,InstallIntent,UploadIntent,Uncertain'&&previous.before!==null;
@@ -73,7 +78,7 @@ export class DoomDeploymentJournal{
     }else if(previous.before===null||previous.upload?.status!=='Uncertain'||previous.upload.highestPossibleOffset<=previous.upload.offset)fail();
     this.#resume=clone({...previous,...(retryBaseline?{before:retryBaseline}:{})});this.#record=previous;
     this.#fd=fs.openSync(this.#file,'a');
-    this.#append({...previous,attempt:previous.attempt+1,status:'Created',upload:null,before:null,attemptKind:retryWithoutData?'retry-no-data':'resume'});
+    this.#append({...previous,attempt:previous.attempt+1,status:'Created',upload:null,before:null,attemptKind:afterSpace?'retry-after-space-r375':retryWithoutData?'retry-no-data':'resume'});
    }else{
     this.#fd=fs.openSync(this.#file,'wx',0o600);
     this.#append({schema:2,targetTag:this.#tag,model:'M2315W1',firmware:'2.2.86',id:plan.id,sha256:plan.sha256,size:plan.size,seq:0,attempt:1,status:'Created',before:null,upload:null,previous:this.#lastHash});

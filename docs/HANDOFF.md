@@ -1,4 +1,26 @@
-# R374 intento autorizado rechazado antes del archivo; puertas cerradas
+# R375 retry tras espacio listo; pendiente de aprobación
+
+Usuario confirmó espacio liberado. Paquete R374 idéntico y privado; C/ELF/Lua
+sin cambios. Preparado docs/doom-ultimate-space-retry-r375.md, no reloj usado.
+tools/pc-doom-ultimate-r374.mjs prepare-after-space/install-after-space.
+Nuevo gate PHYSICAL_ULTIMATE_SPACE_R375_REVIEWED=false, todos gates cerrados.
+Después de aprobación abrir SOLO general+R375 JS y RetailC#, rebuild/target
+vacío antes de privados/journal. NO abrir gate R374 ni retry/resume genéricos.
+
+afterSpace exige journal HMAC íntegro/mismaidentidad/paquete, intento1,
+Created→InstallIntent→Uncertain y uploadnull en todas las3filas. Agrega intento2
+retry-after-space-r375 sin tocar prefijo. Catálogo debe reducirse solo mediante
+remociones eliminables, flags supervivientes iguales, carrier963 presente e
+IDUltimateausente; conservar selección ACTUAL. Sin dependencia de UI previa.
+Cualquier fallo consume ese intento, no tercero/resume. No cambiar WAD ni C.
+Tests43casos con6405partes por IPC C# y receptor sintético pasan; regresiones
+retry18/catálogo17 pasan. Aún no aprobación ni envío R375.
+
+Pedir autorización concreta para UNA instalación inactiva13.09MB y DOSarranques
+≤90s, batería≥50%, observación12–18min; mismo riesgo de flash/bloqueo/reinicio y
+recoveryintegral sin validar. Las esferas/partidas restantes se conservan.
+
+## R374: intento rechazado antes del archivo; puertas cerradas
 
 Usuario autorizó UNA instalación y DOS arranques; luego «sigue, se habían
 acabado los créditos». Antes de esa continuación solo se habían abierto

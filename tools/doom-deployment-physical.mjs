@@ -18,6 +18,7 @@ const PHYSICAL_AUDIO_R367_REVIEWED=false;
 const PHYSICAL_VOICE_R369_REVIEWED=false;
 const PHYSICAL_MENU_R370_REVIEWED=false;
 const PHYSICAL_ULTIMATE_R374_REVIEWED=false;
+const PHYSICAL_ULTIMATE_SPACE_R375_REVIEWED=false;
 const PHYSICAL_PADS_R349_REVIEWED=false;
 const PHYSICAL_WIDE_R347_REVIEWED=false;
 const PHYSICAL_TOUCH_R345_REVIEWED=false;
@@ -42,6 +43,7 @@ export function physicalDoomAudioEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&
 export function physicalDoomVoiceEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_VOICE_R369_REVIEWED;}
 export function physicalDoomMenuEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_MENU_R370_REVIEWED;}
 export function physicalDoomUltimateEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_ULTIMATE_R374_REVIEWED;}
+export function physicalDoomUltimateAfterSpaceEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_ULTIMATE_SPACE_R375_REVIEWED;}
 export function physicalDoomPadsEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_PADS_R349_REVIEWED;}
 export function physicalDoomWideEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_WIDE_R347_REVIEWED;}
 export function physicalDoomTouchEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_TOUCH_R345_REVIEWED;}
@@ -49,8 +51,9 @@ export function physicalDoomDirectEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&
 export function physicalDoomResumeEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_RESUME_REVIEWED;}
 export function physicalDoomControlRetryEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_CONTROL_RETRY_REVIEWED;}
 export function isReviewedDoomPeer(peer){return PHYSICAL_DEPLOYMENT_REVIEWED&&peers.has(peer);}
-export function createReviewedDoomEndpoint(address,{resume=false,retryWithoutData=false,retail=false}={}){
- if(typeof retail!=='boolean'||retail&&(!physicalDoomUltimateEnabled()||resume||retryWithoutData))fail();
+export function createReviewedDoomEndpoint(address,{resume=false,retryWithoutData=false,retail=false,afterSpace=false}={}){
+ if(typeof afterSpace!=='boolean'||afterSpace&&(!retail||!physicalDoomUltimateAfterSpaceEnabled()||resume||retryWithoutData))fail();
+ if(typeof retail!=='boolean'||retail&&(!(afterSpace?physicalDoomUltimateAfterSpaceEnabled():physicalDoomUltimateEnabled())||resume||retryWithoutData))fail();
  if(!PHYSICAL_DEPLOYMENT_REVIEWED||typeof resume!=='boolean'||typeof retryWithoutData!=='boolean'||resume&&retryWithoutData||resume&&!PHYSICAL_RESUME_REVIEWED||retryWithoutData&&!PHYSICAL_CONTROL_RETRY_REVIEWED)fail();
  if(typeof address!=='string'||!/^[A-Fa-f0-9]{12}$/.test(address)||/^0{12}$/.test(address))fail();
  let pipe=null,busy=false,closing=false,closePromise=null;
@@ -80,10 +83,10 @@ export function createReviewedDoomEndpoint(address,{resume=false,retryWithoutDat
   }
  });
  const endpoint=Object.freeze({kind:'reviewed-doom-deployment'});
- const peer=Object.freeze({link,physical:true,retailReviewed:retail,resumeReviewed:resume,retryWithoutDataReviewed:retryWithoutData,journalTarget:'rw4:'+address.toLowerCase(),clock:()=>performance.now(),wait:ms=>new Promise(resolve=>setTimeout(resolve,ms))});
+ const peer=Object.freeze({link,physical:true,afterSpaceReviewed:afterSpace,retailReviewed:retail,resumeReviewed:resume,retryWithoutDataReviewed:retryWithoutData,journalTarget:'rw4:'+address.toLowerCase(),clock:()=>performance.now(),wait:ms=>new Promise(resolve=>setTimeout(resolve,ms))});
  peers.add(peer);endpoints.set(endpoint,peer);
  return endpoint;
 }
-export function claimReviewedDoomEndpoint(endpoint,{resume=false,retryWithoutData=false,retail=false}={}){
- if(!PHYSICAL_DEPLOYMENT_REVIEWED)fail();const peer=endpoints.get(endpoint);if(!peer||peer.retailReviewed!==retail||peer.resumeReviewed!==resume||peer.retryWithoutDataReviewed!==retryWithoutData)fail();endpoints.delete(endpoint);return peer;
+export function claimReviewedDoomEndpoint(endpoint,{resume=false,retryWithoutData=false,retail=false,afterSpace=false}={}){
+ if(!PHYSICAL_DEPLOYMENT_REVIEWED)fail();const peer=endpoints.get(endpoint);if(!peer||peer.afterSpaceReviewed!==afterSpace||peer.retailReviewed!==retail||peer.resumeReviewed!==resume||peer.retryWithoutDataReviewed!==retryWithoutData)fail();endpoints.delete(endpoint);return peer;
 }
