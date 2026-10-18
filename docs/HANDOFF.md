@@ -1,4 +1,25 @@
-# R378: envío parcial detenido; sin instalación registrada
+# R379 preparado: pendiente de nueva aprobación
+
+Usuario confirma cambio de distancia/conexión durante R378; ya vuelve a dejar
+reloj al lado del PC. No prueba causa exacta. Mismo paquete R378 sin cambios.
+Plan docs/doom-packed-link-retry-r379.md: UN envío nuevo desde0 y DOSensayos≤90s,
+6–10min/batería≥50%/cercaPC/MiFitness cerrado. No borra/SET/reinicio previo.
+47casos nuevos pasan, incluido C#IPC completo3017partes; shared23/retry18/
+catalog17 pasan. No más pruebas del motor ni radio en R379 hasta aprobación.
+
+CLI pc-doom-packed-r378.mjs prepare-restart/install-restart, checkpointR379.
+Gate nuevo PHYSICAL_PACKED_RESTART_R379_REVIEWED=false. Solo general+R379 y
+RetailC# se abrirían tras aprobación; R378 y retry/resume anteriores cerrados.
+Journal original112filas debe validar HMAC/identidad y patrón exacto observado;
+agrega intento2 restart-packed-r379 conservando prefijo. Nuevo envío solo con
+ACKposición0 y mismo catálogo/flags, selecciónACTUAL preservada. Otro intento
+se bloquea. No tocar journal privado ni suplantar con otro nombre.
+prepare-restart no lee privados ni reclama journal. El helper estructural ya
+acepta el historial físico original sin modificarlo; HMAC se valida al instalar.
+Tras cualquier resultado cerrar gates/rebuild antes del ensayo. Falta pedir
+aprobación concreta; no interpretar el mensaje «ya» como permiso nuevo.
+
+## R378: envío parcial detenido; sin instalación registrada
 
 Usuario aprobó el 2026-10-18 UNA instalación y DOS ensayos manuales≤90s.
 Intento consumido: modelo/FW y catálogo10 correctos, INSTALLstatus0, ACK

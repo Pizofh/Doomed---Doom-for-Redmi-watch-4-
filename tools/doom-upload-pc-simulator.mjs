@@ -13,7 +13,7 @@ function ccm(key,nonce,input,decrypt=false){
  return Buffer.concat([c.update(body),c.final(),...(decrypt?[]:[c.getAuthTag()])]);
 }
 function referenceCrc(b){let crc=0xffffffff;for(const value of b){crc^=value;for(let bit=0;bit<8;bit++)crc=(crc>>>1)^((crc&1)?0xedb88320:0);}return(crc^0xffffffff)>>>0;}
-const scenarios=new Set(['ok','bad-key','v2','wrong-model','wrong-fw','collision','clear-response','reject','bad-md5','bad-offset','bad-chunk','disconnect','native-send-timeout','missing','active','protected','unrelated-lost','close-failure','deadline']);
+const scenarios=new Set(['ok','bad-key','v2','wrong-model','wrong-fw','collision','clear-response','reject','bad-md5','bad-offset','bad-chunk','disconnect','native-send-timeout','packed-interruption','missing','active','protected','unrelated-lost','close-failure','deadline']);
 export function createDoomUploadPcPeer(plan,{scenario='ok',chunkSize=2048,resumePosition=0,target='fixture-one',ackShape='complete',catalogRows=null}={}){
  if(!scenarios.has(scenario)||![2048,4080].includes(chunkSize)||!Number.isInteger(resumePosition)||resumePosition<0||resumePosition>=plan.size||!/^fixture-[a-z]+$/.test(target)||!['complete','stock-minimal','defaults'].includes(ackShape)||ackShape!=='complete'&&(chunkSize!==2048||resumePosition!==0||scenario!=='ok'))throw Error('PcPeerRefused');
  if(catalogRows!==null&&(!Array.isArray(catalogRows)||catalogRows.length>64||catalogRows.filter(r=>r.active).length!==1||catalogRows.some(r=>!/^\d{9}$/.test(r.id)||typeof r.active!=='boolean'||typeof r.canDelete!=='boolean')||new Set(catalogRows.map(r=>r.id)).size!==catalogRows.length))throw Error('PcPeerRefused');
@@ -28,7 +28,7 @@ export function createDoomUploadPcPeer(plan,{scenario='ok',chunkSize=2048,resume
  const link={
   async opened(){},
   async read(){return queue.shift()??Buffer.alloc(0);},
-  async close(){stats.closeCalls++;for(const b of [material,secret])b?.fill(0);return{closeConfirmed:scenario!=='close-failure',...(scenario==='native-send-timeout'?{workerExitConfirmed:true,workerExitCode:1,nativeError:true,nativeOutcome:'Deadline',nativeErrorCode:null,failureStage:'Send',supervisor:null}:{})};},
+  async close(){stats.closeCalls++;for(const b of [material,secret])b?.fill(0);return{closeConfirmed:scenario!=='close-failure',...(['native-send-timeout','packed-interruption'].includes(scenario)?{workerExitConfirmed:true,workerExitCode:1,nativeError:true,nativeOutcome:'Deadline',nativeErrorCode:null,failureStage:'Send',supervisor:null}:{})};},
   async send(buffer){
    assert(buffer.length<=4096);stats.sentFrames++;stats.bytes+=buffer.length;assert(stats.bytes<=uploadLimits(plan).wireBytes);assert(stats.sentFrames<=uploadLimits(plan).parts+32);
    reader.push(buffer);const f=reader.next();assert(f);assert.equal(reader.next(),null);
@@ -41,6 +41,7 @@ export function createDoomUploadPcPeer(plan,{scenario='ok',chunkSize=2048,resume
     const streamBytes=parts.reduce((n,p)=>n+p.length-4,0);
     stats.highestReceivedOffset=Math.min(data.length,resumePosition+Math.max(0,streamBytes-22));
     if(['disconnect','native-send-timeout'].includes(scenario)&&stats.massFrames===11)throw Error('PRIVATE-CANARY');
+    if(scenario==='packed-interruption'&&stats.massFrames===1688)throw Error('PRIVATE-CANARY');
     if(parts.length===part.readUInt16LE()){
      assert(parts.every(p=>p.readUInt16LE()===parts.length));
      const stream=Buffer.concat(parts.map(p=>p.subarray(4)));

@@ -21,6 +21,7 @@ const PHYSICAL_ULTIMATE_R374_REVIEWED=false;
 const PHYSICAL_ULTIMATE_SPACE_R375_REVIEWED=false;
 const PHYSICAL_ULTIMATE_CATALOG_R376_REVIEWED=false;
 const PHYSICAL_PACKED_R378_REVIEWED=false;
+const PHYSICAL_PACKED_RESTART_R379_REVIEWED=false;
 const PHYSICAL_PADS_R349_REVIEWED=false;
 const PHYSICAL_WIDE_R347_REVIEWED=false;
 const PHYSICAL_TOUCH_R345_REVIEWED=false;
@@ -48,6 +49,7 @@ export function physicalDoomUltimateEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWE
 export function physicalDoomUltimateAfterSpaceEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_ULTIMATE_SPACE_R375_REVIEWED;}
 export function physicalDoomUltimateAfterCatalogEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_ULTIMATE_CATALOG_R376_REVIEWED;}
 export function physicalDoomPackedEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_PACKED_R378_REVIEWED;}
+export function physicalDoomPackedRestartEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_PACKED_RESTART_R379_REVIEWED;}
 export function physicalDoomPadsEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_PADS_R349_REVIEWED;}
 export function physicalDoomWideEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_WIDE_R347_REVIEWED;}
 export function physicalDoomTouchEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_TOUCH_R345_REVIEWED;}
@@ -55,11 +57,12 @@ export function physicalDoomDirectEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&
 export function physicalDoomResumeEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_RESUME_REVIEWED;}
 export function physicalDoomControlRetryEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_CONTROL_RETRY_REVIEWED;}
 export function isReviewedDoomPeer(peer){return PHYSICAL_DEPLOYMENT_REVIEWED&&peers.has(peer);}
-export function createReviewedDoomEndpoint(address,{resume=false,retryWithoutData=false,retail=false,afterSpace=false,afterCatalog=false,packed=false}={}){
- if(typeof packed!=='boolean'||packed&&(!retail||!physicalDoomPackedEnabled()||resume||retryWithoutData||afterSpace||afterCatalog))fail();
+export function createReviewedDoomEndpoint(address,{resume=false,retryWithoutData=false,retail=false,afterSpace=false,afterCatalog=false,packed=false,restartPacked=false}={}){
+ if(typeof restartPacked!=='boolean'||restartPacked&&(!packed||!physicalDoomPackedRestartEnabled()||resume||retryWithoutData||afterSpace||afterCatalog))fail();
+ if(typeof packed!=='boolean'||packed&&(!retail||!(restartPacked?physicalDoomPackedRestartEnabled():physicalDoomPackedEnabled())||resume||retryWithoutData||afterSpace||afterCatalog))fail();
  if(typeof afterCatalog!=='boolean'||afterCatalog&&(!retail||!physicalDoomUltimateAfterCatalogEnabled()||resume||retryWithoutData||afterSpace))fail();
  if(typeof afterSpace!=='boolean'||afterSpace&&(!retail||!physicalDoomUltimateAfterSpaceEnabled()||resume||retryWithoutData))fail();
- if(typeof retail!=='boolean'||retail&&(!(packed?physicalDoomPackedEnabled():afterCatalog?physicalDoomUltimateAfterCatalogEnabled():afterSpace?physicalDoomUltimateAfterSpaceEnabled():physicalDoomUltimateEnabled())||resume||retryWithoutData))fail();
+ if(typeof retail!=='boolean'||retail&&(!(packed?(restartPacked?physicalDoomPackedRestartEnabled():physicalDoomPackedEnabled()):afterCatalog?physicalDoomUltimateAfterCatalogEnabled():afterSpace?physicalDoomUltimateAfterSpaceEnabled():physicalDoomUltimateEnabled())||resume||retryWithoutData))fail();
  if(!PHYSICAL_DEPLOYMENT_REVIEWED||typeof resume!=='boolean'||typeof retryWithoutData!=='boolean'||resume&&retryWithoutData||resume&&!PHYSICAL_RESUME_REVIEWED||retryWithoutData&&!PHYSICAL_CONTROL_RETRY_REVIEWED)fail();
  if(typeof address!=='string'||!/^[A-Fa-f0-9]{12}$/.test(address)||/^0{12}$/.test(address))fail();
  let pipe=null,busy=false,closing=false,closePromise=null;
@@ -89,10 +92,10 @@ export function createReviewedDoomEndpoint(address,{resume=false,retryWithoutDat
   }
  });
  const endpoint=Object.freeze({kind:'reviewed-doom-deployment'});
- const peer=Object.freeze({link,physical:true,packedReviewed:packed,afterCatalogReviewed:afterCatalog,afterSpaceReviewed:afterSpace,retailReviewed:retail,resumeReviewed:resume,retryWithoutDataReviewed:retryWithoutData,journalTarget:'rw4:'+address.toLowerCase(),clock:()=>performance.now(),wait:ms=>new Promise(resolve=>setTimeout(resolve,ms))});
+ const peer=Object.freeze({link,physical:true,packedReviewed:packed,restartPackedReviewed:restartPacked,afterCatalogReviewed:afterCatalog,afterSpaceReviewed:afterSpace,retailReviewed:retail,resumeReviewed:resume,retryWithoutDataReviewed:retryWithoutData,journalTarget:'rw4:'+address.toLowerCase(),clock:()=>performance.now(),wait:ms=>new Promise(resolve=>setTimeout(resolve,ms))});
  peers.add(peer);endpoints.set(endpoint,peer);
  return endpoint;
 }
-export function claimReviewedDoomEndpoint(endpoint,{resume=false,retryWithoutData=false,retail=false,afterSpace=false,afterCatalog=false,packed=false}={}){
- if(!PHYSICAL_DEPLOYMENT_REVIEWED)fail();const peer=endpoints.get(endpoint);if(!peer||peer.packedReviewed!==packed||peer.afterCatalogReviewed!==afterCatalog||peer.afterSpaceReviewed!==afterSpace||peer.retailReviewed!==retail||peer.resumeReviewed!==resume||peer.retryWithoutDataReviewed!==retryWithoutData)fail();endpoints.delete(endpoint);return peer;
+export function claimReviewedDoomEndpoint(endpoint,{resume=false,retryWithoutData=false,retail=false,afterSpace=false,afterCatalog=false,packed=false,restartPacked=false}={}){
+ if(!PHYSICAL_DEPLOYMENT_REVIEWED)fail();const peer=endpoints.get(endpoint);if(!peer||peer.packedReviewed!==packed||peer.restartPackedReviewed!==restartPacked||peer.afterCatalogReviewed!==afterCatalog||peer.afterSpaceReviewed!==afterSpace||peer.retailReviewed!==retail||peer.resumeReviewed!==resume||peer.retryWithoutDataReviewed!==retryWithoutData)fail();endpoints.delete(endpoint);return peer;
 }
