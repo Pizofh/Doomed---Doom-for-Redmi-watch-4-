@@ -89,3 +89,13 @@ abrir solo main+audio-r367 JS, ejecutar una vez
 Al terminar cerrar ambas puertas JS y el perfil C#, recompilar cerrado. No
 realizar consultas o pruebas extra para pedir al usuario confirmar menús/corona:
 asumir normalidad salvo que reporte problemas.
+
+## Instalación autorizada ejecutada
+
+El usuario autorizó la instalación y los dos arranques. Se completó un envío:
+RegisteredInactive, registeredVerified=true, installStatus=0, MD5 eco coincidente,
+328 partes, sin reanudación, conexión cerrada y worker terminado con exit=0.
+No se seleccionó la esfera ni se ejecutó C automáticamente. No se leyó de vuelta
+el contenido: su comprobación queda en el START manual. Puertas JS main/Audio
+y perfil Large C# restaurados a false; transporte cerrado recompilado. Pendiente
+el resultado manual del usuario, sin afirmar todavía que suene el reloj.

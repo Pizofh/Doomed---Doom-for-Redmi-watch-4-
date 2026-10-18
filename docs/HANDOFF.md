@@ -1,3 +1,19 @@
+# R367 instalado inactivo; esperar primer ensayo físico de direcciones corregidas
+
+Usuario autorizó instalación+2ensayos<=60s,>=50%batería,podíaobservar.
+Se abrieronLargeC#yJSmain+Audio,buildypruebaInvalidTargetsinBTprevios; CLI
+pc-doom-audio-r367 install terminó RegisteredInactive/registeredVerifiedtrue,
+installStatus0,MD5ecoOK,resume0,328partes; closeConfirmed,workerExitConfirmedtrue,
+exit0. No activación/START automático. Contenido no leído de vuelta: verificación
+ELF/WAD al START. Journal propio audio-r367.jsonl. No más envíos autorizados.
+RestauradosLargeC#=false,JSmain/Audio=false y recompilado transporte cerrado.
+
+Dar/esperarensayoDoomAudio(noDoomSound),CUATROBARRASAMARILLAS,READY->START1,
+disparo/USARpuerta/pausa2s/resume/save-load/EXIT<=60s. AudioERR/PCM SFX/CACHE.
+Solo consonido+CLOSED+ERR0,segundoSTARTcorto+EXIT. Si silencio/error/noCLOSED,
+no repetiry recogerestadoycifras. No re-pedirmenús/corona salvo reporte.
+Sonido RW4 todavía no validado. Base ahora0c100000; erroresetapa1xxx..9xxx.
+
 # R367 preparado; Sound físico sin audio y causa de direcciones localizada
 
 Usuario probóR365:todoOKsinsonido,AUDIOERR22,PCM0,CACHE532927; segundoensayo
