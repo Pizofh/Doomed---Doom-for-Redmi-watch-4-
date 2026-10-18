@@ -29,19 +29,19 @@ local function fixture(kind)
   if path=='/proc/modules'then content=kind=='foreign'and'othermodule,0x1'or t.native and record or ''end
   if path=='/dev/rw4doomready'then
    if not t.native then return nil,'absent',2 end
-   t.native_reads=t.native_reads+1;local parts={};for i=1,72 do parts[i]=string.pack('<I4',t.state[i])end;content=table.concat(parts)
+   t.native_reads=t.native_reads+1;if kind=='late-ready'and t.native_reads>310 then t.state[5]=1;t.state[10]=1;t.state[23]=1 end;local parts={};for i=1,72 do parts[i]=string.pack('<I4',t.state[i])end;content=table.concat(parts)
   end
   if mode=='wb'then content='';t.data[path]=''elseif content==nil then return nil,'absent',2 end
   local f={cursor=0}
   function f:setvbuf(v)assert(v=='no');return true end
   function f:seek(origin)assert(origin=='end');return path==c.wad_path and c.packed_bytes or #content end
-  function f:read(n)local b=content:sub(self.cursor+1,self.cursor+n);self.cursor=self.cursor+#b;return #b>0 and b or nil end
+  function f:read(n)if kind=='post-read-error'and path=='/dev/rw4doomready'and t.state[4]==1 then return nil,'mock read error',5 end;local b=content:sub(self.cursor+1,self.cursor+n);self.cursor=self.cursor+#b;return #b>0 and b or nil end
   function f:write(b)
    if path=='/dev/rw4doomready'then
     local magic,seq,op,value=string.unpack('<I4I4I4I4',b);assert(magic==0x36445752 and seq==t.state[3]+1);t.state[3]=seq;t.commands[#t.commands+1]=op
-    if op==1 then t.state[4]=1;t.state[5]=1;t.state[9]=42;t.state[10]=1;t.state[23]=1
-    elseif op==4 then t.state[6]=1;t.state[47]=1
-    elseif op==5 then t.state[7]=1;t.state[15]=1;t.state[18]=14;t.state[19]=14
+    if op==1 then t.state[4]=1;t.state[5]=(kind=='late-ready'or kind=='never-ready')and 0 or 1;t.state[9]=42;t.state[10]=t.state[5];t.state[23]=t.state[5];if kind=='post-bad-state'then t.state[8]=1 end;if kind=='engine-fail'then t.state[5]=0;t.state[6]=1;t.state[47]=1 end
+    elseif op==4 then if kind~='stop-hang'then t.state[6]=1;t.state[47]=1 end
+    elseif op==5 then t.state[7]=1;t.state[15]=kind=='engine-fail'and 3 or 1;t.state[16]=kind=='engine-fail'and 84 or 0;t.state[18]=14;t.state[19]=14
     else assert(op==7 or op==10 or op==2 or op==3 or op==6)end
    else t.data[path]=t.data[path]..b end
    return self
@@ -60,14 +60,14 @@ local function fixture(kind)
   else error('unexpected shell')end
   t.data[out]=text;return false,'exit',1
  end
- local view={status=function(s)t.rows[#t.rows+1]=s end,slot=function()end,native=function()end,detach=function()end,frame=function()end}
+ local view={status=function(s)t.rows[#t.rows+1]=s end,slot=function()end,native=function(s)t.last_native=s end,detach=function()end,frame=function()end}
  t.backend=factory.new(c,files,system,view)
  local se=setmetatable({boot=boot,backend=t.backend},{__index=_ENV});t.safe=assert(load(safe_code,'boot-safe','t',se))()
  function t.start()t.safe(t.backend.start);for _=1,90 do if t.backend.phase()=='ERROR'or boot.stage==60 then break end;t.safe(t.backend.tick)end end
  return t
 end
-for _,v in ipairs({{'crc',13,101},{'short',13,101},{'elf-missing',11,999},{'ram-low',21,201},{'ram-fragmented',21,201},{'memory-format',20,999},{'header',32,301},{'identity',32,302},{'layout',32,303},{'wad-missing',32,305},{'foreign',40,401},{'orphan',41,402},{'load-refused',50,501},{'bad-state',52,999}})do
- local t=fixture(v[1]);t.start();assert(t.backend.phase()=='ERROR',v[1]..' phase');assert(t.boot.stage==v[2],v[1]..' stage '..t.boot.stage);assert(t.boot.code==v[3],v[1]..' code '..t.boot.code)
+for _,v in ipairs({{'crc',13,101},{'short',13,101},{'elf-missing',11,999},{'ram-low',21,201},{'ram-fragmented',21,201},{'memory-format',20,999},{'header',32,301},{'identity',32,302},{'layout',32,303},{'wad-missing',32,305},{'foreign',40,401},{'orphan',41,402},{'load-refused',50,501},{'bad-state',52,START_VERSION and 704 or 999}})do
+ local t=fixture(v[1]);t.start();assert(t.backend.phase()=='ERROR',v[1]..' phase');assert(t.boot.stage==v[2],v[1]..' stage '..t.boot.stage);assert((START_VERSION and v[3]==999 and t.boot.code>=90000000 and t.boot.code<=90999999)or t.boot.code==v[3],v[1]..' code '..t.boot.code)
  if v[2]<50 then assert(t.loads==0 and t.native_reads==0,'must refuse before native code')end
  if v[2]==21 then assert(t.boot.free>0 and t.boot.max>0)end
  assert(t.config.min_free==7366211 and t.config.min_largest==4194320);cases=cases+1
@@ -78,5 +78,12 @@ end
 do
  local t=fixture('ok');for _=1,2 do t.start();assert(t.boot.stage==60 and t.boot.code==0 and t.native);t.safe(t.backend.tick);assert(t.backend.phase()=='PLAYING');t.safe(t.backend.stop);t.safe(t.backend.tick);assert(t.backend.phase()=='CLOSED' and not t.native)end
  assert(t.loads==2 and t.unloads==2 and t.collected and t.boot.bytes==0);cases=cases+1 -- second start uses the existing context's verified CRC
+end
+if START_VERSION then
+ for _,p in ipairs({{'post-bad-state',704},{'post-read-error',705}})do local t=fixture(p[1]);t.start();t.safe(t.backend.tick);assert(t.backend.phase()=='ERROR' and t.boot.stage==60 and t.boot.code==p[2] and t.unloads==0);cases=cases+1 end
+ do local t=fixture('engine-fail');t.start();t.safe(t.backend.tick);assert(t.backend.phase()=='ERROR' and t.boot.code==0 and t.unloads==1 and t.last_native[7]==1 and t.last_native[15]==3 and t.last_native[16]==84);cases=cases+1 end
+ do local t=fixture('late-ready');t.start();for _=1,320 do t.safe(t.backend.tick);if t.backend.phase()=='PLAYING'then break end end;assert(t.backend.phase()=='PLAYING' and t.boot.code==0);t.safe(t.backend.stop);t.safe(t.backend.tick);assert(t.backend.phase()=='CLOSED' and t.unloads==1);cases=cases+1 end
+ do local t=fixture('never-ready');t.start();for _=1,2249 do t.safe(t.backend.tick)end;assert(t.backend.phase()~='ERROR');t.safe(t.backend.tick);assert(t.backend.phase()=='ERROR' and t.boot.code==701 and t.native and t.unloads==0);cases=cases+1 end
+ do local t=fixture('stop-hang');t.start();t.safe(t.backend.tick);t.safe(t.backend.stop);for _=1,199 do t.safe(t.backend.tick)end;assert(t.backend.phase()=='STOPPING');t.safe(t.backend.tick);assert(t.backend.phase()=='ERROR' and t.boot.code==702 and t.unloads==0);cases=cases+1 end
 end
 print('BOOT_R381_OK',cases)

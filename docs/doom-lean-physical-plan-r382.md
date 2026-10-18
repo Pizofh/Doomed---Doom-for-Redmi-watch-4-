@@ -79,3 +79,18 @@ selectedByClientfalse. Selección/esferas preservadas; cierre/workerexit0 y
 nativeErrorfalse. Gatesgeneral/LeanJS/LargeC# cerrados y worker reconstruido
 inmediatamente; Retail/Boot y demás siguieron cerrados. No borrados/SET/
 reinicio ni reenvío de C/WAD. UN ensayo manual ya aprobado pendiente.
+
+### Ensayo R382 reportado
+
+No inició. GATE60/FREE7370096/MAX4776864/CODE999/READ629904/TOTAL629904;
+contadores anteriores0 salvoPHASE1 yAUDIOEND1. RAM supera mínimo por3885B,
+y mejora9088B frenteR381. Checksum/headers/insmod/primerstate/command1
+pasaron. No afirmar que C se descargó o que nunca ejecutó el motor: llegó a
+command1, pero no hay CLOSED ni snapshot completo que pruebe join/unload.
+El código999 no identifica causa. El límite heredado de200callbacks40ms
+(~8s nominales) puede cortar arranque comprimido; es una hipótesis, no prueba.
+R383 separa espera inicial/cierre y añade snapshots/códigos, sin C/WAD nuevos.
+Usuario aclaró después que el error fue CASI INMEDIATO tras CHECKING: reduce
+la plausibilidad del timeout, no la confirma. R383 se centra también en
+distinguir lectura/identidad/control y salida C inmediata. No atribuir causa
+exacta sin el nuevo diagnóstico.

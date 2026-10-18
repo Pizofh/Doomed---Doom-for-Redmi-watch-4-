@@ -1,4 +1,39 @@
-# R382 DoomLean instalado inactivo; UN ensayo aprobado pendiente
+# R383 DoomStart listo; pendiente de aprobación nueva
+
+R382 físico: no juego, GATE60/FREE7370096/MAX4776864/CODE999/READ629904/
+TOTAL629904. Métricas0 salvoPHASE1/AUDIOEND1. RAMguard ya pasa por3885B,
+mejora9088B vsR381; insmod/state/command1 pasaron. No CLOSED/join/unload
+confirmados: no afirmar motor no cargado ni causa exacta. Usuario aclaró
+CASI INMEDIATO trasCHECKING; hace menos probable timeout8s, NO atribuirlo
+a timeout ni prometer resuelto. R383 distingue fallos inmediatos poscommand1.
+
+R383 soloLua: startup2250callbacks≈90s nominales, stop200/audio50 intactos,
+wait_ticks reseteado already. MismoC/WAD/guard/paneldiferido. CODE701startup,
+702stop,703cleanup,704identity,705read,706write,707unload,708registry;
+otrosstrings90000000+líneaLua, no textoOS. MODEpáginas7/8 START/READY/FINISH,
+JOIN/REASON/EXIT. El timeout anterior200≈8s puede explicarR382, NO demostrado.
+
+DoomStartID365220005, marcoÁMBAR/TRESVERTICALES; paquete47200B SHA
+4f81e1a07f9ab9044236adbb2adf8c647ec32341c569662070c57a63f50e257a,
+Lua29947B SHA2eb6b5d652c5e44b7079b7c46f26722b6166df4177ac23f401eb5eea0a49202b.
+build/doom-start-r383/package; reusa365220002(CONSERVAR DoomPacked).
+22casos Lua/UIpasan (errores inmediatos poscommand1,exit84 conjoin, ready>
+310polls,init2250 y stop200), paquete13recursos/
+6tamper/24partesIPC/retries6/dependencia/CLI pasan. R382paquete y shared23
+pasan. No repetir campaña C. Sin radio/escritura al reloj en preparación.
+
+Plan docs/doom-start-physical-plan-r383.md listo: pedirUNA instalación47.2KB
+y UNensayo≤60sjuego, batería≥50%/observararranque~90s, con REINICIO normal
+antes de abrir porque R382 cargó C sin descarga confirmada (no Restablecer).
+Puede instalarse inactivo antes, esperar conexión cerrada antes de reiniciar.
+CLIpc-doom-boot-r381.mjs install --start-r383. GateSTARTfalse, todo cerrado.
+Tras aprobar abrir SOLO general+StartJS/C#Large, build/emptytargetready,
+installUNAvez; cerrar/rebuild siempre. Journalstart-r383, no retries/resume.
+Manualtrasreinicio READY→START1, CHECKING/LOADINGdespierto; sierror6cifras+
+flags2páginasnuevas siGATE≥50; no repetir. Siinicia controles/sonido/pausa y
+SALIR≤60s→CLOSED. No segundoarranque. No usar permisosR382consumidos.
+
+## R382 instalación y preparación anteriores
 
 Usuario aprobó instalación y ensayo el 2026-10-18. Una instalación completa:
 modelo/FW correctos, catálogo12/ownIDausente, INSTALL0/ACKMD5/status0/offset0/
