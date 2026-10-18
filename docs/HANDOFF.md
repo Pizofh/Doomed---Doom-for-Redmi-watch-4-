@@ -1,4 +1,27 @@
-# R375 retry tras espacio listo; pendiente de aprobación
+# R376 corrección del catálogo lista; pendiente de aprobación
+
+R375 fue autorizado/consumido: CatalogPreflight,count10, sameSelectiontrue,
+reviewedSpaceRemovalsfalse,5frames/185BTX,0MASS/sinINSTALL. Close/workerexit
+confirmados. Gates general/R375/Retail cerrados y rebuild. Intento2 journal
+Created→Uncertain, before=null/uploadnull; originalR374 prefijo intacto.
+
+GET sololectura posterior completó HMAC/cifrado/cierre. Carrier963 presente,
+sin adiciones/cambios de flags; guardfallaba porque la entrada365110003 antes
+canDeletefalse ya no aparece. No inferir borrado de archivos protegidos.
+Inventario privado tools/local/pc-rfcomm/ultimate-catalog-r375.json.
+
+R376 autoriza únicamente esa ausencia adicional. Gate independiente
+PHYSICAL_ULTIMATE_CATALOG_R376_REVIEWED=false; CLI prepare-after-catalog/
+install-after-catalog. Journal requiere5filas exactas R374/R375, sin upload,
+mismaidentidad/paquete; recupera baselineoriginal y agrega intento3.
+No cuarto intento/resume, ni C/Lua/WAD nuevos. GuardR376 ya pasa inventario
+registrado sin Bluetooth. Tests26casos/6405partesIPC pasan, regresiones43/18/17
+pasan. Plan docs/doom-ultimate-catalog-retry-r376.md pendiente de aprobación
+para UN envío13.09MB y DOSarranques≤90s; batería≥50%, observar12–18min.
+Tras aprobar abrir SOLO general+R376 JS/RetailC#, rebuild/targetvacío, ejecutar
+UNAvez, cerrar gates/rebuild antes del ensayo. No reutilizar R375 consumida.
+
+## R375 preparado antes del intento
 
 Usuario confirmó espacio liberado. Paquete R374 idéntico y privado; C/ELF/Lua
 sin cambios. Preparado docs/doom-ultimate-space-retry-r375.md, no reloj usado.

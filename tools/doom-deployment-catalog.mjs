@@ -23,8 +23,16 @@ export function reviewedTwoRemovals(previous,current){
 // R375: user confirmed freeing space. Accept only removals of deletable faces;
 // preserve the retained carrier, surviving flags and CURRENT selection.
 export function reviewedUltimateSpaceRemovals(previous,current){
+ return ultimateRemovals(previous,current,false);
+}
+// R376: read-only inventory confirmed this one previously nondeletable entry
+// absent, with no additions or survivor flag changes. Not a general exemption.
+export function reviewedUltimateCatalogRetry(previous,current){
+ return ultimateRemovals(previous,current,true);
+}
+function ultimateRemovals(previous,current,knownDefaultAbsent){
  if(!canonical(previous)||!canonical(current)||current.length>=previous.length)return false;
  if(!current.some(r=>r.id==='365219963'))return false;
  if(current.some(r=>!previous.some(p=>p.id===r.id&&p.canDelete===r.canDelete)))return false;
- return previous.filter(p=>!current.some(r=>r.id===p.id)).every(p=>p.canDelete);
+ return previous.filter(p=>!current.some(r=>r.id===p.id)).every(p=>p.canDelete||(knownDefaultAbsent&&p.id==='365110003'));
 }

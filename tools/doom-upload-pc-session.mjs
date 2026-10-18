@@ -15,9 +15,9 @@ import {physicalDoomSoundEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomAudioEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomVoiceEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomMenuEnabled} from './doom-deployment-physical.mjs';
-import {physicalDoomUltimateEnabled,physicalDoomUltimateAfterSpaceEnabled} from './doom-deployment-physical.mjs';
+import {physicalDoomUltimateEnabled,physicalDoomUltimateAfterSpaceEnabled,physicalDoomUltimateAfterCatalogEnabled} from './doom-deployment-physical.mjs';
 import {uploadLimits} from './doom-retail-limits-r374.mjs';
-import {compareDoomCatalogs,reviewedTwoRemovals,reviewedUltimateSpaceRemovals} from './doom-deployment-catalog.mjs';
+import {compareDoomCatalogs,reviewedTwoRemovals,reviewedUltimateSpaceRemovals,reviewedUltimateCatalogRetry} from './doom-deployment-catalog.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const directory=path.join(root,'artifacts/doom-upload-session-r280');
@@ -79,14 +79,15 @@ class PcLargeSession extends XiaomiSession{
 
 // The only accepted endpoint is minted by the in-process simulator. Passing
 // PrivatePipe, a link factory, a hostname or a copied scope string is refused.
-export async function runDoomUploadPc(endpoint,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false,deploymentRetryWithoutData=false,deploymentAfterSpace=false}={}){
- return runLargeUpload(()=>pcPeerAccess(endpoint),plan,secret,{resumeFrom,deploymentDirectory,deploymentResume,deploymentRetryWithoutData,deploymentAfterSpace});
+export async function runDoomUploadPc(endpoint,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false,deploymentRetryWithoutData=false,deploymentAfterSpace=false,deploymentAfterCatalog=false}={}){
+ return runLargeUpload(()=>pcPeerAccess(endpoint),plan,secret,{resumeFrom,deploymentDirectory,deploymentResume,deploymentRetryWithoutData,deploymentAfterSpace,deploymentAfterCatalog});
 }
-export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=false,retryWithoutData=false,afterSpace=false}={}){
+export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=false,retryWithoutData=false,afterSpace=false,afterCatalog=false}={}){
  return runLargeUpload(()=>{
   if(typeof afterSpace!=='boolean'||afterSpace&&plan?.kind!=='review-ultimate-r374-manual')refuse();
+  if(typeof afterCatalog!=='boolean'||afterCatalog&&(plan?.kind!=='review-ultimate-r374-manual'||afterSpace))refuse();
   if(plan?.kind==='review-ultimate-r374-manual'){
-   if(!(afterSpace?physicalDoomUltimateAfterSpaceEnabled():physicalDoomUltimateEnabled())||resume||retryWithoutData)refuse();
+   if(!(afterCatalog?physicalDoomUltimateAfterCatalogEnabled():afterSpace?physicalDoomUltimateAfterSpaceEnabled():physicalDoomUltimateEnabled())||resume||retryWithoutData)refuse();
   }else if(plan?.kind==='review-ram-png-manual'){
    if(!physicalDoomRamPngEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind==='review-readers-r318-manual'){
@@ -126,10 +127,10 @@ export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=fal
   }else if(plan?.kind==='review-direct-r343-manual'){
    if(!physicalDoomDirectEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind!=='review-low-memory-native-disabled')refuse();
-  return claimReviewedDoomEndpoint(endpoint,{resume,retryWithoutData,retail:plan?.kind==='review-ultimate-r374-manual',afterSpace});
- },plan,secret,{deploymentResume:resume,deploymentRetryWithoutData:retryWithoutData,deploymentAfterSpace:afterSpace});
+  return claimReviewedDoomEndpoint(endpoint,{resume,retryWithoutData,retail:plan?.kind==='review-ultimate-r374-manual',afterSpace,afterCatalog});
+ },plan,secret,{deploymentResume:resume,deploymentRetryWithoutData:retryWithoutData,deploymentAfterSpace:afterSpace,deploymentAfterCatalog:afterCatalog});
 }
-async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false,deploymentRetryWithoutData=false,deploymentAfterSpace=false}={}){
+async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false,deploymentRetryWithoutData=false,deploymentAfterSpace=false,deploymentAfterCatalog=false}={}){
  let peer,client,journal,parent,identity,upload=null,report={checkpoint:'R280',simulated:true,physicalEnabled:false,status:'StoppedNeedsReview',registeredVerified:false,contentVerified:false,selectedByClient:false,bluetoothOperationRequested:false,watchCommandRequested:false};
  try{
   peer=acquire();const data=packageCopy(plan),md5=digest(data);
@@ -138,10 +139,10 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   if(deploymentDirectory!==null||peer.physical){
    if(resumeFrom!==null)refuse();
    identity=deploymentIdentity(peer.physical?peer.journalTarget:'pc:'+peer.targetTag,secret);
-   journal=new DoomDeploymentJournal(plan,identity,{...(deploymentDirectory!==null?{directory:deploymentDirectory}:{}),resume:deploymentResume,retryWithoutData:deploymentRetryWithoutData,afterSpace:deploymentAfterSpace});
+   journal=new DoomDeploymentJournal(plan,identity,{...(deploymentDirectory!==null?{directory:deploymentDirectory}:{}),resume:deploymentResume,retryWithoutData:deploymentRetryWithoutData,afterSpace:deploymentAfterSpace,afterCatalog:deploymentAfterCatalog});
    parent=journal.resumeRecord;
   }else{
-   if(deploymentResume||deploymentRetryWithoutData||deploymentAfterSpace)refuse();
+   if(deploymentResume||deploymentRetryWithoutData||deploymentAfterSpace||deploymentAfterCatalog)refuse();
    if(resumeFrom)parent=parentRecord(resumeFrom,plan,peer.targetTag);
    journal=new PcJournal(plan,peer.targetTag,resumeFrom);
   }
@@ -165,8 +166,9 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   const removalReview=deploymentRetryWithoutData&&parent?.attempt===3;
   const acceptedRemovals=removalReview&&reviewedTwoRemovals(parent.before,before);
   const acceptedSpace=deploymentAfterSpace&&parent?.attempt===1&&reviewedUltimateSpaceRemovals(parent.before,before);
-  report.catalogPreflight={ownIdAbsent:!before.some(f=>f.id===plan.id),currentCount:before.length,...(comparison??{}),...(removalReview?{reviewedTwoRemovals:acceptedRemovals}:{}),...(deploymentAfterSpace?{reviewedSpaceRemovals:acceptedSpace}:{})};
-  if(before.some(f=>f.id===plan.id)||parent&&!soundLocalOnly&&!(deploymentAfterSpace?acceptedSpace:deploymentRetryWithoutData?(removalReview?acceptedRemovals:comparison.sameMembership):equal(parent.before,before)))refuse();
+  const acceptedCatalog=deploymentAfterCatalog&&parent?.attempt===2&&reviewedUltimateCatalogRetry(parent.before,before);
+  report.catalogPreflight={ownIdAbsent:!before.some(f=>f.id===plan.id),currentCount:before.length,...(comparison??{}),...(removalReview?{reviewedTwoRemovals:acceptedRemovals}:{}),...(deploymentAfterSpace?{reviewedSpaceRemovals:acceptedSpace}:{}),...(deploymentAfterCatalog?{reviewedCatalogR376:acceptedCatalog}:{})};
+  if(before.some(f=>f.id===plan.id)||parent&&!soundLocalOnly&&!(deploymentAfterCatalog?acceptedCatalog:deploymentAfterSpace?acceptedSpace:deploymentRetryWithoutData?(removalReview?acceptedRemovals:comparison.sameMembership):equal(parent.before,before)))refuse();
   journal.save({status:'InstallIntent',before});client.phase='InstallIntent';
   const install=envelope(4,4,6,bytes(6,Buffer.concat([bytes(1,Buffer.from(plan.id)),uint(2,plan.size)])));
   const installAck=await client.exchange(install,4,4);

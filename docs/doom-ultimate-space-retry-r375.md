@@ -1,9 +1,14 @@
 # R375: un intento de Ultimate tras liberar espacio
 
-Preparado, **pendiente de autorización física nueva**. El intento R374 quedó
+**Autorizado y consumido, detenido en preflight sin enviar datos.** El intento R374 quedó
 rechazado por INSTALLstatus3 antes de enviar datos; el usuario confirma que
 liberó espacio. No se consulta ni escribe el reloj durante esta preparación.
 La aprobación anterior cubría un solo intento y está consumida.
+
+Resultado R375: CatalogPreflight,10entradas, revisión de removidos=false,
+5frames/185B TX,0partes; sin INSTALL ni upload. Cierre y salida del worker
+confirmados. Gates cerrados y worker reconstruido. Diagnóstico de solo lectura
+y corrección propuesta: [R376](doom-ultimate-catalog-retry-r376.md).
 
 ## Paquete y alcance
 
