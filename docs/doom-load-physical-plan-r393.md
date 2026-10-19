@@ -1,5 +1,14 @@
 # R391–R393: reducir la espera de LOADING
 
+## Autorización recibida, 2026-10-18
+
+El usuario respondió «Sí, autorizo y puedo observar» a UNA instalación de
+911KB y UN ensayo≤60s, batería≥50%, reloj junto al PC y Mi Fitness cerrado.
+Permiso vigente para el paquete/hash de este plan, sin cambio de alcance.
+Ejecutar dispatch-once UNA vez; no reintentar ante rechazo/corte.
+
+## Preparación previa a esa autorización
+
 Usuario pide revisar la carga lenta y aclara que ocurre principalmente en
 LOADING. Autoriza desarrollo local; aún NO autoriza esta instalación física.
 R390/monstruo010 sigue aceptado. No instalar hasta permiso explícito nuevo.
@@ -91,3 +100,20 @@ normal y habitual. Tras éxito, usuario puede quitar010 y mantener solo011.
 Se pide permiso por regla inicial de cada payload nuevo. Cambiar verificador
 C/lecturas y migrar datos conserva riesgo de bloqueo/corrupción/reinicio;
 recuperación integral/pérdida de energía siguen sin validar.
+
+## R393 instalación completada; ensayo manual pendiente
+
+2026-10-18: RegisteredInactive/registeredVerifiedtrue/contentVerifiedfalse;
+446 partes/454 frames/920048 bytes TX, selectedByClientfalse.
+closeConfirmed/workerExitConfirmedtrue/exit0/nativeErrorfalse. Gates general/
+QUICK/C#Large restauradosfalse y worker reconstruido en finally. Sin SET,
+autostart, borrados, reenvío WAD ni reintento. Journal quick-r393 terminal:
+permiso de instalación consumido; NO repetir/resume/consultar radio con él.
+
+Ensayo entregado: elegir recién instalada DOOM II (icono igual al anterior),
+START1/mantener CHECKING, comparar LOADING→menú, cargar partida/jugar≤60s,
+SALIR→CLOSED. MODE5 desde CLOSED muestra CODE/READ/TOTAL; TOTAL00632284
+identifica R393 (R390 tiene00631972). Conserva010 hasta resultado.
+ERROR: no repetir/reabrir, GATE/CODE. Imagen sobre menús: reinicio normal.
+No afirmar aún mejora física, migración/partida/cierre aceptados ni borrar010.
+Tras éxito, usuario puede quitar010 y conservar solo011 y usar Mi Fitness.

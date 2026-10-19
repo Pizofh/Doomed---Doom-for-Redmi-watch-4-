@@ -1,4 +1,23 @@
-# R393 carga más rápida preparada; falta aprobación física
+# R393 DoomQuick instalado; ensayo manual pendiente
+
+## R393 instalación completada; ensayo manual pendiente
+
+2026-10-18: RegisteredInactive/registeredVerifiedtrue/contentVerifiedfalse;
+446 partes/454 frames/920048 bytes TX, selectedByClientfalse.
+closeConfirmed/workerExitConfirmedtrue/exit0/nativeErrorfalse. Gates general/
+QUICK/C#Large restauradosfalse y worker reconstruido en finally. Sin SET,
+autostart, borrados, reenvío WAD ni reintento. Journal quick-r393 terminal:
+permiso de instalación consumido; NO repetir/resume/consultar radio con él.
+
+Ensayo entregado: elegir recién instalada DOOM II (icono igual al anterior),
+START1/mantener CHECKING, comparar LOADING→menú, cargar partida/jugar≤60s,
+SALIR→CLOSED. MODE5 desde CLOSED muestra CODE/READ/TOTAL; TOTAL00632284
+identifica R393 (R390 tiene00631972). Conserva010 hasta resultado.
+ERROR: no repetir/reabrir, GATE/CODE. Imagen sobre menús: reinicio normal.
+No afirmar aún mejora física, migración/partida/cierre aceptados ni borrar010.
+Tras éxito, usuario puede quitar010 y conservar solo011 y usar Mi Fitness.
+
+## Preparación anterior (ya aprobada)
 
 Usuario pide revisar arranque; espera principalmente LOADING. R390 sigue
 aceptado y operativo. NO enviar R393 con permisos anteriores. Plan
