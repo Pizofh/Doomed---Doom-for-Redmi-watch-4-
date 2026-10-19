@@ -77,3 +77,7 @@ Un ?nico despacho autorizado: RegisteredInactive,524/524 partes. Registro confir
 Usuario informa ERROR: CODE ?01? (transcripci?n literal, no normalizar a201), READ00790692, TOTAL00790692, GATE21, FREE07756504, MAX03404064. Identidad/tama?o corresponde al ELF R396790692B. El total libre7756504B supera min_free7196672B, pero el bloque mayor3404064B es inferior a min_largest4194320B; el gate detuvo antes de insmod. No hay medici?n f?sica de la mejora ni ejecuci?n del motor en este intento. El importador precede este gate: no asumir que el WAD permanece en011; conservar ambos directorios/esferas y no intentar la anterior a ciegas.
 
 Instalaci?n y primer ensayo consumidos. Proponer UN ensayo adicional del mismo paquete despu?s de reinicio normal, sin env?o ni m?nimos rebajados; requiere autorizaci?n porque el protocolo ordenaba detenerse al ERROR. El antecedente R394 pas? este l?mite tras reiniciar, sin garant?a de repetirse.
+
+## Ensayo adicional autorizado: mejora percibida ? 2026-10-19
+
+Tras autorizar expl?citamente un arranque adicional despu?s de reinicio normal, el usuario informa ?s? mejor??. Confirma mejora percibida de apertura en hardware; no aporta segundos nuevos, por lo que NO atribuir al reloj el74,24% del tramo emulado. No reporta otros fallos; aplicar su preferencia vigente de asumir el resto normal si no indica lo contrario, sin afirmar un CLOSED expl?cito que no escribi?. R396013/TOTAL00790692 queda como versi?n funcional vigente e independiente tras migraci?n. No se requieren m?s ensayos para este cambio.

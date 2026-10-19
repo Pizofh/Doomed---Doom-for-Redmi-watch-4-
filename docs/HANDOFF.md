@@ -1,3 +1,7 @@
+# R396 aceptada: apertura mejora en el reloj
+
+2026-10-19: tras autorizar UN ensayo adicional y reinicio, usuario ?s? mejor??; sin otros fallos reportados. Versi?n funcional vigente DOOM II013/TOTAL00790692, independiente tras migraci?n. Mejora f?sica percibida, sin segundos nuevos ni porcentaje f?sico demostrados. No pedir m?s pruebas de este cambio. Plan/evidencia docs/doom-fast-physical-plan-r396.md.
+
 # R396 primer ensayo detenido por bloque RAM; sin mejora f?sica medida
 
 GATE21/FREE7756504/MAX3404064, READ/TOTAL790692 y CODE literal ?01?. Free supera7196672 pero mayor bloque inferior4194320; no carg? C. Importador ocurre antes, WAD puede estar ya013: no probar vieja011 ni borrar. Primer ensayo consumido; pedir autorizaci?n para UN arranque tras reinicio del mismo013, sin reinstalar ni bajar guards. V?ase plan R396.
