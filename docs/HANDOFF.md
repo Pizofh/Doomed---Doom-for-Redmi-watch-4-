@@ -1,3 +1,7 @@
+# R396 primer ensayo detenido por bloque RAM; sin mejora f?sica medida
+
+GATE21/FREE7756504/MAX3404064, READ/TOTAL790692 y CODE literal ?01?. Free supera7196672 pero mayor bloque inferior4194320; no carg? C. Importador ocurre antes, WAD puede estar ya013: no probar vieja011 ni borrar. Primer ensayo consumido; pedir autorizaci?n para UN arranque tras reinicio del mismo013, sin reinstalar ni bajar guards. V?ase plan R396.
+
 # R396 instalada inactiva; UN ensayo manual pendiente
 
 2026-10-19 despacho ?nico autorizado completado RegisteredInactive524/524; transporte cerrado/worker0, gatesfalse y rebuilt. Paquete e3bb86a4740ea4ed8e92a6d340f36229f83b39378c62c3a049d5556b16da1923. DOOM II013 reci?n a?adida/mismo monstruo, TOTAL00790692. START manual importa WAD/saves011?013; no se ejecut? desde PC. Pedir prueba de carga/partida/controles/PAUSA y SALIR?CLOSED?60s de juego, comparaci?n de LOADING; anteERROR GATE/CODE no repetir ni borrar. Conservar011 hasta validar, despu?s013 independiente. No mejora f?sica confirmada todav?a.

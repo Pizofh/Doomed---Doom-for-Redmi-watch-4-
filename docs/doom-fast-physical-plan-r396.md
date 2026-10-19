@@ -71,3 +71,9 @@ sigue sin validar. No supone garantía de mejora física ni del audio entrecorta
 ## Instalaci?n completada ? 2026-10-19
 
 Un ?nico despacho autorizado: RegisteredInactive,524/524 partes. Registro confirmado; no readback del contenido. Sin selecci?n/START desde PC. Transporte cerrado, worker termin?0, sin nativeError. Gates general/FAST_R396/C#Large restauradosfalse y worker recompilado cerrado. Pendiente UN ensayo manual; sin reintentos autorizados. WAD/partidas no trasladados a?n: ese paso solo ocurre al START manual.
+
+## Primer ensayo f?sico R396 ? 2026-10-19
+
+Usuario informa ERROR: CODE ?01? (transcripci?n literal, no normalizar a201), READ00790692, TOTAL00790692, GATE21, FREE07756504, MAX03404064. Identidad/tama?o corresponde al ELF R396790692B. El total libre7756504B supera min_free7196672B, pero el bloque mayor3404064B es inferior a min_largest4194320B; el gate detuvo antes de insmod. No hay medici?n f?sica de la mejora ni ejecuci?n del motor en este intento. El importador precede este gate: no asumir que el WAD permanece en011; conservar ambos directorios/esferas y no intentar la anterior a ciegas.
+
+Instalaci?n y primer ensayo consumidos. Proponer UN ensayo adicional del mismo paquete despu?s de reinicio normal, sin env?o ni m?nimos rebajados; requiere autorizaci?n porque el protocolo ordenaba detenerse al ERROR. El antecedente R394 pas? este l?mite tras reiniciar, sin garant?a de repetirse.
