@@ -1,19 +1,24 @@
-# 0.2: Doom II jugable; cierre de entrega
+# 0.2: DOOM II en una sola esfera
 
-**Estado actual R387:** DoomTune probado por el usuario con Doom II completo,
-controles, menú original, guardar/cargar, pausa y salida. La captura táctil del
-fondo evita el selector durante juego y lo libera al salir. El audio mejoró y
-es escuchable, aunque persisten algunos cortes. No afirmar audio perfecto ni
-campaña completa o sesión larga de Doom II comprobadas físicamente.
-[Resultado y límites R387](doom-tune-physical-plan-r387.md).
+## R388 aceptado en el reloj
 
-Conservar DoomTune y el carrier DoomII (datos/partidas). Siguiente prioridad:
-cerrar documentación y reproducibilidad de la entrega, sin otra instalación
-pequeña por rutina. Si se prepara una revisión posterior, recuperar imagen
-grande (~383×239, zoom306/Y30) por preferencia del usuario y mantener las
-mejoras táctiles/audio. Trabajar el audio residual localmente con alcance
-acotado antes de proponer otro ensayo combinado. Multitáctil sigue sin ruta
-demostrada. No hay nuevo payload ni ensayo físico autorizado.
+Usuario respondió «todo ok» al ensayo de migración, carga de partida, juego
+y SALIR→CLOSED. Se acepta ese resultado general sin exigir otra repetición
+ni cifras. La nueva DOOM II/casco verde009 es independiente tras migrar;
+puede conservarse como única esfera Doom. DoomII006/Fit007/Tune008 son
+versiones anteriores prescindibles; no hay permiso para borrarlas desde PC.
+El usuario puede volver a Mi Fitness y uso habitual. Gates permanecen cerrados.
+
+Consulta posterior: acelerar apertura y dos dedos/mover+FIRE. No se midió
+tiempo de arranque final ni se hizo optimización nueva de CHECKING en R388:
+solo migración inicial única, checks previos y carga completos siguen presentes.
+R353/R371 investigaron estáticamente entrada: tres rutas stock reportan un
+punto; motor permite combinaciones pero la UI actual no recibe dos contactos
+independientes. No hubo ensayo multitáctil físico ni prueba universal de límite
+del panel. Referencia docs/touch-path-and-audio-startup-r371-r372.md.
+No prometer dos dedos ni confundir autofire/toggle (rechazados) con multitáctil.
+Próxima prioridad propuesta: medir y optimizar arranque localmente; multitáctil
+requiere una ruta de contactos demostrada antes de otro payload. Sin nuevo envío.
 
 ## Historial previo, sustituido por el estado anterior
 

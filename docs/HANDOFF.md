@@ -1,4 +1,24 @@
-# R388 DOOM II/casco verde instalado; ensayo manual pendiente
+# R388 DOOM II única aceptada; apertura y multitáctil pendientes
+
+## R388 aceptado en el reloj
+
+Usuario respondió «todo ok» al ensayo de migración, carga de partida, juego
+y SALIR→CLOSED. Se acepta ese resultado general sin exigir otra repetición
+ni cifras. La nueva DOOM II/casco verde009 es independiente tras migrar;
+puede conservarse como única esfera Doom. DoomII006/Fit007/Tune008 son
+versiones anteriores prescindibles; no hay permiso para borrarlas desde PC.
+El usuario puede volver a Mi Fitness y uso habitual. Gates permanecen cerrados.
+
+Consulta posterior: acelerar apertura y dos dedos/mover+FIRE. No se midió
+tiempo de arranque final ni se hizo optimización nueva de CHECKING en R388:
+solo migración inicial única, checks previos y carga completos siguen presentes.
+R353/R371 investigaron estáticamente entrada: tres rutas stock reportan un
+punto; motor permite combinaciones pero la UI actual no recibe dos contactos
+independientes. No hubo ensayo multitáctil físico ni prueba universal de límite
+del panel. Referencia docs/touch-path-and-audio-startup-r371-r372.md.
+No prometer dos dedos ni confundir autofire/toggle (rechazados) con multitáctil.
+Próxima prioridad propuesta: medir y optimizar arranque localmente; multitáctil
+requiere una ruta de contactos demostrada antes de otro payload. Sin nuevo envío.
 
 ## Instalación física R388 completada; ensayo manual pendiente
 
