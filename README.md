@@ -3,20 +3,19 @@
 Original DOOM running on the Redmi Watch 4 with stock firmware, a native C
 engine and a Lua/LVGL watchface interface.
 
-**Current 0.2 development status:** [DOOM II R396](docs/doom-fast-physical-plan-r396.md)
-with its monster preview is accepted on the watch as a single face, with
-original menus, larger display, controls, persistent saves, pause and CLOSED
-exit. The user confirms faster startup after the graphics metadata change;
-there is no measured hardware improvement percentage. Sound effects remain
-occasionally choppy; music and two-finger input are not implemented.
+**Current 0.2 development status:** [DOOM II R397](docs/doom-controls-physical-plan-r397.md)
+with its monster preview is the working version on the watch. The user confirms
+save loading, weapon cycling and two successful starts/exits. Its registration
+also survived a manual reboot after the [R398 resend](docs/doom-controls-persistence-retry-r398.md).
+Original menus, persistent saves, pause and CLOSED exit work. MENU/PAUSA overlays
+are too faint and sometimes need repeated taps; sound effects remain choppy.
+Music and two-finger input are not implemented.
 
-[R397 candidate](docs/doom-controls-physical-plan-r397.md), resent after a lost registration and retained across a manual reboot,
-adds previous/next weapon buttons, compact MENU/PAUSA over the game, SALIR in
-the pause panel, optional INFO after normal exit and fewer CHECKING callbacks.
-Its native engine, UI, save/load and weapon tests pass locally. Physical
-comfort, overlay performance and startup improvement remain untested. R396 is
-still present; the R397 manual gameplay trial is pending. The cause of the first lost
-registration is unresolved. See the [R398 verification](docs/doom-controls-persistence-retry-r398.md).
+Previous/next weapon buttons work. Normal exit offers optional INFO instead of
+automatic diagnostic pages. R397 reduces CHECKING callbacks; no new hardware
+startup percentage was measured. The earlier graphics metadata optimization
+improved startup according to the user. The first lost registration remains
+unexplained; one successful reboot does not establish a general persistence fix.
 This does not establish a full campaign playthrough or a long Doom II session.
 Retail WADs and derived binary assets are private build inputs, absent here.
 

@@ -76,3 +76,23 @@ Ahora corresponde el ensayo manual R397 previamente autorizado: START, cargar
 partida, armas/controles/menu/pausa y SALIR->CLOSED; solo si funciona, segundo
 arranque breve y CLOSED. Pregunta corta enviada; sin cifras normales solicitadas.
 R397 aun no esta aceptada funcionalmente hasta recibir el resultado. Conservar013.
+
+
+## Resultado funcional del usuario
+
+El usuario confirma que todo el protocolo salio bien: partida, armas y ambos
+arranques/cierres. R397014 pasa a ser la version funcional vigente, con sus datos
+migrados propios. No se requiere mantener013 como dependencia del juego.
+
+Quedan defectos fisicos de uso: MENU/PAUSA sobre el juego demasiado transparentes,
+dificiles de localizar y a veces requieren varias pulsaciones. ARMA-/+ funciona
+bien. El audio sigue entrecortado. Jugar con un solo boton limita especialmente
+la sierra; controles simultaneos siguen siendo una prioridad del usuario.
+No declarar corregidos estos problemas ni presentar esta version como final.
+
+Revision local de UI confirma zonas MENU92x30 y PAUSA112x30 arriba, fondo35%;
+PAUSA usa CLICKED, MENU usa PRESSED/RELEASED. Esto orienta la revision de contraste,
+areas tactiles y eventos, pero no identifica aun por que se pierden pulsaciones.
+La viabilidad multitactil conserva los limites R353/R371: no hay una ruta fisica
+verificada de dos contactos independientes, y autofire/toggles siguen rechazados.
+No nuevo payload ni envio autorizado por esta respuesta de resultados.

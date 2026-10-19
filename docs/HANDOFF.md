@@ -1,3 +1,9 @@
+# R397014 funcional vigente, con defectos de usabilidad pendientes
+
+Usuario confirma ensayo completo y dos arranques/cierres bien: cargar partida, armas, MENU/PAUSA, CLOSED. Datos propios migrados014, sin dependencia operacional de013. Persistencia tras reinicio ya confirmada por catalogo y usuario. NO registrar como acabado perfecto: MENU/PAUSA demasiado transparentes, dificiles de localizar y varias pulsaciones para reaccionar; ARMA-/+ bien. Audio sigue entrecortado. Un solo boton limita mucho jugabilidad, sierra casi inutil: usuario prioriza controles simultaneos. No nueva instalacion autorizada.
+
+Proxima revision local: contraste y areas MENU/PAUSA (92x30/112x30,35% fondo), coherencia tactil/cancelaciones. PAUSA usa CLICKED y MENU PRESSED/RELEASED; causa de pulsaciones perdidas no demostrada. Dos dedos requiere ruta real de contactos R353/R371, no prometer ni sustituir por autofire/toggle rechazados. Audio merece perfil separado, sin afirmar mejora nueva. Gates cerrados; no radio/envio extra ni PCborrados.
+
 # R398 persistencia confirmada; nueva014 activa, ensayo funcional pendiente
 
 Usuario vio ambas antes/despues del reinicio. Consulta fisica SOLO LECTURA confirma11 entradas,013inactiva/014activa, ningun ID/flag previo perdido. Complete/transporte cerrado/worker0, sin archivos enviados. No PCselect/START. Evidencia privada build/doom-controls-r397/after-manual-reboot-r398.json. El reenvio sobrevivio ESTE reinicio; causa de primera desaparicion sigue desconocida, no atribuir solucion a las esperas como hecho.
