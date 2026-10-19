@@ -1,4 +1,20 @@
-# R387 DoomTune instalado inactivo; UN ensayo manual YA autorizado
+# R387 DoomTune jugable confirmado; cerrar entrega, audio residual pendiente
+
+Ensayo completado: usuario «todo salió bien»/«todo se solucionó», salvo audio
+todavía algo entrecortado, ya escuchable y jugable. Captura de fondo/imagen,
+pausa/guardar/cargar/cierre y regreso aceptados según respuesta al protocolo;
+sin cifras nuevas ni medida acústica. Encuadre mejoró, pero prefiere imagen
+anterior MÁS GRANDE: en la próxima versión volver a zoom306/Y30 (~383×239),
+aceptando recorte de esquinas; conservar captura táctil y audio R387.
+No modificar/reinstalar solo por tamaño ahora. Mantener DoomTune008 + carrier
+DoomII006; DoomFit007 es fallback opcional. Nada autoriza otro payload/ensayo.
+No repetir START, reinstalar ni reabrir una prueba por el protocolo consumido.
+Prioridad: entrega/documentación reproducible; audio residual con trabajo local
+acotado antes de plantear otro ensayo combinado. No prometer audio perfecto,
+multitáctil, campaña completa o sesión larga de Doom II ya probados físicamente.
+Usuario pide mensajes y protocolos mucho más breves.
+
+## Instalación y ensayo anteriores R387, ya completados
 
 Usuario aprobó «Sí, autorizo y puedo observar» el 2026-10-18. UNA instalación
 terminó RegisteredInactive/registeredVerifiedtrue/contentVerifiedfalse.
@@ -9,8 +25,8 @@ nativeErrorfalse. Gates general/TUNEJS/C#Large restauradosfalse y rebuild
 inmediato por finally; otrosfalse. Sin SET/borrados/autostart/reenvío WAD.
 Journal tune-r387 terminado: NO otro install/retry/resume/consultaBluetooth.
 
-Pendiente UN ensayo manual≤60s YA autorizado, sin pedir otra aprobación ni
-reinicio. Seleccionar DoomTune (MARCO MENTA/TRES VERTICALES), conservar DoomII
+Protocolo histórico completado; NO repetirlo con este permiso.
+Seleccionar DoomTune (MARCO MENTA/TRES VERTICALES), conservar DoomII
 y DoomFit. READY→START1, mantener CHECKING/LOADINGdespierto (~90s carga más
 checksum). Menú/NEWGAME/dificultad/MAP01, sonido/controles/USAR/PAUSA;
 holds3s en azul y3s en imagen NO deben abrir selector. Guardar/mover/cargar,
@@ -20,7 +36,7 @@ Si abre selector en juego: elegirhabitual, NO reabrir. ERROR/silencio/corrupció
 cierrefallido: no repetir; MODE GATE/FREE/MAX,CODE/READ/TOTAL; siGATE≥50
 START/READY/FINISH,JOIN/REASON/EXIT; AUDIOERR/CALL. Habitual porAjustes;
 imagenretenida→reinicio normal NO Restablecer y dejar habitual.
-Asumir resto normal salvo reporte. Nuevos cambios físicos aún sin validar.
+Asumir resto normal salvo reporte. Resultado posterior registrado al inicio.
 
 ## Preparación anterior R387; aprobación e instalación ya consumidas
 

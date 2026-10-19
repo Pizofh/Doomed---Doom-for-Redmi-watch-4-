@@ -1,6 +1,17 @@
 # R387: DoomTune, continuidad de audio y encuadre/táctil
 
-## Resultado de instalación; UN ensayo manual pendiente
+## Resultado físico del ensayo
+
+Usuario confirma «todo salió bien» y que el resto se solucionó: captura del
+fondo/imagen, controles, pausa, guardar/cargar y cierre aceptados según el
+protocolo. Audio aún algo entrecortado, pero escuchable y juego jugable.
+Encuadre más completo y ligeramente menor; preferencia explícita para la
+PRÓXIMA versión: recuperar tamaño anterior (~383×239, zoom306/Y30), aceptando
+esquinas recortadas. No cambiar esta entrega ni enviar otro paquete por ello.
+Sin cifras nuevas, medición acústica ni sesión larga Doom II. Ensayo consumido;
+ningún arranque adicional de prueba ni payload nuevo autorizado por este plan.
+
+## Resultado de instalación
 
 2026-10-18: UNA ejecución autorizada terminó RegisteredInactive,
 registeredVerifiedtrue/contentVerifiedfalse. Modelo/FW esperados; catálogo11,
@@ -9,8 +20,8 @@ chunk2048.331partes/339frames/682731BTX, selectedByClientfalse. Cierre y
 workerexit confirmados/exit0/nativeErrorfalse. No SET, borrados ni autostart.
 Journal tune-r387 terminado: NO otro install/retry/resume. Gates JS general/
 TUNE y C#Large restauradosfalse/rebuild inmediato por finally; demásfalse.
-Sin ejecución del nuevo C durante registro inactivo. Falta el ensayo≤60s ya
-autorizado; no pedir permiso otra vez ni exigir reinicio previo.
+Sin ejecución del nuevo C durante registro inactivo. El ensayo posterior se
+completó y se registra arriba; no repetirlo con este permiso.
 
 ## Autorización
 

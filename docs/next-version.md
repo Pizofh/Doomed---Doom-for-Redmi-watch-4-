@@ -1,4 +1,21 @@
-# 0.2: efectos de sonido confirmados en el reloj
+# 0.2: Doom II jugable; cierre de entrega
+
+**Estado actual R387:** DoomTune probado por el usuario con Doom II completo,
+controles, menú original, guardar/cargar, pausa y salida. La captura táctil del
+fondo evita el selector durante juego y lo libera al salir. El audio mejoró y
+es escuchable, aunque persisten algunos cortes. No afirmar audio perfecto ni
+campaña completa o sesión larga de Doom II comprobadas físicamente.
+[Resultado y límites R387](doom-tune-physical-plan-r387.md).
+
+Conservar DoomTune y el carrier DoomII (datos/partidas). Siguiente prioridad:
+cerrar documentación y reproducibilidad de la entrega, sin otra instalación
+pequeña por rutina. Si se prepara una revisión posterior, recuperar imagen
+grande (~383×239, zoom306/Y30) por preferencia del usuario y mantener las
+mejoras táctiles/audio. Trabajar el audio residual localmente con alcance
+acotado antes de proponer otro ensayo combinado. Multitáctil sigue sin ruta
+demostrada. No hay nuevo payload ni ensayo físico autorizado.
+
+## Historial previo, sustituido por el estado anterior
 
 **R370 instalado y probado por el usuario:** título y menú original, controles contextuales
 OK/ATRÁS y MENU, NEW GAME/episodio/dificultad, título sin demo automática y carga

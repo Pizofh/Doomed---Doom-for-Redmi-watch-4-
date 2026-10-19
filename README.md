@@ -3,6 +3,19 @@
 Original DOOM running on the Redmi Watch 4 with stock firmware, a native C
 engine and a Lua/LVGL watchface interface.
 
+**Current 0.2 development status:** [DoomTune R387](docs/doom-tune-physical-plan-r387.md)
+has been tested on the watch with Doom II, its original menu, controls,
+pause, persistent save/load and clean exit. Background holds stay within the
+game and face selection returns after exit. Sound effects are usable but still
+occasionally choppy. This does not establish a full campaign playthrough or a
+long Doom II session. DoomTune depends on the retained DoomII data carrier;
+retail WADs are private inputs and are not included in this repository.
+
+The 0.1.0 baseline and its build instructions below remain unchanged;
+see [0.2 work](docs/next-version.md) for the newer incremental builds and limits.
+
+## 0.1.0 baseline
+
 **Physically tested:** [DoomReady R351/R352](docs/doom-ready-physical-plan-r351.md).
 The user confirmed gameplay, larger controls, interaction, pause, save/load with
 the original screen melt, persistence after switching to another face, and clean
