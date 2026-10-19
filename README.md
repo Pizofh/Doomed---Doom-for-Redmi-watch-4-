@@ -3,8 +3,9 @@
 Original DOOM running on the Redmi Watch 4 with stock firmware, a native C
 engine and a Lua/LVGL watchface interface.
 
-**Current 0.2 development status:** [DOOM II R388](docs/doom-final-physical-plan-r388.md)
-has been accepted on the watch as a single face, including migration of the
+**Current 0.2 development status:** [DOOM II R390](docs/doom-monster-physical-plan-r390.md)
+with its monster preview has been accepted on the watch as a single face,
+including migration of the
 installed game and saves, larger display, original menu, controls, pause,
 persistent save/load and CLOSED exit. Background holds stay within the game.
 Sound effects remain occasionally choppy; music is not implemented.

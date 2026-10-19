@@ -1,4 +1,17 @@
-# R390 DOOM II monstruo instalado; ensayo manual pendiente
+# R390 DOOM II monstruo aceptado; entrega actual cerrada
+
+## R390 aceptado en el reloj
+
+2026-10-18: usuario responde «sí, todo bien» al protocolo de migración010,
+carga de partida, juego breve y SALIR→CLOSED. Resultado general aceptado sin
+pedir nuevas cifras ni repetir arranques. DOOM II/monstruo rojo010 queda como
+versión actual independiente; puede retirar manualmente casco verde009.
+No hay acción de borrado desde PC ni otra instalación/ensayo autorizados.
+Puede reconectar Mi Fitness y usar el reloj normalmente. Gates cerrados.
+Pendientes pospuestos por el usuario: apertura más rápida, dos dedos reales,
+música y cortes residuales de efectos; no presentar esos cambios como hechos.
+
+## Historia de instalación (permiso consumido)
 
 ## R390 instalación completada; ensayo manual pendiente
 
