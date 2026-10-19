@@ -1,6 +1,16 @@
 # R386: DoomFit, reducir memoria residente del audio
 
-## Resultado de instalación; ensayo manual pendiente
+## Resultado físico del ensayo
+
+Usuario informó «todo ok» en respuesta al protocolo: Doom II arrancó y las
+pruebas de controles, guardar/cargar y SALIR/CLOSED resultaron correctas.
+Excepción explícita: audio entrecortado (confirmado al aclarar el síntoma).
+También reportó selector stock al mantener fondo azul o imagen y mostró foto
+con recorte superior por las esquinas redondeadas. No hay cifras nuevas ni
+medida de latencia. Ensayo consumido: no repetir START/reabrir por este plan.
+No nuevo payload físico autorizado; pulido posterior se prepara localmente.
+
+## Resultado de instalación
 
 2026-10-18: UNA ejecución autorizada terminó RegisteredInactive,
 registeredVerifiedtrue/contentVerifiedfalse. Modelo/FW esperados; catálogo10,
@@ -10,8 +20,8 @@ workerexit confirmados/exit0/nativeErrorfalse. No SET, borrados ni autostart.
 Journal nuevo fit-r386.jsonl terminado; NO otro install/retry/resume.
 Gates general/FITJS/C#Large restauradosfalse y worker reconstruido mediante
 finally inmediatamente tras el resultado. Todos los demás permanecieronfalse.
-No ejecución C en esta instalación inactiva; arranque/audio/cierre físicos
-todavía pendientes. UN ensayo≤60s ya autorizado; no volver a pedir permiso.
+No ejecución C durante la instalación inactiva; el ensayo posterior y sus
+límites se registran arriba. Ningún arranque adicional autorizado por R386.
 
 ## Autorización
 

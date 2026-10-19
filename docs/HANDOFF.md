@@ -1,4 +1,18 @@
-# R386 DoomFit instalado inactivo; UN ensayo manual ya autorizado
+# R386 Doom II funciona físicamente; preparar pulido R387 sin nuevo ensayo
+
+Usuario reportó «todo ok» al protocolo R386 (arranque, controles, guardar/cargar,
+SALIR/CLOSED); única excepción de audio: confirmó que se oye ENTRE CORTADO,
+no solo retrasado. Foto muestra MAP01/HUD/controles completos salvo recorte
+en esquinas superiores redondeadas. Hold en fondo azul/imagen abre selector
+sin SALIR; los huecos no son CLICKABLE en la capa hits actual.
+No pedir repetir ni otro arranque R386: permiso consumido. Asumir menús/corona
+normales salvo reporte. Ninguna autorización R387 aún; solo trabajo local.
+Plan de revisión: captura táctil de fondo durante juego, ajuste proporcional
+de imagen sin reducir resolución del motor, quitar dependencia de los bloques
+de audio de la cadencia irregular del motor. Mantener carrier DoomII006 y
+DoomFit007 como versión probada; no borrados ni WAD reenviado.
+
+## Instalación y protocolo anteriores R386, ya consumidos
 
 Usuario aprobó «Sí, autorizo y puedo observar» el 2026-10-18. UNA instalación
 terminó RegisteredInactive/registeredVerifiedtrue/contentVerifiedfalse.
@@ -9,7 +23,7 @@ nativeErrorfalse. Gates general/FITJS/C#Large restauradosfalse y rebuild
 inmediato por finally, demásgatesfalse. No SET/borrado/autostart ni WADreenviado.
 Journalfit-r386 terminado: NO otro install/retry/resume/consultaBluetooth.
 
-Pendiente UN ensayo manual≤60s YA autorizado. No nueva aprobación/reinicio.
+Protocolo anterior R386 completado; NO repetirlo con este permiso:
 Seleccionar DoomFit (MARCO MORADO y DOS VERTICALES), conservar DoomII carrier.
 READY→START1, mantener CHECKING/LOADINGdespierto (~90s carga más checksum).
 Título→OK/NEWGAME→dificultad→MAP01, controles/primerdisparo/sonido/USAR,
@@ -19,7 +33,7 @@ No segundo arranque/reabrir. Error/silencio/corrupción/cierrefallido: MODE
 GATE/FREE/MAX,CODE/READ/TOTAL; siGATE≥50 START/READY/FINISH,JOIN/REASON/EXIT;
 AUDIOERR/CALL si responde. Habitual desde Ajustes; imagenretenida→reinicio
 normal NO Restablecer y dejar habitual. Asumir menús/corona normales salvo
-reporte. Ningún gameplay/audio/cierre de DoomII validado físicamente aún.
+reporte. Resultado físico posterior indicado al inicio.
 
 ## Preparación anterior R386 (autorización e instalación ya consumidas)
 
