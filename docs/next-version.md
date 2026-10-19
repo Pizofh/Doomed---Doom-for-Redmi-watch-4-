@@ -1,8 +1,14 @@
 # 0.2: DOOM II en una sola esfera
 
-## R396 aceptada; R397 preparada para uso habitual
+## R396 aceptada; R397 ausente tras reiniciar
 
-R396013 abri? m?s r?pido seg?n el usuario. R397014 a?ade ARMA?/+, MENU y PAUSA compactos arriba, SALIR en pausa, INFO opcional al cerrar y CHECKING con CRC ?ntegro en bloques de16KiB. Pruebas locales aprobadas; sin nueva instalaci?n ni autorizaci?n f?sica todav?a. Plan y l?mites: [R397](doom-controls-physical-plan-r397.md).
+R396013 sigue presente y aceptada. El envio autorizado de R397014 recibio
+confirmacion de registro inactivo, pero la consulta posterior al reinicio ya no
+la incluye. El usuario no comprobo el selector antes; no hubo ensayo R397.
+Armas, controles compactos e INFO pasan las pruebas locales y siguen pendientes
+en hardware. La prueba de catalogo frio S3 reconoce ambos paquetes exactos;
+no explica el resultado del RW4. Causa por confirmar, sin reenvio autorizado.
+[Estado y evidencia R397](doom-controls-physical-plan-r397.md).
 
 
 ## R393 funcional, carga pendiente de medir

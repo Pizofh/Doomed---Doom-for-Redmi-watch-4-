@@ -1,3 +1,9 @@
+# R397 ausente tras reinicio; R396 sigue vigente
+
+Catalogo fisico consultado de solo lectura:10 entradas, solo DOOM013 activa;014 ausente. Envio anterior reconocio RegisteredInactive524/524, sin readback de contenido. Usuario SOLO reinicio, sin Mi Fitness/borrados, y NO miro si habia dos antes de reiniciar. Visibilidad previa desconocida; no afirmar que vio desaparecer014 ni que se sustituyo013. R397 nunca se probo. No nuevo envio autorizado ni START pendiente util sobre014 ausente. Mantener013 y journal original; gatesfalse.
+
+Prueba local adicional: ambos paquetes exactos013/014 se reconocen simultaneamente al regenerar catalogo frio S3, mismo titulo/icono; sin seleccionar/ejecutar C. No reproduce problema, NO valida persistencia/transporte RW4. Retirados160 archivos propios y directorios; cache original restaurada tras comprobar que el reinicio solo retenia las entradas cacheadas incluso sin sus directorios. Restauracion final verificada:35 entradas originales, mismos IDs activos y ningun modulo propio. Evidencia privada build/doom-controls-r397/cold-catalog-result.json y watchfaces-after-reboot.json. Causa fisica desconocida. No atribuir a limite10 ni bajar guards.
+
 # R397 instalada inactiva; dos ensayos manuales pendientes
 
 ?nico despacho autorizado RegisteredInactive524/524; registro confirmado sin readback de contenido. Transporte cerrado/worker0; gatesfalse y rebuilt. NuevaDOOMII014/TOTAL00790804 a?n sin START desdePC. Usuario autoriz? dos arranques, primero tras reinicio normal para fragmentaci?n; segundo solo si primeroCLOSED, sin reiniciar/cambiar de esfera. Conservar013 hasta validar migraci?n y cierre. Protocolo corto: cargar partida, ARMA?/+, MENU/PAUSA y PAUSA?SALIR; INFO opcional alCLOSED. AnteERROR no repetir: INFO?GATE/CODE. Sin rendimiento f?sico nuevo demostrado.

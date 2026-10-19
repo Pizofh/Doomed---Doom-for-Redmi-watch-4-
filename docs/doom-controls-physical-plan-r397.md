@@ -1,8 +1,10 @@
 # R397: armas, controles y cierre para uso habitual
 
-Estado: paquete preparado, SIN autorización ni instalación física nueva.
-R396013 es la versión aceptada en el reloj. Esta revisión requiere una
-autorización concreta para un payload nuevo, según la regla del usuario.
+Estado actual: envio autorizado y registro inactivo reconocido, pero R397014
+ausente del catalogo tras reiniciar. Sin ensayo del motor R397 en el reloj.
+R396013 sigue presente y es la version aceptada. La causa no esta identificada;
+no hay autorizacion para otro envio. El protocolo original se conserva abajo
+como historial, no como instrucciones vigentes para abrir una esfera ausente.
 
 ## Comportamiento
 
@@ -106,3 +108,28 @@ Tras posponer por distancia y volver a indicar disponibilidad, el usuario confir
 ## Instalaci?n completada
 
 ?nico despacho autorizado completado: RegisteredInactive,524/524 partes, registro confirmado. Contenido no le?do de vuelta. Sin selecci?n ni START desde PC; WAD/partidas a?n no migrados por PC. Transporte cerrado, worker termin?0, sin nativeError. Gates general/CONTROLS_R397/C#Large restauradosfalse y worker recompilado cerrado. Pendientes losDOS arranques manuales del plan, segundo condicionado al primerCLOSED. No hay permiso para reintentar la instalaci?n.
+
+
+## Registro ausente despues del reinicio
+
+Consulta fisica de solo lectura posterior al reinicio: catalogo de10 entradas,
+R396013 presente y activa; R397014 ausente. La consulta termino Complete,
+transporte cerrado y worker0, sin transferencia de archivos ni seleccion.
+El usuario solo reinicio; no abrio Mi Fitness ni elimino esferas entre el envio
+y la comprobacion. No miro el selector antes del reinicio: su visibilidad previa
+es desconocida. La confirmacion inicial RegisteredInactive no demuestra que el
+registro se conservara tras reiniciar. No se ejecutaron los ensayos R397.
+
+Revision local: paquetes R396/R397 con IDs distintos y hashes revisados. En el
+emulador S3 propio, una regeneracion en frio del catalogo reconocio AMBOS paquetes
+exactos, con el mismo titulo/icono y sin seleccionar ni ejecutar sus ELF. No se
+reproduce ahi la desaparicion ni una deduplicacion por nombre/icono. Esta prueba
+usa otro firmware y copia local de archivos, no el transporte del RW4: no prueba
+persistencia fisica ni identifica la causa. Archivos propios retirados y cache
+original restaurada; membresia/activacion originales verificadas despues del ultimo reinicio.
+
+No reenviar, borrar013, seleccionar otra esfera desde PC ni pedir START sobre014.
+No atribuir el fallo a un limite de10 esferas: la revision estatica R377 fija20
+como limite de mercado, y no se ha medido espacio libre actual. Proximo trabajo:
+revisar la persistencia de instalacion antes de preparar un reintento concreto
+con autorizacion nueva; conservar el journal original y la version funcional.
