@@ -1,5 +1,22 @@
 # R385: un reintento de Doom II tras liberar cuota
 
+## Resultado de instalación
+
+Completada una sola ejecución el 2026-10-18: RegisteredInactive,
+registeredVerifiedtrue/contentVerifiedfalse. Modelo/FW esperados; catálogo9,
+sameSelectiontrue/reviewedSpaceRemovalstrue: únicamente Packed retirado y
+nueve caras personales preservadas. INSTALL0, ACKMD5/status0/offset0,
+chunk2048;3534partes/3542frames/7289214BTX. closeConfirmed y
+workerExitConfirmedtrue, exit0/nativeErrorfalse. No SET/autostart/borradosPC.
+Gate general/DOOM2SPACEJS/C#Retail cerrados y rebuild inmediato; otrosfalse.
+Journal conserva intento1 rechazado e intento2 terminado. No más envíos,
+retries/resume ni consultas Bluetooth necesarios. Pendientes DOS arranques
+manuales ya autorizados, segundo solo si primer CLOSED y todo correcto.
+No volver a pedir aprobación ni reinicio por rutina. C/WADII aún no ejecutados
+en el reloj: no afirmar sonido/cierre/guardado/rendimiento físicos validados.
+
+## Preparación y autorización anteriores
+
 Autorizado por el usuario el 2026-10-18, tras confirmar que retiró DoomPacked.
 Alcance final: conservar TODAS las esferas personales y sustituir solo DoomI.
 No usar la propuesta anterior de eliminar ocho caras personales, rechazada.

@@ -1,4 +1,30 @@
-# R385 autorizado: sustituir SOLO DoomPacked, conservar nueve caras personales
+# R385 Doom II instalado inactivo; pendientes dos ensayos ya autorizados
+
+Una ejecución install-after-space completada el 2026-10-18: RegisteredInactive,
+registeredVerifiedtrue/contentVerifiedfalse. Catálogo9/modeloFWesperados,
+sameSelectiontrue/reviewedSpaceRemovalstrue, INSTALL0/ACKMD5/status0/offset0/
+chunk2048.3534partes/3542frames/7289214BTX. closeConfirmed/workerExitConfirmed
+true/exit0/nativeErrorfalse. Nueve esferas personales/selección preservadas;
+solo retiro manual de Packed aceptado. Sin SET/autostart/borrados desdePC.
+Gates general/DOOM2SPACEJS/C#Retail cerrados/rebuild inmediato, todosotrosfalse.
+Journaldoom2-r384 conserva intento1 rechazado y intento2RegisteredInactive.
+NO otro envío/retry/resume/consultaBluetooth. Mismo paquete7221744B
+SHA483dcce2620f99839f930881c5024f1b0c67885e27a36cd1b1a26e5d6864f5a1.
+DoomII365220006/rw4doomii384, preview marcoROJO/DOSVERTICALES.
+
+Faltan DOS ensayos manuales YA autorizados. No nueva aprobación/reinicio.
+READY→START1, CHECKING/LOADINGdespierto (~90s arranque más checksum).
+TítuloDoomII→OK/NEWGAME→dificultad→MAP01, controles/primerdisparo/sonido,
+USAR, PAUSA/GUARDAR→GUARDADO; SEGUIR/mover, PAUSA/CARGAR→CARGADO,
+SEGUIR/SALIR≤60sjuego→CLOSED. Esperar salida sin insistir (~40s nominales máx
+de stop/audio; cooperativo). SOLO si todo correcto: habitual→volverDoomII,
+START1/cargar desde título/SEGUIR/SALIR→CLOSED. Error/sonidoausente/cierre
+fallido: no segundo ciclo/repetir/reabrir. MODE: GATE/FREE/MAX,CODE/READ/TOTAL,
+START/READY/FINISH,JOIN/REASON/EXIT,AUDIOERR/CALL si responde. Imagenretenida:
+reinicio normal (NO Restablecer), habitual. Asumir menús/corona normales salvo
+reporte del usuario. Nada físico de gameplay/audio/cierre validado todavía.
+
+## R385 autorización y preparación anteriores
 
 Usuario confirmó eliminación de DoomPacked y AUTORIZÓ el nuevo envío:
 «ya la borré. te autorizo a que envies. dale». No preguntar de nuevo.
