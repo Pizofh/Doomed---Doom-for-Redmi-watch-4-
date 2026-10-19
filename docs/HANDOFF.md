@@ -1,3 +1,7 @@
+# R396 instalada inactiva; UN ensayo manual pendiente
+
+2026-10-19 despacho ?nico autorizado completado RegisteredInactive524/524; transporte cerrado/worker0, gatesfalse y rebuilt. Paquete e3bb86a4740ea4ed8e92a6d340f36229f83b39378c62c3a049d5556b16da1923. DOOM II013 reci?n a?adida/mismo monstruo, TOTAL00790692. START manual importa WAD/saves011?013; no se ejecut? desde PC. Pedir prueba de carga/partida/controles/PAUSA y SALIR?CLOSED?60s de juego, comparaci?n de LOADING; anteERROR GATE/CODE no repetir ni borrar. Conservar011 hasta validar, despu?s013 independiente. No mejora f?sica confirmada todav?a.
+
 # R396 paquete consolidado listo y autorizado; falta env?o ?nico
 
 Usuario ?autorizo?2026-10-19 tras explicar versi?n optimizada. UNA instalaci?n y UN ensayo manual, sin retry. Plan docs/doom-fast-physical-plan-r396.md. Paquete1069660B/SHAe3bb86a4740ea4ed8e92a6d340f36229f83b39378c62c3a049d5556b16da1923; ID013, importa011?013 tras START. Guardar011 hasta validar. 43 import+27 boot+2 ciclos exactos+32 mapas prototipo+524IPC/regresiones pasan. Gatesfalse; dispatch build/doom-fast-r396/dispatch-once.mjs preparado NO ejecutado, journal a?n ausente.

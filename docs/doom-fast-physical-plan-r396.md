@@ -67,3 +67,7 @@ menús, reinicio normal desde Ajustes y esfera habitual.
 Riesgos: cambia código C de inicialización y mueve el juego dentro de flash.
 Puede bloquear/corromper el sistema o necesitar reinicio. Recuperación integral
 sigue sin validar. No supone garantía de mejora física ni del audio entrecortado.
+
+## Instalaci?n completada ? 2026-10-19
+
+Un ?nico despacho autorizado: RegisteredInactive,524/524 partes. Registro confirmado; no readback del contenido. Sin selecci?n/START desde PC. Transporte cerrado, worker termin?0, sin nativeError. Gates general/FAST_R396/C#Large restauradosfalse y worker recompilado cerrado. Pendiente UN ensayo manual; sin reintentos autorizados. WAD/partidas no trasladados a?n: ese paso solo ocurre al START manual.
