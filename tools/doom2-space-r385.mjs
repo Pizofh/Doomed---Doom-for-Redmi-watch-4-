@@ -9,8 +9,10 @@ export function reviewedDoom2SpaceHistory(h){
   b.filter(r=>r.active).length===1&&b.some(r=>r.id==='365210175'&&r.active)&&b.some(r=>r.id==='365220002'&&!r.active)&&!b.some(r=>r.id==='365220006');
 }
 export function reviewedDoom2Removals(before,after){
- if(!Array.isArray(before)||before.length!==10||!Array.isArray(after)||after.length!==2||new Set(after.map(r=>r.id)).size!==2)return false;
- return after.every(r=>r.canDelete===true&&before.some(b=>b.id===r.id&&b.canDelete===r.canDelete))&&
-  after.some(r=>r.id==='365210175'&&r.active===true)&&after.some(r=>r.id==='365220002'&&r.active===false)&&
-  before.filter(b=>!after.some(r=>r.id===b.id)).every(b=>b.canDelete===true&&!b.active);
+ if(!Array.isArray(before)||before.length!==10||!Array.isArray(after)||after.length!==9||
+  before.some(r=>!r)||after.some(r=>!r)||new Set(before.map(r=>r.id)).size!==10||new Set(after.map(r=>r.id)).size!==9)return false;
+ // Replace Doom I only. Every personal face and its current flags must survive.
+ return before.some(r=>r.id==='365220002'&&r.canDelete===true&&r.active===false)&&!after.some(r=>r.id==='365220002')&&
+  before.filter(r=>r.id!=='365220002').every(b=>after.some(r=>r.id===b.id&&r.active===b.active&&r.canDelete===b.canDelete))&&
+  after.filter(r=>r.active===true).length===1&&after.some(r=>r.id==='365210175'&&r.active===true);
 }

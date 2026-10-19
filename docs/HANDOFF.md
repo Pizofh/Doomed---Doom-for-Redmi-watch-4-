@@ -1,4 +1,19 @@
-# R384 rechazado con0partes; R385 preparado, falta espacio/aprobación
+# R385 autorizado: sustituir SOLO DoomPacked, conservar nueve caras personales
+
+Usuario confirmó eliminación de DoomPacked y AUTORIZÓ el nuevo envío:
+«ya la borré. te autorizo a que envies. dale». No preguntar de nuevo.
+Plan R385 ajustado: preservar las NUEVE caras personales con flags/selección
+idénticos y aceptar únicamente retiro de Packed365220002. La propuesta previa
+de retirar otras ocho fue rechazada. No borrar personales ni desdePC.
+Mismo paquete7221744B/hash483dcce...; no cambios ELF/Lua/WAD ni nuevosensayosC.
+Nuevo guard pasó47casos/3534IPC; paqueteR384 pasóregresión. Listo para abrir
+SOLO general+DOOM2SPACEJS/C#Retail, build/emptytargetready,
+pc-doom2-r384.mjs install-after-space UNA vez; cerrar/rebuild siempre.
+No otro reinicio necesario. Usuario al reloj, batería≥50%/observación ya
+confirmadas. No otro reintento automático. DOS ensayos≤60s incluidos, segundo
+solo si primer CLOSED y todo correcto. R384 sigue consumido0partes.
+
+## R385 preparación anterior (reemplazada por el alcance anterior)
 
 Usuario confirmó reinicio, batería≥50%, espacio/observación y autorizó UNA
 instalación y DOS ensayos. R384 consumido: instalación detenida INSTALLstatus3,

@@ -7,7 +7,7 @@ import {reviewedDoom2SpaceHistory,reviewedDoom2Removals} from './doom2-space-r38
 import {createDoomUploadPcPeer,createDoomUploadIpcPeer,pcPeerSummary} from './doom-upload-pc-simulator.mjs';import {runDoomUploadPc,runReviewedDoomDeployment} from './doom-upload-pc-session.mjs';
 import {physicalDoomIIEnabled,physicalDoomIIAfterSpaceEnabled,createReviewedDoomEndpoint} from './doom-deployment-physical.mjs';
 const plan=prepareDoomII(fs.readFileSync(path.join(root,'build/doom2-r384/package/DoomII-id-only.face'))),filename='doom2-r384.jsonl',where=()=>path.join(root,'artifacts/doom-deployment-r286-'+randomUUID());
-const baseline=['365210037','365210129','365210030','365210122','365220048','365210006','365210218','365230174','365210175','365220002'].map(id=>({id,active:id==='365210175',canDelete:true})),remaining=baseline.slice(-2);
+const baseline=['365210037','365210129','365210030','365210122','365220048','365210006','365210218','365230174','365210175','365220002'].map(id=>({id,active:id==='365210175',canDelete:true})),remaining=baseline.filter(r=>r.id!=='365220002');
 let cases=0;const check=fn=>{fn();cases++;};
 const key=Buffer.alloc(16,37),identity=deploymentIdentity('pc:'+createHash('sha256').update('PC ONLY:fixture-one').digest('hex'),key);
 const read=d=>fs.readFileSync(path.join(d,filename)),history=d=>read(d).toString().trim().split('\n').map(s=>JSON.parse(s).record);
@@ -21,7 +21,7 @@ try{
  const other=deploymentIdentity('pc:'+createHash('sha256').update('PC ONLY:fixture-one').digest('hex'),Buffer.alloc(16,38));check(()=>assert.throws(()=>new DoomDeploymentJournal(plan,other,{directory:copy(initial),afterSpace:true})));disposeDeploymentIdentity(other);
  const tampered=copy(initial);fs.appendFileSync(path.join(tampered,filename),'{}\n');check(()=>assert.throws(()=>new DoomDeploymentJournal(plan,identity,{directory:tampered,afterSpace:true})));
  const claimed=copy(initial),j=new DoomDeploymentJournal(plan,identity,{directory:claimed,afterSpace:true});check(()=>assert.equal(j.record.attemptKind,'retry-doom2-space-r385'));j.close();check(()=>assert(read(claimed).subarray(0,original.length).equals(original)));check(()=>assert.throws(()=>new DoomDeploymentJournal(plan,identity,{directory:claimed,afterSpace:true})));
- for(const rows of [baseline,baseline.slice(1),remaining.slice(0,1),remaining.concat({id:'365799991',active:false,canDelete:true}),remaining.map(r=>({...r,active:r.id==='365220002'})),remaining.map(r=>({...r,canDelete:false}))]){
+ for(const rows of [baseline,baseline.slice(1),remaining.filter(r=>r.active),baseline.slice(-2),remaining.concat({id:'365799991',active:false,canDelete:true}),remaining.map(r=>({...r,active:r.id==='365210037'})),remaining.map(r=>({...r,active:r.id==='365210129'})),remaining.map(r=>({...r,canDelete:false}))]){
   check(()=>assert(!reviewedDoom2Removals(baseline,rows)));const failed=await run(copy(initial),rows,{afterSpace:true});assert.equal(failed.r.status,'StoppedNeedsReview');assert.equal(failed.s.mutations,0);assert.equal(failed.s.massFrames,0);
  }
  for(const scenario of ['disconnect','bad-key','bad-chunk']){const d=where();await run(d,baseline,{scenario});check(()=>assert.throws(()=>new DoomDeploymentJournal(plan,identity,{directory:d,afterSpace:true})));}
@@ -30,6 +30,6 @@ try{
  check(()=>{assert(!physicalDoomIIEnabled()&&!physicalDoomIIAfterSpaceEnabled());assert.throws(()=>createReviewedDoomEndpoint('AABBCCDDEE01',{retail:true,doom2:true,afterSpace:true}));});
  const denied=await runReviewedDoomDeployment({},plan,Buffer.alloc(16,37),{afterSpace:true});check(()=>assert.equal(denied.sentFrames,0));
  for(const action of ['prepare-after-space','install-after-space']){const r=spawnSync(process.execPath,['tools/pc-doom2-r384.mjs',action],{cwd:root,encoding:'utf8',windowsHide:true,timeout:5000});check(()=>{assert.equal(r.status,action.startsWith('install')?2:0,r.stderr);const p=JSON.parse(r.stdout);assert.equal(p.checkpoint,'R385');assert.equal(p.status,action.startsWith('install')?'PhysicalGateClosed':'OfflinePrepared');});}
- const result={passed:true,cases,samePackage:true,priorZeroDataRequired:true,originalHistoryPreserved:true,onlyReviewedRemovals:true,currentSelectionPreserved:true,oneRetryOnly:true,fullIpcParts:3534,physicalGateClosed:true,physicalWatchUsed:false};
+ const result={passed:true,cases,samePackage:true,priorZeroDataRequired:true,originalHistoryPreserved:true,onlyPackedRemoval:true,allNinePersonalFacesPreserved:true,currentSelectionPreserved:true,oneRetryOnly:true,fullIpcParts:3534,physicalGateClosed:true,physicalWatchUsed:false};
  const out=path.join(root,'build/doom2-space-r385');fs.mkdirSync(out,{recursive:true});fs.writeFileSync(path.join(out,'test-result.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
 }finally{key.fill(0);disposeDeploymentIdentity(identity);}
