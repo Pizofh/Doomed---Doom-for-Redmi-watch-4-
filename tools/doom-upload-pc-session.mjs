@@ -17,7 +17,8 @@ import {physicalDoomVoiceEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomMenuEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomUltimateEnabled,physicalDoomUltimateAfterSpaceEnabled,physicalDoomUltimateAfterCatalogEnabled,physicalDoomPackedEnabled,physicalDoomPackedRestartEnabled,physicalDoomPackedResumeEnabled} from './doom-deployment-physical.mjs';
 import {uploadLimits} from './doom-retail-limits-r374.mjs';
-import {physicalDoomBootEnabled,physicalDoomLeanEnabled,physicalDoomStartEnabled,physicalDoomIIEnabled} from './doom-deployment-physical.mjs';
+import {physicalDoomBootEnabled,physicalDoomLeanEnabled,physicalDoomStartEnabled,physicalDoomIIEnabled,physicalDoomIIAfterSpaceEnabled} from './doom-deployment-physical.mjs';
+import {reviewedDoom2Removals} from './doom2-space-r385.mjs';
 import {compareDoomCatalogs,reviewedTwoRemovals,reviewedUltimateSpaceRemovals,reviewedUltimateCatalogRetry} from './doom-deployment-catalog.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
@@ -85,10 +86,10 @@ export async function runDoomUploadPc(endpoint,plan,secret,{resumeFrom=null,depl
 }
 export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=false,retryWithoutData=false,afterSpace=false,afterCatalog=false,restartPacked=false,resumePacked=false}={}){
  return runLargeUpload(()=>{
-  if(typeof afterSpace!=='boolean'||afterSpace&&plan?.kind!=='review-ultimate-r374-manual')refuse();
+  if(typeof afterSpace!=='boolean'||afterSpace&&!['review-ultimate-r374-manual','review-doom2-r384-manual'].includes(plan?.kind))refuse();
   if(typeof afterCatalog!=='boolean'||afterCatalog&&(plan?.kind!=='review-ultimate-r374-manual'||afterSpace))refuse();
   if(plan?.kind==='review-doom2-r384-manual'){
-   if(!physicalDoomIIEnabled()||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked)refuse();
+   if(!(afterSpace?physicalDoomIIAfterSpaceEnabled():physicalDoomIIEnabled())||resume||retryWithoutData||afterCatalog||restartPacked||resumePacked)refuse();
   }else if(['review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan?.kind)){
    if(!(plan.kind==='review-start-r383-manual'?physicalDoomStartEnabled():plan.kind==='review-lean-r382-manual'?physicalDoomLeanEnabled():physicalDoomBootEnabled())||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked)refuse();
   }else if(plan?.kind==='review-packed-r378-manual'){
@@ -174,7 +175,7 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   const soundLocalOnly=plan.kind==='review-sound-r365-manual'&&deploymentRetryWithoutData&&parent?.before===null&&parent?.upload===null;
   const removalReview=deploymentRetryWithoutData&&parent?.attempt===3;
   const acceptedRemovals=removalReview&&reviewedTwoRemovals(parent.before,before);
-  const acceptedSpace=deploymentAfterSpace&&parent?.attempt===1&&reviewedUltimateSpaceRemovals(parent.before,before);
+  const acceptedSpace=deploymentAfterSpace&&parent?.attempt===1&&(plan.kind==='review-doom2-r384-manual'?reviewedDoom2Removals:reviewedUltimateSpaceRemovals)(parent.before,before);
   const acceptedCatalog=deploymentAfterCatalog&&parent?.attempt===2&&reviewedUltimateCatalogRetry(parent.before,before);
   report.catalogPreflight={ownIdAbsent:!before.some(f=>f.id===plan.id),currentCount:before.length,...(comparison??{}),...(removalReview?{reviewedTwoRemovals:acceptedRemovals}:{}),...(deploymentAfterSpace?{reviewedSpaceRemovals:acceptedSpace}:{}),...(deploymentAfterCatalog?{reviewedCatalogR376:acceptedCatalog}:{})};
   if(before.some(f=>f.id===plan.id)||parent&&!soundLocalOnly&&!((deploymentRestartPacked||deploymentResumePacked)?comparison.sameMembership:deploymentAfterCatalog?acceptedCatalog:deploymentAfterSpace?acceptedSpace:deploymentRetryWithoutData?(removalReview?acceptedRemovals:comparison.sameMembership):equal(parent.before,before)))refuse();

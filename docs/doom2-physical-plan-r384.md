@@ -1,6 +1,12 @@
 # R384: Doom II completo, candidato local privado
 
-Pendiente de aprobación específica para el reloj. La indicación «dale el 2»
+Autorización física consumida el 2026-10-18. Una ejecución: catálogo10,
+INSTALLstatus3,6frames/226BTX,0partes MASS, sin negociación de upload.
+Modelo/FW esperados, close/workerexit0 confirmados, nativeErrorfalse.
+Gates cerrados y rebuild inmediato. No instalado ni C ejecutado; no ensayos.
+Reintento preparado, aún sin permiso: [R385](doom2-space-retry-r385.md).
+
+La indicación inicial «dale el 2»
 autoriza preparar el port; no sustituye la revisión de cada payload físico
 exigida inicialmente por el usuario. Todos los gates permanecen cerrados.
 

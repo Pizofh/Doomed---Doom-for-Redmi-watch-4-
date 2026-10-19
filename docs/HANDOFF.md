@@ -1,4 +1,32 @@
-# R384 Doom II listo localmente; falta espacio y aprobación física
+# R384 rechazado con0partes; R385 preparado, falta espacio/aprobación
+
+Usuario confirmó reinicio, batería≥50%, espacio/observación y autorizó UNA
+instalación y DOS ensayos. R384 consumido: instalación detenida INSTALLstatus3,
+catálogo10/ownIDausente/modeloFWesperados,6frames/226BTX,0MASS/uploadnull.
+Cierre y workerexit0/nativeErrorfalse. Gates cerrados/rebuild inmediato.
+No juego instalado ni C ejecutado. NO repetir CLIinstall ni borrar journal.
+
+Catálogo ya recibido: habitualactiva365210175, DoomPacked365220002 inactivo,
+otras8caras eliminables/inactivas. No tamaños ni byteslibres medidos; status3
+compatible con cuota/statfs. Proponer conservar SOLO Packed/habitual entre
+descargadas y eliminar otras8 manualmente. No borrados desdePC ni abrirPacked.
+No otro reinicio: el usuario ya reinició y R384 no envió datos ni ejecutóC.
+
+R385 mismo paquete/ELF/Lua/WAD, NO recompilar ni repetir campaña32mapas.
+Plan docs/doom2-space-retry-r385.md, gateDOOM2SPACEfalse/R384false, todoscerrados.
+CLIpc-doom2-r384.mjs prepare-after-space|install-after-space. Nuevo guard exige
+HMAC/key/target/hashchain y exactamente historia3 del intento1 uploadnull;
+conserva journaloriginal y añade intento2/retry-doom2-space-r385. Catálogo nuevo
+EXACTAMENTE2: habitualactiva175 y Packedinactivo002 conflagsanteriores.
+43casosR385/3534IPC pasan, paqueteR384regresión pasa. Shared23/R37543casos pasan.
+Ninguna radio adicional ni alteración del journal físico durante preparación.
+Falta confirmar limpieza y NUEVA aprobación UN envío/DOSensayos≤60s,
+batería≥50/observar8–12min/relojcerca/MiFitnesscerrado/volumenaudible.
+Tras aprobar SOLO general+DOOM2SPACEJS/C#Retail, build/emptytargetready,
+install-after-space1, cerrar/rebuild inmediato. Fallo→detener, sin retry/resume.
+Segundo arranque solo si primer CLOSED y todo funciona. Riesgos R384 intactos.
+
+## R384 preparación anterior
 
 Usuario pidió «dale el2». Solo preparación local, ningún envío/R384journal.
 DoomII ID365220006/rw4doomii384, marcoROJO/DOSBARRASVERTICALES; autónomo

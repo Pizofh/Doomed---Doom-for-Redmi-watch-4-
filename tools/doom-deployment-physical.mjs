@@ -27,6 +27,7 @@ const PHYSICAL_BOOT_R381_REVIEWED=false;
 const PHYSICAL_LEAN_R382_REVIEWED=false;
 const PHYSICAL_START_R383_REVIEWED=false;
 const PHYSICAL_DOOM2_R384_REVIEWED=false;
+const PHYSICAL_DOOM2_SPACE_R385_REVIEWED=false;
 const PHYSICAL_PADS_R349_REVIEWED=false;
 const PHYSICAL_WIDE_R347_REVIEWED=false;
 const PHYSICAL_TOUCH_R345_REVIEWED=false;
@@ -60,6 +61,7 @@ export function physicalDoomBootEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&P
 export function physicalDoomLeanEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_LEAN_R382_REVIEWED;}
 export function physicalDoomStartEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_START_R383_REVIEWED;}
 export function physicalDoomIIEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_DOOM2_R384_REVIEWED;}
+export function physicalDoomIIAfterSpaceEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_DOOM2_SPACE_R385_REVIEWED;}
 export function physicalDoomPadsEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_PADS_R349_REVIEWED;}
 export function physicalDoomWideEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_WIDE_R347_REVIEWED;}
 export function physicalDoomTouchEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_TOUCH_R345_REVIEWED;}
@@ -68,14 +70,15 @@ export function physicalDoomResumeEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&
 export function physicalDoomControlRetryEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_CONTROL_RETRY_REVIEWED;}
 export function isReviewedDoomPeer(peer){return PHYSICAL_DEPLOYMENT_REVIEWED&&peers.has(peer);}
 export function createReviewedDoomEndpoint(address,{resume=false,retryWithoutData=false,retail=false,afterSpace=false,afterCatalog=false,packed=false,restartPacked=false,resumePacked=false,doom2=false}={}){
- if(typeof doom2!=='boolean'||doom2&&(!retail||!physicalDoomIIEnabled()||packed||restartPacked||resumePacked||resume||retryWithoutData||afterSpace||afterCatalog))fail();
+ const doom2Enabled=afterSpace?physicalDoomIIAfterSpaceEnabled():physicalDoomIIEnabled();
+ if(typeof doom2!=='boolean'||doom2&&(!retail||!doom2Enabled||packed||restartPacked||resumePacked||resume||retryWithoutData||afterCatalog))fail();
  if(typeof resumePacked!=='boolean'||resumePacked&&(!packed||!physicalDoomPackedResumeEnabled()||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked))fail();
  const packedEnabled=resumePacked?physicalDoomPackedResumeEnabled():restartPacked?physicalDoomPackedRestartEnabled():physicalDoomPackedEnabled();
  if(typeof restartPacked!=='boolean'||restartPacked&&(!packed||!physicalDoomPackedRestartEnabled()||resume||retryWithoutData||afterSpace||afterCatalog))fail();
  if(typeof packed!=='boolean'||packed&&(!retail||!packedEnabled||resume||retryWithoutData||afterSpace||afterCatalog))fail();
  if(typeof afterCatalog!=='boolean'||afterCatalog&&(!retail||!physicalDoomUltimateAfterCatalogEnabled()||resume||retryWithoutData||afterSpace))fail();
- if(typeof afterSpace!=='boolean'||afterSpace&&(!retail||!physicalDoomUltimateAfterSpaceEnabled()||resume||retryWithoutData))fail();
- if(typeof retail!=='boolean'||retail&&(!(doom2?physicalDoomIIEnabled():packed?packedEnabled:afterCatalog?physicalDoomUltimateAfterCatalogEnabled():afterSpace?physicalDoomUltimateAfterSpaceEnabled():physicalDoomUltimateEnabled())||resume||retryWithoutData))fail();
+ if(typeof afterSpace!=='boolean'||afterSpace&&(!retail||!(doom2?doom2Enabled:physicalDoomUltimateAfterSpaceEnabled())||resume||retryWithoutData))fail();
+ if(typeof retail!=='boolean'||retail&&(!(doom2?doom2Enabled:packed?packedEnabled:afterCatalog?physicalDoomUltimateAfterCatalogEnabled():afterSpace?physicalDoomUltimateAfterSpaceEnabled():physicalDoomUltimateEnabled())||resume||retryWithoutData))fail();
  if(!PHYSICAL_DEPLOYMENT_REVIEWED||typeof resume!=='boolean'||typeof retryWithoutData!=='boolean'||resume&&retryWithoutData||resume&&!PHYSICAL_RESUME_REVIEWED||retryWithoutData&&!PHYSICAL_CONTROL_RETRY_REVIEWED)fail();
  if(typeof address!=='string'||!/^[A-Fa-f0-9]{12}$/.test(address)||/^0{12}$/.test(address))fail();
  let pipe=null,busy=false,closing=false,closePromise=null;
