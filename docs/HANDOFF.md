@@ -1,3 +1,17 @@
+# R389 dos dedos investigados; icono de monstruo preparado localmente
+
+Usuario solicita dos dedos reales y cambiar marine por monstruo. R388 aceptado
+sigue instalado, sin nuevos permisos de payload ni radio. Nuevo arte original
+en tools/doom-monster-icon-r389.mjs, preview build/doom-monster-r389/preview.png
+revisado visualmente. No alterar paquete R388 reproducible.
+Nueva inspección: upper ioctl delega lower+8; tres handlers inicializados
+contienen el mismo despacho0x901..0x906, sin cambio de npoints/habilitación
+multipunto. No hay interruptor demostrado; motor admite combinaciones pero
+entrada sigue un contacto. Falta lower activo/muestras reales y contratoRW4
+rawfd/no bloqueo/lector independiente antes de un diagnóstico. Sin ELF nuevo
+ni firmware modificado; no prometer dos dedos. Detalle y reproducción:
+docs/two-finger-and-monster-r389.md. Apertura aún sin perfilado nuevo.
+
 # R388 DOOM II única aceptada; apertura y multitáctil pendientes
 
 ## R388 aceptado en el reloj
