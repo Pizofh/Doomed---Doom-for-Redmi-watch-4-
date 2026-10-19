@@ -49,3 +49,20 @@ Protocolo: DOOM II/monstruo → START1, mantener CHECKING despierto, cargar
 partida y jugar brevemente, SALIR≤60s juego→CLOSED. ERROR: no repetir/reabrir
 ni borrar; GATE/CODE. Imagen sobre menús: reinicio normal, esfera habitual.
 Tras éxito, borrar009 manualmente y volver a Mi Fitness/uso habitual.
+
+## R390 instalación completada; ensayo manual pendiente
+
+2026-10-18: RegisteredInactive/registeredVerifiedtrue/contentVerifiedfalse;
+446 partes/454 frames/919736 bytes TX, selectedByClientfalse.
+closeConfirmed/workerExitConfirmedtrue, exit0, nativeErrorfalse. Gates general/
+MONSTER/C#Large restauradosfalse y worker reconstruido en finally.
+Sin SET/autostart/borrados/reenvío WAD/reintento. Journal monster-r390 terminal:
+permiso de instalación consumido; NO repetir/resume/consultar radio con él.
+
+Protocolo entregado: DOOM II monstruo rojo010 → START1/mantener CHECKING,
+cargar partida, jugar≤60s y SALIR→CLOSED. Esperando resultado; aún no afirmar
+migración/partida/cierre aceptados ni indicar quitar casco verde009. No abrir
+009 después de migrar. ERROR: no repetir/reabrir, GATE/CODE. Imagen sobre menús:
+reinicio normal y habitual. No pedir números si resultado general es correcto.
+Tras éxito conservar solo monstruo010; usuario puede quitar009 y usar Mi Fitness.
+

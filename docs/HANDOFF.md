@@ -1,16 +1,20 @@
-# R390 monstruo listo, UN envío autorizado y pendiente
+# R390 DOOM II monstruo instalado; ensayo manual pendiente
 
-Usuario pide enviar versión con icono chévere y posponer pendientes. Confirma
-reloj junto al PC, ≥50%, Mi Fitness cerrado y CLOSED. Plan
-docs/doom-monster-physical-plan-r390.md. No pedir otra autorización del envío.
-DOOM II monstruo rojo010,910940B/SHA59e345710e8f4f8be98c00ebf7c6249c47a4b033c5df8dbb3e2300d343bd25b0.
-Mismo juego/audio/imagen grande: ELF difiere solo seis bytes de tres rutas009→010.
-Importador aceptado copia saves009 con CRC, mueve WAD a010; independencia luego.
-Conservar cascoverde009 hasta carga/CLOSED010. No abrir009 tras migrar.
-Import43/realFS WAD completo, boot/UI27, dos ciclos nativos/carga título,
-paquete77/446IPC y transporte23/gates pasan. Guest propio limpiado/modules0.
-Solo gates general/MONSTER/C#Large durante despacho único; finally rebuild.
-No retry/resume/SET/autostart/borradosPC, no WAD resend. Una prueba manual breve.
+## R390 instalación completada; ensayo manual pendiente
+
+2026-10-18: RegisteredInactive/registeredVerifiedtrue/contentVerifiedfalse;
+446 partes/454 frames/919736 bytes TX, selectedByClientfalse.
+closeConfirmed/workerExitConfirmedtrue, exit0, nativeErrorfalse. Gates general/
+MONSTER/C#Large restauradosfalse y worker reconstruido en finally.
+Sin SET/autostart/borrados/reenvío WAD/reintento. Journal monster-r390 terminal:
+permiso de instalación consumido; NO repetir/resume/consultar radio con él.
+
+Protocolo entregado: DOOM II monstruo rojo010 → START1/mantener CHECKING,
+cargar partida, jugar≤60s y SALIR→CLOSED. Esperando resultado; aún no afirmar
+migración/partida/cierre aceptados ni indicar quitar casco verde009. No abrir
+009 después de migrar. ERROR: no repetir/reabrir, GATE/CODE. Imagen sobre menús:
+reinicio normal y habitual. No pedir números si resultado general es correcto.
+Tras éxito conservar solo monstruo010; usuario puede quitar009 y usar Mi Fitness.
 
 # R389 dos dedos investigados; icono de monstruo preparado localmente
 
