@@ -1,4 +1,21 @@
-# R387 DoomTune jugable confirmado; cerrar entrega, audio residual pendiente
+# R388 entrega de una sola esfera/icono; trabajo LOCAL, reloj vuelve al uso habitual
+
+Usuario quiere una sola esfera final e icono más bonito; recuperar Mi Fitness
+y uso diario después de una semana. No necesita reloj/BT para tareas locales;
+próximo uso del reloj será instalación/ensayo final cuando esté preparado y
+aprobado. No mantener Mi Fitness cerrado ni pedir observación ahora.
+No nueva aprobación de payload físico. Conservar DoomTune008 y DoomII006.
+Plan docs/single-face-delivery-r388.md. Icono original procedural390×450 ya
+generado y revisado visualmente (marine verde/marco metálico/DOOM II), receta
+tools/doom-final-icon-r388.mjs; preview build/doom-final-r388/preview.png.
+No paquete final preparado todavía: primero actualización/migración de slots
+con respaldo/CRC/interrupciones probada localmente. Motor WAD/slots apuntan006;
+instalador actual prohíbe colisión del ID, NO quitar guard ni borrarcarrier.
+Unificar sin duplicar WAD completo mientras no haya espacio confirmado.
+Recuperar imagen grande306/Y30 en esa entrega, mantener captura/audioR387.
+Ninguna radio, escritura/consulta reloj ni nuevo ensayo para esta preparación.
+
+## R387 DoomTune jugable confirmado; audio residual pendiente
 
 Ensayo completado: usuario «todo salió bien»/«todo se solucionó», salvo audio
 todavía algo entrecortado, ya escuchable y jugable. Captura de fondo/imagen,
