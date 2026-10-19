@@ -1,0 +1,27 @@
+// SPDX-License-Identifier: GPL-2.0-only
+// Temporary diagnostic; depends on accepted DoomQuick011 and never migrates it.
+import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
+import {quickLauncher,root,sha256} from './doom-quick-r393.mjs';import {once} from './doom-ready-source-r351.mjs';import {residentBytes} from './doom-fit-r386.mjs';import {crc32} from './static-watchface-transfer.mjs';import {png} from './first-c-assets.mjs';import {ownTextPixel} from './native-info-legend.mjs';
+import {profileStartup} from './doom-load-profile-r391.mjs';
+export {root,sha256};
+export function loadMeterLauncher(){
+const old=quickLauncher(),dir=path.join(root,'build/doom-audio-r394/rw4'),elf=fs.readFileSync(path.join(dir,'doom.elf')),r=JSON.parse(fs.readFileSync(path.join(dir,'review.json')));assert.equal(sha256(elf),r.elfSha256);assert(r.loading.profile&&r.loading.fullStoredFileScan);assert.equal(r.packed.gamePath,old.config.wad_path);
+const prior=JSON.parse(fs.readFileSync(path.join(root,'build/doom-audio-r393/rw4/review.json')));for(const n of ['transport','menu','doom-sfx','sink-worker'])assert.equal(r.generatedHashes[n],prior.generatedHashes[n],n);for(const n of ['readerSha256','runtimeSha256'])assert.equal(r.packed[n],prior.packed[n],n);
+const expected=profileStartup(fs.readFileSync(path.join(root,'build/doom-audio-r393/rw4/adapter.c'),'utf8'),true).replace('menu_spawn[2]=load_created-load_begin;','menu_spawn[2]=load_created-load_begin;menu_snapshot();');assert.equal(fs.readFileSync(path.join(dir,'adapter.c'),'utf8'),expected);
+const resident=residentBytes(elf),saved=old.memory.previousResident-resident,minimum=Math.ceil((old.memory.previousMinimum-saved)/4096)*4096;
+assert(minimum>=old.config.min_free);
+const own='/data/app/watchface/market/365220012/lua/',config={...old.config,id:'365220012',ui_base:own,elf_base:own,module:'rw4load394',elf_sha:sha256(elf),elf_bytes:elf.length,elf_crc:crc32(elf),min_free:minimum};for(const k of ['import_base','import_bytes','import_crc'])delete config[k];
+let s=old.source.replace(/^local config=.*$/m,'local config={'+Object.entries(config).map(([k,v])=>k+'='+JSON.stringify(v)).join(',')+'}');s=once(s,'config.min_free=='+old.config.min_free,'config.min_free=='+minimum);
+const start=s.indexOf('local importing,imported=nil,false'),end=s.indexOf('local current,total,value,ticks=',start);assert(start>0&&end>start);s=s.slice(0,start)+'local function cancel_import()end\n'+s.slice(end);s=once(s,"if not imported then boot.stage=12;if not import_tick()then return end end\n",'');
+const library=fs.readFileSync(path.join(root,'doom/platform-rw4/launcher/load-timing-r394.lua'),'utf8');s=once(s,'local factory=(function()', 'local meter=(function()\n'+library+'\nend)().new(os.clock)\nlocal factory=(function()');
+s=once(s,"boot.stage=10;boot.code=0;", "meter.reset();boot.stage=10;boot.code=0;");s=once(s,"status('LOADING')","meter.mark('loading');status('LOADING')");
+s=once(s,"boot.stage=50;assert(capture('insmod '","meter.mark('module_start');boot.stage=50;assert(capture('insmod '");s=once(s,"boot.stage=51;local key=registry()","meter.mark('module_end');boot.stage=51;local key=registry()");s=once(s,"boot.stage=53;command(1)","meter.mark('worker');boot.stage=53;command(1)");
+s=once(s,'function view.native(s)\n','function view.native(s)\nmeter.native(s)\n');
+s=once(s,"function b.save()if phase=='PAUSED' then store.start('save')end end",'function b.save()end');s=once(s,"function b.load()if phase=='PAUSED' then store.start('load')end end",'function b.load()end');
+s=once(s,"phase=name\nif name=='STOPPING'", "phase=name\nif name=='PLAYING'then meter.present()elseif name=='STOPPING'then meter.mark('stop')elseif name=='CLOSED'then meter.mark('closed')end\nif name=='STOPPING'");
+s=once(s,"local names={{'time','tics','images'},{'first','last','dims'},{'audio_error','audio_pcm','audio_cache'}", "local names={{'load_check','load_elf','load_total'},{'load_verify','load_init','load_ready'},{'load_frame','load_close','load_clock'}");
+s=once(s,'ensure_panel()\nvalues[13]=',"ensure_panel()\nlocal measured=meter.values();for i=1,9 do values[i]=measured[i]end\nvalues[13]=");s=once(s,"src=asset_base..names[page][row]..'.png'","src=(page<=3 and config.ui_base or asset_base)..names[page][row]..'.png'");
+s=once(s,'cb=function()safe(backend.tick)end','cb=function()safe(function()backend.tick();if meter.done()and backend.phase()==\'PLAYING\'then meter.mark(\'stop\');backend.stop()end end)end');
+assert(Buffer.byteLength(s)<=32768,Buffer.byteLength(s));return{source:s,config,sourceSha256:sha256(s),library,memory:{...old.memory,resident,saved,minimum},automaticStopAfterFirstFrame:true,existingDoomQuickRequired:true};
+}
+export function loadMeterAssets(){const a={},extra={V:[17,17,17,17,17,10,4],Y:[17,17,10,4,4,4,4]};for(const [name,label]of Object.entries({load_check:'CHECK MS',load_elf:'ELF MS',load_total:'TOTAL MS',load_verify:'VERIFY',load_init:'INIT MS',load_ready:'READY MS',load_frame:'FRAME MS',load_close:'CLOSE MS',load_clock:'CLOCKERR'}))a[name]=png(110,20,(x,y)=>{const bits=extra[label[Math.floor(x/12)]],gx=Math.floor(x%12/2),gy=Math.floor(y/2);return bits?gx<5&&gy<7&&(bits[gy]&(1<<(4-gx)))?[255,255,255]:[16,32,48]:ownTextPixel(label,x,y,[16,32,48]);});a.preview=png(390,450,(x,y)=>((x>=62&&x<328&&y>=90&&y<345&&(x<78||x>=312||y<106||y>=329))||(y>=158&&y<285&&[130,185,240].some(a=>x>=a&&x<a+20)))?[245,190,60]:[16,32,48]);return a;}

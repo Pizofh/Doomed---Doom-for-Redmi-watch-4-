@@ -1,5 +1,13 @@
 # 0.2: DOOM II en una sola esfera
 
+## R393 funcional, carga pendiente de medir
+
+El usuario confirma TOTAL00632284 y funcionamiento general, pero no percibe
+mejora de carga en hardware. El41% era un tramo parcial del emulador. R394
+prepara un diagnóstico completo con cierre automático y tres páginas de
+tiempos; aún sin autorización ni instalación. Mantener el juego011 operativo.
+[Plan y evidencia R394](doom-load-meter-physical-plan-r394.md).
+
 ## R390 aceptado en el reloj
 
 2026-10-18: usuario responde «sí, todo bien» al protocolo de migración010,

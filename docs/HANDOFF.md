@@ -1,4 +1,32 @@
-# R393: funcionamiento reportado bien, sin mejora perceptible de carga
+# R394 diagnóstico completo preparado; falta aprobación física
+
+Usuario confirma TOTAL00632284: sí probó R393 y funciona, pero NO percibe
+mejora de carga. Tiempo físico desconocido. El objetivo de acelerar sigue abierto.
+Se prepara medición completa, NO otra optimización ni envío ya autorizado.
+Plan docs/doom-load-meter-physical-plan-r394.md. DoomLoad012/barras doradas,
+paquete679716B/SHA450cf2e0dc48d469bc69dcccecc49071c70ebfc1bcb0dc1c039665f659897307.
+Lua32087B/SHA3d108de267f8532ffd25999470fb3b3ab78285d5a6825087ae53c5cd9d939b4c;
+ELF632476B/SHA8e8173df64bbfdad005af22a403cff0c006a43d12419cfc87512a35d23735b62.
+Requiere DOOM II011: no migración/WAD resend/cambio partidas; save/load
+deshabilitados. No borrar011 después del diagnóstico; solo DoomLoad temporal.
+Un START manual; se detiene solo después del primer acuse gráfico. Tres páginas
+CHECK/ELF/TOTAL; VERIFY/INIT/READY; FRAME/CLOSE/CLOCKERR. Unidadesms menos
+CLOCKERR0/1. READY contiene VERIFY+INIT, FRAME es acuse, no fotometría.
+Lua os.clock con rutaAP previamente revisada/ticks10000; falla antes de C si
+no disponible, fallo posterior marcaCLOCKERR sin interrumpir limpieza. C de
+R393 solo añade tiempos/verifica+crea y publica métricas al título antesREADY;
+runtime/lector/transporte/audio sin cambios. No claims de mejora física nueva.
+Pruebas:15 reloj+25 boot/UI, dos ciclos completos Lua/loader/C reales en S3
+(LVGL/audio/gráficos modelados) con autoCLOSED y clock0. Medidas emuladas
+CHECK4193/16, ELF160/168, TOTAL9096/4885, VERIFY88/90, INIT3999/3955,
+READY4696/4654, FRAME43/43, CLOSE53/58. CachéELF solo mismo contextoLua.
+Paquete11/tamper6/333IPC/dependencia011/retry bloqueados; transporte23/gates
+pasan. Guest011/012 propios limpiados/módulos ausentes. Gates todosfalse,
+journalload-meter-r394 sin crear y dispatch-once preparado NO ejecutado.
+Pedir autorización de UNA instalación+UN ensayo,≥50%,cercaPC,MiFitnesscerrado,
+observación; regla original cada nuevo payload. Riesgos/recuperación en plan.
+
+## Historial R393
 
 Usuario «todo ok pero no mejoró el tiempo de carga […] salí y volví y volvió a
 demorar». No tiempos físicos ni TOTAL00632284 confirmado. No afirmar mejora

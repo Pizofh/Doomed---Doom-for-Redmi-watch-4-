@@ -8,7 +8,7 @@ import {uploadLimits} from './doom-retail-limits-r374.mjs';
 const owned=new WeakMap(),hash=(b,a='sha256')=>createHash(a).update(b).digest('hex');
 const refuse=()=>{throw Error('DoomLargeUploadRefused');};
 function mint(b,id,kind){
- const nativeLauncher=['review-quick-r393-manual','review-monster-r390-manual','review-final-r388-manual','review-tune-r387-manual','review-fit-r386-manual','review-doom2-r384-manual','review-start-r383-manual','review-lean-r382-manual','review-boot-r381-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual','review-fast-r331-manual','review-palette-r333-manual','review-bench-r335-manual','review-demand-r337-manual','review-direct-r343-manual','review-touch-r345-manual','review-wide-r347-manual','review-pads-r349-manual','review-ready-r351-manual','review-sound-r365-manual','review-audio-r367-manual','review-voice-r369-manual','review-menu-r370-manual'].includes(kind);
+ const nativeLauncher=['review-load-meter-r394-manual','review-quick-r393-manual','review-monster-r390-manual','review-final-r388-manual','review-tune-r387-manual','review-fit-r386-manual','review-doom2-r384-manual','review-start-r383-manual','review-lean-r382-manual','review-boot-r381-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual','review-fast-r331-manual','review-palette-r333-manual','review-bench-r335-manual','review-demand-r337-manual','review-direct-r343-manual','review-touch-r345-manual','review-wide-r347-manual','review-pads-r349-manual','review-ready-r351-manual','review-sound-r365-manual','review-audio-r367-manual','review-voice-r369-manual','review-menu-r370-manual'].includes(kind);
  const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher,physicalEnabled:false});owned.set(p,b);return p;
 }
 export function prepareDoomAssets(raw){
@@ -123,6 +123,10 @@ export function prepareDoomII(raw){
 export function prepareDoomFit(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==674868||hash(raw)!=='37a0161b7c9b7fbc9955d9d7a19ba0c5a43af29de7a18bab6975bfb07da1a136'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365220007'||raw[49]!==0)refuse();
  return mint(Buffer.from(raw),'365220007','review-fit-r386-manual');
+}
+export function prepareDoomLoadMeter(raw){
+ if(!Buffer.isBuffer(raw)||raw.length!==679716||hash(raw)!=='450cf2e0dc48d469bc69dcccecc49071c70ebfc1bcb0dc1c039665f659897307'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365220012'||raw[49]!==0)refuse();
+ return mint(Buffer.from(raw),'365220012','review-load-meter-r394-manual');
 }
 export function prepareDoomQuick(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==911252||hash(raw)!=='7ba43cf9f908b5d6b573899e6f03336090ffb3c7d421a55e9fb687a57a21c18b'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365220011'||raw[49]!==0)refuse();
