@@ -1,19 +1,19 @@
-# R388 entrega final autorizada; pendiente UN envío y UN ensayo
+# R388 DOOM II/casco verde instalado; ensayo manual pendiente
 
-Usuario pidió «manda la nueva versión de una vez» y confirmó «Sí, listo»:
-reloj al lado PC, batería≥50%, Mi Fitness cerrado. No pedir otra aprobación
-del mismo envío. Plan docs/doom-final-physical-plan-r388.md. Una instalación
-inactiva009/DOOM II/casco verde, paquete1404628B SHA4533a2e0e53e581a38395725b8be863383d6d0003899e4f2edd8dfd5ea47f5b2.
-Primera apertura copia con CRC los bancos006 y mueve WAD006→009. Luego
-independiente: no borrar006/Fit007/Tune008 antes de carga y CLOSED aceptados.
-No reenvío WAD, no borrados/selección por PC ni reintento automático.
-Imagen grande restaurada; mismo audio R387, música aún pendiente.
-Migración43+filesystem real, boot/UI27, dos ciclos nativos y held-audio,
-paquete77 recursos/688 partes IPC y regresiones aprobados. Gates cerrados;
-abrir solo general/FINAL/C#Large durante despacho único con finally rebuild.
-Modelo emulado probado desde009 después de retirar006; cleanup propio hecho.
-Tras ensayo satisfactorio usuario puede eliminar las tres versiones antiguas,
-conservar DOOM II nueva y volver a Mi Fitness/uso diario. Protocolo muy breve.
+## Instalación física R388 completada; ensayo manual pendiente
+
+2026-10-18: único envío terminó RegisteredInactive/registeredVerifiedtrue,
+contentVerifiedfalse (registro no equivale a lectura del contenido instalado).
+688 partes/696 frames/1418022 bytes TX; selectedByClientfalse.
+closeConfirmed/workerExitConfirmedtrue, exit0, nativeErrorfalse.
+Gates general/FINAL/C#Large restauradosfalse y worker reconstruido en finally.
+Sin SET/autostart/borrados/reintentos. Journal final-r388 terminal: permiso de
+instalación consumido; NO instalar/reanudar/consultar radio otra vez con él.
+
+Se entregó protocolo breve de UN START/migración, CARGAR partida, jugar≤60s
+y SALIR→CLOSED. Esperando respuesta: aún NO afirmar migración/carga física
+correcta ni indicar borrar006/Fit007/Tune008. Ante ERROR no repetir/reabrir;
+pedir GATE/CODE y adaptar lectura. Si queda imagen sobre menús, reinicio normal.
 
 ## Historia anterior (permisos antiguos no reutilizables)
 
