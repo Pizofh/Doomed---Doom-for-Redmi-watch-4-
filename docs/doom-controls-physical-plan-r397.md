@@ -98,3 +98,11 @@ Riesgos: cambia entrada C, salida de consola, capas táctiles y trabajo por
 callback; puede causar lag, bloqueo/corrupción o requerir reinicio. Guardar y
 migrar usan flash. La recuperación integral continúa sin validar. No se promete
 un resultado físico ni que no vuelva a fragmentarse la RAM.
+
+## Autorizaci?n recibida
+
+Tras posponer por distancia y volver a indicar disponibilidad, el usuario confirma expl?citamente ?S?, autorizo y est? todo listo?: UNA instalaci?n inactiva y DOS ensayos previstos, bater?a?50%, reloj junto al PC y Mi Fitness cerrado. Env?o ?nico a?n pendiente; no reintentos autorizados.
+
+## Instalaci?n completada
+
+?nico despacho autorizado completado: RegisteredInactive,524/524 partes, registro confirmado. Contenido no le?do de vuelta. Sin selecci?n ni START desde PC; WAD/partidas a?n no migrados por PC. Transporte cerrado, worker termin?0, sin nativeError. Gates general/CONTROLS_R397/C#Large restauradosfalse y worker recompilado cerrado. Pendientes losDOS arranques manuales del plan, segundo condicionado al primerCLOSED. No hay permiso para reintentar la instalaci?n.

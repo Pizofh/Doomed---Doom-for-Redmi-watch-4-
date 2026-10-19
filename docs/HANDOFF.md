@@ -1,3 +1,11 @@
+# R397 instalada inactiva; dos ensayos manuales pendientes
+
+?nico despacho autorizado RegisteredInactive524/524; registro confirmado sin readback de contenido. Transporte cerrado/worker0; gatesfalse y rebuilt. NuevaDOOMII014/TOTAL00790804 a?n sin START desdePC. Usuario autoriz? dos arranques, primero tras reinicio normal para fragmentaci?n; segundo solo si primeroCLOSED, sin reiniciar/cambiar de esfera. Conservar013 hasta validar migraci?n y cierre. Protocolo corto: cargar partida, ARMA?/+, MENU/PAUSA y PAUSA?SALIR; INFO opcional alCLOSED. AnteERROR no repetir: INFO?GATE/CODE. Sin rendimiento f?sico nuevo demostrado.
+
+# R397 autorizada y lista para ?nico env?o
+
+Usuario confirma ?S?, autorizo y est? todo listo?, incluidas bater?a?50%, proximidad y Mi Fitness cerrado. UNA instalaci?n y DOS ensayos cortos seg?n plan R397; segundo solo si primeroCLOSED. Preparaci?n offline reconfirmada1071020B/524partes, gatesfalse, journal sin crear. Dispatch build/doom-controls-r397/dispatch-once.mjs revisado. No reintentar.
+
 # R397 lista; necesita autorizaci?n f?sica nueva
 
 Usuario pide cambiar armas, reorganizar botones, carga m?s r?pida y quitar logs para usuarios. Implementado: ARMA?/+ abajo, MENU/PAUSA arriba35%, SALIR en pausa; INFO a petici?n trasCLOSED, errores directos; stdoutnormal motor silenciado, stderr conservado. CRC16KiB ?ntegro en CHECKING reduce tiempo emulado5117/5090?3092/3092ms; no prometer porcentaje f?sico. Corona sin ruta validada; sigue un dedo.
