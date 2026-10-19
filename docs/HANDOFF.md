@@ -1,4 +1,41 @@
-# R386 Doom II funciona físicamente; preparar pulido R387 sin nuevo ensayo
+# R387 DoomTune listo localmente; falta aprobación de nuevo payload físico
+
+Plan docs/doom-tune-physical-plan-r387.md. Usuario aclaró audio ENTRE CORTADO.
+DoomTune008/rw4doomii387, preview MARCO MENTA/TRESVERTICALES, paquete676120B
+SHA20829805e03a4572b21bb73c750638083f6949bfe6998e364407b0deb473e2a6.
+ELF631972B SHA6166c1f23db3d73b0b5632cec54f72fef494837015704479e329563bbcf83ad8;
+Lua30376B SHA3658f5c4092ccf36d57d942f0e0ce559bcea0238f90b38008d860e20c53519bd.
+Reutiliza WAD/assets/slots006: CONSERVAR DoomII y DoomFit007 probado.
+Sin radio, instalación, journal R387, borrados ni reenvío WAD; todosgatesfalse.
+
+Mixer SOLO worker audio, mailbox atómico por4voces/generación24bit/volumen;
+PCM512/22050Hz sin ritmo del juego, writes regulados por reloj/sleep≤5ms,
+sin deuda/catchup tras write lento/pausa. Mismo ADPCM/cache320KiB, bindings y
+16bloques iniciales. No garantizar arreglo acústico antes de hardware.
+Root propio captura actividad y hits390×450 tapa huecos/imagen; libera en
+CLOSED/ERROR/READY, sin ajustes globales/ancestros. Zoom288/Y39, bounds
+15/26.5/360/225, termina251.5 antes UP252; ancho5.88%menos, controles iguales.
+ALLOC1897708,3748Bmenos queFit; min7036928 derivado del ahorro329792 vsR384
+y redondeado ARRIBA4KiB, largest4194320/zona3MiB/slots192KiB intactos.
+
+Pasaron9casos mailbox/2000retriggers y9worker (sinupdatesjuego, fast/slowservice,
+errores, pausa/stop/closequarantine); fijó plazo obsoleto al reanudar.
+2ciclos motor real modelado con guardar/cargar/título/persistencia/join/unload;
+held prepare/close conthreads reales;25casos Lua más hitrouter malla7px en
+juego/pausa y liberaciónCLOSED; paquete2recursos/6tamper/331IPC/5fallos/
+6retrymodesdenegados. Regresión transporte23casos; limpieza WAD guest hecha.
+S3 graphics/audio modelados; selector/corners/audio físicos sin validar.
+
+Siguiente pedir UNA instalación inactiva y UN ensayo≤60s, sin reinicio/borrados,
+batería≥50%/observar. Si aprueba SOLO general+TUNEJS/C#Large, build/readiness
+emptytarget; CLIpc-doom-tune-r387.mjs install1, cerrar/rebuild SIEMPRE.
+No retry/resume. Manual propuesto: menú/MAP01, sonido/controles, holds3s en
+azul/imagen, pausa/guardar/cargar/SALIR≤60→CLOSED; holdCLOSED debe abrir selector.
+Si abre selector en juego: habitual sin reabrir. ERROR/cierrefallido: diagnóstico
+plan/GATE+CODE+flags+AUDIOERR/CALL, detener. Imagenretenida→reinicio normal.
+No autorización R387 todavía; aprobación anterior R386 consumida.
+
+## Resultado físico R386 y preparación inicial R387
 
 Usuario reportó «todo ok» al protocolo R386 (arranque, controles, guardar/cargar,
 SALIR/CLOSED); única excepción de audio: confirmó que se oye ENTRE CORTADO,

@@ -1,0 +1,15 @@
+// SPDX-License-Identifier: GPL-2.0-only
+import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import {spawnSync} from 'node:child_process';
+import {root,sha256} from './doom-ready-source-r351.mjs';import {session} from './doom-ui-emulator.mjs';
+const out=path.join(root,'build/audio-render-r387'),build=path.join(root,'build/doom-audio-r387/s3-model');fs.mkdirSync(out,{recursive:true});assert(!fs.existsSync(path.join(out,'result.json')));
+const review=JSON.parse(fs.readFileSync(path.join(build,'review.json'))),rw4=JSON.parse(fs.readFileSync(path.join(root,'build/doom-audio-r387/rw4/review.json')));
+for(const n of ['doom-sfx','sink-worker']){assert.equal(sha256(fs.readFileSync(path.join(build,n+'.c'))),review.generatedHashes[n]);assert.equal(review.generatedHashes[n],rw4.generatedHashes[n]);}
+const recipe=JSON.parse(fs.readFileSync(path.join(build,'build-log.json'))).find(r=>r.label==='pcm-core').args,flags=['-I'+build,...recipe.slice(0,recipe.indexOf('-c'))];
+function run(tool,args){const r=spawnSync(path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-'+tool+'.exe'),args,{cwd:root,windowsHide:true,shell:false,encoding:'utf8',timeout:20000,maxBuffer:65536});assert.equal(r.status,0,r.stderr);return r.stdout;}
+const obj=path.join(out,'test.o'),elf=path.join(out,'test.elf');run('gcc',[...flags,'-c','experiments/audio/render-r387.c','-o',obj]);
+const libgcc=run('gcc',['-march=armv7-a','-mthumb','-mfloat-abi=soft','-print-libgcc-file-name']).trim();
+run('ld',['-r','-T','doom/platform-rw4/device/module.ld','-e','rw4_audio_render_test_init',obj,...['doom-sfx','sink-worker','pcm-core','adpcm','startup'].map(n=>path.join(build,n+'.o')),libgcc,'-o',elf]);
+assert(!/\bUND[ \t]+\S+[ \t]*$/m.test(run('readelf',['-Ws',elf])));
+const vm=session('audio-render'),remote='/tmp/doomed-render-r387.elf',module='arender387',before=vm.adb(['shell','lsmod'],'before');assert.equal(before.trim().split(/\r?\n/).length,1);assert(/^nsh: ls: stat failed: 2\r?$/im.test(vm.adb(['shell','ls',remote],'absence')));
+vm.adb(['push',elf,remote],'push');try{const text=vm.adb(['shell','insmod',remote,module],'run');assert(vm.adb(['shell','lsmod'],'loaded').includes(module),text);vm.adb(['shell','rmmod',module],'unload');assert.equal(vm.adb(['shell','lsmod'],'after'),before);}finally{if(vm.adb(['shell','lsmod'],'cleanup-check')===before)vm.adb(['shell','rm',remote],'remove-own');}
+const result={passed:true,mailboxCases:['pending-first-effect','no-game-update-continuity','pause-resume','stop','2000-retriggers','volume','four-voice-clipping','natural-completion','end'],workerCases:['fast-buffered-service','open-error','prime-write-error','play-write-error','slow-service-no-catchup','pause-resume','sleep-error','stop-before-worker','close-quarantine'],blockSamples:512,pacingRate:22050,maxSleepUs:5000,exactProductionSourcesBothArchitectures:true,physicalWatchUsed:false,devicePlayback:false};fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

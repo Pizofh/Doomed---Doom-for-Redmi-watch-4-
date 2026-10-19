@@ -1,0 +1,20 @@
+// SPDX-License-Identifier: GPL-2.0-only
+import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import {randomUUID} from 'node:crypto';import {spawnSync} from 'node:child_process';
+import {root,sha256,tuneLauncher} from './doom-tune-r387.mjs';import {prepareDoomTune} from './doom-large-upload.mjs';import {physicalDoomTuneEnabled,createReviewedDoomEndpoint} from './doom-deployment-physical.mjs';import {assertLargeNativeDispatchReady} from './large-native-dispatch.mjs';
+import {DoomDeploymentJournal,deploymentIdentity,disposeDeploymentIdentity} from './doom-deployment-journal.mjs';import {createDoomUploadPcPeer,createDoomUploadIpcPeer,pcPeerSummary} from './doom-upload-pc-simulator.mjs';import {runDoomUploadPc} from './doom-upload-pc-session.mjs';
+assert.equal(process.argv.length,2);
+const dir=path.join(root,'build/doom-tune-r387/package'),b=fs.readFileSync(path.join(dir,'DoomTune-id-only.face')),plan=prepareDoomTune(b),review=JSON.parse(fs.readFileSync(path.join(dir,'review.json'))),p=tuneLauncher();
+assert.equal(review.sourceSha256,p.sourceSha256);assert(plan.nativeLauncher&&b.includes(Buffer.from(p.source)));assert(review.nativeExecutableIncluded&&!review.wadIncluded&&review.installedDoomIIRequired);assert.equal(p.config.base,'/data/app/watchface/market/365220006/lua/');assert.equal(p.config.elf_base,'/data/app/watchface/market/365220008/lua/');
+assert.deepEqual(review.entries.map(e=>e.name).sort(),['doom.elf','main.lua']);
+for(const e of review.entries){const r=fs.readFileSync(path.join(dir,'app/lua',e.name));assert.equal(sha256(r),e.sha256);assert(b.subarray(e.offset,e.offset+e.size).equals(r));}
+for(const at of [0,5,40,100,b.length-1]){const bad=Buffer.from(b);bad[at]^=1;assert.throws(()=>prepareDoomTune(bad));}
+assert.throws(()=>prepareDoomTune(b.subarray(1)));assert(!physicalDoomTuneEnabled());assert.throws(()=>createReviewedDoomEndpoint('AABBCCDDEE01'));assert.throws(()=>assertLargeNativeDispatchReady(),/NativeProfileNotReady/);
+const where=()=>path.join(root,'artifacts/doom-deployment-r286-'+randomUUID()),identity=deploymentIdentity('pc:'+'0'.repeat(64),Buffer.alloc(16,37)),j=new DoomDeploymentJournal(plan,identity,{directory:where()});assert.equal(path.basename(j.file),'tune-r387.jsonl');j.close();
+for(const opt of ['resume','retryWithoutData','afterSpace','afterCatalog','restartPacked','resumePacked'])assert.throws(()=>new DoomDeploymentJournal(plan,identity,{directory:where(),[opt]:true}));disposeDeploymentIdentity(identity);
+for(const action of ['prepare','install']){const r=spawnSync(process.execPath,['tools/pc-doom-tune-r387.mjs',action],{cwd:root,encoding:'utf8',windowsHide:true,timeout:5000});assert.equal(r.status,action==='install'?2:0,r.stderr);assert.equal(JSON.parse(r.stdout).status,action==='install'?'PhysicalGateClosed':'OfflinePrepared');}
+const catalog=[{id:'365220006',active:false,canDelete:true},{id:'123456789',active:true,canDelete:false}];
+const peer=createDoomUploadIpcPeer(plan,{catalogRows:catalog}),r=await runDoomUploadPc(peer,plan,Buffer.alloc(16,37),{deploymentDirectory:where()}),s=pcPeerSummary(peer);assert.equal(r.status,'RegisteredInactive',JSON.stringify(r));assert(r.closeConfirmed&&r.workerExitConfirmed&&r.workerWireVerified);assert.equal(s.massFrames,331);
+for(const [scenario,catalogRows]of [['ok',catalog.slice(1)],['collision',catalog],['reject',catalog],['bad-md5',catalog],['disconnect',catalog]]){
+ const end=createDoomUploadPcPeer(plan,{scenario,catalogRows}),failed=await runDoomUploadPc(end,plan,Buffer.alloc(16,37),{deploymentDirectory:where()});assert.equal(failed.status,'StoppedNeedsReview');assert.equal(pcPeerSummary(end).massFrames,scenario==='disconnect'?11:0);if(scenario==='ok')assert.equal(pcPeerSummary(end).mutations,0);
+}
+const result={passed:true,resources:2,tamperRejected:6,fullIpcParts:331,dependenciesEnforced:true,wadIncluded:false,allRetryModesBlocked:true,physicalGateClosed:true,physicalWatchUsed:false};fs.writeFileSync(path.join(root,'build/doom-tune-r387/package-test.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

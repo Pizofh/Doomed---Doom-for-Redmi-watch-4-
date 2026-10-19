@@ -1,0 +1,24 @@
+// SPDX-License-Identifier: GPL-2.0-only
+import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import {spawnSync} from 'node:child_process';
+import {root,sha256,tuneLauncher,tunePreview} from './doom-tune-r387.mjs';
+const json=f=>JSON.parse(fs.readFileSync(path.join(root,f),'utf8')),p=tuneLauncher(),out=path.join(root,'build/doom-tune-r387/package');assert(!fs.existsSync(out));
+const build=path.join(root,'build/doom-audio-r387/rw4'),review=json('build/doom-audio-r387/rw4/review.json'),elf=fs.readFileSync(path.join(build,'doom.elf'));assert.equal(sha256(elf),review.elfSha256);
+for(const [f,h]of Object.entries(review.adpcm.sourceHashes))assert.equal(sha256(fs.readFileSync(path.join(root,f))),h);
+assert.equal(sha256(fs.readFileSync(path.join(build,'pcm-core.c'))),review.adpcm.coreSha256);assert.equal(sha256(fs.readFileSync(path.join(build,'pcm-core.h'))),review.adpcm.headerSha256);
+for(const [n,h]of Object.entries(review.generatedHashes))assert.equal(sha256(fs.readFileSync(path.join(build,n==='menu'?'m_menu.c':n+'.c'))),h);
+const played=json('build/doom-audio-r387/s3-model/test-result.json'),codec=json('build/adpcm-r386/result.json'),ui=json('build/doom-tune-r387/test-result.json');
+assert(played.passed&&played.twoCyclesJoinedAndUnloaded&&played.loadDirectlyFromTitle&&played.cycles.every(c=>c.cachedSampleBytes===310485&&c.error===0&&c.nonSilentBlocks>0));
+assert(json('build/audio-render-r387/result.json').passed);assert(ui.activeBackgroundShield);
+assert(codec.passed&&codec.realCorpusEffects===107&&codec.mixedFourVoicesAtFourRates&&codec.cacheBytes===310485);
+assert(json('build/doom-audio-r387/s3-hold/test-result.json').passed);assert(ui.passed&&ui.cases===25&&ui.exactSource===p.sourceSha256&&ui.guardDerivedFromResidentSavings);
+const records=[['main.lua',Buffer.from(p.source)],['doom.elf',elf]],compilerDir=path.join(root,'tools/local/easyface-v4.23-review'),compiler=path.join(compilerDir,'Compiler.exe');
+assert(!fs.lstatSync(compilerDir).isSymbolicLink());assert(fs.readdirSync(compilerDir).every(n=>['Compiler.exe','DeviceInfo.db','EasyFace_en.exe'].includes(n)));
+assert.equal(sha256(fs.readFileSync(compiler)),'bfb8c3b6666b79de165884d832c69d46e5bbfa581c65c1e188cddfc4b9d6723a');assert.equal(sha256(fs.readFileSync(path.join(compilerDir,'DeviceInfo.db'))),'7fde4b233d75e36985f709e84ea4c164c494b02d109bcdb5f50f0ab76e6c3f76');
+for(const d of ['app/lua','images','output'])fs.mkdirSync(path.join(out,d),{recursive:true});for(const [n,b]of records)fs.writeFileSync(path.join(out,'app/lua',n),b,{flag:'wx'});fs.writeFileSync(path.join(out,'images/preview.png'),tunePreview(),{flag:'wx'});
+const project=path.join(out,'DoomTune.fprj');fs.writeFileSync(project,'<?xml version="1.0" encoding="utf-8" ?>\n<FaceProject DeviceType="365"><Screen Title="DoomTune" Bitmap="preview.png"><Widget Shape="34" Name="app_lua%2Fmain.lua" X="0" Y="0" Width="390" Height="450" Alpha="0" Visible_Src="0" /></Screen></FaceProject>\n');
+const r=spawnSync(compiler,['-b',project,path.join(out,'output'),'DoomTune.face',p.config.id],{cwd:out,windowsHide:true,shell:false,encoding:'utf8',timeout:60000,maxBuffer:1048576,env:{...process.env,TEMP:out,TMP:out,PATH:path.join(process.env.SystemRoot,'System32')}});
+fs.writeFileSync(path.join(out,'compiler-result.json'),JSON.stringify({status:r.status,stdout:r.stdout,stderr:r.stderr},null,2));assert(!r.error&&r.status===0&&/No Errors/.test(r.stdout)&&/Watch:\s*RedmiWatch4/.test(r.stdout)&&/adb util is missing, skipping to upload/.test(r.stdout));
+const b=fs.readFileSync(path.join(out,'output/DoomTune.face'));assert(b.length>660000&&b.length<690000&&b.readUInt32LE(0)===0x1234a55a&&b[5]===0&&b[49]===0);b.write(p.config.id,40,9,'ascii');
+const entries=records.map(([name,data])=>{const n=Buffer.from('lua/'+name),found=[];for(let at=b.indexOf(n);at>=0;at=b.indexOf(n,at+1))if(at>=20){const w=b.readUInt32LE(at-20);if((w&0xffffff)===data.length&&(w>>>24)===n.length&&b.subarray(at+n.length,at+n.length+data.length).equals(data))found.push(at+n.length);}assert.equal(found.length,1,name);return{name,size:data.length,offset:found[0],sha256:sha256(data)};});
+fs.writeFileSync(path.join(out,'DoomTune-id-only.face'),b,{flag:'wx'});const result={checkpoint:'R387',id:p.config.id,size:b.length,sha256:sha256(b),sourceSha256:p.sourceSha256,elfSha256:sha256(elf),entries,config:p.config,memory:p.memory,display:p.display,manualStartOnly:true,nativeExecutableIncluded:true,wadIncluded:false,installedDoomIIRequired:true,physicalWatchUsed:false};
+fs.writeFileSync(path.join(out,'review.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify({...result,entries:entries.length}));
