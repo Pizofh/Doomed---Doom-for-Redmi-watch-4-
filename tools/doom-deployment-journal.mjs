@@ -39,6 +39,7 @@ export class DoomDeploymentJournal{
   packageCopy(plan);const binding=identities.get(identity);if(!binding||typeof resume!=='boolean'||typeof retryWithoutData!=='boolean'||resume&&retryWithoutData)fail();
   if(plan.kind==='review-packed-r378-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog))fail();
   if(plan.kind==='review-doom2-r384-manual'&&(resume||retryWithoutData||afterCatalog||restartPacked||resumePacked))fail();
+  if(plan.kind==='review-fit-r386-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
   if(['review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan.kind)&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
   if(typeof restartPacked!=='boolean'||restartPacked&&(plan.kind!=='review-packed-r378-manual'||resume||retryWithoutData||afterSpace||afterCatalog))fail();
   if(typeof resumePacked!=='boolean'||resumePacked&&(plan.kind!=='review-packed-r378-manual'||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked))fail();
@@ -55,6 +56,7 @@ export class DoomDeploymentJournal{
   if(plan.kind==='review-lean-r382-manual')this.#file=path.join(dir,'lean-r382.jsonl');
   if(plan.kind==='review-start-r383-manual')this.#file=path.join(dir,'start-r383.jsonl');
   if(plan.kind==='review-doom2-r384-manual')this.#file=path.join(dir,'doom2-r384.jsonl');
+  if(plan.kind==='review-fit-r386-manual')this.#file=path.join(dir,'fit-r386.jsonl');
   this.#key=Buffer.from(binding.key);this.#tag=binding.tag;this.#plan=plan;
   try{
    this.#lock=fs.openSync(this.#lockFile,'wx',0o600);

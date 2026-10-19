@@ -1,22 +1,59 @@
-# R385 primer ensayo bloqueado por RAM antes de C; comprobar arranque limpio
+# R386 DoomFit preparado; falta aprobación física
+
+Usuario aclaró que acababa de reiniciar antes del fallo R385. Cancelada la
+propuesta de repetir reinicio; no autorizada ni ejecutada. No atribuir la RAM
+observada al transporte. Ofreció borrar esferas si sirve: conservar personales;
+ese borrado libera flash y no demuestra que aumente RAM de arranque.
+
+DoomFit ID365220007/rw4doomii386, marco MORADO y DOS barras VERTICALES.
+Actualización de674868B, SHA256
+37a0161b7c9b7fbc9955d9d7a19ba0c5a43af29de7a18bab6975bfb07da1a136.
+ELF631588B SHAd3aae03d409d9b32dbee80c19c042cbcca1304448f41a07482714a353cca154d.
+Reutiliza WAD/assets/slots de DoomII365220006: CONSERVAR DoomII, abrir DoomFit.
+Sin WAD incluido, borrados ni cambio automático de esfera. Plan completo
+docs/doom-fit-physical-plan-r386.md. NINGUNA aprobación R386 todavía;
+gates general/FIT/C# todos cerrados, sin radio ni journal físico R386.
+
+Cache ADPCM320KiB (107SFX/310485B útiles), decodificación incremental por voz,
+sin heap ni expansión completa en mixer. Conserva frecuencia R384, zona3MiB,
+slots192KiB, resolución/controles/32mapas. Compresión adicional CON pérdida:
+calidad y coste real pendientes. ALLOC alineado2227500→1901456, ahorro326044B.
+min_free=ceil((7366211-326044)/4096)*4096=7041024; misma reserva planificada,
+redondeo hacia arriba. Largest4194320 intacto. Frente FREE7270920 observado,
+margen modelado229896B; no garantiza asignaciones ni RAM actual del reloj.
+
+Pruebas:26vectores codec+107efectos/4voces a4rates, bytes C vs referenciaJS;
+2ciclos motor real título/MAP01/guardar/cargar/persistencia/cierre;
+held prepare/close con threads reales;25casos Lua exacto (FREE observado
+aceptado, ambos límites-1 rechazados); paquete2recursos/6tamper/331partes
+C#IPC/5fallos/6retrymodes denegados; regresión transporte23casos.
+Gráficos/audio modelados, NO reproducción física. Campaña32mapas es R384
+anterior; no llamarla nueva campaña R386. Guest WAD temporal retirado.
+
+Siguiente: pedir UNA instalación inactiva + UN ensayo≤60s, batería≥50% y
+observación, sin reinicio/borrados/reenvío WAD. Si aprueba abrir SOLO
+general+FITJS/C#Large, build/emptytargetready, pc-doom-fit-r386.mjs install1;
+cerrar gates/rebuild SIEMPRE. No retry/resume. Registrar resultado antes de
+protocolo manual. Mantener DoomII carrier y nueve personales.
+Error anterior SALIR R383 aún sin causa validada: R386 conserva cierre R384,
+no afirmar arreglado. Riesgo bloqueo/corrupción/reinicio; recovery sin validar.
+
+## R385 primer ensayo: guard de RAM rechazó antes de C
 
 Usuario reportó ERROR durante CHECKING: GATE21/FREE7270920/MAX7192944,
 CODE201/READ630004/TOTAL630004. TodosSTART/READY/FINISH/JOIN/REASON/EXIT y
 TIME/TICS/IMAGES0. ELFCRC pasó; faltan95291B frente min7366211. El bloque
 contiguo supera4194320 por2998624B: rechazo por libre total, no fragmentación
 que impida ese mínimo. No insmod/command1 ni motorC ejecutado en este ensayo.
-No segundo arranque ni guardado/audio/cierre del juego validados. No bajar guard.
+No segundo arranque ni guardado/audio/cierre del juego validados. Esto prueba
+rechazo del mínimo planificado, NO un fallo real de asignación del motor.
 
 Código revisado: seis widgets antes de arranque,30diagnósticos diferidos,
 CRC streaming y collectgarbage('collect') antes de ram(). El C nuevo de640KiB
 SFX no está cargado todavía; su ahorro estático no aumenta FREE preinsmod.
-Primera opción de bajo coste: UN arranque del MISMO DoomII instalado después
-de reinicio normal desde Ajustes. El reinicio previo fue antes del envío7.22MB;
-reservas temporales del transporte/UI son una hipótesis, no causa confirmada.
-No reenviar/instalar ni modificar C/WAD/UI para esta comprobación. Pedir permiso
-del ensayo adicional porque el protocolo anterior detenía al primer ERROR;
-si acepta, reiniciar NO Restablecer, dejar habitual, abrir DoomII/START1,
-recoger GATE/FREE/MAX/CODE si falla. No más reinicios/reintentos en cadena.
+El usuario aclaró reinicio reciente; la propuesta de otro reinicio queda
+cancelada. La siguiente revisión R386 reduce memoria residente real y deriva
+un mínimo nuevo, sin omitir esa reserva ni reducir la zona del motor.
 
 ## R385 instalación anterior
 
@@ -32,7 +69,7 @@ NO otro envío/retry/resume/consultaBluetooth. Mismo paquete7221744B
 SHA483dcce2620f99839f930881c5024f1b0c67885e27a36cd1b1a26e5d6864f5a1.
 DoomII365220006/rw4doomii384, preview marcoROJO/DOSVERTICALES.
 
-Faltan DOS ensayos manuales YA autorizados. No nueva aprobación/reinicio.
+Protocolo histórico R385, detenido por el primer ERROR; NO ejecutarlo ahora:
 READY→START1, CHECKING/LOADINGdespierto (~90s arranque más checksum).
 TítuloDoomII→OK/NEWGAME→dificultad→MAP01, controles/primerdisparo/sonido,
 USAR, PAUSA/GUARDAR→GUARDADO; SEGUIR/mover, PAUSA/CARGAR→CARGADO,

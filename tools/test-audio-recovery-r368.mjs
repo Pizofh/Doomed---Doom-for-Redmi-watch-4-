@@ -2,8 +2,8 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
 import {root,sha256} from './doom-ready-source-r351.mjs';
 import {session} from './doom-ui-emulator.mjs';
-const doom2=process.argv[2]==='--doom2-r384',packed=doom2||process.argv[2]==='--packed-r378',ultimate=packed||process.argv[2]==='--ultimate-r374',corrected=process.argv[2]==='--r369';assert(process.argv.length===2||(process.argv.length===3&&(corrected||ultimate)));
-const out=path.join(root,doom2?'build/doom-audio-r384/s3-hold':packed?'build/doom-audio-r378/s3-hold':ultimate?'build/doom-audio-r374/s3-hold':corrected?'build/doom-audio-r369/s3-hold':'build/doom-audio-r368/s3-hold'),elf=path.join(out,'doom.elf');
+const adpcm=process.argv[2]==='--doom2-adpcm-r386',doom2=adpcm||process.argv[2]==='--doom2-r384',packed=doom2||process.argv[2]==='--packed-r378',ultimate=packed||process.argv[2]==='--ultimate-r374',corrected=process.argv[2]==='--r369';assert(process.argv.length===2||(process.argv.length===3&&(corrected||ultimate)));
+const out=path.join(root,adpcm?'build/doom-audio-r386/s3-hold':doom2?'build/doom-audio-r384/s3-hold':packed?'build/doom-audio-r378/s3-hold':ultimate?'build/doom-audio-r374/s3-hold':corrected?'build/doom-audio-r369/s3-hold':'build/doom-audio-r368/s3-hold'),elf=path.join(out,'doom.elf');
 const review=JSON.parse(fs.readFileSync(path.join(out,'review.json'),'utf8'));
 assert.equal(sha256(fs.readFileSync(elf)),review.elfSha256);assert.equal(review.mode,'s3-hold');
 assert(!fs.existsSync(path.join(out,'test-result.json')));

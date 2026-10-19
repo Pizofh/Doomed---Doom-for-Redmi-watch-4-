@@ -7,9 +7,11 @@ READ630004/TOTAL630004; todos los flagsC y métricas0. Faltan95291B de libre
 total frente7366211; bloque mayor7192944 sí supera4194320. ELFCRC correcto,
 rechazo antes de insmod/command1. No se ejecutaron C, audio ni guardado.
 Segundo ciclo condicional cancelado. No repetir START/reabrir con el permiso
-anterior. Siguiente comprobación propuesta: un arranque ya instalado tras un
-reinicio normal, previa nueva aprobación, sin envío ni modificación de guardas.
-No afirmar causa de la diferencia de RAM ni prometer que reiniciar la resolverá.
+anterior. El usuario aclaró que acababa de reiniciar: cancelada la propuesta
+de otro reinicio, sin aprobación ni ejecución. El rechazo del mínimo no prueba
+un fallo real de asignación C ni su causa. Siguiente preparación:
+[R386](doom-fit-physical-plan-r386.md), ahorro residente del cache de audio;
+sin borrar esferas personales ni reenviar el WAD.
 
 ## Resultado de instalación
 
@@ -21,9 +23,8 @@ chunk2048;3534partes/3542frames/7289214BTX. closeConfirmed y
 workerExitConfirmedtrue, exit0/nativeErrorfalse. No SET/autostart/borradosPC.
 Gate general/DOOM2SPACEJS/C#Retail cerrados y rebuild inmediato; otrosfalse.
 Journal conserva intento1 rechazado e intento2 terminado. No más envíos,
-retries/resume ni consultas Bluetooth necesarios. Pendientes DOS arranques
-manuales ya autorizados, segundo solo si primer CLOSED y todo correcto.
-No volver a pedir aprobación ni reinicio por rutina. C/WADII aún no ejecutados
+retries/resume ni consultas Bluetooth necesarios. El primer arranque posterior
+falló en el guard; el segundo quedó cancelado por el protocolo. C/WADII aún no ejecutados
 en el reloj: no afirmar sonido/cierre/guardado/rendimiento físicos validados.
 
 ## Preparación y autorización anteriores
