@@ -1,4 +1,24 @@
-# R385 Doom II instalado inactivo; pendientes dos ensayos ya autorizados
+# R385 primer ensayo bloqueado por RAM antes de C; comprobar arranque limpio
+
+Usuario reportó ERROR durante CHECKING: GATE21/FREE7270920/MAX7192944,
+CODE201/READ630004/TOTAL630004. TodosSTART/READY/FINISH/JOIN/REASON/EXIT y
+TIME/TICS/IMAGES0. ELFCRC pasó; faltan95291B frente min7366211. El bloque
+contiguo supera4194320 por2998624B: rechazo por libre total, no fragmentación
+que impida ese mínimo. No insmod/command1 ni motorC ejecutado en este ensayo.
+No segundo arranque ni guardado/audio/cierre del juego validados. No bajar guard.
+
+Código revisado: seis widgets antes de arranque,30diagnósticos diferidos,
+CRC streaming y collectgarbage('collect') antes de ram(). El C nuevo de640KiB
+SFX no está cargado todavía; su ahorro estático no aumenta FREE preinsmod.
+Primera opción de bajo coste: UN arranque del MISMO DoomII instalado después
+de reinicio normal desde Ajustes. El reinicio previo fue antes del envío7.22MB;
+reservas temporales del transporte/UI son una hipótesis, no causa confirmada.
+No reenviar/instalar ni modificar C/WAD/UI para esta comprobación. Pedir permiso
+del ensayo adicional porque el protocolo anterior detenía al primer ERROR;
+si acepta, reiniciar NO Restablecer, dejar habitual, abrir DoomII/START1,
+recoger GATE/FREE/MAX/CODE si falla. No más reinicios/reintentos en cadena.
+
+## R385 instalación anterior
 
 Una ejecución install-after-space completada el 2026-10-18: RegisteredInactive,
 registeredVerifiedtrue/contentVerifiedfalse. Catálogo9/modeloFWesperados,

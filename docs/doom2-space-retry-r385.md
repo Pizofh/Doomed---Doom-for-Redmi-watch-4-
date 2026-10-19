@@ -1,5 +1,16 @@
 # R385: un reintento de Doom II tras liberar cuota
 
+## Resultado del primer arranque
+
+No llegó al juego: GATE21/FREE7270920/MAX7192944/CODE201,
+READ630004/TOTAL630004; todos los flagsC y métricas0. Faltan95291B de libre
+total frente7366211; bloque mayor7192944 sí supera4194320. ELFCRC correcto,
+rechazo antes de insmod/command1. No se ejecutaron C, audio ni guardado.
+Segundo ciclo condicional cancelado. No repetir START/reabrir con el permiso
+anterior. Siguiente comprobación propuesta: un arranque ya instalado tras un
+reinicio normal, previa nueva aprobación, sin envío ni modificación de guardas.
+No afirmar causa de la diferencia de RAM ni prometer que reiniciar la resolverá.
+
 ## Resultado de instalación
 
 Completada una sola ejecución el 2026-10-18: RegisteredInactive,
