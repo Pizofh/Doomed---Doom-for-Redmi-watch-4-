@@ -4,7 +4,7 @@ R393 funciona según el usuario; confirma TOTAL00632284 pero no percibe mejora
 de carga. La duración física sigue desconocida. El41% anterior era solamente
 verify_wad+doomgeneric_Create emulados, excluyendo loader y otros intervalos.
 No se considera resuelto el objetivo. Este trabajo prepara diagnóstico, NO otra
-optimización. Falta autorización física nueva; los permisos R393 se consumieron.
+optimización. Autorización física R394 recibida: «Sí, autorizo y puedo observar». Una instalación y un ensayo; envío aún pendiente. El usuario pidió continuar el 2026-10-19 tras agotar créditos.
 
 ## Paquete y dependencia
 
@@ -102,3 +102,7 @@ Se pide permiso por regla del usuario para cada payload físico nuevo:
 instrumenta C/Lua y adelanta parada al título; puede bloquear/corromper sistema
 o requerir reinicio, con recuperación integral aún sin validar. Después del
 resultado, decidir qué optimizar usando estos tiempos y mantener el juego011.
+
+## Instalación física 2026-10-19
+
+Autorizada explícitamente y completada en un único intento: RegisteredInactive,333/333 partes. Registro confirmado; contenido no leído de vuelta. Sin selección ni START automático. Transporte cerrado y proceso terminado con código0; gates restaurados false y worker recompilado cerrado. Pendiente el único ensayo manual y sus nueve cifras. No reintentos autorizados.

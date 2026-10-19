@@ -1,3 +1,11 @@
+# R394 instalado; ensayo manual pendiente
+
+2026-10-19: envío único autorizado completado. RegisteredInactive, 333/333 partes; registro confirmado, contenido no leído de vuelta; sin selección/inicio automático. Transporte cerrado y worker terminó con código 0. Gates restaurados false y worker recompilado cerrado. Falta UN ensayo manual automático hasta CLOSED y tres páginas de métricas; no repetir START. Conservar DOOM II011.
+
+# R394 autorizado; envío único pendiente
+
+Usuario autorizó: «Sí, autorizo y puedo observar»; pidió continuar el 2026-10-19 tras agotar créditos. Una instalación y un ensayo, sin reintentos. Preparación offline reconfirmada: 679716 bytes, 333 partes, hash revisado.
+
 # R394 diagnóstico completo preparado; falta aprobación física
 
 Usuario confirma TOTAL00632284: sí probó R393 y funciona, pero NO percibe
