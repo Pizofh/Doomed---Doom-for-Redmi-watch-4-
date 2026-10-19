@@ -9,7 +9,8 @@ save loading, weapon cycling and two successful starts/exits. Its registration
 also survived a manual reboot after the [R398 resend](docs/doom-controls-persistence-retry-r398.md).
 Original menus, persistent saves, pause and CLOSED exit work. MENU/PAUSA overlays
 are too faint and sometimes need repeated taps; sound effects remain choppy.
-Music and two-finger input are not implemented.
+Music and two-finger input are not implemented. [Multitouch research](docs/touch-investigation-risk-r400.md)
+is currently static only; no driver changes or physical diagnostic have been run.
 
 Previous/next weapon buttons work. Normal exit offers optional INFO instead of
 automatic diagnostic pages. R397 reduces CHECKING callbacks; no new hardware

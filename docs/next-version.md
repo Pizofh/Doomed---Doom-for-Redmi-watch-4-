@@ -11,6 +11,9 @@ Prioridad explicita actual: dos contactos reales ANTES que audio o ajustes
 visuales. La revision ampliada R399 no encontro otra ruta directa al reporte;
 falta identificar el controlador activo y acceso previo al recorte a un punto.
 [Investigacion y criterios R399](touch-priority-r399.md).
+R400 identifica selector/capacidad cacheada y separa diagnostico RAM de cambios
+de driver/flash. Instruccion actual: investigar SIN ejecutar en el reloj.
+[Hallazgos y riesgos R400](touch-investigation-risk-r400.md).
 [Resultado R397/R398](doom-controls-persistence-retry-r398.md).
 
 

@@ -1,3 +1,13 @@
+# R400 investigacion estatica; instruccion vigente NO EJECUTAR
+
+Usuario: ?haz tu investigacion. si hay mucho riesgo de da?o evaluamos el riesgo. no ejecutes?. Mantener esta frontera: sin BLE ni siquiera consultas, envios, seleccion, C, ioctl, hooks, emulador o firmware en reloj. Esta vuelta solo analisis local de AP como datos y fuentes publicas. No payload preparado/compilado/instalable; no pedir permiso aun ni interpretar un ?sigue? como autorizacion fisica.
+
+Hallazgo NUEVO: selector en rutina4b6988 intenta ICNT8918->Zinitix->Hynitron y guarda RAM3c1cdedc:2/1/3 segun exito,0 error. Modelos segun etiquetas ICNT8918/ZTW662/CST9217. Valor real NO leido. Chipone consulta801a en1dcd54 y cachea max_num en RAM3c1aeba2: posible futura identificacion de solo lectura, sin tocar bus ni reinit. max_num no prueba contactos reales. Chipone lee16B en pila y conversion normal extrae primer registro; segundo registro en cola es HIPOTESIS sin layout/traza, no afirmar dos dedos posibles aun.
+
+Riesgo clave: setups alcanzan rutas de upgrade (Zinitix1dbbc0->1db350, Chipone1de392->1de0c8, Hyn1deab6->1df5d8). No llamarlos como consultas. DirectI2C y hooksRAM tienen riesgos de concurrencia/callbacks tardios; flashpanel/sistema riesgo persistente alto y recuperacion sin validar. Candidato menos invasivo futuro: SOLO selector+cache tras fingerprint, sin I/O/drivercalls/hilos/Doom; aun requiere diseno/loader revisados y autorizacion nueva. No ejecutar ahora.
+
+Informe completo docs/touch-investigation-risk-r400.md con matriz de riesgos y fuentes primarias. Helper tools/review-touch-selection-r400.mjs validado offline; artifacts/research/rw4-touch-r400-repro-v2/review.json y ventanas ignoradas, ningun byteFW enGit. ESPHome describe CST9217single; no identificar nuestro panel por ello. Waveshare buffer2 NO prueba2dedos; Chipone ficha no especifica dedos. Sin porcentajes inventados ni declaracion de imposibilidad universal. R397014 sigue vigente/audio pospuesto.
+
 # R399 prioridad: multitactil antes que audio
 
 Usuario pide resolver primero dos botones porque jugar con uno es dificil. Audio y ajustes visuales quedan pospuestos. No nuevo payload/envio autorizado; R397014 sigue funcional con defectos MENU/PAUSA/audio ya anotados.
