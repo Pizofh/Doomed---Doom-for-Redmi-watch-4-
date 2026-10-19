@@ -1,3 +1,11 @@
+# R402 contrato offline revisado; sigue NO EJECUTAR
+
+Usuario "dale" continua investigacion, NO autoriza hardware. Sin conexion/BLE/envio/VM/Lua en reloj/C/hook/I2C/firmware. R397014 funcional sin cambios. Nuevo modelo PC tools/touch-read-contract-r402.mjs devuelve solo TEXTO de solicitudes, sin I/O ni procesos; no es adaptador Lua ni paquete instalable. Node tools/test-touch-read-contract-r402.mjs pasa38 casos; informe ignorado artifacts/research/rw4-touch-r402-contract/review.json. SHA AP/handler, siete palabras y formato stock contrastados con binario como datos.
+
+Contrato: siete palabras codigo/literal -> selector1/2/3 -> SOLO2 cacheChipone, max9 solicitudes, sin '=' ni cantidad ni direccion libre. Parseo <=96 una linea de direccion+word exactos, aborta ante discrepancia/contaminacion y no reintenta. Constructor inerte. Nunca declarar multitactil probado por cache>=2. Formato real AP "  %p = 0x%08lx" + LF; no inferir seguridad solo de docs.
+
+LIMITES: siete palabras no atestan firmware integral y primera lectura ya depende de mapa/handler correctos. No liveattestation ni ruta mw/Lua probada. Limite parser no limita escritura shell ni cancela system.execute bloqueado; pcall no recupera fault nativo. InterpreteLua host no encontrado en rutas consultadas, NO usar emulador para rodear NO EJECUTAR. PruebasLua/adapter captura/cierre/limpieza/exclusividad aun pendientes; no presentar38 como runtimeLua. No pedir aprobacion de payload inexistente. Decision: identificar primero; no evidencia para hook/driver/flash aun. Ver docs/touch-read-contract-r402.md. Mantener sin conexion aunque usuario responda ok.
+
 # R401 alternativa stock de lectura; sigue NO EJECUTAR
 
 Usuario solo confirma plan, no revoca prohibicion. SIN radio/consulta BLE/comando al reloj/envio/C/emulador en esta vuelta. Hallazgo: comando stock mw tabla77e20 handler21f7f8. Rama SIN '=' y argc2 lee UNA palabra y retorna, sin store al destino; assignment/cantidad son otras ramas que deben excluirse. Argumentos fijos para wordselector y wordcacheChipone solo si selector2; no entrada libre. Puede evitar ELFlector propio, pero uso de mw desde system.execute Lua aun NO validado fisicamente. Nada compilado/empaquetado/enviado.
