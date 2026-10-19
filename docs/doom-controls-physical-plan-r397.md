@@ -3,8 +3,9 @@
 Estado actual: envio autorizado y registro inactivo reconocido, pero R397014
 ausente del catalogo tras reiniciar. Sin ensayo del motor R397 en el reloj.
 R396013 sigue presente y es la version aceptada. La causa no esta identificada;
-El usuario autorizo un reenvio R398: ambas presentes tras reconectar, pendiente
-comprobacion tras reinicio; ver doom-controls-persistence-retry-r398.md.
+El usuario autorizo un reenvio R398: ambas presentes tras reconectar Y tras
+reinicio manual;014 activa, ensayo funcional pendiente.
+Ver doom-controls-persistence-retry-r398.md.
 El protocolo original se conserva abajo
 como historial, no como instrucciones vigentes para abrir una esfera ausente.
 

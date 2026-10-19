@@ -60,3 +60,19 @@ sin nueva operacion fisica. Ambas consultas conservan la seleccion correcta.
 Se pidio al usuario reinicio normal, sin abrir Doom ni borrar nada. PENDIENTE
 consulta posterior al reinicio. Todavia no esta validada la persistencia ni
 los controles R397 en hardware. No hay permiso para un tercer envio.
+
+
+## Persistencia tras reinicio confirmada
+
+El usuario comprobo ambas antes y despues de reiniciar normalmente: siguen las
+dos. Consulta independiente de SOLO LECTURA posterior: Complete,11 entradas,
+013 presente/inactiva,014 presente/activa, todos los IDs/flags previos retenidos.
+Transporte cerrado, worker0, sin transferencia de archivos. La seleccion de014
+fue manual o del firmware, nunca del cliente PC. No se atribuye una causa a la
+primera desaparicion: el segundo envio con espera y reconexion persistio en
+ESTE reinicio; no demuestra que la espera sea la correccion necesaria.
+
+Ahora corresponde el ensayo manual R397 previamente autorizado: START, cargar
+partida, armas/controles/menu/pausa y SALIR->CLOSED; solo si funciona, segundo
+arranque breve y CLOSED. Pregunta corta enviada; sin cifras normales solicitadas.
+R397 aun no esta aceptada funcionalmente hasta recibir el resultado. Conservar013.

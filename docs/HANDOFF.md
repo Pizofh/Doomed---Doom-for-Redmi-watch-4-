@@ -1,3 +1,9 @@
+# R398 persistencia confirmada; nueva014 activa, ensayo funcional pendiente
+
+Usuario vio ambas antes/despues del reinicio. Consulta fisica SOLO LECTURA confirma11 entradas,013inactiva/014activa, ningun ID/flag previo perdido. Complete/transporte cerrado/worker0, sin archivos enviados. No PCselect/START. Evidencia privada build/doom-controls-r397/after-manual-reboot-r398.json. El reenvio sobrevivio ESTE reinicio; causa de primera desaparicion sigue desconocida, no atribuir solucion a las esperas como hecho.
+
+Pregunta asincrona corta enviada: nueva ya activa, START/cargar/ARMA-/+/FIRE/MENU/PAUSA, PAUSA->SALIR->CLOSED; solo si todo bien otro START breve/CLOSED. Dos ensayos previamente autorizados, no nueva instalacion. No cifras salvoERROR->INFO GATE/CODE; conservar013. Falta respuesta funcional, no declarar aceptada R397 todavia. Gatesfalse, ningun tercer envio autorizado.
+
 # R398 reenviada; presente tras reconectar, pendiente reinicio manual
 
 Usuario autoriza ?pasa la nueva entonces y mira la persistencia?. Mismo paqueteR397014/1071020B/SHAcb16a5de71ab9f9fb0c8c0678d2e2cb0fa1cd1f2050690a8620055388f536d2e; no nuevoELF. Intento2 en journalcontrols-r397 original, sin borrarlo. RegisteredInactive524/524 y4observaciones durante6s, contenido no leido de vuelta. Gatesfalse/native rebuilt; transporte cerrado/worker0 sinerror.

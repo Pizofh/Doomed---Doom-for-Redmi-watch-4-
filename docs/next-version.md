@@ -1,14 +1,15 @@
 # 0.2: DOOM II en una sola esfera
 
-## R396 aceptada; R397 reenviada, persistencia pendiente
+## R396 aceptada; R397 persiste tras reiniciar, ensayo pendiente
 
 R396013 sigue presente y aceptada. El envio autorizado de R397014 recibio
 confirmacion de registro inactivo, pero la consulta posterior al reinicio ya no
 la incluye. El usuario no comprobo el selector antes; no hubo ensayo R397.
 Armas, controles compactos e INFO pasan las pruebas locales y siguen pendientes
 en hardware. La prueba de catalogo frio S3 reconoce ambos paquetes exactos;
-no explica el resultado del RW4. Reenvio R398 autorizado y completado: ambas presentes tras reconectar; falta
-consulta posterior al reinicio manual. Causa original por confirmar.
+no explica el resultado del RW4. Reenvio R398 autorizado y completado: ambas presentes tras reconectar Y tras
+reinicio manual confirmado por usuario y catalogo.014 activa; ensayo funcional
+pendiente. Causa original por confirmar.
 [Verificacion R398](doom-controls-persistence-retry-r398.md).
 [Estado y evidencia R397](doom-controls-physical-plan-r397.md).
 
