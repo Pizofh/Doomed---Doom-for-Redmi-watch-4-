@@ -1,3 +1,11 @@
+# R399 prioridad: multitactil antes que audio
+
+Usuario pide resolver primero dos botones porque jugar con uno es dificil. Audio y ajustes visuales quedan pospuestos. No nuevo payload/envio autorizado; R397014 sigue funcional con defectos MENU/PAUSA/audio ya anotados.
+
+Nueva revision local tools/review-touch-branches-r399.mjs:16 comprobaciones del decodificador, inventario adicional B.W/condicionales/cortos en AP fijado; solo mismos3BL a notify, ningun punteroThumb absoluto. No otra ruta directa encontrada. Limites: no prueba driver activo, indirectos/otroscanales ni capacidad fisica. No seguir repitiendo R353/R371/R389 como si fueran hallazgos nuevos. Evidencia ignorada artifacts/research/rw4-touch-r399/review.json. Sin radio/VM/cargaC.
+
+Siguiente trabajo real: identificar driver activo y datos ANTES del recorte a1punto, luego evaluar observacion pasiva acotada independiente. Input0 solo no recupera datos descartados. No diagnostico fisico listo todavia, no pedir aprobacion para algo inexistente. Integrar solo tras observar dos contactos y releases independientes; no autofire/toggles rechazados. Plan docs/touch-priority-r399.md.
+
 # R397014 funcional vigente, con defectos de usabilidad pendientes
 
 Usuario confirma ensayo completo y dos arranques/cierres bien: cargar partida, armas, MENU/PAUSA, CLOSED. Datos propios migrados014, sin dependencia operacional de013. Persistencia tras reinicio ya confirmada por catalogo y usuario. NO registrar como acabado perfecto: MENU/PAUSA demasiado transparentes, dificiles de localizar y varias pulsaciones para reaccionar; ARMA-/+ bien. Audio sigue entrecortado. Un solo boton limita mucho jugabilidad, sierra casi inutil: usuario prioriza controles simultaneos. No nueva instalacion autorizada.

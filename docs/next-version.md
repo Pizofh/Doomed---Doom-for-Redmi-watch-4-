@@ -7,8 +7,10 @@ registro persistente tras reinicio confirmado fisicamente. MENU/PAUSA demasiado
 transparentes y requieren a veces varias pulsaciones; ARMA-/+ bien. Audio sigue
 entrecortado. El usuario insiste en dos botones a la vez por la jugabilidad de
 la sierra. No hay ruta fisica multitactil verificada ni permiso para otro envio.
-Proxima prioridad local: controles superiores visibles y fiables; evaluar audio
-y viabilidad de contactos reales sin simular autofire/toggles rechazados.
+Prioridad explicita actual: dos contactos reales ANTES que audio o ajustes
+visuales. La revision ampliada R399 no encontro otra ruta directa al reporte;
+falta identificar el controlador activo y acceso previo al recorte a un punto.
+[Investigacion y criterios R399](touch-priority-r399.md).
 [Resultado R397/R398](doom-controls-persistence-retry-r398.md).
 
 
