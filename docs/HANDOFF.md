@@ -1,4 +1,28 @@
-# R387 DoomTune listo localmente; falta aprobación de nuevo payload físico
+# R387 DoomTune instalado inactivo; UN ensayo manual YA autorizado
+
+Usuario aprobó «Sí, autorizo y puedo observar» el 2026-10-18. UNA instalación
+terminó RegisteredInactive/registeredVerifiedtrue/contentVerifiedfalse.
+Catálogo11/carrier006 presente/008ausente/modeloFWesperados; INSTALL0,
+ACKMD5/status0/offset0/chunk2048.331partes/339frames/682731BTX,
+selectedByClientfalse; closeConfirmed/workerExitConfirmedtrue/exit0/
+nativeErrorfalse. Gates general/TUNEJS/C#Large restauradosfalse y rebuild
+inmediato por finally; otrosfalse. Sin SET/borrados/autostart/reenvío WAD.
+Journal tune-r387 terminado: NO otro install/retry/resume/consultaBluetooth.
+
+Pendiente UN ensayo manual≤60s YA autorizado, sin pedir otra aprobación ni
+reinicio. Seleccionar DoomTune (MARCO MENTA/TRES VERTICALES), conservar DoomII
+y DoomFit. READY→START1, mantener CHECKING/LOADINGdespierto (~90s carga más
+checksum). Menú/NEWGAME/dificultad/MAP01, sonido/controles/USAR/PAUSA;
+holds3s en azul y3s en imagen NO deben abrir selector. Guardar/mover/cargar,
+SALIR≤60sjuego→CLOSED; esperar cierre sin insistir (~40s nominales).
+Después hold en fondoCLOSED debe permitir selector y habitual. No otro START.
+Si abre selector en juego: elegirhabitual, NO reabrir. ERROR/silencio/corrupción/
+cierrefallido: no repetir; MODE GATE/FREE/MAX,CODE/READ/TOTAL; siGATE≥50
+START/READY/FINISH,JOIN/REASON/EXIT; AUDIOERR/CALL. Habitual porAjustes;
+imagenretenida→reinicio normal NO Restablecer y dejar habitual.
+Asumir resto normal salvo reporte. Nuevos cambios físicos aún sin validar.
+
+## Preparación anterior R387; aprobación e instalación ya consumidas
 
 Plan docs/doom-tune-physical-plan-r387.md. Usuario aclaró audio ENTRE CORTADO.
 DoomTune008/rw4doomii387, preview MARCO MENTA/TRESVERTICALES, paquete676120B
@@ -6,7 +30,7 @@ SHA20829805e03a4572b21bb73c750638083f6949bfe6998e364407b0deb473e2a6.
 ELF631972B SHA6166c1f23db3d73b0b5632cec54f72fef494837015704479e329563bbcf83ad8;
 Lua30376B SHA3658f5c4092ccf36d57d942f0e0ce559bcea0238f90b38008d860e20c53519bd.
 Reutiliza WAD/assets/slots006: CONSERVAR DoomII y DoomFit007 probado.
-Sin radio, instalación, journal R387, borrados ni reenvío WAD; todosgatesfalse.
+Preparación offline; instalación posterior registrada arriba. Todosgatesfalse.
 
 Mixer SOLO worker audio, mailbox atómico por4voces/generación24bit/volumen;
 PCM512/22050Hz sin ritmo del juego, writes regulados por reloj/sleep≤5ms,
@@ -26,14 +50,13 @@ juego/pausa y liberaciónCLOSED; paquete2recursos/6tamper/331IPC/5fallos/
 6retrymodesdenegados. Regresión transporte23casos; limpieza WAD guest hecha.
 S3 graphics/audio modelados; selector/corners/audio físicos sin validar.
 
-Siguiente pedir UNA instalación inactiva y UN ensayo≤60s, sin reinicio/borrados,
-batería≥50%/observar. Si aprueba SOLO general+TUNEJS/C#Large, build/readiness
-emptytarget; CLIpc-doom-tune-r387.mjs install1, cerrar/rebuild SIEMPRE.
-No retry/resume. Manual propuesto: menú/MAP01, sonido/controles, holds3s en
+Preparación contemplaba UNA instalación inactiva y UN ensayo≤60s, sin reinicio/
+borrados. Instalación consumida: NO repetir. Manual autorizado: menú/MAP01,
+sonido/controles, holds3s en
 azul/imagen, pausa/guardar/cargar/SALIR≤60→CLOSED; holdCLOSED debe abrir selector.
 Si abre selector en juego: habitual sin reabrir. ERROR/cierrefallido: diagnóstico
 plan/GATE+CODE+flags+AUDIOERR/CALL, detener. Imagenretenida→reinicio normal.
-No autorización R387 todavía; aprobación anterior R386 consumida.
+Aprobación R387 e instalación registradas arriba; R386 también consumido.
 
 ## Resultado físico R386 y preparación inicial R387
 

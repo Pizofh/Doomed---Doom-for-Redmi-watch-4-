@@ -1,5 +1,24 @@
 # R387: DoomTune, continuidad de audio y encuadre/táctil
 
+## Resultado de instalación; UN ensayo manual pendiente
+
+2026-10-18: UNA ejecución autorizada terminó RegisteredInactive,
+registeredVerifiedtrue/contentVerifiedfalse. Modelo/FW esperados; catálogo11,
+ID008 ausente y dependencia006 presente. INSTALL0, ACK MD5/status0/offset0,
+chunk2048.331partes/339frames/682731BTX, selectedByClientfalse. Cierre y
+workerexit confirmados/exit0/nativeErrorfalse. No SET, borrados ni autostart.
+Journal tune-r387 terminado: NO otro install/retry/resume. Gates JS general/
+TUNE y C#Large restauradosfalse/rebuild inmediato por finally; demásfalse.
+Sin ejecución del nuevo C durante registro inactivo. Falta el ensayo≤60s ya
+autorizado; no pedir permiso otra vez ni exigir reinicio previo.
+
+## Autorización
+
+El 2026-10-18 el usuario respondió «Sí, autorizo y puedo observar» a UNA
+instalación inactiva de676KB y UN ensayo≤60s, batería≥50%, volumen audible,
+reloj junto al PC. Sin borrado, reinicio previo ni reenvío WAD. No autoriza
+reintento, reanudación, segundo arranque ni payload distinto.
+
 ## Motivo y límites de evidencia
 
 R386 funcionó físicamente para Doom II, controles, guardar/cargar y cierre;
@@ -89,7 +108,7 @@ Paquete:2recursos/slices/hash,6alteraciones,331partes C#IPC, dependencia006,
 5fallos y6retrymodes denegados; CLI prepare sin radio/install cerrado.
 Transporte compartido23casos. WAD temporal del guest retirado al terminar.
 
-## Protocolo propuesto, requiere nueva aprobación
+## Protocolo autorizado
 
 UNA instalación inactiva676KB y UN ensayo≤60s de juego; batería≥50%, volumen
 audible, reloj junto al PC, Mi Fitness cerrado y observación~1–2min de envío.
@@ -120,4 +139,5 @@ dejar habitual. Asumir resto normal salvo reporte del usuario.
 Regla original del usuario: aprobar cada payload físico nuevo. Este cambia
 sincronización/propiedad del mixer, ritmo de writes y captura de touch. Puede
 bloquear/corromper el sistema, impedir CLOSED o requerir reinicio. Recuperación
-integral sigue sin validar. Nada enviado ni journal físico R387 al preparar.
+integral sigue sin validar. La preparación fue offline; instalación posterior
+consumida y registrada arriba. No otro envío por este permiso.
