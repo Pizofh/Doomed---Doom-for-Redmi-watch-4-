@@ -5,9 +5,9 @@ import fs from 'node:fs';import path from 'node:path';import assert from 'node:a
 import {root,sha256,once} from './doom-ready-source-r351.mjs';import {session} from './doom-ui-emulator.mjs';
 import {ultimateProfile as p} from './doom-ultimate-source-r374.mjs';
 import {doom2Profile} from './doom2-source-r384.mjs';
-const doom2=process.argv[2]==='--doom2-r384',profile=doom2?doom2Profile:p;
+const metadata=process.argv[2]==='--doom2-metadata-r395',doom2=metadata||process.argv[2]==='--doom2-r384',profile=doom2?doom2Profile:p;
 const packed=doom2||process.argv[2]==='--packed-r378';assert(process.argv.length===2||(packed&&process.argv.length===3));
-const dir=path.join(root,doom2?'build/doom-audio-r384/s3-model':packed?'build/doom-audio-r378/s3-model':'build/doom-audio-r374/s3-model'),out=path.join(root,doom2?'artifacts/research/doom2-campaign-r384':packed?'artifacts/research/packed-campaign-r378':'artifacts/research/ultimate-campaign-r374');
+const dir=path.join(root,metadata?'build/doom-audio-r395/s3-model':doom2?'build/doom-audio-r384/s3-model':packed?'build/doom-audio-r378/s3-model':'build/doom-audio-r374/s3-model'),out=path.join(root,metadata?'artifacts/research/doom2-campaign-r395':doom2?'artifacts/research/doom2-campaign-r384':packed?'artifacts/research/packed-campaign-r378':'artifacts/research/ultimate-campaign-r374');
 assert(!fs.existsSync(out));fs.mkdirSync(out,{recursive:true});
 const review=JSON.parse(fs.readFileSync(path.join(dir,'review.json'),'utf8')),logs=JSON.parse(fs.readFileSync(path.join(dir,'build-log.json'),'utf8'));
 assert.equal(sha256(fs.readFileSync(path.join(dir,'doom.elf'))),review.elfSha256);
@@ -44,7 +44,7 @@ local function run()
  shell('insmod ${remote} rw4ultmap374');state();command(1);local ready
  for _=1,${packed?200:120} do local s=state();if s[5]==1 and s[35]==0 and s[36]==${episode} and s[37]==${map} then ready=s;break end;assert(s[6]==0,'stopped before map: '..s[15]..'/'..s[16]);wait()end
  assert(ready and ready[35]==0 and ready[36]==${episode} and ready[37]==${map},'map startup')
- assert(ready[63]==${profile.audioSampleBytes} and ready[64]==0,'all effects cached '..ready[63])
+ assert(ready[63]==${(metadata?310485:profile.audioSampleBytes)} and ready[64]==0,'all effects cached '..ready[63])
  for _=1,6 do command(7);wait()end;command(3);for _=1,4 do wait()end
  command(8);local saved
  for _=1,30 do wait();local s=state();if s[56]==0 and s[55]==8 then assert(s[57]==0 and s[58]==1,'save failed '..s[57]);saved=s;break end end

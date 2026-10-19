@@ -1,3 +1,15 @@
+# R396 paquete consolidado listo y autorizado; falta env?o ?nico
+
+Usuario ?autorizo?2026-10-19 tras explicar versi?n optimizada. UNA instalaci?n y UN ensayo manual, sin retry. Plan docs/doom-fast-physical-plan-r396.md. Paquete1069660B/SHAe3bb86a4740ea4ed8e92a6d340f36229f83b39378c62c3a049d5556b16da1923; ID013, importa011?013 tras START. Guardar011 hasta validar. 43 import+27 boot+2 ciclos exactos+32 mapas prototipo+524IPC/regresiones pasan. Gatesfalse; dispatch build/doom-fast-r396/dispatch-once.mjs preparado NO ejecutado, journal a?n ausente.
+
+# R395 optimizaci?n nativa local validada; falta paquete f?sico
+
+2026-10-19: R394 f?sico encontr? INIT26008/32674ms total. Perfil local muestra render y lecturas/descompresi?n dominantes. R395 deriva metadatos gr?ficos del WAD privado fijado:469 patches/1381 sprites,158608B de tablas; Create3880,5?999,5ms (-74,24% SOLO tramo emulado). Dos ciclos completos men?/guardar/cargar/cierre y32 mapas con guardar/cargar aprobados. Tablas nativas equivalentes en dos aperturas originales y dos optimizadas. No mejora f?sica nueva confirmada.
+
+Build flag --doom2-metadata-r395, RW4 ELF790692B/SHAf6e298d367dc37df596b1d2b35b5a60bdf0fdd66c7f53a5655bbbd68e0c27d7e. Residente2056428B; futuro launcher necesita min_free7196672, min_largest4194320 sin rebajarlos. Adapter/audio/runtime/lector id?nticos a R393. No launcher ni paquete ni transporte R395 a?n; no hay autorizaci?n para otro payload. Sigue instalada/funcional DOOM II011. No enviar ELF aislado. Pr?ximo trabajo: empaquetar versi?n consolidada con importador011?nuevo ID y comprobar Lua/migraci?n/transporte antes de pedir UNA autorizaci?n f?sica concreta. No repetir m?tricas ni ensayos consumidos.
+
+Plan/evidencia docs/doom-init-research-r395.md. Nuevo emulador headless propio execsession24651, PID2928; fixtures propios ya limpiados, no m?dulos. No lanzar otro emulador ni tests VM concurrentes.
+
 # R394 tiempos físicos: INIT domina; no más ensayos autorizados
 
 2026-10-19, ensayo adicional autorizado tras reinicio: CHECK4590 ELF144 TOTAL32674 VERIFY1218 INIT26008 READY27887 FRAME41 CLOSE198 CLOCKERR0. GATE84/FREE7518232/MAX7463632. INIT79,6% del total. Estado CLOSED no escrito explícitamente; métricas de cierre coherentes. Ver plan R394 para límites y siguiente investigación local; no atribuir aún INIT a audio o lector sin separar costes.

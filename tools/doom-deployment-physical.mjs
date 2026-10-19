@@ -33,6 +33,7 @@ const PHYSICAL_TUNE_R387_REVIEWED=false;
 const PHYSICAL_FINAL_R388_REVIEWED=false;
 const PHYSICAL_MONSTER_R390_REVIEWED=false;
 const PHYSICAL_QUICK_R393_REVIEWED=false;
+const PHYSICAL_FAST_R396_REVIEWED=false;
 const PHYSICAL_LOAD_METER_R394_REVIEWED=false;
 const PHYSICAL_PADS_R349_REVIEWED=false;
 const PHYSICAL_WIDE_R347_REVIEWED=false;
@@ -127,3 +128,5 @@ export function createReviewedDoomEndpoint(address,{resume=false,retryWithoutDat
 export function claimReviewedDoomEndpoint(endpoint,{resume=false,retryWithoutData=false,retail=false,afterSpace=false,afterCatalog=false,packed=false,restartPacked=false,resumePacked=false,doom2=false}={}){
  if(!PHYSICAL_DEPLOYMENT_REVIEWED)fail();const peer=endpoints.get(endpoint);if(!peer||peer.doom2Reviewed!==doom2||peer.packedReviewed!==packed||peer.restartPackedReviewed!==restartPacked||peer.resumePackedReviewed!==resumePacked||peer.afterCatalogReviewed!==afterCatalog||peer.afterSpaceReviewed!==afterSpace||peer.retailReviewed!==retail||peer.resumeReviewed!==resume||peer.retryWithoutDataReviewed!==retryWithoutData)fail();endpoints.delete(endpoint);return peer;
 }
+
+export function physicalDoomFast396Enabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_FAST_R396_REVIEWED;}
