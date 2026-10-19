@@ -1,4 +1,27 @@
-# R386 DoomFit preparado; falta aprobación física
+# R386 DoomFit instalado inactivo; UN ensayo manual ya autorizado
+
+Usuario aprobó «Sí, autorizo y puedo observar» el 2026-10-18. UNA instalación
+terminó RegisteredInactive/registeredVerifiedtrue/contentVerifiedfalse.
+Catálogo10/carrier006 presente/007ausente/modeloFWesperados; INSTALL0,
+ACKMD5/status0/offset0/chunk2048.331partes/339frames/681479BTX,
+selectedByClientfalse. closeConfirmed/workerExitConfirmedtrue/exit0/
+nativeErrorfalse. Gates general/FITJS/C#Large restauradosfalse y rebuild
+inmediato por finally, demásgatesfalse. No SET/borrado/autostart ni WADreenviado.
+Journalfit-r386 terminado: NO otro install/retry/resume/consultaBluetooth.
+
+Pendiente UN ensayo manual≤60s YA autorizado. No nueva aprobación/reinicio.
+Seleccionar DoomFit (MARCO MORADO y DOS VERTICALES), conservar DoomII carrier.
+READY→START1, mantener CHECKING/LOADINGdespierto (~90s carga más checksum).
+Título→OK/NEWGAME→dificultad→MAP01, controles/primerdisparo/sonido/USAR,
+PAUSA/GUARDAR→GUARDADO; SEGUIR/mover, PAUSA/CARGAR→CARGADO,
+SEGUIR/SALIR≤60sjuego→CLOSED; esperar cierre sin insistir (~40s nominales).
+No segundo arranque/reabrir. Error/silencio/corrupción/cierrefallido: MODE
+GATE/FREE/MAX,CODE/READ/TOTAL; siGATE≥50 START/READY/FINISH,JOIN/REASON/EXIT;
+AUDIOERR/CALL si responde. Habitual desde Ajustes; imagenretenida→reinicio
+normal NO Restablecer y dejar habitual. Asumir menús/corona normales salvo
+reporte. Ningún gameplay/audio/cierre de DoomII validado físicamente aún.
+
+## Preparación anterior R386 (autorización e instalación ya consumidas)
 
 Usuario aclaró que acababa de reiniciar antes del fallo R385. Cancelada la
 propuesta de repetir reinicio; no autorizada ni ejecutada. No atribuir la RAM
@@ -11,8 +34,8 @@ Actualización de674868B, SHA256
 ELF631588B SHAd3aae03d409d9b32dbee80c19c042cbcca1304448f41a07482714a353cca154d.
 Reutiliza WAD/assets/slots de DoomII365220006: CONSERVAR DoomII, abrir DoomFit.
 Sin WAD incluido, borrados ni cambio automático de esfera. Plan completo
-docs/doom-fit-physical-plan-r386.md. NINGUNA aprobación R386 todavía;
-gates general/FIT/C# todos cerrados, sin radio ni journal físico R386.
+docs/doom-fit-physical-plan-r386.md. Aprobación e instalación posteriores
+registradas arriba; gates cerrados y journal físico R386 consumido.
 
 Cache ADPCM320KiB (107SFX/310485B útiles), decodificación incremental por voz,
 sin heap ni expansión completa en mixer. Conserva frecuencia R384, zona3MiB,
@@ -30,11 +53,10 @@ C#IPC/5fallos/6retrymodes denegados; regresión transporte23casos.
 Gráficos/audio modelados, NO reproducción física. Campaña32mapas es R384
 anterior; no llamarla nueva campaña R386. Guest WAD temporal retirado.
 
-Siguiente: pedir UNA instalación inactiva + UN ensayo≤60s, batería≥50% y
-observación, sin reinicio/borrados/reenvío WAD. Si aprueba abrir SOLO
-general+FITJS/C#Large, build/emptytargetready, pc-doom-fit-r386.mjs install1;
-cerrar gates/rebuild SIEMPRE. No retry/resume. Registrar resultado antes de
-protocolo manual. Mantener DoomII carrier y nueve personales.
+Preparación contemplaba UNA instalación inactiva + UN ensayo≤60s,
+batería≥50% y observación, sin reinicio/borrados/reenvío WAD. Instalación
+consumida: no ejecutar ese procedimiento otra vez. Mantener DoomII carrier
+y nueve personales. Solo queda el ensayo manual descrito arriba.
 Error anterior SALIR R383 aún sin causa validada: R386 conserva cierre R384,
 no afirmar arreglado. Riesgo bloqueo/corrupción/reinicio; recovery sin validar.
 

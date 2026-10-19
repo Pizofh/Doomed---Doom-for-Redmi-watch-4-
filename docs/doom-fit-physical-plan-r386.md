@@ -1,5 +1,25 @@
 # R386: DoomFit, reducir memoria residente del audio
 
+## Resultado de instalación; ensayo manual pendiente
+
+2026-10-18: UNA ejecución autorizada terminó RegisteredInactive,
+registeredVerifiedtrue/contentVerifiedfalse. Modelo/FW esperados; catálogo10,
+ID007 ausente y carrier006 presente. INSTALL0, MD5 correcto/status0/offset0,
+chunk2048.331partes/339frames/681479BTX; selectedByClientfalse. Cierre y
+workerexit confirmados/exit0/nativeErrorfalse. No SET, borrados ni autostart.
+Journal nuevo fit-r386.jsonl terminado; NO otro install/retry/resume.
+Gates general/FITJS/C#Large restauradosfalse y worker reconstruido mediante
+finally inmediatamente tras el resultado. Todos los demás permanecieronfalse.
+No ejecución C en esta instalación inactiva; arranque/audio/cierre físicos
+todavía pendientes. UN ensayo≤60s ya autorizado; no volver a pedir permiso.
+
+## Autorización
+
+El 2026-10-18 el usuario respondió «Sí, autorizo y puedo observar» a UNA
+instalación inactiva y UN ensayo≤60s, batería≥50%, volumen audible y reloj
+junto al PC. Incluye el codec C revisado; no autoriza reintento/reanudación,
+borrados, otro arranque ni otro payload. No exigir reinicio previo.
+
 ## Evidencia y alcance
 
 El ensayo R385 rechazó CHECKING en GATE21/CODE201: FREE7270920 frente al
@@ -69,9 +89,10 @@ se abra DoomFit. Sin cambios ni reenvío del WAD lossless6531369B.
 
 Artefactos privados en build/adpcm-r386 y build/doom-audio-r386; pruebas de
 boot/paquete en build/doom-fit-r386. WAD temporal del emulador retirado,
-ningún reloj físico usado al preparar. Todos los gates físicos cerrados.
+ningún reloj físico usado al preparar. Instalación posterior registrada arriba;
+todos los gates físicos nuevamente cerrados.
 
-## Procedimiento propuesto, pendiente de aprobación
+## Procedimiento autorizado
 
 UNA instalación inactiva y UN arranque manual de hasta60s de juego, batería≥50%,
 volumen audible, reloj junto al PC, Mi Fitness cerrado y observación. No exige
