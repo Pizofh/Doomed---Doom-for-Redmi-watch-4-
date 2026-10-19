@@ -3,7 +3,9 @@
 Estado actual: envio autorizado y registro inactivo reconocido, pero R397014
 ausente del catalogo tras reiniciar. Sin ensayo del motor R397 en el reloj.
 R396013 sigue presente y es la version aceptada. La causa no esta identificada;
-no hay autorizacion para otro envio. El protocolo original se conserva abajo
+El usuario autorizo un reenvio R398: ambas presentes tras reconectar, pendiente
+comprobacion tras reinicio; ver doom-controls-persistence-retry-r398.md.
+El protocolo original se conserva abajo
 como historial, no como instrucciones vigentes para abrir una esfera ausente.
 
 ## Comportamiento
@@ -110,7 +112,7 @@ Tras posponer por distancia y volver a indicar disponibilidad, el usuario confir
 ?nico despacho autorizado completado: RegisteredInactive,524/524 partes, registro confirmado. Contenido no le?do de vuelta. Sin selecci?n ni START desde PC; WAD/partidas a?n no migrados por PC. Transporte cerrado, worker termin?0, sin nativeError. Gates general/CONTROLS_R397/C#Large restauradosfalse y worker recompilado cerrado. Pendientes losDOS arranques manuales del plan, segundo condicionado al primerCLOSED. No hay permiso para reintentar la instalaci?n.
 
 
-## Registro ausente despues del reinicio
+## Registro ausente despues del primer reinicio
 
 Consulta fisica de solo lectura posterior al reinicio: catalogo de10 entradas,
 R396013 presente y activa; R397014 ausente. La consulta termino Complete,

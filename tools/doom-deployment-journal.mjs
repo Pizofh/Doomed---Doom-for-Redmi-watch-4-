@@ -35,8 +35,9 @@ function upload(value,plan){
 const transitions={Created:['InstallIntent'],InstallIntent:['UploadIntent'],UploadIntent:['Uploading'],Uploading:['SentNotVerified'],SentNotVerified:['SentNotVerified','RegisteredInactive','UnexpectedActivation','UnexpectedSelection','RegisteredNotRemovable']};
 export class DoomDeploymentJournal{
  #fd=null;#lock=null;#token=randomUUID();#key;#tag;#plan;#record;#lastHash='0'.repeat(64);#file;#lockFile;#resume=null;
- constructor(plan,identity,{directory:where=defaultDirectory,resume=false,retryWithoutData=false,afterSpace=false,afterCatalog=false,restartPacked=false,resumePacked=false}={}){
+ constructor(plan,identity,{directory:where=defaultDirectory,resume=false,retryWithoutData=false,afterSpace=false,afterCatalog=false,restartPacked=false,resumePacked=false,retryControlsLoss=false}={}){
   packageCopy(plan);const binding=identities.get(identity);if(!binding||typeof resume!=='boolean'||typeof retryWithoutData!=='boolean'||resume&&retryWithoutData)fail();
+  if(typeof retryControlsLoss!=='boolean'||retryControlsLoss&&(plan.kind!=='review-controls-r397-manual'||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
   if(plan.kind==='review-packed-r378-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog))fail();
   if(plan.kind==='review-doom2-r384-manual'&&(resume||retryWithoutData||afterCatalog||restartPacked||resumePacked))fail();
   if(plan.kind==='review-fit-r386-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
@@ -75,7 +76,7 @@ export class DoomDeploymentJournal{
   try{
    this.#lock=fs.openSync(this.#lockFile,'wx',0o600);
    fs.writeFileSync(this.#lock,JSON.stringify({token:this.#token,pid:process.pid})+'\n');fs.fsyncSync(this.#lock);
-   const exists=fs.existsSync(this.#file);if(exists&&!resume&&!retryWithoutData&&!afterSpace&&!afterCatalog&&!restartPacked&&!resumePacked||!exists&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
+   const exists=fs.existsSync(this.#file);if(exists&&!resume&&!retryWithoutData&&!afterSpace&&!afterCatalog&&!restartPacked&&!resumePacked&&!retryControlsLoss||!exists&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked||retryControlsLoss))fail();
    if(exists){
     regular(this.#file,2097152);const data=fs.readFileSync(this.#file,'utf8');if(!data.endsWith('\n'))fail();
     let previous=null;const history=[];
@@ -84,12 +85,18 @@ export class DoomDeploymentJournal{
      if(!r||signature.length!==32||!timingSafeEqual(signature,mac(this.#key,JSON.stringify(r))))fail();
      this.#validate(r);
      if(r.seq!==(previous?.seq??0)+1||r.previous!==this.#lastHash)fail();
-     if(previous&&r.attempt!==previous.attempt&&!(r.attempt===previous.attempt+1&&r.status==='Created'&&previous.status==='Uncertain'))fail();
+     if(previous&&r.attempt!==previous.attempt&&!(r.attempt===previous.attempt+1&&r.status==='Created'&&(previous.status==='Uncertain'||plan.kind==='review-controls-r397-manual'&&previous.attempt===1&&previous.status==='RegisteredInactive'&&r.attemptKind==='retry-registration-loss-r398')))fail();
      previous=r;history.push(r);this.#lastHash=hash(line+'\n');
     }
-    if(!previous||previous.status!=='Uncertain')fail();
+    if(!previous||previous.status!==(retryControlsLoss?'RegisteredInactive':'Uncertain'))fail();
     let retryBaseline=null;
-    if(resumePacked){
+    if(retryControlsLoss){
+     const u=previous.upload;
+     if(previous.attempt!==1||history.some(r=>r.attempt!==1)||history[0].status!=='Created'||
+        previous.before===null||previous.before.some(r=>r.id===plan.id)||!previous.before.some(r=>r.id==='365220013')||
+        !u||u.status!=='SentNotVerified'||u.offset!==0||u.chunkSize!==2048||u.totalParts!==524||u.locallyWritten!==524||u.highestPossibleOffset!==plan.size)fail();
+     retryBaseline=previous.before;
+    }else if(resumePacked){
      if(!reviewedPackedResumeHistory(history))fail();
      retryBaseline=history[111].before;
     }else if(restartPacked){
@@ -117,9 +124,9 @@ export class DoomDeploymentJournal{
      retryBaseline=previous.before??[...first].reverse().find(r=>r.before!==null)?.before;
      if(!soundLocalOnly&&(retryBaseline===null||retryBaseline===undefined))fail();
     }else if(previous.before===null||previous.upload?.status!=='Uncertain'||previous.upload.highestPossibleOffset<=previous.upload.offset)fail();
-    this.#resume=clone({...previous,...(retryBaseline?{before:retryBaseline}:{}),...(restartPacked?{upload:null}:resumePacked?{upload:history[111].upload}:{})});this.#record=previous;
+    this.#resume=clone({...previous,...(retryBaseline?{before:retryBaseline}:{}),...(restartPacked||retryControlsLoss?{upload:null}:resumePacked?{upload:history[111].upload}:{})});this.#record=previous;
     this.#fd=fs.openSync(this.#file,'a');
-    this.#append({...previous,attempt:previous.attempt+1,status:'Created',upload:null,before:null,attemptKind:resumePacked?'resume-packed-r380':restartPacked?'restart-packed-r379':afterCatalog?'retry-catalog-r376':afterSpace?(plan.kind==='review-doom2-r384-manual'?'retry-doom2-space-r385':'retry-after-space-r375'):retryWithoutData?'retry-no-data':'resume'});
+    this.#append({...previous,attempt:previous.attempt+1,status:'Created',upload:null,before:null,attemptKind:retryControlsLoss?'retry-registration-loss-r398':resumePacked?'resume-packed-r380':restartPacked?'restart-packed-r379':afterCatalog?'retry-catalog-r376':afterSpace?(plan.kind==='review-doom2-r384-manual'?'retry-doom2-space-r385':'retry-after-space-r375'):retryWithoutData?'retry-no-data':'resume'});
    }else{
     this.#fd=fs.openSync(this.#file,'wx',0o600);
     this.#append({schema:2,targetTag:this.#tag,model:'M2315W1',firmware:'2.2.86',id:plan.id,sha256:plan.sha256,size:plan.size,seq:0,attempt:1,status:'Created',before:null,upload:null,previous:this.#lastHash});

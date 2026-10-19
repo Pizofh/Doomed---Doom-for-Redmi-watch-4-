@@ -10,12 +10,13 @@ exit. The user confirms faster startup after the graphics metadata change;
 there is no measured hardware improvement percentage. Sound effects remain
 occasionally choppy; music and two-finger input are not implemented.
 
-[R397 candidate](docs/doom-controls-physical-plan-r397.md), acknowledged inactive during upload but absent from the catalog after reboot,
+[R397 candidate](docs/doom-controls-physical-plan-r397.md), resent after a lost registration and present again after reconnecting,
 adds previous/next weapon buttons, compact MENU/PAUSA over the game, SALIR in
 the pause panel, optional INFO after normal exit and fewer CHECKING callbacks.
 Its native engine, UI, save/load and weapon tests pass locally. Physical
 comfort, overlay performance and startup improvement remain untested. R396 is
-still present; the cause of the lost R397 registration is unresolved.
+still present; a manual reboot check is pending. The cause of the first lost
+registration is unresolved. See the [R398 verification](docs/doom-controls-persistence-retry-r398.md).
 This does not establish a full campaign playthrough or a long Doom II session.
 Retail WADs and derived binary assets are private build inputs, absent here.
 

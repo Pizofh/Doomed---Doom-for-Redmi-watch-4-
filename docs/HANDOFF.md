@@ -1,3 +1,13 @@
+# R398 reenviada; presente tras reconectar, pendiente reinicio manual
+
+Usuario autoriza ?pasa la nueva entonces y mira la persistencia?. Mismo paqueteR397014/1071020B/SHAcb16a5de71ab9f9fb0c8c0678d2e2cb0fa1cd1f2050690a8620055388f536d2e; no nuevoELF. Intento2 en journalcontrols-r397 original, sin borrarlo. RegisteredInactive524/524 y4observaciones durante6s, contenido no leido de vuelta. Gatesfalse/native rebuilt; transporte cerrado/worker0 sinerror.
+
+Consulta independiente nueva conexion: Complete11 entradas,013 y014 presentes/inactivas, seleccion personal actual conservada respecto al preflight2. El usuario habia cambiado seleccion desde consulta anterior; no suponer013activa. Chequeo auxiliar fallo al suponerlo; validacion posterior con preflight2 aprobada sin operacion adicional.
+
+Pregunta asincrona enviada: reinicio NORMAL sin START ni borrados; esperar aviso y consultar catalogo SOLO LECTURA. No reenviar ni seleccionar/iniciar desdePC. Si014 falta, detener y anotar momento. Si persiste, identificar nueva y continuar ensayo manualR397 autorizado; conservar013 hasta validar migracion/cierre. No tercer envio autorizado. Plan docs/doom-controls-persistence-retry-r398.md. Dispatch ignorado build/doom-controls-r397/dispatch-persistence-r398.mjs YA EJECUTADO, marcador existe: nunca repetir.
+
+Nuevas pruebas19,regresionretry18/transporte23,paquete y gates pasan. Codigo retryControlsLoss soloR397, requiere historial1RegisteredInactive completo y catalogo igual sin014; conserva seleccion actual. Cuatro consultas no equivalen durabilidad. Evidencia privada physical-retry-r398.json y reconnected-before-reboot-r398.json.
+
 # R397 ausente tras reinicio; R396 sigue vigente
 
 Catalogo fisico consultado de solo lectura:10 entradas, solo DOOM013 activa;014 ausente. Envio anterior reconocio RegisteredInactive524/524, sin readback de contenido. Usuario SOLO reinicio, sin Mi Fitness/borrados, y NO miro si habia dos antes de reiniciar. Visibilidad previa desconocida; no afirmar que vio desaparecer014 ni que se sustituyo013. R397 nunca se probo. No nuevo envio autorizado ni START pendiente util sobre014 ausente. Mantener013 y journal original; gatesfalse.
