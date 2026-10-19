@@ -1,0 +1,13 @@
+// SPDX-License-Identifier: GPL-2.0-only
+import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import {spawnSync} from 'node:child_process';
+import {root,sha256} from './doom-monster-r390.mjs';import {session} from './doom-ui-emulator.mjs';
+const build=path.join(root,'build/doom-audio-r392/s3-model'),out=path.join(root,'build/doom-load-r391/verify');fs.mkdirSync(out,{recursive:true});assert(!fs.existsSync(path.join(out,'result.json')));
+const log=JSON.parse(fs.readFileSync(path.join(build,'build-log.json'))),args=log.find(r=>r.label==='packed-reader').args,objects=[];
+function run(name,args){const r=spawnSync(path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-'+name+'.exe'),args,{cwd:root,windowsHide:true,encoding:'utf8',timeout:30000,maxBuffer:2097152});assert.equal(r.status,0,r.error?.message??r.stderr);return r.stdout;}
+const io={fopen:'open',fclose:'close',fread:'read',fseek:'seek',ftell:'tell',ferror:'error'};
+for(const [src,name]of [[path.join(build,'packed-reader.c'),'reader'],['experiments/doom-runtime-rw4/packed-verify-r392.c','fixture']]){
+const obj=path.join(out,name+'.o');run('gcc',[...args.slice(0,args.indexOf('-c')),...(name==='reader'?Object.entries(io).map(([a,b])=>'-Drw4_host_'+a+'=load_test_'+b):[]),'-Idoom/platform-rw4','-c',src,'-o',obj]);objects.push(obj);}
+const elf=path.join(out,'test.elf'),link=log.find(r=>r.label==='link').args.map(a=>a==='rw4_doom_device_init'?'rw4_load_verify_test_init':a===path.join(build,'doom.elf')?elf:a===path.join(build,'packed-reader.o')?objects[0]:a);link.splice(link.indexOf('--start-group'),0,objects[1]);run('ld',link);assert(!/\bUND[ \t]+\S+[ \t]*$/m.test(run('readelf',['-W','-s',elf])));
+const vm=session('load-verify'),before=vm.adb(['shell','lsmod'],'before'),remote='/tmp/rw4-load-verify-r392.elf';assert.equal(before.trim().split(/\r?\n/).length,1);assert(/^nsh: ls: stat failed: 2\r?$/im.test(vm.adb(['shell','ls',remote],'absence')));
+vm.adb(['push',elf,remote],'own-fixture');const text=vm.adb(['shell','insmod',remote,'loadverify392'],'faults',{timeoutMs:45000});assert(vm.adb(['shell','lsmod'],'loaded').includes('loadverify392'),text);vm.adb(['shell','rmmod','loadverify392'],'unload');assert.equal(vm.adb(['shell','lsmod'],'after'),before);vm.adb(['shell','rm',remote],'remove-own');
+const result={passed:true,realReaderAndRuntime:true,scenarios:12,corruptionAcrossWholeStoredStream:true,shortReads:true,cancelClosesTrackedStream:true,noHeapOrStreamsAfterEveryCase:true,rawPageCrcRetained:true,elfSha256:sha256(fs.readFileSync(elf)),physicalWatchUsed:false};fs.writeFileSync(path.join(out,'result.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

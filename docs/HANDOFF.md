@@ -1,3 +1,24 @@
+# R393 carga más rápida preparada; falta aprobación física
+
+Usuario pide revisar arranque; espera principalmente LOADING. R390 sigue
+aceptado y operativo. NO enviar R393 con permisos anteriores. Plan
+docs/doom-load-physical-plan-r393.md. Se pedirá un envío/ensayo nuevo.
+Perfil C emulado intercalado: baseline6931/6947ms, candidato4076/4068ms,
+~41,3% menos en verificar+crear motor; no tiempo físico ni todo CHECKING.
+Antes infla14,6MB para CRC, ahora verifica6,53MB comprimidos completos con
+CRC3504688683; lector sigue comprobando páginas descomprimidas antes de uso.
+Código sin caché persistente de validación ni guard RAM rebajado. Reutiliza
+64KB estáticos, cursor registrado para cancelar/cerrar. Fclose fallido conserva
+cuarentena. Audio/render/input guardado sin cambios, mismo monstruo.
+R393 produce ID011, ELF632284B/SH A44593b1c736d7fd8e1fb056643476f8bfb4264c719f683b53fc923c365d8fbfc;
+paquete911252B/SHA7ba43cf9f908b5d6b573899e6f03336090ffb3c7d421a55e9fb687a57a21c18b.
+Importación010→011 conserva saves y deja011 independiente; no abrir010 tras
+migrar ni borrar hasta aceptación. Checks12 nativos,2 ciclos completos,
+boot/UI27/import43+realFS, paquete77/446IPC y transporte23/gates pasan.
+Guest propio011 limpiado, módulos ausentes. Gates todosfalse, journal nuevo
+sin crear y dispatch-once preparado pero NO ejecutado. No radio en este trabajo.
+No prometer41% físico: medir aproximado LOADING→título durante ensayo aprobado.
+
 # R390 DOOM II monstruo aceptado; entrega actual cerrada
 
 ## R390 aceptado en el reloj

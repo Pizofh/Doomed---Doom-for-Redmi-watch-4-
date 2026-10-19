@@ -32,6 +32,7 @@ const PHYSICAL_FIT_R386_REVIEWED=false;
 const PHYSICAL_TUNE_R387_REVIEWED=false;
 const PHYSICAL_FINAL_R388_REVIEWED=false;
 const PHYSICAL_MONSTER_R390_REVIEWED=false;
+const PHYSICAL_QUICK_R393_REVIEWED=false;
 const PHYSICAL_PADS_R349_REVIEWED=false;
 const PHYSICAL_WIDE_R347_REVIEWED=false;
 const PHYSICAL_TOUCH_R345_REVIEWED=false;
@@ -67,6 +68,7 @@ export function physicalDoomStartEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&
 export function physicalDoomIIEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_DOOM2_R384_REVIEWED;}
 export function physicalDoomIIAfterSpaceEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_DOOM2_SPACE_R385_REVIEWED;}
 export function physicalDoomFitEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_FIT_R386_REVIEWED;}
+export function physicalDoomQuickEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_QUICK_R393_REVIEWED;}
 export function physicalDoomMonsterEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_MONSTER_R390_REVIEWED;}
 export function physicalDoomFinalEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_FINAL_R388_REVIEWED;}
 export function physicalDoomTuneEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_TUNE_R387_REVIEWED;}
