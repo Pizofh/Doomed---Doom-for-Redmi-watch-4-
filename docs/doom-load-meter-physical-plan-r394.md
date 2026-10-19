@@ -110,3 +110,9 @@ Autorizada explícitamente y completada en un único intento: RegisteredInactive
 ## Resultado físico R394 — 2026-10-19
 
 El usuario informa GATE21, FREE07164888 y MAX03401744. No inició el motor: el mayor bloque disponible (3401744B) queda por debajo del mínimo4194320B, aunque el total libre7164888B supera7036928B. No hay medidas válidas de apertura; no atribuir el tiempo de carga a este fallo ni afirmar mejora. Ensayo único consumido; no repetir ni instalar sin nueva autorización. Conservar la versión funcional DOOM II011/TOTAL00632284, dependencia de DoomLoad.
+
+## Ensayo adicional autorizado tras reinicio — 2026-10-19
+
+Usuario autorizó explícitamente un ensayo adicional del mismo paquete tras reinicio; sin nueva instalación. Reportó GATE84/FREE07518232/MAX07463632 y después CHECK4590, ELF144, TOTAL32674, VERIFY1218, INIT26008, READY27887, FRAME41, CLOSE198, CLOCKERR0 (ms salvo CLOCKERR). GATE84 también permanece en un cierre normal: no significa por sí solo fallo de unload. El usuario no escribió explícitamente CLOSED; CLOSE198 y CLOCKERR0 son coherentes con la instrumentación de cierre. No solicitar otro arranque.
+
+INIT ocupa79,6% de TOTAL; CHECK14,0%, VERIFY3,7%, ELF0,44%. READY contiene VERIFY+INIT; no sumarlos dos veces. Resto READY661ms compatible con calibración. El cuello dominante físico está en doomgeneric_Create, no insmod/verificación/primera presentación. Lectura de código: Create prepara render/texturas y precarga/recodifica efectos ADPCM; estas cifras NO separan esos costes. No afirmar aún que audio o descompresión sean el componente dominante ni prometer reducción concreta. Próxima investigación local: separar inicialización de render y precarga/codec, y contar fallos de caché del lector comprimido antes de elegir una optimización. Sin nuevo payload aprobado.

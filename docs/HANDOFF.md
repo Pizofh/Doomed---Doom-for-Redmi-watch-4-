@@ -1,3 +1,7 @@
+# R394 tiempos físicos: INIT domina; no más ensayos autorizados
+
+2026-10-19, ensayo adicional autorizado tras reinicio: CHECK4590 ELF144 TOTAL32674 VERIFY1218 INIT26008 READY27887 FRAME41 CLOSE198 CLOCKERR0. GATE84/FREE7518232/MAX7463632. INIT79,6% del total. Estado CLOSED no escrito explícitamente; métricas de cierre coherentes. Ver plan R394 para límites y siguiente investigación local; no atribuir aún INIT a audio o lector sin separar costes.
+
 # R394 detenido por control de RAM; sin tiempos físicos
 
 GATE21/FREE07164888/MAX03401744: bloque mayor insuficiente frente a4194320B; no cargó motor. Ensayo consumido. No repetir automáticamente; sigue funcional DOOM II011/TOTAL00632284.
