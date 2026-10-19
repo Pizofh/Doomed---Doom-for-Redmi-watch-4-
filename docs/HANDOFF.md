@@ -1,4 +1,17 @@
-# R393 DoomQuick instalado; ensayo manual pendiente
+# R393: funcionamiento reportado bien, sin mejora perceptible de carga
+
+Usuario «todo ok pero no mejoró el tiempo de carga […] salí y volví y volvió a
+demorar». No tiempos físicos ni TOTAL00632284 confirmado. No afirmar mejora
+real ni objetivo cumplido;41% es solo tramo parcial emulado. Se consultó versión
+y segundos aproximados según recuerdo, sin reabrir. Esperar esa información
+antes de decidir otro ensayo. No nueva instalación autorizada.
+LOADING incluye insmod/relocaciones antes del tramo C que perfilamos, más
+calibración/creación motor/sonido/primerframe. Loader vs init vs audio aún sin
+medir físicamente; no dar causa por segura. Cerrar descarga C y cada apertura
+vuelve a cargar/verificar: no hay arranque caliente persistente entre esferas.
+Plan/resultados docs/doom-load-physical-plan-r393.md. Gates cerrados.
+
+## Instalación y protocolo anteriores (permiso consumido)
 
 ## R393 instalación completada; ensayo manual pendiente
 

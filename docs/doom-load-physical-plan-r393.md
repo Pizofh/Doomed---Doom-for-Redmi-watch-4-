@@ -1,5 +1,25 @@
 # R391–R393: reducir la espera de LOADING
 
+## Resultado comunicado: sin mejora perceptible en el reloj
+
+Usuario: «todo ok pero no mejoró el tiempo de carga. Lo cargué, salí y volví
+y volvió a demorar». Funcionamiento/cierre generales reportados correctos;
+no hay tiempos físicos ni confirmación de TOTAL00632284 todavía. No atribuir
+al reloj el41% emulado ni declarar resuelto el objetivo de acelerar apertura.
+El segundo arranque fue iniciativa del usuario, no otro ensayo indicado.
+
+LOADING se publica ANTES de insmod/carga del ELF; R391/R392 solo midieron
+verify_wad+doomgeneric_Create DESPUÉS de cargar el módulo y calibrar. Esa
+diferencia de alcance deja sin medir loader/relocaciones/arranque del worker,
+calibración, preparación del sonido y primer frame en hardware. No elegir
+ninguno como causa confirmada sin medir. Cerrar descarga el motor; cada nuevo
+arranque vuelve a cargarlo y comprobar el WAD. La optimización no mantiene
+un motor vivo entre esferas ni persiste el CRC como comprobación ya superada.
+
+Pendiente identificar versión y duración aproximada según recuerdo, sin pedir
+reabrir/repetir. No preparar/envíar otra variante a ciegas. Conservar la anterior
+hasta identidad funcional confirmada. Gates cerrados y permiso consumido.
+
 ## Autorización recibida, 2026-10-18
 
 El usuario respondió «Sí, autorizo y puedo observar» a UNA instalación de
