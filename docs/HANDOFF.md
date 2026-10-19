@@ -1,3 +1,11 @@
+# R401 alternativa stock de lectura; sigue NO EJECUTAR
+
+Usuario solo confirma plan, no revoca prohibicion. SIN radio/consulta BLE/comando al reloj/envio/C/emulador en esta vuelta. Hallazgo: comando stock mw tabla77e20 handler21f7f8. Rama SIN '=' y argc2 lee UNA palabra y retorna, sin store al destino; assignment/cantidad son otras ramas que deben excluirse. Argumentos fijos para wordselector y wordcacheChipone solo si selector2; no entrada libre. Puede evitar ELFlector propio, pero uso de mw desde system.execute Lua aun NO validado fisicamente. Nada compilado/empaquetado/enviado.
+
+Tool tools/review-touch-stock-read-r401.mjs validado con AP/objdump fijados, tabla/instrucciones/ruta y slots fijos. Evidencia ignorada artifacts/research/rw4-touch-r401-repro. No ejecutar comandos del informe, no convertirlo en despachador. API publica especifica de identidad no encontrada por strings, no probar inexistencia exhaustiva. Fuente primaria NuttX docs concuerda con semantica pero no sustituye contraste del AP.
+
+Riesgo menor al no nuevoELF no es cero: direcciones/firmware distintos pueden bloquear, wrapper o interpolacion con '=' podria escribir, captura a fichero escribe almacenamiento propio. NO input/I2C/hooks/reinit/upgrade. Sigue sin multitactil demostrado. Proximo trabajo solo diseno/revision wrapper+huellas+captura+parseo/limpieza si usuario pide continuar investigando; instalacion/ejecucion fisica requiere permiso explicito nuevo. Ver docs/touch-stock-read-r401.md y R400.
+
 # R400 investigacion estatica; instruccion vigente NO EJECUTAR
 
 Usuario: ?haz tu investigacion. si hay mucho riesgo de da?o evaluamos el riesgo. no ejecutes?. Mantener esta frontera: sin BLE ni siquiera consultas, envios, seleccion, C, ioctl, hooks, emulador o firmware en reloj. Esta vuelta solo analisis local de AP como datos y fuentes publicas. No payload preparado/compilado/instalable; no pedir permiso aun ni interpretar un ?sigue? como autorizacion fisica.

@@ -130,3 +130,11 @@ Genera ventanas privadas en artifacts/research/rw4-touch-r400-repro-v2,
 rechazando sobreescritura. No compila payload ni usa BLE, ADB, ioctl o emulador.
 Informe adicional de trabajo en artifacts/research/rw4-touch-r400. Ambos
 directorios estan ignorados; el firmware y sus bytes no entran al repositorio.
+
+
+## Actualizacion R401
+
+Se encontro una alternativa para el primer diagnostico sin cargar un lector C
+nuevo: modo de lectura de una palabra del comando stock mw, contrastado con su
+rama exacta en el AP. Es un diseno aun no probado desde Lua, sin instalable ni
+ejecucion autorizados. Ver [revision y riesgos R401](touch-stock-read-r401.md).
