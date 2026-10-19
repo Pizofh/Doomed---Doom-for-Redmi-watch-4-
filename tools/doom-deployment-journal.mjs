@@ -43,6 +43,7 @@ export class DoomDeploymentJournal{
   if(plan.kind==='review-load-meter-r394-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
   if(plan.kind==='review-quick-r393-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
   if(plan.kind==='review-fast-r396-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
+  if(plan.kind==='review-controls-r397-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
   if(plan.kind==='review-monster-r390-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
   if(plan.kind==='review-final-r388-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
   if(plan.kind==='review-tune-r387-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
@@ -68,6 +69,7 @@ export class DoomDeploymentJournal{
   if(plan.kind==='review-monster-r390-manual')this.#file=path.join(dir,'monster-r390.jsonl');
   if(plan.kind==='review-quick-r393-manual')this.#file=path.join(dir,'quick-r393.jsonl');
   if(plan.kind==='review-fast-r396-manual')this.#file=path.join(dir,'fast-r396.jsonl');
+  if(plan.kind==='review-controls-r397-manual')this.#file=path.join(dir,'controls-r397.jsonl');
   if(plan.kind==='review-load-meter-r394-manual')this.#file=path.join(dir,'load-meter-r394.jsonl');
   this.#key=Buffer.from(binding.key);this.#tag=binding.tag;this.#plan=plan;
   try{

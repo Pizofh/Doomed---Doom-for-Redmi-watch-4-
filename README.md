@@ -3,16 +3,20 @@
 Original DOOM running on the Redmi Watch 4 with stock firmware, a native C
 engine and a Lua/LVGL watchface interface.
 
-**Current 0.2 development status:** [DOOM II R393](docs/doom-load-physical-plan-r393.md)
-with its monster preview has been accepted on the watch as a single face,
-including migration of the
-installed game and saves, larger display, original menu, controls, pause,
-persistent save/load and CLOSED exit. Background holds stay within the game.
-Sound effects remain occasionally choppy; music is not implemented.
-Startup time is not yet measured and two-finger input is not supported by the
-current port. R393's emulator loading improvement was not perceptible on the
-watch; full startup measurement is pending. This does not establish a full campaign playthrough or a long
-Doom II session. Retail WADs are private inputs, absent from this repository.
+**Current 0.2 development status:** [DOOM II R396](docs/doom-fast-physical-plan-r396.md)
+with its monster preview is accepted on the watch as a single face, with
+original menus, larger display, controls, persistent saves, pause and CLOSED
+exit. The user confirms faster startup after the graphics metadata change;
+there is no measured hardware improvement percentage. Sound effects remain
+occasionally choppy; music and two-finger input are not implemented.
+
+[R397 candidate](docs/doom-controls-physical-plan-r397.md), not yet installed,
+adds previous/next weapon buttons, compact MENU/PAUSA over the game, SALIR in
+the pause panel, optional INFO after normal exit and fewer CHECKING callbacks.
+Its native engine, UI, save/load and weapon tests pass locally. Physical
+comfort, overlay performance and startup improvement still need observation.
+This does not establish a full campaign playthrough or a long Doom II session.
+Retail WADs and derived binary assets are private build inputs, absent here.
 
 The 0.1.0 baseline and its build instructions below remain unchanged;
 see [0.2 work](docs/next-version.md) for the newer incremental builds and limits.

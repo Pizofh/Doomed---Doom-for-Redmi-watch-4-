@@ -34,6 +34,7 @@ const PHYSICAL_FINAL_R388_REVIEWED=false;
 const PHYSICAL_MONSTER_R390_REVIEWED=false;
 const PHYSICAL_QUICK_R393_REVIEWED=false;
 const PHYSICAL_FAST_R396_REVIEWED=false;
+const PHYSICAL_CONTROLS_R397_REVIEWED=false;
 const PHYSICAL_LOAD_METER_R394_REVIEWED=false;
 const PHYSICAL_PADS_R349_REVIEWED=false;
 const PHYSICAL_WIDE_R347_REVIEWED=false;
@@ -130,3 +131,5 @@ export function claimReviewedDoomEndpoint(endpoint,{resume=false,retryWithoutDat
 }
 
 export function physicalDoomFast396Enabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_FAST_R396_REVIEWED;}
+
+export function physicalDoomControls397Enabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_CONTROLS_R397_REVIEWED;}

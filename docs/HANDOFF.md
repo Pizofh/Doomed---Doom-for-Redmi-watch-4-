@@ -1,3 +1,11 @@
+# R397 lista; necesita autorizaci?n f?sica nueva
+
+Usuario pide cambiar armas, reorganizar botones, carga m?s r?pida y quitar logs para usuarios. Implementado: ARMA?/+ abajo, MENU/PAUSA arriba35%, SALIR en pausa; INFO a petici?n trasCLOSED, errores directos; stdoutnormal motor silenciado, stderr conservado. CRC16KiB ?ntegro en CHECKING reduce tiempo emulado5117/5090?3092/3092ms; no prometer porcentaje f?sico. Corona sin ruta validada; sigue un dedo.
+
+PaqueteR3970141071020B/SHAcb16a5de71ab9f9fb0c8c0678d2e2cb0fa1cd1f2050690a8620055388f536d2e, ELF790804B/TOTAL00790804. Migra013?014 con importador probado43casos. MinFree7200768/minLargest4194320. 27boot/UI,2ciclos exactos motor/save/load, arma3direcciones sin gasto munici?n/holdrepeat,524IPC+regresiones23/gates pasan. Guest014 y fixtures/m?dulos propios limpiados. Emulador reiniciado SOLO por fallo del fixture que presentaba pausado; corregido con limpieza en mismoowner y prueba final aprobada.
+
+No hay permiso para instalarR397. Plan docs/doom-controls-physical-plan-r397.md propone UNA instalaci?n+DOS arranques cortos, primero tras reinicio normal para reducir fragmentaci?n conocida; segundo solo siprimeroCLOSED. Conservar actual013 hasta validar. Gatesfalse, journalcontrols-r397 ausente, CLIprepare aprobado sinradio. Falta autorizaci?n expl?cita de este payload.
+
 # R396 aceptada: apertura mejora en el reloj
 
 2026-10-19: tras autorizar UN ensayo adicional y reinicio, usuario ?s? mejor??; sin otros fallos reportados. Versi?n funcional vigente DOOM II013/TOTAL00790692, independiente tras migraci?n. Mejora f?sica percibida, sin segundos nuevos ni porcentaje f?sico demostrados. No pedir m?s pruebas de este cambio. Plan/evidencia docs/doom-fast-physical-plan-r396.md.

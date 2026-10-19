@@ -3,12 +3,12 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
 import {root,sha256} from './doom-ready-source-r351.mjs';import {session} from './doom-ui-emulator.mjs';
 import {doom2Profile} from './doom2-source-r384.mjs';
-const fast=process.argv[2]==='--doom2-fast-r396',metadata=fast||process.argv[2]==='--doom2-metadata-r395',quick=metadata||process.argv[2]==='--doom2-load-r393',monster=quick||process.argv[2]==='--doom2-monster-r390',final=monster||process.argv[2]==='--doom2-final-r388',tune=final||process.argv[2]==='--doom2-tune-r387',adpcm=tune||process.argv[2]==='--doom2-adpcm-r386',doom2=adpcm||process.argv[2]==='--doom2-r384';
+const controls=process.argv[2]==='--doom2-controls-r397',fast=controls||process.argv[2]==='--doom2-fast-r396',metadata=fast||process.argv[2]==='--doom2-metadata-r395',quick=metadata||process.argv[2]==='--doom2-load-r393',monster=quick||process.argv[2]==='--doom2-monster-r390',final=monster||process.argv[2]==='--doom2-final-r388',tune=final||process.argv[2]==='--doom2-tune-r387',adpcm=tune||process.argv[2]==='--doom2-adpcm-r386',doom2=adpcm||process.argv[2]==='--doom2-r384';
 const packed=doom2||process.argv[2]==='--packed-r378';
 const ultimate=packed||process.argv[2]==='--ultimate-r374';
 const startup=ultimate||process.argv[2]==='--startup-r372';
 const quitOnly=process.argv[2]==='--quit-only';assert(process.argv.length===2||(process.argv.length===3&&(quitOnly||startup)));
-const out=path.join(root,fast?'build/doom-audio-r396/s3-model':metadata?'build/doom-audio-r395/s3-model':quick?'build/doom-audio-r393/s3-model':monster?'build/doom-audio-r390/s3-model':final?'build/doom-audio-r388/s3-model':tune?'build/doom-audio-r387/s3-model':adpcm?'build/doom-audio-r386/s3-model':doom2?'build/doom-audio-r384/s3-model':packed?'build/doom-audio-r378/s3-model':ultimate?'build/doom-audio-r374/s3-model':startup?'build/doom-audio-r372/s3-model':'build/doom-audio-r370/s3-model'),elf=path.join(out,'doom.elf');
+const out=path.join(root,controls?'build/doom-audio-r397/s3-model':fast?'build/doom-audio-r396/s3-model':metadata?'build/doom-audio-r395/s3-model':quick?'build/doom-audio-r393/s3-model':monster?'build/doom-audio-r390/s3-model':final?'build/doom-audio-r388/s3-model':tune?'build/doom-audio-r387/s3-model':adpcm?'build/doom-audio-r386/s3-model':doom2?'build/doom-audio-r384/s3-model':packed?'build/doom-audio-r378/s3-model':ultimate?'build/doom-audio-r374/s3-model':startup?'build/doom-audio-r372/s3-model':'build/doom-audio-r370/s3-model'),elf=path.join(out,'doom.elf');
 const review=JSON.parse(fs.readFileSync(path.join(out,'review.json'),'utf8'));
 assert.equal(sha256(fs.readFileSync(elf)),review.elfSha256);if(!quitOnly)assert(!fs.existsSync(path.join(out,'test-result.json')));
 const owned=session(startup?'doom-startup-menu':'doom-menu');
@@ -72,7 +72,7 @@ assert(initial[68]>=40,'title-to-level melt must finish before movement tests')
 for _=1,4 do wait()end;initial=state() -- fill both slots for the backpressure case
 `;
 let rest=original.slice(original.indexOf('reject(2,6)'));
-rest=rest.replace('reject(2,64);','reject(2,128);');
+rest=rest.replace('reject(2,64);',controls?'reject(2,384);':'reject(2,128);');
 rest=rest.replace("full[10]==2,'backpressure'","full[10]==initial[10],'backpressure'");
 rest=rest.replace('present();local visible=state();assert(visible[23]==1',
  'local shown=state()[23];present();local visible=state();assert(visible[23]==shown+1');
@@ -160,6 +160,6 @@ const loadFile=path.join(vm.folder,'title-load.lua');fs.writeFileSync(loadFile,r
 vm.adb(['push',loadFile,script],'title-load-fixture');assert(vm.adb(['shell','lua',script],'title-load',{timeoutMs:45000}).includes('MENU_TITLE_LOAD_R370_OK'));
 assert.equal(vm.adb(['shell','lsmod'],'after-title-load'),before);
 for(const p of [remote,script,'/tmp/rw4-ready351-save.dsg','/tmp/rw4-menu-r370-saved.bin'])vm.adb(['shell','rm',p],'remove-own');
-const result={passed:true,checkpoint:fast?'R396':metadata?'R395':quick?'R393':monster?'R390':final?'R388':tune?'R387':adpcm?'R386':doom2?'R384':packed?'R378':ultimate?'R374':startup?'R372':'R370',realDoom:true,titleHeldBeyondAttractDeadline:true,originalMenuNewGame:true,originalPlayer1SpawnBothCycles:true,
+const result={passed:true,checkpoint:controls?'R397':fast?'R396':metadata?'R395':quick?'R393':monster?'R390':final?'R388':tune?'R387':adpcm?'R386':doom2?'R384':packed?'R378':ultimate?'R374':startup?'R372':'R370',realDoom:true,titleHeldBeyondAttractDeadline:true,originalMenuNewGame:true,originalPlayer1SpawnBothCycles:true,
  menuConfirmationDoesNotFire:true,saveLoad:true,loadDirectlyFromTitle:true,pauseResume:true,twoCyclesJoinedAndUnloaded:true,modeledAudio:true,devicePlayback:false,physicalWatchUsed:false,cycles};
 fs.writeFileSync(path.join(out,'test-result.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

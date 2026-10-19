@@ -8,7 +8,7 @@ import {uploadLimits} from './doom-retail-limits-r374.mjs';
 const owned=new WeakMap(),hash=(b,a='sha256')=>createHash(a).update(b).digest('hex');
 const refuse=()=>{throw Error('DoomLargeUploadRefused');};
 function mint(b,id,kind){
- const nativeLauncher=['review-fast-r396-manual','review-load-meter-r394-manual','review-quick-r393-manual','review-monster-r390-manual','review-final-r388-manual','review-tune-r387-manual','review-fit-r386-manual','review-doom2-r384-manual','review-start-r383-manual','review-lean-r382-manual','review-boot-r381-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual','review-fast-r331-manual','review-palette-r333-manual','review-bench-r335-manual','review-demand-r337-manual','review-direct-r343-manual','review-touch-r345-manual','review-wide-r347-manual','review-pads-r349-manual','review-ready-r351-manual','review-sound-r365-manual','review-audio-r367-manual','review-voice-r369-manual','review-menu-r370-manual'].includes(kind);
+ const nativeLauncher=['review-controls-r397-manual','review-fast-r396-manual','review-load-meter-r394-manual','review-quick-r393-manual','review-monster-r390-manual','review-final-r388-manual','review-tune-r387-manual','review-fit-r386-manual','review-doom2-r384-manual','review-start-r383-manual','review-lean-r382-manual','review-boot-r381-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual','review-fast-r331-manual','review-palette-r333-manual','review-bench-r335-manual','review-demand-r337-manual','review-direct-r343-manual','review-touch-r345-manual','review-wide-r347-manual','review-pads-r349-manual','review-ready-r351-manual','review-sound-r365-manual','review-audio-r367-manual','review-voice-r369-manual','review-menu-r370-manual'].includes(kind);
  const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher,physicalEnabled:false});owned.set(p,b);return p;
 }
 export function prepareDoomAssets(raw){
@@ -226,4 +226,9 @@ async function uploadWithAdapter(plan,ack,api,previous=null){
 export function prepareDoomFast396(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==1069660||hash(raw)!=='e3bb86a4740ea4ed8e92a6d340f36229f83b39378c62c3a049d5556b16da1923'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365220013'||raw[49]!==0)refuse();
  return mint(Buffer.from(raw),'365220013','review-fast-r396-manual');
+}
+
+export function prepareDoomControls397(raw){
+ if(!Buffer.isBuffer(raw)||raw.length!==1071020||hash(raw)!=='cb16a5de71ab9f9fb0c8c0678d2e2cb0fa1cd1f2050690a8620055388f536d2e'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365220014'||raw[49]!==0)refuse();
+ return mint(Buffer.from(raw),'365220014','review-controls-r397-manual');
 }
