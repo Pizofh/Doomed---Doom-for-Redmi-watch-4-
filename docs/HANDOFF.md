@@ -1,3 +1,17 @@
+# R390 monstruo listo, UN envío autorizado y pendiente
+
+Usuario pide enviar versión con icono chévere y posponer pendientes. Confirma
+reloj junto al PC, ≥50%, Mi Fitness cerrado y CLOSED. Plan
+docs/doom-monster-physical-plan-r390.md. No pedir otra autorización del envío.
+DOOM II monstruo rojo010,910940B/SHA59e345710e8f4f8be98c00ebf7c6249c47a4b033c5df8dbb3e2300d343bd25b0.
+Mismo juego/audio/imagen grande: ELF difiere solo seis bytes de tres rutas009→010.
+Importador aceptado copia saves009 con CRC, mueve WAD a010; independencia luego.
+Conservar cascoverde009 hasta carga/CLOSED010. No abrir009 tras migrar.
+Import43/realFS WAD completo, boot/UI27, dos ciclos nativos/carga título,
+paquete77/446IPC y transporte23/gates pasan. Guest propio limpiado/modules0.
+Solo gates general/MONSTER/C#Large durante despacho único; finally rebuild.
+No retry/resume/SET/autostart/borradosPC, no WAD resend. Una prueba manual breve.
+
 # R389 dos dedos investigados; icono de monstruo preparado localmente
 
 Usuario solicita dos dedos reales y cambiar marine por monstruo. R388 aceptado

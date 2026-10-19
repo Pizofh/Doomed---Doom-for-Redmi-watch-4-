@@ -17,7 +17,7 @@ import {physicalDoomVoiceEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomMenuEnabled} from './doom-deployment-physical.mjs';
 import {physicalDoomUltimateEnabled,physicalDoomUltimateAfterSpaceEnabled,physicalDoomUltimateAfterCatalogEnabled,physicalDoomPackedEnabled,physicalDoomPackedRestartEnabled,physicalDoomPackedResumeEnabled} from './doom-deployment-physical.mjs';
 import {uploadLimits} from './doom-retail-limits-r374.mjs';
-import {physicalDoomBootEnabled,physicalDoomLeanEnabled,physicalDoomStartEnabled,physicalDoomIIEnabled,physicalDoomIIAfterSpaceEnabled,physicalDoomFitEnabled,physicalDoomTuneEnabled,physicalDoomFinalEnabled} from './doom-deployment-physical.mjs';
+import {physicalDoomBootEnabled,physicalDoomLeanEnabled,physicalDoomStartEnabled,physicalDoomIIEnabled,physicalDoomIIAfterSpaceEnabled,physicalDoomFitEnabled,physicalDoomTuneEnabled,physicalDoomFinalEnabled,physicalDoomMonsterEnabled} from './doom-deployment-physical.mjs';
 import {reviewedDoom2Removals} from './doom2-space-r385.mjs';
 import {compareDoomCatalogs,reviewedTwoRemovals,reviewedUltimateSpaceRemovals,reviewedUltimateCatalogRetry} from './doom-deployment-catalog.mjs';
 
@@ -88,7 +88,9 @@ export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=fal
  return runLargeUpload(()=>{
   if(typeof afterSpace!=='boolean'||afterSpace&&!['review-ultimate-r374-manual','review-doom2-r384-manual'].includes(plan?.kind))refuse();
   if(typeof afterCatalog!=='boolean'||afterCatalog&&(plan?.kind!=='review-ultimate-r374-manual'||afterSpace))refuse();
-  if(plan?.kind==='review-final-r388-manual'){
+  if(plan?.kind==='review-monster-r390-manual'){
+   if(!physicalDoomMonsterEnabled()||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked)refuse();
+  }else if(plan?.kind==='review-final-r388-manual'){
    if(!physicalDoomFinalEnabled()||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked)refuse();
   }else if(plan?.kind==='review-tune-r387-manual'){
    if(!physicalDoomTuneEnabled()||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked)refuse();
@@ -174,7 +176,8 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   if(info.modelRecognized!==true||info.firmware!=='2.2.86')refuse();
   client.phase='CatalogPreflight';
   const before=catalog(readWatchfaces(await client.query(4,0)));
-  if(plan.nativeLauncher&&!['review-final-r388-manual','review-tune-r387-manual','review-fit-r386-manual','review-doom2-r384-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan.kind)&&!before.some(f=>f.id==='365219963'))refuse();
+  if(plan.nativeLauncher&&!['review-monster-r390-manual','review-final-r388-manual','review-tune-r387-manual','review-fit-r386-manual','review-doom2-r384-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan.kind)&&!before.some(f=>f.id==='365219963'))refuse();
+  if(plan.kind==='review-monster-r390-manual'&&!before.some(f=>f.id==='365220009'))refuse();
   if(['review-final-r388-manual','review-fit-r386-manual','review-tune-r387-manual'].includes(plan.kind)&&!before.some(f=>f.id==='365220006'))refuse();
   if(['review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan.kind)&&!before.some(f=>f.id==='365220002'))refuse();
   if(plan.kind==='review-fault-r321-manual'&&!before.some(f=>f.id==='365219953'))refuse();

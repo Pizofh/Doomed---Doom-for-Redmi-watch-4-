@@ -3,12 +3,12 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';
 import {root,sha256} from './doom-ready-source-r351.mjs';import {session} from './doom-ui-emulator.mjs';
 import {doom2Profile} from './doom2-source-r384.mjs';
-const final=process.argv[2]==='--doom2-final-r388',tune=final||process.argv[2]==='--doom2-tune-r387',adpcm=tune||process.argv[2]==='--doom2-adpcm-r386',doom2=adpcm||process.argv[2]==='--doom2-r384';
+const monster=process.argv[2]==='--doom2-monster-r390',final=monster||process.argv[2]==='--doom2-final-r388',tune=final||process.argv[2]==='--doom2-tune-r387',adpcm=tune||process.argv[2]==='--doom2-adpcm-r386',doom2=adpcm||process.argv[2]==='--doom2-r384';
 const packed=doom2||process.argv[2]==='--packed-r378';
 const ultimate=packed||process.argv[2]==='--ultimate-r374';
 const startup=ultimate||process.argv[2]==='--startup-r372';
 const quitOnly=process.argv[2]==='--quit-only';assert(process.argv.length===2||(process.argv.length===3&&(quitOnly||startup)));
-const out=path.join(root,final?'build/doom-audio-r388/s3-model':tune?'build/doom-audio-r387/s3-model':adpcm?'build/doom-audio-r386/s3-model':doom2?'build/doom-audio-r384/s3-model':packed?'build/doom-audio-r378/s3-model':ultimate?'build/doom-audio-r374/s3-model':startup?'build/doom-audio-r372/s3-model':'build/doom-audio-r370/s3-model'),elf=path.join(out,'doom.elf');
+const out=path.join(root,monster?'build/doom-audio-r390/s3-model':final?'build/doom-audio-r388/s3-model':tune?'build/doom-audio-r387/s3-model':adpcm?'build/doom-audio-r386/s3-model':doom2?'build/doom-audio-r384/s3-model':packed?'build/doom-audio-r378/s3-model':ultimate?'build/doom-audio-r374/s3-model':startup?'build/doom-audio-r372/s3-model':'build/doom-audio-r370/s3-model'),elf=path.join(out,'doom.elf');
 const review=JSON.parse(fs.readFileSync(path.join(out,'review.json'),'utf8'));
 assert.equal(sha256(fs.readFileSync(elf)),review.elfSha256);if(!quitOnly)assert(!fs.existsSync(path.join(out,'test-result.json')));
 const owned=session(startup?'doom-startup-menu':'doom-menu');
@@ -30,6 +30,7 @@ const render=s=>{
  if(adpcm)text=text.replaceAll('rw4doomii384','rw4doomii386').replaceAll('/tmp/rw4-menu-r384','/tmp/rw4-menu-r386').replaceAll(String(doom2Profile.audioSampleBytes),'310485');
  if(tune)text=text.replaceAll('rw4doomii386','rw4doomii387').replaceAll('/tmp/rw4-menu-r386','/tmp/rw4-menu-r387');
  if(final)text=text.replaceAll('rw4doomii387','rw4doomii388').replaceAll('/tmp/rw4-menu-r387','/tmp/rw4-menu-r388');
+ if(monster)text=text.replaceAll('rw4doomii388','rw4doomii390').replaceAll('/tmp/rw4-menu-r388','/tmp/rw4-menu-r390');
  return text;
 };
 const vm={folder:owned.folder,adb:(args,...rest)=>owned.adb(args.map(v=>typeof v==='string'?render(v):v),...rest)};
@@ -158,6 +159,6 @@ const loadFile=path.join(vm.folder,'title-load.lua');fs.writeFileSync(loadFile,r
 vm.adb(['push',loadFile,script],'title-load-fixture');assert(vm.adb(['shell','lua',script],'title-load',{timeoutMs:45000}).includes('MENU_TITLE_LOAD_R370_OK'));
 assert.equal(vm.adb(['shell','lsmod'],'after-title-load'),before);
 for(const p of [remote,script,'/tmp/rw4-ready351-save.dsg','/tmp/rw4-menu-r370-saved.bin'])vm.adb(['shell','rm',p],'remove-own');
-const result={passed:true,checkpoint:final?'R388':tune?'R387':adpcm?'R386':doom2?'R384':packed?'R378':ultimate?'R374':startup?'R372':'R370',realDoom:true,titleHeldBeyondAttractDeadline:true,originalMenuNewGame:true,originalPlayer1SpawnBothCycles:true,
+const result={passed:true,checkpoint:monster?'R390':final?'R388':tune?'R387':adpcm?'R386':doom2?'R384':packed?'R378':ultimate?'R374':startup?'R372':'R370',realDoom:true,titleHeldBeyondAttractDeadline:true,originalMenuNewGame:true,originalPlayer1SpawnBothCycles:true,
  menuConfirmationDoesNotFire:true,saveLoad:true,loadDirectlyFromTitle:true,pauseResume:true,twoCyclesJoinedAndUnloaded:true,modeledAudio:true,devicePlayback:false,physicalWatchUsed:false,cycles};
 fs.writeFileSync(path.join(out,'test-result.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
