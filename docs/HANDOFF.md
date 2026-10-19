@@ -1,3 +1,7 @@
+# R394 detenido por control de RAM; sin tiempos físicos
+
+GATE21/FREE07164888/MAX03401744: bloque mayor insuficiente frente a4194320B; no cargó motor. Ensayo consumido. No repetir automáticamente; sigue funcional DOOM II011/TOTAL00632284.
+
 # R394 instalado; ensayo manual pendiente
 
 2026-10-19: envío único autorizado completado. RegisteredInactive, 333/333 partes; registro confirmado, contenido no leído de vuelta; sin selección/inicio automático. Transporte cerrado y worker terminó con código 0. Gates restaurados false y worker recompilado cerrado. Falta UN ensayo manual automático hasta CLOSED y tres páginas de métricas; no repetir START. Conservar DOOM II011.

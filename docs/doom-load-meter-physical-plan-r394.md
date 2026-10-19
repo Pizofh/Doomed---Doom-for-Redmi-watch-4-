@@ -106,3 +106,7 @@ resultado, decidir qué optimizar usando estos tiempos y mantener el juego011.
 ## Instalación física 2026-10-19
 
 Autorizada explícitamente y completada en un único intento: RegisteredInactive,333/333 partes. Registro confirmado; contenido no leído de vuelta. Sin selección ni START automático. Transporte cerrado y proceso terminado con código0; gates restaurados false y worker recompilado cerrado. Pendiente el único ensayo manual y sus nueve cifras. No reintentos autorizados.
+
+## Resultado físico R394 — 2026-10-19
+
+El usuario informa GATE21, FREE07164888 y MAX03401744. No inició el motor: el mayor bloque disponible (3401744B) queda por debajo del mínimo4194320B, aunque el total libre7164888B supera7036928B. No hay medidas válidas de apertura; no atribuir el tiempo de carga a este fallo ni afirmar mejora. Ensayo único consumido; no repetir ni instalar sin nueva autorización. Conservar la versión funcional DOOM II011/TOTAL00632284, dependencia de DoomLoad.
