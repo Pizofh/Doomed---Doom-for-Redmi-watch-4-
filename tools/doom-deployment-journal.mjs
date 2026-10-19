@@ -40,6 +40,7 @@ export class DoomDeploymentJournal{
   if(plan.kind==='review-packed-r378-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog))fail();
   if(plan.kind==='review-doom2-r384-manual'&&(resume||retryWithoutData||afterCatalog||restartPacked||resumePacked))fail();
   if(plan.kind==='review-fit-r386-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
+  if(plan.kind==='review-final-r388-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
   if(plan.kind==='review-tune-r387-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
   if(['review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan.kind)&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
   if(typeof restartPacked!=='boolean'||restartPacked&&(plan.kind!=='review-packed-r378-manual'||resume||retryWithoutData||afterSpace||afterCatalog))fail();
@@ -59,6 +60,7 @@ export class DoomDeploymentJournal{
   if(plan.kind==='review-doom2-r384-manual')this.#file=path.join(dir,'doom2-r384.jsonl');
   if(plan.kind==='review-fit-r386-manual')this.#file=path.join(dir,'fit-r386.jsonl');
   if(plan.kind==='review-tune-r387-manual')this.#file=path.join(dir,'tune-r387.jsonl');
+  if(plan.kind==='review-final-r388-manual')this.#file=path.join(dir,'final-r388.jsonl');
   this.#key=Buffer.from(binding.key);this.#tag=binding.tag;this.#plan=plan;
   try{
    this.#lock=fs.openSync(this.#lockFile,'wx',0o600);

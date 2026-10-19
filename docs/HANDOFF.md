@@ -1,19 +1,21 @@
-# R388 entrega de una sola esfera/icono; trabajo LOCAL, reloj vuelve al uso habitual
+# R388 entrega final autorizada; pendiente UN envío y UN ensayo
 
-Usuario quiere una sola esfera final e icono más bonito; recuperar Mi Fitness
-y uso diario después de una semana. No necesita reloj/BT para tareas locales;
-próximo uso del reloj será instalación/ensayo final cuando esté preparado y
-aprobado. No mantener Mi Fitness cerrado ni pedir observación ahora.
-No nueva aprobación de payload físico. Conservar DoomTune008 y DoomII006.
-Plan docs/single-face-delivery-r388.md. Icono original procedural390×450 ya
-generado y revisado visualmente (marine verde/marco metálico/DOOM II), receta
-tools/doom-final-icon-r388.mjs; preview build/doom-final-r388/preview.png.
-No paquete final preparado todavía: primero actualización/migración de slots
-con respaldo/CRC/interrupciones probada localmente. Motor WAD/slots apuntan006;
-instalador actual prohíbe colisión del ID, NO quitar guard ni borrarcarrier.
-Unificar sin duplicar WAD completo mientras no haya espacio confirmado.
-Recuperar imagen grande306/Y30 en esa entrega, mantener captura/audioR387.
-Ninguna radio, escritura/consulta reloj ni nuevo ensayo para esta preparación.
+Usuario pidió «manda la nueva versión de una vez» y confirmó «Sí, listo»:
+reloj al lado PC, batería≥50%, Mi Fitness cerrado. No pedir otra aprobación
+del mismo envío. Plan docs/doom-final-physical-plan-r388.md. Una instalación
+inactiva009/DOOM II/casco verde, paquete1404628B SHA4533a2e0e53e581a38395725b8be863383d6d0003899e4f2edd8dfd5ea47f5b2.
+Primera apertura copia con CRC los bancos006 y mueve WAD006→009. Luego
+independiente: no borrar006/Fit007/Tune008 antes de carga y CLOSED aceptados.
+No reenvío WAD, no borrados/selección por PC ni reintento automático.
+Imagen grande restaurada; mismo audio R387, música aún pendiente.
+Migración43+filesystem real, boot/UI27, dos ciclos nativos y held-audio,
+paquete77 recursos/688 partes IPC y regresiones aprobados. Gates cerrados;
+abrir solo general/FINAL/C#Large durante despacho único con finally rebuild.
+Modelo emulado probado desde009 después de retirar006; cleanup propio hecho.
+Tras ensayo satisfactorio usuario puede eliminar las tres versiones antiguas,
+conservar DOOM II nueva y volver a Mi Fitness/uso diario. Protocolo muy breve.
+
+## Historia anterior (permisos antiguos no reutilizables)
 
 ## R387 DoomTune jugable confirmado; audio residual pendiente
 
