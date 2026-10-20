@@ -1,122 +1,31 @@
-# Doomed - DOOM for Redmi Watch 4
+# Doomed ? DOOM II on Redmi Watch 4
 
-Original DOOM running on the Redmi Watch 4 with stock firmware, a native C
-engine and a Lua/LVGL watchface interface.
+DOOM II on stock Redmi Watch 4 firmware, using a native C engine and a Lua/LVGL watchface interface.
 
-**Current 0.2 development status:** [DOOM II R397](docs/doom-controls-physical-plan-r397.md)
-with its monster preview is the working version on the watch. The user confirms
-save loading, weapon cycling and two successful starts/exits. Its registration
-also survived a manual reboot after the [R398 resend](docs/doom-controls-persistence-retry-r398.md).
-Original menus, persistent saves, pause and CLOSED exit work. MENU/PAUSA overlays
-are too faint and sometimes need repeated taps; sound effects remain choppy.
-Music and two-finger input are not implemented. [Multitouch research](docs/touch-investigation-risk-r400.md)
-is currently static only; no driver changes or physical diagnostic have been run.
+**Tested device: Redmi Watch 4 M2315W1, firmware 2.2.86.** The game works independently of the PC after installation.
 
-Previous/next weapon buttons work. Normal exit offers optional INFO instead of
-automatic diagnostic pages. R397 reduces CHECKING callbacks; no new hardware
-startup percentage was measured. The earlier graphics metadata optimization
-improved startup according to the user. The first lost registration remains
-unexplained; one successful reboot does not establish a general persistence fix.
-This does not establish a full campaign playthrough or a long Doom II session.
-Retail WADs and derived binary assets are private build inputs, absent here.
+## Status
 
-The 0.1.0 baseline and its build instructions below remain unchanged;
-see [0.2 work](docs/next-version.md) for the newer incremental builds and limits.
+Original menus, movement, interaction, weapon switching, persistent save/load, pause and clean CLOSED exits work in the user-confirmed R397 baseline. Sound effects work but can stutter. Music and simultaneous touch inputs are absent. MENU/PAUSA overlays can be faint and difficult to tap.
 
-## 0.1.0 baseline
+R405 fixes advancing after completing a map. Its installation is confirmed; physical confirmation of that specific fix is pending. A full physical DOOM II campaign has not been validated.
 
-**Physically tested:** [DoomReady R351/R352](docs/doom-ready-physical-plan-r351.md).
-The user confirmed gameplay, larger controls, interaction, pause, save/load with
-the original screen melt, persistence after switching to another face, and clean
-CLOSED exit. The final short cycle reported zero engine/graphics errors and
-phase2. DoomPads remains the previously tested fallback.
-The final acceptance session lasted approximately 30 minutes according to the
-user, including death, recovery from a save and CLOSED exit, with no failures
-reported.
+## Start here
 
-DoomReady includes faster checks, longer sessions and persistent save/load.
-Local tests also cover a147-second session and save/load in all nine shareware
-maps. The30-minute cap and a whole campaign playthrough have not been physically
-validated. Touch input currently accepts one action at a time; hardware
-multitouch support is unconfirmed.
+[Getting started](docs/getting-started.md) ? [Playing](docs/playing.md) ? [Architecture](docs/architecture.md) ? [Results and limits](docs/project-results.md)
 
-[Playing guide (Spanish)](docs/playing.md) | [Current handoff](docs/HANDOFF.md)
-[Getting started / installation status](docs/getting-started.md) |
-[0.2 work](docs/next-version.md)
+This is a source release. A fresh-clone build and installation by a second owner are not yet validated. R405 is an upgrade from R397, not a first-install package. Commercial game data is supplied separately by its owner.
 
-**First playable release:** [0.1.0 handoff (Spanish)](docs/first-playable-release.md).
-Acceptance is complete. It preserves the tested package byte for byte; no new
-face installation is needed.
-
-New visitors: this is currently a source and documentation release. A fresh-clone
-build and a second-owner installation have not been validated. Start with the
-getting-started guide and `node tools/check-release-prerequisites.mjs`; it never
-connects to a watch or reads connection credentials.
-
-## Controls and presentation
-
-- Proportional game image about 383 x 239 on a 390 x 450 display.
-- Direction pad, FIRE and USAR; one active touch input at a time.
-- PAUSA/SEGUIR and SALIR. Controls remain below the game, with its HUD visible.
-- Direct in-memory presentation, two immutable buffers and UI-owned graphics.
-  The engine thread never calls LVGL; no per-frame PNG or flash writes.
-
-DoomReady adds GUARDAR/CARGAR while paused. A save uses two alternating local
-banks, length/CRC checks and readback before reporting success. Save files belong
-to the face; uninstalling it can remove them. Sound is not implemented.
-
-## Compatibility and limits
-
-The physical port is pinned to Redmi Watch 4 M2315W1, firmware 2.2.86.
-The S3 emulator is a separate validation target and does not establish support
-for other firmware or watches. Native modules share the OS address space.
-DoomReady uses a cooperative 30-minute session cap; it cannot interrupt a blocked
-OS call. Its RAM guard is checked at every start. Full device recovery has not
-been validated.
-
-Only the original shareware 1.9 WAD is supported here. The nine maps start and
-save/load in the emulator; a complete campaign playthrough has not been tested.
-The WAD is installed once in the retained DoomLauncher data carrier.
-
-## Local build and validation
-
-Build scripts use reviewed local Arm 14.3 tools, pinned doomgeneric sources,
-WAD, compiler, firmware inspection input and cached baseline objects. This is
-an incremental research build, not yet a one-command clean-machine SDK.
-No download, device installation or activation occurs in these commands:
+Create a compact public source snapshot:
 
 ~~~powershell
-node tools/build-doom-ready-r351.mjs rw4
-node tools/build-doom-ready-r351.mjs s3-model
-node tools/build-doom-ready-r351.mjs s3-ui
-node tools/test-ready-launcher-r351.mjs
-node tools/test-ready-store-r351.mjs
-node tools/test-doom-ready-r351.mjs
-node tools/test-ready-campaign-r351.mjs
-# UI stage/test/cleanup requires the owned S3 UIProbe inactive/selected as directed.
-# After successful UI cleanup:
-node tools/package-doom-ready-r351.mjs
-node tools/test-doom-ready-package-r351.mjs
-node tools/pc-doom-ready-r351.mjs prepare
+node tools/export-public-source.mjs
 ~~~
 
-Reviewed output directories are protected against accidental overwrite. Emulator
-helpers are restricted to their owned loopback instance. Physical install gates
-remain closed until a specific reviewed trial is approved; no automatic retries.
-Build details and trial evidence are in the linked R351 plan and local reports.
+The exporter audits Git history and copies tracked source plus a short documentation set to build/public-source/. It writes SHA256 hashes and excludes the research diary, Git history, WADs, firmware, binaries, saves and credentials. It never connects to the watch.
 
-## Sources and private data
+The build still composes earlier revision helpers, so their source dependencies remain. [Storage and preservation](docs/local-storage.md) explains what to retain before deleting this development checkout.
 
-Original project source code defaults to **GPL-2.0-only**, except where a file
-has an explicit different notice. Existing `GPL-2.0-or-later` notices and upstream
-licenses remain in effect. See [LICENSE](LICENSE) and [licensing scope](LICENSING.md).
+## License
 
-Upstream: doomgeneric revision dcb7a8dbc7a16ce3dda29382ac9aae9d77d21284;
-its original GPL license is retained with the local source. Game data has its
-own license. See [source review](docs/doom-build-audit.md) and
-[WAD provenance](docs/native-wad-emulator.md).
-
-Firmware, WADs, tool binaries, face packages, save files, raw Bluetooth logs,
-device addresses and authentication keys are not included in this repository.
-Private inputs stay in ignored local directories. No remote push is part of the
-current workflow.
+Original code defaults to GPL-2.0-only except where individual files state otherwise. Upstream notices remain intact. See [LICENSE](LICENSE), [LICENSING.md](LICENSING.md) and [dependencies](third_party/README.md).

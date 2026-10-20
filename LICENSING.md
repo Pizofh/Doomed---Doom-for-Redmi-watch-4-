@@ -22,7 +22,7 @@ the default grant above specifically chooses version 2 only.
 doomgeneric and its contributors retain their copyright and original file
 notices. Its pinned source is obtained separately; its license is not replaced
 by this project's default. See [the dependency inventory](third_party/README.md)
-and [source provenance](docs/doom-build-audit.md).
+and [architecture](docs/architecture.md).
 
 WAD game data, firmware, external tool binaries and emulator assets are not
 relicensed under this notice and are not included in the public source release.

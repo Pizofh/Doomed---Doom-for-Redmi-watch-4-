@@ -4,6 +4,10 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - 'README.md'
+      - 'LICENSING.md'
+      - 'docs/**'
+      - 'tools/export-public-source.mjs'
       - 'experiments/pc-rfcomm/**'
       - 'tools/pc-rfcomm.mjs'
       - 'tools/pc-rfcomm-supervisor.mjs'
@@ -31,6 +35,10 @@ on:
       - '.github/workflows/pc-rfcomm-offline.yml'
   pull_request:
     paths:
+      - 'README.md'
+      - 'LICENSING.md'
+      - 'docs/**'
+      - 'tools/export-public-source.mjs'
       - 'experiments/pc-rfcomm/**'
       - 'tools/pc-rfcomm.mjs'
       - 'tools/pc-rfcomm-supervisor.mjs'
@@ -87,6 +95,8 @@ jobs:
           fetch-depth: 0
       - name: Audit reachable history for excluded assets and credential patterns
         run: node tools/audit-git-publish.mjs
+      - name: Validate curated public source snapshot and guide links
+        run: node tools/export-public-source.mjs
 
   large-file-model:
     runs-on: windows-2022
