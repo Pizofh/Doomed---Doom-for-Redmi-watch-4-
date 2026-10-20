@@ -1,4 +1,4 @@
-# R404: instalacion inactiva, lectura manual pendiente
+# R404: identificacion manual completada
 
 El usuario confirmo firmware 2.2.86 y autorizo explicitamente UNA instalacion
 inactiva de TouchID y UNA lectura manual, con bateria >=50%, reloj junto al PC,
@@ -23,15 +23,27 @@ Mismo paquete que paso los casos locales, sin recompilar/modificar Lua o recurso
   prueba LOCAL posterior devuelve `E:GateClosed`, sin otra conexion Bluetooth.
 
 El registro no es un readback de los bytes instalados: contentVerified=false.
-No se ha ejecutado LEER ni se ha identificado el controlador. La version reportada
-no sustituye una atestacion integral del firmware vivo.
+El registro no sustituye una atestacion integral del firmware vivo.
 
-## Alcance restante y evidencia
+## Resultado de la unica lectura autorizada
 
-Se pidio al usuario abrir TouchID, pulsar LEER UNA VEZ, esperar sin cambiar de
-esfera y devolver CONTROLADOR/ID/CACHE o motivo de ERROR. No repetir; despues
-volver a la esfera habitual. El resultado de esa unica lectura sigue pendiente.
-La marca persistente debe impedir rearmado normal, no se borrara para insistir.
+El usuario ejecuto una sola vez `LEER` y reporto:
+
+- CONTROLADOR: `CHIPONE ICNT8918`
+- ID: `2`
+- CACHE: `1`
+
+El identificador coincide con la rama Chipone prevista para el firmware 2.2.86.
+La capacidad cacheada de uno descarta el camino nativo actual de dos contactos;
+no se observan ni se infieren contactos simultaneos. Por tanto no hay base para
+un hook de multitactil, ni para modificar driver, firmware, I2C o Doom. La
+lectura consumio la autorizacion R404: no se repetira ni se borrara la marca
+persistente para rearmarla.
+
+El usuario volvio a su esfera habitual. TouchID puede eliminarse cuando quiera;
+no afecta Doom ni sus partidas.
+
+## Evidencia
 
 Evidencia local ignorada:
 

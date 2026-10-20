@@ -1,6 +1,6 @@
-# R404 instalado inactivo; SOLO una lectura manual autorizada pendiente
+# R404 TouchID concluido: Chipone ICNT8918, capacidad 1
 
-Usuario confirmo firmware2.2.86, luego aprobo explicitamente1instalacioninactivaTouchID+1lecturamanualconbateria>=50/relojjuntoPC/MiFitnesscerrado/observacion. LevantaNOEJECUTARsoloestealcance, NO hooks/driver/FW/I2C/otra lectura/retry/resume. No volver a pedir permiso para la lectura manual ya autorizada; esperar resultado. No consultas adicionales al reloj.
+Usuario confirmo firmware2.2.86 y aprobo explicitamente1instalacioninactivaTouchID+1lecturamanualconbateria>=50/relojjuntoPC/MiFitnesscerrado/observacion. La lectura unica reporto CHIPONE ICNT8918,ID2,CACHE1. Coincide con selector Chipone previsto; cache1 descarta el camino nativo actual de dos contactos. No prueba universal de imposibilidad del silicio, pero no hay base practica/segura para multitactil: NO hooks/driver/FW/I2C/otra lectura/retry/resume. TouchID ya puede borrarse manualmente sin tocar Doom.
 
 Unicoenvio TouchID ID365220404/28348B/SHA1293f339b9188bec946207f1c1e208d0fe212657a5188b25343bd9af861b98b4 terminoRegisteredInactive14/14, model/FWpreflightvalidos,catalogoprevio10,IDausente,seleccionyotrascarasconservadasporchecks. SinPCselect/LEER. contentVerified=false (NOreadback). closeConfirmedtrue,workerExit0,nativeErrorfalse. GatesJSrestaurados+C#recompiladocerrado; comprobacionLOCALnativeE:GateClosed, sinsegundaBLE. gitcodigo limpio tras restaurar.
 
