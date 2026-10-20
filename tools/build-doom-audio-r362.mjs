@@ -15,9 +15,10 @@ import {tuneWorker,tuneView} from './doom-tune-source-r387.mjs';
 import {profileStartup,packedStartup,packedRuntime} from './doom-load-profile-r391.mjs';
 import {cachedTextureHeaders,spriteHeaders} from './doom-texture-headers-r395.mjs';
 import {weaponAdapter,weaponTransport,quietRuntime} from './doom-controls-source-r397.mjs';
+import {intermissionAdapter} from './doom-intermission-source-r405.mjs';
 import {crc32} from './static-watchface-transfer.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url)),mode=process.argv[2];
-const controls=process.argv[3]==='--doom2-controls-r397',fast=controls||process.argv[3]==='--doom2-fast-r396',metadata=fast||process.argv[3]==='--doom2-metadata-r395',loadmeasure=process.argv[3]==='--doom2-load-measure-r394',quick=metadata||process.argv[3]==='--doom2-load-r393',fastload=loadmeasure||quick||process.argv[3]==='--doom2-load-fast-r392',loadprofile=fastload||process.argv[3]==='--doom2-load-profile-r391';
+const intermission=process.argv[3]==='--doom2-intermission-r405',controls=intermission||process.argv[3]==='--doom2-controls-r397',fast=controls||process.argv[3]==='--doom2-fast-r396',metadata=fast||process.argv[3]==='--doom2-metadata-r395',loadmeasure=process.argv[3]==='--doom2-load-measure-r394',quick=metadata||process.argv[3]==='--doom2-load-r393',fastload=loadmeasure||quick||process.argv[3]==='--doom2-load-fast-r392',loadprofile=fastload||process.argv[3]==='--doom2-load-profile-r391';
 const monster=loadprofile||process.argv[3]==='--doom2-monster-r390',final=monster||process.argv[3]==='--doom2-final-r388',tune=final||process.argv[3]==='--doom2-tune-r387',adpcm=tune||process.argv[3]==='--doom2-adpcm-r386',doom2=adpcm||process.argv[3]==='--doom2-r384';
 const packed=doom2||process.argv[3]==='--packed-r378';
 const ultimate=packed||process.argv[3]==='--ultimate-r374';
@@ -28,7 +29,7 @@ const recovery=process.argv[3]==='--recovery-r368'||corrected;
 assert((process.argv.length===3||(process.argv.length===4&&recovery))&&['rw4','s3-model','s3-hold'].includes(mode),'Fixed targets');
 assert(mode!=='s3-hold'||recovery);
 const baselineMode=mode==='s3-hold'?'s3-model':mode;
-const checkpoint=controls?'R397':fast?'R396':metadata?'R395':loadmeasure?'R394':quick?'R393':fastload?'R392':loadprofile?'R391':monster?'R390':final?'R388':tune?'R387':adpcm?'R386':doom2?'R384':packed?'R378':ultimate?'R374':startup?'R372':menu?'R370':corrected?'R369':recovery?'R368':'R367';
+const checkpoint=intermission?'R405':controls?'R397':fast?'R396':metadata?'R395':loadmeasure?'R394':quick?'R393':fastload?'R392':loadprofile?'R391':monster?'R390':final?'R388':tune?'R387':adpcm?'R386':doom2?'R384':packed?'R378':ultimate?'R374':startup?'R372':menu?'R370':corrected?'R369':recovery?'R368':'R367';
 const out=path.join(root,'build/doom-audio-'+checkpoint.toLowerCase(),mode),old=path.join(root,'build/doom-ready-r351',baselineMode);
 assert(!fs.existsSync(path.join(out,'review.json')),'Reviewed output exists');fs.mkdirSync(out,{recursive:true});
 const hash=b=>createHash('sha256').update(b).digest('hex');
@@ -43,7 +44,7 @@ const args=[...recipe.find(x=>x.label==='link').args];
 const gcc=path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-gcc.exe');
 const ld=path.join(root,'tools/local/arm-14.3-review/bin/arm-none-eabi-ld.exe');
 const packedData=packed?(doom2?doom2PackedConfig:packedConfig)(mode):null;
-if(final)packedData.gamePath='/data/app/watchface/market/'+(controls?'365220014':fast?'365220013':quick||loadmeasure?'365220011':monster?'365220010':'365220009')+'/lua/doom2-r384.wad';
+if(final)packedData.gamePath='/data/app/watchface/market/'+(intermission?'365220015':controls?'365220014':fast?'365220013':quick||loadmeasure?'365220011':monster?'365220010':'365220009')+'/lua/doom2-r384.wad';
 if(fastload)packedData.header+='#define RW4_PACK_PHYSICAL_CRC '+crc32(fs.readFileSync(path.join(root,'build/doom2-r384/doom.rwc')))+'u\n';
 if(packed)fs.writeFileSync(path.join(out,'packed-config.h'),packedData.header);
 function flags(label){const a=recipe.find(x=>x.label===label).args;return a.slice(0,a.indexOf('-c')).map(v=>ultimate&&v.startsWith('-DRW4_GAME_WAD=')?'-DRW4_GAME_WAD="'+(packed?packedData.gamePath:ultimateWadPath(mode))+'"':v);}
@@ -71,6 +72,7 @@ if(fastload)adapter=packedStartup(adapter);
 if(loadprofile&&!quick)adapter=profileStartup(adapter,fastload);
 if(loadmeasure)adapter=once(adapter,'menu_spawn[2]=load_created-load_begin;','menu_spawn[2]=load_created-load_begin;menu_snapshot();');
 if(controls)adapter=weaponAdapter(adapter);
+if(intermission)adapter=intermissionAdapter(adapter);
 fs.writeFileSync(path.join(out,'adapter.c'),adapter);
 let transport=fs.readFileSync(path.join(old,'transport.c'),'utf8');
 transport=once(transport,'#include "platform.h"','#include "platform.h"\n#include "doom-sfx.h"\n#include "sink-worker.h"');
@@ -163,7 +165,7 @@ const meta=run(readelf,['-W','-h','-A','-s','-r',elf],'readelf');
 assert(!/\bUND[ \t]+\S+[ \t]*$/m.test(meta));fs.writeFileSync(path.join(out,'readelf.txt'),meta);
 const sources=['pcm-core.c','doom-sfx.c','doom-module.c','sink-worker.c','media-sink.c',mode==='rw4'?'media-sink.h':'media-model.c'];
 const result={checkpoint,mode,elfBytes:fs.statSync(elf).size,elfSha256:hash(fs.readFileSync(elf)),
- controls:controls?{weaponPrevious:128,weaponNext:256,quietNormalConsole:true,sourceSha256:hash(fs.readFileSync(path.join(root,'tools/doom-controls-source-r397.mjs')))}:null,
+ controls:controls?{weaponPrevious:128,weaponNext:256,quietNormalConsole:true,sourceSha256:hash(fs.readFileSync(path.join(root,'tools/doom-controls-source-r397.mjs'))),intermissionAdvance:intermission}:null,
  metadata:metadataReview??null,
  tune:tune?{workerOwnedMixer:true,pacedWrites:true,zoom:final?306:288,y:final?30:39,sourceHashes:Object.fromEntries(['tools/doom-tune-source-r387.mjs','doom/platform-rw4/audio/sfx-render-r387.c'].map(f=>[f,hash(fs.readFileSync(path.join(root,f)))]))}:null,
  adpcm:adpcm?{cacheBytes:320*1024,sourceHashes:Object.fromEntries(['tools/doom2-adpcm-r386.mjs','doom/platform-rw4/audio/adpcm-r386.c','doom/platform-rw4/audio/adpcm-r386.h'].map(f=>[f,hash(fs.readFileSync(path.join(root,f)))])),coreSha256:hash(fs.readFileSync(path.join(out,'pcm-core.c'))),headerSha256:hash(fs.readFileSync(path.join(out,'pcm-core.h')))}:null,
