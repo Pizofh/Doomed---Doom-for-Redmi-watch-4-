@@ -7,9 +7,14 @@ import {isReviewedDoomPeer} from './doom-deployment-physical.mjs';
 import {uploadLimits} from './doom-retail-limits-r374.mjs';
 const owned=new WeakMap(),hash=(b,a='sha256')=>createHash(a).update(b).digest('hex');
 const refuse=()=>{throw Error('DoomLargeUploadRefused');};
-function mint(b,id,kind){
+function mint(b,id,kind,stockMemoryReader=false){
  const nativeLauncher=['review-controls-r397-manual','review-fast-r396-manual','review-load-meter-r394-manual','review-quick-r393-manual','review-monster-r390-manual','review-final-r388-manual','review-tune-r387-manual','review-fit-r386-manual','review-doom2-r384-manual','review-start-r383-manual','review-lean-r382-manual','review-boot-r381-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual','review-fast-r331-manual','review-palette-r333-manual','review-bench-r335-manual','review-demand-r337-manual','review-direct-r343-manual','review-touch-r345-manual','review-wide-r347-manual','review-pads-r349-manual','review-ready-r351-manual','review-sound-r365-manual','review-audio-r367-manual','review-voice-r369-manual','review-menu-r370-manual'].includes(kind);
- const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher,physicalEnabled:false});owned.set(p,b);return p;
+ const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher:nativeLauncher||stockMemoryReader,physicalEnabled:false});owned.set(p,b);return p;
+}
+// Lua-only stock memory reader: use privileged/manual deployment rules despite no ELF.
+export function prepareTouchIdentity404(raw){
+ if(!Buffer.isBuffer(raw)||raw.length!==28348||hash(raw)!=='1293f339b9188bec946207f1c1e208d0fe212657a5188b25343bd9af861b98b4'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365220404'||raw[49]!==0)refuse();
+ return mint(Buffer.from(raw),'365220404','review-touch-id-r404-manual',true);
 }
 export function prepareDoomAssets(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==4807680||hash(raw)!=='387e6c80616296ca7c8727e1a356e169c5b3575e1f2c33d4c9e9a32729ffa7c9'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='167210065'||raw[49]!==0)refuse();

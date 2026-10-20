@@ -1,4 +1,5 @@
 import {physicalDoomControls397Enabled} from './doom-deployment-physical.mjs';
+import {physicalTouchIdentity404Enabled} from './doom-deployment-physical.mjs';
 import {physicalDoomFast396Enabled} from './doom-deployment-physical.mjs';
 // Shared authenticated transfer core. PC peer and reviewed physical capability
 // have distinct branded entries; physical creation remains gated in its module.
@@ -91,7 +92,9 @@ export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=fal
   if(typeof retryControlsLoss!=='boolean'||retryControlsLoss&&(plan?.kind!=='review-controls-r397-manual'||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))refuse();
   if(typeof afterSpace!=='boolean'||afterSpace&&!['review-ultimate-r374-manual','review-doom2-r384-manual'].includes(plan?.kind))refuse();
   if(typeof afterCatalog!=='boolean'||afterCatalog&&(plan?.kind!=='review-ultimate-r374-manual'||afterSpace))refuse();
-  if(plan?.kind==='review-controls-r397-manual'){
+  if(plan?.kind==='review-touch-id-r404-manual'){
+   if(!physicalTouchIdentity404Enabled()||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked||retryControlsLoss)refuse();
+  }else if(plan?.kind==='review-controls-r397-manual'){
    if(!physicalDoomControls397Enabled()||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked)refuse();
   }else if(plan?.kind==='review-fast-r396-manual'){
    if(!physicalDoomFast396Enabled()||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked)refuse();
@@ -187,7 +190,7 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   if(info.modelRecognized!==true||info.firmware!=='2.2.86')refuse();
   client.phase='CatalogPreflight';
   const before=catalog(readWatchfaces(await client.query(4,0)));
-  if(plan.nativeLauncher&&!['review-controls-r397-manual','review-fast-r396-manual','review-load-meter-r394-manual','review-quick-r393-manual','review-monster-r390-manual','review-final-r388-manual','review-tune-r387-manual','review-fit-r386-manual','review-doom2-r384-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan.kind)&&!before.some(f=>f.id==='365219963'))refuse();
+  if(plan.nativeLauncher&&!['review-touch-id-r404-manual','review-controls-r397-manual','review-fast-r396-manual','review-load-meter-r394-manual','review-quick-r393-manual','review-monster-r390-manual','review-final-r388-manual','review-tune-r387-manual','review-fit-r386-manual','review-doom2-r384-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan.kind)&&!before.some(f=>f.id==='365219963'))refuse();
   if(plan.kind==='review-monster-r390-manual'&&!before.some(f=>f.id==='365220009'))refuse();
   if(plan.kind==='review-quick-r393-manual'&&!before.some(f=>f.id==='365220010'))refuse();
   if(plan.kind==='review-load-meter-r394-manual'&&!before.some(f=>f.id==='365220011'))refuse();
