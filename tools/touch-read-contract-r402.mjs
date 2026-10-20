@@ -5,7 +5,7 @@ const pins = Object.freeze([
   ['0c31f7f8', 0x4ff0e92d], // mw handler entry
   ['0c31f810', 0xb3404680], // no-assignment branch
   ['0c31f870', 0x0f02f1b9], // argc comparison
-  ['0c31f8be', 0x682b462a], // one-word read
+  ['0c31f8c0', 0x4620682b], // aligned word containing the one-word read (R403 correction)
   ['0c31f8d0', 0x20004798], // print/return
   ['0c5b6988', 0x481bb5b0], // controller selector entry
   ['0c5b69fc', 0x3c1cdedc], // selector RAM literal

@@ -12,7 +12,11 @@ const sha = b => createHash('sha256').update(b).digest('hex');
 const image = fs.readFileSync(path.join(root, 'tools/local/firmware-research/rw4-stock-candidate-r193/vela-ap-inspection-only.bin'));
 assert.equal(sha(image), profile.imageSha256);
 assert.equal(sha(image.subarray(0x21f7f8, 0x21f92c)), profile.handlerSha256);
-for (const [address, word] of profile.pins) assert.equal(image.readUInt32LE(parseInt(address, 16) - 0x0c100000), word);
+for (const [address, word] of profile.pins) {
+  assert.equal(parseInt(address,16)%4,0,'UnalignedRead');
+  assert.equal(image.readUInt32LE(parseInt(address, 16) - 0x0c100000), word);
+}
+for(const address of [profile.selector,profile.cache])assert.equal(parseInt(address,16)%4,0,'UnalignedRead');
 for (const [at, expected] of [[0x21f920, '  %p = 0x%08lx'], [0x21f928, '\n']]) {
   const offset = image.readUInt32LE(at) - 0x3bff187c;
   assert.equal(image.subarray(offset, image.indexOf(0, offset)).toString('ascii'), expected);
@@ -108,7 +112,8 @@ const report = {checkpoint: 'R402', cases, imageSha256: profile.imageSha256,
   hostModelOnly: true, luaRuntimeValidated: false, physicalMemoryRead: false,
   firmwareAttestedLive: false, physicalTransport: false, emulatorUsed: false,
   deployableDiagnostic: false, multitouchProven: false};
-const out = path.join(root, 'artifacts/research/rw4-touch-r402-contract');
+// R403 retains the original R402 report; revised source gets a distinct report.
+const out = path.join(root, 'artifacts/research/rw4-touch-r402-contract-'+report.modelSha256.slice(0,12));
 assert(!fs.existsSync(out), 'ExistingReport'); fs.mkdirSync(out, {recursive: true});
 fs.writeFileSync(path.join(out, 'review.json'), JSON.stringify(report, null, 2) + '\n', {flag: 'wx'});
 console.log(JSON.stringify(report));

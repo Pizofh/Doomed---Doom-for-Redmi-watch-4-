@@ -1,5 +1,10 @@
 # R402: contrato local para identificar el tactil
 
+Actualizacion R403: adaptador Lua probado en PC con 62 casos, sin hardware.
+Tambien se corrigio un pin de codigo desalineado del plan original; todos los
+pins actuales se comprueban alineados a 4 bytes. Ver `touch-lua-review-r403.md`.
+Este documento conserva el estado y las limitaciones de la investigacion R402.
+
 Continua **NO EJECUTAR**: no conexion, BLE, envio, comando en reloj, emulador,
 I2C, ioctl, hook ni cambio de firmware. Los comandos del modelo son texto.
 R397014 sigue siendo la version funcional; no se ha preparado otro instalable.
@@ -71,5 +76,7 @@ una autorizacion explicita que levante NO EJECUTAR para un alcance concreto.
 
 `node tools/test-touch-read-contract-r402.mjs` no acepta argumentos y no despacha
 los comandos. Usa el AP local como datos y crea una sola vez el informe ignorado
-`artifacts/research/rw4-touch-r402-contract/review.json`. No sobreescribe evidencia.
+`artifacts/research/rw4-touch-r402-contract/review.json` en la primera pasada.
+Tras R403 usa `rw4-touch-r402-contract-<hash-del-modelo>/review.json`, conservando
+los originales y sin sobreescribir evidencia.
 Codigo del modelo: `tools/touch-read-contract-r402.mjs`.

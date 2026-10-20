@@ -1,3 +1,13 @@
+# R403 Lua probado SOLO PC; sigue NO EJECUTAR
+
+Usuario ok continua investigacion, no levanta prohibicion hardware. Sin conexion/radio/envio/VMdispositivo/lectura memoria real/C/I2C/hooks/FW. Se instalo Fengari0.1.5 con permiso de herramientas, localignorado sin scripts, para ejecutar Lua del PC con SOLO base/string/table/math y archivos/sistema simulados. WSL solo enumero docker-desktop; no se arranco ni uso VM. No main/UI/paquete/instalable nuevo ni autorizacion fisica.
+
+experiments/touch-identity/read-only-r403.lua: constructor inerte, comandos fijos, captura acotada, cierre tras fallos, nunca borrar captura previa, cleanup propio tras despacho, stop ante cualquier fallo y guard por instancia/modulo. Sin globalsio/os ni loader. tools/test-touch-lua-r403.mjs pasa62 casos realesLua enFengari; tools/test-touch-read-contract-r402.mjs pasa38 de modelo. No confundir mocks con ABI/ruta stock validados. Dependencias locales Fengari0.1.5/readline-sync1.4.10/sprintf-js1.1.3/tmp0.2.7, runner verifica integridad/origen/version y registra manifestsha.
+
+CORRECCION IMPORTANTE R402: pin0c31f8be estaba desalineado4B; NUNCA se leyo fisicamente. Reemplazado en modelo y Lua por0c31f8c0=4620682b contrastado AP. Ambosrunners/mock exigenalineacion4Bdetodos. Hex usa floatincremental para evitaroverflowintLua32. Informes previos conservados, prueba definitiva con hash: artifacts/research/rw4-touch-r403-lua-<hash>/review.json; modelo corregido rw4-touch-r402-contract-6ee7d73c4c90. InformeR403sin sufijo es anterioracorreccion, no definitiva.
+
+Limites: ausencia+redireccionNOatomico, guardLuaNOlock entreVM/recarga, parserNOtimeout ni cotaescrituraShell, pcallNOrecuperafault. Primera lectura presuponehandler/mapa; pinsNOatestadointegral. Sigue no multitactil probado ni driveractivo conocido. R403doc detalla decision: identificacion sololectura menosinvasiva quehook/firmware, riesgo sistema no cero y recuperacionintegral no validada. Falta correspondenciaFW actual, UI manual/lifecycle/paquete antes de proponer ensayo concreto; no pedir permiso instalacion de algo inexistente. No repetir investigacion ni disfrazar bloqueos comoavance. Ver docs/touch-lua-review-r403.md.
+
 # R402 contrato offline revisado; sigue NO EJECUTAR
 
 Usuario "dale" continua investigacion, NO autoriza hardware. Sin conexion/BLE/envio/VM/Lua en reloj/C/hook/I2C/firmware. R397014 funcional sin cambios. Nuevo modelo PC tools/touch-read-contract-r402.mjs devuelve solo TEXTO de solicitudes, sin I/O ni procesos; no es adaptador Lua ni paquete instalable. Node tools/test-touch-read-contract-r402.mjs pasa38 casos; informe ignorado artifacts/research/rw4-touch-r402-contract/review.json. SHA AP/handler, siete palabras y formato stock contrastados con binario como datos.
