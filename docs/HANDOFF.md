@@ -1,4 +1,14 @@
-# R404 TouchID empaquetado SOLO PC; sigue NO EJECUTAR
+# R404 instalado inactivo; SOLO una lectura manual autorizada pendiente
+
+Usuario confirmo firmware2.2.86, luego aprobo explicitamente1instalacioninactivaTouchID+1lecturamanualconbateria>=50/relojjuntoPC/MiFitnesscerrado/observacion. LevantaNOEJECUTARsoloestealcance, NO hooks/driver/FW/I2C/otra lectura/retry/resume. No volver a pedir permiso para la lectura manual ya autorizada; esperar resultado. No consultas adicionales al reloj.
+
+Unicoenvio TouchID ID365220404/28348B/SHA1293f339b9188bec946207f1c1e208d0fe212657a5188b25343bd9af861b98b4 terminoRegisteredInactive14/14, model/FWpreflightvalidos,catalogoprevio10,IDausente,seleccionyotrascarasconservadasporchecks. SinPCselect/LEER. contentVerified=false (NOreadback). closeConfirmedtrue,workerExit0,nativeErrorfalse. GatesJSrestaurados+C#recompiladocerrado; comprobacionLOCALnativeE:GateClosed, sinsegundaBLE. gitcodigo limpio tras restaurar.
+
+IMPORTANTE build/touch-id-r404/dispatch-r404.mjs YA EJECUTADO, install-r404.started existe; NO repetir/borrar/renombrar/resetearWAL. Journal tools/local/pc-rfcomm/doom-deployment/touch-id-r404.jsonl intento1terminalRegisteredInactive14/14. Evidencia privada authorization-r404,physical-install-r404,dispatch-closed-r404,verified-after-install-r404 JSON bajo build/touch-id-r404. Docsresultado docs/touch-id-physical-result-r404.md.
+
+Preguntaasincrona enviada: abrirTouchID(marcomentay2circulos)->LEER UNA VEZ, esperar sin cambiarfase, devolverCONTROLADOR+ID/CACHEoERRORmotivo, NOrepetir,volverhabitual. Aun NOdriveractivoconocido/lecturarealreportada/multitactilprobado. Cache>=2 NO prueba2dedos. SiERRORnohacerotra/niquitarusedmarker. SiVMbloqueada valorarestado/reinicionormalsiresponde,NOrestablecer. No hay permiso automatico para otro payload.
+
+# R404 TouchID empaquetado SOLO PC; sigue NO EJECUTAR (estado anterior)
 
 Usuario go autoriza preparar prueba revisable, NO hardware. Sin conexion/BLE/target/auth/envio/comandos de memoria reales/VMdispositivo/driver/FW. Pregunta asincrona pendiente: si firmware sigue2.2.86 o se actualizo; no asumir respuesta. Revisado firmware AP es2.2.86/R193, no atestacion de unidad actual.
 

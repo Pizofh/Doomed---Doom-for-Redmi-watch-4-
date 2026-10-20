@@ -1,5 +1,10 @@
 # R404: TouchID, propuesta manual de identificacion
 
+**Actualizacion:** el usuario confirmo 2.2.86 y autorizo explicitamente un envio
+y una lectura manual. El unico envio termino RegisteredInactive, transporte
+cerrado; lectura aun pendiente. Ver [resultado R404](touch-id-physical-result-r404.md).
+El texto siguiente conserva la propuesta revisada, no concede nuevos intentos.
+
 **Preparado solo en PC. NO AUTORIZADO para enviar o ejecutar.** El usuario pidio
 investigar y no ejecutar. Sus posteriores go/ok permiten esta preparacion; no
 levantan esa instruccion. No ha habido conexion, consulta BLE ni lectura real.
