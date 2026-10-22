@@ -8,7 +8,7 @@ import {uploadLimits} from './doom-retail-limits-r374.mjs';
 const owned=new WeakMap(),hash=(b,a='sha256')=>createHash(a).update(b).digest('hex');
 const refuse=()=>{throw Error('DoomLargeUploadRefused');};
 function mint(b,id,kind,stockMemoryReader=false){
- const nativeLauncher=['review-intermission-r405-manual','review-controls-r397-manual','review-fast-r396-manual','review-load-meter-r394-manual','review-quick-r393-manual','review-monster-r390-manual','review-final-r388-manual','review-tune-r387-manual','review-fit-r386-manual','review-doom2-r384-manual','review-start-r383-manual','review-lean-r382-manual','review-boot-r381-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual','review-fast-r331-manual','review-palette-r333-manual','review-bench-r335-manual','review-demand-r337-manual','review-direct-r343-manual','review-touch-r345-manual','review-wide-r347-manual','review-pads-r349-manual','review-ready-r351-manual','review-sound-r365-manual','review-audio-r367-manual','review-voice-r369-manual','review-menu-r370-manual'].includes(kind);
+ const nativeLauncher=['review-themed-r406-manual','review-intermission-r405-manual','review-controls-r397-manual','review-fast-r396-manual','review-load-meter-r394-manual','review-quick-r393-manual','review-monster-r390-manual','review-final-r388-manual','review-tune-r387-manual','review-fit-r386-manual','review-doom2-r384-manual','review-start-r383-manual','review-lean-r382-manual','review-boot-r381-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-ram-png-manual','review-readers-r318-manual','review-fault-r321-manual','review-refs-r325-manual','review-lease-r327-manual','review-hold-r329-manual','review-fast-r331-manual','review-palette-r333-manual','review-bench-r335-manual','review-demand-r337-manual','review-direct-r343-manual','review-touch-r345-manual','review-wide-r347-manual','review-pads-r349-manual','review-ready-r351-manual','review-sound-r365-manual','review-audio-r367-manual','review-voice-r369-manual','review-menu-r370-manual'].includes(kind);
  const p=Object.freeze({id,size:b.length,sha256:hash(b),kind,nativeLauncher:nativeLauncher||stockMemoryReader,physicalEnabled:false});owned.set(p,b);return p;
 }
 // Lua-only stock memory reader: use privileged/manual deployment rules despite no ELF.
@@ -241,4 +241,9 @@ export function prepareDoomControls397(raw){
 export function prepareDoomIntermission405(raw){
  if(!Buffer.isBuffer(raw)||raw.length!==1071592||hash(raw)!=='11c755b19314d74e2aa1a097578b58e4a86d4023e4ca04a2660fbbd5487ec523'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365220015'||raw[49]!==0)refuse();
  return mint(Buffer.from(raw),'365220015','review-intermission-r405-manual');
+}
+
+export function prepareDoomThemed406(raw){
+ if(!Buffer.isBuffer(raw)||raw.length!==1081616||hash(raw)!=='433e082f028fd223422cdc698b495e9a13538648cbefff62819c4c15a689e103'||raw.subarray(0,4).toString('hex')!=='5aa53412'||raw[5]!==0||raw.subarray(40,49).toString('ascii')!=='365220016'||raw[49]!==0)refuse();
+ return mint(Buffer.from(raw),'365220016','review-themed-r406-manual');
 }
