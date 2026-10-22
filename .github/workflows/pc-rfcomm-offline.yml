@@ -10,6 +10,7 @@ on:
       - 'tools/export-public-source.mjs'
       - 'tools/delivery/**'
       - 'tools/test-delivery-preparer.mjs'
+      - 'tools/test-delivery-configuration.mjs'
       - 'experiments/pc-rfcomm/**'
       - 'tools/pc-rfcomm.mjs'
       - 'tools/pc-rfcomm-supervisor.mjs'
@@ -43,6 +44,7 @@ on:
       - 'tools/export-public-source.mjs'
       - 'tools/delivery/**'
       - 'tools/test-delivery-preparer.mjs'
+      - 'tools/test-delivery-configuration.mjs'
       - 'experiments/pc-rfcomm/**'
       - 'tools/pc-rfcomm.mjs'
       - 'tools/pc-rfcomm-supervisor.mjs'
@@ -110,7 +112,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Test offline consumer preparer with synthetic game data
-        run: node --test tools/test-delivery-preparer.mjs
+        run: node --test tools/test-delivery-preparer.mjs tools/test-delivery-configuration.mjs
       - name: Test large upload and ambiguous delivery with owned synthetic data
         run: node tools/test-doom-large-upload.mjs --synthetic
       - name: Test authenticated large session, journal, resume and catalog with PC peer

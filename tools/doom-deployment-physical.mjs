@@ -37,6 +37,7 @@ const PHYSICAL_FAST_R396_REVIEWED=false;
 const PHYSICAL_CONTROLS_R397_REVIEWED=false;
 const PHYSICAL_INTERMISSION_R405_REVIEWED=false;
 const PHYSICAL_THEMED_R406_REVIEWED=false;
+const PHYSICAL_DELIVERY_R407_REVIEWED=false;
 const PHYSICAL_TOUCH_ID_R404_REVIEWED=false;
 const PHYSICAL_LOAD_METER_R394_REVIEWED=false;
 const PHYSICAL_PADS_R349_REVIEWED=false;
@@ -86,7 +87,8 @@ export function physicalDoomDirectEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&
 export function physicalDoomResumeEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_RESUME_REVIEWED;}
 export function physicalDoomControlRetryEnabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_CONTROL_RETRY_REVIEWED;}
 export function isReviewedDoomPeer(peer){return PHYSICAL_DEPLOYMENT_REVIEWED&&peers.has(peer);}
-export function createReviewedDoomEndpoint(address,{resume=false,retryWithoutData=false,retail=false,afterSpace=false,afterCatalog=false,packed=false,restartPacked=false,resumePacked=false,doom2=false}={}){
+export function createReviewedDoomEndpoint(address,{resume=false,retryWithoutData=false,retail=false,afterSpace=false,afterCatalog=false,packed=false,restartPacked=false,resumePacked=false,doom2=false,delivery=false}={}){
+ if(typeof delivery!=='boolean'||delivery&&(!retail||!physicalDoomDelivery407Enabled()||doom2||packed||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
  const doom2Enabled=afterSpace?physicalDoomIIAfterSpaceEnabled():physicalDoomIIEnabled();
  if(typeof doom2!=='boolean'||doom2&&(!retail||!doom2Enabled||packed||restartPacked||resumePacked||resume||retryWithoutData||afterCatalog))fail();
  if(typeof resumePacked!=='boolean'||resumePacked&&(!packed||!physicalDoomPackedResumeEnabled()||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked))fail();
@@ -95,7 +97,7 @@ export function createReviewedDoomEndpoint(address,{resume=false,retryWithoutDat
  if(typeof packed!=='boolean'||packed&&(!retail||!packedEnabled||resume||retryWithoutData||afterSpace||afterCatalog))fail();
  if(typeof afterCatalog!=='boolean'||afterCatalog&&(!retail||!physicalDoomUltimateAfterCatalogEnabled()||resume||retryWithoutData||afterSpace))fail();
  if(typeof afterSpace!=='boolean'||afterSpace&&(!retail||!(doom2?doom2Enabled:physicalDoomUltimateAfterSpaceEnabled())||resume||retryWithoutData))fail();
- if(typeof retail!=='boolean'||retail&&(!(doom2?doom2Enabled:packed?packedEnabled:afterCatalog?physicalDoomUltimateAfterCatalogEnabled():afterSpace?physicalDoomUltimateAfterSpaceEnabled():physicalDoomUltimateEnabled())||resume||retryWithoutData))fail();
+ if(typeof retail!=='boolean'||retail&&(!(delivery?physicalDoomDelivery407Enabled():doom2?doom2Enabled:packed?packedEnabled:afterCatalog?physicalDoomUltimateAfterCatalogEnabled():afterSpace?physicalDoomUltimateAfterSpaceEnabled():physicalDoomUltimateEnabled())||resume||retryWithoutData))fail();
  if(!PHYSICAL_DEPLOYMENT_REVIEWED||typeof resume!=='boolean'||typeof retryWithoutData!=='boolean'||resume&&retryWithoutData||resume&&!PHYSICAL_RESUME_REVIEWED||retryWithoutData&&!PHYSICAL_CONTROL_RETRY_REVIEWED)fail();
  if(typeof address!=='string'||!/^[A-Fa-f0-9]{12}$/.test(address)||/^0{12}$/.test(address))fail();
  let pipe=null,busy=false,closing=false,closePromise=null;
@@ -125,12 +127,12 @@ export function createReviewedDoomEndpoint(address,{resume=false,retryWithoutDat
   }
  });
  const endpoint=Object.freeze({kind:'reviewed-doom-deployment'});
- const peer=Object.freeze({link,physical:true,doom2Reviewed:doom2,packedReviewed:packed,restartPackedReviewed:restartPacked,resumePackedReviewed:resumePacked,afterCatalogReviewed:afterCatalog,afterSpaceReviewed:afterSpace,retailReviewed:retail,resumeReviewed:resume,retryWithoutDataReviewed:retryWithoutData,journalTarget:'rw4:'+address.toLowerCase(),clock:()=>performance.now(),wait:ms=>new Promise(resolve=>setTimeout(resolve,ms))});
+ const peer=Object.freeze({link,physical:true,deliveryReviewed:delivery,doom2Reviewed:doom2,packedReviewed:packed,restartPackedReviewed:restartPacked,resumePackedReviewed:resumePacked,afterCatalogReviewed:afterCatalog,afterSpaceReviewed:afterSpace,retailReviewed:retail,resumeReviewed:resume,retryWithoutDataReviewed:retryWithoutData,journalTarget:'rw4:'+address.toLowerCase(),clock:()=>performance.now(),wait:ms=>new Promise(resolve=>setTimeout(resolve,ms))});
  peers.add(peer);endpoints.set(endpoint,peer);
  return endpoint;
 }
-export function claimReviewedDoomEndpoint(endpoint,{resume=false,retryWithoutData=false,retail=false,afterSpace=false,afterCatalog=false,packed=false,restartPacked=false,resumePacked=false,doom2=false}={}){
- if(!PHYSICAL_DEPLOYMENT_REVIEWED)fail();const peer=endpoints.get(endpoint);if(!peer||peer.doom2Reviewed!==doom2||peer.packedReviewed!==packed||peer.restartPackedReviewed!==restartPacked||peer.resumePackedReviewed!==resumePacked||peer.afterCatalogReviewed!==afterCatalog||peer.afterSpaceReviewed!==afterSpace||peer.retailReviewed!==retail||peer.resumeReviewed!==resume||peer.retryWithoutDataReviewed!==retryWithoutData)fail();endpoints.delete(endpoint);return peer;
+export function claimReviewedDoomEndpoint(endpoint,{resume=false,retryWithoutData=false,retail=false,afterSpace=false,afterCatalog=false,packed=false,restartPacked=false,resumePacked=false,doom2=false,delivery=false}={}){
+ if(!PHYSICAL_DEPLOYMENT_REVIEWED)fail();const peer=endpoints.get(endpoint);if(!peer||peer.deliveryReviewed!==delivery||peer.doom2Reviewed!==doom2||peer.packedReviewed!==packed||peer.restartPackedReviewed!==restartPacked||peer.resumePackedReviewed!==resumePacked||peer.afterCatalogReviewed!==afterCatalog||peer.afterSpaceReviewed!==afterSpace||peer.retailReviewed!==retail||peer.resumeReviewed!==resume||peer.retryWithoutDataReviewed!==retryWithoutData)fail();endpoints.delete(endpoint);return peer;
 }
 
 export function physicalDoomFast396Enabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_FAST_R396_REVIEWED;}
@@ -140,3 +142,5 @@ export function physicalDoomIntermission405Enabled(){return PHYSICAL_DEPLOYMENT_
 export function physicalTouchIdentity404Enabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_TOUCH_ID_R404_REVIEWED;}
 
 export function physicalDoomThemed406Enabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_THEMED_R406_REVIEWED;}
+
+export function physicalDoomDelivery407Enabled(){return PHYSICAL_DEPLOYMENT_REVIEWED&&PHYSICAL_DELIVERY_R407_REVIEWED;}

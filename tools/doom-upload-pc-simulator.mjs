@@ -13,7 +13,7 @@ function ccm(key,nonce,input,decrypt=false){
  return Buffer.concat([c.update(body),c.final(),...(decrypt?[]:[c.getAuthTag()])]);
 }
 function referenceCrc(b){let crc=0xffffffff;for(const value of b){crc^=value;for(let bit=0;bit<8;bit++)crc=(crc>>>1)^((crc&1)?0xedb88320:0);}return(crc^0xffffffff)>>>0;}
-const scenarios=new Set(['ok','bad-key','v2','wrong-model','wrong-fw','collision','clear-response','reject','bad-md5','bad-offset','bad-chunk','resume-missing-md5','resume-missing-offset','disconnect','native-send-timeout','packed-interruption','registration-lost','missing','active','protected','unrelated-lost','close-failure','deadline']);
+const scenarios=new Set(['ok','low-battery','bad-key','v2','wrong-model','wrong-fw','collision','clear-response','reject','bad-md5','bad-offset','bad-chunk','resume-missing-md5','resume-missing-offset','disconnect','native-send-timeout','packed-interruption','registration-lost','missing','active','protected','unrelated-lost','close-failure','deadline']);
 export function createDoomUploadPcPeer(plan,{scenario='ok',chunkSize=2048,resumePosition=0,target='fixture-one',ackShape='complete',catalogRows=null}={}){
  if(!scenarios.has(scenario)||![2048,4080].includes(chunkSize)||!Number.isInteger(resumePosition)||resumePosition<0||resumePosition>=plan.size||!/^fixture-[a-z]+$/.test(target)||!['complete','stock-minimal','defaults'].includes(ackShape)||ackShape!=='complete'&&(chunkSize!==2048||resumePosition!==0||scenario!=='ok'))throw Error('PcPeerRefused');
  if(catalogRows!==null&&(!Array.isArray(catalogRows)||catalogRows.length>64||catalogRows.filter(r=>r.active).length!==1||catalogRows.some(r=>!/^\d{9}$/.test(r.id)||typeof r.active!=='boolean'||typeof r.canDelete!=='boolean')||new Set(catalogRows.map(r=>r.id)).size!==catalogRows.length))throw Error('PcPeerRefused');
@@ -73,6 +73,7 @@ export function createDoomUploadPcPeer(plan,{scenario='ok',chunkSize=2048,resume
     authReceived=true;reply(command(1,27,bytes(33,uint(1,1))));return;
    }
    const response=(field,body)=>reply(Buffer.concat([uint(1,type),uint(2,subtype),bytes(field,body)]),scenario!=='clear-response');
+   if(type===2&&subtype===1){response(4,bytes(2,bytes(1,uint(1,scenario==='low-battery'?49:80))));return;}
    if(type===2&&subtype===2){response(4,bytes(3,Buffer.concat([bytes(2,Buffer.from(scenario==='wrong-fw'?'2.2.87':'2.2.86')),bytes(4,Buffer.from(scenario==='wrong-model'?'OTHER':'M2315W1'))])));return;}
    if(type===4&&subtype===0){
     if(uploaded)postUploadCatalogs++;

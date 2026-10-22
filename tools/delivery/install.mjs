@@ -1,0 +1,12 @@
+// SPDX-License-Identifier: GPL-2.0-only
+// Consumer entry. No private inputs are read while the hardware gate is closed.
+import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';import {spawnSync} from 'node:child_process';
+import {physicalDoomDelivery407Enabled} from '../doom-deployment-physical.mjs';import {prepareDoomDelivery407} from '../doom-large-upload.mjs';
+import {installationMessage} from './outcome.mjs';
+const root=fileURLToPath(new URL('../../',import.meta.url)),toolkit=path.resolve(root,'..');
+try{if(process.argv.length!==2)throw Error('ArgumentsInvalid');if(!physicalDoomDelivery407Enabled()){console.log('Instalacion fisica aun en validacion. Este paquete no conecta al reloj.');process.exitCode=2;}
+ else{const file=path.join(toolkit,'mi-paquete/DOOM-II.face');const st=fs.lstatSync(file);if(!st.isFile()||st.isSymbolicLink()||st.size!==7606616)throw Error('PackageInvalid');const plan=prepareDoomDelivery407(fs.readFileSync(file));
+  if(!process.stdin.isTTY)throw Error('InteractiveRequired');const {createInterface}=await import('node:readline/promises');const rl=createInterface({input:process.stdin,output:process.stdout});let yes;try{console.log('DOOM II: '+(plan.size/1000000).toFixed(2)+' MB. Una instalacion inactiva; no borra esferas ni inicia el juego.\nReloj junto al PC, bateria >=50%, Mi Fitness cerrado y juego cerrado.\nEl proceso comprueba modelo, firmware, bateria y catalogo antes de escribir.');yes=(await rl.question('Escribe INSTALAR para autorizar el envio: ')).trim();}finally{rl.close();}
+  if(yes!=='INSTALAR')console.log('Cancelado. No se conecta al reloj.');else{const r=spawnSync(process.execPath,[path.join(root,'tools/pc-doom-delivery-r407.mjs'),'install',file],{cwd:root,stdio:['ignore','pipe','inherit'],encoding:'utf8',windowsHide:true,shell:false,timeout:1320000,maxBuffer:65536});if(r.error||!r.stdout.trim())throw Error('ProcessFailed');const report=JSON.parse(r.stdout.trim());console.log(installationMessage(report));const local={};for(const k of ['status','phase','failureReason','devicePreflight','batteryPreflight','catalogPreflight','massPartsLocallyWritten','registeredVerified','contentVerified','closeConfirmed','workerExitConfirmed'])if(k in report)local[k]=report[k];fs.writeFileSync(path.join(toolkit,'mi-paquete/installation-result.json'),JSON.stringify(local,null,2)+'\n',{flag:'wx'});process.exitCode=r.status??1;}
+ }
+}catch{console.error('No se pudo instalar. Conserva tu esfera actual; no se muestran claves ni archivos privados.');process.exitCode=1;}

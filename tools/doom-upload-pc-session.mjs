@@ -1,4 +1,4 @@
-import {physicalDoomControls397Enabled,physicalDoomIntermission405Enabled,physicalDoomThemed406Enabled} from './doom-deployment-physical.mjs';
+import {physicalDoomControls397Enabled,physicalDoomIntermission405Enabled,physicalDoomThemed406Enabled,physicalDoomDelivery407Enabled} from './doom-deployment-physical.mjs';
 import {physicalTouchIdentity404Enabled} from './doom-deployment-physical.mjs';
 import {physicalDoomFast396Enabled} from './doom-deployment-physical.mjs';
 // Shared authenticated transfer core. PC peer and reviewed physical capability
@@ -8,7 +8,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash,randomUUID} from 'node:crypto';
 import {XiaomiSession} from './pc-rfcomm-session.mjs';
-import {command,uint,bytes,fields,one,readDeviceInfo,readWatchfaces} from './rw4-xiaomi-protocol.mjs';
+import {command,uint,bytes,fields,one,readDeviceInfo,readWatchfaces,readBattery} from './rw4-xiaomi-protocol.mjs';
 import {packageCopy,uploadLayout,uploadToPcAdapter,uploadToReviewedAdapter} from './doom-large-upload.mjs';
 import {pcPeerAccess} from './doom-upload-pc-simulator.mjs';
 import {DoomDeploymentJournal,deploymentIdentity,disposeDeploymentIdentity} from './doom-deployment-journal.mjs';
@@ -87,13 +87,16 @@ class PcLargeSession extends XiaomiSession{
 export async function runDoomUploadPc(endpoint,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false,deploymentRetryWithoutData=false,deploymentAfterSpace=false,deploymentAfterCatalog=false,deploymentRestartPacked=false,deploymentResumePacked=false,deploymentRetryControlsLoss=false}={}){
  return runLargeUpload(()=>pcPeerAccess(endpoint),plan,secret,{resumeFrom,deploymentDirectory,deploymentResume,deploymentRetryWithoutData,deploymentAfterSpace,deploymentAfterCatalog,deploymentRestartPacked,deploymentResumePacked,deploymentRetryControlsLoss});
 }
-export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=false,retryWithoutData=false,afterSpace=false,afterCatalog=false,restartPacked=false,resumePacked=false,retryControlsLoss=false}={}){
+export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=false,retryWithoutData=false,afterSpace=false,afterCatalog=false,restartPacked=false,resumePacked=false,retryControlsLoss=false,onProgress=null}={}){
  return runLargeUpload(()=>{
+  if(onProgress!==null&&typeof onProgress!=='function')refuse();
   if(typeof retryControlsLoss!=='boolean'||retryControlsLoss&&(plan?.kind!=='review-controls-r397-manual'||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))refuse();
   if(typeof afterSpace!=='boolean'||afterSpace&&!['review-ultimate-r374-manual','review-doom2-r384-manual'].includes(plan?.kind))refuse();
   if(typeof afterCatalog!=='boolean'||afterCatalog&&(plan?.kind!=='review-ultimate-r374-manual'||afterSpace))refuse();
   if(plan?.kind==='review-touch-id-r404-manual'){
    if(!physicalTouchIdentity404Enabled()||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked||retryControlsLoss)refuse();
+  }else if(plan?.kind==='review-delivery-r407-manual'){
+   if(!physicalDoomDelivery407Enabled()||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked||retryControlsLoss)refuse();
   }else if(plan?.kind==='review-themed-r406-manual'){
    if(!physicalDoomThemed406Enabled()||resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked||retryControlsLoss)refuse();
   }else if(plan?.kind==='review-intermission-r405-manual'){
@@ -162,10 +165,10 @@ export async function runReviewedDoomDeployment(endpoint,plan,secret,{resume=fal
    if(!physicalDoomDirectEnabled()||resume||retryWithoutData)refuse();
   }else if(plan?.kind!=='review-low-memory-native-disabled')refuse();
   if((restartPacked||resumePacked)&&plan?.kind!=='review-packed-r378-manual')refuse();
-  return claimReviewedDoomEndpoint(endpoint,{resume,retryWithoutData,retail:['review-doom2-r384-manual','review-ultimate-r374-manual','review-packed-r378-manual'].includes(plan?.kind),afterSpace,afterCatalog,packed:plan?.kind==='review-packed-r378-manual',restartPacked,resumePacked,doom2:plan?.kind==='review-doom2-r384-manual'});
- },plan,secret,{deploymentResume:resume,deploymentRetryWithoutData:retryWithoutData,deploymentAfterSpace:afterSpace,deploymentAfterCatalog:afterCatalog,deploymentRestartPacked:restartPacked,deploymentResumePacked:resumePacked,deploymentRetryControlsLoss:retryControlsLoss});
+  return claimReviewedDoomEndpoint(endpoint,{resume,retryWithoutData,retail:['review-delivery-r407-manual','review-doom2-r384-manual','review-ultimate-r374-manual','review-packed-r378-manual'].includes(plan?.kind),afterSpace,afterCatalog,packed:plan?.kind==='review-packed-r378-manual',restartPacked,resumePacked,doom2:plan?.kind==='review-doom2-r384-manual',delivery:plan?.kind==='review-delivery-r407-manual'});
+ },plan,secret,{deploymentResume:resume,deploymentRetryWithoutData:retryWithoutData,deploymentAfterSpace:afterSpace,deploymentAfterCatalog:afterCatalog,deploymentRestartPacked:restartPacked,deploymentResumePacked:resumePacked,deploymentRetryControlsLoss:retryControlsLoss,onProgress});
 }
-async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false,deploymentRetryWithoutData=false,deploymentAfterSpace=false,deploymentAfterCatalog=false,deploymentRestartPacked=false,deploymentResumePacked=false,deploymentRetryControlsLoss=false}={}){
+async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDirectory=null,deploymentResume=false,deploymentRetryWithoutData=false,deploymentAfterSpace=false,deploymentAfterCatalog=false,deploymentRestartPacked=false,deploymentResumePacked=false,deploymentRetryControlsLoss=false,onProgress=null}={}){
  let peer,client,journal,parent,identity,upload=null,report={checkpoint:'R280',simulated:true,physicalEnabled:false,status:'StoppedNeedsReview',registeredVerified:false,contentVerified:false,selectedByClient:false,bluetoothOperationRequested:false,watchCommandRequested:false};
  try{
   peer=acquire();const data=packageCopy(plan),md5=digest(data);
@@ -192,9 +195,10 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   const info=readDeviceInfo(await client.query(2,2));
   report.devicePreflight={expectedModel:info.modelRecognized===true,expectedFirmware:info.firmware==='2.2.86'};
   if(info.modelRecognized!==true||info.firmware!=='2.2.86')refuse();
+  if(plan.kind==='review-delivery-r407-manual'){client.phase='BatteryPreflight';report.batteryPreflight={level:readBattery(await client.query(2,1)),minimum:50};if(report.batteryPreflight.level<50)refuse();}
   client.phase='CatalogPreflight';
   const before=catalog(readWatchfaces(await client.query(4,0)));
-  if(plan.nativeLauncher&&!['review-themed-r406-manual','review-touch-id-r404-manual','review-intermission-r405-manual','review-controls-r397-manual','review-fast-r396-manual','review-load-meter-r394-manual','review-quick-r393-manual','review-monster-r390-manual','review-final-r388-manual','review-tune-r387-manual','review-fit-r386-manual','review-doom2-r384-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan.kind)&&!before.some(f=>f.id==='365219963'))refuse();
+  if(plan.nativeLauncher&&!['review-delivery-r407-manual','review-themed-r406-manual','review-touch-id-r404-manual','review-intermission-r405-manual','review-controls-r397-manual','review-fast-r396-manual','review-load-meter-r394-manual','review-quick-r393-manual','review-monster-r390-manual','review-final-r388-manual','review-tune-r387-manual','review-fit-r386-manual','review-doom2-r384-manual','review-ultimate-r374-manual','review-packed-r378-manual','review-boot-r381-manual','review-lean-r382-manual','review-start-r383-manual'].includes(plan.kind)&&!before.some(f=>f.id==='365219963'))refuse();
   if(plan.kind==='review-monster-r390-manual'&&!before.some(f=>f.id==='365220009'))refuse();
   if(plan.kind==='review-quick-r393-manual'&&!before.some(f=>f.id==='365220010'))refuse();
   if(plan.kind==='review-load-meter-r394-manual'&&!before.some(f=>f.id==='365220011'))refuse();
@@ -231,7 +235,7 @@ async function runLargeUpload(acquire,plan,secret,{resumeFrom=null,deploymentDir
   upload=await (peer.physical?uploadToReviewedAdapter:uploadToPcAdapter)(plan,ack,{
    scope:peer.physical?'reviewed-doom-deployment':'pc-upload-simulator',...(peer.physical?{peer}:{}),key:client.keys.tx,noncePrefix:client.keys.txNonce,
    initialSerial,txBudgetBytes:layout.wireBytes,clock:peer.clock,wait:peer.wait,
-   checkpoint:record=>journal.save({upload:record}),send:frame=>client.send(frame)
+   checkpoint:record=>{journal.save({upload:record});if(onProgress)onProgress({phase:record.status,parts:record.locallyWritten,total:record.totalParts});},send:frame=>client.send(frame)
   },parent?.upload??null);
   client.serial=(initialSerial+client.massFrames)&255;client.massPhase=false;
   if(upload.status!=='SentNotVerified')refuse();

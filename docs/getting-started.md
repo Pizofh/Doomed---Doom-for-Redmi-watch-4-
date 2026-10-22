@@ -4,7 +4,7 @@ The tested target is Redmi Watch 4 M2315W1 / firmware 2.2.86. Other firmware and
 
 ## Players
 
-The [offline preparer](delivery.md) can create a first-install package from a compatible user-owned DOOM2.WAD. Its standalone preparation was tested in an isolated folder; it does not send anything to a watch. There is no validated first-install wizard yet. Historical install scripts pin individual trial packages and depend on the owner's private connection setup. They are not a general installation tutorial.
+The [offline preparer](delivery.md) can create a first-install package from a compatible user-owned DOOM2.WAD. Its standalone preparation was tested in an isolated folder; it does not send anything to a watch. The setup toolkit now provides Preparar.cmd, Configurar.cmd and Instalar.cmd. Owner credentials remain local and are not printed. Full installation is still disabled pending hardware acceptance; credential acquisition and setup on another owner's watch are not yet validated. Historical trial scripts are not a general installation tutorial.
 
 R405 imports game data and saves from R397 on first START. Installing it on an empty watch does not install DOOM II. Keep your working face until an upgrade has loaded your save and exited successfully. See [playing](playing.md).
 

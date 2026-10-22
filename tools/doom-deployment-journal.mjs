@@ -45,7 +45,7 @@ export class DoomDeploymentJournal{
   if(plan.kind==='review-quick-r393-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
   if(plan.kind==='review-fast-r396-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
   if(plan.kind==='review-controls-r397-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
-  if(['review-themed-r406-manual','review-intermission-r405-manual'].includes(plan.kind)&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked||retryControlsLoss))fail();
+  if(['review-delivery-r407-manual','review-themed-r406-manual','review-intermission-r405-manual'].includes(plan.kind)&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked||retryControlsLoss))fail();
   if(plan.kind==='review-touch-id-r404-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked||retryControlsLoss))fail();
   if(plan.kind==='review-monster-r390-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
   if(plan.kind==='review-final-r388-manual'&&(resume||retryWithoutData||afterSpace||afterCatalog||restartPacked||resumePacked))fail();
@@ -75,6 +75,7 @@ export class DoomDeploymentJournal{
   if(plan.kind==='review-controls-r397-manual')this.#file=path.join(dir,'controls-r397.jsonl');
   if(plan.kind==='review-intermission-r405-manual')this.#file=path.join(dir,'intermission-r405.jsonl');
   if(plan.kind==='review-themed-r406-manual')this.#file=path.join(dir,'themed-r406.jsonl');
+  if(plan.kind==='review-delivery-r407-manual')this.#file=path.join(dir,'delivery-r407.jsonl');
   if(plan.kind==='review-touch-id-r404-manual')this.#file=path.join(dir,'touch-id-r404.jsonl');
   if(plan.kind==='review-load-meter-r394-manual')this.#file=path.join(dir,'load-meter-r394.jsonl');
   this.#key=Buffer.from(binding.key);this.#tag=binding.tag;this.#plan=plan;

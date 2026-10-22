@@ -1,0 +1,13 @@
+// SPDX-License-Identifier: GPL-2.0-only
+// Exact first-install package. Physical operation remains separately gated.
+import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';import {createHash} from 'node:crypto';
+import {prepareDoomDelivery407,uploadLayout} from './doom-large-upload.mjs';import {physicalDoomDelivery407Enabled,createReviewedDoomEndpoint} from './doom-deployment-physical.mjs';import {runReviewedDoomDeployment} from './doom-upload-pc-session.mjs';import {assertRetailNativeDispatchReady} from './large-native-dispatch.mjs';import {validateTarget} from './pc-rfcomm-supervisor.mjs';import {validateAuth} from './pc-rfcomm-session.mjs';
+const root=fileURLToPath(new URL('../',import.meta.url)),base={checkpoint:'R407',id:'365220017',physicalEnabled:false,bluetoothOperationRequested:false,filesTransferred:false};
+function read(file,max){const s=fs.lstatSync(file);if(!s.isFile()||s.isSymbolicLink()||s.size>max)throw Error('FileInvalid');return fs.readFileSync(file);}
+try{const [action='plan',file]=process.argv.slice(2);if(process.argv.length>4||!['plan','prepare','install'].includes(action)||action!=='plan'&&!file)throw Error('ArgumentsInvalid');
+ if(action==='install'&&!physicalDoomDelivery407Enabled()){console.log(JSON.stringify({...base,status:'PhysicalGateClosed'}));process.exitCode=2;}
+ else if(action==='plan')console.log(JSON.stringify({...base,status:'OfflineReviewOnly',firstInstall:true,previousFaceRequired:false,minimumBattery:50,automaticRetry:false,automaticSelection:false}));
+ else{const b=read(file,7606616),plan=prepareDoomDelivery407(b);if(action==='prepare'){const layout=uploadLayout(plan,{status:0,md5:createHash('md5').update(b).digest(),chunkSize:2048,resumePosition:0});console.log(JSON.stringify({...base,status:'OfflinePrepared',bytes:plan.size,sha256:plan.sha256,parts:layout.total,firstInstall:true,journalCreated:false}));}
+  else{assertRetailNativeDispatchReady();const folder=path.join(root,'tools/local/pc-rfcomm'),address=validateTarget(JSON.parse(read(path.join(folder,'target.json'),4096))),key=validateAuth(JSON.parse(read(path.join(folder,'auth.json'),4096)));try{const r=await runReviewedDoomDeployment(createReviewedDoomEndpoint(address,{retail:true,delivery:true}),plan,key,{onProgress:p=>{if(p.phase==='LocallyWritten'&&(p.parts===p.total||p.parts%256===0))console.error('Enviando: '+p.parts+'/'+p.total);}});console.log(JSON.stringify({...r,checkpoint:'R407'}));process.exitCode=r.status==='RegisteredInactive'&&r.closeConfirmed&&r.workerExitConfirmed?0:1;}finally{key.fill(0);}}
+ }
+}catch{console.error('Instalacion detenida. No hay reintento automatico; no se muestran claves ni datos privados.');process.exitCode=1;}

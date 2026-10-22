@@ -1,52 +1,79 @@
-# Preparar DOOM II para tu reloj
+# Preparar e instalar DOOM II
 
-Estado: preparador local en desarrollo. Genera un paquete de primera instalacion,
-sin otra esfera de Doom. Aun no instala en el reloj ni se ha validado en una
-segunda unidad. No es una entrega jugable lista para cualquier usuario.
+Estado: asistente de primera instalacion en validacion. Preparacion, configuracion
+y transporte pasan las pruebas aisladas sin Bluetooth. La instalacion fisica
+permanece deshabilitada hasta validar el paquete en hardware.
 
-## Recorrido previsto
+## Recorrido del usuario
 
-1. Descargar y extraer la herramienta de preparacion.
-2. Abrir **Preparar.cmd** y arrastrar el propio **DOOM2.WAD** a la ventana.
-3. La herramienta verifica el juego y crea **mi-paquete/DOOM-II.face**.
-4. Un futuro asistente de instalacion comprobara reloj, firmware y conexion,
-   mostrara lo que enviara y pedira confirmacion antes de escribir.
+1. Extraer la herramienta y abrir **Preparar.cmd**. Arrastrar el propio DOOM2.WAD
+   a la ventana. Se genera **mi-paquete/DOOM-II.face**.
+2. Abrir **Configurar.cmd**, una sola vez, e importar un log propio compatible de
+   Mi Fitness o introducir manualmente la direccion Bluetooth y la clave propia.
+   La clave se oculta durante la entrada y no aparece en los informes.
+3. Abrir **Instalar.cmd**. Cuando este habilitado, mostrara lo que enviara y
+   pedira escribir **INSTALAR**. Comprobara autenticacion, modelo, firmware,
+   bateria >=50% y catalogo antes de escribir. Mostrara el progreso del envio.
+4. Tras confirmar el registro, seleccionar DOOM II en el reloj y pulsar JUGAR.
+   La primera instalacion incluye el juego: no necesita otra esfera ni un portador.
 
-El paso 4 todavia no esta disponible. No cargar la plantilla vacia ni ejecutar
-los scripts de ensayos historicos para saltarse ese paso.
+Actualmente el paso 3 informa que la instalacion sigue en validacion y no se
+conecta al reloj. No editar los gates ni usar scripts historicos para evitarlo.
 
-## Requisitos del preparador
+## Requisitos
 
-Windows y Node.js 22 o posterior. No requiere compilador ARM, EasyFace,
-emulador, cuenta de desarrollador ni archivos de otra instalacion.
-El destino probado por el proyecto es Redmi Watch 4 M2315W1 / firmware 2.2.86.
+Windows de 64 bits, Node.js 22 o posterior y Bluetooth. La herramienta incluye
+el cliente nativo propio y sus fuentes; no requiere ARM GCC, EasyFace ni emulador.
+El destino del port es Redmi Watch 4 M2315W1 con firmware 2.2.86. Antes del envio:
+reloj junto al PC, emparejado en Windows, Mi Fitness cerrado y juego cerrado.
+No se borran esferas, no se inicia el juego desde el PC y no se reintenta un
+corte automaticamente. Una version ya registrada tampoco se sobrescribe.
 
-Solo se acepta por ahora el DOOM2.WAD exacto de 14.604.584 bytes y 32 mapas
-que corresponde al motor preparado. Otras ediciones, mods y PWAD se rechazan;
-no se modifica el original. SHA-256 compatible:
+Solo se acepta por ahora el DOOM2.WAD exacto de 14.604.584 bytes y 32 mapas:
 
 `10d67824b11025ddd9198e8cfc87ca335ee6e2d3e63af4180fa9b8a471893255`
 
-La herramienta funciona sin Internet y no se conecta al reloj. Comprime el
-WAD sin perdida y verifica el paquete final. La carpeta de salida contiene
-datos comerciales del juego: conservarla para uso propio, no redistribuirla.
-No incluye ni solicita MAC, claves, logs del telefono ni partidas.
+Otras ediciones y mods se rechazan. El preparador funciona sin Internet,
+comprime sin perdida y verifica el paquete. No modifica el WAD original.
+El paquete generado contiene datos comerciales: usarlo personalmente y no
+publicarlo. La carpeta de salida existente nunca se sobrescribe.
 
-Tambien se puede preparar desde consola:
+## Conexion privada
+
+La clave de autenticacion no es el PIN de emparejamiento. Cada propietario
+necesita la de su reloj. No hay todavia una extraccion de claves validada para
+cualquier telefono o version de Mi Fitness. Si no se dispone de una clave o
+log compatible, este flujo no puede completar la configuracion.
+
+Los logs se leen localmente y solo se acepta una identidad no ambigua. Una clave
+extraida no se considera vigente hasta que el reloj la autentique. No se suben
+logs ni claves a ningun servidor. La configuracion queda en archivos locales
+sin cifrar dentro de **runtime/tools/local/pc-rfcomm/**: proteger esa carpeta y
+no compartirla. La entrega original no contiene claves ni datos del propietario.
+
+Tambien puede importarse un JSON propio con los campos address, authKey,
+model y firmware mediante Configurar.cmd --file. No se admiten datos de otra
+persona y no se reemplaza una configuracion existente automaticamente.
+
+## Uso por consola
 
 ~~~powershell
 node prepare.mjs --wad "C:\Juegos\DOOM2.WAD" --out "C:\Juegos\mi-paquete"
+Configurar.cmd --file "C:\Privado\conexion.json"
 ~~~
 
-El resultado indica `installed: false`: preparar no significa instalar.
-Si la carpeta de salida existe, se detiene para conservar lo que ya hay.
+Instalar.cmd busca mi-paquete junto a la herramienta. Si se elige una salida
+personalizada para preparar, colocar luego ese directorio junto a Instalar.cmd.
+Preparar muestra installed: false: crear el paquete no significa instalar.
+Los resultados del envio se guardan localmente sin claves; la lectura de registro
+no equivale a leer de vuelta y verificar todos los bytes instalados.
 
-## Lo que falta para la entrega publica
+## Validacion pendiente
 
-- Confirmar el inicio estetico R406 con el propietario.
-- Validar el paquete independiente, sus cierres y reapertura en hardware.
-- Resolver la configuracion de conexion de otro propietario sin publicar claves.
-- Probar el asistente en un segundo reloj compatible antes de anunciar instalacion sencilla.
+- Aceptacion del nuevo inicio R406 por el propietario.
+- Arranque, controles, guardado/carga, cierres y reapertura del paquete independiente.
+- Configuracion e instalacion por un segundo propietario con un reloj compatible.
 
-El preparador conserva las limitaciones actuales del juego: un toque activo,
-audio que puede entrecortarse y ausencia de musica.
+El juego sigue limitado a un toque activo, audio que puede entrecortarse y
+sin musica. Los modulos nativos comparten el espacio del sistema; un fallo
+puede bloquear el reloj o requerir reinicio. Recuperacion integral sin validar.
