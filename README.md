@@ -1,31 +1,56 @@
-# Doomed ? DOOM II on Redmi Watch 4
+# Doomed - DOOM II on Redmi Watch 4
 
-DOOM II on stock Redmi Watch 4 firmware, using a native C engine and a Lua/LVGL watchface interface.
+[![Offline CI](https://github.com/Pizofh/Doomed---Doom-for-Redmi-watch-4-/actions/workflows/pc-rfcomm-offline.yml/badge.svg)](https://github.com/Pizofh/Doomed---Doom-for-Redmi-watch-4-/actions/workflows/pc-rfcomm-offline.yml)
 
-**Tested device: Redmi Watch 4 M2315W1, firmware 2.2.86.** The game works independently of the PC after installation.
+A native DOOM II port for **Redmi Watch 4 M2315W1 / stock firmware 2.2.86**, with a C engine and Lua/LVGL watchface interface. Once installed, the game runs independently of the PC.
 
-## Status
+**Availability: source code and developer tooling. The public installer is not enabled yet.**
 
-Original menus, movement, interaction, weapon switching, persistent save/load, pause and clean CLOSED exits work in the user-confirmed R397 baseline. Sound effects work but can stutter. Music and simultaneous touch inputs are absent. MENU/PAUSA overlays can be faint and difficult to tap.
+## What works
 
-R405 fixes advancing after completing a map. Its installation is confirmed; physical confirmation of that specific fix is pending. R406 adds a dark DOOM-themed launcher with a larger JUGAR button; installation is confirmed; its startup appearance and gameplay still await user confirmation. A full physical DOOM II campaign has not been validated.
+Original menus, movement, interaction, weapon switching, pause, persistent save/load and clean CLOSED exits have been confirmed by the owner in the DOOM II line. Direct memory presentation avoids per-frame PNG files. Sound effects work but can stutter; music is absent. One touch action is supported at a time.
 
-## Start here
+| Version | Change | Validation |
+|---|---|---|
+| R397 | Menus, saves, weapons and normal exits | User-confirmed gameplay baseline |
+| R405 | Advance after completing a map | Installed; map-end confirmation pending |
+| R406 | Dark DOOM-themed start screen and larger JUGAR button | Installed; visual/gameplay confirmation pending |
+| R407 | Independent first-install package and setup assistant | Offline preparation and simulated transport pass; hardware acceptance pending |
 
-[Getting started](docs/getting-started.md) ? [Delivery preparation](docs/delivery.md) ? [Playing](docs/playing.md) ? [Architecture](docs/architecture.md) ? [Results and limits](docs/project-results.md)
+A full physical DOOM II campaign and installation by a second owner are not validated. Other firmware and watch models are unsupported by the current delivery flow.
 
-This is a source release. R407 adds an offline preparation toolkit: users supply their own DOOM2.WAD and generate a self-contained first-install package without ARM tools, EasyFace or a previous Doom face. The setup assistant now includes owner-local connection configuration, compatibility/battery checks and installation progress. Physical installation remains gated until R407 hardware acceptance; obtaining credentials and installing on a second owner's watch are not universally validated. A fresh-clone developer build is not yet validated. Commercial game data is supplied separately by its owner.
+## Delivery flow
 
-Create a compact public source snapshot:
+The candidate toolkit has three entry points:
+
+1. **Preparar.cmd** verifies the user's own compatible DOOM2.WAD and builds a self-contained package locally.
+2. **Configurar.cmd** stores the owner's connection details locally, with hidden key entry or a compatible local-log import.
+3. **Instalar.cmd** will check authentication, model, firmware, battery and catalog before sending. It is currently disabled pending hardware acceptance.
+
+The consumer toolkit does not require ARM tools, EasyFace or an older Doom face. Obtaining a valid authentication key is still owner-specific; a universal key-acquisition flow has not been validated. Game data and private credentials are never included in the public source.
+
+[Delivery guide, Spanish](docs/delivery.md) | [Getting started](docs/getting-started.md) | [Playing](docs/playing.md)
+
+## Development and verification
+
+Requires Node.js 22 for the public offline checks. No WAD, credentials or watch are needed:
 
 ~~~powershell
-node tools/export-public-source.mjs
+node --test tools/test-delivery-preparer.mjs tools/test-delivery-configuration.mjs
+node tools/test-doom-large-upload.mjs --synthetic
+node tools/test-doom-upload-pc-session.mjs
 ~~~
 
-The exporter audits Git history and copies tracked source plus a short documentation set to build/public-source/. It writes SHA256 hashes and excludes the research diary, Git history, WADs, firmware, binaries, saves and credentials. It never connects to the watch.
+CI also checks Lua launcher contracts, native Windows worker simulation, physical gates and publication hygiene. It does not build the complete game from a clean checkout or replace physical acceptance.
 
-The build still composes earlier revision helpers, so their source dependencies remain. [Storage and preservation](docs/local-storage.md) explains what to retain before deleting this development checkout.
+[Architecture](docs/architecture.md) | [Results and limits](docs/project-results.md) | [Changelog](CHANGELOG.md)
 
-## License
+The game build still composes earlier revision helpers and local generated baselines. A clean-machine developer build remains work in progress. Do not delete those dependencies just because their filenames refer to older revisions.
 
-Original code defaults to GPL-2.0-only except where individual files state otherwise. Upstream notices remain intact. See [LICENSE](LICENSE), [LICENSING.md](LICENSING.md) and [dependencies](third_party/README.md).
+A curated source snapshot can be generated with `node tools/export-public-source.mjs`. [Storage and preservation](docs/local-storage.md) covers private backups before removing the development checkout.
+
+## License and private inputs
+
+Original code defaults to **GPL-2.0-only**, except where a file states otherwise. Upstream notices remain intact. See [LICENSE](LICENSE), [LICENSING.md](LICENSING.md) and [dependencies](third_party/README.md).
+
+WADs, generated game packages, firmware, external tool binaries, saves, device credentials and raw logs are excluded from Git. The existing transport has no automatic deletion, activation or retry after an uncertain transfer.

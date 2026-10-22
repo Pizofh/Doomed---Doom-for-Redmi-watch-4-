@@ -1,75 +1,10 @@
-name: PC RFCOMM offline
+name: Offline validation
 
 on:
   workflow_dispatch:
   push:
-    paths:
-      - 'README.md'
-      - 'LICENSING.md'
-      - 'docs/**'
-      - 'tools/export-public-source.mjs'
-      - 'tools/delivery/**'
-      - 'tools/test-delivery-preparer.mjs'
-      - 'tools/test-delivery-configuration.mjs'
-      - 'experiments/pc-rfcomm/**'
-      - 'tools/pc-rfcomm.mjs'
-      - 'tools/pc-rfcomm-supervisor.mjs'
-      - 'tools/test-pc-rfcomm-supervisor.mjs'
-      - 'tools/pc-rfcomm-session.mjs'
-      - 'tools/pc-rfcomm-auth-prepare.mjs'
-      - 'tools/rw4-xiaomi-protocol.mjs'
-      - 'tools/test-rw4-xiaomi-session.mjs'
-      - 'tools/static-watchface-*.mjs'
-      - 'tools/pc-static-watchface.mjs'
-      - 'tools/test-static-watchface-gates.mjs'
-      - 'tools/pc-pairing.mjs'
-      - 'tools/doom-large-upload.mjs'
-      - 'tools/test-doom-large-upload.mjs'
-      - 'tools/doom-upload-pc-*.mjs'
-      - 'tools/test-doom-upload-pc-session.mjs'
-      - 'tools/test-doom-large-worker.mjs'
-      - 'tools/audit-git-publish.mjs'
-      - 'doom/platform-rw4/launcher/**'
-      - 'tools/*doom-launcher*.mjs'
-      - 'experiments/doom-runtime-rw4/launcher-tests-r282.lua'
-      - 'experiments/memory-preflight/**'
-      - 'tools/*memory-preflight*.mjs'
-      - 'tools/test-pc-pairing.mjs'
-      - '.github/workflows/pc-rfcomm-offline.yml'
+    branches: [main]
   pull_request:
-    paths:
-      - 'README.md'
-      - 'LICENSING.md'
-      - 'docs/**'
-      - 'tools/export-public-source.mjs'
-      - 'tools/delivery/**'
-      - 'tools/test-delivery-preparer.mjs'
-      - 'tools/test-delivery-configuration.mjs'
-      - 'experiments/pc-rfcomm/**'
-      - 'tools/pc-rfcomm.mjs'
-      - 'tools/pc-rfcomm-supervisor.mjs'
-      - 'tools/test-pc-rfcomm-supervisor.mjs'
-      - 'tools/pc-rfcomm-session.mjs'
-      - 'tools/pc-rfcomm-auth-prepare.mjs'
-      - 'tools/rw4-xiaomi-protocol.mjs'
-      - 'tools/test-rw4-xiaomi-session.mjs'
-      - 'tools/static-watchface-*.mjs'
-      - 'tools/pc-static-watchface.mjs'
-      - 'tools/test-static-watchface-gates.mjs'
-      - 'tools/pc-pairing.mjs'
-      - 'tools/doom-large-upload.mjs'
-      - 'tools/test-doom-large-upload.mjs'
-      - 'tools/doom-upload-pc-*.mjs'
-      - 'tools/test-doom-upload-pc-session.mjs'
-      - 'tools/test-doom-large-worker.mjs'
-      - 'tools/audit-git-publish.mjs'
-      - 'doom/platform-rw4/launcher/**'
-      - 'tools/*doom-launcher*.mjs'
-      - 'experiments/doom-runtime-rw4/launcher-tests-r282.lua'
-      - 'experiments/memory-preflight/**'
-      - 'tools/*memory-preflight*.mjs'
-      - 'tools/test-pc-pairing.mjs'
-      - '.github/workflows/pc-rfcomm-offline.yml'
 
 permissions:
   contents: read
@@ -99,6 +34,9 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
       - name: Audit reachable history for excluded assets and credential patterns
         run: node tools/audit-git-publish.mjs
       - name: Validate curated public source snapshot and guide links
@@ -111,6 +49,9 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
       - name: Test offline consumer preparer with synthetic game data
         run: node --test tools/test-delivery-preparer.mjs tools/test-delivery-configuration.mjs
       - name: Test large upload and ambiguous delivery with owned synthetic data
@@ -125,6 +66,9 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
       - name: Compile own offline client
         shell: pwsh
         run: node tools/pc-rfcomm.mjs build

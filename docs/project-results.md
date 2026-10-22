@@ -10,8 +10,11 @@ Doomed progressed from emulator experiments to a playable native port on stock R
 - TouchID identified Chipone ICNT8918. The delivered port remains single touch; no driver modification was attempted.
 - R405 corrects intermission input mapping. Installation is confirmed; map-end gameplay acceptance is pending.
 
+- R406 adds the themed startup screen; installation is confirmed and user acceptance is pending.
+- R407 preparation and owner-local configuration run from an isolated toolkit without build tools. The exact self-contained payload crosses the bundled native worker in a synthetic 3,722-block transfer. Battery, identity, authentication and interruption failure cases are checked without radio.
+
 ## Remaining work
 
 Sound can stutter; music and concurrent touch controls are absent. MENU/PAUSA visibility needs improvement. Fresh-machine builds and a second-owner installation flow are not validated. Compatibility is limited to the tested model/firmware.
 
-The public documentation keeps architecture, practical use, results and limitations. Intermediate trial notes stay in the development checkout rather than the compact export.
+The public documentation keeps architecture, practical use, results and limitations. Intermediate trial notes were removed from the current public tree and remain in Git history and the private backup.

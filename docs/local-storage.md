@@ -20,3 +20,5 @@ Before deleting this checkout:
 4. Verify the backups can be opened before removing the original.
 
 The exporter performs no deletion. It refuses to overwrite an existing snapshot. Repository organization does not require the watch.
+
+The verified LeDisk backup from 2026-10-20 predates the R406/R407 development outputs. Refresh and verify the private backup before deleting C:; a Git push preserves tracked source, not those newer ignored build artifacts.
