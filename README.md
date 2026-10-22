@@ -12,9 +12,9 @@ R405 fixes advancing after completing a map. Its installation is confirmed; phys
 
 ## Start here
 
-[Getting started](docs/getting-started.md) ? [Playing](docs/playing.md) ? [Architecture](docs/architecture.md) ? [Results and limits](docs/project-results.md)
+[Getting started](docs/getting-started.md) ? [Delivery preparation](docs/delivery.md) ? [Playing](docs/playing.md) ? [Architecture](docs/architecture.md) ? [Results and limits](docs/project-results.md)
 
-This is a source release. A fresh-clone build and installation by a second owner are not yet validated. R405 is an upgrade from R397, not a first-install package. Commercial game data is supplied separately by its owner.
+This is a source release. R407 adds an offline preparation toolkit: users supply their own DOOM2.WAD and generate a self-contained first-install package without ARM tools, EasyFace or a previous Doom face. The toolkit does not install on the watch. Physical acceptance of R407, owner-specific connection setup, and installation by a second owner remain pending. A fresh-clone developer build is not yet validated. Commercial game data is supplied separately by its owner.
 
 Create a compact public source snapshot:
 

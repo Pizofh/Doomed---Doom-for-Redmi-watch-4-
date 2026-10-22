@@ -17,7 +17,7 @@ const audit=JSON.parse(run.stdout);
 const tracked=spawnSync('git',['-c','safe.directory='+root.replaceAll('\\','/').replace(/\/$/,''),'ls-files','-z','--cached'],{cwd:root,encoding:'utf8',windowsHide:true,maxBuffer:8*1024*1024});
 if(tracked.status!==0)throw Error('Source inventory failed');
 const guides=new Set(['README.md','LICENSE','LICENSING.md','.gitignore','.gitattributes',
- 'docs/getting-started.md','docs/playing.md','docs/architecture.md','docs/project-results.md','docs/local-storage.md',
+ 'docs/delivery.md','docs/getting-started.md','docs/playing.md','docs/architecture.md','docs/project-results.md','docs/local-storage.md',
  'third_party/README.md','third_party/dependencies.lock.json','third_party/openvela-emulator-binaries.lock.json','doom/platform-rw4/README.md']);
 const allowed=filename=>guides.has(filename)||
  /^(doom|tools|scripts|experiments)\//.test(filename)&&/\.(mjs|js|c|h|S|lua|ld|json|ps1|java|cs)$/.test(filename)||
