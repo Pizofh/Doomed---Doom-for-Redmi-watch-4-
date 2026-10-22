@@ -8,7 +8,7 @@ DOOM II on stock Redmi Watch 4 firmware, using a native C engine and a Lua/LVGL 
 
 Original menus, movement, interaction, weapon switching, persistent save/load, pause and clean CLOSED exits work in the user-confirmed R397 baseline. Sound effects work but can stutter. Music and simultaneous touch inputs are absent. MENU/PAUSA overlays can be faint and difficult to tap.
 
-R405 fixes advancing after completing a map. Its installation is confirmed; physical confirmation of that specific fix is pending. A full physical DOOM II campaign has not been validated.
+R405 fixes advancing after completing a map. Its installation is confirmed; physical confirmation of that specific fix is pending. R406 adds a dark DOOM-themed launcher with a larger JUGAR button; its package is prepared but has not been installed or tested on the watch. A full physical DOOM II campaign has not been validated.
 
 ## Start here
 
